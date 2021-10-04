@@ -5,15 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace skills
+namespace sanguis::server::entities::enemies::skills
 {
 
 using
@@ -23,10 +15,6 @@ fcppt::unique_ptr<
 	sanguis::server::entities::enemies::skills::skill
 >;
 
-}
-}
-}
-}
 }
 
 #endif

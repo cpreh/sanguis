@@ -4,24 +4,12 @@
 #include <sanguis/server/random/amount.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace modifiers
+namespace sanguis::server::entities::enemies::modifiers
 {
 
 sanguis::server::random::amount
 amount();
 
-}
-}
-}
-}
 }
 
 #endif

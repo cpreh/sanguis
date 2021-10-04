@@ -6,9 +6,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace load
+namespace sanguis::load
 {
 
 SANGUIS_COMMON_SYMBOL
@@ -17,7 +15,6 @@ aoe_projectile_name(
 	sanguis::aoe_projectile_type
 );
 
-}
 }
 
 #endif

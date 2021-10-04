@@ -6,11 +6,7 @@
 #include <sanguis/messages/types/magazine_size.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace convert
+namespace sanguis::messages::convert
 {
 
 SANGUIS_COMMON_SYMBOL
@@ -19,8 +15,6 @@ to_magazine_size(
 	sanguis::magazine_type
 );
 
-}
-}
 }
 
 #endif

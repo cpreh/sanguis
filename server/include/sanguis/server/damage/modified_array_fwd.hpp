@@ -5,11 +5,7 @@
 #include <sanguis/server/damage/modified_unit_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 using
@@ -19,8 +15,6 @@ sanguis::server::damage::basic_array<
 	sanguis::server::damage::modified_unit
 >;
 
-}
-}
 }
 
 #endif

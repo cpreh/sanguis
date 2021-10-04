@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
-{
-namespace impl
+namespace sanguis::tools::libmergeimage::impl
 {
 
 using
@@ -24,9 +18,6 @@ std::integral_constant<
 	3
 >;
 
-}
-}
-}
 }
 
 #endif

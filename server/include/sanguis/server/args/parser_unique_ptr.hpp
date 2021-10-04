@@ -5,11 +5,7 @@
 #include <fcppt/options/base_unique_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace args
+namespace sanguis::server::args
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::options::base_unique_ptr<
 	sanguis::server::args::result
 >;
 
-}
-}
 }
 
 #endif

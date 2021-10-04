@@ -2,9 +2,7 @@
 #define SANGUIS_CLIENT_HEALTH_VALUE_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 using
@@ -12,7 +10,6 @@ health_value
 =
 float;
 
-}
 }
 
 #endif

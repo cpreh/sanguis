@@ -11,9 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 class timer_impl
@@ -50,7 +48,6 @@ private:
 	timer deadline_timer_;
 };
 
-}
 }
 
 #endif

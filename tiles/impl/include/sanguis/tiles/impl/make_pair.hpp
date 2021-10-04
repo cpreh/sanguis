@@ -7,11 +7,7 @@
 #include <sanguis/tiles/impl/optional_pair.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -29,8 +25,6 @@ make_pair(
 	>
 );
 
-}
-}
 }
 
 #define SANGUIS_TILES_DECLARE_MAKE_PAIR(\

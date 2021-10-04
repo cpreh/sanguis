@@ -5,13 +5,7 @@
 #include <sanguis/tools/libmergeimage/impl/count_maximum.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
-{
-namespace impl
+namespace sanguis::tools::libmergeimage::impl
 {
 
 sanguis::tools::libmergeimage::impl::count_maximum
@@ -19,9 +13,6 @@ make_maximum_count(
 	sanguis::tools::libmergeimage::impl::cell_size const &
 );
 
-}
-}
-}
 }
 
 #endif

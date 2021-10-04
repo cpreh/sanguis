@@ -7,15 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace skills
+namespace sanguis::server::entities::enemies::skills
 {
 
 class mother_spider
@@ -43,10 +35,6 @@ private:
 	override;
 };
 
-}
-}
-}
-}
 }
 
 #endif

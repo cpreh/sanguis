@@ -5,13 +5,7 @@
 #include <sanguis/model/animation_name_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 sanguis::client::load::animation_type
@@ -19,9 +13,6 @@ lookup_animation_name(
 	sanguis::model::animation_name const &
 );
 
-}
-}
-}
 }
 
 #endif

@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	sanguis::server::entities::transfer_result
 >;
 
-}
-}
 }
 
 #endif

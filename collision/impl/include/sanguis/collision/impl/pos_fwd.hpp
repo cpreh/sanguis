@@ -5,11 +5,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -17,8 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	pos
 );
 
-}
-}
 }
 
 #endif

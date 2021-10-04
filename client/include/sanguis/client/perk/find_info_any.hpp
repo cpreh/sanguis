@@ -13,11 +13,7 @@
 #include <fcppt/optional/to_exception.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 template<
@@ -59,8 +55,6 @@ find_info_any(
 		);
 }
 
-}
-}
 }
 
 #endif

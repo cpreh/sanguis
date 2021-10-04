@@ -4,11 +4,7 @@
 #include <alda/bindings/float_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 using
@@ -16,8 +12,6 @@ space_unit
 =
 alda::bindings::float_;
 
-}
-}
 }
 
 #endif

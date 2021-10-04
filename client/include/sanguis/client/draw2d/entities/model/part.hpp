@@ -16,15 +16,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace model
+namespace sanguis::client::draw2d::entities::model
 {
 
 class part
@@ -109,10 +101,6 @@ private:
 	sanguis::client::draw2d::entities::model::animation animation_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

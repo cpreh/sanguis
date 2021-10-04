@@ -5,11 +5,7 @@
 #include <sanguis/server/auras/target_kind_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 sanguis::server::auras::influence
@@ -17,8 +13,6 @@ target_kind_to_influence(
 	sanguis::server::auras::target_kind
 );
 
-}
-}
 }
 
 #endif

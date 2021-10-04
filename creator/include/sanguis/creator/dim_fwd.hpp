@@ -5,9 +5,7 @@
 #include <fcppt/container/grid/dim_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -18,7 +16,6 @@ fcppt::container::grid::dim<
 	2U
 >;
 
-}
 }
 
 #endif

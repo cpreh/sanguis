@@ -7,11 +7,7 @@
 #include <fcppt/log/object.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class log
@@ -34,8 +30,6 @@ private:
 	mutable fcppt::log::object main_log_;
 };
 
-}
-}
 }
 
 #endif

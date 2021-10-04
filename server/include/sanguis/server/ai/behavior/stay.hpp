@@ -9,13 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace behavior
+namespace sanguis::server::ai::behavior
 {
 
 class stay
@@ -49,9 +43,6 @@ private:
 	sanguis::server::center const start_pos_;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -5,13 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace hud
+namespace sanguis::client::gui::hud
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::unique_ptr<
 	sanguis::client::gui::hud::weapon_tooltip
 >;
 
-}
-}
-}
 }
 
 #endif

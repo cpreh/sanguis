@@ -5,13 +5,7 @@
 #include <sge/sprite/state/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
+namespace sanguis::client::draw2d::sprite
 {
 
 using
@@ -21,9 +15,6 @@ sge::sprite::state::object<
 	sanguis::client::draw2d::sprite::state_choices
 >;
 
-}
-}
-}
 }
 
 #endif

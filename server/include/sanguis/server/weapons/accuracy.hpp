@@ -6,11 +6,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -18,8 +14,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	accuracy
 );
 
-}
-}
 }
 
 #endif

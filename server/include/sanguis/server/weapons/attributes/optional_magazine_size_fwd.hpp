@@ -5,13 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace attributes
+namespace sanguis::server::weapons::attributes
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::optional::object<
 	sanguis::server::weapons::attributes::magazine_size
 >;
 
-}
-}
-}
 }
 
 #endif

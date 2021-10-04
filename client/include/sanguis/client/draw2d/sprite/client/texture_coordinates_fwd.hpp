@@ -5,15 +5,7 @@
 #include <sge/sprite/types/texture_coordinates_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace client
+namespace sanguis::client::draw2d::sprite::client
 {
 
 using
@@ -23,10 +15,6 @@ sge::sprite::types::texture_coordinates<
 	sanguis::client::draw2d::sprite::type_choices
 >;
 
-}
-}
-}
-}
 }
 
 #endif

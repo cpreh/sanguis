@@ -2,9 +2,7 @@
 #define SANGUIS_CREATOR_COUNT_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -12,7 +10,6 @@ count
 =
 unsigned;
 
-}
 }
 
 #endif

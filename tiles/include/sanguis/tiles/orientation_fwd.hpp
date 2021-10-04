@@ -5,9 +5,7 @@
 #include <fcppt/container/bitfield/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::container::bitfield::object<
 	sanguis::tiles::direction
 >;
 
-}
 }
 
 #endif

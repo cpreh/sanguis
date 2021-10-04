@@ -5,11 +5,7 @@
 #include <sanguis/server/damage/type.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 template<
@@ -37,8 +33,6 @@ private:
 
 };
 
-}
-}
 }
 
 #endif

@@ -7,11 +7,7 @@
 #include <sanguis/tools/libmergeimage/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
+namespace sanguis::tools::libmergeimage
 {
 
 class path_count_pair
@@ -37,8 +33,6 @@ private:
 	sanguis::tools::libmergeimage::count_type count_;
 };
 
-}
-}
 }
 
 #endif

@@ -2,13 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_DIFFICULTY_VALUE_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
+namespace sanguis::server::entities::enemies
 {
 
 using
@@ -16,9 +10,6 @@ difficulty_value
 =
 float;
 
-}
-}
-}
 }
 
 #endif

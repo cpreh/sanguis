@@ -5,11 +5,7 @@
 #include <sanguis/server/entities/insert_parameters.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 sanguis::server::entities::insert_parameters
@@ -17,8 +13,6 @@ insert_parameters_center(
 	sanguis::server::center const &
 );
 
-}
-}
 }
 
 #endif

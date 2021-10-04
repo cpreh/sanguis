@@ -7,11 +7,7 @@
 #include <fcppt/unique_ptr_decl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 template<
@@ -61,8 +57,6 @@ private:
 	sanguis::server::entities::insert_parameters insert_parameters_;
 };
 
-}
-}
 }
 
 #endif

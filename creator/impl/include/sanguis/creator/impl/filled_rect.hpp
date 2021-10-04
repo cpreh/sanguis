@@ -8,11 +8,7 @@
 #include <fcppt/container/grid/make_sup.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 template<
@@ -37,8 +33,6 @@ filled_rect(
 	);
 }
 
-}
-}
 }
 
 #endif

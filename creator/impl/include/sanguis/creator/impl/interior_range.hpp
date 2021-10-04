@@ -13,11 +13,7 @@
 #include <fcppt/math/vector/fill.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 template<
@@ -56,8 +52,6 @@ interior_range(
 		);
 }
 
-}
-}
 }
 
 #endif

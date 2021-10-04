@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_ENVIRONMENT_LOAD_CONTEXT_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace environment
+namespace sanguis::server::environment
 {
 
 class load_context;
 
-}
-}
 }
 
 #endif

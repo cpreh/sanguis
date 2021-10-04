@@ -7,13 +7,7 @@
 #include <fcppt/log/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 sanguis::client::load::resource::optional_sound
@@ -23,9 +17,6 @@ make_sound(
 	sanguis::client::load::resource::sounds_cref
 );
 
-}
-}
-}
 }
 
 #endif

@@ -9,13 +9,7 @@
 #include <fcppt/optional/map.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace attributes
+namespace sanguis::server::weapons::attributes
 {
 
 template<
@@ -50,9 +44,6 @@ make(
 		);
 }
 
-}
-}
-}
 }
 
 #endif

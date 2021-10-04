@@ -5,9 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::reference<
 	sanguis::tiles::collection
 >;
 
-}
 }
 
 #endif

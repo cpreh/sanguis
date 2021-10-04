@@ -2,20 +2,11 @@
 #define SANGUIS_MESSAGES_CLIENT_TYPES_MESSAGE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace client
-{
-namespace types
+namespace sanguis::messages::client::types
 {
 
 enum class message;
 
-}
-}
-}
 }
 
 #endif

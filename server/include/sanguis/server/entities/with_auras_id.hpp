@@ -10,11 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class with_auras_id
@@ -46,8 +42,6 @@ protected:
 	aura_types() const;
 };
 
-}
-}
 }
 
 #endif

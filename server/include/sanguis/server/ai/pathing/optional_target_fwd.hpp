@@ -5,13 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace pathing
+namespace sanguis::server::ai::pathing
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::optional::object<
 	sanguis::server::ai::pathing::target
 >;
 
-}
-}
-}
 }
 
 #endif

@@ -5,13 +5,7 @@
 #include <sanguis/server/random/amount.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace modifiers
+namespace sanguis::server::weapons::modifiers
 {
 
 sanguis::server::random::amount
@@ -20,9 +14,6 @@ random_amount(
 	sanguis::server::random::amount
 );
 
-}
-}
-}
 }
 
 #endif

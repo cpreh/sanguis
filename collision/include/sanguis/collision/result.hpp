@@ -6,9 +6,7 @@
 #include <sanguis/collision/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 class result
@@ -27,7 +25,6 @@ private:
 	sanguis::collision::speed speed_;
 };
 
-}
 }
 
 #endif

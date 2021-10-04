@@ -6,15 +6,7 @@
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace modifiers
+namespace sanguis::server::entities::enemies::modifiers
 {
 
 class parameters
@@ -32,10 +24,6 @@ private:
 	sanguis::random_generator_ref random_generator_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

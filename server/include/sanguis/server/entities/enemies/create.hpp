@@ -12,13 +12,7 @@
 #include <sanguis/server/world/difficulty.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
+namespace sanguis::server::entities::enemies
 {
 
 sanguis::server::entities::with_id_unique_ptr
@@ -33,9 +27,6 @@ create(
 	sanguis::server::entities::enemies::special_chance
 );
 
-}
-}
-}
 }
 
 #endif

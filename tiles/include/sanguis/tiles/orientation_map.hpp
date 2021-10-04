@@ -10,9 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 using
@@ -23,7 +21,6 @@ std::unordered_map<
 	sanguis::tiles::area_container
 >;
 
-}
 }
 
 #endif

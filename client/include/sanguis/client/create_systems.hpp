@@ -6,9 +6,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 sanguis::client::systems_unique_ptr
@@ -17,7 +15,6 @@ create_systems(
 	sanguis::client::args::result const &
 );
 
-}
 }
 
 #endif

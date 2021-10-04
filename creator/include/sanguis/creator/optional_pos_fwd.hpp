@@ -5,9 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::optional::object<
 	sanguis::creator::pos
 >;
 
-}
 }
 
 #endif

@@ -6,15 +6,7 @@
 #include <sanguis/collision/world/body_exit_container.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
-{
-namespace simple
+namespace sanguis::collision::impl::world::simple
 {
 
 class ghost_result
@@ -36,10 +28,6 @@ private:
 	sanguis::collision::world::body_exit_container body_exit_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

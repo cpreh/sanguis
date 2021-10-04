@@ -10,11 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace global
+namespace sanguis::server::global
 {
 
 class load_context
@@ -50,8 +46,6 @@ private:
 	sanguis::server::global::next_id_callback const next_id_callback_;
 };
 
-}
-}
 }
 
 #endif

@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace load
-{
-namespace model
+namespace sanguis::load::model
 {
 
 SANGUIS_COMMON_SYMBOL
@@ -21,8 +17,6 @@ make_path(
 	sanguis::load::model::path const &
 );
 
-}
-}
 }
 
 #endif

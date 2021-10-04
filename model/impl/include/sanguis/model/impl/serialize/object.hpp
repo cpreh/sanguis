@@ -5,13 +5,7 @@
 #include <sge/parse/json/object.hpp>
 
 
-namespace sanguis
-{
-namespace model
-{
-namespace impl
-{
-namespace serialize
+namespace sanguis::model::impl::serialize
 {
 
 sge::parse::json::object
@@ -19,9 +13,6 @@ object(
 	sanguis::model::object const &
 );
 
-}
-}
-}
 }
 
 #endif

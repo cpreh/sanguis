@@ -26,13 +26,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace menu
+namespace sanguis::client::gui::menu
 {
 
 class object
@@ -142,9 +136,6 @@ private:
 	fcppt::signal::auto_connection const port_change_connection_;
 };
 
-}
-}
-}
 }
 
 #endif

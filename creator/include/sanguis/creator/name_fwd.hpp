@@ -5,9 +5,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -15,7 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	name
 );
 
-}
 }
 
 #endif

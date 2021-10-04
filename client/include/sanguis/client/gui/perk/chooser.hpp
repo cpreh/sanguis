@@ -23,13 +23,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace perk
+namespace sanguis::client::gui::perk
 {
 
 class chooser
@@ -106,9 +100,6 @@ private:
 	fcppt::signal::auto_connection const level_connection_;
 };
 
-}
-}
-}
 }
 
 #endif

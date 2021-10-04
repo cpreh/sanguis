@@ -6,13 +6,7 @@
 #include <fcppt/log/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace hud
+namespace sanguis::client::load::hud
 {
 
 sanguis::client::load::hud::weapon_icon_map
@@ -21,9 +15,6 @@ make_weapon_icons(
 	sanguis::client::load::resource::textures_cref
 );
 
-}
-}
-}
 }
 
 #endif

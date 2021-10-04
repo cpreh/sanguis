@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 class path_model_pair
@@ -57,8 +53,6 @@ private:
 	sanguis::model::object model_;
 };
 
-}
-}
 }
 
 #endif

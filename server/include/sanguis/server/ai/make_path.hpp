@@ -5,11 +5,7 @@
 #include <sanguis/server/ai/context_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 [[nodiscard]]
@@ -19,8 +15,6 @@ make_path(
 	sanguis::creator::pos const &
 );
 
-}
-}
 }
 
 #endif

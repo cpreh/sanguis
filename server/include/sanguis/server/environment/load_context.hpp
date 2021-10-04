@@ -8,11 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace environment
+namespace sanguis::server::environment
 {
 
 class load_context
@@ -39,8 +35,6 @@ public:
 	~load_context();
 };
 
-}
-}
 }
 
 #endif

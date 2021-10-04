@@ -58,7 +58,7 @@ sanguis::server::timer_impl::reset()
 		[
 			this
 		](
-			boost::system::error_code const &_error
+			boost::system::error_code const & /*_error*/
 		){
 			this->handler();
 		}

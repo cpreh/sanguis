@@ -10,11 +10,7 @@
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class ghost_parameters
@@ -53,8 +49,6 @@ private:
 	sanguis::collision::world::ghost_base_ref ghost_base_;
 };
 
-}
-}
 }
 
 #endif

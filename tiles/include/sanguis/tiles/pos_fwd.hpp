@@ -5,9 +5,7 @@
 #include <fcppt/math/vector/static_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 using
@@ -18,7 +16,6 @@ fcppt::math::vector::static_<
 	2
 >;
 
-}
 }
 
 #endif

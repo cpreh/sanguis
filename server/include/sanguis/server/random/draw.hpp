@@ -20,11 +20,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace random
+namespace sanguis::server::random
 {
 
 template<
@@ -133,8 +129,6 @@ FCPPT_PP_POP_WARNING
 		);
 }
 
-}
-}
 }
 
 #endif

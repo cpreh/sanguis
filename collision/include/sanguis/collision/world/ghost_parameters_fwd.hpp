@@ -2,17 +2,11 @@
 #define SANGUIS_COLLISION_WORLD_GHOST_PARAMETERS_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class ghost_parameters;
 
-}
-}
 }
 
 #endif

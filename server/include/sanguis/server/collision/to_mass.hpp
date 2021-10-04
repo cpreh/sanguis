@@ -5,11 +5,7 @@
 #include <sanguis/server/mass_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 sanguis::collision::mass
@@ -17,8 +13,6 @@ to_mass(
 	sanguis::server::mass const &
 );
 
-}
-}
 }
 
 #endif

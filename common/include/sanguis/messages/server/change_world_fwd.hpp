@@ -19,11 +19,7 @@
 #include <fcppt/record/element_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
+namespace sanguis::messages::server
 {
 
 using
@@ -61,8 +57,6 @@ alda::message::object<
 	>
 >;
 
-}
-}
 }
 
 #endif

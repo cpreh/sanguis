@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace events
+namespace sanguis::server::events
 {
 
 class tick
@@ -64,8 +60,6 @@ private:
 	sanguis::slowdown slowdown_;
 };
 
-}
-}
 }
 
 #endif

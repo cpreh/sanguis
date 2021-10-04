@@ -8,11 +8,7 @@
 #include <sanguis/client/perk/tree_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 sanguis::client::perk::choosable_state
@@ -23,8 +19,6 @@ choosable(
 	sanguis::client::perk::remaining_levels
 );
 
-}
-}
 }
 
 #endif

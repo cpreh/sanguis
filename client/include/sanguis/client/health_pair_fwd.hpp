@@ -2,14 +2,11 @@
 #define SANGUIS_CLIENT_HEALTH_PAIR_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class health_pair;
 
-}
 }
 
 #endif

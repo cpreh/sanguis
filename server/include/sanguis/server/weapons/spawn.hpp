@@ -18,11 +18,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class spawn
@@ -94,8 +90,6 @@ private:
 	sanguis::server::entities::auto_weak_link spawned_;
 };
 
-}
-}
 }
 
 #endif

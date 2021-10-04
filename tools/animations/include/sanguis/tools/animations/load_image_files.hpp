@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 sanguis::tools::animations::image_file_map
@@ -21,8 +17,6 @@ load_image_files(
 	sanguis::model::object const &
 );
 
-}
-}
 }
 
 #endif

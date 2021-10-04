@@ -5,13 +5,7 @@
 #include <sge/sprite/types/size_or_texture_size_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
+namespace sanguis::client::draw2d::sprite
 {
 
 using
@@ -21,9 +15,6 @@ sge::sprite::types::size_or_texture_size<
 	sanguis::client::draw2d::sprite::type_choices
 >;
 
-}
-}
-}
 }
 
 #endif

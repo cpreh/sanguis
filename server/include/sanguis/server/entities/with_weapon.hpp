@@ -26,11 +26,7 @@
 #include <fcppt/optional/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class with_weapon
@@ -268,8 +264,6 @@ private:
 	extra_damage_array extra_damages_;
 };
 
-}
-}
 }
 
 #endif

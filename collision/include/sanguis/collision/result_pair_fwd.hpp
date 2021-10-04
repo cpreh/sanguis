@@ -5,9 +5,7 @@
 #include <fcppt/tuple/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 using
@@ -18,7 +16,6 @@ fcppt::tuple::object<
 	sanguis::collision::result
 >;
 
-}
 }
 
 #endif

@@ -16,13 +16,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace projectiles
+namespace sanguis::server::entities::projectiles
 {
 
 class grenade
@@ -76,9 +70,6 @@ private:
 	sanguis::server::vector const dest_;
 };
 
-}
-}
-}
 }
 
 #endif

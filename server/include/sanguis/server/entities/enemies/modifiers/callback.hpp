@@ -7,15 +7,7 @@
 #include <fcppt/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace modifiers
+namespace sanguis::server::entities::enemies::modifiers
 {
 
 using
@@ -29,10 +21,6 @@ sanguis::server::entities::enemies::attribute
 	sanguis::server::entities::enemies::modifiers::parameters const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

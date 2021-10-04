@@ -5,13 +5,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
+namespace sanguis::server::entities::enemies
 {
 
 class attribute
@@ -29,9 +23,6 @@ private:
 	fcppt::string text_;
 };
 
-}
-}
-}
 }
 
 #endif

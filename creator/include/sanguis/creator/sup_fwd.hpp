@@ -5,9 +5,7 @@
 #include <fcppt/container/grid/sup_from_pos_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::container::grid::sup_from_pos<
 	sanguis::creator::pos
 >;
 
-}
 }
 
 #endif

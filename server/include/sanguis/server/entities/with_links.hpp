@@ -9,11 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class with_links
@@ -49,8 +45,6 @@ private:
 	sanguis::server::entities::link_container links_;
 };
 
-}
-}
 }
 
 #endif

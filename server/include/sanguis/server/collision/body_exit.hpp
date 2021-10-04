@@ -4,11 +4,7 @@
 #include <sanguis/collision/world/body_exit_container.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 void
@@ -16,8 +12,6 @@ body_exit(
 	sanguis::collision::world::body_exit_container const &
 );
 
-}
-}
 }
 
 #endif

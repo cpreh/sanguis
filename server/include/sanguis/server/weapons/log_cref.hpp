@@ -5,11 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::reference<
 	sanguis::server::weapons::log const
 >;
 
-}
-}
 }
 
 #endif

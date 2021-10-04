@@ -14,11 +14,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 class frame
@@ -68,8 +64,6 @@ private:
 	label_unique_ptr label_;
 };
 
-}
-}
 }
 
 #endif

@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 using
@@ -21,8 +17,6 @@ std::vector<
 	sanguis::tools::animations::frame
 >;
 
-}
-}
 }
 
 #endif

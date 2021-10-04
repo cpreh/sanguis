@@ -5,9 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::reference<
 	sanguis::creator::grid const
 >;
 
-}
 }
 
 #endif

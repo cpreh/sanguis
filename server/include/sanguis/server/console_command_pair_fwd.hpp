@@ -5,9 +5,7 @@
 #include <fcppt/tuple/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 using
@@ -18,7 +16,6 @@ fcppt::tuple::object<
 	fcppt::string
 >;
 
-}
 }
 
 #endif

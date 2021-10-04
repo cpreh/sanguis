@@ -9,15 +9,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 class batch
@@ -54,10 +46,6 @@ private:
 	sanguis::client::draw2d::scene::world::sprite::range range_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

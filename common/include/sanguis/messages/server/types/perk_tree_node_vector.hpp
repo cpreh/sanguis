@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
-{
-namespace types
+namespace sanguis::messages::server::types
 {
 
 using
@@ -23,9 +17,6 @@ std::vector<
 	sanguis::messages::server::types::perk_tree_node
 >;
 
-}
-}
-}
 }
 
 #endif

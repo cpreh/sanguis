@@ -5,9 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::optional::object<
 	sanguis::model::animation_delay
 >;
 
-}
 }
 
 #endif

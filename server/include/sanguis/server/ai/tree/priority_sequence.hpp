@@ -8,13 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace tree
+namespace sanguis::server::ai::tree
 {
 
 class priority_sequence
@@ -41,9 +35,6 @@ private:
 	override;
 };
 
-}
-}
-}
 }
 
 #endif

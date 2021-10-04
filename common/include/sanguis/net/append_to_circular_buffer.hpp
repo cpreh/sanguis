@@ -6,9 +6,7 @@
 #include <alda/net/buffer/circular_send/streambuf_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace net
+namespace sanguis::net
 {
 
 [[nodiscard]]
@@ -19,7 +17,6 @@ append_to_circular_buffer(
 	sanguis::net::data_buffer const &
 );
 
-}
 }
 
 #endif

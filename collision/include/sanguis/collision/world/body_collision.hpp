@@ -7,11 +7,7 @@
 #include <sanguis/collision/world/body_collision_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class body_collision
@@ -37,8 +33,6 @@ private:
 	sanguis::collision::world::body_base_ref body2_;
 };
 
-}
-}
 }
 
 #endif

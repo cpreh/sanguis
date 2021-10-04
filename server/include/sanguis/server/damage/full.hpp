@@ -4,17 +4,11 @@
 #include <sanguis/server/damage/unit.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 extern sanguis::server::damage::unit const full;
 
-}
-}
 }
 
 #endif

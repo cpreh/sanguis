@@ -4,9 +4,7 @@
 #include <fcppt/container/grid/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 template<
@@ -20,7 +18,6 @@ fcppt::container::grid::object<
 	2U
 >;
 
-}
 }
 
 #endif

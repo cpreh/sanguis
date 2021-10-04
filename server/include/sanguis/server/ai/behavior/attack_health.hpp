@@ -8,13 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace behavior
+namespace sanguis::server::ai::behavior
 {
 
 class attack_health
@@ -42,9 +36,6 @@ private:
 	sanguis::server::ai::speed_factor const speed_factor_;
 };
 
-}
-}
-}
 }
 
 #endif

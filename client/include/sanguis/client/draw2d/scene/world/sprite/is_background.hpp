@@ -7,17 +7,7 @@
 #include <fcppt/record/element.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
-{
-namespace sprite
+namespace sanguis::client::draw2d::scene::world::sprite
 {
 
 struct is_background
@@ -39,11 +29,6 @@ struct is_background
 	};
 };
 
-}
-}
-}
-}
-}
 }
 
 #endif

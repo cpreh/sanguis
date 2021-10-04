@@ -5,9 +5,7 @@
 #include <sge/console/arg_list.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 sge::console::arg_list
@@ -15,7 +13,6 @@ to_console_arg_list(
 	sanguis::string_vector const &
 );
 
-}
 }
 
 #endif

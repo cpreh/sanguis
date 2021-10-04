@@ -9,13 +9,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace modifiers
+namespace sanguis::server::weapons::modifiers
 {
 
 struct damage
@@ -52,9 +46,6 @@ struct damage
 	}
 };
 
-}
-}
-}
 }
 
 #endif

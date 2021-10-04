@@ -7,11 +7,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace global
+namespace sanguis::server::global
 {
 
 class world_map
@@ -51,8 +47,6 @@ private:
 	sanguis::server::global::world_connection_map connections_;
 };
 
-}
-}
 }
 
 #endif

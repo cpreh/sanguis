@@ -9,11 +9,7 @@
 #include <sanguis/tools/animations/image_file_map.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 sanguis::tools::animations::const_optional_image_file_ref
@@ -25,8 +21,6 @@ find_image_file(
 	sanguis::model::animation_name const &
 );
 
-}
-}
 }
 
 #endif

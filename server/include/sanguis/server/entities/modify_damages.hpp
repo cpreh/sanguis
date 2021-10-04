@@ -6,11 +6,7 @@
 #include <sanguis/server/entities/ifaces/with_weapon_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 sanguis::server::damage::modified_array
@@ -19,8 +15,6 @@ modify_damages(
 	sanguis::server::damage::array const &
 );
 
-}
-}
 }
 
 #endif

@@ -11,11 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 sanguis::tools::animations::frame_container
@@ -28,8 +24,6 @@ make_frames(
 	sanguis::model::animation const &
 );
 
-}
-}
 }
 
 #endif

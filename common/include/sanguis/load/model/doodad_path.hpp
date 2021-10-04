@@ -6,11 +6,7 @@
 #include <sanguis/load/model/path.hpp>
 
 
-namespace sanguis
-{
-namespace load
-{
-namespace model
+namespace sanguis::load::model
 {
 
 SANGUIS_COMMON_SYMBOL
@@ -19,8 +15,6 @@ doodad_path(
 	sanguis::doodad_type
 );
 
-}
-}
 }
 
 #endif

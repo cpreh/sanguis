@@ -4,11 +4,7 @@
 #include <sanguis/server/ai/status_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 enum class status
@@ -18,8 +14,6 @@ enum class status
 	success
 };
 
-}
-}
 }
 
 #endif

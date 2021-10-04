@@ -5,13 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace tree
+namespace sanguis::server::ai::tree
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::unique_ptr<
 	sanguis::server::ai::tree::base
 >;
 
-}
-}
-}
 }
 
 #endif

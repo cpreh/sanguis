@@ -4,15 +4,12 @@
 #include <fcppt/log/location.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 fcppt::log::location
 log_location();
 
-}
 }
 
 #endif

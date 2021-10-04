@@ -11,11 +11,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class with_id
@@ -58,8 +54,6 @@ private:
 	sanguis::entity_id const id_;
 };
 
-}
-}
 }
 
 #endif

@@ -7,13 +7,7 @@
 #include <fcppt/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace pathing
+namespace sanguis::server::ai::pathing
 {
 
 sanguis::server::ai::pathing::optional_target
@@ -24,9 +18,6 @@ update_trail(
 	sanguis::server::entities::with_ai const &
 );
 
-}
-}
-}
 }
 
 #endif

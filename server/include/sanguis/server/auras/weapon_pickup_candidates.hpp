@@ -12,11 +12,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 class weapon_pickup_candidates
@@ -59,8 +55,6 @@ private:
 	sanguis::server::remove_weapon_pickup_callback const remove_;
 };
 
-}
-}
 }
 
 #endif

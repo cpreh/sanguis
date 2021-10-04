@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_DAMAGE_TYPE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 enum class type;
 
-}
-}
 }
 
 #endif

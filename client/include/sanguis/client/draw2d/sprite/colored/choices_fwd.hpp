@@ -12,15 +12,7 @@
 #include <fcppt/mpl/list/object.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace colored
+namespace sanguis::client::draw2d::sprite::colored
 {
 
 using
@@ -41,10 +33,6 @@ sge::sprite::config::choices<
 	>
 >;
 
-}
-}
-}
-}
 }
 
 #endif

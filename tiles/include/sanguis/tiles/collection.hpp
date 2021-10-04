@@ -20,9 +20,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 class collection
@@ -84,7 +82,6 @@ private:
 	tiles_;
 };
 
-}
 }
 
 #define SANGUIS_TILES_DECLARE_COLLECTION_SET(\

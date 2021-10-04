@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
-{
-namespace qtutil
+namespace sanguis::tools::animations::qtutil
 {
 
 QString
@@ -21,9 +15,6 @@ from_fcppt_string(
 	fcppt::string const &
 );
 
-}
-}
-}
 }
 
 #endif

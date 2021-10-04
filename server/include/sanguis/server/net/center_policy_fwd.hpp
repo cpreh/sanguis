@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_NET_CENTER_POLICY_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace net
+namespace sanguis::server::net
 {
 
 struct center_policy;
 
-}
-}
 }
 
 #endif

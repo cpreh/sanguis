@@ -5,11 +5,7 @@
 #include <fcppt/enum/array_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -23,8 +19,6 @@ fcppt::enum_::array<
 	Tile
 >;
 
-}
-}
 }
 
 #endif

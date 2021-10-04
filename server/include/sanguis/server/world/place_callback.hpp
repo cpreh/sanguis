@@ -5,11 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 template<
@@ -24,8 +20,6 @@ fcppt::function<
 	> ()
 >;
 
-}
-}
 }
 
 #endif

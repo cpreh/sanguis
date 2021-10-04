@@ -12,13 +12,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace perk
+namespace sanguis::client::gui::perk
 {
 
 class state
@@ -46,9 +40,6 @@ private:
 	sge::gui::widget::tab main_tab_;
 };
 
-}
-}
-}
 }
 
 #endif

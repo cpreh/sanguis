@@ -8,13 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
+namespace sanguis::client::load::resource
 {
 
 using
@@ -25,9 +19,6 @@ std::unordered_map<
 	std::filesystem::path
 >;
 
-}
-}
-}
 }
 
 #endif

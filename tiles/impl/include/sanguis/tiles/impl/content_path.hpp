@@ -6,11 +6,7 @@
 #include <sanguis/tiles/impl/content_path_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 class content_path
@@ -34,8 +30,6 @@ private:
 	sanguis::tiles::path_reference path_;
 };
 
-}
-}
 }
 
 #endif

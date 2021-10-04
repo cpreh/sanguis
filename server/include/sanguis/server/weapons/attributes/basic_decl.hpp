@@ -5,13 +5,7 @@
 #include <fcppt/optional/object_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace attributes
+namespace sanguis::server::weapons::attributes
 {
 
 template<
@@ -54,9 +48,6 @@ private:
 	optional_extra extra_;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -9,9 +9,7 @@
 #include <sanguis/tiles/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 class cell
@@ -53,7 +51,6 @@ private:
 	sanguis::tiles::is_background is_background_;
 };
 
-}
 }
 
 #endif

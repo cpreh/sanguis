@@ -2,14 +2,11 @@
 #define SANGUIS_TILES_COLLECTION_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 class collection;
 
-}
 }
 
 #endif

@@ -8,15 +8,7 @@
 #include <sanguis/tiles/cell_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 sanguis::client::draw2d::scene::world::sprite::optional_object
@@ -27,10 +19,6 @@ make_sprite(
 	sanguis::tiles::cell const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

@@ -4,15 +4,7 @@
 #include <sge/image/color/rgba8_format.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace colored
+namespace sanguis::client::draw2d::sprite::colored
 {
 
 using
@@ -20,10 +12,6 @@ color_format
 =
 sge::image::color::rgba8_format;
 
-}
-}
-}
-}
 }
 
 #endif

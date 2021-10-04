@@ -4,13 +4,7 @@
 #include <sanguis/client/control/actions/nullary_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
-{
-namespace actions
+namespace sanguis::client::control::actions
 {
 
 enum class nullary_type
@@ -26,9 +20,6 @@ enum class nullary_type
 	reload_secondary_weapon
 };
 
-}
-}
-}
 }
 
 #endif

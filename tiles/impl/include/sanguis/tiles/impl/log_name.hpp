@@ -4,18 +4,12 @@
 #include <fcppt/log/name.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 fcppt::log::name
 log_name();
 
-}
-}
 }
 
 #endif

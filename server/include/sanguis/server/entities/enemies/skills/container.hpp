@@ -7,15 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace skills
+namespace sanguis::server::entities::enemies::skills
 {
 
 using
@@ -25,10 +17,6 @@ std::vector<
 	sanguis::server::entities::enemies::skills::unique_ptr
 >;
 
-}
-}
-}
-}
 }
 
 #endif

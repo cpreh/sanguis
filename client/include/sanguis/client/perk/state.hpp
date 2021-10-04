@@ -22,11 +22,7 @@
 #include <fcppt/signal/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 class state
@@ -123,8 +119,6 @@ private:
 	> change_signal_;
 };
 
-}
-}
 }
 
 #endif

@@ -25,13 +25,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
+namespace sanguis::server::entities::enemies
 {
 
 class enemy
@@ -120,9 +114,6 @@ private:
 	sanguis::server::entities::spawn_owner const spawn_owner_;
 };
 
-}
-}
-}
 }
 
 #endif

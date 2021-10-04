@@ -2,20 +2,11 @@
 #define SANGUIS_CLIENT_LOAD_TILES_CONTEXT_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace tiles
+namespace sanguis::client::load::tiles
 {
 
 class context;
 
-}
-}
-}
 }
 
 #endif

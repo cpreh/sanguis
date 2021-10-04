@@ -4,11 +4,7 @@
 #include <sanguis/model/animation_delay_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 int
@@ -16,8 +12,6 @@ delay_to_int(
 	sanguis::model::animation_delay const &
 );
 
-}
-}
 }
 
 #endif

@@ -4,13 +4,7 @@
 #include <sanguis/messages/server/types/message_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
-{
-namespace types
+namespace sanguis::messages::server::types
 {
 
 enum class message
@@ -55,9 +49,6 @@ enum class message
 	fcppt_maximum = weapon_status
 };
 
-}
-}
-}
 }
 
 #endif

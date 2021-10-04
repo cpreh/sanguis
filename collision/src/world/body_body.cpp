@@ -76,7 +76,7 @@ sanguis::collision::world::body_body(
 				fcppt::literal<
 					sanguis::collision::unit
 				>(
-					0.9f
+					0.9F
 				)
 			);
 

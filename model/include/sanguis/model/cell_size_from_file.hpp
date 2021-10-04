@@ -8,9 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 SANGUIS_MODEL_SYMBOL
@@ -19,7 +17,6 @@ cell_size_from_file(
 	std::filesystem::path const &
 );
 
-}
 }
 
 #endif

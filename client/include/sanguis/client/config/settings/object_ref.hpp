@@ -5,13 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace config
-{
-namespace settings
+namespace sanguis::client::config::settings
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::reference<
 	sanguis::client::config::settings::object
 >;
 
-}
-}
-}
 }
 
 #endif

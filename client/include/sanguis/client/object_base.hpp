@@ -8,9 +8,7 @@
 #include <fcppt/symbol/class.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class FCPPT_SYMBOL_CLASS object_base
@@ -31,7 +29,6 @@ public:
 	run() = 0;
 };
 
-}
 }
 
 #endif

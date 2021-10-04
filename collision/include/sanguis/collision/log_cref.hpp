@@ -5,9 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::reference<
 	sanguis::collision::log const
 >;
 
-}
 }
 
 #endif

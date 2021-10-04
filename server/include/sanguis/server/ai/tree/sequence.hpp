@@ -8,13 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace tree
+namespace sanguis::server::ai::tree
 {
 
 class sequence
@@ -43,9 +37,6 @@ private:
 	sanguis::server::ai::tree::container::iterator current_;
 };
 
-}
-}
-}
 }
 
 #endif

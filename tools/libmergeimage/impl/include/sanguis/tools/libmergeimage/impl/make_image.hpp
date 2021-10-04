@@ -10,13 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
-{
-namespace impl
+namespace sanguis::tools::libmergeimage::impl
 {
 
 sanguis::tools::libmergeimage::image
@@ -27,9 +21,6 @@ make_image(
 	sanguis::tools::libmergeimage::impl::path_vector
 );
 
-}
-}
-}
 }
 
 #endif

@@ -5,13 +5,7 @@
 #include <sge/parse/json/member.hpp>
 
 
-namespace sanguis
-{
-namespace model
-{
-namespace impl
-{
-namespace serialize
+namespace sanguis::model::impl::serialize
 {
 
 sge::parse::json::member
@@ -19,9 +13,6 @@ animation_map(
 	sanguis::model::animation_map const &
 );
 
-}
-}
-}
 }
 
 #endif

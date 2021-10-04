@@ -5,13 +5,7 @@
 #include <sanguis/creator/impl/random/uniform_int_distribution_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
-{
-namespace random
+namespace sanguis::creator::impl::random
 {
 
 template<
@@ -62,9 +56,6 @@ private:
 	IntType max_;
 };
 
-}
-}
-}
 }
 
 #endif

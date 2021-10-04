@@ -4,9 +4,7 @@
 #include <sanguis/creator/enemy_kind_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 enum class enemy_kind
@@ -17,7 +15,6 @@ enum class enemy_kind
 	fcppt_maximum = boss
 };
 
-}
 }
 
 #endif

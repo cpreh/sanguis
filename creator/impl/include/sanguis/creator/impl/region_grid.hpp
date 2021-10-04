@@ -4,11 +4,7 @@
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/creator/impl/region_id.hpp>
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 using
@@ -18,8 +14,6 @@ sanguis::creator::tile_grid<
 	sanguis::creator::impl::region_id
 >;
 
-}
-}
 }
 
 #endif

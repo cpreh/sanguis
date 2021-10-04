@@ -7,9 +7,7 @@
 #include <alda/net/buffer/circular_send/streambuf_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace net
+namespace sanguis::net
 {
 
 template<
@@ -34,7 +32,6 @@ serialize_to_circular_buffer(
 		);
 }
 
-}
 }
 
 #endif

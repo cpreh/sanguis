@@ -16,13 +16,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace hud
+namespace sanguis::client::gui::hud
 {
 
 class weapon_details
@@ -58,9 +52,6 @@ private:
 	sge::gui::widget::box_container container_;
 };
 
-}
-}
-}
 }
 
 #endif

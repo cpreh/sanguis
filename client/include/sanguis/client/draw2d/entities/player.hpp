@@ -16,13 +16,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 class player
@@ -74,9 +68,6 @@ protected:
 	using sanguis::client::draw2d::entities::container::speed;
 };
 
-}
-}
-}
 }
 
 #endif

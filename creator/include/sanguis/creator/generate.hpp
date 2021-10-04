@@ -6,9 +6,7 @@
 #include <sanguis/creator/top_result_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
@@ -17,7 +15,6 @@ generate(
 	sanguis::creator::top_parameters const &
 );
 
-}
 }
 
 #endif

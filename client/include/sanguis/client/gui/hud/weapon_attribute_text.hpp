@@ -5,13 +5,7 @@
 #include <sge/font/string.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace hud
+namespace sanguis::client::gui::hud
 {
 
 sge::font::string
@@ -19,9 +13,6 @@ weapon_attribute_text(
 	sanguis::weapon_attribute const &
 );
 
-}
-}
-}
 }
 
 #endif

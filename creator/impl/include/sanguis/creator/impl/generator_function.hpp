@@ -5,11 +5,7 @@
 #include <sanguis/creator/impl/result_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 using
@@ -20,8 +16,6 @@ sanguis::creator::impl::result
 	sanguis::creator::impl::parameters const &
 );
 
-}
-}
 }
 
 #endif

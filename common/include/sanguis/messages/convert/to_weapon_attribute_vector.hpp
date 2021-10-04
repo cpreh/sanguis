@@ -6,11 +6,7 @@
 #include <sanguis/messages/server/types/weapon_attribute_vector.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace convert
+namespace sanguis::messages::convert
 {
 
 SANGUIS_COMMON_SYMBOL
@@ -19,8 +15,6 @@ to_weapon_attribute_vector(
 	sanguis::weapon_attribute_vector const &
 );
 
-}
-}
 }
 
 #endif

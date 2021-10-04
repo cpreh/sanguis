@@ -5,11 +5,7 @@
 #include <alda/message/base_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace client
+namespace sanguis::messages::client
 {
 
 using
@@ -19,8 +15,6 @@ alda::message::base<
 	sanguis::messages::client::types::alda_type
 >;
 
-}
-}
 }
 
 #endif

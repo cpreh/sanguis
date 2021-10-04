@@ -9,15 +9,7 @@
 #include <sanguis/client/load/model/collection_cref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace buffs
+namespace sanguis::client::draw2d::entities::buffs
 {
 
 sanguis::client::draw2d::entities::buffs::unique_ptr
@@ -29,10 +21,6 @@ create(
 	sanguis::buff_type
 );
 
-}
-}
-}
-}
 }
 
 #endif

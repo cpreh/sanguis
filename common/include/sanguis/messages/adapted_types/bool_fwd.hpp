@@ -4,11 +4,7 @@
 #include <alda/bindings/bool_decl.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 using
@@ -16,8 +12,6 @@ bool_
 =
 alda::bindings::bool_;
 
-}
-}
 }
 
 #endif

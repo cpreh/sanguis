@@ -5,13 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace tiles
+namespace sanguis::client::load::tiles
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::reference<
 	sanguis::client::load::tiles::context
 >;
 
-}
-}
-}
 }
 
 #endif

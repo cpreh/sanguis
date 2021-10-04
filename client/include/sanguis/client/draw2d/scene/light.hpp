@@ -13,13 +13,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
+namespace sanguis::client::draw2d::scene
 {
 
 class light
@@ -55,9 +49,6 @@ private:
 	fcppt::signal::auto_connection const viewport_connection_;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -7,11 +7,7 @@
 #include <sanguis/creator/grid_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 sanguis::creator::grid_crange
@@ -21,8 +17,6 @@ make_range(
 	sanguis::collision::radius const &
 );
 
-}
-}
 }
 
 #endif

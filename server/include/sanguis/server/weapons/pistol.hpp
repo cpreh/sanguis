@@ -14,11 +14,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class pistol
@@ -63,8 +59,6 @@ private:
 	sanguis::server::weapons::attributes::damage const damage_;
 };
 
-}
-}
 }
 
 #endif

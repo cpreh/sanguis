@@ -8,13 +8,7 @@
 #include <sanguis/creator/optional_background_tile_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 sanguis::client::draw2d::entities::optional_own_unique_ptr
@@ -25,9 +19,6 @@ enemy_spawn_particle(
 	sanguis::creator::optional_background_tile
 );
 
-}
-}
-}
 }
 
 #endif

@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	sanguis::tiles::impl::content_path
 >;
 
-}
-}
 }
 
 #endif

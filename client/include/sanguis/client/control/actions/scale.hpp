@@ -6,13 +6,7 @@
 #include <sanguis/client/control/actions/scale_type.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
-{
-namespace actions
+namespace sanguis::client::control::actions
 {
 
 class scale
@@ -36,9 +30,6 @@ private:
 	sanguis::client::control::key_scale scale_;
 };
 
-}
-}
-}
 }
 
 #endif

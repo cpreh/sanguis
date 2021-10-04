@@ -8,9 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 SANGUIS_MODEL_SYMBOL
@@ -20,7 +18,6 @@ serialize(
 	sanguis::model::object const &
 );
 
-}
 }
 
 #endif

@@ -5,13 +5,7 @@
 #include <sanguis/client/control/actions/nullary_type.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
-{
-namespace actions
+namespace sanguis::client::control::actions
 {
 
 class nullary
@@ -29,9 +23,6 @@ private:
 	sanguis::client::control::actions::nullary_type type_;
 };
 
-}
-}
-}
 }
 
 #endif

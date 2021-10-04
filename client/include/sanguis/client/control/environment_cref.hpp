@@ -5,11 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
+namespace sanguis::client::control
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::reference<
 	sanguis::client::control::environment const
 >;
 
-}
-}
 }
 
 #endif

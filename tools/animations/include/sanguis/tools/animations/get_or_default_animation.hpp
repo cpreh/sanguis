@@ -8,11 +8,7 @@
 #include <sanguis/model/weapon_category_name_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 sanguis::model::animation
@@ -23,8 +19,6 @@ get_or_default_animation(
 	sanguis::model::animation_name const &
 );
 
-}
-}
 }
 
 #endif

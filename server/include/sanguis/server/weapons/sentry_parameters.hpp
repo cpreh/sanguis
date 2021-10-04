@@ -9,11 +9,7 @@
 #include <sanguis/server/weapons/attributes/health.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class sentry_parameters
@@ -56,8 +52,6 @@ private:
 	sanguis::server::weapons::range range_;
 };
 
-}
-}
 }
 
 #endif

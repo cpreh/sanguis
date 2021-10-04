@@ -11,11 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 class ghost_base
@@ -63,8 +59,6 @@ private:
 	) const = 0;
 };
 
-}
-}
 }
 
 #endif

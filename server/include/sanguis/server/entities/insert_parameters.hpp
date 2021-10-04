@@ -7,11 +7,7 @@
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class insert_parameters
@@ -47,8 +43,6 @@ private:
 	sanguis::collision::world::created created_;
 };
 
-}
-}
 }
 
 #endif

@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_ENTITIES_BASE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class base;
 
-}
-}
 }
 
 #endif

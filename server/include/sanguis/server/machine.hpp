@@ -30,9 +30,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 struct machine
@@ -160,7 +158,6 @@ private:
 	fcppt::signal::auto_connection const data_connection_;
 };
 
-}
 }
 
 #endif

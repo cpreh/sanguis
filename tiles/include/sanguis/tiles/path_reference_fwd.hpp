@@ -7,9 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 using
@@ -19,7 +17,6 @@ fcppt::reference<
 	std::filesystem::path const
 >;
 
-}
 }
 
 #endif

@@ -4,11 +4,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -16,8 +12,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	difficulty
 );
 
-}
-}
 }
 
 #endif

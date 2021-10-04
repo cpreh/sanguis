@@ -6,13 +6,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
+namespace sanguis::server::entities::enemies
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -20,9 +14,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	special_chance
 );
 
-}
-}
-}
 }
 
 #endif

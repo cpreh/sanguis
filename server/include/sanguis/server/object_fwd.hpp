@@ -2,14 +2,11 @@
 #define SANGUIS_SERVER_OBJECT_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 class object;
 
-}
 }
 
 #endif

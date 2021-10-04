@@ -2,14 +2,11 @@
 #define SANGUIS_SERVER_CONSOLE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 class console;
 
-}
 }
 
 #endif

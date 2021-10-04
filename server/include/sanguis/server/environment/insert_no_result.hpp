@@ -7,11 +7,7 @@
 #include <sanguis/server/environment/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace environment
+namespace sanguis::server::environment
 {
 
 void
@@ -28,8 +24,6 @@ insert_no_result(
 	sanguis::server::entities::insert_parameters const &
 );
 
-}
-}
 }
 
 #endif

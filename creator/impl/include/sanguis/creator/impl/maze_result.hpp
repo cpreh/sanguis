@@ -4,11 +4,7 @@
 #include <sanguis/creator/impl/region_grid.hpp>
 #include <sanguis/creator/impl/region_id.hpp>
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 struct
@@ -21,8 +17,6 @@ maze_result
 	next_id;
 };
 
-}
-}
 }
 
 #endif

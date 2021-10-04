@@ -5,11 +5,7 @@
 #include <alda/net/buffer/circular_send/streambuf_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace net
+namespace sanguis::client::net
 {
 
 [[nodiscard]]
@@ -19,8 +15,6 @@ serialize_to_circular_buffer(
 	alda::net::buffer::circular_send::streambuf & // NOLINT(google-runtime-references)
 ); // NOLINT(google-runtime-references)
 
-}
-}
 }
 
 #endif

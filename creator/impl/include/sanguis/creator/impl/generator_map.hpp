@@ -4,18 +4,12 @@
 #include <sanguis/creator/impl/generator_map_type.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 sanguis::creator::impl::generator_map_type const &
 generator_map();
 
-}
-}
 }
 
 #endif

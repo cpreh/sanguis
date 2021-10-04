@@ -14,11 +14,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class sentry
@@ -64,8 +60,6 @@ private:
 	sanguis::server::weapons::attributes::health const health_;
 };
 
-}
-}
 }
 
 #endif

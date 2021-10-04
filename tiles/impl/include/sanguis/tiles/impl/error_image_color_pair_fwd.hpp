@@ -5,11 +5,7 @@
 #include <fcppt/tuple/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 using
@@ -20,8 +16,6 @@ fcppt::tuple::object<
 	sge::image::color::any::object
 >;
 
-}
-}
 }
 
 #endif

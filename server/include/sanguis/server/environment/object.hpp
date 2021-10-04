@@ -34,11 +34,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace environment
+namespace sanguis::server::environment
 {
 
 class object
@@ -259,8 +255,6 @@ public:
 	~object();
 };
 
-}
-}
 }
 
 #endif

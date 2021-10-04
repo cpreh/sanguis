@@ -5,16 +5,13 @@
 #include <sanguis/creator/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
 sanguis::creator::generator_vector const &
 generators();
 
-}
 }
 
 #endif

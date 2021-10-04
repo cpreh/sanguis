@@ -5,11 +5,7 @@
 #include <sanguis/server/world/insert_pair_container.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 using
@@ -19,8 +15,6 @@ sanguis::server::world::insert_pair_container<
 	sanguis::server::entities::with_id
 >;
 
-}
-}
 }
 
 #endif

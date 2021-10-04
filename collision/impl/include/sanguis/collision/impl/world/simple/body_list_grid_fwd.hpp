@@ -5,15 +5,7 @@
 #include <fcppt/container/grid/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
-{
-namespace simple
+namespace sanguis::collision::impl::world::simple
 {
 
 using
@@ -24,10 +16,6 @@ fcppt::container::grid::object<
 	2
 >;
 
-}
-}
-}
-}
 }
 
 #endif

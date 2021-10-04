@@ -4,18 +4,12 @@
 #include <sanguis/server/weapons/irs.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 sanguis::server::weapons::irs
 default_irs();
 
-}
-}
 }
 
 #endif

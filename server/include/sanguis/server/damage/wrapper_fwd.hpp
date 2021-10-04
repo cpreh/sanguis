@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_DAMAGE_WRAPPER_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 class wrapper;
 
-}
-}
 }
 
 #endif

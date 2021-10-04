@@ -5,13 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace hud
+namespace sanguis::client::load::hud
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::reference<
 	sanguis::client::load::hud::context
 >;
 
-}
-}
-}
 }
 
 #endif

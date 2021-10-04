@@ -7,11 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
+namespace sanguis::client::control
 {
 
 class environment
@@ -33,8 +29,6 @@ public:
 	~environment();
 };
 
-}
-}
 }
 
 #endif

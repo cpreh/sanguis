@@ -11,11 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace random
+namespace sanguis::server::random
 {
 
 template<
@@ -114,8 +110,6 @@ struct make_upper_bound<
 	}
 };
 
-}
-}
 }
 
 #endif

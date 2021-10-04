@@ -5,9 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::optional::object<
 	sanguis::client::health_pair
 >;
 
-}
 }
 
 #endif

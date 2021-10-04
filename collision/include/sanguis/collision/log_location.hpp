@@ -5,16 +5,13 @@
 #include <fcppt/log/location.hpp>
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 SANGUIS_COLLISION_SYMBOL
 fcppt::log::location
 log_location();
 
-}
 }
 
 #endif

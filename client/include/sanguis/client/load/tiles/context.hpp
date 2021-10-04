@@ -18,13 +18,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace tiles
+namespace sanguis::client::load::tiles
 {
 
 class context
@@ -82,9 +76,6 @@ private:
 	missing_texture_array const missing_textures_;
 };
 
-}
-}
-}
 }
 
 #endif

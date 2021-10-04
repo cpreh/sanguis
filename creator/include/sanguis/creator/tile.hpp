@@ -4,9 +4,7 @@
 #include <sanguis/creator/tile_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 enum class tile
@@ -24,7 +22,6 @@ enum class tile
 	fcppt_maximum = concrete_wall
 };
 
-}
 }
 
 #endif

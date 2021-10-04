@@ -5,11 +5,7 @@
 #include <sanguis/tiles/impl/error_image_color_pair.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 sanguis::tiles::impl::error_image_color_pair
@@ -17,8 +13,6 @@ error_image_colors(
 	sanguis::tiles::error
 );
 
-}
-}
 }
 
 #endif

@@ -10,9 +10,7 @@
 #include <fcppt/optional/object_impl.hpp>
 
 
-namespace sanguis
-{
-namespace net
+namespace sanguis::net
 {
 
 template<
@@ -40,7 +38,6 @@ deserialize(
 		);
 }
 
-}
 }
 
 #endif

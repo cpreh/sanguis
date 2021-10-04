@@ -9,11 +9,7 @@
 #include <sanguis/creator/impl/result_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 class result
@@ -58,8 +54,6 @@ private:
 	sanguis::creator::destructible_container destructibles_;
 };
 
-}
-}
 }
 
 #endif

@@ -6,11 +6,7 @@
 #include <alda/message/make_concrete_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
+namespace sanguis::messages::server
 {
 
 template<
@@ -30,8 +26,6 @@ create_ptr(
 		);
 }
 
-}
-}
 }
 
 #endif

@@ -6,11 +6,7 @@
 #include <sanguis/server/net/slowdown_policy_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace net
+namespace sanguis::server::net
 {
 
 struct slowdown_policy
@@ -27,8 +23,6 @@ struct slowdown_policy
 	);
 };
 
-}
-}
 }
 
 #endif

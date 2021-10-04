@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace pathing
+namespace sanguis::server::ai::pathing
 {
 
 using
@@ -23,9 +17,6 @@ std::vector<
 	sanguis::creator::pos
 >;
 
-}
-}
-}
 }
 
 #endif

@@ -5,15 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace state
+namespace sanguis::client::draw2d::scene::state
 {
 
 using
@@ -23,10 +15,6 @@ fcppt::optional::object<
 	sanguis::client::draw2d::scene::state::scoped_unique_ptr
 >;
 
-}
-}
-}
-}
 }
 
 #endif

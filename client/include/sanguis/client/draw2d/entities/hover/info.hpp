@@ -5,15 +5,7 @@
 #include <sanguis/client/draw2d/entities/hover/variant.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace hover
+namespace sanguis::client::draw2d::entities::hover
 {
 
 class info
@@ -31,10 +23,6 @@ private:
 	sanguis::client::draw2d::entities::hover::variant impl_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

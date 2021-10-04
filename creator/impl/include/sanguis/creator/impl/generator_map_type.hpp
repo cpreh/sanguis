@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 using
@@ -23,8 +19,6 @@ std::unordered_map<
 	sanguis::creator::impl::generator_function
 >;
 
-}
-}
 }
 
 #endif

@@ -4,9 +4,7 @@
 #include <sanguis/creator/background_tile_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 enum class background_tile
@@ -18,7 +16,6 @@ enum class background_tile
 	fcppt_maximum = nothing
 };
 
-}
 }
 
 #endif

@@ -4,15 +4,7 @@
 #include <sanguis/client/draw2d/sprite/client/category_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace client
+namespace sanguis::client::draw2d::sprite::client
 {
 
 enum class category
@@ -21,10 +13,6 @@ enum class category
 	light
 };
 
-}
-}
-}
-}
 }
 
 #endif

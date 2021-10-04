@@ -5,15 +5,7 @@
 #include <sanguis/client/load/animation_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace model
+namespace sanguis::client::draw2d::entities::model
 {
 
 sanguis::client::draw2d::sprite::animation::loop_method
@@ -21,10 +13,6 @@ loop_method(
 	sanguis::client::load::animation_type
 );
 
-}
-}
-}
-}
 }
 
 #endif

@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace tiles
+namespace sanguis::client::load::tiles
 {
 
 using
@@ -23,9 +17,6 @@ std::vector<
 	sge::texture::const_part_unique_ptr
 >;
 
-}
-}
-}
 }
 
 #endif

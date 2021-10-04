@@ -5,11 +5,7 @@
 #include <sanguis/server/world/insert_pair_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 using
@@ -19,8 +15,6 @@ sanguis::server::world::insert_pair<
 	sanguis::server::entities::simple
 >;
 
-}
-}
 }
 
 #endif

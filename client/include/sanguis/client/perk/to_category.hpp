@@ -5,11 +5,7 @@
 #include <sanguis/client/perk/category_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 sanguis::client::perk::category
@@ -17,8 +13,6 @@ to_category(
 	sanguis::perk_type
 );
 
-}
-}
 }
 
 #endif

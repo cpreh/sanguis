@@ -10,9 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 class load
@@ -42,7 +40,6 @@ private:
 	mutable dim_map dims_;
 };
 
-}
 }
 
 #endif

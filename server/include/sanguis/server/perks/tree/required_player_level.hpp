@@ -6,13 +6,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
-{
-namespace tree
+namespace sanguis::server::perks::tree
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -20,9 +14,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	required_player_level
 );
 
-}
-}
-}
 }
 
 #endif

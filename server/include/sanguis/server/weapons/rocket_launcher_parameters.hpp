@@ -14,11 +14,7 @@
 #include <sanguis/server/weapons/attributes/damage.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class rocket_launcher_parameters
@@ -94,8 +90,6 @@ private:
 	sanguis::server::weapons::range range_;
 };
 
-}
-}
 }
 
 #endif

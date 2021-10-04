@@ -18,13 +18,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace behavior
+namespace sanguis::server::ai::behavior
 {
 
 class attack
@@ -93,9 +87,6 @@ private:
 	fcppt::signal::auto_connection const health_connection_;
 };
 
-}
-}
-}
 }
 
 #endif

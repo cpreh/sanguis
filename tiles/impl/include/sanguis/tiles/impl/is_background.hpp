@@ -6,11 +6,7 @@
 #include <sanguis/tiles/is_background.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -22,8 +18,6 @@ sanguis::creator::enable_if_tile<
 >
 is_background();
 
-}
-}
 }
 
 #define SANGUIS_TILES_DECLARE_IS_BACKGROUND(\

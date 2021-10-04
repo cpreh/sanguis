@@ -13,9 +13,7 @@
 #include <sanguis/creator/top_result_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 class top_result
@@ -89,7 +87,6 @@ private:
 	sanguis::creator::destructible_container destructibles_;
 };
 
-}
 }
 
 #endif

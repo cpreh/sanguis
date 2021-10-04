@@ -4,24 +4,12 @@
 #include <sanguis/server/entities/enemies/modifiers/container.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace modifiers
+namespace sanguis::server::entities::enemies::modifiers
 {
 
 sanguis::server::entities::enemies::modifiers::container const &
 create_callbacks();
 
-}
-}
-}
-}
 }
 
 #endif

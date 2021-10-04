@@ -7,13 +7,7 @@
 #include <sanguis/server/ai/pathing/target_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace pathing
+namespace sanguis::server::ai::pathing
 {
 
 [[nodiscard]]
@@ -24,9 +18,6 @@ find_target(
 	sanguis::server::ai::pathing::target const &
 );
 
-}
-}
-}
 }
 
 #endif

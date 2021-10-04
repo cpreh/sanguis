@@ -15,11 +15,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 template<
@@ -157,8 +153,6 @@ find_closest(
 		sanguis::creator::impl::optional_pos();
 }
 
-}
-}
 }
 
 #endif

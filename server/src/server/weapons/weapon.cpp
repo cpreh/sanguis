@@ -275,7 +275,7 @@ sanguis::server::weapons::weapon::description() const
 					return
 						sanguis::reload_time(
 							sanguis::duration_second(
-								0.f
+								0.F
 							)
 						);
 				}

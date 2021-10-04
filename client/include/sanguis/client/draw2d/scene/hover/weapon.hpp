@@ -23,15 +23,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace hover
+namespace sanguis::client::draw2d::scene::hover
 {
 
 class weapon
@@ -84,10 +76,6 @@ private:
 	sge::gui::background::colored gui_background_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

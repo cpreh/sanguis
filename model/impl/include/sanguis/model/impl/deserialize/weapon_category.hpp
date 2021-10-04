@@ -5,13 +5,7 @@
 #include <sge/parse/json/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace model
-{
-namespace impl
-{
-namespace deserialize
+namespace sanguis::model::impl::deserialize
 {
 
 sanguis::model::weapon_category
@@ -19,9 +13,6 @@ weapon_category(
 	sge::parse::json::object const &
 );
 
-}
-}
-}
 }
 
 #endif

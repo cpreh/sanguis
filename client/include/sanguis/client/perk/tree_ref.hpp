@@ -5,11 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::reference<
 	sanguis::client::perk::tree
 >;
 
-}
-}
 }
 
 #endif

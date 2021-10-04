@@ -6,11 +6,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -22,8 +18,6 @@ sanguis::creator::enable_if_tile<
 >
 category();
 
-}
-}
 }
 
 #define SANGUIS_TILES_DECLARE_CATEGORY(\

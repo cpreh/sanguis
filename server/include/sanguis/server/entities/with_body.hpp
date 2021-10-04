@@ -29,11 +29,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class with_body
@@ -174,8 +170,6 @@ private:
 	sanguis::server::net::angle net_angle_;
 };
 
-}
-}
 }
 
 #endif

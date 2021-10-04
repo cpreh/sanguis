@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace events
+namespace sanguis::client::events
 {
 
 class message
@@ -59,8 +55,6 @@ private:
 	sanguis::messages::server::shared_ptr value_;
 };
 
-}
-}
 }
 
 #endif

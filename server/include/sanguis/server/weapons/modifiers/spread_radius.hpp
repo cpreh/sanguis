@@ -16,13 +16,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace modifiers
+namespace sanguis::server::weapons::modifiers
 {
 
 struct spread_radius
@@ -76,9 +70,6 @@ struct spread_radius
 	}
 };
 
-}
-}
-}
 }
 
 #endif

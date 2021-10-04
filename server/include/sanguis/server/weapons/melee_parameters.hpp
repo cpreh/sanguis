@@ -9,11 +9,7 @@
 #include <sanguis/server/weapons/attributes/damage.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class melee_parameters
@@ -56,8 +52,6 @@ private:
 	sanguis::server::damage::array damage_values_;
 };
 
-}
-}
 }
 
 #endif

@@ -6,9 +6,7 @@
 #include <fcppt/enum/array_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -19,7 +17,6 @@ fcppt::enum_::array<
 	sanguis::creator::opening_count
 >;
 
-}
 }
 
 #endif

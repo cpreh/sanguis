@@ -4,9 +4,7 @@
 #include <sanguis/tiles/direction_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 enum class direction
@@ -18,7 +16,6 @@ enum class direction
 	fcppt_maximum = south_east
 };
 
-}
 }
 
 #endif

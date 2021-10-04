@@ -39,13 +39,7 @@
 #include <fcppt/optional/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace hud
+namespace sanguis::client::gui::hud
 {
 
 class object
@@ -277,9 +271,6 @@ private:
 	bool paused_;
 };
 
-}
-}
-}
 }
 
 #endif

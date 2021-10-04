@@ -3,21 +3,12 @@
 
 #include <sge/image/color/any/object.hpp>
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace style
+namespace sanguis::client::gui::style
 {
 
 sge::image::color::any::object
 text_color();
 
-}
-}
-}
 }
 
 #endif

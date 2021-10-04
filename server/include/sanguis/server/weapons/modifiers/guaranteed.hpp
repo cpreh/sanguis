@@ -6,13 +6,7 @@
 #include <fcppt/strong_typedef_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace modifiers
+namespace sanguis::server::weapons::modifiers
 {
 
 template<
@@ -28,9 +22,6 @@ fcppt::strong_typedef<
 	sanguis::server::weapons::modifiers::guaranteed_tag
 >;
 
-}
-}
-}
 }
 
 #endif

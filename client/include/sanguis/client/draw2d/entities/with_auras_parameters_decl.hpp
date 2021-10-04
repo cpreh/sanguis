@@ -10,13 +10,7 @@
 #include <sanguis/client/load/auras/context_ref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 template<
@@ -64,9 +58,6 @@ private:
 	Base base_;
 };
 
-}
-}
-}
 }
 
 #endif

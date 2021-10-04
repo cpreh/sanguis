@@ -11,11 +11,7 @@
 #include <sanguis/server/world/insert_with_id_pair_container.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 sanguis::server::world::insert_with_id_pair_container
@@ -29,8 +25,6 @@ generate_single_spawns(
 	sanguis::server::world::difficulty
 );
 
-}
-}
 }
 
 #endif

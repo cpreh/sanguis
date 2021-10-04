@@ -5,9 +5,7 @@
 #include <sanguis/server/exp.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 sanguis::messages::types::exp
@@ -15,7 +13,6 @@ exp_to_net(
 	sanguis::server::exp
 );
 
-}
 }
 
 #endif

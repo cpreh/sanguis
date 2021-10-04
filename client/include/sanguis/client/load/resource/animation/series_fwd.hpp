@@ -2,23 +2,11 @@
 #define SANGUIS_CLIENT_LOAD_RESOURCE_ANIMATION_SERIES_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
-{
-namespace animation
+namespace sanguis::client::load::resource::animation
 {
 
 class series;
 
-}
-}
-}
-}
 }
 
 #endif

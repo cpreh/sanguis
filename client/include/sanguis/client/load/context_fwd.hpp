@@ -2,17 +2,11 @@
 #define SANGUIS_CLIENT_LOAD_CONTEXT_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
+namespace sanguis::client::load
 {
 
 class context;
 
-}
-}
 }
 
 #endif

@@ -4,11 +4,7 @@
 #include <sanguis/collision/world/ghost_group_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 enum class ghost_group
@@ -21,8 +17,6 @@ enum class ghost_group
 	fcppt_maximum = weapon_pickup_sight
 };
 
-}
-}
 }
 
 #endif

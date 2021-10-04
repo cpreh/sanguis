@@ -4,13 +4,7 @@
 #include <sanguis/client/control/actions/binary_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
-{
-namespace actions
+namespace sanguis::client::control::actions
 {
 
 enum class binary_type
@@ -19,9 +13,6 @@ enum class binary_type
 	shoot_secondary
 };
 
-}
-}
-}
 }
 
 #endif

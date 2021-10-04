@@ -5,13 +5,7 @@
 #include <sanguis/client/control/actions/binary_type.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
-{
-namespace actions
+namespace sanguis::client::control::actions
 {
 
 class binary
@@ -35,9 +29,6 @@ private:
 	bool value_;
 };
 
-}
-}
-}
 }
 
 #endif

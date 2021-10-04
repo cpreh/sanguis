@@ -5,13 +5,7 @@
 #include <sanguis/server/team_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace projectiles
+namespace sanguis::server::entities::projectiles
 {
 
 sanguis::collision::world::body_group
@@ -19,9 +13,6 @@ collision_group(
 	sanguis::server::team
 );
 
-}
-}
-}
 }
 
 #endif

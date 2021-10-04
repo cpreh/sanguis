@@ -15,13 +15,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace style
+namespace sanguis::client::gui::style
 {
 
 class simple
@@ -137,9 +131,6 @@ private:
 	sanguis::client::load::resource::textures_cref const textures_;
 };
 
-}
-}
-}
 }
 
 #endif

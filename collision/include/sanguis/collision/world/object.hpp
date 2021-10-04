@@ -17,11 +17,7 @@
 #include <fcppt/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class object
@@ -101,8 +97,6 @@ public:
 	= 0;
 };
 
-}
-}
 }
 
 #endif

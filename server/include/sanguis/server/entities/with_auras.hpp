@@ -9,11 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class with_auras
@@ -46,8 +42,6 @@ private:
 	sanguis::server::auras::container auras_;
 };
 
-}
-}
 }
 
 #endif

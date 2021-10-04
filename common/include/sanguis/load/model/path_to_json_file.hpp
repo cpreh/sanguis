@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace load
-{
-namespace model
+namespace sanguis::load::model
 {
 
 SANGUIS_COMMON_SYMBOL
@@ -20,8 +16,6 @@ path_to_json_file(
 	std::filesystem::path const &
 );
 
-}
-}
 }
 
 #endif

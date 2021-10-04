@@ -10,13 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace hud
+namespace sanguis::client::load::hud
 {
 
 using
@@ -29,9 +23,6 @@ std::map<
 	>
 >;
 
-}
-}
-}
 }
 
 #endif

@@ -10,13 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 using
@@ -27,9 +21,6 @@ std::map<
 	sanguis::client::load::model::weapon_category_unique_ptr
 >;
 
-}
-}
-}
 }
 
 #endif

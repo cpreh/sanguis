@@ -5,13 +5,7 @@
 #include <sge/renderer/matrix4.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
+namespace sanguis::client::draw2d::scene
 {
 
 sge::renderer::matrix4
@@ -19,9 +13,6 @@ translation_matrix(
 	sanguis::client::draw2d::translation const &
 );
 
-}
-}
-}
 }
 
 #endif

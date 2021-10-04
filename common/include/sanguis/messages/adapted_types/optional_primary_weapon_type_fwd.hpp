@@ -6,11 +6,7 @@
 #include <alda/bindings/optional_decl.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 using
@@ -21,8 +17,6 @@ alda::bindings::optional<
 	sanguis::messages::adapted_types::primary_weapon_type
 >;
 
-}
-}
 }
 
 #endif

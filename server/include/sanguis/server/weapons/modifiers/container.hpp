@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace modifiers
+namespace sanguis::server::weapons::modifiers
 {
 
 template<
@@ -28,9 +22,6 @@ std::vector<
 	>
 >;
 
-}
-}
-}
 }
 
 #endif

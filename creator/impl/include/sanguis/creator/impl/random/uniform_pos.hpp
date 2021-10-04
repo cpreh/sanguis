@@ -9,13 +9,7 @@
 #include <fcppt/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
-{
-namespace random
+namespace sanguis::creator::impl::random
 {
 
 class uniform_pos
@@ -37,9 +31,6 @@ private:
 	sanguis::creator::impl::random::uniform_size_variate random_y_;
 };
 
-}
-}
-}
 }
 
 #endif

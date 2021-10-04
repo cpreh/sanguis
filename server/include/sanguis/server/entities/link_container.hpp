@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 using
@@ -24,8 +20,6 @@ boost::intrusive::list<
 	>
 >;
 
-}
-}
 }
 
 #endif

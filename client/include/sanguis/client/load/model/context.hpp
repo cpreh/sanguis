@@ -9,13 +9,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 class context
@@ -42,9 +36,6 @@ private:
 	> const collection_;
 };
 
-}
-}
-}
 }
 
 #endif

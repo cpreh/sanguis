@@ -4,18 +4,12 @@
 #include <sanguis/duration.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 sanguis::duration
 update_interval();
 
-}
-}
 }
 
 #endif

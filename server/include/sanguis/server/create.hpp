@@ -7,9 +7,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 SANGUIS_SERVER_SYMBOL
@@ -19,7 +17,6 @@ create(
 	alda::net::port
 );
 
-}
 }
 
 #endif

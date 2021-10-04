@@ -5,11 +5,7 @@
 #include <sanguis/server/speed_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 sanguis::server::speed
@@ -17,8 +13,6 @@ from_speed(
 	sanguis::collision::speed const &
 );
 
-}
-}
 }
 
 #endif

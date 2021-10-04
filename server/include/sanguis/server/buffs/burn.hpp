@@ -11,11 +11,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace buffs
+namespace sanguis::server::buffs
 {
 
 class burn
@@ -61,8 +57,6 @@ private:
 	sanguis::server::damage::modified_array const damage_values_;
 };
 
-}
-}
 }
 
 #endif

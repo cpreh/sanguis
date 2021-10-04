@@ -6,13 +6,7 @@
 #include <sanguis/messages/server/types/weapon_attribute_vector.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
-{
-namespace adapted_types
+namespace sanguis::messages::server::adapted_types
 {
 
 using
@@ -23,9 +17,6 @@ sanguis::messages::adapted_types::dynamic_len<
 	sanguis::messages::server::adapted_types::weapon_attribute
 >;
 
-}
-}
-}
 }
 
 #endif

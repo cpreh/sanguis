@@ -15,15 +15,7 @@
 #include <sanguis/load/model/path.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace model
+namespace sanguis::client::draw2d::entities::model
 {
 
 class parameters
@@ -110,10 +102,6 @@ private:
 	sanguis::client::draw2d::sprite::normal::color color_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

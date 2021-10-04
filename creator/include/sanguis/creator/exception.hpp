@@ -7,9 +7,7 @@
 #include <fcppt/symbol/class.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 class FCPPT_SYMBOL_CLASS exception
@@ -52,7 +50,6 @@ public:
 	override;
 };
 
-}
 }
 
 #endif

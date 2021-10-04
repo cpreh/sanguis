@@ -5,11 +5,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::function<
 	sanguis::client::perk::change_function
 >;
 
-}
-}
 }
 
 #endif

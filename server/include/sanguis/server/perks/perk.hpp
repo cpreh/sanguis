@@ -9,11 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
+namespace sanguis::server::perks
 {
 
 class perk
@@ -62,8 +58,6 @@ private:
 	sanguis::server::level level_;
 };
 
-}
-}
 }
 
 #endif

@@ -7,11 +7,7 @@
 #include <sanguis/tools/libmergeimage/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
+namespace sanguis::tools::libmergeimage
 {
 
 class saved_image
@@ -38,8 +34,6 @@ private:
 	sanguis::model::image_name image_name_;
 };
 
-}
-}
 }
 
 #endif

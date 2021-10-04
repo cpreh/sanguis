@@ -2,9 +2,7 @@
 #define SANGUIS_SERVER_SPACE_UNIT_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 using
@@ -12,7 +10,6 @@ space_unit
 =
 float;
 
-}
 }
 
 #endif

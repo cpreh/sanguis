@@ -10,11 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
+namespace sanguis::tools::libmergeimage
 {
 
 [[nodiscard]]
@@ -26,8 +22,6 @@ save_images(
 	sanguis::tools::libmergeimage::image_vector const &
 );
 
-}
-}
 }
 
 #endif

@@ -13,11 +13,7 @@
 #include <fcppt/log/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 [[nodiscard]]
@@ -35,8 +31,6 @@ place_spawners(
 	sanguis::creator::tile // sanguis::creator::tile::spawner
 );
 
-}
-}
 }
 
 #endif

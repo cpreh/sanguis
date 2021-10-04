@@ -6,9 +6,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace net
+namespace sanguis::net
 {
 
 using
@@ -16,7 +14,6 @@ message_header
 =
 std::uint16_t;
 
-}
 }
 
 #endif

@@ -35,11 +35,7 @@ namespace Ui
 	class MainWindow;
 }
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 FCPPT_PP_PUSH_WARNING
@@ -69,7 +65,7 @@ public:
 
 	~main_window()
 	override;
-public Q_SLOTS:
+
 	void
 	actionJSON();
 
@@ -79,7 +75,7 @@ public Q_SLOTS:
 	void
 	actionSave();
 
-	void
+	static void
 	actionQuit();
 
 	void
@@ -213,8 +209,6 @@ private:
 
 FCPPT_PP_POP_WARNING
 
-}
-}
 }
 
 #endif

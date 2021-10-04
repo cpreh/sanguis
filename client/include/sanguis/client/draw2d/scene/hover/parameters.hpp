@@ -17,15 +17,7 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace hover
+namespace sanguis::client::draw2d::scene::hover
 {
 
 class parameters
@@ -91,10 +83,6 @@ private:
 	sanguis::client::draw2d::radius radius_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

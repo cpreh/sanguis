@@ -7,11 +7,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class parameters
@@ -34,8 +30,6 @@ private:
 	> grid_;
 };
 
-}
-}
 }
 
 #endif

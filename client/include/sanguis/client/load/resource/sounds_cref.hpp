@@ -5,13 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
+namespace sanguis::client::load::resource
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::reference<
 	sanguis::client::load::resource::sounds const
 >;
 
-}
-}
-}
 }
 
 #endif

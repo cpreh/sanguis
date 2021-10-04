@@ -17,11 +17,7 @@
 #include <fcppt/type_iso/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 class pickup_spawner
@@ -108,8 +104,6 @@ private:
 	real_distribution spawn_prob_;
 };
 
-}
-}
 }
 
 #endif

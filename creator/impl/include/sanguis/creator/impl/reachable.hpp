@@ -4,11 +4,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -16,8 +12,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	reachable
 );
 
-}
-}
 }
 
 #endif

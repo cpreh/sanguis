@@ -8,15 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace state
+namespace sanguis::client::draw2d::scene::state
 {
 
 class scoped_text
@@ -38,10 +30,6 @@ private:
 	sge::renderer::state::ffp::sampler::scoped const state_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

@@ -7,15 +7,7 @@
 #include <fcppt/log/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 sanguis::client::draw2d::scene::world::base_unique_ptr
@@ -25,10 +17,6 @@ create(
 	sanguis::client::draw2d::scene::world::parameters const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

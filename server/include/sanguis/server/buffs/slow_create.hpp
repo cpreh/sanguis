@@ -22,11 +22,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace buffs
+namespace sanguis::server::buffs
 {
 
 template<
@@ -88,8 +84,6 @@ FCPPT_PP_POP_WARNING
 		};
 }
 
-}
-}
 }
 
 #endif

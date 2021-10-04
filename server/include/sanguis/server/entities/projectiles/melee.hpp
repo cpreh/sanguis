@@ -8,13 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace projectiles
+namespace sanguis::server::entities::projectiles
 {
 
 class melee
@@ -35,9 +29,6 @@ public:
 	override;
 };
 
-}
-}
-}
 }
 
 #endif

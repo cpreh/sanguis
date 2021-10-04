@@ -4,15 +4,7 @@
 #include <sanguis/client/draw2d/entities/model/decay_option_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace model
+namespace sanguis::client::draw2d::entities::model
 {
 
 enum class decay_option
@@ -21,10 +13,6 @@ enum class decay_option
 	delayed
 };
 
-}
-}
-}
-}
 }
 
 #endif

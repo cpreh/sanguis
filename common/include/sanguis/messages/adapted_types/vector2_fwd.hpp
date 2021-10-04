@@ -6,11 +6,7 @@
 #include <alda/bindings/static_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 using
@@ -21,8 +17,6 @@ alda::bindings::static_<
 	sanguis::messages::adapted_types::space_unit
 >;
 
-}
-}
 }
 
 #endif

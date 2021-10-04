@@ -84,13 +84,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
+namespace sanguis::client::draw2d::scene
 {
 
 class object
@@ -443,9 +437,6 @@ private:
 	sanguis::client::draw2d::scene::state::array const render_states_;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -7,11 +7,7 @@
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace cheat
+namespace sanguis::server::cheat
 {
 
 void
@@ -22,8 +18,6 @@ process(
 	sanguis::server::unicast_callback const &
 );
 
-}
-}
 }
 
 #endif

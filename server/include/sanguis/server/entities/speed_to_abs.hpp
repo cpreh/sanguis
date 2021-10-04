@@ -6,11 +6,7 @@
 #include <sanguis/server/entities/property/value.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 sanguis::server::speed
@@ -19,8 +15,6 @@ speed_to_abs(
 	sanguis::server::entities::property::value
 );
 
-}
-}
 }
 
 #endif

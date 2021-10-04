@@ -13,13 +13,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
+namespace sanguis::client::load::resource
 {
 
 class context
@@ -57,9 +51,6 @@ private:
 	> const sounds_;
 };
 
-}
-}
-}
 }
 
 #endif

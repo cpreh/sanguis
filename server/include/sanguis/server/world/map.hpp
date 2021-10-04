@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 using
@@ -23,8 +19,6 @@ std::unordered_map<
 	sanguis::server::world::object_unique_ptr
 >;
 
-}
-}
 }
 
 #endif

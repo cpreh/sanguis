@@ -22,15 +22,7 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
-{
-namespace simple
+namespace sanguis::collision::impl::world::simple
 {
 
 FCPPT_PP_PUSH_WARNING
@@ -127,10 +119,6 @@ private:
 
 FCPPT_PP_POP_WARNING
 
-}
-}
-}
-}
 }
 
 #endif

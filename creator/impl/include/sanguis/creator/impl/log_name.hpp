@@ -4,18 +4,12 @@
 #include <fcppt/log/name.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 fcppt::log::name
 log_name();
 
-}
-}
 }
 
 #endif

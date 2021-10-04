@@ -50,7 +50,7 @@ try
 
 	return
 		awl::main::exit_code(
-			app.exec()
+			QApplication::exec()
 		);
 }
 catch(

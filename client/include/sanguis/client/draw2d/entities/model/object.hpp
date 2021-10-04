@@ -28,15 +28,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace model
+namespace sanguis::client::draw2d::entities::model
 {
 
 class object
@@ -208,10 +200,6 @@ private:
 	part_vector parts_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

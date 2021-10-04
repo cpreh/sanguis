@@ -5,15 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
-{
-namespace simple
+namespace sanguis::collision::impl::world::simple
 {
 
 using
@@ -23,10 +15,6 @@ fcppt::unique_ptr<
 	sanguis::collision::impl::world::simple::body
 >;
 
-}
-}
-}
-}
 }
 
 #endif

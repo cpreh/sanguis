@@ -4,11 +4,7 @@
 #include <sanguis/server/aoe.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 using
@@ -16,8 +12,6 @@ aoe
 =
 sanguis::server::aoe;
 
-}
-}
 }
 
 #endif

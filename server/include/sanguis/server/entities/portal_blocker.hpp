@@ -6,11 +6,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class portal_blocker
@@ -30,8 +26,6 @@ public:
 	override;
 };
 
-}
-}
 }
 
 #endif

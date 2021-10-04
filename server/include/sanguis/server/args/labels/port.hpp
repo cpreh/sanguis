@@ -4,22 +4,13 @@
 #include <fcppt/record/make_label.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace args
-{
-namespace labels
+namespace sanguis::server::args::labels
 {
 
 FCPPT_RECORD_MAKE_LABEL(
 	port
 );
 
-}
-}
-}
 }
 
 #endif

@@ -7,11 +7,7 @@
 #include <sanguis/tools/libmergeimage/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
+namespace sanguis::tools::libmergeimage
 {
 
 SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
@@ -21,8 +17,6 @@ to_model(
 	sanguis::tools::libmergeimage::saved_image_vector const &
 );
 
-}
-}
 }
 
 #endif

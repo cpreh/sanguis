@@ -6,9 +6,7 @@
 #include <sanguis/creator/top_parameters.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class world_parameters
@@ -32,7 +30,6 @@ private:
 	sanguis::creator::top_parameters top_parameters_;
 };
 
-}
 }
 
 #endif

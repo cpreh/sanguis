@@ -8,15 +8,7 @@
 #include <fcppt/optional/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace buffs
+namespace sanguis::client::draw2d::entities::buffs
 {
 
 class slow
@@ -54,10 +46,6 @@ private:
 	optional_color previous_color_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

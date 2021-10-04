@@ -10,9 +10,7 @@
 #include <sanguis/creator/grid_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 SANGUIS_COLLISION_SYMBOL
@@ -25,7 +23,6 @@ test_move(
 	sanguis::creator::grid const &
 );
 
-}
 }
 
 #endif

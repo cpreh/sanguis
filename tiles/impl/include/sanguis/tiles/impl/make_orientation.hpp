@@ -8,11 +8,7 @@
 #include <sanguis/tiles/impl/neighbors_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -31,8 +27,6 @@ make_orientation(
 	> const &
 );
 
-}
-}
 }
 
 #define SANGUIS_TILES_DECLARE_MAKE_ORIENTATION(\

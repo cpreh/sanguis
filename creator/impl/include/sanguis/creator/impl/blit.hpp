@@ -6,11 +6,7 @@
 #include <fcppt/container/grid/pos_ref_range_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 template<
@@ -33,8 +29,6 @@ blit(
 	>
 );
 
-}
-}
 }
 
 #endif

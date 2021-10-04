@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace call
+namespace sanguis::messages::call
 {
 
 template<
@@ -79,8 +75,6 @@ dispatch(
 		);
 }
 
-}
-}
 }
 
 #endif

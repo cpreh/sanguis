@@ -5,15 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace hover
+namespace sanguis::client::draw2d::entities::hover
 {
 
 using
@@ -23,10 +15,6 @@ fcppt::optional::object<
 	sanguis::client::draw2d::entities::hover::name
 >;
 
-}
-}
-}
-}
 }
 
 #endif

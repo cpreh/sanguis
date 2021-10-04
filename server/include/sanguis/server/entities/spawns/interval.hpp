@@ -5,13 +5,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace spawns
+namespace sanguis::server::entities::spawns
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -19,9 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	interval
 );
 
-}
-}
-}
 }
 
 #endif

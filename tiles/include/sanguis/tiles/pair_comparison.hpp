@@ -5,9 +5,7 @@
 #include <sanguis/tiles/pair_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 template<
@@ -26,7 +24,6 @@ operator==(
 	>
 );
 
-}
 }
 
 #endif

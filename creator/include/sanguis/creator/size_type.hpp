@@ -6,9 +6,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -16,7 +14,6 @@ size_type
 =
 std::size_t;
 
-}
 }
 
 #endif

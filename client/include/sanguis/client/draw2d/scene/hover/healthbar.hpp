@@ -16,15 +16,7 @@
 #include <fcppt/mpl/list/object.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace hover
+namespace sanguis::client::draw2d::scene::hover
 {
 
 class healthbar
@@ -82,10 +74,6 @@ private:
 	sge_state state_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

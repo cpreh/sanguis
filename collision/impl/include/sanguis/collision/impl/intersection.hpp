@@ -5,11 +5,7 @@
 #include <sanguis/collision/impl/intersection_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 class intersection
@@ -27,8 +23,6 @@ private:
 	sanguis::collision::impl::dir dir_;
 };
 
-}
-}
 }
 
 #endif

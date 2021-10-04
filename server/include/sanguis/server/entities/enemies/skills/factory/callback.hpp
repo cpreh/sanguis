@@ -5,17 +5,7 @@
 #include <sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace skills
-{
-namespace factory
+namespace sanguis::server::entities::enemies::skills::factory
 {
 
 using
@@ -26,11 +16,6 @@ sanguis::server::entities::enemies::skills::unique_ptr
 	sanguis::server::entities::enemies::skills::factory::parameters const &
 );
 
-}
-}
-}
-}
-}
 }
 
 #endif

@@ -5,11 +5,7 @@
 #include <sanguis/creator/spawn.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 sanguis::creator::spawn
@@ -17,8 +13,6 @@ place_boss(
 	sanguis::creator::opening_container_array const &
 );
 
-}
-}
 }
 
 #endif

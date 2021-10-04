@@ -5,13 +5,7 @@
 #include <sanguis/server/entities/enemies/difficulty_value.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
+namespace sanguis::server::entities::enemies
 {
 
 sanguis::server::entities::enemies::difficulty_value
@@ -19,9 +13,6 @@ base_difficulty(
 	sanguis::creator::enemy_type
 );
 
-}
-}
-}
 }
 
 #endif

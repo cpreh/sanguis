@@ -5,11 +5,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 sanguis::server::weapons::unique_ptr
@@ -17,8 +13,6 @@ player_start_weapon(
 	sanguis::server::weapons::common_parameters const &
 );
 
-}
-}
 }
 
 #endif

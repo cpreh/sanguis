@@ -7,15 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 using
@@ -26,10 +18,6 @@ std::integral_constant<
 	16 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 >;
 
-}
-}
-}
-}
 }
 
 #endif

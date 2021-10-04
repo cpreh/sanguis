@@ -31,15 +31,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
-{
-namespace simple
+namespace sanguis::collision::impl::world::simple
 {
 
 class object
@@ -209,10 +201,6 @@ private:
 	body_list_grid_array body_list_grids_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

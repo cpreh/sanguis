@@ -4,11 +4,7 @@
 #include <alda/bindings/float_type.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace types
+namespace sanguis::messages::types
 {
 
 using
@@ -16,8 +12,6 @@ space_unit
 =
 alda::bindings::float_type;
 
-}
-}
 }
 
 #endif

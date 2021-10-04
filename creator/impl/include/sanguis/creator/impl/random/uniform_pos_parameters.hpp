@@ -5,13 +5,7 @@
 #include <sanguis/creator/impl/random/uniform_size.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
-{
-namespace random
+namespace sanguis::creator::impl::random
 {
 
 sanguis::creator::impl::random::uniform_size::param_type
@@ -19,9 +13,6 @@ uniform_pos_parameters(
 	sanguis::creator::size_type
 );
 
-}
-}
-}
 }
 
 #endif

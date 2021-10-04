@@ -5,15 +5,7 @@
 #include <sanguis/creator/pos_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
-{
-namespace simple
+namespace sanguis::collision::impl::world::simple
 {
 
 sanguis::creator::pos
@@ -21,10 +13,6 @@ grid_position(
 	sanguis::collision::center const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

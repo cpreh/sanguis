@@ -21,13 +21,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace states
+namespace sanguis::server::weapons::states
 {
 
 FCPPT_PP_PUSH_WARNING
@@ -92,9 +86,6 @@ private:
 
 FCPPT_PP_POP_WARNING
 
-}
-}
-}
 }
 
 #endif

@@ -17,9 +17,7 @@
 #include <fcppt/record/get.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 template<
@@ -79,7 +77,6 @@ weapon_description_from_message(
 		);
 }
 
-}
 }
 
 #endif

@@ -5,9 +5,7 @@
 #include <fcppt/math/dim/static_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 using
@@ -18,7 +16,6 @@ fcppt::math::dim::static_<
 	2
 >;
 
-}
 }
 
 #endif

@@ -58,9 +58,10 @@ sanguis::tools::animations::qtutil::FlowLayout::FlowLayout(int _margin, int hSpa
 
 sanguis::tools::animations::qtutil::FlowLayout::~FlowLayout()
 {
-    QLayoutItem *item;
-    while ((item = takeAt(0)))
+    QLayoutItem *item = nullptr;
+    while ((item = takeAt(0)) != nullptr) {
         delete item;
+}
 }
 
 void sanguis::tools::animations::qtutil::FlowLayout::addItem(QLayoutItem *item)
@@ -72,18 +73,16 @@ int sanguis::tools::animations::qtutil::FlowLayout::horizontalSpacing() const
 {
     if (m_hSpace >= 0) {
         return m_hSpace;
-    } else {
-        return smartSpacing(QStyle::PM_LayoutHorizontalSpacing);
-    }
+    }         return smartSpacing(QStyle::PM_LayoutHorizontalSpacing);
+   
 }
 
 int sanguis::tools::animations::qtutil::FlowLayout::verticalSpacing() const
 {
     if (m_vSpace >= 0) {
         return m_vSpace;
-    } else {
-        return smartSpacing(QStyle::PM_LayoutVerticalSpacing);
-    }
+    }         return smartSpacing(QStyle::PM_LayoutVerticalSpacing);
+   
 }
 
 int sanguis::tools::animations::qtutil::FlowLayout::count() const
@@ -98,10 +97,9 @@ QLayoutItem *sanguis::tools::animations::qtutil::FlowLayout::itemAt(int index) c
 
 QLayoutItem *sanguis::tools::animations::qtutil::FlowLayout::takeAt(int index)
 {
-    if (index >= 0 && index < itemList.size())
+    if (index >= 0 && index < itemList.size()) {
         return itemList.takeAt(index);
-    else
-        return nullptr;
+    }         return nullptr;
 }
 
 Qt::Orientations sanguis::tools::animations::qtutil::FlowLayout::expandingDirections() const
@@ -134,7 +132,7 @@ QSize sanguis::tools::animations::qtutil::FlowLayout::sizeHint() const
 QSize sanguis::tools::animations::qtutil::FlowLayout::minimumSize() const
 {
     QSize size;
-    QLayoutItem *item;
+    QLayoutItem *item = nullptr;
     foreach (item, itemList)
         size = size.expandedTo(item->minimumSize());
 
@@ -144,24 +142,29 @@ QSize sanguis::tools::animations::qtutil::FlowLayout::minimumSize() const
 
 int sanguis::tools::animations::qtutil::FlowLayout::doLayout(const QRect &rect, bool testOnly) const
 {
-    int left, top, right, bottom;
+    int left;
+    int top;
+    int right;
+    int bottom;
     getContentsMargins(&left, &top, &right, &bottom);
     QRect effectiveRect = rect.adjusted(+left, +top, -right, -bottom);
     int x = effectiveRect.x();
     int y = effectiveRect.y();
     int lineHeight = 0;
 
-    QLayoutItem *item;
+    QLayoutItem *item = nullptr;
     foreach (item, itemList) {
         QWidget *wid = item->widget();
         int spaceX = horizontalSpacing();
-        if (spaceX == -1)
+        if (spaceX == -1) {
             spaceX = wid->style()->layoutSpacing(
                 QSizePolicy::PushButton, QSizePolicy::PushButton, Qt::Horizontal);
+}
         int spaceY = verticalSpacing();
-        if (spaceY == -1)
+        if (spaceY == -1) {
             spaceY = wid->style()->layoutSpacing(
                 QSizePolicy::PushButton, QSizePolicy::PushButton, Qt::Vertical);
+}
         int nextX = x + item->sizeHint().width() + spaceX;
         if (nextX - spaceX > effectiveRect.right() && lineHeight > 0) {
             x = effectiveRect.x();
@@ -170,8 +173,9 @@ int sanguis::tools::animations::qtutil::FlowLayout::doLayout(const QRect &rect, 
             lineHeight = 0;
         }
 
-        if (!testOnly)
+        if (!testOnly) {
             item->setGeometry(QRect(QPoint(x, y), item->sizeHint()));
+}
 
         x = nextX;
         lineHeight = qMax(lineHeight, item->sizeHint().height());
@@ -181,9 +185,9 @@ int sanguis::tools::animations::qtutil::FlowLayout::doLayout(const QRect &rect, 
 int sanguis::tools::animations::qtutil::FlowLayout::smartSpacing(QStyle::PixelMetric pm) const
 {
     QObject *cur_parent = this->parent();
-    if (!cur_parent) {
+    if (cur_parent == nullptr) {
         return -1;
-    } else if (cur_parent->isWidgetType()) {
+    } if (cur_parent->isWidgetType()) {
         QWidget *pw = static_cast<QWidget *>(cur_parent);
         return pw->style()->pixelMetric(pm, nullptr, pw);
     } else {

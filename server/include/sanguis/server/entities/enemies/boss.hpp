@@ -9,13 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
+namespace sanguis::server::entities::enemies
 {
 
 class boss
@@ -56,9 +50,6 @@ private:
 	sanguis::messages::types::string const name_;
 };
 
-}
-}
-}
 }
 
 #endif

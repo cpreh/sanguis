@@ -10,13 +10,7 @@
 #include <sge/font/string.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace factory
+namespace sanguis::client::draw2d::factory
 {
 
 sanguis::client::draw2d::entities::own_unique_ptr
@@ -29,9 +23,6 @@ text(
 	sanguis::client::draw2d::sprite::normal::color
 );
 
-}
-}
-}
 }
 
 #endif

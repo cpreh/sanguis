@@ -11,15 +11,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace hover
+namespace sanguis::client::draw2d::scene::hover
 {
 
 class name
@@ -57,10 +49,6 @@ private:
 	sge::font::draw::static_text text_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

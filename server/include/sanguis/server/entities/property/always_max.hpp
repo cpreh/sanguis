@@ -11,13 +11,7 @@
 #include <fcppt/signal/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 class always_max
@@ -68,9 +62,6 @@ private:
 	sanguis::server::entities::property::change_signal change_signal_;
 };
 
-}
-}
-}
 }
 
 #endif

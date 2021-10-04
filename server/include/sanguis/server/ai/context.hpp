@@ -12,11 +12,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 class context
@@ -66,8 +62,6 @@ private:
 	sanguis::server::ai::pathing::optional_trail trail_;
 };
 
-}
-}
 }
 
 #endif

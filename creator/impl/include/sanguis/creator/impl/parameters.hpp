@@ -9,11 +9,7 @@
 #include <fcppt/log/object_reference.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 class parameters
@@ -55,8 +51,6 @@ private:
 	sanguis::creator::opening_count_array opening_count_array_;
 };
 
-}
-}
 }
 
 #endif

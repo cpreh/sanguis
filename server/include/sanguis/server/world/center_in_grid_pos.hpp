@@ -5,11 +5,7 @@
 #include <sanguis/server/center_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 bool
@@ -18,8 +14,6 @@ center_in_grid_pos(
 	sanguis::creator::pos const &
 );
 
-}
-}
 }
 
 #endif

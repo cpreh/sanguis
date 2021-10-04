@@ -10,11 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw
+namespace sanguis::client::draw
 {
 
 class base
@@ -62,8 +58,6 @@ public:
 	) = 0;
 };
 
-}
-}
 }
 
 #endif

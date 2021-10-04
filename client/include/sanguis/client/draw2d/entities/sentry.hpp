@@ -15,13 +15,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 class sentry
@@ -57,9 +51,6 @@ private:
 	using sanguis::client::draw2d::entities::container::orientation;
 };
 
-}
-}
-}
 }
 
 #endif

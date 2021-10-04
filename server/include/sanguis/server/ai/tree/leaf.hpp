@@ -9,13 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace tree
+namespace sanguis::server::ai::tree
 {
 
 class leaf
@@ -51,9 +45,6 @@ private:
 	bool started_;
 };
 
-}
-}
-}
 }
 
 #endif

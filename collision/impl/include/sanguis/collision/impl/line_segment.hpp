@@ -6,11 +6,7 @@
 #include <sanguis/collision/impl/pos.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 class line_segment
@@ -34,8 +30,6 @@ private:
 	sanguis::collision::impl::dir dir_;
 };
 
-}
-}
 }
 
 #endif

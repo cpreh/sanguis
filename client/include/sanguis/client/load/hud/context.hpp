@@ -11,13 +11,7 @@
 #include <fcppt/log/object.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace hud
+namespace sanguis::client::load::hud
 {
 
 class context
@@ -46,9 +40,6 @@ private:
 	sge::texture::part const &missing_texture_;
 };
 
-}
-}
-}
 }
 
 #endif

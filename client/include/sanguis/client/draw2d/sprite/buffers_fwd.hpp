@@ -5,13 +5,7 @@
 #include <sge/sprite/buffers/with_declaration_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
+namespace sanguis::client::draw2d::sprite
 {
 
 template<
@@ -25,9 +19,6 @@ sge::sprite::buffers::with_declaration<
 	>
 >;
 
-}
-}
-}
 }
 
 #endif

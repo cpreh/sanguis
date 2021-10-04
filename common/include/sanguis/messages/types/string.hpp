@@ -4,11 +4,7 @@
 #include <sge/charconv/utf8_string.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace types
+namespace sanguis::messages::types
 {
 
 using
@@ -16,8 +12,6 @@ string
 =
 sge::charconv::utf8_string;
 
-}
-}
 }
 
 #endif

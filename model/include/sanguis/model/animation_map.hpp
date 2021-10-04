@@ -8,9 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 using
@@ -21,7 +19,6 @@ std::unordered_map<
 	sanguis::model::animation
 >;
 
-}
 }
 
 #endif

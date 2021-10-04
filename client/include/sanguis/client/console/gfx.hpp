@@ -12,11 +12,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace console
+namespace sanguis::client::console
 {
 
 class gfx
@@ -49,8 +45,6 @@ private:
 	fcppt::signal::auto_connection const resize_connection_;
 };
 
-}
-}
 }
 
 #endif

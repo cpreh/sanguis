@@ -16,11 +16,7 @@
 #include <fcppt/math/vector/null.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -71,8 +67,6 @@ draw_non_connecting(
 		);
 }
 
-}
-}
 }
 
 #endif

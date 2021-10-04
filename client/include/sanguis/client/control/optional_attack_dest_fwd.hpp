@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
+namespace sanguis::client::control
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	sanguis::client::control::attack_dest
 >;
 
-}
-}
 }
 
 #endif

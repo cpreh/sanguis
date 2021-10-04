@@ -21,11 +21,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class with_velocity
@@ -110,8 +106,6 @@ private:
 	fcppt::signal::auto_connection const speed_change_;
 };
 
-}
-}
 }
 
 #endif

@@ -6,11 +6,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -24,8 +20,6 @@ to_string(
 	Tile
 );
 
-}
-}
 }
 
 #define SANGUIS_TILES_DECLARE_TO_STRING(\

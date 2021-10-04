@@ -4,21 +4,12 @@
 #include <fcppt/log/name.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
+namespace sanguis::client::draw2d::scene
 {
 
 fcppt::log::name
 log_name();
 
-}
-}
-}
 }
 
 #endif

@@ -7,13 +7,7 @@
 #include <fcppt/mpl/list/object.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
+namespace sanguis::client::draw2d::sprite
 {
 
 using
@@ -26,9 +20,6 @@ sge::sprite::state::choices<
 	>
 >;
 
-}
-}
-}
 }
 
 #endif

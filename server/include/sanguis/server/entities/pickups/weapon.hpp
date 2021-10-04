@@ -19,13 +19,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace pickups
+namespace sanguis::server::entities::pickups
 {
 
 class weapon
@@ -88,9 +82,6 @@ private:
 	sanguis::server::weapons::optional_unique_ptr weapon_;
 };
 
-}
-}
-}
 }
 
 #endif

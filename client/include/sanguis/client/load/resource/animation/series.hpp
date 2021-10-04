@@ -8,15 +8,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
-{
-namespace animation
+namespace sanguis::client::load::resource::animation
 {
 
 class series
@@ -63,10 +55,6 @@ private:
 	sanguis::client::load::resource::animation::entity_vector entities_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

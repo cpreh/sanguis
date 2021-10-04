@@ -9,11 +9,7 @@
 #include <fcppt/optional/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class center_simple
@@ -51,8 +47,6 @@ private:
 	optional_center center_;
 };
 
-}
-}
 }
 
 #endif

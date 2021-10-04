@@ -4,13 +4,7 @@
 #include <sanguis/creator/impl/parameters_fwd.hpp>
 #include <sanguis/creator/impl/result_fwd.hpp>
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
-{
-namespace generators
+namespace sanguis::creator::impl::generators
 {
 
 sanguis::creator::impl::result
@@ -18,9 +12,6 @@ rooms(
 	sanguis::creator::impl::parameters const &
 );
 
-}
-}
-}
 }
 
 #endif

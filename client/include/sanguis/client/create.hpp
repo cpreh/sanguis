@@ -7,9 +7,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 SANGUIS_CLIENT_SYMBOL
@@ -19,7 +17,6 @@ create(
 	sanguis::client::args::result const &
 );
 
-}
 }
 
 #endif

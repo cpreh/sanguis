@@ -4,11 +4,7 @@
 #include <sanguis/client/draw2d/z_ordering_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
+namespace sanguis::client::draw2d
 {
 
 enum class z_ordering
@@ -27,8 +23,6 @@ enum class z_ordering
 	fcppt_maximum = text
 };
 
-}
-}
 }
 
 #endif

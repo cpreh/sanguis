@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace global
+namespace sanguis::server::global
 {
 
 using
@@ -24,8 +20,6 @@ std::map<
 	sanguis::server::global::dest_world_pair
 >;
 
-}
-}
 }
 
 #endif

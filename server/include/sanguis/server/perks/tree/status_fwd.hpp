@@ -2,20 +2,11 @@
 #define SANGUIS_SERVER_PERKS_TREE_STATUS_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
-{
-namespace tree
+namespace sanguis::server::perks::tree
 {
 
 class status;
 
-}
-}
-}
 }
 
 #endif

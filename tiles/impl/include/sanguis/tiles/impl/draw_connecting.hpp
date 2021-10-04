@@ -21,11 +21,7 @@
 #include <fcppt/math/vector/fill.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -91,8 +87,6 @@ draw_connecting(
 		);
 }
 
-}
-}
 }
 
 #endif

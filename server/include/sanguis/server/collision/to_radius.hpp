@@ -5,11 +5,7 @@
 #include <sanguis/server/radius_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 sanguis::collision::radius
@@ -17,8 +13,6 @@ to_radius(
 	sanguis::server::radius
 );
 
-}
-}
 }
 
 #endif

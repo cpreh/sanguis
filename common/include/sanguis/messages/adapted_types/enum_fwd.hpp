@@ -6,11 +6,7 @@
 #include <alda/bindings/enum_decl.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 template<
@@ -25,8 +21,6 @@ alda::bindings::enum_<
 	>
 >;
 
-}
-}
 }
 
 #endif

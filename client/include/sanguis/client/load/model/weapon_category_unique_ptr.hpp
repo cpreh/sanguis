@@ -5,13 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::unique_ptr<
 	sanguis::client::load::model::weapon_category
 >;
 
-}
-}
-}
 }
 
 #endif

@@ -6,9 +6,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 using
@@ -21,7 +19,6 @@ fcppt::function<
 	)
 >;
 
-}
 }
 
 #endif

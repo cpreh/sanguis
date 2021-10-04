@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace events
+namespace sanguis::server::events
 {
 
 class disconnect
@@ -57,8 +53,6 @@ private:
 	alda::net::id id_;
 };
 
-}
-}
 }
 
 #endif

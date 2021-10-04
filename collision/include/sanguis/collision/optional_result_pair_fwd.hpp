@@ -5,9 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::optional::object<
 	sanguis::collision::result_pair
 >;
 
-}
 }
 
 #endif

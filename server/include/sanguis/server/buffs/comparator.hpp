@@ -5,11 +5,7 @@
 #include <sanguis/server/buffs/unique_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace buffs
+namespace sanguis::server::buffs
 {
 
 struct comparator
@@ -38,8 +34,6 @@ struct comparator
 	void;
 };
 
-}
-}
 }
 
 #endif

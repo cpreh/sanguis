@@ -11,15 +11,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace skills
+namespace sanguis::server::entities::enemies::skills
 {
 
 class scatter
@@ -55,10 +47,6 @@ private:
 	sanguis::diff_timer cooldown_timer_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

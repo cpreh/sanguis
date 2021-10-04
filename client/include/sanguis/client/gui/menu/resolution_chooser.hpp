@@ -14,13 +14,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace menu
+namespace sanguis::client::gui::menu
 {
 
 class resolution_chooser
@@ -58,9 +52,6 @@ private:
 	fcppt::signal::auto_connection const apply_connection_;
 };
 
-}
-}
-}
 }
 
 #endif

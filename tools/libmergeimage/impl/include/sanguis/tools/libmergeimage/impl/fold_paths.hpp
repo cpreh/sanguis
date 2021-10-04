@@ -5,13 +5,7 @@
 #include <sanguis/tools/libmergeimage/impl/path_vector.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
-{
-namespace impl
+namespace sanguis::tools::libmergeimage::impl
 {
 
 sanguis::tools::libmergeimage::path_count_pair_vector
@@ -19,9 +13,6 @@ fold_paths(
 	sanguis::tools::libmergeimage::impl::path_vector const &
 );
 
-}
-}
-}
 }
 
 #endif

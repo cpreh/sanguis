@@ -4,18 +4,12 @@
 #include <sanguis/server/damage/array.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 sanguis::server::damage::array
 explosive();
 
-}
-}
 }
 
 #endif

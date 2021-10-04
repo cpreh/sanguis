@@ -6,9 +6,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace load
+namespace sanguis::load
 {
 
 SANGUIS_COMMON_SYMBOL
@@ -17,7 +15,6 @@ friend_name(
 	sanguis::friend_type
 );
 
-}
 }
 
 #endif

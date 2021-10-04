@@ -7,15 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 class none
@@ -44,10 +36,6 @@ private:
 	override;
 };
 
-}
-}
-}
-}
 }
 
 #endif

@@ -8,9 +8,7 @@
 #include <sanguis/model/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 SANGUIS_MODEL_SYMBOL
@@ -21,7 +19,6 @@ make_cell_areas(
 	sanguis::model::animation_range
 );
 
-}
 }
 
 #endif

@@ -2,17 +2,11 @@
 #define SANGUIS_CLIENT_STATES_MENU_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace states
+namespace sanguis::client::states
 {
 
 class menu;
 
-}
-}
 }
 
 #endif

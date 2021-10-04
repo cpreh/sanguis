@@ -11,9 +11,7 @@
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 sanguis::server::entities::player_unique_ptr
@@ -27,7 +25,6 @@ create_player(
 	sanguis::server::console_command_vector const &
 );
 
-}
 }
 
 #endif

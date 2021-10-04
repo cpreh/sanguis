@@ -4,9 +4,7 @@
 #include <sanguis/tiles/error_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 enum class error
@@ -17,7 +15,6 @@ enum class error
 	fcppt_maximum = missing_object
 };
 
-}
 }
 
 #endif

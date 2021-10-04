@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace perk
+namespace sanguis::client::gui::perk
 {
 
 using
@@ -23,9 +17,6 @@ std::vector<
 	sanguis::client::gui::perk::tab_unique_ptr
 >;
 
-}
-}
-}
 }
 
 #endif

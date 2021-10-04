@@ -10,11 +10,7 @@
 #include <sanguis/creator/tile_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 sanguis::collision::impl::optional_speed
@@ -27,8 +23,6 @@ test_tile(
 	sanguis::creator::tile
 );
 
-}
-}
 }
 
 #endif

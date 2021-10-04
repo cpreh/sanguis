@@ -4,13 +4,7 @@
 #include <sanguis/client/control/actions/scale_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
-{
-namespace actions
+namespace sanguis::client::control::actions
 {
 
 enum class scale_type
@@ -19,9 +13,6 @@ enum class scale_type
 	vertical_move
 };
 
-}
-}
-}
 }
 
 #endif

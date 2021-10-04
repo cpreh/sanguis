@@ -5,11 +5,7 @@
 #include <sanguis/server/damage/armor_meta_list.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 sanguis::server::damage::armor_array
@@ -17,8 +13,6 @@ make_armor_array(
 	sanguis::server::damage::armor_meta_list const &
 );
 
-}
-}
 }
 
 #endif

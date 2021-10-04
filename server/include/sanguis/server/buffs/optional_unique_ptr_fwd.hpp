@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace buffs
+namespace sanguis::server::buffs
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	sanguis::server::buffs::unique_ptr
 >;
 
-}
-}
 }
 
 #endif

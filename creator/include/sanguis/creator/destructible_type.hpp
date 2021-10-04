@@ -4,9 +4,7 @@
 #include <sanguis/creator/destructible_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 enum class destructible_type
@@ -15,7 +13,6 @@ enum class destructible_type
 	fcppt_maximum = barrel
 };
 
-}
 }
 
 #endif

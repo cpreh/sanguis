@@ -2,14 +2,11 @@
 #define SANGUIS_CREATOR_OPENING_TYPE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 enum class opening_type;
 
-}
 }
 
 #endif

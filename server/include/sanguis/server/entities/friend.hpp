@@ -25,11 +25,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class friend_
@@ -91,8 +87,6 @@ private:
 	sanguis::friend_type const friend_type_;
 };
 
-}
-}
 }
 
 #endif

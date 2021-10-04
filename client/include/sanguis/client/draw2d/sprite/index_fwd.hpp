@@ -4,13 +4,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
+namespace sanguis::client::draw2d::sprite
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -18,9 +12,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	index
 );
 
-}
-}
-}
 }
 
 #endif

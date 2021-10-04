@@ -10,9 +10,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 template<
@@ -40,7 +38,6 @@ center_to_grid_pos(
 		).get_unsafe();
 }
 
-}
 }
 
 #endif

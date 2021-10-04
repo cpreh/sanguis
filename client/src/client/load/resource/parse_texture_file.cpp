@@ -61,7 +61,7 @@ sanguis::client::load::resource::parse_texture_file(
 
 		fcppt::string::size_type const equal(
 			line.find(
-				FCPPT_TEXT("=")
+				'='
 			)
 		);
 

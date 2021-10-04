@@ -8,13 +8,7 @@
 #include <sge/sprite/config/unit_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
+namespace sanguis::client::draw2d::sprite
 {
 
 using
@@ -29,9 +23,6 @@ sge::sprite::config::type_choices<
 	>
 >;
 
-}
-}
-}
 }
 
 #endif

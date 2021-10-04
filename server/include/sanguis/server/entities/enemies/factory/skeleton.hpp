@@ -5,15 +5,7 @@
 #include <sanguis/server/entities/enemies/factory/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace factory
+namespace sanguis::server::entities::enemies::factory
 {
 
 sanguis::server::entities::with_id_unique_ptr
@@ -21,10 +13,6 @@ skeleton(
 	sanguis::server::entities::enemies::factory::parameters const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

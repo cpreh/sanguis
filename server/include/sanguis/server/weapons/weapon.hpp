@@ -39,11 +39,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class weapon
@@ -231,8 +227,6 @@ private:
 	sanguis::server::entities::optional_with_weapon_ref owner_;
 };
 
-}
-}
 }
 
 #endif

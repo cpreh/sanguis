@@ -8,9 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 using
@@ -21,7 +19,6 @@ boost::units::quantity<
 	sanguis::collision::unit
 >;
 
-}
 }
 
 #endif

@@ -5,11 +5,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 fcppt::string
@@ -17,8 +13,6 @@ orientation_to_string(
 	sanguis::tiles::orientation
 );
 
-}
-}
 }
 
 #endif

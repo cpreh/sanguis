@@ -4,11 +4,7 @@
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 sanguis::server::entities::transfer_result
@@ -17,8 +13,6 @@ combine_transfer(
 	sanguis::server::entities::transfer_result &&
 );
 
-}
-}
 }
 
 #endif

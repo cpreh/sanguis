@@ -19,11 +19,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class with_health
@@ -109,8 +105,6 @@ private:
 	fcppt::signal::auto_connection const max_health_change_;
 };
 
-}
-}
 }
 
 #endif

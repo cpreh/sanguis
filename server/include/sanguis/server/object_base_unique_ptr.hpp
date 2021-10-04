@@ -5,9 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::unique_ptr<
 	sanguis::server::object_base
 >;
 
-}
 }
 
 #endif

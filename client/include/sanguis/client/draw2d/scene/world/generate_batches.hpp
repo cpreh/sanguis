@@ -11,15 +11,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 sanguis::client::draw2d::scene::world::batch_grid
@@ -33,10 +25,6 @@ generate_batches(
 	sanguis::client::draw2d::scene::world::sprite::buffers_ref
 );
 
-}
-}
-}
-}
 }
 
 #endif

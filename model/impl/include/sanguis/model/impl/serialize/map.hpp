@@ -10,13 +10,7 @@
 #include <fcppt/algorithm/map.hpp>
 
 
-namespace sanguis
-{
-namespace model
-{
-namespace impl
-{
-namespace serialize
+namespace sanguis::model::impl::serialize
 {
 
 template<
@@ -66,9 +60,6 @@ map(
 		);
 }
 
-}
-}
-}
 }
 
 #endif

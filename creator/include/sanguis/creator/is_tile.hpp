@@ -11,9 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 FCPPT_PP_PUSH_WARNING
@@ -48,7 +46,6 @@ std::true_type
 
 FCPPT_PP_POP_WARNING
 
-}
 }
 
 #endif

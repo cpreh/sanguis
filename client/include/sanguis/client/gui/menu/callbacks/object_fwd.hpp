@@ -2,23 +2,11 @@
 #define SANGUIS_CLIENT_GUI_MENU_CALLBACKS_OBJECT_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace menu
-{
-namespace callbacks
+namespace sanguis::client::gui::menu::callbacks
 {
 
 class object;
 
-}
-}
-}
-}
 }
 
 #endif

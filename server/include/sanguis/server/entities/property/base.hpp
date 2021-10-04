@@ -9,13 +9,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 class base
@@ -88,9 +82,6 @@ private:
 	sanguis::server::entities::property::linear_decrease linear_decrease_;
 };
 
-}
-}
-}
 }
 
 #endif

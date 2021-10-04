@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	sanguis::server::weapons::reload_time
 >;
 
-}
-}
 }
 
 #endif

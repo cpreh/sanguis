@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 inline
@@ -31,8 +27,6 @@ is_null(
 		;
 }
 
-}
-}
 }
 
 #endif

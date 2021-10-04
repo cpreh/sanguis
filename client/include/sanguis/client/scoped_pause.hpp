@@ -5,9 +5,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class scoped_pause
@@ -26,7 +24,6 @@ private:
 	sanguis::client::send_callback const send_;
 };
 
-}
 }
 
 #endif

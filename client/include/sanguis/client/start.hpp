@@ -6,9 +6,7 @@
 #include <awl/main/exit_code.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 SANGUIS_CLIENT_SYMBOL
@@ -17,7 +15,6 @@ start(
 	sanguis::client::args::result const &
 );
 
-}
 }
 
 #endif

@@ -10,13 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace behavior
+namespace sanguis::server::ai::behavior
 {
 
 class patrol
@@ -52,9 +46,6 @@ private:
 	sanguis::creator::pos const start_pos_;
 };
 
-}
-}
-}
 }
 
 #endif

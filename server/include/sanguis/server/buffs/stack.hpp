@@ -11,11 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace buffs
+namespace sanguis::server::buffs
 {
 
 class stack
@@ -72,8 +68,6 @@ private:
 	set impl_;
 };
 
-}
-}
 }
 
 #endif

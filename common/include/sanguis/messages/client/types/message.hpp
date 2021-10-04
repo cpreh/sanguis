@@ -4,13 +4,7 @@
 #include <sanguis/messages/client/types/message_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace client
-{
-namespace types
+namespace sanguis::messages::client::types
 {
 
 enum class message
@@ -31,9 +25,6 @@ enum class message
 	fcppt_maximum = unpause
 };
 
-}
-}
-}
 }
 
 #endif

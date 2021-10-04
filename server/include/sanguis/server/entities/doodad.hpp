@@ -15,11 +15,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class doodad
@@ -70,8 +66,6 @@ private:
 	bool dead_;
 };
 
-}
-}
 }
 
 #endif

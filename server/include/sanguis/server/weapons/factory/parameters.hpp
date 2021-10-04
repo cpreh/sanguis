@@ -8,13 +8,7 @@
 #include <sanguis/server/weapons/factory/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace factory
+namespace sanguis::server::weapons::factory
 {
 
 class parameters
@@ -49,9 +43,6 @@ private:
 	sanguis::server::entities::enemies::difficulty difficulty_;
 };
 
-}
-}
-}
 }
 
 #endif

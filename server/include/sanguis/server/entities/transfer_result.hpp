@@ -5,11 +5,7 @@
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class transfer_result
@@ -33,8 +29,6 @@ private:
 	sanguis::collision::world::body_enter_container body_enter_;
 };
 
-}
-}
 }
 
 #endif

@@ -15,15 +15,7 @@
 #include <fcppt/optional/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace hover
+namespace sanguis::client::draw2d::scene::hover
 {
 
 class name_and_health
@@ -77,10 +69,6 @@ private:
 	optional_name name_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

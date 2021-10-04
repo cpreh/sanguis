@@ -6,13 +6,7 @@
 #include <sanguis/server/perks/tree/container.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
-{
-namespace tree
+namespace sanguis::server::perks::tree
 {
 
 bool
@@ -22,9 +16,6 @@ choosable(
 	sanguis::server::level
 );
 
-}
-}
-}
 }
 
 #endif

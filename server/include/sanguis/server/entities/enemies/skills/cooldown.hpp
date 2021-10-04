@@ -6,15 +6,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace skills
+namespace sanguis::server::entities::enemies::skills
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -22,10 +14,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	cooldown
 );
 
-}
-}
-}
-}
 }
 
 #endif

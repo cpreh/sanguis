@@ -4,11 +4,7 @@
 #include <sanguis/client/perk/category_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 enum class category
@@ -18,8 +14,6 @@ enum class category
 	fcppt_maximum = attack
 };
 
-}
-}
 }
 
 #endif

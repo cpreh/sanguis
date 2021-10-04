@@ -17,13 +17,7 @@
 #include <sanguis/creator/enemy_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace factory
+namespace sanguis::client::draw2d::factory
 {
 
 sanguis::client::draw2d::entities::unique_ptr
@@ -43,9 +37,6 @@ enemy(
 	sanguis::client::health_pair
 );
 
-}
-}
-}
 }
 
 #endif

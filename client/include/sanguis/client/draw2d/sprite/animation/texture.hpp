@@ -31,15 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace animation
+namespace sanguis::client::draw2d::sprite::animation
 {
 
 class texture
@@ -84,10 +76,6 @@ private:
 	sanguis::diff_timer cur_timer_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

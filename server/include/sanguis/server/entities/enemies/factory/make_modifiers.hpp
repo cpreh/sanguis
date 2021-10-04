@@ -6,15 +6,7 @@
 #include <sanguis/server/random/amount.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace factory
+namespace sanguis::server::entities::enemies::factory
 {
 
 sanguis::server::entities::enemies::modifiers::container
@@ -23,10 +15,6 @@ make_modifiers(
 	sanguis::server::random::amount
 );
 
-}
-}
-}
-}
 }
 
 #endif

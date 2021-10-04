@@ -9,13 +9,7 @@
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace factory
+namespace sanguis::client::draw2d::factory
 {
 
 sanguis::client::draw2d::entities::unique_ptr
@@ -27,9 +21,6 @@ projectile(
 	sanguis::client::draw2d::sprite::rotation
 );
 
-}
-}
-}
 }
 
 #endif

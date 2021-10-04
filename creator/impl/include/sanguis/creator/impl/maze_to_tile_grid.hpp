@@ -15,11 +15,7 @@
 #include <fcppt/math/vector/dim.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 template<
@@ -201,8 +197,6 @@ maze_to_tile_grid(
 	return result;
 }
 
-}
-}
 }
 
 #endif

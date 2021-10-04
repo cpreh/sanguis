@@ -9,15 +9,7 @@
 #include <fcppt/type_traits/integral_cast.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 using
@@ -33,10 +25,6 @@ fcppt::type_traits::integral_cast<
 	>
 >;
 
-}
-}
-}
-}
 }
 
 #endif

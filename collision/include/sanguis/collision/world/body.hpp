@@ -9,11 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class body
@@ -60,8 +56,6 @@ public:
 	mass() const = 0;
 };
 
-}
-}
 }
 
 #endif

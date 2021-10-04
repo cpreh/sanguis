@@ -5,11 +5,7 @@
 #include <alda/message/base_unique_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
+namespace sanguis::messages::server
 {
 
 using
@@ -19,8 +15,6 @@ alda::message::base_unique_ptr<
 	sanguis::messages::server::types::alda_type
 >;
 
-}
-}
 }
 
 #endif

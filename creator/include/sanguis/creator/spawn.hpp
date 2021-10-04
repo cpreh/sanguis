@@ -9,9 +9,7 @@
 #include <sanguis/creator/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 class spawn
@@ -53,7 +51,6 @@ private:
 	sanguis::creator::enemy_kind enemy_kind_;
 };
 
-}
 }
 
 #endif

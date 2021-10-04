@@ -25,11 +25,7 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -127,8 +123,6 @@ FCPPT_PP_POP_WARNING
 		);
 }
 
-}
-}
 }
 
 #endif

@@ -13,13 +13,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 class particle
@@ -63,9 +57,6 @@ private:
 	sanguis::client::draw2d::sprite::normal::object sprite_;
 };
 
-}
-}
-}
 }
 
 #endif

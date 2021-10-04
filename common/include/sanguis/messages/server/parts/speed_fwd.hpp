@@ -6,13 +6,7 @@
 #include <fcppt/record/element_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
-{
-namespace parts
+namespace sanguis::messages::server::parts
 {
 
 using
@@ -23,9 +17,6 @@ fcppt::record::element<
 	sanguis::messages::adapted_types::vector2
 >;
 
-}
-}
-}
 }
 
 #endif

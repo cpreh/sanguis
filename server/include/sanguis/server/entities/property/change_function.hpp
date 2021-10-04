@@ -4,13 +4,7 @@
 #include <sanguis/server/entities/property/change_event_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 using
@@ -20,9 +14,6 @@ void (
 	sanguis::server::entities::property::change_event const &
 );
 
-}
-}
-}
 }
 
 #endif

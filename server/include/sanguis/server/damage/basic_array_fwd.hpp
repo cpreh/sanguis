@@ -5,11 +5,7 @@
 #include <fcppt/enum/array_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 template<
@@ -23,8 +19,6 @@ fcppt::enum_::array<
 	Unit
 >;
 
-}
-}
 }
 
 #endif

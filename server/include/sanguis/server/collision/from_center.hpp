@@ -5,11 +5,7 @@
 #include <sanguis/server/center_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 sanguis::server::center
@@ -17,8 +13,6 @@ from_center(
 	sanguis::collision::center const &
 );
 
-}
-}
 }
 
 #endif

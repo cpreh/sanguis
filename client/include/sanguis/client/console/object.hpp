@@ -13,11 +13,7 @@
 #include <fcppt/signal/auto_connection_container.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace console
+namespace sanguis::client::console
 {
 
 class object
@@ -65,8 +61,6 @@ private:
 	fcppt::signal::auto_connection_container server_connections_;
 };
 
-}
-}
 }
 
 #endif

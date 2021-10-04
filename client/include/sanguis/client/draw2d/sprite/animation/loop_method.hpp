@@ -4,15 +4,7 @@
 #include <sanguis/client/draw2d/sprite/animation/loop_method_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace animation
+namespace sanguis::client::draw2d::sprite::animation
 {
 
 enum class loop_method
@@ -21,10 +13,6 @@ enum class loop_method
 	stop_at_end
 };
 
-}
-}
-}
-}
 }
 
 #endif

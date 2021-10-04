@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_BUFFS_BUFF_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace buffs
+namespace sanguis::server::buffs
 {
 
 class buff;
 
-}
-}
 }
 
 #endif

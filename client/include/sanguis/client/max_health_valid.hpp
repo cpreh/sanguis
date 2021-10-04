@@ -4,9 +4,7 @@
 #include <sanguis/client/max_health.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 bool
@@ -14,7 +12,6 @@ max_health_valid(
 	sanguis::client::max_health
 );
 
-}
 }
 
 #endif

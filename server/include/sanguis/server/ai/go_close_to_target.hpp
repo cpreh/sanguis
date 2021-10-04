@@ -6,11 +6,7 @@
 #include <sanguis/server/ai/target_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 [[nodiscard]]
@@ -21,8 +17,6 @@ go_close_to_target(
 	sanguis::server::ai::speed_factor
 );
 
-}
-}
 }
 
 #endif

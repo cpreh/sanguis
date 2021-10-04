@@ -5,16 +5,13 @@
 #include <fcppt/log/location.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 SANGUIS_TILES_SYMBOL
 fcppt::log::location
 log_location();
 
-}
 }
 
 #endif

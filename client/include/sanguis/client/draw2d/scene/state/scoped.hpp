@@ -5,15 +5,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace state
+namespace sanguis::client::draw2d::scene::state
 {
 
 class scoped
@@ -28,10 +20,6 @@ public:
 	~scoped();
 };
 
-}
-}
-}
-}
 }
 
 #endif

@@ -5,13 +5,7 @@
 #include <sanguis/messages/types/vector2_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace translate
+namespace sanguis::client::draw2d::translate
 {
 
 sanguis::client::draw2d::vector2
@@ -19,9 +13,6 @@ vector_to_client(
 	sanguis::messages::types::vector2 const &
 );
 
-}
-}
-}
 }
 
 #endif

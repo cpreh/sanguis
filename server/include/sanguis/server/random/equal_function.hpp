@@ -6,11 +6,7 @@
 #include <fcppt/strong_typedef_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace random
+namespace sanguis::server::random
 {
 
 template<
@@ -29,8 +25,6 @@ fcppt::strong_typedef<
 	sanguis::server::random::equal_function_tag
 >;
 
-}
-}
 }
 
 #endif

@@ -5,11 +5,7 @@
 #include <sanguis/messages/types/char.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 using
@@ -19,8 +15,6 @@ sanguis::messages::adapted_types::fundamental<
 	sanguis::messages::types::char_
 >;
 
-}
-}
 }
 
 #endif

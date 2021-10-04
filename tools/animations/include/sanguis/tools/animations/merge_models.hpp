@@ -4,11 +4,7 @@
 #include <sanguis/model/object.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 sanguis::model::object
@@ -17,8 +13,6 @@ merge_models(
 	sanguis::model::object &&
 );
 
-}
-}
 }
 
 #endif

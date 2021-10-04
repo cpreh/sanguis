@@ -15,15 +15,7 @@
 #include <fcppt/mpl/list/object.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace client
+namespace sanguis::client::draw2d::sprite::client
 {
 
 using
@@ -49,10 +41,6 @@ sge::sprite::config::choices<
 	>
 >;
 
-}
-}
-}
-}
 }
 
 #endif

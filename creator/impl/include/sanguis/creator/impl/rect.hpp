@@ -4,11 +4,7 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/rect.hpp>
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 template<
@@ -55,8 +51,6 @@ rect(
 	}
 }
 
-}
-}
 }
 
 #endif

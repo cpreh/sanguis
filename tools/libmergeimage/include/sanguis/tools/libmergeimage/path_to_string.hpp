@@ -6,11 +6,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
+namespace sanguis::tools::libmergeimage
 {
 
 SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
@@ -19,8 +15,6 @@ path_to_string(
 	sanguis::tools::libmergeimage::path const &
 );
 
-}
-}
 }
 
 #endif

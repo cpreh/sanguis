@@ -36,11 +36,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace global
+namespace sanguis::server::global
 {
 
 class context
@@ -232,8 +228,6 @@ private:
 	sanguis::server::global::world_map const worlds_;
 };
 
-}
-}
 }
 
 #endif

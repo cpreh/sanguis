@@ -11,11 +11,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
+namespace sanguis::client::load
 {
 
 class context
@@ -47,8 +43,6 @@ private:
 	sanguis::client::load::model::context const model_ctx_;
 };
 
-}
-}
 }
 
 #endif

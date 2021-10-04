@@ -5,15 +5,7 @@
 #include <sanguis/creator/pos.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 sanguis::creator::pos
@@ -21,10 +13,6 @@ center_to_grid_pos(
 	sanguis::client::draw2d::sprite::center const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

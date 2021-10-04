@@ -2,11 +2,7 @@
 #define SANGUIS_SERVER_RANDOM_DISTRIBUTOR_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace random
+namespace sanguis::server::random
 {
 
 template<
@@ -15,8 +11,6 @@ template<
 >
 class distributor;
 
-}
-}
 }
 
 #endif

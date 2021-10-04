@@ -2,20 +2,11 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace pickups
+namespace sanguis::server::entities::pickups
 {
 
 class weapon;
 
-}
-}
-}
 }
 
 #endif

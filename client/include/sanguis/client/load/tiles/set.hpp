@@ -15,13 +15,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace tiles
+namespace sanguis::client::load::tiles
 {
 
 class set
@@ -69,9 +63,6 @@ private:
 	element_map elements_;
 };
 
-}
-}
-}
 }
 
 #endif

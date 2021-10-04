@@ -4,11 +4,7 @@
 #include <sanguis/collision/world/body_group_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 enum class body_group
@@ -24,8 +20,6 @@ enum class body_group
 	fcppt_maximum = weapon_pickup
 };
 
-}
-}
 }
 
 #endif

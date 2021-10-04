@@ -20,13 +20,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 class object
@@ -116,9 +110,6 @@ private:
 	mutable optional_part_rand random_part_;
 };
 
-}
-}
-}
 }
 
 #endif

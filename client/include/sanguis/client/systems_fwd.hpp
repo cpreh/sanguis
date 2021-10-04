@@ -12,9 +12,7 @@
 #include <sge/systems/with_window_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 using
@@ -32,7 +30,6 @@ sge::systems::instance<
 	sge::systems::with_audio_player
 >;
 
-}
 }
 
 #endif

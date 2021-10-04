@@ -6,11 +6,7 @@
 #include <sanguis/server/ai/status.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 sanguis::server::ai::status
@@ -19,8 +15,6 @@ go_to_grid_pos(
 	sanguis::server::ai::speed_factor
 );
 
-}
-}
 }
 
 #endif

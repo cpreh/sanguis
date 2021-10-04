@@ -6,15 +6,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace hover
+namespace sanguis::client::draw2d::scene::hover
 {
 
 class base
@@ -35,10 +27,6 @@ public:
 	) = 0; // NOLINT(google-runtime-references)
 };
 
-}
-}
-}
-}
 }
 
 #endif

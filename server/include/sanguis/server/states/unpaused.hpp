@@ -29,11 +29,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace states
+namespace sanguis::server::states
 {
 
 FCPPT_PP_PUSH_WARNING
@@ -153,8 +149,6 @@ private:
 
 FCPPT_PP_POP_WARNING
 
-}
-}
 }
 
 #endif

@@ -5,13 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace perk
+namespace sanguis::client::gui::perk
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::unique_ptr<
 	sanguis::client::gui::perk::tab
 >;
 
-}
-}
-}
 }
 
 #endif

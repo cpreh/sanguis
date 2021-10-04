@@ -5,9 +5,7 @@
 #include <fcppt/math/box/rect_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::math::box::rect<
 	sanguis::creator::size_type
 >;
 
-}
 }
 
 #endif

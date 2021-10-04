@@ -8,15 +8,7 @@
 #include <fcppt/container/grid/moore_neighbors.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
-{
-namespace simple
+namespace sanguis::collision::impl::world::simple
 {
 
 template<
@@ -54,10 +46,6 @@ for_all_body_neighbors(
 	}
 }
 
-}
-}
-}
-}
 }
 
 #endif

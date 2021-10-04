@@ -5,19 +5,13 @@
 #include <sanguis/load/model/path.hpp>
 
 
-namespace sanguis
-{
-namespace load
-{
-namespace model
+namespace sanguis::load::model
 {
 
 SANGUIS_COMMON_SYMBOL
 sanguis::load::model::path
 player_path();
 
-}
-}
 }
 
 #endif

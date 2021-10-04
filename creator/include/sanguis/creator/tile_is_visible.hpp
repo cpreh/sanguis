@@ -6,9 +6,7 @@
 #include <sanguis/creator/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
@@ -19,7 +17,6 @@ tile_is_visible(
 	sanguis::creator::pos const &
 );
 
-}
 }
 
 #endif

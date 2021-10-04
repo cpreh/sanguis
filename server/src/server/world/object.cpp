@@ -459,12 +459,13 @@ sanguis::server::world::object::insert(
 		sanguis::server::world::insert_with_id_pair &element
 		:
 		_pairs
-	)
+	) {
 		this->insert(
 			std::move(
 				element
 			)
 		);
+}
 }
 
 sanguis::server::entities::optional_base_ref

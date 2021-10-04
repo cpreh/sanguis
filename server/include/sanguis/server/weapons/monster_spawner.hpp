@@ -11,11 +11,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class monster_spawner
@@ -59,8 +55,6 @@ private:
 	sanguis::server::weapons::common_parameters const common_parameters_;
 };
 
-}
-}
 }
 
 #endif

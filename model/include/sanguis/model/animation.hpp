@@ -9,9 +9,7 @@
 #include <sanguis/model/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 class animation
@@ -93,7 +91,6 @@ private:
 	sanguis::model::optional_image_name image_name_;
 };
 
-}
 }
 
 #endif

@@ -7,13 +7,7 @@
 #include <fcppt/log/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 sanguis::client::load::model::animation_map
@@ -23,9 +17,6 @@ make_animations(
 	sanguis::client::load::model::global_parameters const &
 );
 
-}
-}
-}
 }
 
 #endif

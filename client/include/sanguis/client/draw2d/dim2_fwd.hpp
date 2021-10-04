@@ -5,11 +5,7 @@
 #include <fcppt/math/dim/static_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
+namespace sanguis::client::draw2d
 {
 
 using
@@ -20,8 +16,6 @@ fcppt::math::dim::static_<
 	2
 >;
 
-}
-}
 }
 
 #endif

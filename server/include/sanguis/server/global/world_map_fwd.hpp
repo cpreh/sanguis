@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_GLOBAL_WORLD_MAP_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace global
+namespace sanguis::server::global
 {
 
 class world_map;
 
-}
-}
 }
 
 #endif

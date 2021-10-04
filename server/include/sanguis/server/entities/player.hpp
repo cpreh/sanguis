@@ -42,11 +42,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class player
@@ -239,8 +235,6 @@ private:
 	weapon_pickup_set weapon_pickups_;
 };
 
-}
-}
 }
 
 #endif

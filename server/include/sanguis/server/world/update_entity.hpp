@@ -8,11 +8,7 @@
 #include <fcppt/algorithm/update_action_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 class update_entity
@@ -49,8 +45,6 @@ private:
 	sanguis::duration elapsed_time_;
 };
 
-}
-}
 }
 
 #endif

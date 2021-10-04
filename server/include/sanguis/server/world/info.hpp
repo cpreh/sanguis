@@ -10,11 +10,7 @@
 #include <sanguis/server/world/info_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 class info
@@ -66,8 +62,6 @@ private:
 	sanguis::creator::opening_container_array openings_;
 };
 
-}
-}
 }
 
 #endif

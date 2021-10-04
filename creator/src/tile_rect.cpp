@@ -8,7 +8,7 @@
 
 sanguis::creator::rect
 sanguis::creator::tile_rect(
-	sanguis::creator::tile const _tile
+	sanguis::creator::tile const  /*_tile*/
 )
 {
 	return

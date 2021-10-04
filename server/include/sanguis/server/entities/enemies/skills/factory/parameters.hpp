@@ -9,17 +9,7 @@
 #include <sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace skills
-{
-namespace factory
+namespace sanguis::server::entities::enemies::skills::factory
 {
 
 class parameters
@@ -50,11 +40,6 @@ private:
 	sanguis::server::entities::enemies::difficulty difficulty_;
 };
 
-}
-}
-}
-}
-}
 }
 
 #endif

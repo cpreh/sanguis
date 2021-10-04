@@ -10,11 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace events
+namespace sanguis::server::events
 {
 
 class message
@@ -65,8 +61,6 @@ private:
 	sanguis::server::player_id id_;
 };
 
-}
-}
 }
 
 #endif

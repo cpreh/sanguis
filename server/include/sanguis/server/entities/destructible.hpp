@@ -19,11 +19,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class destructible
@@ -80,8 +76,6 @@ private:
 	sanguis::server::entities::enemies::difficulty const difficulty_;
 };
 
-}
-}
 }
 
 #endif

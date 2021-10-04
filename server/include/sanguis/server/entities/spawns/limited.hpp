@@ -17,13 +17,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace spawns
+namespace sanguis::server::entities::spawns
 {
 
 class limited
@@ -84,9 +78,6 @@ private:
 	sanguis::server::entities::spawns::total_count const total_count_;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 class const_tree_range
@@ -53,8 +49,6 @@ private:
 	sanguis::client::perk::tree::const_iterator end_;
 };
 
-}
-}
 }
 
 #endif

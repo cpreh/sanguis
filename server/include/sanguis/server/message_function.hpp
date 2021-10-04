@@ -6,9 +6,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 template<
@@ -58,7 +56,6 @@ private:
 	sanguis::server::player_id id_;
 };
 
-}
 }
 
 #endif

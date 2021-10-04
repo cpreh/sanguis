@@ -5,15 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace model
+namespace sanguis::client::draw2d::entities::model
 {
 
 using
@@ -23,10 +15,6 @@ fcppt::optional::object<
 	sge::audio::sound::base_unique_ptr
 >;
 
-}
-}
-}
-}
 }
 
 #endif

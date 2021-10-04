@@ -5,11 +5,7 @@
 #include <fcppt/shared_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
+namespace sanguis::messages::server
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::shared_ptr<
 	sanguis::messages::server::base
 >;
 
-}
-}
 }
 
 #endif

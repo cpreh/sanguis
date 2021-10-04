@@ -6,13 +6,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace ifaces
+namespace sanguis::server::entities::ifaces
 {
 
 class with_links
@@ -36,9 +30,6 @@ protected:
 	reset_links() = 0;
 };
 
-}
-}
-}
 }
 
 #endif

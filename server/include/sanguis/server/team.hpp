@@ -4,9 +4,7 @@
 #include <sanguis/server/team_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 enum class team
@@ -15,7 +13,6 @@ enum class team
 	monsters
 };
 
-}
 }
 
 #endif

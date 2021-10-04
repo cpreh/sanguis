@@ -10,9 +10,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 class timer
@@ -34,7 +32,6 @@ private:
 	> const impl_;
 };
 
-}
 }
 
 #endif

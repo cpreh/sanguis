@@ -2,9 +2,7 @@
 #define SANGUIS_TILES_SET_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 template<
@@ -12,7 +10,6 @@ template<
 >
 class set;
 
-}
 }
 
 #endif

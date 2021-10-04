@@ -7,13 +7,7 @@
 #include <sge/texture/part_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
+namespace sanguis::client::draw2d::scene
 {
 
 sanguis::client::draw2d::sprite::client::texture_coordinates
@@ -23,9 +17,6 @@ background_texture_coordinates(
 	sge::texture::part const &
 );
 
-}
-}
-}
 }
 
 #endif

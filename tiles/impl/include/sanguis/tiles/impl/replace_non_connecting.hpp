@@ -6,11 +6,7 @@
 #include <sanguis/creator/tile_connects.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 inline
@@ -40,8 +36,6 @@ replace_non_connecting(
 		_tile;
 }
 
-}
-}
 }
 
 #endif

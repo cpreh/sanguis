@@ -4,18 +4,12 @@
 #include <sanguis/creator/name.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 sanguis::creator::name
 maze_name();
 
-}
-}
 }
 
 #endif

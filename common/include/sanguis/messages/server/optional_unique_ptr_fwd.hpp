@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
+namespace sanguis::messages::server
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	sanguis::messages::server::unique_ptr
 >;
 
-}
-}
 }
 
 #endif

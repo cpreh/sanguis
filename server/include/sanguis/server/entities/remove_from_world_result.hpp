@@ -5,11 +5,7 @@
 #include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class remove_from_world_result
@@ -33,8 +29,6 @@ private:
 	sanguis::collision::world::body_exit_container body_exit_;
 };
 
-}
-}
 }
 
 #endif

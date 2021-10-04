@@ -5,11 +5,7 @@
 #include <fcppt/optional/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::reference<
 	sanguis::model::animation
 >;
 
-}
-}
 }
 
 #endif

@@ -21,11 +21,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class exp_area
@@ -91,8 +87,6 @@ private:
 	weak_link_map player_links_;
 };
 
-}
-}
 }
 
 #endif

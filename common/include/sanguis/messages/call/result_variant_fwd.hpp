@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace call
+namespace sanguis::messages::call
 {
 
 using
@@ -23,8 +19,6 @@ fcppt::variant::object<
 	sanguis::messages::call::forward_to_default
 >;
 
-}
-}
 }
 
 #endif

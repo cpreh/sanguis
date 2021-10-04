@@ -8,13 +8,7 @@
 #include <fcppt/random/generator/mt19937_decl.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
-{
-namespace random
+namespace sanguis::creator::impl::random
 {
 
 class generator
@@ -54,9 +48,6 @@ private:
 	generator_type generator_;
 };
 
-}
-}
-}
 }
 
 #endif

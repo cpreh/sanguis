@@ -8,11 +8,7 @@
 #include <sanguis/server/random/grid_distance.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace random
+namespace sanguis::server::random
 {
 
 sanguis::creator::optional_pos
@@ -23,8 +19,6 @@ grid_pos_around(
 	sanguis::server::random::grid_distance
 );
 
-}
-}
 }
 
 #endif

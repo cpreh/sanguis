@@ -25,13 +25,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
+namespace sanguis::server::entities::enemies
 {
 
 class parameters
@@ -224,9 +218,6 @@ private:
 	sanguis::server::weapons::irs irs_;
 };
 
-}
-}
-}
 }
 
 #endif

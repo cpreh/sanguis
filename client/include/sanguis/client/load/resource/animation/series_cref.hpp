@@ -5,15 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
-{
-namespace animation
+namespace sanguis::client::load::resource::animation
 {
 
 using
@@ -23,10 +15,6 @@ fcppt::reference<
 	sanguis::client::load::resource::animation::series const
 >;
 
-}
-}
-}
-}
 }
 
 #endif

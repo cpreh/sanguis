@@ -8,9 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 using
@@ -21,7 +19,6 @@ boost::units::quantity<
 	sanguis::server::space_unit
 >;
 
-}
 }
 
 #endif

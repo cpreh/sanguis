@@ -5,15 +5,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
-{
-namespace simple
+namespace sanguis::collision::impl::world::simple
 {
 
 using
@@ -25,10 +17,6 @@ fcppt::function<
 	)
 >;
 
-}
-}
-}
-}
 }
 
 #endif

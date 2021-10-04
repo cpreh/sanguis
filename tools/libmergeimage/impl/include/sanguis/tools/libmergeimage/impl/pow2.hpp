@@ -4,13 +4,7 @@
 #include <sge/image/size_type.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
-{
-namespace impl
+namespace sanguis::tools::libmergeimage::impl
 {
 
 sge::image::size_type
@@ -18,9 +12,6 @@ pow2(
 	sge::image::size_type
 );
 
-}
-}
-}
 }
 
 #endif

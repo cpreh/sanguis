@@ -5,11 +5,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
+namespace sanguis::client::load
 {
 
 fcppt::string
@@ -17,8 +13,6 @@ aura_name(
 	sanguis::aura_type
 );
 
-}
-}
 }
 
 #endif

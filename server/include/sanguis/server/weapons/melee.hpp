@@ -14,11 +14,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class melee
@@ -65,8 +61,6 @@ private:
 	sanguis::server::damage::array const damage_values_;
 };
 
-}
-}
 }
 
 #endif

@@ -2,17 +2,11 @@
 #define SANGUIS_CLIENT_LOAD_ANIMATION_TYPE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
+namespace sanguis::client::load
 {
 
 enum class animation_type;
 
-}
-}
 }
 
 #endif

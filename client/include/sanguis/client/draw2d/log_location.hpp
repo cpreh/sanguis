@@ -4,18 +4,12 @@
 #include <fcppt/log/location.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
+namespace sanguis::client::draw2d
 {
 
 fcppt::log::location
 log_location();
 
-}
-}
 }
 
 #endif

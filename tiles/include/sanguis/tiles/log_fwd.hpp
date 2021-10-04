@@ -2,14 +2,11 @@
 #define SANGUIS_TILES_LOG_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 class log;
 
-}
 }
 
 #endif

@@ -7,11 +7,7 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 FCPPT_PP_PUSH_WARNING
@@ -28,8 +24,6 @@ enum class type
 
 FCPPT_PP_POP_WARNING
 
-}
-}
 }
 
 #endif

@@ -6,13 +6,7 @@
 #include <sge/texture/part_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace tiles
+namespace sanguis::client::load::tiles
 {
 
 sanguis::client::load::tiles::texture_container
@@ -21,9 +15,6 @@ make_textures(
 	sanguis::tiles::area_container const &
 );
 
-}
-}
-}
 }
 
 #endif

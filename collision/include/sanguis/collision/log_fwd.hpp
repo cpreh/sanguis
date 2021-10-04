@@ -2,14 +2,11 @@
 #define SANGUIS_COLLISION_LOG_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 class log;
 
-}
 }
 
 #endif

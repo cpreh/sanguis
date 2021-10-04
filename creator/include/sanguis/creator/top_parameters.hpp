@@ -10,9 +10,7 @@
 #include <fcppt/log/context_reference.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 class top_parameters
@@ -59,7 +57,6 @@ private:
 	sanguis::creator::spawn_boss spawn_boss_;
 };
 
-}
 }
 
 #endif

@@ -9,13 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 sanguis::client::load::model::part_result
@@ -25,9 +19,6 @@ make_parts(
 	sanguis::client::load::resource::context_cref
 );
 
-}
-}
-}
 }
 
 #endif

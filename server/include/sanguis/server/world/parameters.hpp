@@ -12,11 +12,7 @@
 #include <fcppt/log/context_reference.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 class parameters
@@ -61,8 +57,6 @@ private:
 	sanguis::server::environment::load_context_ref load_context_;
 };
 
-}
-}
 }
 
 #endif

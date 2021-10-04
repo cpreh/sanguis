@@ -9,11 +9,7 @@
 #include <sanguis/server/damage/wrapper_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 class wrapper
@@ -41,8 +37,6 @@ private:
 	sanguis::server::damage::type type_;
 };
 
-}
-}
 }
 
 #endif

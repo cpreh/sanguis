@@ -5,11 +5,7 @@
 #include <sanguis/server/damage/modified_array.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 sanguis::server::damage::modified_array
@@ -17,8 +13,6 @@ unmodified(
 	sanguis::server::damage::array const &
 );
 
-}
-}
 }
 
 #endif

@@ -5,11 +5,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::function<
 	fcppt::string ()
 >;
 
-}
-}
 }
 
 #endif

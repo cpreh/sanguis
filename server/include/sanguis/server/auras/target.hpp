@@ -14,11 +14,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 class target
@@ -63,8 +59,6 @@ private:
 	sanguis::server::remove_target_callback const remove_target_;
 };
 
-}
-}
 }
 
 #endif

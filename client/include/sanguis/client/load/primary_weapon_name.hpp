@@ -5,11 +5,7 @@
 #include <sanguis/model/weapon_category_name.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
+namespace sanguis::client::load
 {
 
 sanguis::model::weapon_category_name
@@ -17,8 +13,6 @@ primary_weapon_name(
 	sanguis::primary_weapon_type
 );
 
-}
-}
 }
 
 #endif

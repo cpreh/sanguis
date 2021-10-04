@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 using
@@ -21,8 +17,6 @@ std::vector<
 	sanguis::server::collision::ghost
 >;
 
-}
-}
 }
 
 #endif

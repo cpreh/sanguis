@@ -4,21 +4,12 @@
 #include <sge/gui/text_color.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace hud
+namespace sanguis::client::gui::hud
 {
 
 sge::gui::text_color
 weapon_attribute_color();
 
-}
-}
-}
 }
 
 #endif

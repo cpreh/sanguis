@@ -5,19 +5,13 @@
 #include <sanguis/server/args/parser_unique_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace args
+namespace sanguis::server::args
 {
 
 SANGUIS_SERVER_SYMBOL
 sanguis::server::args::parser_unique_ptr
 create_parser();
 
-}
-}
 }
 
 #endif

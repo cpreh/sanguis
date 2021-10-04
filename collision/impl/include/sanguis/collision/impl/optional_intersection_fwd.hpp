@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	sanguis::collision::impl::intersection
 >;
 
-}
-}
 }
 
 #endif

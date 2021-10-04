@@ -5,15 +5,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace ifaces
+namespace sanguis::client::draw2d::entities::ifaces
 {
 
 class with_orientation
@@ -39,10 +31,6 @@ public:
 	orientation() const = 0;
 };
 
-}
-}
-}
-}
 }
 
 #endif

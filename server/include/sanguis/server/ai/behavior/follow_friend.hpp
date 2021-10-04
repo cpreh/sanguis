@@ -15,13 +15,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace behavior
+namespace sanguis::server::ai::behavior
 {
 
 class follow_friend
@@ -78,9 +72,6 @@ private:
 	sanguis::server::entities::auto_weak_link target_;
 };
 
-}
-}
-}
 }
 
 #endif

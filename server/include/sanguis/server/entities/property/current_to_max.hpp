@@ -4,13 +4,7 @@
 #include <sanguis/server/entities/property/changeable_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 void
@@ -18,9 +12,6 @@ current_to_max(
 	sanguis::server::entities::property::changeable & // NOLINT(google-runtime-references)
 ); // NOLINT(google-runtime-references)
 
-}
-}
-}
 }
 
 #endif

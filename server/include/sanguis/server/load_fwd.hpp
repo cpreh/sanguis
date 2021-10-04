@@ -2,14 +2,11 @@
 #define SANGUIS_SERVER_LOAD_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 class load;
 
-}
 }
 
 #endif

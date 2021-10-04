@@ -5,11 +5,7 @@
 #include <sanguis/server/damage/meta_list.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 sanguis::server::damage::array
@@ -17,8 +13,6 @@ make_array(
 	sanguis::server::damage::meta_list const &
 );
 
-}
-}
 }
 
 #endif

@@ -14,9 +14,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class server
@@ -59,7 +57,6 @@ private:
 	std::thread server_thread_;
 };
 
-}
 }
 
 #endif

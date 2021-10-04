@@ -5,13 +5,7 @@
 #include <sanguis/creator/impl/random/uniform_int_wrapper_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
-{
-namespace random
+namespace sanguis::creator::impl::random
 {
 
 struct uniform_int_wrapper
@@ -30,9 +24,6 @@ struct uniform_int_wrapper
 	};
 };
 
-}
-}
-}
 }
 
 #endif

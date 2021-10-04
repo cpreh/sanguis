@@ -10,13 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 class weapon_pickup
@@ -45,9 +39,6 @@ private:
 	sanguis::weapon_description const weapon_description_;
 };
 
-}
-}
-}
 }
 
 #endif

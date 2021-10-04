@@ -5,15 +5,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace ifaces
+namespace sanguis::client::draw2d::entities::ifaces
 {
 
 class with_buffs
@@ -40,10 +32,6 @@ public:
 	) = 0;
 };
 
-}
-}
-}
-}
 }
 
 #endif

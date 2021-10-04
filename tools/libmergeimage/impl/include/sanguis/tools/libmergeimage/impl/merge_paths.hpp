@@ -5,13 +5,7 @@
 #include <sanguis/tools/libmergeimage/impl/path_vector_vector.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
-{
-namespace impl
+namespace sanguis::tools::libmergeimage::impl
 {
 
 sanguis::tools::libmergeimage::impl::path_vector_vector
@@ -20,9 +14,6 @@ merge_paths(
 	sanguis::tools::libmergeimage::impl::count_maximum
 );
 
-}
-}
-}
 }
 
 #endif

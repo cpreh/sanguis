@@ -5,13 +5,7 @@
 #include <sanguis/model/weapon_category_name_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 sanguis::optional_primary_weapon_type
@@ -19,9 +13,6 @@ lookup_weapon_name(
 	sanguis::model::weapon_category_name const &
 );
 
-}
-}
-}
 }
 
 #endif

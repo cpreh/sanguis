@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 using
@@ -23,8 +19,6 @@ std::unordered_map<
 	QImage
 >;
 
-}
-}
 }
 
 #endif

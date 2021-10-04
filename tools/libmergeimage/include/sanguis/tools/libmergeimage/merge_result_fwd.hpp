@@ -2,17 +2,11 @@
 #define SANGUIS_TOOLS_LIBMERGEIMAGE_MERGE_RESULT_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
+namespace sanguis::tools::libmergeimage
 {
 
 class merge_result;
 
-}
-}
 }
 
 #endif

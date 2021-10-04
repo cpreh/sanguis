@@ -5,11 +5,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::function<
 	sanguis::server::weapons::unique_ptr ()
 >;
 
-}
-}
 }
 
 #endif

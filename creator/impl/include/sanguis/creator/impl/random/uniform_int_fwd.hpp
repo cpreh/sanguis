@@ -5,13 +5,7 @@
 #include <fcppt/random/distribution/parameters/uniform_int_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
-{
-namespace random
+namespace sanguis::creator::impl::random
 {
 
 template<
@@ -25,9 +19,6 @@ fcppt::random::distribution::parameters::uniform_int<
 	sanguis::creator::impl::random::uniform_int_wrapper
 >;
 
-}
-}
-}
 }
 
 #endif

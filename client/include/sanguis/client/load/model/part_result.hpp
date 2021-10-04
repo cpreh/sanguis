@@ -7,13 +7,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 class part_result
@@ -53,9 +47,6 @@ private:
 	sanguis::client::load::model::part_map parts_;
 };
 
-}
-}
-}
 }
 
 #endif

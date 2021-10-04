@@ -4,11 +4,7 @@
 #include <sanguis/server/space_unit.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 using
@@ -16,8 +12,6 @@ unit_value
 =
 sanguis::server::space_unit;
 
-}
-}
 }
 
 #endif

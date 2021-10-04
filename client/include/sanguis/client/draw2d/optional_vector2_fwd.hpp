@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
+namespace sanguis::client::draw2d
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	sanguis::client::draw2d::vector2
 >;
 
-}
-}
 }
 
 #endif

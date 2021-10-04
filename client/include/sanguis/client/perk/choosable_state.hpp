@@ -4,11 +4,7 @@
 #include <sanguis/client/perk/choosable_state_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 enum class choosable_state
@@ -20,8 +16,6 @@ enum class choosable_state
 	level_up
 };
 
-}
-}
 }
 
 #endif

@@ -5,22 +5,13 @@
 #include <sanguis/messages/server/serialization/context_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
-{
-namespace serialization
+namespace sanguis::messages::server::serialization
 {
 
 SANGUIS_COMMON_SYMBOL
 sanguis::messages::server::serialization::context &
 global_context();
 
-}
-}
-}
 }
 
 #endif

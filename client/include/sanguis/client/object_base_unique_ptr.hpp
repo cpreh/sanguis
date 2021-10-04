@@ -5,9 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::unique_ptr<
 	sanguis::client::object_base
 >;
 
-}
 }
 
 #endif

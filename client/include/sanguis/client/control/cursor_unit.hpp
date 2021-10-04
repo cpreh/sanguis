@@ -2,11 +2,7 @@
 #define SANGUIS_CLIENT_CONTROL_CURSOR_UNIT_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
+namespace sanguis::client::control
 {
 
 using
@@ -14,8 +10,6 @@ cursor_unit
 =
 int;
 
-}
-}
 }
 
 #endif

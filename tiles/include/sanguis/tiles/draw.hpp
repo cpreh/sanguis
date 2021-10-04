@@ -11,9 +11,7 @@
 #include <sanguis/tiles/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 SANGUIS_TILES_SYMBOL
@@ -27,7 +25,6 @@ draw(
 	sanguis::creator::sup const &
 );
 
-}
 }
 
 #endif

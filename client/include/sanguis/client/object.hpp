@@ -29,9 +29,7 @@
 #include <fcppt/optional/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class object
@@ -143,7 +141,6 @@ private:
 	scoped_machine scoped_machine_;
 };
 
-}
 }
 
 #endif

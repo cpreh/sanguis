@@ -6,11 +6,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -18,8 +14,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	max_level
 );
 
-}
-}
 }
 
 #endif

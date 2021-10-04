@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_PERKS_PERK_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
+namespace sanguis::server::perks
 {
 
 class perk;
 
-}
-}
 }
 
 #endif

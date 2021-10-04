@@ -5,9 +5,7 @@
 #include <fcppt/container/grid/pos_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -18,7 +16,6 @@ fcppt::container::grid::pos<
 	2
 >;
 
-}
 }
 
 #endif

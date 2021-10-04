@@ -5,11 +5,7 @@
 #include <awl/main/function_context_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 awl::main::exit_code
@@ -17,8 +13,6 @@ main(
 	awl::main::function_context const &
 );
 
-}
-}
 }
 
 #endif

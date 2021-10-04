@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace events
+namespace sanguis::client::events
 {
 
 class render
@@ -58,8 +54,6 @@ private:
 	sge::renderer::context::ffp_ref context_;
 };
 
-}
-}
 }
 
 #endif

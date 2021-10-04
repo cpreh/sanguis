@@ -11,13 +11,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace behavior
+namespace sanguis::server::ai::behavior
 {
 
 class base
@@ -70,9 +64,6 @@ private:
 	sanguis::server::ai::context_ref const context_;
 };
 
-}
-}
-}
 }
 
 #endif

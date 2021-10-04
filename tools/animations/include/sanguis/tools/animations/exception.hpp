@@ -6,11 +6,7 @@
 #include <fcppt/assert/information_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 class exception
@@ -52,8 +48,6 @@ public:
 	override;
 };
 
-}
-}
 }
 
 #endif

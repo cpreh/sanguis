@@ -17,11 +17,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 class aura
@@ -87,8 +83,6 @@ private:
 	sanguis::collision::world::ghost_group const collision_group_;
 };
 
-}
-}
 }
 
 #endif

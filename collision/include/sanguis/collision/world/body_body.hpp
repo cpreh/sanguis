@@ -7,11 +7,7 @@
 #include <sanguis/collision/world/body_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 SANGUIS_COLLISION_SYMBOL
@@ -22,8 +18,6 @@ body_body(
 	sanguis::collision::duration
 );
 
-}
-}
 }
 
 #endif

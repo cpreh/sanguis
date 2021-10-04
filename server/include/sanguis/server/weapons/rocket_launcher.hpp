@@ -15,11 +15,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class rocket_launcher
@@ -67,8 +63,6 @@ private:
 	sanguis::server::weapons::attributes::aoe const aoe_;
 };
 
-}
-}
 }
 
 #endif

@@ -20,13 +20,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace pickups
+namespace sanguis::server::entities::pickups
 {
 
 class pickup
@@ -100,9 +94,6 @@ private:
 	sanguis::diff_timer life_timer_;
 };
 
-}
-}
-}
 }
 
 #endif

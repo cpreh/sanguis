@@ -7,13 +7,7 @@
 #include <sge/texture/const_part_unique_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
+namespace sanguis::client::load::resource
 {
 
 sge::texture::const_part_unique_ptr
@@ -24,9 +18,6 @@ make_missing_texture(
 	sge::image::color::any::object const &
 );
 
-}
-}
-}
 }
 
 #endif

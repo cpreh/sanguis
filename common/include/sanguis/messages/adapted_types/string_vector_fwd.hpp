@@ -6,11 +6,7 @@
 #include <sanguis/messages/types/string_vector.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 using
@@ -21,8 +17,6 @@ sanguis::messages::adapted_types::dynamic_len<
 	sanguis::messages::adapted_types::string
 >;
 
-}
-}
 }
 
 #endif

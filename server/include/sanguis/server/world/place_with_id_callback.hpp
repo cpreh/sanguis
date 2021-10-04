@@ -5,11 +5,7 @@
 #include <sanguis/server/world/place_callback.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 using
@@ -19,8 +15,6 @@ sanguis::server::world::place_callback<
 	sanguis::server::entities::with_id
 >;
 
-}
-}
 }
 
 #endif

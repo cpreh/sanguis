@@ -11,15 +11,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 class graveyard
@@ -54,10 +46,6 @@ private:
 	sanguis::client::draw2d::scene::light light_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

@@ -8,9 +8,7 @@
 #include <fcppt/tuple/object_impl.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 template<
@@ -51,7 +49,6 @@ private:
 	impl_type impl_;
 };
 
-}
 }
 
 #define SANGUIS_TILES_DECLARE_TILE(\

@@ -6,11 +6,7 @@
 #include <fcppt/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 void
@@ -21,8 +17,6 @@ set_opening_tiles(
 	sanguis::creator::opening_container_array const &
 );
 
-}
-}
 }
 
 #endif

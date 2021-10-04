@@ -5,13 +5,7 @@
 #include <sanguis/server/entities/property/value.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 class constant
@@ -31,9 +25,6 @@ private:
 	sanguis::server::entities::property::value value_;
 };
 
-}
-}
-}
 }
 
 #endif

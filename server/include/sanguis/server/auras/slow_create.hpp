@@ -13,11 +13,7 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 template<
@@ -50,8 +46,6 @@ slow_create(
 		);
 }
 
-}
-}
 }
 
 #endif

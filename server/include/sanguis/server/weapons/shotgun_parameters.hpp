@@ -16,11 +16,7 @@
 #include <sanguis/server/weapons/attributes/spread_radius.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class shotgun_parameters
@@ -113,8 +109,6 @@ private:
 	sanguis::server::weapons::range range_;
 };
 
-}
-}
 }
 
 #endif

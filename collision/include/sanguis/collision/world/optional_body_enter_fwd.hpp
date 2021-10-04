@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	sanguis::collision::world::body_enter
 >;
 
-}
-}
 }
 
 #endif

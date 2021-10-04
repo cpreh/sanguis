@@ -5,11 +5,7 @@
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 sanguis::server::entities::insert_parameters
@@ -17,8 +13,6 @@ spawn_parameters(
 	sanguis::creator::spawn const &
 );
 
-}
-}
 }
 
 #endif

@@ -6,11 +6,7 @@
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 void
@@ -20,8 +16,6 @@ rotate_and_move_to_target(
 	sanguis::server::ai::speed_factor
 );
 
-}
-}
 }
 
 #endif

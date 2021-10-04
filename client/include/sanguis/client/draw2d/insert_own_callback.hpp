@@ -6,11 +6,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
+namespace sanguis::client::draw2d
 {
 
 using
@@ -22,8 +18,6 @@ fcppt::function<
 	)
 >;
 
-}
-}
 }
 
 #endif

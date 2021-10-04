@@ -5,13 +5,7 @@
 #include <alda/serialization/context_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace client
-{
-namespace serialization
+namespace sanguis::messages::client::serialization
 {
 
 using
@@ -21,9 +15,6 @@ alda::serialization::context<
 	sanguis::messages::client::types::alda_type
 >;
 
-}
-}
-}
 }
 
 #endif

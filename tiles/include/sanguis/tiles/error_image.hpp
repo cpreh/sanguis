@@ -6,9 +6,7 @@
 #include <sge/image2d/store/object.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 SANGUIS_TILES_SYMBOL
@@ -17,7 +15,6 @@ error_image(
 	sanguis::tiles::error
 );
 
-}
 }
 
 #endif

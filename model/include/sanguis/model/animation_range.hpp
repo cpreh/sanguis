@@ -6,9 +6,7 @@
 #include <sanguis/model/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 class animation_range
@@ -35,7 +33,6 @@ private:
 	sanguis::model::animation_index end_;
 };
 
-}
 }
 
 #endif

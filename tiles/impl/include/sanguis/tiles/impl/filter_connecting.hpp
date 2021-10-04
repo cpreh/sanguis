@@ -6,11 +6,7 @@
 #include <sanguis/creator/tile.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 inline
@@ -43,8 +39,6 @@ filter_connecting(
 		false;
 }
 
-}
-}
 }
 
 #endif

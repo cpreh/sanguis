@@ -5,16 +5,13 @@
 #include <fcppt/log/location.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 SANGUIS_SERVER_SYMBOL
 fcppt::log::location
 log_location();
 
-}
 }
 
 #endif

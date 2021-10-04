@@ -6,13 +6,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace modifiers
+namespace sanguis::server::weapons::modifiers
 {
 
 sanguis::server::space_unit
@@ -21,9 +15,6 @@ random_increase(
 	sanguis::server::entities::enemies::difficulty
 );
 
-}
-}
-}
 }
 
 #endif

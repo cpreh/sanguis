@@ -6,11 +6,7 @@
 #include <sanguis/collision/impl/rect_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 sanguis::collision::impl::optional_intersection
@@ -19,8 +15,6 @@ rect_line_intersection(
 	sanguis::collision::impl::line_segment
 );
 
-}
-}
 }
 
 #endif

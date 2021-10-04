@@ -7,11 +7,7 @@
 #include <sanguis/server/world/difficulty.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 sanguis::server::entities::with_id_unique_ptr
@@ -21,8 +17,6 @@ make_destructible(
 	sanguis::server::world::difficulty
 );
 
-}
-}
 }
 
 #endif

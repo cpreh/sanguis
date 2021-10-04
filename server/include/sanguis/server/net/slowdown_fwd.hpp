@@ -7,11 +7,7 @@
 #include <sanguis/server/net/slowdown_policy_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace net
+namespace sanguis::server::net
 {
 
 using
@@ -23,8 +19,6 @@ sanguis::server::net::basic_value<
 	sanguis::clock
 >;
 
-}
-}
 }
 
 #endif

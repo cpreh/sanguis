@@ -6,11 +6,7 @@
 #include <sge/parse/json/value_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 sanguis::tiles::area_container
@@ -19,8 +15,6 @@ make_areas(
 	sge::parse::json::value const &
 );
 
-}
-}
 }
 
 #endif

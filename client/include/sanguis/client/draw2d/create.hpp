@@ -15,11 +15,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
+namespace sanguis::client::draw2d
 {
 
 sanguis::client::draw::base_unique_ptr
@@ -37,8 +33,6 @@ create(
 	sanguis::client::draw::debug
 );
 
-}
-}
 }
 
 #endif

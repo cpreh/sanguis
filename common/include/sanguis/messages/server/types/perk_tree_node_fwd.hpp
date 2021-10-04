@@ -9,13 +9,7 @@
 #include <alda/raw/element_type.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
-{
-namespace types
+namespace sanguis::messages::server::types
 {
 
 using
@@ -25,9 +19,6 @@ alda::raw::element_type<
 	sanguis::messages::server::adapted_types::perk_tree_node
 >;
 
-}
-}
-}
 }
 
 #endif

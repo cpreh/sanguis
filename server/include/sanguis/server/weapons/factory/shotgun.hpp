@@ -5,13 +5,7 @@
 #include <sanguis/server/weapons/factory/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace factory
+namespace sanguis::server::weapons::factory
 {
 
 sanguis::server::weapons::unique_ptr
@@ -19,9 +13,6 @@ shotgun(
 	sanguis::server::weapons::factory::parameters const &
 );
 
-}
-}
-}
 }
 
 #endif

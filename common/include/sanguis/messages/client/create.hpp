@@ -4,11 +4,7 @@
 #include <sanguis/messages/client/concrete.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace client
+namespace sanguis::messages::client
 {
 
 template<
@@ -30,8 +26,6 @@ create(
 		);
 }
 
-}
-}
 }
 
 #endif

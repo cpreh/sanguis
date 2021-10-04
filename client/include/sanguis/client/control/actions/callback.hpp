@@ -5,13 +5,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
-{
-namespace actions
+namespace sanguis::client::control::actions
 {
 
 using
@@ -23,9 +17,6 @@ fcppt::function<
 	)
 >;
 
-}
-}
-}
 }
 
 #endif

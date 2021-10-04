@@ -6,9 +6,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 class object_base
@@ -28,7 +26,6 @@ public:
 	run() = 0;
 };
 
-}
 }
 
 #endif

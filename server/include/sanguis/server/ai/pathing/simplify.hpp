@@ -5,13 +5,7 @@
 #include <sanguis/server/ai/pathing/trail.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace pathing
+namespace sanguis::server::ai::pathing
 {
 
 sanguis::server::ai::pathing::trail
@@ -20,9 +14,6 @@ simplify(
 	sanguis::creator::grid const &
 );
 
-}
-}
-}
 }
 
 #endif

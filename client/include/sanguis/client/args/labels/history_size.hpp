@@ -4,22 +4,13 @@
 #include <fcppt/record/make_label.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace args
-{
-namespace labels
+namespace sanguis::client::args::labels
 {
 
 FCPPT_RECORD_MAKE_LABEL(
 	history_size
 );
 
-}
-}
-}
 }
 
 #endif

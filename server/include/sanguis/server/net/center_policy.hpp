@@ -6,11 +6,7 @@
 #include <sanguis/server/net/center_policy_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace net
+namespace sanguis::server::net
 {
 
 struct center_policy
@@ -27,8 +23,6 @@ struct center_policy
 	);
 };
 
-}
-}
 }
 
 #endif

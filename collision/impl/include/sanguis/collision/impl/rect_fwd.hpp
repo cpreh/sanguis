@@ -5,11 +5,7 @@
 #include <fcppt/math/box/rect_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::math::box::rect<
 	sanguis::collision::length
 >;
 
-}
-}
 }
 
 #endif

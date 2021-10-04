@@ -8,11 +8,7 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 inline
@@ -35,8 +31,6 @@ move(
 		};
 }
 
-}
-}
 }
 
 #endif

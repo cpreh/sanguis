@@ -12,9 +12,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 class object
@@ -59,7 +57,6 @@ private:
 	scoped_machine scoped_machine_;
 };
 
-}
 }
 
 #endif

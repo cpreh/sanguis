@@ -7,17 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace skills
-{
-namespace factory
+namespace sanguis::server::entities::enemies::skills::factory
 {
 
 using
@@ -27,11 +17,6 @@ std::vector<
 	sanguis::server::entities::enemies::skills::factory::callback
 >;
 
-}
-}
-}
-}
-}
 }
 
 #endif

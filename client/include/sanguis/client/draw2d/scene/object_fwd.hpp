@@ -2,20 +2,11 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_OBJECT_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
+namespace sanguis::client::draw2d::scene
 {
 
 class object;
 
-}
-}
-}
 }
 
 #endif

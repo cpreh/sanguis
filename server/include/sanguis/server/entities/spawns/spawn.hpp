@@ -19,13 +19,7 @@
 #include <fcppt/optional/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace spawns
+namespace sanguis::server::entities::spawns
 {
 
 class spawn
@@ -122,9 +116,6 @@ private:
 	optional_angle angle_;
 };
 
-}
-}
-}
 }
 
 #endif

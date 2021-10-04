@@ -7,11 +7,7 @@
 #include <fcppt/optional/object_impl.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 fcppt::optional::object<
@@ -22,8 +18,6 @@ find_opposing_cell(
 	sanguis::creator::pos const &
 );
 
-}
-}
 }
 
 #endif

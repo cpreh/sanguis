@@ -5,11 +5,7 @@
 #include <sanguis/client/perk/tree.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 sanguis::client::perk::const_tree_range
@@ -18,8 +14,6 @@ category_equal_range(
 	sanguis::client::perk::tree::const_iterator
 );
 
-}
-}
 }
 
 #endif

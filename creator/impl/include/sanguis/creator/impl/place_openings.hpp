@@ -8,11 +8,7 @@
 #include <fcppt/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 [[nodiscard]]
@@ -25,8 +21,6 @@ place_openings(
 	sanguis::creator::opening_count_array
 );
 
-}
-}
 }
 
 #endif

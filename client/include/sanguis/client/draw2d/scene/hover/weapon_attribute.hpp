@@ -15,15 +15,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace hover
+namespace sanguis::client::draw2d::scene::hover
 {
 
 class weapon_attribute
@@ -60,10 +52,6 @@ private:
 	sge::gui::widget::box_container container_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

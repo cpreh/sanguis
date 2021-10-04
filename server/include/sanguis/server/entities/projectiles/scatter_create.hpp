@@ -8,13 +8,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace projectiles
+namespace sanguis::server::entities::projectiles
 {
 
 using
@@ -28,9 +22,6 @@ fcppt::function<
 	)
 >;
 
-}
-}
-}
 }
 
 #endif

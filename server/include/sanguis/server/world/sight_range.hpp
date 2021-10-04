@@ -6,11 +6,7 @@
 #include <sanguis/server/world/sight_range_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 class sight_range
@@ -41,8 +37,6 @@ private:
 	sanguis::server::world::sight_range_entry_set entries_;
 };
 
-}
-}
 }
 
 #endif

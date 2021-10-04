@@ -5,15 +5,7 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace state
+namespace sanguis::client::draw2d::scene::state
 {
 
 sanguis::client::draw2d::scene::state::array
@@ -21,10 +13,6 @@ create(
 	sge::renderer::device::ffp_ref
 );
 
-}
-}
-}
-}
 }
 
 #endif

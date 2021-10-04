@@ -8,11 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace buffs
+namespace sanguis::server::buffs
 {
 
 class slow
@@ -54,8 +50,6 @@ private:
 	sanguis::server::buffs::slow_factor const factor_;
 };
 
-}
-}
 }
 
 #endif

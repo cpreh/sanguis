@@ -5,9 +5,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -15,7 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	slowed_duration
 );
 
-}
 }
 
 #endif

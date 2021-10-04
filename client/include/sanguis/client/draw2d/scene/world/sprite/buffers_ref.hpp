@@ -5,17 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
-{
-namespace sprite
+namespace sanguis::client::draw2d::scene::world::sprite
 {
 
 using
@@ -25,11 +15,6 @@ fcppt::reference<
 	sanguis::client::draw2d::scene::world::sprite::buffers
 >;
 
-}
-}
-}
-}
-}
 }
 
 #endif

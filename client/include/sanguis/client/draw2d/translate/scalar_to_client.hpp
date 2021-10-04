@@ -5,13 +5,7 @@
 #include <sanguis/messages/types/space_unit.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace translate
+namespace sanguis::client::draw2d::translate
 {
 
 sanguis::client::draw2d::funit
@@ -19,9 +13,6 @@ scalar_to_client(
 	sanguis::messages::types::space_unit
 );
 
-}
-}
-}
 }
 
 #endif

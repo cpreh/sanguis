@@ -6,17 +6,7 @@
 #include <sge/sprite/buffers/with_declaration_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
-{
-namespace sprite
+namespace sanguis::client::draw2d::scene::world::sprite
 {
 
 using
@@ -28,11 +18,6 @@ sge::sprite::buffers::with_declaration<
 	>
 >;
 
-}
-}
-}
-}
-}
 }
 
 #endif

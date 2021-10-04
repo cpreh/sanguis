@@ -8,9 +8,7 @@
 #include <fcppt/log/object.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 class log
@@ -35,7 +33,6 @@ private:
 	mutable fcppt::log::object main_log_;
 };
 
-}
 }
 
 #endif

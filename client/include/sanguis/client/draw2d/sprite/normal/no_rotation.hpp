@@ -4,24 +4,12 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace normal
+namespace sanguis::client::draw2d::sprite::normal
 {
 
 sanguis::client::draw2d::sprite::rotation
 no_rotation();
 
-}
-}
-}
-}
 }
 
 #endif

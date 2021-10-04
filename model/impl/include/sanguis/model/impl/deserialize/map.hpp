@@ -17,13 +17,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace model
-{
-namespace impl
-{
-namespace deserialize
+namespace sanguis::model::impl::deserialize
 {
 
 template<
@@ -89,9 +83,6 @@ map(
 		);
 }
 
-}
-}
-}
 }
 
 #endif

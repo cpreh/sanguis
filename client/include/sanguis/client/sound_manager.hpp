@@ -9,9 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class sound_manager
@@ -47,7 +45,6 @@ private:
 	sound_list sounds_;
 };
 
-}
 }
 
 #endif

@@ -4,11 +4,7 @@
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 enum class attack_result
@@ -17,8 +13,6 @@ enum class attack_result
 	failure
 };
 
-}
-}
 }
 
 #endif

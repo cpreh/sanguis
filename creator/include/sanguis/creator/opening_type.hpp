@@ -4,9 +4,7 @@
 #include <sanguis/creator/opening_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 enum class opening_type
@@ -16,7 +14,6 @@ enum class opening_type
 	fcppt_maximum = exit
 };
 
-}
 }
 
 #endif

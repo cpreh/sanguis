@@ -5,13 +5,7 @@
 #include <fcppt/container/tree/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
-{
-namespace tree
+namespace sanguis::server::perks::tree
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::container::tree::object<
 	sanguis::server::perks::tree::status
 >;
 
-}
-}
-}
 }
 
 #endif

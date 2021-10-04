@@ -5,11 +5,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -17,8 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	movement_speed
 );
 
-}
-}
 }
 
 #endif

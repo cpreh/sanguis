@@ -5,11 +5,7 @@
 #include <sanguis/optional_weapon_type.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace cheat
+namespace sanguis::server::cheat
 {
 
 sanguis::optional_weapon_type
@@ -17,8 +13,6 @@ weapon_type(
 	sanguis::cheat_type
 );
 
-}
-}
 }
 
 #endif

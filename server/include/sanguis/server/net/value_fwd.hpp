@@ -5,11 +5,7 @@
 #include <sanguis/server/net/basic_value_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace net
+namespace sanguis::server::net
 {
 
 template<
@@ -25,8 +21,6 @@ sanguis::server::net::basic_value<
 	sanguis::diff_clock
 >;
 
-}
-}
 }
 
 #endif

@@ -15,11 +15,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 class buff
@@ -66,8 +62,6 @@ private:
 	sanguis::server::buffs::provider provider_;
 };
 
-}
-}
 }
 
 #endif

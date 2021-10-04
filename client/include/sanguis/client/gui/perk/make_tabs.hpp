@@ -9,13 +9,7 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace perk
+namespace sanguis::client::gui::perk
 {
 
 sanguis::client::gui::perk::tab_unique_ptr_vector
@@ -27,9 +21,6 @@ make_tabs(
 	sanguis::client::perk::state_ref
 );
 
-}
-}
-}
 }
 
 #endif

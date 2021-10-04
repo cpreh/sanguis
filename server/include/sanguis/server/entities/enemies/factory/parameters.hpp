@@ -14,15 +14,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace factory
+namespace sanguis::server::entities::enemies::factory
 {
 
 class parameters
@@ -90,10 +82,6 @@ private:
 	sanguis::server::entities::enemies::special_chance special_chance_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

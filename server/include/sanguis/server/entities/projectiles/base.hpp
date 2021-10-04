@@ -20,13 +20,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace projectiles
+namespace sanguis::server::entities::projectiles
 {
 
 class base
@@ -98,9 +92,6 @@ private:
 	sanguis::diff_timer life_timer_;
 };
 
-}
-}
-}
 }
 
 #endif

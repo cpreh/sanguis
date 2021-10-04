@@ -17,13 +17,7 @@
 #include <fcppt/type_iso/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace projectiles
+namespace sanguis::server::entities::projectiles
 {
 
 class scatter
@@ -78,9 +72,6 @@ private:
 	angle_rng angle_rng_;
 };
 
-}
-}
-}
 }
 
 #endif

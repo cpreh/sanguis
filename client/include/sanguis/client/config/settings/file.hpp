@@ -6,21 +6,12 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace config
-{
-namespace settings
+namespace sanguis::client::config::settings
 {
 
 std::filesystem::path
 file();
 
-}
-}
-}
 }
 
 #endif

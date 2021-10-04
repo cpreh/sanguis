@@ -7,11 +7,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace buffs
+namespace sanguis::server::buffs
 {
 
 class buff
@@ -62,8 +58,6 @@ private:
 	);
 };
 
-}
-}
 }
 
 #endif

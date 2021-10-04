@@ -8,15 +8,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace model
+namespace sanguis::client::draw2d::entities::model
 {
 
 class decay_time
@@ -50,10 +42,6 @@ private:
 	sanguis::diff_timer timer_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

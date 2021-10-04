@@ -7,9 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 using
@@ -19,7 +17,6 @@ std::vector<
 	sanguis::model::cell_area
 >;
 
-}
 }
 
 #endif

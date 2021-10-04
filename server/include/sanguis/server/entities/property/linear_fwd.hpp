@@ -2,20 +2,11 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_LINEAR_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 class linear;
 
-}
-}
-}
 }
 
 #endif

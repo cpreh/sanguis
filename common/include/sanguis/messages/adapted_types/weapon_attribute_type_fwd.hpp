@@ -5,11 +5,7 @@
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 using
@@ -19,8 +15,6 @@ sanguis::messages::adapted_types::enum_<
 	sanguis::weapon_attribute_type
 >;
 
-}
-}
 }
 
 #endif

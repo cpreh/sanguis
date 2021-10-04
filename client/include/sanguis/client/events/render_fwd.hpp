@@ -2,17 +2,11 @@
 #define SANGUIS_CLIENT_EVENTS_RENDER_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace events
+namespace sanguis::client::events
 {
 
 class render;
 
-}
-}
 }
 
 #endif

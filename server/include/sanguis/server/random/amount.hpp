@@ -5,11 +5,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace random
+namespace sanguis::server::random
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -17,8 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	amount
 );
 
-}
-}
 }
 
 #endif

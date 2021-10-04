@@ -5,9 +5,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -15,7 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	mass
 );
 
-}
 }
 
 #endif

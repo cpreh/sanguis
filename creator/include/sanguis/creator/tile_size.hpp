@@ -7,9 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -20,7 +18,6 @@ std::integral_constant<
 	96 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 >;
 
-}
 }
 
 #endif

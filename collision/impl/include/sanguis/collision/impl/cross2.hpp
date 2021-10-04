@@ -5,11 +5,7 @@
 #include <fcppt/math/vector/static.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 inline
@@ -31,8 +27,6 @@ cross2(
 		_a.y() * _b.x();
 }
 
-}
-}
 }
 
 #endif

@@ -7,11 +7,7 @@
 #include <sanguis/server/perks/level_diff.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
+namespace sanguis::server::perks
 {
 
 void
@@ -22,8 +18,6 @@ constant_damage_change(
 	sanguis::server::perks::change_factor
 );
 
-}
-}
 }
 
 #endif

@@ -12,13 +12,7 @@
 #include <sanguis/client/load/model/collection_cref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 class load_parameters
@@ -63,9 +57,6 @@ private:
 	sanguis::client::load::model::collection_cref collection_;
 };
 
-}
-}
-}
 }
 
 #endif

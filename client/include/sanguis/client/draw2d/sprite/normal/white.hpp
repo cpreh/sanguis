@@ -4,24 +4,12 @@
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace normal
+namespace sanguis::client::draw2d::sprite::normal
 {
 
 sanguis::client::draw2d::sprite::normal::color
 white();
 
-}
-}
-}
-}
 }
 
 #endif

@@ -9,13 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
-{
-namespace impl
+namespace sanguis::tools::libmergeimage::impl
 {
 
 sanguis::tools::libmergeimage::impl::cell_size
@@ -25,9 +19,6 @@ calc_cell_size(
 	sanguis::tools::libmergeimage::impl::path_vector_vector const &
 );
 
-}
-}
-}
 }
 
 #endif

@@ -4,13 +4,7 @@
 #include <sanguis/creator/pos_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace pathing
+namespace sanguis::server::ai::pathing
 {
 
 bool
@@ -19,9 +13,6 @@ positions_are_close(
 	sanguis::creator::pos const &
 );
 
-}
-}
-}
 }
 
 #endif

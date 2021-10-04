@@ -5,13 +5,7 @@
 #include <sanguis/server/weapons/attributes/health_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace attributes
+namespace sanguis::server::weapons::attributes
 {
 
 sanguis::weapon_attribute
@@ -19,9 +13,6 @@ make_health(
 	sanguis::server::weapons::attributes::health const &
 );
 
-}
-}
-}
 }
 
 #endif

@@ -11,15 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 sge::texture::const_optional_part_ref
@@ -31,10 +23,6 @@ make_texture(
 	sanguis::tiles::content const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

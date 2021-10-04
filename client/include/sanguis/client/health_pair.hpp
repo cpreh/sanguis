@@ -6,9 +6,7 @@
 #include <sanguis/client/max_health.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class health_pair
@@ -42,7 +40,6 @@ private:
 	sanguis::client::max_health max_health_;
 };
 
-}
 }
 
 #endif

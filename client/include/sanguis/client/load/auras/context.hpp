@@ -12,13 +12,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace auras
+namespace sanguis::client::load::auras
 {
 
 class context
@@ -53,9 +47,6 @@ private:
 	texture_map const textures_;
 };
 
-}
-}
-}
 }
 
 #endif

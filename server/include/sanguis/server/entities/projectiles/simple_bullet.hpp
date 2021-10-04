@@ -11,13 +11,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace projectiles
+namespace sanguis::server::entities::projectiles
 {
 
 class simple_bullet
@@ -50,9 +44,6 @@ private:
 	sanguis::server::damage::modified_array const damage_modifiers_;
 };
 
-}
-}
-}
 }
 
 #endif

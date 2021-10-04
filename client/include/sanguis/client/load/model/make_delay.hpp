@@ -6,13 +6,7 @@
 #include <sanguis/model/optional_animation_delay_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 sanguis::duration
@@ -21,9 +15,6 @@ make_delay(
 	sanguis::model::optional_animation_delay const &
 );
 
-}
-}
-}
 }
 
 #endif

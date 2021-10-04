@@ -61,11 +61,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 class object
@@ -422,8 +418,6 @@ private:
 	sanguis::server::world::pickup_spawner pickup_spawner_;
 };
 
-}
-}
 }
 
 #endif

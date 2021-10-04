@@ -9,13 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace pickups
+namespace sanguis::server::entities::pickups
 {
 
 class health
@@ -45,9 +39,6 @@ private:
 	sanguis::server::health const amount_;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -5,13 +5,7 @@
 #include <sanguis/client/control/actions/variant.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
-{
-namespace actions
+namespace sanguis::client::control::actions
 {
 
 class any
@@ -29,9 +23,6 @@ private:
 	sanguis::client::control::actions::variant variant_;
 };
 
-}
-}
-}
 }
 
 #endif

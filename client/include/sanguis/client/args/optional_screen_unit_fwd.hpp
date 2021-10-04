@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace args
+namespace sanguis::client::args
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	sge::renderer::screen_unit
 >;
 
-}
-}
 }
 
 #endif

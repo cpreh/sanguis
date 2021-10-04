@@ -5,13 +5,7 @@
 #include <sge/image/color/any/object.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 sge::image::color::any::object
@@ -19,9 +13,6 @@ enemy_color(
 	sanguis::enemy_kind
 );
 
-}
-}
-}
 }
 
 #endif

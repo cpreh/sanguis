@@ -4,11 +4,7 @@
 #include <sanguis/model/optional_animation_delay.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 sanguis::model::optional_animation_delay
@@ -16,8 +12,6 @@ int_to_delay(
 	int
 );
 
-}
-}
 }
 
 #endif

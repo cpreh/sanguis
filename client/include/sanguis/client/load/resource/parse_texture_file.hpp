@@ -8,13 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
+namespace sanguis::client::load::resource
 {
 
 sanguis::client::load::resource::texture_name_map
@@ -24,9 +18,6 @@ parse_texture_file(
 	sanguis::client::load::resource::texture_name_map &&
 );
 
-}
-}
-}
 }
 
 #endif

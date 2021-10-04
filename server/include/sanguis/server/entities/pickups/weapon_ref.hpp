@@ -5,13 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace pickups
+namespace sanguis::server::entities::pickups
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::reference<
 	sanguis::server::entities::pickups::weapon
 >;
 
-}
-}
-}
 }
 
 #endif

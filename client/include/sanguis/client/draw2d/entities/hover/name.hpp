@@ -6,15 +6,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace hover
+namespace sanguis::client::draw2d::entities::hover
 {
 
 class name
@@ -38,10 +30,6 @@ private:
 	sge::image::color::any::object color_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

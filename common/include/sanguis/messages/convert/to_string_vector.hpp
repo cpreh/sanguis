@@ -6,11 +6,7 @@
 #include <sanguis/messages/types/string_vector.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace convert
+namespace sanguis::messages::convert
 {
 
 SANGUIS_COMMON_SYMBOL
@@ -19,8 +15,6 @@ to_string_vector(
 	sanguis::string_vector const &
 );
 
-}
-}
 }
 
 #endif

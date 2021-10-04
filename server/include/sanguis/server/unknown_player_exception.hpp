@@ -4,9 +4,7 @@
 #include <sanguis/exception.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 class unknown_player_exception
@@ -42,7 +40,6 @@ public:
 
 };
 
-}
 }
 
 #endif

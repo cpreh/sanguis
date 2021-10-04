@@ -13,13 +13,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
+namespace sanguis::server::entities::enemies
 {
 
 class special
@@ -66,9 +60,6 @@ private:
 	sanguis::server::entities::enemies::is_unique const is_unique_;
 };
 
-}
-}
-}
 }
 
 #endif

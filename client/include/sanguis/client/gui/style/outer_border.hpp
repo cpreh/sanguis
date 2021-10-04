@@ -6,13 +6,7 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace style
+namespace sanguis::client::gui::style
 {
 
 using
@@ -23,9 +17,6 @@ std::integral_constant<
 	0
 >;
 
-}
-}
-}
 }
 
 #endif

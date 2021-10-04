@@ -7,11 +7,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -27,8 +23,6 @@ neighbors_to_string(
 	> const &
 );
 
-}
-}
 }
 
 #define SANGUIS_TILES_DECLARE_NEIGHBORS_TO_STRING(\

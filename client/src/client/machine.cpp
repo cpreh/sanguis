@@ -309,7 +309,7 @@ sanguis::client::machine::process(
 			window_system_->poll(),
 			[](
 				// TODO(philipp): Return this from client::object
-				awl::main::exit_code const _result
+				awl::main::exit_code const  /*_result*/
 			)
 			{
 				return

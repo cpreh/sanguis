@@ -13,11 +13,7 @@
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class transfer_parameters
@@ -69,8 +65,6 @@ private:
 	sanguis::server::angle angle_;
 };
 
-}
-}
 }
 
 #endif

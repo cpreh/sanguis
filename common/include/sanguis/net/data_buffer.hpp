@@ -7,9 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace net
+namespace sanguis::net
 {
 
 using
@@ -19,7 +17,6 @@ std::vector<
 	alda::net::value_type
 >;
 
-}
 }
 
 #endif

@@ -22,23 +22,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace animation
+namespace sanguis::client::draw2d::sprite::animation
 {
 
 class texture;
 
-}
-}
-}
-}
 }
 
 #endif

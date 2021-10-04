@@ -6,13 +6,7 @@
 #include <sge/renderer/screen_size_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
+namespace sanguis::client::draw2d::scene
 {
 
 sanguis::client::draw2d::translation
@@ -21,9 +15,6 @@ translation(
 	sge::renderer::screen_size const &
 );
 
-}
-}
-}
 }
 
 #endif

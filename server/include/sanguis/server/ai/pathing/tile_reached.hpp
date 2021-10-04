@@ -5,13 +5,7 @@
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace pathing
+namespace sanguis::server::ai::pathing
 {
 
 bool
@@ -20,9 +14,6 @@ tile_reached(
 	sanguis::creator::pos const &
 );
 
-}
-}
-}
 }
 
 #endif

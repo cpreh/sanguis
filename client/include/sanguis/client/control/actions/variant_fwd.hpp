@@ -8,13 +8,7 @@
 #include <fcppt/variant/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
-{
-namespace actions
+namespace sanguis::client::control::actions
 {
 
 using
@@ -27,9 +21,6 @@ fcppt::variant::object<
 	sanguis::client::control::actions::scale
 >;
 
-}
-}
-}
 }
 
 #endif

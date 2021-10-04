@@ -6,11 +6,7 @@
 #include <sanguis/server/weapons/accuracy.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 sanguis::server::angle
@@ -20,8 +16,6 @@ random_angle(
 	sanguis::server::angle
 );
 
-}
-}
 }
 
 #endif

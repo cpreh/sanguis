@@ -6,13 +6,7 @@
 #include <sge/texture/const_part_ref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 class level
@@ -36,9 +30,6 @@ private:
 	sge::texture::const_part_ref texture_;
 };
 
-}
-}
-}
 }
 
 #endif

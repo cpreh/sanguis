@@ -6,13 +6,7 @@
 #include <fcppt/random/distribution/basic_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
-{
-namespace random
+namespace sanguis::creator::impl::random
 {
 
 using
@@ -24,9 +18,6 @@ fcppt::random::distribution::basic<
 	>
 >;
 
-}
-}
-}
 }
 
 #endif

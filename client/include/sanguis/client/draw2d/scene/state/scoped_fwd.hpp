@@ -2,23 +2,11 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_STATE_SCOPED_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace state
+namespace sanguis::client::draw2d::scene::state
 {
 
 class scoped;
 
-}
-}
-}
-}
 }
 
 #endif

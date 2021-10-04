@@ -9,11 +9,7 @@
 #include <fcppt/optional/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace net
+namespace sanguis::server::net
 {
 
 template<
@@ -69,8 +65,6 @@ private:
 	optional_type old_;
 };
 
-}
-}
 }
 
 #endif

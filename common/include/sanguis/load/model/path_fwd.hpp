@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace load
-{
-namespace model
+namespace sanguis::load::model
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -19,8 +15,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	path
 );
 
-}
-}
 }
 
 #endif

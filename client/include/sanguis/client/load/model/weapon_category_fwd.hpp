@@ -2,20 +2,11 @@
 #define SANGUIS_CLIENT_LOAD_MODEL_WEAPON_CATEGORY_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 class weapon_category;
 
-}
-}
-}
 }
 
 #endif

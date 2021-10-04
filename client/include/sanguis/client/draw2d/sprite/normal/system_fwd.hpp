@@ -6,15 +6,7 @@
 #include <sanguis/client/draw2d/sprite/normal/choices_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace normal
+namespace sanguis::client::draw2d::sprite::normal
 {
 
 using
@@ -25,10 +17,6 @@ sanguis::client::draw2d::sprite::system<
 	sanguis::client::draw2d::z_ordering
 >;
 
-}
-}
-}
-}
 }
 
 #endif

@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace random
+namespace sanguis::server::random
 {
 
 template<
@@ -32,8 +28,6 @@ fcppt::strong_typedef<
 	sanguis::server::random::less_function_tag
 >;
 
-}
-}
 }
 
 #endif

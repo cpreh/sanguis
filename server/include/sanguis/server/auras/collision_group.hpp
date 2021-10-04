@@ -6,11 +6,7 @@
 #include <sanguis/server/auras/influence_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 sanguis::collision::world::ghost_group
@@ -19,8 +15,6 @@ collision_group(
 	sanguis::server::auras::influence
 );
 
-}
-}
 }
 
 #endif

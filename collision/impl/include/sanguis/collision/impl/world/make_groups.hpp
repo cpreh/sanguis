@@ -12,13 +12,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
+namespace sanguis::collision::impl::world
 {
 
 template<
@@ -127,9 +121,6 @@ public:
 	}
 };
 
-}
-}
-}
 }
 
 #endif

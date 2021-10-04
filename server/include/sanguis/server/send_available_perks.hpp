@@ -5,9 +5,7 @@
 #include <sanguis/server/entities/player_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 void
@@ -16,7 +14,6 @@ send_available_perks(
 	sanguis::server::unicast_callback const &
 );
 
-}
 }
 
 #endif

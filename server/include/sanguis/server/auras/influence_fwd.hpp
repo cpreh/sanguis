@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_AURAS_INFLUENCE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 enum class influence;
 
-}
-}
 }
 
 #endif

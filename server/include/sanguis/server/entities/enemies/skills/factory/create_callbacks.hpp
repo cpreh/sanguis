@@ -4,27 +4,12 @@
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace skills
-{
-namespace factory
+namespace sanguis::server::entities::enemies::skills::factory
 {
 
 sanguis::server::entities::enemies::skills::factory::container const &
 create_callbacks();
 
-}
-}
-}
-}
-}
 }
 
 #endif

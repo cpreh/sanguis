@@ -4,11 +4,7 @@
 #include <sanguis/collision/impl/line_segment_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 bool
@@ -17,8 +13,6 @@ line_line_intersect(
 	sanguis::collision::impl::line_segment const &
 );
 
-}
-}
 }
 
 #endif

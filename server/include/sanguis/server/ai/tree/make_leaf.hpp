@@ -12,13 +12,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace tree
+namespace sanguis::server::ai::tree
 {
 
 template<
@@ -54,9 +48,6 @@ make_leaf(
 		);
 }
 
-}
-}
-}
 }
 
 #endif

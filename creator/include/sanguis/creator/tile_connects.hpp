@@ -5,9 +5,7 @@
 #include <sanguis/creator/tile_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
@@ -16,7 +14,6 @@ tile_connects(
 	sanguis::creator::tile
 );
 
-}
 }
 
 #endif

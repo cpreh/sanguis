@@ -7,11 +7,7 @@
 #include <fcppt/symbol/class.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class FCPPT_SYMBOL_CLASS ghost_base
@@ -28,8 +24,6 @@ public:
 	~ghost_base();
 };
 
-}
-}
 }
 
 #endif

@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_AI_CONTEXT_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 class context;
 
-}
-}
 }
 
 #endif

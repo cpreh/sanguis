@@ -5,9 +5,7 @@
 #include <sanguis/server/level.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 sanguis::server::level
@@ -15,7 +13,6 @@ level_from_exp(
 	sanguis::server::exp
 );
 
-}
 }
 
 #endif

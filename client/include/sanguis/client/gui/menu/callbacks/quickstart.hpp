@@ -5,15 +5,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace menu
-{
-namespace callbacks
+namespace sanguis::client::gui::menu::callbacks
 {
 
 using
@@ -25,10 +17,6 @@ fcppt::function<
 	)
 >;
 
-}
-}
-}
-}
 }
 
 #endif

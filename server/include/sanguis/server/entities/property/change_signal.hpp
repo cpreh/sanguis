@@ -5,13 +5,7 @@
 #include <fcppt/signal/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::signal::object<
 	sanguis::server::entities::property::change_function
 >;
 
-}
-}
-}
 }
 
 #endif

@@ -40,9 +40,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class machine
@@ -198,7 +196,6 @@ private:
 	sanguis::client::cursor_ref const cursor_gfx_;
 };
 
-}
 }
 
 #endif

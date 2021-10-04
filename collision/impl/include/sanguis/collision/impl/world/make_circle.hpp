@@ -6,13 +6,7 @@
 #include <sanguis/collision/impl/circle.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
+namespace sanguis::collision::impl::world
 {
 
 template<
@@ -31,9 +25,6 @@ make_circle(
 		};
 }
 
-}
-}
-}
 }
 
 #endif

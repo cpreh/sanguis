@@ -5,13 +5,7 @@
 #include <sanguis/client/draw2d/entities/with_buffs_parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 using
@@ -21,9 +15,6 @@ sanguis::client::draw2d::entities::with_buffs_parameters<
 	sanguis::client::draw2d::entities::with_auras_model_parameters
 >;
 
-}
-}
-}
 }
 
 #endif

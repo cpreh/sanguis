@@ -4,9 +4,7 @@
 #include <sanguis/creator/enemy_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 enum class enemy_type
@@ -24,7 +22,6 @@ enum class enemy_type
 	fcppt_maximum = reaper
 };
 
-}
 }
 
 #endif

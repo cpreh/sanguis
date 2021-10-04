@@ -4,9 +4,7 @@
 #include <sanguis/client/health.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 bool
@@ -14,7 +12,6 @@ health_valid(
 	sanguis::client::health
 );
 
-}
 }
 
 #endif

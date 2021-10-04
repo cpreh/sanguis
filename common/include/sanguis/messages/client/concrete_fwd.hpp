@@ -5,11 +5,7 @@
 #include <alda/message/concrete_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace client
+namespace sanguis::messages::client
 {
 
 template<
@@ -23,8 +19,6 @@ alda::message::concrete<
 	T
 >;
 
-}
-}
 }
 
 #endif

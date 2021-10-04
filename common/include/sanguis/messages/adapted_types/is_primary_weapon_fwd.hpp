@@ -6,11 +6,7 @@
 #include <alda/bindings/strong_typedef_decl.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 using
@@ -21,8 +17,6 @@ alda::bindings::strong_typedef<
 	sanguis::messages::adapted_types::bool_
 >;
 
-}
-}
 }
 
 #endif

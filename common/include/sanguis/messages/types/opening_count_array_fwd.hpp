@@ -6,11 +6,7 @@
 #include <fcppt/enum/array_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace types
+namespace sanguis::messages::types
 {
 
 using
@@ -21,8 +17,6 @@ fcppt::enum_::array<
 	sanguis::messages::types::size
 >;
 
-}
-}
 }
 
 #endif

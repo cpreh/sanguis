@@ -6,9 +6,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 using
@@ -16,7 +14,6 @@ cell_size_unit
 =
 std::uint64_t;
 
-}
 }
 
 #endif

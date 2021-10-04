@@ -4,18 +4,12 @@
 #include <sanguis/server/weapons/ias.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 sanguis::server::weapons::ias
 default_ias();
 
-}
-}
 }
 
 #endif

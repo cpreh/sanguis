@@ -10,15 +10,7 @@
 #include <sge/viewport/manager_ref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 class parameters
@@ -49,10 +41,6 @@ private:
 	sge::viewport::manager_ref viewport_manager_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

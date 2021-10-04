@@ -7,9 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 template<
@@ -26,7 +24,6 @@ std::enable_if_t<
 	Result
 >;
 
-}
 }
 
 #endif

@@ -8,11 +8,7 @@
 #include <sanguis/collision/world/update_result_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class update_result
@@ -46,8 +42,6 @@ private:
 	sanguis::collision::world::body_collision_container body_collision_;
 };
 
-}
-}
 }
 
 #endif

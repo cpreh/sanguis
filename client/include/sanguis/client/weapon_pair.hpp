@@ -7,9 +7,7 @@
 #include <sanguis/client/weapon_pair_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class weapon_pair
@@ -44,7 +42,6 @@ private:
 	sanguis::optional_weapon_description secondary_;
 };
 
-}
 }
 
 #endif

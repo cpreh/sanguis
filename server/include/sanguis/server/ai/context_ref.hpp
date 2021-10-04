@@ -5,11 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::reference<
 	sanguis::server::ai::context
 >;
 
-}
-}
 }
 
 #endif

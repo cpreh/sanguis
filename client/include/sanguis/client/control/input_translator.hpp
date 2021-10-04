@@ -12,11 +12,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
+namespace sanguis::client::control
 {
 
 class input_translator
@@ -72,8 +68,6 @@ private:
 	sanguis::client::control::actions::callback const callback_;
 };
 
-}
-}
 }
 
 #endif

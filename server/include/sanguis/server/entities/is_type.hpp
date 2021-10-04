@@ -2,11 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_IS_TYPE_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 template<
@@ -30,8 +26,6 @@ is_type(
 		;
 }
 
-}
-}
 }
 
 #endif

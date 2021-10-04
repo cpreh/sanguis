@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 using
@@ -21,8 +17,6 @@ std::vector<
 	sanguis::creator::enemy_type
 >;
 
-}
-}
 }
 
 #endif

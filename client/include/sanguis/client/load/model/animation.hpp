@@ -11,13 +11,7 @@
 #include <fcppt/log/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 class animation
@@ -49,9 +43,6 @@ private:
 	sanguis::client::load::resource::optional_sound const sound_;
 };
 
-}
-}
-}
 }
 
 #endif

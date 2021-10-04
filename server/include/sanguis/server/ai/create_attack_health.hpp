@@ -6,11 +6,7 @@
 #include <sanguis/server/ai/sight_range_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 sanguis::server::ai::create_function
@@ -19,8 +15,6 @@ create_attack_health(
 	sanguis::server::ai::sight_range
 );
 
-}
-}
 }
 
 #endif

@@ -8,11 +8,7 @@
 #include <fcppt/math/vector/map.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 inline
@@ -42,8 +38,6 @@ collides(
 		;
 }
 
-}
-}
 }
 
 #endif

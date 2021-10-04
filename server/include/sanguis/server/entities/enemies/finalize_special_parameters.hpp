@@ -7,13 +7,7 @@
 #include <fcppt/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
+namespace sanguis::server::entities::enemies
 {
 
 sanguis::server::entities::enemies::parameters &
@@ -25,9 +19,6 @@ finalize_special_parameters(
 	sanguis::server::entities::enemies::skills::factory::container const &
 );
 
-}
-}
-}
 }
 
 #endif

@@ -6,13 +6,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
+namespace sanguis::client::load::resource
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -20,9 +14,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	texture_identifier
 );
 
-}
-}
-}
 }
 
 #endif

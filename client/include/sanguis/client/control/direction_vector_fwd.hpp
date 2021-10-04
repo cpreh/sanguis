@@ -5,11 +5,7 @@
 #include <fcppt/math/vector/static_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
+namespace sanguis::client::control
 {
 
 using
@@ -20,8 +16,6 @@ fcppt::math::vector::static_<
 	2
 >;
 
-}
-}
 }
 
 #endif

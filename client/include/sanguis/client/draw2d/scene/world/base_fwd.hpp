@@ -2,23 +2,11 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_BASE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 class base;
 
-}
-}
-}
-}
 }
 
 #endif

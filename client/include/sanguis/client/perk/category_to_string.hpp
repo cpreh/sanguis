@@ -5,11 +5,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 fcppt::string
@@ -17,8 +13,6 @@ category_to_string(
 	sanguis::client::perk::category
 );
 
-}
-}
 }
 
 #endif

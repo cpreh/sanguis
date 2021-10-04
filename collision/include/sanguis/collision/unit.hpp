@@ -2,9 +2,7 @@
 #define SANGUIS_COLLISION_UNIT_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 using
@@ -12,7 +10,6 @@ unit
 =
 float;
 
-}
 }
 
 #endif

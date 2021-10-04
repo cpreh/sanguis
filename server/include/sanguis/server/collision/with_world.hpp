@@ -6,11 +6,7 @@
 #include <sanguis/server/radius_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 bool
@@ -20,8 +16,6 @@ with_world(
 	sanguis::creator::grid const &
 );
 
-}
-}
 }
 
 #endif

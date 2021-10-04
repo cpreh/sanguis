@@ -6,11 +6,7 @@
 #include <fcppt/optional/reference.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 // NOLINTNEXTLINE(cppcoreguidelines-special-member-functions,hicpp-special-member-functions)
@@ -73,8 +69,6 @@ operator!=(
 	sanguis::server::entities::auto_weak_link const &
 );
 
-}
-}
 }
 
 #endif

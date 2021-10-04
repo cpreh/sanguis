@@ -7,11 +7,7 @@
 #include <alda/message/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace client
+namespace sanguis::messages::client
 {
 
 using
@@ -24,8 +20,6 @@ alda::message::object<
 	sanguis::messages::adapted_types::is_primary_weapon
 >;
 
-}
-}
 }
 
 #endif

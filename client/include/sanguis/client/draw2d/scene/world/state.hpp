@@ -29,15 +29,7 @@
 #include <fcppt/log/object.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 class state
@@ -114,10 +106,6 @@ private:
 	sanguis::client::draw2d::scene::world::base_unique_ptr const effects_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

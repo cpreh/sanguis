@@ -5,13 +5,7 @@
 #include <sanguis/client/draw2d/entities/order_function.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 sanguis::client::draw2d::entities::order_function
@@ -19,9 +13,6 @@ constant_order(
 	sanguis::client::draw2d::z_ordering
 );
 
-}
-}
-}
 }
 
 #endif

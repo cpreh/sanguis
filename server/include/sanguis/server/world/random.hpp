@@ -9,11 +9,7 @@
 #include <sanguis/server/world/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 sanguis::server::world::object_unique_ptr
@@ -25,8 +21,6 @@ random(
 	sanguis::server::world::difficulty
 );
 
-}
-}
 }
 
 #endif

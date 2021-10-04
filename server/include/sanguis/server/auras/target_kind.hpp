@@ -4,11 +4,7 @@
 #include <sanguis/server/auras/target_kind_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 enum class target_kind
@@ -17,8 +13,6 @@ enum class target_kind
 	friend_
 };
 
-}
-}
 }
 
 #endif

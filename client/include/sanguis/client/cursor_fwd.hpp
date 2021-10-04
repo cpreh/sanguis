@@ -2,14 +2,11 @@
 #define SANGUIS_CLIENT_CURSOR_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class cursor;
 
-}
 }
 
 #endif

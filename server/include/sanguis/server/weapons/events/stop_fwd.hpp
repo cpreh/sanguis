@@ -2,20 +2,11 @@
 #define SANGUIS_SERVER_WEAPONS_EVENTS_STOP_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace events
+namespace sanguis::server::weapons::events
 {
 
 class stop;
 
-}
-}
-}
 }
 
 #endif

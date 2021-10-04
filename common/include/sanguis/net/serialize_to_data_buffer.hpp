@@ -9,9 +9,7 @@
 #include <fcppt/make_ref.hpp>
 
 
-namespace sanguis
-{
-namespace net
+namespace sanguis::net
 {
 
 template<
@@ -43,7 +41,6 @@ serialize_to_data_buffer(
 	);
 }
 
-}
 }
 
 #endif

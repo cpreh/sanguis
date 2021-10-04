@@ -5,13 +5,7 @@
 #include <alda/type_enum_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
-{
-namespace types
+namespace sanguis::messages::server::types
 {
 
 using
@@ -21,9 +15,6 @@ alda::type_enum<
 	sanguis::messages::server::types::message
 >;
 
-}
-}
-}
 }
 
 #endif

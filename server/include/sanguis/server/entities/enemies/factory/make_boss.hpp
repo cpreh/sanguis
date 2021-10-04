@@ -6,15 +6,7 @@
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace enemies
-{
-namespace factory
+namespace sanguis::server::entities::enemies::factory
 {
 
 sanguis::server::entities::with_id_unique_ptr
@@ -23,10 +15,6 @@ make_boss(
 	sanguis::server::entities::enemies::parameters &&
 );
 
-}
-}
-}
-}
 }
 
 #endif

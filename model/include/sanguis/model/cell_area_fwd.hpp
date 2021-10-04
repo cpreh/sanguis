@@ -5,9 +5,7 @@
 #include <fcppt/math/box/rect_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::math::box::rect<
 	sanguis::model::cell_size_unit
 >;
 
-}
 }
 
 #endif

@@ -5,11 +5,7 @@
 #include <sanguis/model/animation_name.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
+namespace sanguis::client::load
 {
 
 sanguis::model::animation_name
@@ -17,8 +13,6 @@ animation_name(
 	sanguis::client::load::animation_type
 );
 
-}
-}
 }
 
 #endif

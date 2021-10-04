@@ -5,9 +5,7 @@
 #include <alda/net/id.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 alda::net::id
@@ -15,7 +13,6 @@ net_id_from_player(
 	sanguis::server::player_id
 );
 
-}
 }
 
 #endif

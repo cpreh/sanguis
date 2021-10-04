@@ -4,11 +4,7 @@
 #include <sanguis/server/entities/base.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 template<
@@ -35,8 +31,6 @@ same_object(
 		);
 }
 
-}
-}
 }
 
 #endif

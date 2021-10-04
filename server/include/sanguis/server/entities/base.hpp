@@ -16,11 +16,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class base
@@ -108,8 +104,6 @@ private:
 	sanguis::diff_clock diff_clock_;
 };
 
-}
-}
 }
 
 #endif

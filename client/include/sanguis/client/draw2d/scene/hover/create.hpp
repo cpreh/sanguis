@@ -6,15 +6,7 @@
 #include <sanguis/client/draw2d/scene/hover/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace hover
+namespace sanguis::client::draw2d::scene::hover
 {
 
 sanguis::client::draw2d::scene::hover::base_unique_ptr
@@ -23,10 +15,6 @@ create(
 	sanguis::client::draw2d::entities::hover::info const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

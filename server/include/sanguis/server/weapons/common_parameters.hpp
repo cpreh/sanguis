@@ -8,11 +8,7 @@
 #include <sanguis/server/weapons/log_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class common_parameters
@@ -36,8 +32,6 @@ private:
 	sanguis::random_generator_ref random_generator_;
 };
 
-}
-}
 }
 
 #endif

@@ -8,11 +8,7 @@
 #include <sanguis/collision/impl/move.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 inline
@@ -36,8 +32,6 @@ move_circle(
 		};
 }
 
-}
-}
 }
 
 #endif

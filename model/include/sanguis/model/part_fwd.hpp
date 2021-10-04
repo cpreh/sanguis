@@ -2,14 +2,11 @@
 #define SANGUIS_MODEL_PART_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 class part;
 
-}
 }
 
 #endif

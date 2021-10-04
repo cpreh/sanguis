@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_STATES_UNPAUSED_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace states
+namespace sanguis::server::states
 {
 
 class unpaused;
 
-}
-}
 }
 
 #endif

@@ -11,13 +11,7 @@
 #include <fcppt/log/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 class weapon_category
@@ -50,9 +44,6 @@ private:
 	sanguis::client::load::model::animation_map const animations_;
 };
 
-}
-}
-}
 }
 
 #endif

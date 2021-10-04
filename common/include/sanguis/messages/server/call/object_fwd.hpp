@@ -5,13 +5,7 @@
 #include <alda/call/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
-{
-namespace call
+namespace sanguis::messages::server::call
 {
 
 template<
@@ -26,9 +20,6 @@ alda::call::object<
 	Callee
 >;
 
-}
-}
-}
 }
 
 #endif

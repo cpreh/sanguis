@@ -11,11 +11,7 @@
 #include <sanguis/server/weapons/attributes/damage.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class grenade_parameters
@@ -70,8 +66,6 @@ private:
 	sanguis::server::weapons::range range_;
 };
 
-}
-}
 }
 
 #endif

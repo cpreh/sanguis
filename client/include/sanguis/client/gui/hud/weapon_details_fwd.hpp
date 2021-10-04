@@ -2,20 +2,11 @@
 #define SANGUIS_CLIENT_GUI_HUD_WEAPON_DETAILS_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace hud
+namespace sanguis::client::gui::hud
 {
 
 class weapon_details;
 
-}
-}
-}
 }
 
 #endif

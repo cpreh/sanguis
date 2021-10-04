@@ -14,11 +14,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 class aoe_damage
@@ -63,8 +59,6 @@ private:
 	sanguis::server::damage::modified_array const damage_values_;
 };
 
-}
-}
 }
 
 #endif

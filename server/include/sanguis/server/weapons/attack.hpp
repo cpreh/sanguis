@@ -9,11 +9,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class attack
@@ -44,8 +40,6 @@ private:
 	sanguis::server::weapons::target target_;
 };
 
-}
-}
 }
 
 #endif

@@ -6,11 +6,7 @@
 #include <sanguis/client/perk/tree_ref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 sanguis::client::perk::tree &
@@ -19,8 +15,6 @@ find_info(
 	sanguis::client::perk::tree_ref
 );
 
-}
-}
 }
 
 #endif

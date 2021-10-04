@@ -6,13 +6,7 @@
 #include <fcppt/optional/object_impl.hpp>
 
 
-namespace sanguis
-{
-namespace model
-{
-namespace impl
-{
-namespace serialize
+namespace sanguis::model::impl::serialize
 {
 
 fcppt::optional::object<
@@ -22,9 +16,6 @@ image_name(
 	sanguis::model::optional_image_name const &
 );
 
-}
-}
-}
 }
 
 #endif

@@ -6,15 +6,7 @@
 #include <fcppt/enum/array_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace state
+namespace sanguis::client::draw2d::scene::state
 {
 
 using
@@ -25,10 +17,6 @@ fcppt::enum_::array<
 	sanguis::client::draw2d::scene::state::base_unique_ptr
 >;
 
-}
-}
-}
-}
 }
 
 #endif

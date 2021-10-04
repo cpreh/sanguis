@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
+namespace sanguis::client::draw2d
 {
 
 using
@@ -21,8 +17,6 @@ std::vector<
 	sanguis::client::draw2d::z_ordering
 >;
 
-}
-}
 }
 
 #endif

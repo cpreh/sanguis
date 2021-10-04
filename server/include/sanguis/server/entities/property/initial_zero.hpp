@@ -5,13 +5,7 @@
 #include <sanguis/server/entities/property/value.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 sanguis::server::entities::property::initial
@@ -19,9 +13,6 @@ initial_zero(
 	sanguis::server::entities::property::value
 );
 
-}
-}
-}
 }
 
 #endif

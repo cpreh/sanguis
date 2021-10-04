@@ -14,11 +14,7 @@
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class parameters
@@ -92,8 +88,6 @@ private:
 	sanguis::server::weapons::optional_reload_time reload_time_;
 };
 
-}
-}
 }
 
 #endif

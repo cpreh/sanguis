@@ -4,11 +4,7 @@
 #include <alda/bindings/fundamental_decl.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 template<
@@ -22,8 +18,6 @@ alda::bindings::fundamental<
 	Type
 >;
 
-}
-}
 }
 
 #endif

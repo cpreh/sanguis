@@ -6,11 +6,7 @@
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 sanguis::server::optional_angle
@@ -19,8 +15,6 @@ angle_to_target(
 	sanguis::server::ai::target const &
 );
 
-}
-}
 }
 
 #endif

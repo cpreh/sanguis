@@ -5,13 +5,7 @@
 #include <sanguis/client/control/actions/cursor_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
-{
-namespace actions
+namespace sanguis::client::control::actions
 {
 
 class cursor
@@ -29,9 +23,6 @@ private:
 	sanguis::client::control::optional_cursor_position position_;
 };
 
-}
-}
-}
 }
 
 #endif

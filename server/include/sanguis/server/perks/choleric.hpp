@@ -15,11 +15,7 @@
 #include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
+namespace sanguis::server::perks
 {
 
 class choleric
@@ -68,8 +64,6 @@ private:
 	> rand_;
 };
 
-}
-}
 }
 
 #endif

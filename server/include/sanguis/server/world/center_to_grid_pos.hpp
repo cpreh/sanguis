@@ -6,11 +6,7 @@
 #include <sanguis/server/center_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 sanguis::creator::pos
@@ -18,8 +14,6 @@ center_to_grid_pos(
 	sanguis::server::center const &
 );
 
-}
-}
 }
 
 #endif

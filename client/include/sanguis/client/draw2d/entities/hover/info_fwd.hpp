@@ -2,23 +2,11 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_HOVER_INFO_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace hover
+namespace sanguis::client::draw2d::entities::hover
 {
 
 class info;
 
-}
-}
-}
-}
 }
 
 #endif

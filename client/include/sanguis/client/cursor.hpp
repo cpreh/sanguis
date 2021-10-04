@@ -10,9 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 class cursor
@@ -39,7 +37,6 @@ private:
 	sge::cursor::object cursor_;
 };
 
-}
 }
 
 #endif

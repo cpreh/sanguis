@@ -7,11 +7,7 @@
 #include <fcppt/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 [[nodiscard]]
@@ -23,8 +19,6 @@ generate_maze(
 	sanguis::creator::impl::random::generator & // NOLINT(google-runtime-references)
 ); // NOLINT(google-runtime-references)
 
-}
-}
 }
 
 #endif

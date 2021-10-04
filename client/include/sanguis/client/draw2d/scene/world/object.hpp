@@ -25,15 +25,7 @@
 #include <fcppt/optional/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
+namespace sanguis::client::draw2d::scene::world
 {
 
 class object
@@ -121,10 +113,6 @@ private:
 	optional_state_unique_ptr state_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

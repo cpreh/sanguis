@@ -5,11 +5,7 @@
 #include <fcppt/container/tree/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::container::tree::object<
 	sanguis::client::perk::optional_info
 >;
 
-}
-}
 }
 
 #endif

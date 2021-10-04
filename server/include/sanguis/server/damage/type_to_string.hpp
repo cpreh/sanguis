@@ -5,11 +5,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 fcppt::string
@@ -17,8 +13,6 @@ type_to_string(
 	sanguis::server::damage::type
 );
 
-}
-}
 }
 
 #endif

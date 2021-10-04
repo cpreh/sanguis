@@ -5,13 +5,7 @@
 #include <sge/gui/text_color.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace perk
+namespace sanguis::client::gui::perk
 {
 
 sge::gui::text_color
@@ -19,9 +13,6 @@ item_color(
 	sanguis::client::perk::choosable_state
 );
 
-}
-}
-}
 }
 
 #endif

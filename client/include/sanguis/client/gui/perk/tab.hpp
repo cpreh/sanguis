@@ -14,13 +14,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace perk
+namespace sanguis::client::gui::perk
 {
 
 class tab
@@ -55,9 +49,6 @@ private:
 	sge::font::string const name_;
 };
 
-}
-}
-}
 }
 
 #endif

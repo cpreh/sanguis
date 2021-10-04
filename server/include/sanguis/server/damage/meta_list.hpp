@@ -5,11 +5,7 @@
 #include <sanguis/server/damage/unit.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 using
@@ -19,8 +15,6 @@ sanguis::server::damage::basic_meta_list<
 	sanguis::server::damage::unit
 >;
 
-}
-}
 }
 
 #endif

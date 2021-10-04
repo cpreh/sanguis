@@ -2,11 +2,7 @@
 #define SANGUIS_SERVER_NET_BASIC_VALUE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace net
+namespace sanguis::server::net
 {
 
 template<
@@ -16,8 +12,6 @@ template<
 >
 class basic_value;
 
-}
-}
 }
 
 #endif

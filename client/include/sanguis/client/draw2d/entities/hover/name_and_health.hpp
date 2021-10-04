@@ -6,15 +6,7 @@
 #include <sanguis/client/draw2d/entities/hover/optional_name.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace hover
+namespace sanguis::client::draw2d::entities::hover
 {
 
 class name_and_health
@@ -38,10 +30,6 @@ private:
 	sanguis::client::optional_health_pair health_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

@@ -6,11 +6,7 @@
 #include <sanguis/server/weapons/spawn_weapon.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 class spawn_parameters
@@ -34,8 +30,6 @@ private:
 	sanguis::server::weapons::spawn_weapon spawn_weapon_;
 };
 
-}
-}
 }
 
 #endif

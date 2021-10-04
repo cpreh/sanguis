@@ -15,13 +15,7 @@
 #include <fcppt/record/element_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace server
-{
-namespace adapted_types
+namespace sanguis::messages::server::adapted_types
 {
 
 using
@@ -61,9 +55,6 @@ alda::bindings::record_variadic<
 	>
 >;
 
-}
-}
-}
 }
 
 #endif

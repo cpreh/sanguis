@@ -2,14 +2,11 @@
 #define SANGUIS_TILES_DIRECTION_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 enum class direction;
 
-}
 }
 
 #endif

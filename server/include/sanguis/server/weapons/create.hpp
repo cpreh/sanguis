@@ -7,11 +7,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 sanguis::server::weapons::unique_ptr
@@ -21,8 +17,6 @@ create(
 	sanguis::server::entities::enemies::difficulty
 );
 
-}
-}
 }
 
 #endif

@@ -7,9 +7,7 @@
 #include <sanguis/creator/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 class destructible
@@ -35,7 +33,6 @@ private:
 	sanguis::creator::destructible_type type_;
 };
 
-}
 }
 
 #endif

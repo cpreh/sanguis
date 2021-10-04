@@ -7,9 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 using
@@ -19,7 +17,6 @@ std::chrono::duration<
 	sanguis::collision::unit
 >;
 
-}
 }
 
 #endif

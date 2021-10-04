@@ -8,9 +8,7 @@
 #include <sanguis/model/symbol.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 SANGUIS_MODEL_SYMBOL
@@ -21,7 +19,6 @@ cell_area_from_index(
 	sanguis::model::animation_index
 );
 
-}
 }
 
 #endif

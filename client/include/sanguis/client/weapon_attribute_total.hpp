@@ -6,9 +6,7 @@
 #include <sanguis/weapon_attribute_value.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 sanguis::weapon_attribute_value
@@ -17,7 +15,6 @@ weapon_attribute_total(
 	sanguis::weapon_attribute_extra
 );
 
-}
 }
 
 #endif

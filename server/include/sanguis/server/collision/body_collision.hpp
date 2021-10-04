@@ -4,11 +4,7 @@
 #include <sanguis/collision/world/body_collision_container.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 void
@@ -16,8 +12,6 @@ body_collision(
 	sanguis::collision::world::body_collision_container const &
 );
 
-}
-}
 }
 
 #endif

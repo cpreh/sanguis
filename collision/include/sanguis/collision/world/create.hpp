@@ -6,11 +6,7 @@
 #include <sanguis/collision/world/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 SANGUIS_COLLISION_SYMBOL
@@ -19,8 +15,6 @@ create(
 	sanguis::collision::world::parameters const &
 );
 
-}
-}
 }
 
 #endif

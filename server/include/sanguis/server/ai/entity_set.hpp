@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 using
@@ -23,8 +19,6 @@ std::unordered_set<
 	sanguis::server::entities::with_body_ref
 >;
 
-}
-}
 }
 
 #endif

@@ -10,9 +10,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 class weapon_category
@@ -85,7 +83,6 @@ private:
 	sanguis::model::optional_image_name image_name_;
 };
 
-}
 }
 
 #endif

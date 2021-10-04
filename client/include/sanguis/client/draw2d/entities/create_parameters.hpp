@@ -7,13 +7,7 @@
 #include <sanguis/creator/optional_background_tile.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 class create_parameters
@@ -44,9 +38,6 @@ private:
 	sanguis::creator::optional_background_tile background_tile_;
 };
 
-}
-}
-}
 }
 
 #endif

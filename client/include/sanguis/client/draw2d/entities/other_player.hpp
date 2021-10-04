@@ -18,13 +18,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 class other_player
@@ -60,9 +54,6 @@ private:
 	sanguis::client::draw2d::entities::hover::name const name_;
 };
 
-}
-}
-}
 }
 
 #endif

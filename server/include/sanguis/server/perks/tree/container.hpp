@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
-{
-namespace tree
+namespace sanguis::server::perks::tree
 {
 
 using
@@ -23,9 +17,6 @@ std::vector<
 	sanguis::server::perks::tree::object
 >;
 
-}
-}
-}
 }
 
 #endif

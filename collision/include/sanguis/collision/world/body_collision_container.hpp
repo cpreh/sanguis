@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 using
@@ -21,8 +17,6 @@ std::vector<
 	sanguis::collision::world::body_collision
 >;
 
-}
-}
 }
 
 #endif

@@ -5,11 +5,7 @@
 #include <sanguis/server/vector_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 sanguis::server::space_unit
@@ -18,8 +14,6 @@ distance_pos_pos(
 	sanguis::server::vector const &
 );
 
-}
-}
 }
 
 #endif

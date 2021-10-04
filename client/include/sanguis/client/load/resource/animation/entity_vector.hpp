@@ -7,15 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
-{
-namespace animation
+namespace sanguis::client::load::resource::animation
 {
 
 using
@@ -25,10 +17,6 @@ std::vector<
 	sanguis::client::load::resource::animation::entity
 >;
 
-}
-}
-}
-}
 }
 
 #endif

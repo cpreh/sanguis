@@ -2,20 +2,11 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_ALWAYS_MAX_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 class always_max;
 
-}
-}
-}
 }
 
 #endif

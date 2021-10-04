@@ -5,11 +5,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 fcppt::string
@@ -17,8 +13,6 @@ background_tile_name(
 	sanguis::creator::background_tile
 );
 
-}
-}
 }
 
 #endif

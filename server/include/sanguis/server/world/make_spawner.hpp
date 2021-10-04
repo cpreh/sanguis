@@ -10,11 +10,7 @@
 #include <sanguis/server/world/insert_simple_pair.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 sanguis::server::world::insert_simple_pair
@@ -27,8 +23,6 @@ make_spawner(
 	sanguis::server::world::difficulty
 );
 
-}
-}
 }
 
 #endif

@@ -4,9 +4,7 @@
 #include <sanguis/creator/spawn_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 enum class spawn_type
@@ -16,7 +14,6 @@ enum class spawn_type
 	fcppt_maximum = spawner
 };
 
-}
 }
 
 #endif

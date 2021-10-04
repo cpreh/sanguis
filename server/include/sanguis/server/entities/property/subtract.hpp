@@ -5,13 +5,7 @@
 #include <sanguis/server/entities/property/value.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 void
@@ -20,9 +14,6 @@ subtract(
 	sanguis::server::entities::property::value const &
 );
 
-}
-}
-}
 }
 
 #endif

@@ -7,11 +7,7 @@
 #include <sanguis/creator/sup_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace random
+namespace sanguis::server::random
 {
 
 sanguis::creator::optional_pos
@@ -21,8 +17,6 @@ grid_pos(
 	sanguis::creator::sup const &
 );
 
-}
-}
 }
 
 #endif

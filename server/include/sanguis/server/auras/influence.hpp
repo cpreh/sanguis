@@ -4,11 +4,7 @@
 #include <sanguis/server/auras/influence_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace auras
+namespace sanguis::server::auras
 {
 
 enum class influence
@@ -17,8 +13,6 @@ enum class influence
 	debuff
 };
 
-}
-}
 }
 
 #endif

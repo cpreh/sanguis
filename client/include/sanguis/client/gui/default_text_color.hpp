@@ -4,18 +4,12 @@
 #include <sge/gui/text_color.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
+namespace sanguis::client::gui
 {
 
 sge::gui::text_color
 default_text_color();
 
-}
-}
 }
 
 #endif

@@ -5,13 +5,7 @@
 #include <sanguis/server/weapons/attributes/basic_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace attributes
+namespace sanguis::server::weapons::attributes
 {
 
 using
@@ -21,9 +15,6 @@ sanguis::server::weapons::attributes::basic<
 	sanguis::server::weapons::spread_radius
 >;
 
-}
-}
-}
 }
 
 #endif

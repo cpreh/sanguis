@@ -8,11 +8,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
+namespace sanguis::tools::libmergeimage
 {
 
 class merge_result
@@ -57,8 +53,6 @@ private:
 	sanguis::tools::libmergeimage::image_vector images_;
 };
 
-}
-}
 }
 
 #endif

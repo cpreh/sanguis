@@ -5,11 +5,7 @@
 #include <sanguis/client/perk/tree.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 class compare
@@ -28,8 +24,6 @@ private:
 	sanguis::perk_type type_;
 };
 
-}
-}
 }
 
 #endif

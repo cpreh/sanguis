@@ -6,11 +6,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 using
@@ -22,8 +18,6 @@ fcppt::function<
 	)
 >;
 
-}
-}
 }
 
 #endif

@@ -2,9 +2,7 @@
 #define SANGUIS_TILES_UNIT_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 using
@@ -12,7 +10,6 @@ unit
 =
 int;
 
-}
 }
 
 #endif

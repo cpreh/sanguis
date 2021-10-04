@@ -5,15 +5,7 @@
 #include <sge/image/pixel/mizuiro_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
-{
-namespace colored
+namespace sanguis::client::draw2d::sprite::colored
 {
 
 using
@@ -23,10 +15,6 @@ sge::image::pixel::mizuiro_type<
 	sanguis::client::draw2d::sprite::colored::color_format
 >;
 
-}
-}
-}
-}
 }
 
 #endif

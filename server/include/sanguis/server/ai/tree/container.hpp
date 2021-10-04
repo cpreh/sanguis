@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace tree
+namespace sanguis::server::ai::tree
 {
 
 using
@@ -23,9 +17,6 @@ std::vector<
 	sanguis::server::ai::tree::base_unique_ptr
 >;
 
-}
-}
-}
 }
 
 #endif

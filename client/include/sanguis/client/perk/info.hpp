@@ -9,11 +9,7 @@
 #include <sanguis/client/perk/required_player_level.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace perk
+namespace sanguis::client::perk
 {
 
 class info
@@ -66,8 +62,6 @@ private:
 	sanguis::client::perk::max_level max_level_;
 };
 
-}
-}
 }
 
 #endif

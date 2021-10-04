@@ -6,13 +6,7 @@
 #include <sge/image/size_type.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
-{
-namespace impl
+namespace sanguis::tools::libmergeimage::impl
 {
 
 sanguis::tools::libmergeimage::count_type
@@ -21,9 +15,6 @@ cells_in_dim(
 	sanguis::tools::libmergeimage::impl::cell_size const &
 );
 
-}
-}
-}
 }
 
 #endif

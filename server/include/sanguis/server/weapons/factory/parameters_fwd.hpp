@@ -2,20 +2,11 @@
 #define SANGUIS_SERVER_WEAPONS_FACTORY_PARAMETERS_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace factory
+namespace sanguis::server::weapons::factory
 {
 
 class parameters;
 
-}
-}
-}
 }
 
 #endif

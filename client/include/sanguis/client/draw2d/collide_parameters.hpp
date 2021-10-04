@@ -8,11 +8,7 @@
 #include <sanguis/client/draw2d/speed.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
+namespace sanguis::client::draw2d
 {
 
 class collide_parameters
@@ -50,8 +46,6 @@ private:
 	sanguis::client::draw2d::fradius radius_;
 };
 
-}
-}
 }
 
 #endif

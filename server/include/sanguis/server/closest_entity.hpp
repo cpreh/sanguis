@@ -14,9 +14,7 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 template<
@@ -111,7 +109,6 @@ FCPPT_PP_DISABLE_GCC_WARNING(-Wmaybe-uninitialized)
 FCPPT_PP_POP_WARNING
 }
 
-}
 }
 
 #endif

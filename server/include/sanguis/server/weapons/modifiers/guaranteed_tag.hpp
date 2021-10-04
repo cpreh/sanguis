@@ -2,22 +2,13 @@
 #define SANGUIS_SERVER_WEAPONS_MODIFIERS_GUARANTEED_TAG_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace modifiers
+namespace sanguis::server::weapons::modifiers
 {
 
 struct guaranteed_tag
 {
 };
 
-}
-}
-}
 }
 
 #endif

@@ -5,13 +5,7 @@
 #include <sge/font/string.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace perk
+namespace sanguis::client::gui::perk
 {
 
 sge::font::string
@@ -19,9 +13,6 @@ make_description(
 	sanguis::client::perk::info const &
 );
 
-}
-}
-}
 }
 
 #endif

@@ -8,11 +8,7 @@
 #include <sanguis/server/world/place_with_id_callback.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 sanguis::server::world::insert_with_id_pair_container
@@ -23,8 +19,6 @@ place_multiple(
 	sanguis::server::radius
 );
 
-}
-}
 }
 
 #endif

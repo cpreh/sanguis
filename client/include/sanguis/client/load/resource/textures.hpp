@@ -21,13 +21,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
+namespace sanguis::client::load::resource
 {
 
 class textures
@@ -119,9 +113,6 @@ private:
 	sge::texture::const_part_unique_ptr const missing_texture_;
 };
 
-}
-}
-}
 }
 
 #endif

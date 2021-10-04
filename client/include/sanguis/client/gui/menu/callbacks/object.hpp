@@ -8,15 +8,7 @@
 #include <sanguis/client/gui/menu/callbacks/quit.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace menu
-{
-namespace callbacks
+namespace sanguis::client::gui::menu::callbacks
 {
 
 class object
@@ -54,10 +46,6 @@ private:
 	sanguis::client::gui::menu::callbacks::quit quit_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

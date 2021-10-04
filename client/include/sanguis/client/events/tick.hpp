@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace events
+namespace sanguis::client::events
 {
 
 class tick
@@ -57,8 +53,6 @@ private:
 	sanguis::duration delta_;
 };
 
-}
-}
 }
 
 #endif

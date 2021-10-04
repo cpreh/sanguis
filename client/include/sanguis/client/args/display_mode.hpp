@@ -5,11 +5,7 @@
 #include <sge/renderer/display_mode/optional_object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace args
+namespace sanguis::client::args
 {
 
 sge::renderer::display_mode::optional_object
@@ -17,8 +13,6 @@ display_mode(
 	sanguis::client::args::result const &
 );
 
-}
-}
 }
 
 #endif

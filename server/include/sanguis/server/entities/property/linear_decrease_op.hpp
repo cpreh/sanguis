@@ -6,13 +6,7 @@
 #include <sanguis/server/entities/property/value.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
-{
-namespace property
+namespace sanguis::server::entities::property
 {
 
 void
@@ -22,9 +16,6 @@ linear_decrease_op(
 	sanguis::server::entities::property::apply
 );
 
-}
-}
-}
 }
 
 #endif

@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 sanguis::tiles::orientation_map
@@ -21,8 +17,6 @@ make_orientation_map(
 	sge::image2d::dim const &
 );
 
-}
-}
 }
 
 #endif

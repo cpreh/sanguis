@@ -6,13 +6,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace hud
+namespace sanguis::client::gui::hud
 {
 
 class scoped_details
@@ -38,9 +32,6 @@ private:
 	object_ref hud_;
 };
 
-}
-}
-}
 }
 
 #endif

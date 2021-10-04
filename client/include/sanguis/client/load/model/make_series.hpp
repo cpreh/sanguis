@@ -7,13 +7,7 @@
 #include <sge/texture/part_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 sanguis::client::load::resource::animation::series
@@ -23,9 +17,6 @@ make_series(
 	sge::texture::part const &
 );
 
-}
-}
-}
 }
 
 #endif

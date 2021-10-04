@@ -6,11 +6,7 @@
 #include <sanguis/creator/impl/optional_pos.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 sanguis::creator::impl::optional_pos
@@ -19,8 +15,6 @@ closest_empty(
 	sanguis::creator::pos const &
 );
 
-}
-}
 }
 
 #endif

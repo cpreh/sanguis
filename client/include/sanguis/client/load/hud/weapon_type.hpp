@@ -5,13 +5,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace hud
+namespace sanguis::client::load::hud
 {
 
 sanguis::optional_weapon_type
@@ -19,9 +13,6 @@ weapon_type(
 	fcppt::string const &
 );
 
-}
-}
-}
 }
 
 #endif

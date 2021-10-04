@@ -7,13 +7,7 @@
 #include <fcppt/record/get.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace translate
+namespace sanguis::client::draw2d::translate
 {
 
 template<
@@ -39,9 +33,6 @@ rotation(
 		};
 }
 
-}
-}
-}
 }
 
 #endif

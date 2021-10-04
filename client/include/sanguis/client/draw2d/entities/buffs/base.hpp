@@ -6,15 +6,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace buffs
+namespace sanguis::client::draw2d::entities::buffs
 {
 
 class base
@@ -61,10 +53,6 @@ private:
 	counter counter_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

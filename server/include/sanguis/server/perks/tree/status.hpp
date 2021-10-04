@@ -9,13 +9,7 @@
 #include <sanguis/server/perks/tree/status_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
-{
-namespace tree
+namespace sanguis::server::perks::tree
 {
 
 class status
@@ -62,9 +56,6 @@ private:
 	sanguis::server::level level_;
 };
 
-}
-}
-}
 }
 
 #endif

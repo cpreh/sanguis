@@ -14,13 +14,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 template<
@@ -89,9 +83,6 @@ private:
 	buff_map buffs_;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -23,11 +23,7 @@
 #include <fcppt/optional/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 class with_ai
@@ -85,8 +81,6 @@ private:
 	optional_ai_unique_ptr ai_;
 };
 
-}
-}
 }
 
 #endif

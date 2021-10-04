@@ -7,11 +7,7 @@
 #include <sanguis/collision/impl/rect_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 sanguis::collision::speed
@@ -22,8 +18,6 @@ adjust_speed(
 	sanguis::collision::speed const &old_speed
 );
 
-}
-}
 }
 
 #endif

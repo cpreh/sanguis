@@ -9,11 +9,7 @@
 #include <sanguis/collision/world/ghost_base_ref.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class body_exit
@@ -39,8 +35,6 @@ private:
 	sanguis::collision::world::ghost_base_ref ghost_;
 };
 
-}
-}
 }
 
 #endif

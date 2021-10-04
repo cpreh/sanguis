@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 using
@@ -21,8 +17,6 @@ std::unordered_set<
 	sanguis::entity_id
 >;
 
-}
-}
 }
 
 #endif

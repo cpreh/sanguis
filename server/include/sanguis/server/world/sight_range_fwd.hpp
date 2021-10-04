@@ -2,17 +2,11 @@
 #define SANGUIS_SERVER_WORLD_SIGHT_RANGE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 class sight_range;
 
-}
-}
 }
 
 #endif

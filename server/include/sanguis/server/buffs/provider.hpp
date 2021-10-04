@@ -13,11 +13,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace buffs
+namespace sanguis::server::buffs
 {
 
 class provider
@@ -59,8 +55,6 @@ private:
 	buff_map buffs_;
 };
 
-}
-}
 }
 
 #endif

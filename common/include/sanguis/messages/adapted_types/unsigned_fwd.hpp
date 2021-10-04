@@ -5,11 +5,7 @@
 #include <alda/bindings/unsigned_decl.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 template<
@@ -23,8 +19,6 @@ alda::bindings::unsigned_<
 	sanguis::messages::types::endianness()
 >;
 
-}
-}
 }
 
 #endif

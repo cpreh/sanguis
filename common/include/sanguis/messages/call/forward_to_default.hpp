@@ -4,19 +4,13 @@
 #include <sanguis/messages/call/forward_to_default_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace call
+namespace sanguis::messages::call
 {
 
 class forward_to_default
 {
 };
 
-}
-}
 }
 
 #endif

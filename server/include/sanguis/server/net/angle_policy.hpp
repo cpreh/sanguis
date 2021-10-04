@@ -6,11 +6,7 @@
 #include <sanguis/server/net/angle_policy_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace net
+namespace sanguis::server::net
 {
 
 struct angle_policy
@@ -27,8 +23,6 @@ struct angle_policy
 	);
 };
 
-}
-}
 }
 
 #endif

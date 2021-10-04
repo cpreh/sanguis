@@ -5,11 +5,7 @@
 #include <sanguis/creator/seed.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 sanguis::creator::seed
@@ -17,8 +13,6 @@ random_seed(
 	sanguis::random_generator & // NOLINT(google-runtime-references)
 ); // NOLINT(google-runtime-references)
 
-}
-}
 }
 
 #endif

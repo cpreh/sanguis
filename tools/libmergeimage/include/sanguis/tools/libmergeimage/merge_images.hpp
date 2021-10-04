@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
+namespace sanguis::tools::libmergeimage
 {
 
 SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
@@ -23,8 +19,6 @@ merge_images(
 	std::filesystem::path const &
 );
 
-}
-}
 }
 
 #endif

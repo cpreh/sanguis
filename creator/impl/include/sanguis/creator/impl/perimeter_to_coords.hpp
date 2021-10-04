@@ -3,11 +3,7 @@
 
 #include <sanguis/creator/grid.hpp>
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 /**
@@ -23,8 +19,6 @@ perimeter_to_coords(
 	sanguis::creator::grid::dim const &,
 	unsigned const &);
 
-}
-}
 }
 
 #endif

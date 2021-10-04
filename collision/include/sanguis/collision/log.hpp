@@ -8,9 +8,7 @@
 #include <fcppt/log/object.hpp>
 
 
-namespace sanguis
-{
-namespace collision
+namespace sanguis::collision
 {
 
 class log
@@ -35,7 +33,6 @@ private:
 	mutable fcppt::log::object body_log_;
 };
 
-}
 }
 
 #endif

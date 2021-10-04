@@ -4,11 +4,7 @@
 #include <sanguis/reload_time.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
+namespace sanguis::server::weapons
 {
 
 using
@@ -16,8 +12,6 @@ reload_time
 =
 sanguis::reload_time;
 
-}
-}
 }
 
 #endif

@@ -6,11 +6,7 @@
 #include <sanguis/creator/impl/reachable_grid.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
+namespace sanguis::creator::impl
 {
 
 sanguis::creator::impl::reachable_grid
@@ -19,8 +15,6 @@ find_reachable(
 	sanguis::creator::pos const &
 );
 
-}
-}
 }
 
 #endif

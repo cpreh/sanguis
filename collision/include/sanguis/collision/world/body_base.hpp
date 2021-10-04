@@ -12,11 +12,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class FCPPT_SYMBOL_CLASS body_base
@@ -62,8 +58,6 @@ public:
 	world_collision() = 0;
 };
 
-}
-}
 }
 
 #endif

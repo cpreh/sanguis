@@ -7,15 +7,7 @@
 #include <sge/audio/buffer_ref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace model
+namespace sanguis::client::draw2d::entities::model
 {
 
 sanguis::client::draw2d::entities::model::optional_sound
@@ -25,10 +17,6 @@ make_sound(
 	sanguis::client::draw2d::sprite::animation::loop_method
 );
 
-}
-}
-}
-}
 }
 
 #endif

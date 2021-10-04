@@ -7,17 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
-{
-namespace sprite
+namespace sanguis::client::draw2d::scene::world::sprite
 {
 
 using
@@ -27,11 +17,6 @@ std::make_signed_t<
 	sanguis::creator::size_type
 >;
 
-}
-}
-}
-}
-}
 }
 
 #endif

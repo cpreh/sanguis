@@ -6,11 +6,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class ghost
@@ -31,8 +27,6 @@ public:
 	) = 0;
 };
 
-}
-}
 }
 
 #endif

@@ -26,11 +26,7 @@
 #include <fcppt/signal/auto_connection_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace control
+namespace sanguis::client::control
 {
 
 class action_handler
@@ -131,8 +127,6 @@ private:
 	fcppt::signal::auto_connection_container const cheat_connections_;
 };
 
-}
-}
 }
 
 #endif

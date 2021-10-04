@@ -5,11 +5,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace global
+namespace sanguis::server::global
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::function<
 	sanguis::entity_id ()
 >;
 
-}
-}
 }
 
 #endif

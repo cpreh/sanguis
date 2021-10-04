@@ -6,9 +6,7 @@
 #include <fcppt/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 sanguis::server::send_callback
@@ -18,7 +16,6 @@ make_send_callback(
 	>
 );
 
-}
 }
 
 #endif

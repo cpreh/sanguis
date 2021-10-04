@@ -15,13 +15,7 @@
 #include <sanguis/client/load/auras/context_ref.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace factory
+namespace sanguis::client::draw2d::factory
 {
 
 sanguis::client::draw2d::entities::unique_ptr
@@ -39,9 +33,6 @@ player(
 	sanguis::client::draw2d::entities::name const &
 );
 
-}
-}
-}
 }
 
 #endif

@@ -12,13 +12,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
+namespace sanguis::client::draw2d::scene
 {
 
 class camera
@@ -60,9 +54,6 @@ private:
 	sanguis::client::draw2d::optional_vector2 translation_;
 };
 
-}
-}
-}
 }
 
 #endif

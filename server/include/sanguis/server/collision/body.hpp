@@ -18,11 +18,7 @@
 #include <fcppt/optional/object_decl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 class body
@@ -94,8 +90,6 @@ private:
 	optional_body_unique_ptr body_;
 };
 
-}
-}
 }
 
 #endif

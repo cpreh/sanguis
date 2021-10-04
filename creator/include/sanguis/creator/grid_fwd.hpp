@@ -5,9 +5,7 @@
 #include <sanguis/creator/tile_grid_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -17,7 +15,6 @@ sanguis::creator::tile_grid<
 	sanguis::creator::tile
 >;
 
-}
 }
 
 #endif

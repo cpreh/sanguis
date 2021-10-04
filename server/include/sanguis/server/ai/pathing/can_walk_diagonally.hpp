@@ -5,13 +5,7 @@
 #include <sanguis/creator/pos_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
-{
-namespace pathing
+namespace sanguis::server::ai::pathing
 {
 
 bool
@@ -22,9 +16,6 @@ can_walk_diagonally(
 	sanguis::creator::pos const &
 );
 
-}
-}
-}
 }
 
 #endif

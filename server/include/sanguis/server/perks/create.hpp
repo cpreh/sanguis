@@ -7,11 +7,7 @@
 #include <sanguis/server/perks/unique_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
+namespace sanguis::server::perks
 {
 
 sanguis::server::perks::unique_ptr
@@ -21,8 +17,6 @@ create(
 	sanguis::perk_type
 );
 
-}
-}
 }
 
 #endif

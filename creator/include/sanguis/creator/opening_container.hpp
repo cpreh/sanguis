@@ -7,9 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -19,7 +17,6 @@ std::vector<
 	sanguis::creator::opening
 >;
 
-}
 }
 
 #endif

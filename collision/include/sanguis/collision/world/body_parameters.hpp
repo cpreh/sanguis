@@ -15,11 +15,7 @@
 #include <fcppt/log/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace world
+namespace sanguis::collision::world
 {
 
 class body_parameters
@@ -81,8 +77,6 @@ private:
 	sanguis::collision::world::body_base_ref body_base_;
 };
 
-}
-}
 }
 
 #endif

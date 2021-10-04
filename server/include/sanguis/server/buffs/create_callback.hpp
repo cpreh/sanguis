@@ -6,11 +6,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace buffs
+namespace sanguis::server::buffs
 {
 
 using
@@ -22,8 +18,6 @@ fcppt::function<
 	)
 >;
 
-}
-}
 }
 
 #endif

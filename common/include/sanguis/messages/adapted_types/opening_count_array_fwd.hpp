@@ -6,11 +6,7 @@
 #include <alda/bindings/enum_array_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace adapted_types
+namespace sanguis::messages::adapted_types
 {
 
 using
@@ -21,8 +17,6 @@ alda::bindings::enum_array<
 	sanguis::messages::adapted_types::size
 >;
 
-}
-}
 }
 
 #endif

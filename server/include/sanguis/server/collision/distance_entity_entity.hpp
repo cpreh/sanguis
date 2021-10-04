@@ -5,11 +5,7 @@
 #include <sanguis/server/entities/base_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace collision
+namespace sanguis::server::collision
 {
 
 sanguis::server::space_unit
@@ -18,8 +14,6 @@ distance_entity_entity(
 	sanguis::server::entities::base const &
 );
 
-}
-}
 }
 
 #endif

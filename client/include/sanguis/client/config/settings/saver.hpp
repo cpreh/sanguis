@@ -6,13 +6,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace config
-{
-namespace settings
+namespace sanguis::client::config::settings
 {
 
 class saver
@@ -35,9 +29,6 @@ private:
 	> const object_;
 };
 
-}
-}
-}
 }
 
 #endif

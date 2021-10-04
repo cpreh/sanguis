@@ -20,13 +20,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace hud
+namespace sanguis::client::gui::hud
 {
 
 class weapon_widget
@@ -87,9 +81,6 @@ private:
 	sge::gui::widget::box_container container_;
 };
 
-}
-}
-}
 }
 
 #endif

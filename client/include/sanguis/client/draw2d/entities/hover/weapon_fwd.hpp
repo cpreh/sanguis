@@ -5,15 +5,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace hover
+namespace sanguis::client::draw2d::entities::hover
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -21,10 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	weapon
 );
 
-}
-}
-}
-}
 }
 
 #endif

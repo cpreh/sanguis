@@ -6,11 +6,7 @@
 #include <sanguis/server/entities/spawn_owner_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace ai
+namespace sanguis::server::ai
 {
 
 sanguis::server::ai::create_function
@@ -19,8 +15,6 @@ create_friend(
 	sanguis::server::entities::spawn_owner const &
 );
 
-}
-}
 }
 
 #endif

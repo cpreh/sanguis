@@ -9,15 +9,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace model
+namespace sanguis::client::draw2d::entities::model
 {
 
 class animation
@@ -68,10 +60,6 @@ private:
 	sanguis::client::draw2d::entities::model::optional_sound sound_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

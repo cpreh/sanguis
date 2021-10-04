@@ -5,11 +5,7 @@
 #include <sanguis/server/world/parameters_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace global
+namespace sanguis::server::global
 {
 
 sanguis::server::global::world_map
@@ -17,8 +13,6 @@ generate_worlds(
 	sanguis::server::world::parameters const &
 );
 
-}
-}
 }
 
 #endif

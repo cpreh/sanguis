@@ -6,13 +6,7 @@
 #include <alda/message/make_id.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace client
-{
-namespace types
+namespace sanguis::messages::client::types
 {
 
 template<
@@ -25,9 +19,6 @@ alda::message::make_id<
 	Msg
 >;
 
-}
-}
-}
 }
 
 #endif

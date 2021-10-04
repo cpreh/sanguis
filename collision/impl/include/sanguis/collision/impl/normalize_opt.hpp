@@ -10,11 +10,7 @@
 #include <fcppt/optional/object_impl.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
+namespace sanguis::collision::impl
 {
 
 template<
@@ -68,8 +64,6 @@ normalize_opt(
 		;
 }
 
-}
-}
 }
 
 #endif

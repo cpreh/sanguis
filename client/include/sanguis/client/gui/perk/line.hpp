@@ -17,13 +17,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
-{
-namespace perk
+namespace sanguis::client::gui::perk
 {
 
 class line
@@ -72,9 +66,6 @@ private:
 	fcppt::signal::auto_connection const level_change_connection_;
 };
 
-}
-}
-}
 }
 
 #endif

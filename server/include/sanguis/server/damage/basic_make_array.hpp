@@ -7,11 +7,7 @@
 #include <fcppt/enum/array_init.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace damage
+namespace sanguis::server::damage
 {
 
 template<
@@ -63,8 +59,6 @@ basic_make_array(
 		result;
 }
 
-}
-}
 }
 
 #endif

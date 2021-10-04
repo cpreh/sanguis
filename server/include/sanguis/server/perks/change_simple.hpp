@@ -8,11 +8,7 @@
 #include <fcppt/cast/int_to_float.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
+namespace sanguis::server::perks
 {
 
 template<
@@ -38,8 +34,6 @@ change_simple(
 	);
 }
 
-}
-}
 }
 
 #endif

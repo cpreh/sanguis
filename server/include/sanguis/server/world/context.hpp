@@ -10,11 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace world
+namespace sanguis::server::world
 {
 
 class context
@@ -56,8 +52,6 @@ public:
 	~context();
 };
 
-}
-}
 }
 
 #endif

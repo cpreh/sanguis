@@ -6,13 +6,7 @@
 #include <fcppt/random/variate_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
-{
-namespace random
+namespace sanguis::creator::impl::random
 {
 
 using
@@ -23,9 +17,6 @@ fcppt::random::variate<
 	sanguis::creator::impl::random::uniform_size
 >;
 
-}
-}
-}
 }
 
 #endif

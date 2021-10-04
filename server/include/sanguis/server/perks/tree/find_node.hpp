@@ -11,13 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
-{
-namespace tree
+namespace sanguis::server::perks::tree
 {
 
 template<
@@ -103,9 +97,6 @@ find_node(
 		result_type();
 }
 
-}
-}
-}
 }
 
 #endif

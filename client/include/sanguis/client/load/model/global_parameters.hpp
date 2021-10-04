@@ -14,13 +14,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace model
+namespace sanguis::client::load::model
 {
 
 class global_parameters
@@ -78,9 +72,6 @@ private:
 	sanguis::model::optional_image_name image_;
 };
 
-}
-}
-}
 }
 
 #endif

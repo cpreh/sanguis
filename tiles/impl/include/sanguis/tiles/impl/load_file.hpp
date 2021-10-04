@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 sge::image2d::optional_file_unique_ptr
@@ -21,8 +17,6 @@ load_file(
 	std::filesystem::path const &
 );
 
-}
-}
 }
 
 #endif

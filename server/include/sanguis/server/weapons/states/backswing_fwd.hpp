@@ -2,20 +2,11 @@
 #define SANGUIS_SERVER_WEAPONS_STATES_BACKSWING_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace states
+namespace sanguis::server::weapons::states
 {
 
 class backswing;
 
-}
-}
-}
 }
 
 #endif

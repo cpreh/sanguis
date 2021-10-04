@@ -25,11 +25,7 @@
 #include <fcppt/log/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
-{
-namespace impl
+namespace sanguis::tiles::impl
 {
 
 template<
@@ -150,8 +146,6 @@ images_base(
 		);
 }
 
-}
-}
 }
 
 #endif

@@ -11,13 +11,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace sprite
+namespace sanguis::client::draw2d::sprite
 {
 
 template<
@@ -91,9 +85,6 @@ private:
 	collection collection_;
 };
 
-}
-}
-}
 }
 
 #endif

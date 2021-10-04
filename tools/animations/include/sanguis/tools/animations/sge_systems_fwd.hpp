@@ -5,11 +5,7 @@
 #include <sge/systems/with_image2d_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace animations
+namespace sanguis::tools::animations
 {
 
 using
@@ -19,8 +15,6 @@ sge::systems::instance<
 	sge::systems::with_image2d
 >;
 
-}
-}
 }
 
 #endif

@@ -22,15 +22,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace collision
-{
-namespace impl
-{
-namespace world
-{
-namespace simple
+namespace sanguis::collision::impl::world::simple
 {
 
 class ghost
@@ -132,10 +124,6 @@ private:
 	body_map bodies_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

@@ -6,13 +6,7 @@
 #include <sge/texture/const_part_unique_ptr.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
+namespace sanguis::client::load::resource
 {
 
 sge::texture::const_part_unique_ptr
@@ -21,9 +15,6 @@ texture_from_view(
 	sge::image2d::view::const_object const &
 );
 
-}
-}
-}
 }
 
 #endif

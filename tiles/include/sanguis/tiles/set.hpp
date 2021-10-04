@@ -14,9 +14,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 template<
@@ -79,7 +77,6 @@ private:
 	sanguis::tiles::orientation_map orientations_;
 };
 
-}
 }
 
 #define SANGUIS_TILES_DECLARE_SET(\

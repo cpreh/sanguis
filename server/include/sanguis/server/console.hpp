@@ -14,9 +14,7 @@
 #include <fcppt/signal/auto_connection_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 class console
@@ -65,7 +63,6 @@ private:
 	sanguis::server::console_command_vector known_commands_;
 };
 
-}
 }
 
 #endif

@@ -4,11 +4,7 @@
 #include <sanguis/client/load/animation_type_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
+namespace sanguis::client::load
 {
 
 enum class animation_type
@@ -22,8 +18,6 @@ enum class animation_type
 	fcppt_maximum = reloading
 };
 
-}
-}
 }
 
 #endif

@@ -5,9 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace server
+namespace sanguis::server
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::reference<
 	sanguis::server::load const
 >;
 
-}
 }
 
 #endif

@@ -13,11 +13,7 @@
 #include <fcppt/record/object_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace args
+namespace sanguis::client::args
 {
 
 using
@@ -36,8 +32,6 @@ fcppt::record::disjoint_product<
 	>
 >;
 
-}
-}
 }
 
 #endif

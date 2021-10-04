@@ -5,13 +5,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
-{
-namespace impl
+namespace sanguis::tools::libmergeimage::impl
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -19,9 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	count_maximum
 );
 
-}
-}
-}
 }
 
 #endif

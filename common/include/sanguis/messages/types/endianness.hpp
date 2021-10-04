@@ -7,11 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace messages
-{
-namespace types
+namespace sanguis::messages::types
 {
 
 inline
@@ -23,8 +19,6 @@ endianness()
 		alda::serialization::endianness();
 }
 
-}
-}
 }
 
 #endif

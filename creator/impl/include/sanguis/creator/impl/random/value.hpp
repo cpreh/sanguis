@@ -6,20 +6,11 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace creator
-{
-namespace impl
-{
-namespace random
+namespace sanguis::creator::impl::random
 {
 
 using value = std::uint32_t;
 
-}
-}
-}
 }
 
 #endif

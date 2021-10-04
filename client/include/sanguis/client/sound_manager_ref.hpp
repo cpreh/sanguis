@@ -5,9 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace sanguis
-{
-namespace client
+namespace sanguis::client
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::reference<
 	sanguis::client::sound_manager
 >;
 
-}
 }
 
 #endif

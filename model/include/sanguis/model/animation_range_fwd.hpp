@@ -2,14 +2,11 @@
 #define SANGUIS_MODEL_ANIMATION_RANGE_FWD_HPP_INCLUDED
 
 
-namespace sanguis
-{
-namespace model
+namespace sanguis::model
 {
 
 class animation_range;
 
-}
 }
 
 #endif

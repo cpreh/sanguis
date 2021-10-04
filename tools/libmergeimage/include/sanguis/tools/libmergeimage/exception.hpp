@@ -6,11 +6,7 @@
 #include <fcppt/assert/information_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tools
-{
-namespace libmergeimage
+namespace sanguis::tools::libmergeimage
 {
 
 class exception
@@ -52,8 +48,6 @@ public:
 	override;
 };
 
-}
-}
 }
 
 #endif

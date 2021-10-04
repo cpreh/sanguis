@@ -6,9 +6,7 @@
 #include <fcppt/variant/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace tiles
+namespace sanguis::tiles
 {
 
 using
@@ -19,7 +17,6 @@ fcppt::variant::object<
 	sanguis::tiles::error
 >;
 
-}
 }
 
 #endif

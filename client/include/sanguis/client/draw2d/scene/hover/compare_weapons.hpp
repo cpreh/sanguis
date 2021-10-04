@@ -7,15 +7,7 @@
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_diff.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace hover
+namespace sanguis::client::draw2d::scene::hover
 {
 
 sanguis::client::draw2d::scene::hover::weapon_attribute_diff
@@ -25,10 +17,6 @@ compare_weapons(
 	sanguis::client::weapon_pair const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

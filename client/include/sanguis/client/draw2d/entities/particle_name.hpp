@@ -6,13 +6,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace entities
+namespace sanguis::client::draw2d::entities
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -20,9 +14,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	particle_name
 );
 
-}
-}
-}
 }
 
 #endif

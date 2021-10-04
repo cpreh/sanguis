@@ -5,11 +5,7 @@
 #include <sge/gui/duration.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace gui
+namespace sanguis::client::gui
 {
 
 sge::gui::duration
@@ -17,8 +13,6 @@ to_duration(
 	sanguis::duration const &
 );
 
-}
-}
 }
 
 #endif

@@ -6,13 +6,7 @@
 #include <fcppt/record/element_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace args
-{
-namespace elements
+namespace sanguis::client::args::elements
 {
 
 using
@@ -23,9 +17,6 @@ fcppt::record::element<
 	fcppt::log::level
 >;
 
-}
-}
-}
 }
 
 #endif

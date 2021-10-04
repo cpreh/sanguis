@@ -5,9 +5,7 @@
 #include <fcppt/container/grid/pos_ref_range_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace creator
+namespace sanguis::creator
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::container::grid::pos_ref_range<
 	sanguis::creator::grid const
 >;
 
-}
 }
 
 #endif

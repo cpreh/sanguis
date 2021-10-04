@@ -7,11 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace perks
+namespace sanguis::server::perks
 {
 
 class ias
@@ -35,8 +31,6 @@ private:
 	override;
 };
 
-}
-}
 }
 
 #endif

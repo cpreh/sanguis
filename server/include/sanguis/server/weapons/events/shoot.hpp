@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace weapons
-{
-namespace events
+namespace sanguis::server::weapons::events
 {
 
 class shoot
@@ -49,9 +43,6 @@ public:
 	override;
 };
 
-}
-}
-}
 }
 
 #endif

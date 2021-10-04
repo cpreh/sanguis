@@ -9,15 +9,7 @@
 #include <fcppt/noncopyable.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace load
-{
-namespace resource
-{
-namespace animation
+namespace sanguis::client::load::resource::animation
 {
 
 class entity
@@ -61,10 +53,6 @@ private:
 	sge::texture::const_part_unique_ptr texture_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

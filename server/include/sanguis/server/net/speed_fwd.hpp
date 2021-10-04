@@ -6,11 +6,7 @@
 #include <sanguis/server/net/value_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace net
+namespace sanguis::server::net
 {
 
 using
@@ -21,8 +17,6 @@ sanguis::server::net::value<
 	sanguis::server::net::speed_policy
 >;
 
-}
-}
 }
 
 #endif

@@ -12,9 +12,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace sanguis
-{
-namespace net
+namespace sanguis::net
 {
 
 class data_streambuf
@@ -57,7 +55,6 @@ private:
 	> const buffer_;
 };
 
-}
 }
 
 #endif

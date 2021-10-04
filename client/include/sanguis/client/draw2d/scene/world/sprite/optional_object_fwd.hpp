@@ -5,17 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace client
-{
-namespace draw2d
-{
-namespace scene
-{
-namespace world
-{
-namespace sprite
+namespace sanguis::client::draw2d::scene::world::sprite
 {
 
 using
@@ -25,11 +15,6 @@ fcppt::optional::object<
 	sanguis::client::draw2d::scene::world::sprite::object
 >;
 
-}
-}
-}
-}
-}
 }
 
 #endif

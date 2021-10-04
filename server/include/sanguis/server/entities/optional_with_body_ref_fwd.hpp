@@ -5,11 +5,7 @@
 #include <fcppt/optional/reference_fwd.hpp>
 
 
-namespace sanguis
-{
-namespace server
-{
-namespace entities
+namespace sanguis::server::entities
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::reference<
 	sanguis::server::entities::with_body
 >;
 
-}
-}
 }
 
 #endif
