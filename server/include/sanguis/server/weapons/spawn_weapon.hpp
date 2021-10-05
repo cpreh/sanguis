@@ -2,14 +2,14 @@
 #define SANGUIS_SERVER_WEAPONS_SPAWN_WEAPON_HPP_INCLUDED
 
 #include <sanguis/server/weapons/create_function.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 
 namespace sanguis::server::weapons
 {
 
-FCPPT_MAKE_STRONG_TYPEDEF(
+FCPPT_DECLARE_STRONG_TYPEDEF(
 	sanguis::server::weapons::create_function,
 	spawn_weapon
 );

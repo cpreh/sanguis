@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_PERKS_LEVEL_DIFF_HPP_INCLUDED
 
 #include <sanguis/server/level.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>
@@ -12,7 +12,7 @@
 namespace sanguis::server::perks
 {
 
-FCPPT_MAKE_STRONG_TYPEDEF(
+FCPPT_DECLARE_STRONG_TYPEDEF(
 	std::make_signed_t<
 		sanguis::server::level::value_type
 	>,

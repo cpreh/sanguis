@@ -3,7 +3,7 @@
 
 #include <sanguis/server/entities/property/initial_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 
@@ -13,12 +13,12 @@ namespace sanguis::server::entities::property
 class initial
 {
 public:
-	FCPPT_MAKE_STRONG_TYPEDEF(
+	FCPPT_DECLARE_STRONG_TYPEDEF(
 		sanguis::server::entities::property::value,
 		base
 	);
 
-	FCPPT_MAKE_STRONG_TYPEDEF(
+	FCPPT_DECLARE_STRONG_TYPEDEF(
 		sanguis::server::entities::property::value,
 		current
 	);

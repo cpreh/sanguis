@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_LOAD_RESOURCE_TEXTURE_IDENTIFIER_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_RESOURCE_TEXTURE_IDENTIFIER_HPP_INCLUDED
 
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef.hpp>
 
@@ -9,7 +9,7 @@
 namespace sanguis::client::load::resource
 {
 
-FCPPT_MAKE_STRONG_TYPEDEF(
+FCPPT_DECLARE_STRONG_TYPEDEF(
 	fcppt::string,
 	texture_identifier
 );

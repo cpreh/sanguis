@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 
 #include <sanguis/buff_type_fwd.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/strong_typedef.hpp>
 
@@ -46,7 +46,7 @@ public:
 protected:
 	buff();
 
-	FCPPT_MAKE_STRONG_TYPEDEF(
+	FCPPT_DECLARE_STRONG_TYPEDEF(
 		bool,
 		added
 	);

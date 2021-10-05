@@ -1,14 +1,14 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_IS_UNIQUE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_IS_UNIQUE_HPP_INCLUDED
 
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 
 namespace sanguis::server::entities::enemies
 {
 
-FCPPT_MAKE_STRONG_TYPEDEF(
+FCPPT_DECLARE_STRONG_TYPEDEF(
 	bool,
 	is_unique
 );

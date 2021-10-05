@@ -2,14 +2,14 @@
 #define SANGUIS_MAGAZINE_SIZE_HPP_INCLUDED
 
 #include <sanguis/magazine_type.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 
 namespace sanguis
 {
 
-FCPPT_MAKE_STRONG_TYPEDEF(
+FCPPT_DECLARE_STRONG_TYPEDEF(
 	sanguis::magazine_type,
 	magazine_size
 );
