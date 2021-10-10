@@ -16,74 +16,34 @@
 #include <fcppt/cast/dynamic_cross.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
-
 sanguis::server::auras::aoe_damage::aoe_damage(
-	sanguis::server::team const _team,
-	sanguis::server::aoe const _aoe,
-	sanguis::server::auras::influence const _influence,
-	sanguis::server::damage::unit const _damage,
-	sanguis::server::damage::modified_array const &_damage_values
-)
-:
-	sanguis::server::auras::aura(
-		sanguis::server::radius(
-			_aoe.get()
-		),
-		sanguis::server::auras::collision_group(
-			_team,
-			_influence
-		)
-	),
-	damage_(
-		_damage
-	),
-	damage_values_(
-		_damage_values
-	)
+    sanguis::server::team const _team,
+    sanguis::server::aoe const _aoe,
+    sanguis::server::auras::influence const _influence,
+    sanguis::server::damage::unit const _damage,
+    sanguis::server::damage::modified_array const &_damage_values)
+    : sanguis::server::auras::aura(
+          sanguis::server::radius(_aoe.get()),
+          sanguis::server::auras::collision_group(_team, _influence)),
+      damage_(_damage),
+      damage_values_(_damage_values)
 {
 }
 
-sanguis::server::auras::aoe_damage::~aoe_damage()
-= default;
+sanguis::server::auras::aoe_damage::~aoe_damage() = default;
 
-sanguis::optional_aura_type
-sanguis::server::auras::aoe_damage::type() const
+sanguis::optional_aura_type sanguis::server::auras::aoe_damage::type() const
 {
-	return
-		sanguis::optional_aura_type();
+  return sanguis::optional_aura_type();
 }
 
-void
-sanguis::server::auras::aoe_damage::enter(
-	sanguis::server::entities::with_body_ref const _with_body,
-	sanguis::collision::world::created
-)
+void sanguis::server::auras::aoe_damage::enter(
+    sanguis::server::entities::with_body_ref const _with_body, sanguis::collision::world::created)
 {
-	fcppt::optional::maybe_void(
-		fcppt::cast::dynamic_cross<
-			sanguis::server::entities::with_health
-		>(
-			_with_body.get()
-		),
-		[
-			this
-		](
-			fcppt::reference<
-				sanguis::server::entities::with_health
-			> const _with_health
-		)
-		{
-			_with_health->damage(
-				this->damage_,
-				this->damage_values_
-			);
-		}
-	);
+  fcppt::optional::maybe_void(
+      fcppt::cast::dynamic_cross<sanguis::server::entities::with_health>(_with_body.get()),
+      [this](fcppt::reference<sanguis::server::entities::with_health> const _with_health)
+      { _with_health->damage(this->damage_, this->damage_values_); });
 }
 
-void
-sanguis::server::auras::aoe_damage::leave(
-	sanguis::server::entities::with_body &
-)
-{
-}
+void sanguis::server::auras::aoe_damage::leave(sanguis::server::entities::with_body &) {}

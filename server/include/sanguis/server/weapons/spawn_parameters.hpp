@@ -5,29 +5,23 @@
 #include <sanguis/server/weapons/spawn_parameters_fwd.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
 class spawn_parameters
 {
 public:
-	spawn_parameters(
-		sanguis::server::weapons::parameters const &,
-		sanguis::server::weapons::spawn_weapon &&
-	);
+  spawn_parameters(
+      sanguis::server::weapons::parameters const &, sanguis::server::weapons::spawn_weapon &&);
 
-	[[nodiscard]]
-	sanguis::server::weapons::parameters const &
-	parameters() const;
+  [[nodiscard]] sanguis::server::weapons::parameters const &parameters() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::spawn_weapon const &
-	spawn_weapon() const;
+  [[nodiscard]] sanguis::server::weapons::spawn_weapon const &spawn_weapon() const;
+
 private:
-	sanguis::server::weapons::parameters parameters_;
+  sanguis::server::weapons::parameters parameters_;
 
-	sanguis::server::weapons::spawn_weapon spawn_weapon_;
+  sanguis::server::weapons::spawn_weapon spawn_weapon_;
 };
 
 }

@@ -4,5 +4,4 @@
 #include <sanguis/optional_weapon_attribute_value_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

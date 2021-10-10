@@ -4,16 +4,10 @@
 #include <sanguis/creator/pos.hpp>
 #include <fcppt/container/grid/sup_from_pos_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-sup
-=
-fcppt::container::grid::sup_from_pos<
-	sanguis::creator::pos
->;
+using sup = fcppt::container::grid::sup_from_pos<sanguis::creator::pos>;
 
 }
 

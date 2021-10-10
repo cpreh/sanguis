@@ -4,5 +4,4 @@
 #include <sanguis/client/draw2d/sprite/colored/color_fwd.hpp>
 #include <sge/image/pixel/mizuiro_type.hpp>
 
-
 #endif

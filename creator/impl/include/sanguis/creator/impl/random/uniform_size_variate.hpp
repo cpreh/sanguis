@@ -6,5 +6,4 @@
 #include <sanguis/creator/impl/random/uniform_size_variate_fwd.hpp>
 #include <fcppt/random/variate.hpp>
 
-
 #endif

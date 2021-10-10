@@ -21,102 +21,56 @@
 #include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
 
-
 namespace sanguis::client::perk
 {
 
 class state
 {
-	FCPPT_NONMOVABLE(
-		state
-	);
+  FCPPT_NONMOVABLE(state);
+
 public:
-	explicit
-	state(
-		sanguis::client::perk::send_callback &&
-	);
+  explicit state(sanguis::client::perk::send_callback &&);
 
-	~state();
+  ~state();
 
-	void
-	perks(
-		sanguis::client::perk::tree_unique_ptr &&,
-		sanguis::client::perk::remaining_levels
-	);
+  void perks(sanguis::client::perk::tree_unique_ptr &&, sanguis::client::perk::remaining_levels);
 
-	void
-	player_level(
-		sanguis::client::player_level
-	);
+  void player_level(sanguis::client::player_level);
 
-	[[nodiscard]]
-	bool
-	choose_perk(
-		sanguis::perk_type
-	);
+  [[nodiscard]] bool choose_perk(sanguis::perk_type);
 
-	[[nodiscard]]
-	sanguis::client::perk::tree const &
-	perks() const;
+  [[nodiscard]] sanguis::client::perk::tree const &perks() const;
 
-	[[nodiscard]]
-	sanguis::client::player_level
-	player_level() const;
+  [[nodiscard]] sanguis::client::player_level player_level() const;
 
-	[[nodiscard]]
-	sanguis::client::perk::remaining_levels
-	remaining_levels() const;
+  [[nodiscard]] sanguis::client::perk::remaining_levels remaining_levels() const;
 
-	[[nodiscard]]
-	sanguis::client::perk::level
-	perk_level(
-		sanguis::perk_type
-	) const;
+  [[nodiscard]] sanguis::client::perk::level perk_level(sanguis::perk_type) const;
 
-	[[nodiscard]]
-	sanguis::client::perk::choosable_state
-	choosable(
-		sanguis::perk_type
-	) const;
+  [[nodiscard]] sanguis::client::perk::choosable_state choosable(sanguis::perk_type) const;
 
-	[[nodiscard]]
-	fcppt::signal::auto_connection
-	register_level_change(
-		sanguis::client::perk::level_callback &&
-	);
+  [[nodiscard]] fcppt::signal::auto_connection
+  register_level_change(sanguis::client::perk::level_callback &&);
 
-	[[nodiscard]]
-	fcppt::signal::auto_connection
-	register_perks_change(
-		sanguis::client::perk::change_callback &&
-	);
+  [[nodiscard]] fcppt::signal::auto_connection
+  register_perks_change(sanguis::client::perk::change_callback &&);
+
 private:
-	[[nodiscard]]
-	sanguis::client::perk::tree &
-	perks_impl();
+  [[nodiscard]] sanguis::client::perk::tree &perks_impl();
 
-	sanguis::client::perk::send_callback const send_callback_;
+  sanguis::client::perk::send_callback const send_callback_;
 
-	using
-	optional_tree_unique_ptr
-	=
-	fcppt::optional::object<
-		sanguis::client::perk::tree_unique_ptr
-	>;
+  using optional_tree_unique_ptr = fcppt::optional::object<sanguis::client::perk::tree_unique_ptr>;
 
-	optional_tree_unique_ptr perks_;
+  optional_tree_unique_ptr perks_;
 
-	sanguis::client::player_level current_level_;
+  sanguis::client::player_level current_level_;
 
-	sanguis::client::perk::remaining_levels remaining_levels_;
+  sanguis::client::perk::remaining_levels remaining_levels_;
 
-	fcppt::signal::object<
-		sanguis::client::perk::level_function
-	> level_signal_;
+  fcppt::signal::object<sanguis::client::perk::level_function> level_signal_;
 
-	fcppt::signal::object<
-		sanguis::client::perk::change_function
-	> change_signal_;
+  fcppt::signal::object<sanguis::client::perk::change_function> change_signal_;
 };
 
 }

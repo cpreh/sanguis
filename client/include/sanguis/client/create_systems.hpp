@@ -5,15 +5,11 @@
 #include <sanguis/client/args/result_fwd.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
-
 namespace sanguis::client
 {
 
 sanguis::client::systems_unique_ptr
-create_systems(
-	fcppt::log::context_reference,
-	sanguis::client::args::result const &
-);
+create_systems(fcppt::log::context_reference, sanguis::client::args::result const &);
 
 }
 

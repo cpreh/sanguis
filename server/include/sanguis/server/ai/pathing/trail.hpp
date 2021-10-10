@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::ai::pathing
 {
 
-using
-trail
-=
-std::vector<
-	sanguis::creator::pos
->;
+using trail = std::vector<sanguis::creator::pos>;
 
 }
 

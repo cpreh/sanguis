@@ -5,15 +5,11 @@
 #include <sanguis/creator/symbol.hpp>
 #include <sanguis/creator/tile_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-sanguis::creator::rect
-tile_rect(
-	sanguis::creator::tile
-);
+sanguis::creator::rect tile_rect(sanguis::creator::tile);
 
 }
 

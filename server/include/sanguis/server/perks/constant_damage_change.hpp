@@ -6,17 +6,14 @@
 #include <sanguis/server/perks/change_factor.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
 
-
 namespace sanguis::server::perks
 {
 
-void
-constant_damage_change(
-	sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
-	sanguis::server::damage::type,
-	sanguis::server::perks::level_diff,
-	sanguis::server::perks::change_factor
-);
+void constant_damage_change(
+    sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
+    sanguis::server::damage::type,
+    sanguis::server::perks::level_diff,
+    sanguis::server::perks::change_factor);
 
 }
 

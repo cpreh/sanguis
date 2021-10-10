@@ -4,5 +4,4 @@
 #include <sanguis/client/draw2d/scene/world/sprite/dim_fwd.hpp>
 #include <sge/sprite/types/dim.hpp>
 
-
 #endif

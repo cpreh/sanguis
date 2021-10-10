@@ -6,18 +6,10 @@
 #include <bit>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::messages::types
 {
 
-inline
-constexpr
-std::endian
-endianness()
-{
-	return
-		alda::serialization::endianness();
-}
+inline constexpr std::endian endianness() { return alda::serialization::endianness(); }
 
 }
 

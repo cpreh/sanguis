@@ -4,14 +4,10 @@
 #include <sanguis/tiles/orientation_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-fcppt::string
-orientation_to_string(
-	sanguis::tiles::orientation
-);
+fcppt::string orientation_to_string(sanguis::tiles::orientation);
 
 }
 

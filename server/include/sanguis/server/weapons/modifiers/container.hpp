@@ -6,21 +6,11 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
-template<
-	typename Parameters
->
-using
-container
-=
-std::vector<
-	sanguis::server::weapons::modifiers::callback<
-		Parameters
-	>
->;
+template <typename Parameters>
+using container = std::vector<sanguis::server::weapons::modifiers::callback<Parameters>>;
 
 }
 

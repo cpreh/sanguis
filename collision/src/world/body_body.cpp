@@ -28,89 +28,36 @@
 #include <boost/units/systems/si/velocity.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::collision::optional_result_pair
-sanguis::collision::world::body_body(
-	sanguis::collision::world::body const &_body1,
-	sanguis::collision::world::body const &_body2,
-	sanguis::collision::duration const _duration
-)
+sanguis::collision::optional_result_pair sanguis::collision::world::body_body(
+    sanguis::collision::world::body const &_body1,
+    sanguis::collision::world::body const &_body2,
+    sanguis::collision::duration const _duration)
 {
-	using
-	impulse_type
-	=
-	boost::units::quantity<
-		boost::units::si::momentum,
-		sanguis::collision::unit
-	>;
+  using impulse_type = boost::units::quantity<boost::units::si::momentum, sanguis::collision::unit>;
 
-	using
-	optional_impulse
-	=
-	fcppt::optional::object<
-		impulse_type
-	>;
+  using optional_impulse = fcppt::optional::object<impulse_type>;
 
-	using
-	normal_type
-	=
-	fcppt::math::vector::static_<
-		sanguis::collision::unit,
-		2
-	>;
+  using normal_type = fcppt::math::vector::static_<sanguis::collision::unit, 2>;
 
-	auto const make_impulse(
-		[
-			&_body1,
-			&_body2,
-			_duration
-		](
-			normal_type const &_normal,
-			sanguis::collision::mass const &_mass1,
-			sanguis::collision::mass const &_mass2
-		)
-		->
-		optional_impulse
-		{
-			sanguis::collision::unit const elasticity(
-				fcppt::literal<
-					sanguis::collision::unit
-				>(
-					0.9F
-				)
-			);
+  auto const make_impulse(
+      [&_body1, &_body2, _duration](
+          normal_type const &_normal,
+          sanguis::collision::mass const &_mass1,
+          sanguis::collision::mass const &_mass2) -> optional_impulse
+      {
+        sanguis::collision::unit const elasticity(fcppt::literal<sanguis::collision::unit>(0.9F));
 
-			sanguis::collision::unit const one(
-				fcppt::literal<
-					sanguis::collision::unit
-				>(
-					1
-				)
-			);
+        sanguis::collision::unit const one(fcppt::literal<sanguis::collision::unit>(1));
 
-			auto const divisor(
-				one
-				/
-				_mass1
-				+
-				one
-				/
-				_mass2
-			);
+        auto const divisor(one / _mass1 + one / _mass2);
 
-			sanguis::collision::impl::circle const circle1(
-				sanguis::collision::impl::world::make_circle(
-					_body1
-				)
-			);
+        sanguis::collision::impl::circle const circle1(
+            sanguis::collision::impl::world::make_circle(_body1));
 
-			sanguis::collision::impl::circle const circle2(
-				sanguis::collision::impl::world::make_circle(
-					_body2
-				)
-			);
+        sanguis::collision::impl::circle const circle2(
+            sanguis::collision::impl::world::make_circle(_body2));
 
-			return
+        return
 				sanguis::collision::impl::collides(
 					circle1,
 					circle2
@@ -168,96 +115,31 @@ sanguis::collision::world::body_body(
 					:
 						optional_impulse{}
 				;
-		}
-	);
+      });
 
-	return
-		fcppt::optional::maybe_multi(
-			[]{
-				return
-					sanguis::collision::optional_result_pair{};
-			},
-			[
-				make_impulse,
-				&_body1,
-				&_body2
-			](
-				sanguis::collision::mass const &_mass1,
-				sanguis::collision::mass const &_mass2
-			)
-			{
-				return
-					fcppt::optional::bind(
-						sanguis::collision::impl::normalize_opt(
-							fcppt::math::vector::map(
-								_body1.center().get()
-								-
-								_body2.center().get()
-								,
-								fcppt::boost_units_value{}
-							)
-						),
-						[
-							make_impulse,
-							_mass1,
-							_mass2
-						](
-							normal_type const &_normal
-						)
-						{
-							return
-								fcppt::optional::map(
-									make_impulse(
-										_normal,
-										_mass1,
-										_mass2
-									),
-									[
-										_mass1,
-										_mass2,
-										_normal
-									](
-										impulse_type const &_impulse
-									)
-									{
-										auto const make_speed(
-											[
-												_impulse,
-												_normal
-											](
-												sanguis::collision::mass const &_mass
-											)
-											{
-												return
-													(
-														_impulse
-														/
-														_mass
-													)
-													*
-													_normal;
-											}
-										);
+  return fcppt::optional::maybe_multi(
+      [] { return sanguis::collision::optional_result_pair{}; },
+      [make_impulse, &_body1, &_body2](
+          sanguis::collision::mass const &_mass1, sanguis::collision::mass const &_mass2)
+      {
+        return fcppt::optional::bind(
+            sanguis::collision::impl::normalize_opt(fcppt::math::vector::map(
+                _body1.center().get() - _body2.center().get(), fcppt::boost_units_value{})),
+            [make_impulse, _mass1, _mass2](normal_type const &_normal)
+            {
+              return fcppt::optional::map(
+                  make_impulse(_normal, _mass1, _mass2),
+                  [_mass1, _mass2, _normal](impulse_type const &_impulse)
+                  {
+                    auto const make_speed([_impulse, _normal](sanguis::collision::mass const &_mass)
+                                          { return (_impulse / _mass) * _normal; });
 
-										return
-											fcppt::tuple::make(
-												sanguis::collision::result(
-													make_speed(
-														_mass1
-													)
-												),
-												sanguis::collision::result(
-													-make_speed(
-														_mass2
-													)
-												)
-											);
-									}
-								);
-						}
-					);
-			},
-			_body1.mass(),
-			_body2.mass()
-		);
+                    return fcppt::tuple::make(
+                        sanguis::collision::result(make_speed(_mass1)),
+                        sanguis::collision::result(-make_speed(_mass2)));
+                  });
+            });
+      },
+      _body1.mass(),
+      _body2.mass());
 }

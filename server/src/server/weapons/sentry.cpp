@@ -33,7 +33,6 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::weapons::sentry::sentry(
 	sanguis::server::weapons::common_parameters const &_common_parameters,
 	sanguis::server::weapons::spawn_weapon &&_spawn_weapon,
@@ -63,89 +62,47 @@ sanguis::server::weapons::sentry::sentry(
 {
 }
 
-sanguis::server::weapons::sentry::~sentry()
-= default;
+sanguis::server::weapons::sentry::~sentry() = default;
 
 sanguis::server::weapons::sentry::sentry(
-	sanguis::server::weapons::spawn_parameters const &_spawn_parameters,
-	sanguis::server::weapons::attributes::health const _health
-)
-:
-	sanguis::server::weapons::spawn{
-		_spawn_parameters
-	},
-	health_{
-		_health
-	}
+    sanguis::server::weapons::spawn_parameters const &_spawn_parameters,
+    sanguis::server::weapons::attributes::health const _health)
+    : sanguis::server::weapons::spawn{_spawn_parameters}, health_{_health}
 {
 }
 
-sanguis::server::weapons::unique_ptr
-sanguis::server::weapons::sentry::clone() const
+sanguis::server::weapons::unique_ptr sanguis::server::weapons::sentry::clone() const
 {
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::server::weapons::weapon
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::weapons::sentry
-			>(
-				this->spawn_parameters(),
-				health_
-			)
-		);
+  return fcppt::unique_ptr_to_base<sanguis::server::weapons::weapon>(
+      fcppt::make_unique_ptr<sanguis::server::weapons::sentry>(this->spawn_parameters(), health_));
 }
 
-sanguis::server::entities::optional_base_ref
-sanguis::server::weapons::sentry::do_spawn(
-	sanguis::server::weapons::attack const &_attack,
-	sanguis::server::weapons::spawn_weapon const &_spawn_weapon
-)
+sanguis::server::entities::optional_base_ref sanguis::server::weapons::sentry::do_spawn(
+    sanguis::server::weapons::attack const &_attack,
+    sanguis::server::weapons::spawn_weapon const &_spawn_weapon)
 {
-	return
-		_attack.environment().insert(
-			fcppt::unique_ptr_to_base<
-				sanguis::server::entities::with_id
-			>(
-				fcppt::make_unique_ptr<
-					sanguis::server::entities::friend_
-				>(
-					sanguis::friend_type::sentry,
-					_attack.environment().load_context(),
-					sanguis::server::damage::make_armor_array({
-						sanguis::server::damage::fire =
-							sanguis::server::damage::armor_unit(
-								0.9F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							)
-					}),
-					health_.value(),
-					sanguis::server::entities::movement_speed(
-						0.F
-					),
-					sanguis::server::ai::create_stationary(
-						sanguis::server::ai::sight_range(
-							1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						)
-					),
-					_spawn_weapon.get()()
-				)
-			),
-			sanguis::server::entities::insert_parameters(
-				sanguis::server::center(
-					_attack.target().get()
-				),
-				_attack.angle()
-			)
-		);
+  return _attack.environment().insert(
+      fcppt::unique_ptr_to_base<
+          sanguis::server::entities::with_id>(fcppt::make_unique_ptr<
+                                              sanguis::server::entities::friend_>(
+          sanguis::friend_type::sentry,
+          _attack.environment().load_context(),
+          sanguis::server::damage::make_armor_array(
+              {sanguis::server::damage::fire = sanguis::server::damage::armor_unit(
+                   0.9F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                   )}),
+          health_.value(),
+          sanguis::server::entities::movement_speed(0.F),
+          sanguis::server::ai::create_stationary(sanguis::server::ai::sight_range(
+              1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+              )),
+          _spawn_weapon.get()())),
+      sanguis::server::entities::insert_parameters(
+          sanguis::server::center(_attack.target().get()), _attack.angle()));
 }
 
-sanguis::weapon_attribute_vector
-sanguis::server::weapons::sentry::extra_attributes() const
+sanguis::weapon_attribute_vector sanguis::server::weapons::sentry::extra_attributes() const
 {
-	return
-		sanguis::weapon_attribute_vector{
-			sanguis::server::weapons::attributes::make_health(
-				health_
-			)
-		};
+  return sanguis::weapon_attribute_vector{
+      sanguis::server::weapons::attributes::make_health(health_)};
 }

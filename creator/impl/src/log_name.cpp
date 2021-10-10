@@ -2,12 +2,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/name.hpp>
 
-
-fcppt::log::name
-sanguis::creator::impl::log_name()
+fcppt::log::name sanguis::creator::impl::log_name()
 {
-	return
-		fcppt::log::name{
-			FCPPT_TEXT("creator")
-		};
+  return fcppt::log::name{FCPPT_TEXT("creator")};
 }

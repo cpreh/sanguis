@@ -4,16 +4,10 @@
 #include <sge/audio/buffer_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace sanguis::client::load::resource
 {
 
-using
-optional_sound
-=
-fcppt::optional::reference<
-	sge::audio::buffer
->;
+using optional_sound = fcppt::optional::reference<sge::audio::buffer>;
 
 }
 

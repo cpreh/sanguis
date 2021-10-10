@@ -11,32 +11,14 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::model::object
-sanguis::model::deserialize(
-	std::filesystem::path const &_path
-)
+sanguis::model::object sanguis::model::deserialize(std::filesystem::path const &_path)
 try
 {
-	return
-		sanguis::model::impl::deserialize::object(
-			sge::parse::json::parse_file_exn(
-				_path
-			).object()
-		);
+  return sanguis::model::impl::deserialize::object(
+      sge::parse::json::parse_file_exn(_path).object());
 }
-catch(
-	fcppt::exception const &_error
-)
+catch (fcppt::exception const &_error)
 {
-	throw
-		sanguis::model::exception{
-			fcppt::filesystem::path_to_string(
-				_path
-			)
-			+
-			FCPPT_TEXT(": ")
-			+
-			_error.string()
-		};
+  throw sanguis::model::exception{
+      fcppt::filesystem::path_to_string(_path) + FCPPT_TEXT(": ") + _error.string()};
 }

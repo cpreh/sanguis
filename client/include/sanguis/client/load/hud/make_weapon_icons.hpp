@@ -5,15 +5,12 @@
 #include <sanguis/client/load/resource/textures_cref.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
-
 namespace sanguis::client::load::hud
 {
 
-sanguis::client::load::hud::weapon_icon_map
-make_weapon_icons(
-	fcppt::log::object &, // NOLINT(google-runtime-references)
-	sanguis::client::load::resource::textures_cref
-);
+sanguis::client::load::hud::weapon_icon_map make_weapon_icons(
+    fcppt::log::object &, // NOLINT(google-runtime-references)
+    sanguis::client::load::resource::textures_cref);
 
 }
 

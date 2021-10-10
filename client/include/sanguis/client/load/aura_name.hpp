@@ -4,14 +4,10 @@
 #include <sanguis/aura_type_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::client::load
 {
 
-fcppt::string
-aura_name(
-	sanguis::aura_type
-);
+fcppt::string aura_name(sanguis::aura_type);
 
 }
 

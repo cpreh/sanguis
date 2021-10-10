@@ -4,14 +4,10 @@
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::client::draw2d::sprite::center,
-	player_center
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::client::draw2d::sprite::center, player_center);
 
 }
 

@@ -5,5 +5,4 @@
 #include <sanguis/model/optional_image_name_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

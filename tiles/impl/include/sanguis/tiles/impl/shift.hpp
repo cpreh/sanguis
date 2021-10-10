@@ -5,5 +5,4 @@
 #include <sanguis/tiles/impl/shift_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

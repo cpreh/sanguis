@@ -3,14 +3,13 @@
 
 #include <sanguis/server/auras/target_kind_fwd.hpp>
 
-
 namespace sanguis::server::auras
 {
 
 enum class target_kind
 {
-	enemy,
-	friend_
+  enemy,
+  friend_
 };
 
 }

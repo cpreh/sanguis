@@ -4,16 +4,10 @@
 #include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <sanguis/messages/types/length.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-length
-=
-sanguis::messages::adapted_types::unsigned_<
-	sanguis::messages::types::length
->;
+using length = sanguis::messages::adapted_types::unsigned_<sanguis::messages::types::length>;
 
 }
 

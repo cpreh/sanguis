@@ -5,15 +5,11 @@
 #include <sanguis/common/symbol.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::load
 {
 
 SANGUIS_COMMON_SYMBOL
-fcppt::string
-weapon_pickup_name(
-	sanguis::weapon_type const &
-);
+fcppt::string weapon_pickup_name(sanguis::weapon_type const &);
 
 }
 

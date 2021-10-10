@@ -3,15 +3,14 @@
 
 #include <sanguis/friend_type_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class friend_type
 {
-	sentry,
-	spider,
-	fcppt_maximum = spider
+  sentry,
+  spider,
+  fcppt_maximum = spider
 };
 
 }

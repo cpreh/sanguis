@@ -11,55 +11,36 @@
 #include <sanguis/server/entities/with_ai_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::ai
 {
 
 class context
 {
-	FCPPT_NONMOVABLE(
-		context
-	);
+  FCPPT_NONMOVABLE(context);
+
 public:
-	explicit
-	context(
-		sanguis::server::entities::with_ai_ref
-	);
+  explicit context(sanguis::server::entities::with_ai_ref);
 
-	~context();
+  ~context();
 
-	[[nodiscard]]
-	bool
-	path_find(
-		sanguis::creator::pos const &
-	);
+  [[nodiscard]] bool path_find(sanguis::creator::pos const &);
 
-	void
-	clear_path();
+  void clear_path();
 
-	[[nodiscard]]
-	sanguis::creator::optional_pos
-	destination() const;
+  [[nodiscard]] sanguis::creator::optional_pos destination() const;
 
-	[[nodiscard]]
-	sanguis::server::ai::pathing::optional_target
-	continue_path();
+  [[nodiscard]] sanguis::server::ai::pathing::optional_target continue_path();
 
-	[[nodiscard]]
-	sanguis::creator::grid const &
-	grid() const;
+  [[nodiscard]] sanguis::creator::grid const &grid() const;
 
-	[[nodiscard]]
-	sanguis::server::entities::with_ai &
-	me();
+  [[nodiscard]] sanguis::server::entities::with_ai &me();
 
-	[[nodiscard]]
-	sanguis::server::entities::with_ai const &
-	me() const;
+  [[nodiscard]] sanguis::server::entities::with_ai const &me() const;
+
 private:
-	sanguis::server::entities::with_ai_ref const me_;
+  sanguis::server::entities::with_ai_ref const me_;
 
-	sanguis::server::ai::pathing::optional_trail trail_;
+  sanguis::server::ai::pathing::optional_trail trail_;
 };
 
 }

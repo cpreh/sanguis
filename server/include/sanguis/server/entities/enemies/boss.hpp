@@ -8,46 +8,28 @@
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::enemies
 {
 
-class boss
-:
-	public sanguis::server::entities::enemies::enemy
+class boss : public sanguis::server::entities::enemies::enemy
 {
-	FCPPT_NONMOVABLE(
-		boss
-	);
+  FCPPT_NONMOVABLE(boss);
+
 public:
-	explicit
-	boss(
-		sanguis::server::entities::enemies::parameters &&
-	);
+  explicit boss(sanguis::server::entities::enemies::parameters &&);
 
-	~boss()
-	override;
+  ~boss() override;
+
 private:
-	[[nodiscard]]
-	sanguis::server::entities::transfer_result
-	on_create()
-	override;
+  [[nodiscard]] sanguis::server::entities::transfer_result on_create() override;
 
-	void
-	remove_from_game()
-	override;
+  void remove_from_game() override;
 
-	[[nodiscard]]
-	sanguis::messages::types::string const &
-	name() const
-	override;
+  [[nodiscard]] sanguis::messages::types::string const &name() const override;
 
-	[[nodiscard]]
-	sanguis::enemy_kind
-	enemy_kind() const
-	override;
+  [[nodiscard]] sanguis::enemy_kind enemy_kind() const override;
 
-	sanguis::messages::types::string const name_;
+  sanguis::messages::types::string const name_;
 };
 
 }

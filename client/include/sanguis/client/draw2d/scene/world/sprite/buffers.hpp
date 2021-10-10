@@ -6,5 +6,4 @@
 #include <sge/sprite/buffers/multi.hpp>
 #include <sge/sprite/buffers/with_declaration.hpp>
 
-
 #endif

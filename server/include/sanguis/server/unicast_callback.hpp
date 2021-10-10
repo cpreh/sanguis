@@ -5,19 +5,11 @@
 #include <sanguis/server/player_id.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-unicast_callback
-=
-fcppt::function<
-	void (
-		sanguis::server::player_id,
-		sanguis::messages::server::base const &
-	)
->;
+using unicast_callback =
+    fcppt::function<void(sanguis::server::player_id, sanguis::messages::server::base const &)>;
 
 }
 

@@ -5,5 +5,4 @@
 #include <sanguis/creator/impl/random/uniform_size_fwd.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 
-
 #endif

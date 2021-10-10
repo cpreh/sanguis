@@ -4,14 +4,10 @@
 #include <sanguis/enemy_kind_fwd.hpp>
 #include <sge/image/color/any/object.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-sge::image::color::any::object
-enemy_color(
-	sanguis::enemy_kind
-);
+sge::image::color::any::object enemy_color(sanguis::enemy_kind);
 
 }
 

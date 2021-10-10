@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::server::entities::projectiles
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::duration,
-	life_time
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::duration, life_time);
 
 }
 

@@ -3,7 +3,6 @@
 
 #include <sanguis/messages/call/forward_to_default_fwd.hpp>
 
-
 namespace sanguis::messages::call
 {
 

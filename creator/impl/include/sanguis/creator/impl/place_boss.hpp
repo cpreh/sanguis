@@ -4,14 +4,10 @@
 #include <sanguis/creator/opening_container_array_fwd.hpp>
 #include <sanguis/creator/spawn.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
-sanguis::creator::spawn
-place_boss(
-	sanguis::creator::opening_container_array const &
-);
+sanguis::creator::spawn place_boss(sanguis::creator::opening_container_array const &);
 
 }
 

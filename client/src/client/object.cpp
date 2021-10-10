@@ -67,373 +67,157 @@
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::object::object(
-	fcppt::log::context_reference const _log_context,
-	sanguis::client::args::result const &_args
-)
-:
-	sanguis::client::object_base(),
-	log_context_{
-		_log_context
-	},
-	log_{
-		_log_context,
-		sanguis::client::log_location(),
-		fcppt::log::parameters_no_function(
-			fcppt::log::name{
-				FCPPT_TEXT("object")
-			}
-		)
-	},
-	settings_(
-		_log_context,
-		sanguis::client::config::settings::file()
-	),
-	saver_(
-		fcppt::make_cref(
-			settings_
-		)
-	),
-	io_service_(),
-	sys_(
-		sanguis::client::create_systems(
-			_log_context,
-			_args
-		)
-	),
-	renderer_(
-		sys_->renderer_device_core()
-	),
-	added_font_(
-		sys_->font_system().add_font(
-			sanguis::media_path()
-			/
-			FCPPT_TEXT("font")
-			/
-			FCPPT_TEXT("Electrolize-Regular.ttf")
-		)
-	),
-	font_object_(
-		sys_->font_system().create_font(
-			sge::font::parameters()
-			.family(
-				FCPPT_TEXT("Electrolize")
-			)
-			.ttf_size(
-				sge::font::ttf_size(
-					20U
-				)
-			)
-		)
-	),
-	resources_(
-		_log_context,
-		fcppt::make_ref(
-			sys_->image_system()
-		),
-		fcppt::make_ref(
-			sys_->renderer_device_core()
-		),
-		fcppt::make_ref(
-			sys_->audio_loader()
-		),
-		fcppt::make_ref(
-			sys_->audio_player()
-		)
-	),
-	gui_style_(
-		fcppt::unique_ptr_to_base<
-			sge::gui::style::base
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::client::gui::style::simple
-			>(
-				fcppt::make_cref(
-					resources_.resources().textures()
-				)
-			)
-		)
-	),
-	console_(
-		sge::console::prefix(
-			SGE_FONT_LIT('/')
-		)
-	),
-	console_gfx_(
-		fcppt::make_ref(
-			console_
-		),
-		fcppt::make_ref(
-			sys_->renderer_device_ffp()
-		),
-		fcppt::make_ref(
-			*font_object_
-		),
-		fcppt::make_ref(
-			sys_->viewport_manager()
-		),
-		fcppt::record::get<
-			sanguis::client::args::labels::history_size
-		>(
-			_args
-		)
-	),
-	cursor_{
-		fcppt::make_ref(
-			sys_->renderer_device_ffp()
-		),
-		fcppt::make_cref(
-			sys_->input_processor()
-		),
-		fcppt::make_cref(
-			resources_.resources().textures()
-		)
-	},
-	machine_(
-		_log_context,
-		fcppt::make_ref(
-			settings_
-		),
-		fcppt::copy(
-			_args
-		),
-		sanguis::client::server_callback{
-			[
-				this
-			](
-				alda::net::port const _port
-			)
-			{
-				this->create_server(
-					_port
-				);
-			}
-		},
-		fcppt::make_cref(
-			resources_
-		),
-		fcppt::make_cref(
-			*gui_style_
-		),
-		fcppt::make_ref(
-			sys_->window_system()
-		),
-		fcppt::make_ref(
-			*font_object_
-		),
-		fcppt::make_ref(
-			console_gfx_.get()
-		),
-		fcppt::make_ref(
-			sys_->renderer_device_ffp()
-		),
-		fcppt::make_ref(
-			io_service_
-		),
-		fcppt::make_ref(
-			sys_->viewport_manager()
-		),
-		fcppt::make_ref(
-			cursor_
-		)
-	),
-	frame_timer_(),
-	server_(),
-	scoped_machine_(
-		machine_
-	)
+    fcppt::log::context_reference const _log_context, sanguis::client::args::result const &_args)
+    : sanguis::client::object_base(),
+      log_context_{_log_context},
+      log_{
+          _log_context,
+          sanguis::client::log_location(),
+          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("object")})},
+      settings_(_log_context, sanguis::client::config::settings::file()),
+      saver_(fcppt::make_cref(settings_)),
+      io_service_(),
+      sys_(sanguis::client::create_systems(_log_context, _args)),
+      renderer_(sys_->renderer_device_core()),
+      added_font_(sys_->font_system().add_font(
+          sanguis::media_path() / FCPPT_TEXT("font") / FCPPT_TEXT("Electrolize-Regular.ttf"))),
+      font_object_(sys_->font_system().create_font(sge::font::parameters()
+                                                       .family(FCPPT_TEXT("Electrolize"))
+                                                       .ttf_size(sge::font::ttf_size(20U)))),
+      resources_(
+          _log_context,
+          fcppt::make_ref(sys_->image_system()),
+          fcppt::make_ref(sys_->renderer_device_core()),
+          fcppt::make_ref(sys_->audio_loader()),
+          fcppt::make_ref(sys_->audio_player())),
+      gui_style_(fcppt::unique_ptr_to_base<sge::gui::style::base>(
+          fcppt::make_unique_ptr<sanguis::client::gui::style::simple>(
+              fcppt::make_cref(resources_.resources().textures())))),
+      console_(sge::console::prefix(SGE_FONT_LIT('/'))),
+      console_gfx_(
+          fcppt::make_ref(console_),
+          fcppt::make_ref(sys_->renderer_device_ffp()),
+          fcppt::make_ref(*font_object_),
+          fcppt::make_ref(sys_->viewport_manager()),
+          fcppt::record::get<sanguis::client::args::labels::history_size>(_args)),
+      cursor_{
+          fcppt::make_ref(sys_->renderer_device_ffp()),
+          fcppt::make_cref(sys_->input_processor()),
+          fcppt::make_cref(resources_.resources().textures())},
+      machine_(
+          _log_context,
+          fcppt::make_ref(settings_),
+          fcppt::copy(_args),
+          sanguis::client::server_callback{[this](alda::net::port const _port)
+                                           { this->create_server(_port); }},
+          fcppt::make_cref(resources_),
+          fcppt::make_cref(*gui_style_),
+          fcppt::make_ref(sys_->window_system()),
+          fcppt::make_ref(*font_object_),
+          fcppt::make_ref(console_gfx_.get()),
+          fcppt::make_ref(sys_->renderer_device_ffp()),
+          fcppt::make_ref(io_service_),
+          fcppt::make_ref(sys_->viewport_manager()),
+          fcppt::make_ref(cursor_)),
+      frame_timer_(),
+      server_(),
+      scoped_machine_(machine_)
 {
 }
 
 FCPPT_PP_POP_WARNING
 
-sanguis::client::object::~object()
-= default;
+sanguis::client::object::~object() = default;
 
-awl::main::exit_code
-sanguis::client::object::run()
+awl::main::exit_code sanguis::client::object::run()
 {
-	this->register_handler();
+  this->register_handler();
 
-	try
-	{
-		io_service_.run();
-	}
-	catch(
-		fcppt::exception const &_exception
-	)
-	{
-		FCPPT_LOG_FATAL(
-			log_,
-			fcppt::log::out
-				<< FCPPT_TEXT("Client error: ")
-				<< _exception.string()
-		)
+  try
+  {
+    io_service_.run();
+  }
+  catch (fcppt::exception const &_exception)
+  {
+    FCPPT_LOG_FATAL(log_, fcppt::log::out << FCPPT_TEXT("Client error: ") << _exception.string())
 
-		sys_->window_system().quit(
-			awl::main::exit_failure()
-		);
-	}
-	catch(
-		std::exception const &_exception
-	)
-	{
-		FCPPT_LOG_FATAL(
-			log_,
-			fcppt::log::out
-				<< FCPPT_TEXT("Client error: ")
-				<< _exception.what()
-		)
+    sys_->window_system().quit(awl::main::exit_failure());
+  }
+  catch (std::exception const &_exception)
+  {
+    FCPPT_LOG_FATAL(log_, fcppt::log::out << FCPPT_TEXT("Client error: ") << _exception.what())
 
-		sys_->window_system().quit(
-			awl::main::exit_failure()
-		);
-	}
+    sys_->window_system().quit(awl::main::exit_failure());
+  }
 
-	awl::main::exit_code const server_ret(
-		this->quit_server()
-	);
+  awl::main::exit_code const server_ret(this->quit_server());
 
-	return
-		server_ret
-		==
-		awl::main::exit_failure()
-		?
-			awl::main::exit_failure()
-		:
-			// TODO(philipp): Return the actual error here
-			awl::main::exit_success()
-		;
+  return server_ret == awl::main::exit_failure() ? awl::main::exit_failure() :
+                                                 // TODO(philipp): Return the actual error here
+             awl::main::exit_success();
 }
 
-void
-sanguis::client::object::register_handler()
+void sanguis::client::object::register_handler()
 {
-	io_service_.post(
-		sanguis::io_service_callback{
-			[
-				this
-			]{
-				this->loop_handler();
-			}
-		}
-	);
+  io_service_.post(sanguis::io_service_callback{[this] { this->loop_handler(); }});
 }
 
-void
-sanguis::client::object::loop_handler()
+void sanguis::client::object::loop_handler()
 {
-	fcppt::optional::maybe_void(
-		server_,
-		[
-			this
-		](
-			server_unique_ptr const &_server
-		)
-		{
-			if(
-				!_server->running()
-			)
-			{
-				sys_->window_system().quit(
-					awl::main::exit_failure()
-				);
-			}
-		}
-	);
+  fcppt::optional::maybe_void(
+      server_,
+      [this](server_unique_ptr const &_server)
+      {
+        if (!_server->running())
+        {
+          sys_->window_system().quit(awl::main::exit_failure());
+        }
+      });
 
-	if(
-		!machine_.process(
-			std::chrono::duration_cast<
-				sanguis::duration
-			>(
-				sge::timer::difference_and_reset(
-					frame_timer_
-				)
-			)
-		)
-	)
-	{
-		io_service_.stop();
+  if (!machine_.process(std::chrono::duration_cast<sanguis::duration>(
+          sge::timer::difference_and_reset(frame_timer_))))
+  {
+    io_service_.stop();
 
-		return;
-	}
+    return;
+  }
 
-	this->register_handler();
+  this->register_handler();
 }
 
-void
-sanguis::client::object::create_server(
-	alda::net::port const _port
-)
+void sanguis::client::object::create_server(alda::net::port const _port)
 {
-	if(
-		server_.has_value()
-	)
-	{
-		this->quit_server();
+  if (server_.has_value())
+  {
+    this->quit_server();
 
-		server_ =
-			optional_server_unique_ptr();
-	}
-	else
-	{
-		// The server and the client both do logging and this ensures
-		// that it's thread-safe
-		for(
-			fcppt::log::level_stream &element
-			:
-			sanguis::log_level_streams()
-		)
-		{
-			// NOLINTNEXTLINE(readability-static-accessed-through-instance)
-			element.get().sync_with_stdio(
-				true
-			);
-		}
-	}
+    server_ = optional_server_unique_ptr();
+  }
+  else
+  {
+    // The server and the client both do logging and this ensures
+    // that it's thread-safe
+    for (fcppt::log::level_stream &element : sanguis::log_level_streams())
+    {
+      // NOLINTNEXTLINE(readability-static-accessed-through-instance)
+      element.get().sync_with_stdio(true);
+    }
+  }
 
-	server_ =
-		optional_server_unique_ptr(
-			fcppt::make_unique_ptr<
-				sanguis::client::server
-			>(
-				log_context_,
-				_port
-			)
-		);
+  server_ = optional_server_unique_ptr(
+      fcppt::make_unique_ptr<sanguis::client::server>(log_context_, _port));
 }
 
-awl::main::exit_code
-sanguis::client::object::quit_server()
+awl::main::exit_code sanguis::client::object::quit_server()
 {
-	fcppt::optional::maybe_void(
-		server_,
-		[](
-			server_unique_ptr const &_server
-		)
-		{
-			_server->quit();
-		}
-	);
+  fcppt::optional::maybe_void(server_, [](server_unique_ptr const &_server) { _server->quit(); });
 
-	return
-		fcppt::optional::maybe(
-			server_,
-			[]{
-				return
-					awl::main::exit_success();
-			},
-			[](
-				server_unique_ptr const &_server
-			)
-			{
-				return
-					_server->run();
-			}
-		);
+  return fcppt::optional::maybe(
+      server_,
+      [] { return awl::main::exit_success(); },
+      [](server_unique_ptr const &_server) { return _server->run(); });
 }

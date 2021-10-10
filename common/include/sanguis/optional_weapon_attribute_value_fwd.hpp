@@ -4,16 +4,10 @@
 #include <sanguis/weapon_attribute_value.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis
 {
 
-using
-optional_weapon_attribute_value
-=
-fcppt::optional::object<
-	sanguis::weapon_attribute_value
->;
+using optional_weapon_attribute_value = fcppt::optional::object<sanguis::weapon_attribute_value>;
 
 }
 

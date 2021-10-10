@@ -5,15 +5,12 @@
 #include <sanguis/server/ai/speed_factor_fwd.hpp>
 #include <sanguis/server/ai/status.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-sanguis::server::ai::status
-go_to_grid_pos(
-	sanguis::server::ai::context &, // NOLINT(google-runtime-references)
-	sanguis::server::ai::speed_factor
-);
+sanguis::server::ai::status go_to_grid_pos(
+    sanguis::server::ai::context &, // NOLINT(google-runtime-references)
+    sanguis::server::ai::speed_factor);
 
 }
 

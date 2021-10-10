@@ -5,17 +5,11 @@
 #include <sanguis/messages/roles/speed.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server::parts
 {
 
-using
-speed
-=
-fcppt::record::element<
-	sanguis::messages::roles::speed,
-	sanguis::messages::adapted_types::vector2
->;
+using speed = fcppt::record::
+    element<sanguis::messages::roles::speed, sanguis::messages::adapted_types::vector2>;
 
 }
 

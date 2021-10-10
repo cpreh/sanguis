@@ -8,47 +8,21 @@
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::client::perk::const_tree_range
-sanguis::client::perk::category_equal_range(
-	sanguis::client::perk::tree::const_iterator const _begin,
-	sanguis::client::perk::tree::const_iterator const _end
-)
+sanguis::client::perk::const_tree_range sanguis::client::perk::category_equal_range(
+    sanguis::client::perk::tree::const_iterator const _begin,
+    sanguis::client::perk::tree::const_iterator const _end)
 {
-	return
-		_begin
-		==
-		_end
-		?
-			sanguis::client::perk::const_tree_range(
-				_begin,
-				_end
-			)
-		:
-			sanguis::client::perk::const_tree_range(
-				std::equal_range(
-					_begin,
-					_end,
-					*_begin,
-					[](
-						sanguis::client::perk::tree const &_left,
-						sanguis::client::perk::tree const &_right
-					)
-					{
-						return
-							sanguis::client::perk::to_category(
-								FCPPT_ASSERT_OPTIONAL_ERROR(
-									_left.value()
-								).perk_type()
-							)
-							<
-							sanguis::client::perk::to_category(
-								FCPPT_ASSERT_OPTIONAL_ERROR(
-									_right.value()
-								).perk_type()
-							);
-					}
-				)
-			)
-		;
+  return _begin == _end ? sanguis::client::perk::const_tree_range(_begin, _end)
+                        : sanguis::client::perk::const_tree_range(std::equal_range(
+                              _begin,
+                              _end,
+                              *_begin,
+                              [](sanguis::client::perk::tree const &_left,
+                                 sanguis::client::perk::tree const &_right)
+                              {
+                                return sanguis::client::perk::to_category(
+                                           FCPPT_ASSERT_OPTIONAL_ERROR(_left.value()).perk_type()) <
+                                       sanguis::client::perk::to_category(
+                                           FCPPT_ASSERT_OPTIONAL_ERROR(_right.value()).perk_type());
+                              }));
 }

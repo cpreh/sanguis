@@ -4,7 +4,6 @@
 #include <sanguis/server/entities/simple_fwd.hpp>
 #include <sanguis/server/world/place_callback.hpp>
 
-
 namespace sanguis
 {
 namespace server
@@ -12,12 +11,8 @@ namespace server
 namespace world
 {
 
-using
-place_simple_callback
-=
-sanguis::server::world::place_callback<
-	sanguis::server::entities::simple
->;
+using place_simple_callback =
+    sanguis::server::world::place_callback<sanguis::server::entities::simple>;
 
 }
 }

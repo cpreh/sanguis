@@ -9,36 +9,29 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/viewport/manager_ref.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
 class parameters
 {
 public:
-	parameters(
-		sanguis::client::load::context_cref,
-		sanguis::client::draw2d::sprite::client::system_ref,
-		sge::viewport::manager_ref
-	);
+  parameters(
+      sanguis::client::load::context_cref,
+      sanguis::client::draw2d::sprite::client::system_ref,
+      sge::viewport::manager_ref);
 
-	[[nodiscard]]
-	sanguis::client::load::context const &
-	load_context() const;
+  [[nodiscard]] sanguis::client::load::context const &load_context() const;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::sprite::client::system &
-	client_system() const;
+  [[nodiscard]] sanguis::client::draw2d::sprite::client::system &client_system() const;
 
-	[[nodiscard]]
-	sge::viewport::manager &
-	viewport_manager() const;
+  [[nodiscard]] sge::viewport::manager &viewport_manager() const;
+
 private:
-	sanguis::client::load::context_cref load_context_;
+  sanguis::client::load::context_cref load_context_;
 
-	sanguis::client::draw2d::sprite::client::system_ref client_system_;
+  sanguis::client::draw2d::sprite::client::system_ref client_system_;
 
-	sge::viewport::manager_ref viewport_manager_;
+  sge::viewport::manager_ref viewport_manager_;
 };
 
 }

@@ -4,16 +4,10 @@
 #include <sanguis/server/ai/behavior/base_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::server::ai::behavior
 {
 
-using
-base_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::server::ai::behavior::base
->;
+using base_unique_ptr = fcppt::unique_ptr<sanguis::server::ai::behavior::base>;
 
 }
 

@@ -4,16 +4,10 @@
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::collision::world
 {
 
-using
-ghost_base_ref
-=
-fcppt::reference<
-	sanguis::collision::world::ghost_base
->;
+using ghost_base_ref = fcppt::reference<sanguis::collision::world::ghost_base>;
 
 }
 

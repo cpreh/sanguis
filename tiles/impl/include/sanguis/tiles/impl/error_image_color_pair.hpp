@@ -5,5 +5,4 @@
 #include <sge/image/color/any/object.hpp>
 #include <fcppt/tuple/object_impl.hpp>
 
-
 #endif

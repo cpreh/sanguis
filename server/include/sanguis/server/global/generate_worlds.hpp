@@ -4,14 +4,10 @@
 #include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
 
-
 namespace sanguis::server::global
 {
 
-sanguis::server::global::world_map
-generate_worlds(
-	sanguis::server::world::parameters const &
-);
+sanguis::server::global::world_map generate_worlds(sanguis::server::world::parameters const &);
 
 }
 

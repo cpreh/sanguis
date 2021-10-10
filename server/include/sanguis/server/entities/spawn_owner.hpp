@@ -5,5 +5,4 @@
 #include <sanguis/server/entities/spawn_owner_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

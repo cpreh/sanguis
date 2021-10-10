@@ -8,35 +8,28 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::pickups
 {
 
-class health
-:
-	public sanguis::server::entities::pickups::pickup
+class health : public sanguis::server::entities::pickups::pickup
 {
-	FCPPT_NONMOVABLE(
-		health
-	);
+  FCPPT_NONMOVABLE(health);
+
 public:
-	health(
-		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-		sanguis::server::team,
-		sanguis::server::health
-	);
+  health(
+      sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+      sanguis::server::team,
+      sanguis::server::health);
 
-	~health()
-	override;
+  ~health() override;
+
 private:
-	[[nodiscard]]
-	bool
-	do_pickup(
-		sanguis::server::entities::base &receiver // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  [[nodiscard]] bool
+  do_pickup(sanguis::server::entities::base &receiver // NOLINT(google-runtime-references)
+            ) // NOLINT(google-runtime-references)
+      override;
 
-	sanguis::server::health const amount_;
+  sanguis::server::health const amount_;
 };
 
 }

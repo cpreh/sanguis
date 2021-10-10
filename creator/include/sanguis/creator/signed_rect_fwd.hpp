@@ -7,14 +7,8 @@
 namespace sanguis::creator
 {
 
-using
-signed_rect
-=
-fcppt::math::box::rect<
-	sanguis::creator::difference_type
->;
+using signed_rect = fcppt::math::box::rect<sanguis::creator::difference_type>;
 
 }
 
 #endif
-

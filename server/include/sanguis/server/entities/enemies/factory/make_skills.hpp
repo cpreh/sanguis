@@ -5,15 +5,12 @@
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 #include <sanguis/server/random/amount.hpp>
 
-
 namespace sanguis::server::entities::enemies::factory
 {
 
-sanguis::server::entities::enemies::skills::factory::container
-make_skills(
-	sanguis::random_generator &, // NOLINT(google-runtime-references)
-	sanguis::server::random::amount
-);
+sanguis::server::entities::enemies::skills::factory::container make_skills(
+    sanguis::random_generator &, // NOLINT(google-runtime-references)
+    sanguis::server::random::amount);
 
 }
 

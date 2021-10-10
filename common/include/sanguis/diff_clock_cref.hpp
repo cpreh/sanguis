@@ -4,16 +4,10 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis
 {
 
-using
-diff_clock_cref
-=
-fcppt::reference<
-	sanguis::diff_clock const
->;
+using diff_clock_cref = fcppt::reference<sanguis::diff_clock const>;
 
 }
 

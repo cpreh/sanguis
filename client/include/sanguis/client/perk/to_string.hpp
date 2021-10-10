@@ -4,14 +4,10 @@
 #include <sanguis/perk_type_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-fcppt::string
-to_string(
-	sanguis::perk_type
-);
+fcppt::string to_string(sanguis::perk_type);
 
 }
 

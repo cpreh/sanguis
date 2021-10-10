@@ -4,16 +4,10 @@
 #include <sanguis/entity_id_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis
 {
 
-using
-optional_entity_id
-=
-fcppt::optional::object<
-	sanguis::entity_id
->;
+using optional_entity_id = fcppt::optional::object<sanguis::entity_id>;
 
 }
 

@@ -3,14 +3,13 @@
 
 #include <sanguis/client/draw2d/sprite/client/category_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::sprite::client
 {
 
 enum class category
 {
-	background,
-	light
+  background,
+  light
 };
 
 }

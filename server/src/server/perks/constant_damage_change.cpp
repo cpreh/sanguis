@@ -7,21 +7,15 @@
 #include <sanguis/server/perks/constant_damage_change.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
 
-
-void
-sanguis::server::perks::constant_damage_change(
-	sanguis::server::entities::with_perks &_entity,
-	sanguis::server::damage::type const _type,
-	sanguis::server::perks::level_diff const _diff,
-	sanguis::server::perks::change_factor const _factor
-)
+void sanguis::server::perks::constant_damage_change(
+    sanguis::server::entities::with_perks &_entity,
+    sanguis::server::damage::type const _type,
+    sanguis::server::perks::level_diff const _diff,
+    sanguis::server::perks::change_factor const _factor)
 {
-	sanguis::server::perks::change_simple(
-		&sanguis::server::entities::property::constant_change,
-		_entity.extra_damage(
-			_type
-		),
-		_factor,
-		_diff
-	);
+  sanguis::server::perks::change_simple(
+      &sanguis::server::entities::property::constant_change,
+      _entity.extra_damage(_type),
+      _factor,
+      _diff);
 }

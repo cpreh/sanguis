@@ -4,16 +4,10 @@
 #include <sanguis/messages/client/unique_ptr.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-optional_unique_ptr
-=
-fcppt::optional::object<
-	sanguis::messages::client::unique_ptr
->;
+using optional_unique_ptr = fcppt::optional::object<sanguis::messages::client::unique_ptr>;
 
 }
 

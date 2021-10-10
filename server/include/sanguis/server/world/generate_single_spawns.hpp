@@ -10,20 +10,17 @@
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/insert_with_id_pair_container.hpp>
 
-
 namespace sanguis::server::world
 {
 
-sanguis::server::world::insert_with_id_pair_container
-generate_single_spawns(
-	sanguis::creator::enemy_type,
-	sanguis::creator::enemy_kind,
-	sanguis::creator::spawn_pos const &,
-	sanguis::server::weapons::common_parameters const &,
-	sanguis::random_generator_ref,
-	sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-	sanguis::server::world::difficulty
-);
+sanguis::server::world::insert_with_id_pair_container generate_single_spawns(
+    sanguis::creator::enemy_type,
+    sanguis::creator::enemy_kind,
+    sanguis::creator::spawn_pos const &,
+    sanguis::server::weapons::common_parameters const &,
+    sanguis::random_generator_ref,
+    sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+    sanguis::server::world::difficulty);
 
 }
 

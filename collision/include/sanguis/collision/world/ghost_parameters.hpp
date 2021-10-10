@@ -9,44 +9,35 @@
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 
-
 namespace sanguis::collision::world
 {
 
 class ghost_parameters
 {
 public:
-	SANGUIS_COLLISION_SYMBOL
-	ghost_parameters(
-		sanguis::collision::center,
-		sanguis::collision::radius,
-		sanguis::collision::world::ghost_group,
-		sanguis::collision::world::ghost_base_ref
-	);
+  SANGUIS_COLLISION_SYMBOL
+  ghost_parameters(
+      sanguis::collision::center,
+      sanguis::collision::radius,
+      sanguis::collision::world::ghost_group,
+      sanguis::collision::world::ghost_base_ref);
 
-	[[nodiscard]]
-	sanguis::collision::center
-	center() const;
+  [[nodiscard]] sanguis::collision::center center() const;
 
-	[[nodiscard]]
-	sanguis::collision::radius
-	radius() const;
+  [[nodiscard]] sanguis::collision::radius radius() const;
 
-	[[nodiscard]]
-	sanguis::collision::world::ghost_group
-	collision_group() const;
+  [[nodiscard]] sanguis::collision::world::ghost_group collision_group() const;
 
-	[[nodiscard]]
-	sanguis::collision::world::ghost_base &
-	ghost_base() const;
+  [[nodiscard]] sanguis::collision::world::ghost_base &ghost_base() const;
+
 private:
-	sanguis::collision::center center_;
+  sanguis::collision::center center_;
 
-	sanguis::collision::radius radius_;
+  sanguis::collision::radius radius_;
 
-	sanguis::collision::world::ghost_group collision_group_;
+  sanguis::collision::world::ghost_group collision_group_;
 
-	sanguis::collision::world::ghost_base_ref ghost_base_;
+  sanguis::collision::world::ghost_base_ref ghost_base_;
 };
 
 }

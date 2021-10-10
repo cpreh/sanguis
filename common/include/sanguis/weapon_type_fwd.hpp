@@ -4,16 +4,10 @@
 #include <sanguis/weapon_types_fwd.hpp>
 #include <fcppt/variant/from_list_fwd.hpp>
 
-
 namespace sanguis
 {
 
-using
-weapon_type
-=
-fcppt::variant::from_list<
-	sanguis::weapon_types
->;
+using weapon_type = fcppt::variant::from_list<sanguis::weapon_types>;
 
 }
 

@@ -7,21 +7,13 @@
 #include <alda/bindings/record_variadic_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-die
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::die
-	>,
-	alda::bindings::record_variadic<
-		sanguis::messages::server::parts::entity_id
-	>
->;
+using die = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::die>,
+    alda::bindings::record_variadic<sanguis::messages::server::parts::entity_id>>;
 
 }
 

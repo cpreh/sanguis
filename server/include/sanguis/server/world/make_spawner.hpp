@@ -9,19 +9,16 @@
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/insert_simple_pair.hpp>
 
-
 namespace sanguis::server::world
 {
 
-sanguis::server::world::insert_simple_pair
-make_spawner(
-	sanguis::creator::enemy_type,
-	sanguis::creator::enemy_kind,
-	sanguis::creator::spawn_pos const &,
-	sanguis::server::weapons::common_parameters const &,
-	sanguis::random_generator_ref,
-	sanguis::server::world::difficulty
-);
+sanguis::server::world::insert_simple_pair make_spawner(
+    sanguis::creator::enemy_type,
+    sanguis::creator::enemy_kind,
+    sanguis::creator::spawn_pos const &,
+    sanguis::server::weapons::common_parameters const &,
+    sanguis::random_generator_ref,
+    sanguis::server::world::difficulty);
 
 }
 

@@ -5,16 +5,11 @@
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/radius_fwd.hpp>
 
-
 namespace sanguis::server::collision
 {
 
-bool
-with_world(
-	sanguis::server::center const &,
-	sanguis::server::radius,
-	sanguis::creator::grid const &
-);
+bool with_world(
+    sanguis::server::center const &, sanguis::server::radius, sanguis::creator::grid const &);
 
 }
 

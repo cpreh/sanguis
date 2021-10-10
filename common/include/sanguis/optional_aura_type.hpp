@@ -5,5 +5,4 @@
 #include <sanguis/optional_aura_type_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

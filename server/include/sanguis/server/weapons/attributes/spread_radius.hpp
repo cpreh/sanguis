@@ -5,12 +5,7 @@
 #include <sanguis/server/weapons/attributes/basic_decl.hpp>
 #include <sanguis/server/weapons/attributes/spread_radius_fwd.hpp>
 
-
-extern
-template
-class
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::weapons::spread_radius
->;
+extern template class sanguis::server::weapons::attributes::basic<
+    sanguis::server::weapons::spread_radius>;
 
 #endif

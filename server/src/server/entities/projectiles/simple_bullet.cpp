@@ -10,50 +10,34 @@
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 
-
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
-	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::team const _team,
-	sanguis::server::damage::unit const _damage,
-	sanguis::server::damage::modified_array const &_damage_modifiers,
-	sanguis::server::direction const _direction
-)
-:
-	sanguis::server::entities::projectiles::projectile(
-		sanguis::projectile_type::bullet,
-		_team,
-		sanguis::server::entities::movement_speed(
-			800.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-		),
-		_load_context,
-		sanguis::server::entities::projectiles::life_time(
-			sanguis::duration_second(
-				3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			)
-		),
-		_direction
-	),
-	damage_(
-		_damage
-	),
-	damage_modifiers_(
-		_damage_modifiers
-	)
+    sanguis::server::environment::load_context &_load_context,
+    sanguis::server::team const _team,
+    sanguis::server::damage::unit const _damage,
+    sanguis::server::damage::modified_array const &_damage_modifiers,
+    sanguis::server::direction const _direction)
+    : sanguis::server::entities::projectiles::projectile(
+          sanguis::projectile_type::bullet,
+          _team,
+          sanguis::server::entities::movement_speed(
+              800.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+              ),
+          _load_context,
+          sanguis::server::entities::projectiles::life_time(sanguis::duration_second(
+              3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+              )),
+          _direction),
+      damage_(_damage),
+      damage_modifiers_(_damage_modifiers)
 {
 }
 
-sanguis::server::entities::projectiles::simple_bullet::~simple_bullet()
-= default;
+sanguis::server::entities::projectiles::simple_bullet::~simple_bullet() = default;
 
-void
-sanguis::server::entities::projectiles::simple_bullet::do_damage(
-	sanguis::server::entities::with_health &_entity
-)
+void sanguis::server::entities::projectiles::simple_bullet::do_damage(
+    sanguis::server::entities::with_health &_entity)
 {
-	_entity.damage(
-		damage_,
-		damage_modifiers_
-	);
+  _entity.damage(damage_, damage_modifiers_);
 
-	this->expire();
+  this->expire();
 }

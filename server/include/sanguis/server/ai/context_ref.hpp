@@ -4,16 +4,10 @@
 #include <sanguis/server/ai/context_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-using
-context_ref
-=
-fcppt::reference<
-	sanguis::server::ai::context
->;
+using context_ref = fcppt::reference<sanguis::server::ai::context>;
 
 }
 

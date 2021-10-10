@@ -49,333 +49,147 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
-sanguis::server::states::unpaused::unpaused(
-	my_context _ctx
-)
-:
-	my_base(
-		std::move(
-			_ctx
-		)
-	),
-	log_{
-		this->context<
-			sanguis::server::machine
-		>().log_context(),
-		sanguis::server::states::log_location(),
-		fcppt::log::parameters_no_function(
-			fcppt::log::name{
-				FCPPT_TEXT("unpaused")
-			}
-		)
-	},
-	slowdown_{
-		sanguis::clock()
-	}
-{
-	FCPPT_LOG_DEBUG(
-		log_,
-		fcppt::log::out
-			<< FCPPT_TEXT("create")
-	)
-}
+sanguis::server::states::unpaused::unpaused(my_context _ctx)
+    : my_base(std::move(_ctx)),
+      log_{
+          this->context<sanguis::server::machine>().log_context(),
+          sanguis::server::states::log_location(),
+          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("unpaused")})},
+      slowdown_{sanguis::clock()} {FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("create"))}
 
-FCPPT_PP_POP_WARNING
+      FCPPT_PP_POP_WARNING
 
-sanguis::server::states::unpaused::~unpaused()
+      sanguis::server::states::unpaused::~unpaused(){
+          FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("destroy"))}
+
+      boost::statechart::result sanguis::server::states::unpaused::react(
+          sanguis::server::events::tick const &_event)
 {
-	FCPPT_LOG_DEBUG(
-		log_,
-		fcppt::log::out
-			<< FCPPT_TEXT("destroy")
-	)
+  slowdown_.set(_event.slowdown());
+
+  if (this->context<sanguis::server::machine>().process_overflow())
+  {
+    return this->discard_event();
+  }
+
+  this->context<sanguis::server::states::running>().global_context().update(_event.delta());
+
+  if (slowdown_.update())
+  {
+    this->context<sanguis::server::machine>().send_to_all(sanguis::messages::server::create(
+        alda::message::init_record<sanguis::messages::server::slowdown>(
+            sanguis::messages::roles::slowdown{} = _event.slowdown().get())));
+  }
+
+  return this->discard_event();
 }
 
 boost::statechart::result
-sanguis::server::states::unpaused::react(
-	sanguis::server::events::tick const &_event
-)
+sanguis::server::states::unpaused::react(sanguis::server::events::message const &_message)
 {
-	slowdown_.set(
-		_event.slowdown()
-	);
+  auto const handle_default_msg(
+      [this](sanguis::server::player_id, sanguis::messages::client::base const &)
+      { return this->forward_event(); });
 
-	if(
-		this->context<
-			sanguis::server::machine
-		>().process_overflow()
-	)
-	{
-		return
-			this->discard_event();
-	}
-
-	this->context<
-		sanguis::server::states::running
-	>().global_context().update(
-		_event.delta()
-	);
-
-	if(
-		slowdown_.update()
-	)
-	{
-		this->context<
-			sanguis::server::machine
-		>().send_to_all(
-			sanguis::messages::server::create(
-				alda::message::init_record<
-					sanguis::messages::server::slowdown
-				>(
-					sanguis::messages::roles::slowdown{} =
-						_event.slowdown().get()
-				)
-			)
-		);
-	}
-
-	return
-		this->discard_event();
+  return sanguis::server::dispatch<fcppt::mpl::list::object<
+      sanguis::messages::client::attack_dest,
+      sanguis::messages::client::change_world,
+      sanguis::messages::client::direction,
+      sanguis::messages::client::drop_or_pickup_weapon,
+      sanguis::messages::client::pause,
+      sanguis::messages::client::reload,
+      sanguis::messages::client::start_shooting,
+      sanguis::messages::client::stop_shooting,
+      sanguis::messages::client::unpause>>(
+      *this, _message, sanguis::server::dispatch_default_function{handle_default_msg});
 }
 
-boost::statechart::result
-sanguis::server::states::unpaused::react(
-	sanguis::server::events::message const &_message
-)
+sanguis::messages::call::result sanguis::server::states::unpaused::operator()(
+    sanguis::server::player_id const _id, sanguis::messages::client::attack_dest const &_message)
 {
-	auto const handle_default_msg(
-		[
-			this
-		](
-			sanguis::server::player_id,
-			sanguis::messages::client::base const &
-		)
-		{
-			return
-				this->forward_event();
-		}
-	);
+  this->context<sanguis::server::states::running>().global_context().player_target(
+      _id, fcppt::record::get<sanguis::messages::roles::attack_dest>(_message.get()));
 
-	return
-		sanguis::server::dispatch<
-			fcppt::mpl::list::object<
-				sanguis::messages::client::attack_dest,
-				sanguis::messages::client::change_world,
-				sanguis::messages::client::direction,
-				sanguis::messages::client::drop_or_pickup_weapon,
-				sanguis::messages::client::pause,
-				sanguis::messages::client::reload,
-				sanguis::messages::client::start_shooting,
-				sanguis::messages::client::stop_shooting,
-				sanguis::messages::client::unpause
-			>
-		>(
-			*this,
-			_message,
-			sanguis::server::dispatch_default_function{
-				handle_default_msg
-			}
-		);
+  return sanguis::messages::call::result(this->discard_event());
 }
 
-sanguis::messages::call::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id const _id,
-	sanguis::messages::client::attack_dest const &_message
-)
+sanguis::messages::call::result sanguis::server::states::unpaused::operator()(
+    sanguis::server::player_id const _id, sanguis::messages::client::change_world const &)
 {
-	this->context<
-		sanguis::server::states::running
-	>().global_context().player_target(
-		_id,
-		fcppt::record::get<
-			sanguis::messages::roles::attack_dest
-		>(
-			_message.get()
-		)
-	);
+  this->context<sanguis::server::states::running>().global_context().player_change_world(_id);
 
-	return
-		sanguis::messages::call::result(
-			this->discard_event()
-		);
+  return sanguis::messages::call::result(this->discard_event());
 }
 
-sanguis::messages::call::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id const _id,
-	sanguis::messages::client::change_world const &
-)
+sanguis::messages::call::result sanguis::server::states::unpaused::operator()(
+    sanguis::server::player_id const _id, sanguis::messages::client::direction const &_message)
 {
-	this->context<
-		sanguis::server::states::running
-	>().global_context().player_change_world(
-		_id
-	);
+  this->context<sanguis::server::states::running>().global_context().player_speed(
+      _id,
+      sanguis::server::speed(
+          fcppt::record::get<sanguis::messages::roles::direction>(_message.get())));
 
-	return
-		sanguis::messages::call::result(
-			this->discard_event()
-		);
+  return sanguis::messages::call::result(this->discard_event());
 }
 
-sanguis::messages::call::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id const _id,
-	sanguis::messages::client::direction const &_message
-)
+sanguis::messages::call::result sanguis::server::states::unpaused::operator()(
+    sanguis::server::player_id const _id,
+    sanguis::messages::client::drop_or_pickup_weapon const &_message)
 {
-	this->context<
-		sanguis::server::states::running
-	>().global_context().player_speed(
-		_id,
-		sanguis::server::speed(
-			fcppt::record::get<
-				sanguis::messages::roles::direction
-			>(
-				_message.get()
-			)
-		)
-	);
+  this->context<sanguis::server::states::running>().global_context().player_drop_or_pickup_weapon(
+      _id, _message.get());
 
-	return
-		sanguis::messages::call::result(
-			this->discard_event()
-		);
+  return sanguis::messages::call::result(this->discard_event());
 }
 
-sanguis::messages::call::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id const _id,
-	sanguis::messages::client::drop_or_pickup_weapon const &_message
-)
+sanguis::messages::call::result sanguis::server::states::unpaused::operator()(
+    sanguis::server::player_id, sanguis::messages::client::pause const &)
 {
-	this->context<
-		sanguis::server::states::running
-	>().global_context().player_drop_or_pickup_weapon(
-		_id,
-		_message.get()
-	);
+  if (this->context<sanguis::server::states::running>().global_context().multiple_players())
+  {
+    return sanguis::messages::call::result(this->discard_event());
+  }
 
-	return
-		sanguis::messages::call::result(
-			this->discard_event()
-		);
+  this->context<sanguis::server::machine>().send_to_all(
+      sanguis::messages::server::create(sanguis::messages::server::pause{fcppt::unit{}}));
+
+  return sanguis::messages::call::result(this->transit<sanguis::server::states::paused>());
 }
 
-sanguis::messages::call::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id,
-	sanguis::messages::client::pause const &
-)
+sanguis::messages::call::result sanguis::server::states::unpaused::operator()(
+    sanguis::server::player_id const _id, sanguis::messages::client::reload const &_message)
 {
-	if(
-		this->context<
-			sanguis::server::states::running
-		>().global_context().multiple_players()
-	)
-	{
-		return
-			sanguis::messages::call::result(
-				this->discard_event()
-			);
-	}
+  this->context<sanguis::server::states::running>().global_context().player_reload(
+      _id, _message.get());
 
-	this->context<
-		sanguis::server::machine
-	>().send_to_all(
-		sanguis::messages::server::create(
-			sanguis::messages::server::pause{
-				fcppt::unit{}
-			}
-		)
-	);
-
-	return
-		sanguis::messages::call::result(
-			this->transit<
-				sanguis::server::states::paused
-			>()
-		);
+  return sanguis::messages::call::result(this->discard_event());
 }
 
-sanguis::messages::call::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id const _id,
-	sanguis::messages::client::reload const &_message
-)
+sanguis::messages::call::result sanguis::server::states::unpaused::operator()(
+    sanguis::server::player_id const _id, sanguis::messages::client::start_shooting const &_message)
 {
-	this->context<
-		sanguis::server::states::running
-	>().global_context().player_reload(
-		_id,
-		_message.get()
-	);
+  this->context<sanguis::server::states::running>().global_context().player_change_shooting(
+      _id, true, _message.get());
 
-	return
-		sanguis::messages::call::result(
-			this->discard_event()
-		);
+  return sanguis::messages::call::result(this->discard_event());
 }
 
-sanguis::messages::call::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id const _id,
-	sanguis::messages::client::start_shooting const &_message
-)
+sanguis::messages::call::result sanguis::server::states::unpaused::operator()(
+    sanguis::server::player_id const _id, sanguis::messages::client::stop_shooting const &_message)
 {
-	this->context<
-		sanguis::server::states::running
-	>().global_context().player_change_shooting(
-		_id,
-		true,
-		_message.get()
-	);
+  this->context<sanguis::server::states::running>().global_context().player_change_shooting(
+      _id, false, _message.get());
 
-	return
-		sanguis::messages::call::result(
-			this->discard_event()
-		);
+  return sanguis::messages::call::result(this->discard_event());
 }
 
-sanguis::messages::call::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id const _id,
-	sanguis::messages::client::stop_shooting const &_message
-)
+sanguis::messages::call::result sanguis::server::states::unpaused::operator()(
+    sanguis::server::player_id, sanguis::messages::client::unpause const &)
 {
-	this->context<
-		sanguis::server::states::running
-	>().global_context().player_change_shooting(
-		_id,
-		false,
-		_message.get()
-	);
+  FCPPT_LOG_WARNING(log_, fcppt::log::out << FCPPT_TEXT("received superfluous unpause!"))
 
-	return
-		sanguis::messages::call::result(
-			this->discard_event()
-		);
-}
-
-sanguis::messages::call::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id,
-	sanguis::messages::client::unpause const &
-)
-{
-	FCPPT_LOG_WARNING(
-		log_,
-		fcppt::log::out
-			<< FCPPT_TEXT("received superfluous unpause!")
-	)
-
-	return
-		sanguis::messages::call::result(
-			this->discard_event()
-		);
+  return sanguis::messages::call::result(this->discard_event());
 }

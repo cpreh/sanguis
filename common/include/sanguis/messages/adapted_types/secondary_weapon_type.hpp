@@ -5,5 +5,4 @@
 #include <sanguis/messages/adapted_types/enum.hpp>
 #include <sanguis/messages/adapted_types/secondary_weapon_type_fwd.hpp>
 
-
 #endif

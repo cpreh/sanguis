@@ -5,15 +5,11 @@
 #include <sanguis/client/perk/tree_cref.hpp>
 #include <sanguis/client/perk/tree_fwd.hpp>
 
-
 namespace sanguis::client::perk
 {
 
 sanguis::client::perk::tree const &
-find_info_const(
-	sanguis::perk_type,
-	sanguis::client::perk::tree_cref
-);
+    find_info_const(sanguis::perk_type, sanguis::client::perk::tree_cref);
 
 }
 

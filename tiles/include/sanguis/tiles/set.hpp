@@ -13,84 +13,47 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tiles
 {
 
-template<
-	typename Tile
->
+template <typename Tile>
 class set
 {
-	FCPPT_NONCOPYABLE(
-		set
-	);
+  FCPPT_NONCOPYABLE(set);
 
-	static_assert(
-		sanguis::creator::is_tile<
-			Tile
-		>::value,
-		"Tile must be a tile type"
-	);
+  static_assert(sanguis::creator::is_tile<Tile>::value, "Tile must be a tile type");
+
 public:
-	SANGUIS_TILES_SYMBOL
-	set(
-		sge::image2d::system &, // NOLINT(google-runtime-references)
-		sanguis::tiles::pair<
-			Tile
-		>
-	);
+  SANGUIS_TILES_SYMBOL
+  set(sge::image2d::system &, // NOLINT(google-runtime-references)
+      sanguis::tiles::pair<Tile>);
 
-	SANGUIS_TILES_SYMBOL
-	set(
-		set &&
-	)
-	noexcept;
+  SANGUIS_TILES_SYMBOL
+  set(set &&) noexcept;
 
-	SANGUIS_TILES_SYMBOL
-	set &
-	operator=(
-		set &&
-	)
-	noexcept;
+  SANGUIS_TILES_SYMBOL
+  set &operator=(set &&) noexcept;
 
-	SANGUIS_TILES_SYMBOL
-	~set();
+  SANGUIS_TILES_SYMBOL
+  ~set();
 
-	[[nodiscard]]
-	SANGUIS_TILES_SYMBOL
-	sanguis::tiles::orientation_map const &
-	orientations() const;
+  [[nodiscard]] SANGUIS_TILES_SYMBOL sanguis::tiles::orientation_map const &orientations() const;
 
-	[[nodiscard]]
-	SANGUIS_TILES_SYMBOL
-	std::filesystem::path const &
-	path() const;
+  [[nodiscard]] SANGUIS_TILES_SYMBOL std::filesystem::path const &path() const;
+
 private:
-	set(
-		sge::image2d::system &, // NOLINT(google-runtime-references)
-		std::filesystem::path const &
-	);
+  set(sge::image2d::system &, // NOLINT(google-runtime-references)
+      std::filesystem::path const &);
 
-	std::filesystem::path path_;
+  std::filesystem::path path_;
 
-	sanguis::tiles::orientation_map orientations_;
+  sanguis::tiles::orientation_map orientations_;
 };
 
 }
 
-#define SANGUIS_TILES_DECLARE_SET(\
-	tile_type\
-)\
-extern \
-template \
-class \
-sanguis::tiles::set<\
-	tile_type \
->
+#define SANGUIS_TILES_DECLARE_SET(tile_type) extern template class sanguis::tiles::set<tile_type>
 
-SANGUIS_CREATOR_INSTANTIATE_TILE(
-	SANGUIS_TILES_DECLARE_SET
-);
+SANGUIS_CREATOR_INSTANTIATE_TILE(SANGUIS_TILES_DECLARE_SET);
 
 #endif

@@ -3,14 +3,10 @@
 
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::server
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	unsigned,
-	player_id
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(unsigned, player_id);
 
 }
 

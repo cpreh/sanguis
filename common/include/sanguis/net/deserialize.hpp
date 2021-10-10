@@ -9,33 +9,17 @@
 #include <alda/serialization/context_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 namespace sanguis::net
 {
 
-template<
-	typename AldaType
->
-inline
-fcppt::optional::object<
-	alda::message::base_unique_ptr<
-		AldaType
-	>
->
-deserialize(
-	alda::serialization::context<
-		AldaType
-	> const &_context,
-	alda::net::buffer::circular_receive::streambuf &_data // NOLINT(google-runtime-references)
-) // NOLINT(google-runtime-references)
+template <typename AldaType>
+inline fcppt::optional::object<alda::message::base_unique_ptr<AldaType>> deserialize(
+    alda::serialization::context<AldaType> const &_context,
+    alda::net::buffer::circular_receive::streambuf &_data // NOLINT(google-runtime-references)
+    ) // NOLINT(google-runtime-references)
 {
-	return
-		alda::net::buffer::circular_receive::extract_message<
-			sanguis::net::message_header
-		>(
-			_context,
-			_data
-		);
+  return alda::net::buffer::circular_receive::extract_message<sanguis::net::message_header>(
+      _context, _data);
 }
 
 }

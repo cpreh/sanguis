@@ -17,10 +17,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_FWD_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_FWD_HPP_INCLUDED
-
 
 namespace sanguis::client::draw2d::sprite::animation
 {

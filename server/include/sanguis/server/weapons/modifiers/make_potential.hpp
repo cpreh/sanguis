@@ -7,35 +7,14 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
-template<
-	typename Parameters,
-	typename... Args
->
-sanguis::server::weapons::modifiers::potential<
-	Parameters
->
-make_potential(
-	Args && ..._args
-)
+template <typename Parameters, typename... Args>
+sanguis::server::weapons::modifiers::potential<Parameters> make_potential(Args &&..._args)
 {
-	return
-		sanguis::server::weapons::modifiers::potential<
-			Parameters
-		>{
-			sanguis::server::weapons::modifiers::make<
-				Parameters
-			>(
-				std::forward<
-					Args
-				>(
-					_args
-				)...
-			)
-		};
+  return sanguis::server::weapons::modifiers::potential<Parameters>{
+      sanguis::server::weapons::modifiers::make<Parameters>(std::forward<Args>(_args)...)};
 }
 
 }

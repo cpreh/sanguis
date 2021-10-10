@@ -30,211 +30,116 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::collision::impl::world::simple::body::body(
-	sanguis::collision::world::body_parameters const &_parameters,
-	sanguis::collision::impl::world::simple::body_remove_callback &&_body_remove_callback,
-	sanguis::collision::impl::world::simple::body_move_callback &&_body_move_callback
-)
-:
-	sanguis::collision::world::body(),
-	body_remove_callback_(
-		std::move(
-			_body_remove_callback
-		)
-	),
-	body_move_callback_(
-		std::move(
-			_body_move_callback
-		)
-	),
-	radius_(
-		_parameters.radius()
-	),
-	mass_(
-		_parameters.mass()
-	),
-	collision_group_(
-		_parameters.collision_group()
-	),
-	body_base_(
-		_parameters.body_base()
-	),
-	center_(
-		_parameters.center()
-	),
-	speed_(
-		_parameters.speed()
-	)
+    sanguis::collision::world::body_parameters const &_parameters,
+    sanguis::collision::impl::world::simple::body_remove_callback &&_body_remove_callback,
+    sanguis::collision::impl::world::simple::body_move_callback &&_body_move_callback)
+    : sanguis::collision::world::body(),
+      body_remove_callback_(std::move(_body_remove_callback)),
+      body_move_callback_(std::move(_body_move_callback)),
+      radius_(_parameters.radius()),
+      mass_(_parameters.mass()),
+      collision_group_(_parameters.collision_group()),
+      body_base_(_parameters.body_base()),
+      center_(_parameters.center()),
+      speed_(_parameters.speed())
 {
-	if(
-		radius_.get()
-		>=
-		sanguis::collision::impl::grid_to_meter(
-			sanguis::creator::tile_size::value
-			/
-			fcppt::literal<
-				sanguis::creator::size_type
-			>(
-				2
-			)
-		)
-	)
-	{
-		FCPPT_LOG_WARNING(
-			_parameters.log(),
-			fcppt::log::out
-				<< FCPPT_TEXT("Body with radius ")
-				<< radius_
-				<< FCPPT_TEXT(" won't fit into a single tile.")
-		)
-	}
+  if (radius_.get() >=
+      sanguis::collision::impl::grid_to_meter(
+          sanguis::creator::tile_size::value / fcppt::literal<sanguis::creator::size_type>(2)))
+  {
+    FCPPT_LOG_WARNING(
+        _parameters.log(),
+        fcppt::log::out << FCPPT_TEXT("Body with radius ") << radius_
+                        << FCPPT_TEXT(" won't fit into a single tile."))
+  }
 
-	fcppt::optional::maybe_void(
-		_parameters.mass(),
-		[](
-			sanguis::collision::mass const &_mass
-		)
-		{
-			if(
-				sanguis::collision::impl::is_null(
-					_mass.value()
-				)
-			)
-			{
-				throw
-					sanguis::collision::exception{
-						FCPPT_TEXT("world::simple::body: mass is 0")
-					};
-			}
-		}
-	);
+  fcppt::optional::maybe_void(
+      _parameters.mass(),
+      [](sanguis::collision::mass const &_mass)
+      {
+        if (sanguis::collision::impl::is_null(_mass.value()))
+        {
+          throw sanguis::collision::exception{FCPPT_TEXT("world::simple::body: mass is 0")};
+        }
+      });
 }
 
-sanguis::collision::impl::world::simple::body::~body()
+sanguis::collision::impl::world::simple::body::~body() { body_remove_callback_(*this); }
+
+void sanguis::collision::impl::world::simple::body::center(sanguis::collision::center const _center)
 {
-	body_remove_callback_(
-		*this
-	);
+  center_ = _center;
+
+  body_move_callback_(fcppt::make_ref(*this));
 }
 
-void
-sanguis::collision::impl::world::simple::body::center(
-	sanguis::collision::center const _center
-)
+void sanguis::collision::impl::world::simple::body::move(
+    sanguis::collision::optional_result const &_opt_collision,
+    sanguis::collision::duration const _duration)
 {
-	center_ =
-		_center;
+  fcppt::optional::maybe_void(
+      _opt_collision,
+      [this](sanguis::collision::result const &_collision)
+      {
+        speed_ = _collision.speed();
 
-	body_move_callback_(
-		fcppt::make_ref(
-			*this
-		)
-	);
+        this->speed_changed();
+
+        body_base_.world_collision();
+      });
+
+  center_ = sanguis::collision::impl::move(center_, speed_, _duration);
+
+  body_base_.center_changed(center_);
 }
 
-void
-sanguis::collision::impl::world::simple::body::move(
-	sanguis::collision::optional_result const &_opt_collision,
-	sanguis::collision::duration const _duration
-)
+void sanguis::collision::impl::world::simple::body::push(
+    sanguis::collision::result const &_collision)
 {
-	fcppt::optional::maybe_void(
-		_opt_collision,
-		[
-			this
-		](
-			sanguis::collision::result const &_collision
-		)
-		{
+  speed_ += _collision.speed();
 
-			speed_ =
-				_collision.speed();
-
-			this->speed_changed();
-
-			body_base_.world_collision();
-		}
-	);
-
-	center_ =
-		sanguis::collision::impl::move(
-			center_,
-			speed_,
-			_duration
-		);
-
-	body_base_.center_changed(
-		center_
-	);
+  this->speed_changed();
 }
 
-void
-sanguis::collision::impl::world::simple::body::push(
-	sanguis::collision::result const &_collision
-)
+sanguis::collision::center sanguis::collision::impl::world::simple::body::center() const
 {
-	speed_ +=
-		_collision.speed();
-
-	this->speed_changed();
+  return center_;
 }
 
-sanguis::collision::center
-sanguis::collision::impl::world::simple::body::center() const
+void sanguis::collision::impl::world::simple::body::speed(sanguis::collision::speed const _speed)
 {
-	return
-		center_;
+  speed_ = _speed;
 }
 
-void
-sanguis::collision::impl::world::simple::body::speed(
-	sanguis::collision::speed const _speed
-)
+sanguis::collision::speed sanguis::collision::impl::world::simple::body::speed() const
 {
-	speed_ =
-		_speed;
+  return speed_;
 }
 
-sanguis::collision::speed
-sanguis::collision::impl::world::simple::body::speed() const
+sanguis::collision::radius sanguis::collision::impl::world::simple::body::radius() const
 {
-	return
-		speed_;
+  return radius_;
 }
 
-sanguis::collision::radius
-sanguis::collision::impl::world::simple::body::radius() const
+sanguis::collision::optional_mass sanguis::collision::impl::world::simple::body::mass() const
 {
-	return
-		radius_;
-}
-
-sanguis::collision::optional_mass
-sanguis::collision::impl::world::simple::body::mass() const
-{
-	return
-		mass_;
+  return mass_;
 }
 
 sanguis::collision::world::body_group
 sanguis::collision::impl::world::simple::body::collision_group() const
 {
-	return
-		collision_group_;
+  return collision_group_;
 }
 
 sanguis::collision::world::body_base &
 sanguis::collision::impl::world::simple::body::body_base() const
 {
-	return
-		body_base_;
+  return body_base_;
 }
 
-void
-sanguis::collision::impl::world::simple::body::speed_changed()
+void sanguis::collision::impl::world::simple::body::speed_changed()
 {
-	body_base_.speed_changed(
-		speed_
-	);
+  body_base_.speed_changed(speed_);
 }

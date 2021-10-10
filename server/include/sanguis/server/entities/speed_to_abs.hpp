@@ -5,15 +5,11 @@
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
-
 namespace sanguis::server::entities
 {
 
 sanguis::server::speed
-speed_to_abs(
-	sanguis::server::direction,
-	sanguis::server::entities::property::value
-);
+    speed_to_abs(sanguis::server::direction, sanguis::server::entities::property::value);
 
 }
 

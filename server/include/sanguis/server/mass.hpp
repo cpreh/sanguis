@@ -5,5 +5,4 @@
 #include <sanguis/server/mass_unit.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

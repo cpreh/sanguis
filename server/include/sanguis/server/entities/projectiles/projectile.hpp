@@ -13,39 +13,29 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::projectiles
 {
 
-class projectile
-:
-	public sanguis::server::entities::projectiles::base
+class projectile : public sanguis::server::entities::projectiles::base
 {
-	FCPPT_NONMOVABLE(
-		projectile
-	);
+  FCPPT_NONMOVABLE(projectile);
+
 protected:
-	projectile(
-		sanguis::projectile_type,
-		sanguis::server::team,
-		sanguis::server::entities::movement_speed,
-		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-		sanguis::server::entities::projectiles::life_time,
-		sanguis::server::direction
-	);
+  projectile(
+      sanguis::projectile_type,
+      sanguis::server::team,
+      sanguis::server::entities::movement_speed,
+      sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+      sanguis::server::entities::projectiles::life_time,
+      sanguis::server::direction);
 
-	~projectile()
-	override;
+  ~projectile() override;
 
-	[[nodiscard]]
-	sanguis::messages::server::unique_ptr
-	add_message(
-		sanguis::server::player_id,
-		sanguis::collision::world::created
-	) const
-	override;
+  [[nodiscard]] sanguis::messages::server::unique_ptr
+      add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
+
 private:
-	sanguis::projectile_type const projectile_type_;
+  sanguis::projectile_type const projectile_type_;
 };
 
 }

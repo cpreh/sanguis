@@ -4,14 +4,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	bool,
-	in_range
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(bool, in_range);
 
 }
 

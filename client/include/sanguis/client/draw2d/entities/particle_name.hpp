@@ -5,14 +5,10 @@
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	fcppt::string,
-	particle_name
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(fcppt::string, particle_name);
 
 }
 

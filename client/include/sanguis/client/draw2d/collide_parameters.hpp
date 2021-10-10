@@ -7,43 +7,34 @@
 #include <sanguis/client/draw2d/fradius.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
 class collide_parameters
 {
 public:
-	collide_parameters(
-		sanguis::duration,
-		sanguis::client::draw2d::center,
-		sanguis::client::draw2d::speed,
-		sanguis::client::draw2d::fradius
-	);
+  collide_parameters(
+      sanguis::duration,
+      sanguis::client::draw2d::center,
+      sanguis::client::draw2d::speed,
+      sanguis::client::draw2d::fradius);
 
-	[[nodiscard]]
-	sanguis::duration
-	duration() const;
+  [[nodiscard]] sanguis::duration duration() const;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::center
-	center() const;
+  [[nodiscard]] sanguis::client::draw2d::center center() const;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::speed
-	speed() const;
+  [[nodiscard]] sanguis::client::draw2d::speed speed() const;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::fradius
-	radius() const;
+  [[nodiscard]] sanguis::client::draw2d::fradius radius() const;
+
 private:
-	sanguis::duration duration_;
+  sanguis::duration duration_;
 
-	sanguis::client::draw2d::center center_;
+  sanguis::client::draw2d::center center_;
 
-	sanguis::client::draw2d::speed speed_;
+  sanguis::client::draw2d::speed speed_;
 
-	sanguis::client::draw2d::fradius radius_;
+  sanguis::client::draw2d::fradius radius_;
 };
 
 }

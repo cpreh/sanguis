@@ -5,15 +5,11 @@
 #include <sanguis/collision/radius_fwd.hpp>
 #include <sanguis/creator/grid_spiral_range_fwd.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
 sanguis::creator::grid_spiral_range
-make_spiral_range(
-	sanguis::collision::center const &,
-	sanguis::collision::radius const &
-);
+make_spiral_range(sanguis::collision::center const &, sanguis::collision::radius const &);
 
 }
 

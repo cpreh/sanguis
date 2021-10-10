@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/pickups/weapon_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::entities::pickups
 {
 
-using
-weapon_ref
-=
-fcppt::reference<
-	sanguis::server::entities::pickups::weapon
->;
+using weapon_ref = fcppt::reference<sanguis::server::entities::pickups::weapon>;
 
 }
 

@@ -4,21 +4,11 @@
 #include <sanguis/tiles/pair_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-template<
-	typename Tile
->
-using
-optional_pair
-=
-fcppt::optional::object<
-	sanguis::tiles::pair<
-		Tile
-	>
->;
+template <typename Tile>
+using optional_pair = fcppt::optional::object<sanguis::tiles::pair<Tile>>;
 
 }
 

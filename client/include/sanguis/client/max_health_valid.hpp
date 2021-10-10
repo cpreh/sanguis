@@ -3,14 +3,10 @@
 
 #include <sanguis/client/max_health.hpp>
 
-
 namespace sanguis::client
 {
 
-bool
-max_health_valid(
-	sanguis::client::max_health
-);
+bool max_health_valid(sanguis::client::max_health);
 
 }
 

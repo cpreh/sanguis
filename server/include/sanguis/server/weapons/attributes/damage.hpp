@@ -5,12 +5,6 @@
 #include <sanguis/server/weapons/attributes/basic_decl.hpp>
 #include <sanguis/server/weapons/attributes/damage_fwd.hpp>
 
-
-extern
-template
-class
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::weapons::damage
->;
+extern template class sanguis::server::weapons::attributes::basic<sanguis::server::weapons::damage>;
 
 #endif

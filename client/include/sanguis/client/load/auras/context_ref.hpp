@@ -4,16 +4,10 @@
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::load::auras
 {
 
-using
-context_ref
-=
-fcppt::reference<
-	sanguis::client::load::auras::context
->;
+using context_ref = fcppt::reference<sanguis::client::load::auras::context>;
 
 }
 

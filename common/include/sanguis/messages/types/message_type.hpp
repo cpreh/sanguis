@@ -5,7 +5,6 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis
 {
 namespace messages
@@ -13,10 +12,7 @@ namespace messages
 namespace types
 {
 
-using
-message_type
-=
-std::uint8_t;
+using message_type = std::uint8_t;
 
 }
 }

@@ -4,5 +4,4 @@
 #include <sanguis/messages/adapted_types/bool_fwd.hpp>
 #include <alda/bindings/bool.hpp>
 
-
 #endif

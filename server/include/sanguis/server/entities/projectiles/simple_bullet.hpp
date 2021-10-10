@@ -10,38 +10,31 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::projectiles
 {
 
-class simple_bullet
-:
-	public sanguis::server::entities::projectiles::projectile
+class simple_bullet : public sanguis::server::entities::projectiles::projectile
 {
-	FCPPT_NONMOVABLE(
-		simple_bullet
-	);
+  FCPPT_NONMOVABLE(simple_bullet);
+
 public:
-	simple_bullet(
-		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-		sanguis::server::team,
-		sanguis::server::damage::unit,
-		sanguis::server::damage::modified_array const &,
-		sanguis::server::direction
-	);
+  simple_bullet(
+      sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+      sanguis::server::team,
+      sanguis::server::damage::unit,
+      sanguis::server::damage::modified_array const &,
+      sanguis::server::direction);
 
-	~simple_bullet()
-	override;
+  ~simple_bullet() override;
+
 private:
-	void
-	do_damage(
-		sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void do_damage(sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
+                 ) // NOLINT(google-runtime-references)
+      override;
 
-	sanguis::server::damage::unit const damage_;
+  sanguis::server::damage::unit const damage_;
 
-	sanguis::server::damage::modified_array const damage_modifiers_;
+  sanguis::server::damage::modified_array const damage_modifiers_;
 };
 
 }

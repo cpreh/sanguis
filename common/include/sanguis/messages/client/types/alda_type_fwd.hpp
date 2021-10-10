@@ -4,16 +4,10 @@
 #include <sanguis/messages/client/types/message.hpp>
 #include <alda/type_enum_fwd.hpp>
 
-
 namespace sanguis::messages::client::types
 {
 
-using
-alda_type
-=
-alda::type_enum<
-	sanguis::messages::client::types::message
->;
+using alda_type = alda::type_enum<sanguis::messages::client::types::message>;
 
 }
 

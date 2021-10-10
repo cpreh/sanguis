@@ -11,28 +11,19 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-magazine_remaining
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::magazine_remaining
-	>,
-	alda::bindings::record_variadic<
-		fcppt::record::element<
-			sanguis::messages::roles::is_primary_weapon,
-			sanguis::messages::adapted_types::is_primary_weapon
-		>,
-		fcppt::record::element<
-			sanguis::messages::roles::magazine_remaining,
-			sanguis::messages::adapted_types::magazine_size
-		>
-	>
->;
+using magazine_remaining = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::magazine_remaining>,
+    alda::bindings::record_variadic<
+        fcppt::record::element<
+            sanguis::messages::roles::is_primary_weapon,
+            sanguis::messages::adapted_types::is_primary_weapon>,
+        fcppt::record::element<
+            sanguis::messages::roles::magazine_remaining,
+            sanguis::messages::adapted_types::magazine_size>>>;
 
 }
 

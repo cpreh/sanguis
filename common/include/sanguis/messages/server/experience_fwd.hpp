@@ -6,19 +6,13 @@
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/object_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-experience
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::experience
-	>,
-	sanguis::messages::adapted_types::exp
->;
+using experience = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::experience>,
+    sanguis::messages::adapted_types::exp>;
 
 }
 

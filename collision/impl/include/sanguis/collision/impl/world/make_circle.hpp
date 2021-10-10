@@ -5,24 +5,13 @@
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/impl/circle.hpp>
 
-
 namespace sanguis::collision::impl::world
 {
 
-template<
-	typename Type
->
-inline
-sanguis::collision::impl::circle
-make_circle(
-	Type const &_object
-)
+template <typename Type>
+inline sanguis::collision::impl::circle make_circle(Type const &_object)
 {
-	return
-		sanguis::collision::impl::circle{
-			_object.center().get(),
-			_object.radius().get()
-		};
+  return sanguis::collision::impl::circle{_object.center().get(), _object.radius().get()};
 }
 
 }

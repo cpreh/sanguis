@@ -8,16 +8,10 @@
 #include <unordered_set>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-using
-entity_set
-=
-std::unordered_set<
-	sanguis::server::entities::with_body_ref
->;
+using entity_set = std::unordered_set<sanguis::server::entities::with_body_ref>;
 
 }
 

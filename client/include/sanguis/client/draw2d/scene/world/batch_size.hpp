@@ -6,17 +6,13 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
-using
-batch_size
-=
-std::integral_constant<
-	sanguis::creator::size_type,
-	16 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
->;
+using batch_size = std::integral_constant<
+    sanguis::creator::size_type,
+    16 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+    >;
 
 }
 

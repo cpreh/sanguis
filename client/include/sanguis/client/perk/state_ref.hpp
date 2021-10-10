@@ -4,16 +4,10 @@
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-using
-state_ref
-=
-fcppt::reference<
-	sanguis::client::perk::state
->;
+using state_ref = fcppt::reference<sanguis::client::perk::state>;
 
 }
 

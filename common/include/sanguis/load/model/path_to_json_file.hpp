@@ -6,15 +6,11 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::load::model
 {
 
 SANGUIS_COMMON_SYMBOL
-std::filesystem::path
-path_to_json_file(
-	std::filesystem::path const &
-);
+std::filesystem::path path_to_json_file(std::filesystem::path const &);
 
 }
 

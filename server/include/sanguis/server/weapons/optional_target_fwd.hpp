@@ -4,16 +4,10 @@
 #include <sanguis/server/weapons/target_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-using
-optional_target
-=
-fcppt::optional::object<
-	sanguis::server::weapons::target
->;
+using optional_target = fcppt::optional::object<sanguis::server::weapons::target>;
 
 }
 

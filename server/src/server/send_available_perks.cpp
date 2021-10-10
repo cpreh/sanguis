@@ -22,82 +22,40 @@
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/optional/map.hpp>
 
-
-void
-sanguis::server::send_available_perks(
-	sanguis::server::entities::player const &_player,
-	sanguis::server::unicast_callback const &_send
-)
+void sanguis::server::send_available_perks(
+    sanguis::server::entities::player const &_player,
+    sanguis::server::unicast_callback const &_send)
 {
-	auto const nodes(
-		fcppt::algorithm::map_concat<
-			sanguis::messages::server::types::perk_tree_node_vector
-		>(
-			_player.perk_tree(),
-			[](
-				sanguis::server::perks::tree::object const &_tree
-			)
-			{
-				return
-					fcppt::algorithm::map<
-						sanguis::messages::server::types::perk_tree_node_vector
-					>(
-						fcppt::container::tree::pre_order<
-							sanguis::server::perks::tree::object const
-						>(
-							_tree
-						),
-						[](
-							sanguis::server::perks::tree::object const &_inner
-						)
-						{
-							sanguis::server::perks::tree::status const &info(
-								_inner.value()
-							);
+  auto const nodes(fcppt::algorithm::map_concat<
+                   sanguis::messages::server::types::perk_tree_node_vector>(
+      _player.perk_tree(),
+      [](sanguis::server::perks::tree::object const &_tree)
+      {
+        return fcppt::algorithm::map<sanguis::messages::server::types::perk_tree_node_vector>(
+            fcppt::container::tree::pre_order<sanguis::server::perks::tree::object const>(_tree),
+            [](sanguis::server::perks::tree::object const &_inner)
+            {
+              sanguis::server::perks::tree::status const &info(_inner.value());
 
-							return
-								sanguis::messages::server::types::perk_tree_node(
-									sanguis::messages::roles::perk_label{} =
-										info.type(),
-									sanguis::messages::roles::perk_level{} =
-										info.level().get(),
-									sanguis::messages::roles::required_perk_player_level{} =
-										info.required_player_level().get(),
-									sanguis::messages::roles::required_perk_parent_level{} =
-										info.required_parent_level().get(),
-									sanguis::messages::roles::max_perk_level{} =
-										info.max_level().get(),
-									sanguis::messages::roles::perk_parent{} =
-										fcppt::optional::map(
-											_inner.parent(),
-											[](
-												fcppt::reference<
-													sanguis::server::perks::tree::object const
-												> const _node
-											)
-											{
-												return
-													_node.get().value().type();
-											}
-										)
-								);
-						}
-					);
-			}
-		)
-	);
+              return sanguis::messages::server::types::perk_tree_node(
+                  sanguis::messages::roles::perk_label{} = info.type(),
+                  sanguis::messages::roles::perk_level{} = info.level().get(),
+                  sanguis::messages::roles::required_perk_player_level{} =
+                      info.required_player_level().get(),
+                  sanguis::messages::roles::required_perk_parent_level{} =
+                      info.required_parent_level().get(),
+                  sanguis::messages::roles::max_perk_level{} = info.max_level().get(),
+                  sanguis::messages::roles::perk_parent{} = fcppt::optional::map(
+                      _inner.parent(),
+                      [](fcppt::reference<sanguis::server::perks::tree::object const> const _node)
+                      { return _node.get().value().type(); }));
+            });
+      }));
 
-	_send(
-		_player.player_id(),
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::available_perks
-			>(
-				sanguis::messages::roles::perk_tree{} =
-					nodes,
-				sanguis::messages::roles::remaining_perk_levels{} =
-					_player.skill_points().get()
-			)
-		)
-	);
+  _send(
+      _player.player_id(),
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::available_perks>(
+              sanguis::messages::roles::perk_tree{} = nodes,
+              sanguis::messages::roles::remaining_perk_levels{} = _player.skill_points().get())));
 }

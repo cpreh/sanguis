@@ -6,49 +6,26 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::client::load::model::part_result::part_result(
-	sanguis::model::cell_size const _cell_size,
-	sanguis::client::load::model::part_map &&_parts
-)
-:
-	cell_size_(
-		_cell_size
-	),
-	parts_(
-		std::move(
-			_parts
-		)
-	)
+    sanguis::model::cell_size const _cell_size, sanguis::client::load::model::part_map &&_parts)
+    : cell_size_(_cell_size), parts_(std::move(_parts))
 {
 }
 
-sanguis::client::load::model::part_result::part_result(
-	part_result &&
-)
-noexcept
-= default;
+sanguis::client::load::model::part_result::part_result(part_result &&) noexcept = default;
 
 sanguis::client::load::model::part_result &
-sanguis::client::load::model::part_result::operator=(
-	part_result &&
-)
-noexcept
-= default;
+sanguis::client::load::model::part_result::operator=(part_result &&) noexcept = default;
 
-sanguis::client::load::model::part_result::~part_result()
-= default;
+sanguis::client::load::model::part_result::~part_result() = default;
 
-sanguis::model::cell_size const &
-sanguis::client::load::model::part_result::cell_size() const
+sanguis::model::cell_size const &sanguis::client::load::model::part_result::cell_size() const
 {
-	return
-		cell_size_;
+  return cell_size_;
 }
 
 sanguis::client::load::model::part_map const &
 sanguis::client::load::model::part_result::parts() const
 {
-	return
-		parts_;
+  return parts_;
 }

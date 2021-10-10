@@ -48,39 +48,38 @@
 #include <QStyle>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations::qtutil
 {
 
 class FlowLayout : public QLayout
 {
-    FCPPT_NONMOVABLE(FlowLayout);
-public:
-    explicit FlowLayout(QWidget *parent, int margin = -1, int hSpacing = -1, int vSpacing = -1);
-    explicit FlowLayout(int margin = -1, int hSpacing = -1, int vSpacing = -1);
-    ~FlowLayout()
-    override;
+  FCPPT_NONMOVABLE(FlowLayout);
 
-    void addItem(QLayoutItem *item) override;
-    [[nodiscard]] int horizontalSpacing() const;
-    [[nodiscard]] int verticalSpacing() const;
-    [[nodiscard]] Qt::Orientations expandingDirections() const override;
-    [[nodiscard]] bool hasHeightForWidth() const override;
-    [[nodiscard]] int heightForWidth(int) const override;
-    [[nodiscard]] int count() const override;
-    [[nodiscard]] QLayoutItem *itemAt(int index) const override;
-    [[nodiscard]] QSize minimumSize() const override;
-    void setGeometry(const QRect &rect) override;
-    [[nodiscard]] QSize sizeHint() const override;
-    [[nodiscard]] QLayoutItem *takeAt(int index) override;
+public:
+  explicit FlowLayout(QWidget *parent, int margin = -1, int hSpacing = -1, int vSpacing = -1);
+  explicit FlowLayout(int margin = -1, int hSpacing = -1, int vSpacing = -1);
+  ~FlowLayout() override;
+
+  void addItem(QLayoutItem *item) override;
+  [[nodiscard]] int horizontalSpacing() const;
+  [[nodiscard]] int verticalSpacing() const;
+  [[nodiscard]] Qt::Orientations expandingDirections() const override;
+  [[nodiscard]] bool hasHeightForWidth() const override;
+  [[nodiscard]] int heightForWidth(int) const override;
+  [[nodiscard]] int count() const override;
+  [[nodiscard]] QLayoutItem *itemAt(int index) const override;
+  [[nodiscard]] QSize minimumSize() const override;
+  void setGeometry(const QRect &rect) override;
+  [[nodiscard]] QSize sizeHint() const override;
+  [[nodiscard]] QLayoutItem *takeAt(int index) override;
 
 private:
-    [[nodiscard]] int doLayout(const QRect &rect, bool testOnly) const;
-    [[nodiscard]] int smartSpacing(QStyle::PixelMetric pm) const;
+  [[nodiscard]] int doLayout(const QRect &rect, bool testOnly) const;
+  [[nodiscard]] int smartSpacing(QStyle::PixelMetric pm) const;
 
-    QList<QLayoutItem *> itemList;
-    int m_hSpace;
-    int m_vSpace;
+  QList<QLayoutItem *> itemList;
+  int m_hSpace;
+  int m_vSpace;
 };
 
 }

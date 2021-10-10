@@ -4,5 +4,4 @@
 #include <sanguis/client/args/elements/draw_debug_fwd.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

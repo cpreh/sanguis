@@ -5,5 +5,4 @@
 #include <sanguis/model/optional_animation_delay_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

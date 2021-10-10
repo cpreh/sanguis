@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::perks::tree
 {
 
-using
-container
-=
-std::vector<
-	sanguis::server::perks::tree::object
->;
+using container = std::vector<sanguis::server::perks::tree::object>;
 
 }
 

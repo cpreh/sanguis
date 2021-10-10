@@ -4,7 +4,6 @@
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace sanguis
 {
 namespace server
@@ -12,12 +11,7 @@ namespace server
 namespace entities
 {
 
-using
-optional_with_ai_ref
-=
-fcppt::optional::reference<
-	sanguis::server::entities::with_ai
->;
+using optional_with_ai_ref = fcppt::optional::reference<sanguis::server::entities::with_ai>;
 
 }
 }

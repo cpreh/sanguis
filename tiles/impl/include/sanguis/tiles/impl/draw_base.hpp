@@ -27,102 +27,44 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-template<
-	typename Tile
->
-sanguis::tiles::cell_container
-draw_base(
-	sanguis::creator::tile_grid<
-		Tile
-	> const &_grid,
-	sanguis::creator::min const _min,
-	sanguis::creator::sup const _sup,
-	sanguis::tiles::impl::shift const &_shift,
-	sanguis::tiles::impl::get_content_function const &_get_content
-)
+template <typename Tile>
+sanguis::tiles::cell_container draw_base(
+    sanguis::creator::tile_grid<Tile> const &_grid,
+    sanguis::creator::min const _min,
+    sanguis::creator::sup const _sup,
+    sanguis::tiles::impl::shift const &_shift,
+    sanguis::tiles::impl::get_content_function const &_get_content)
 {
-	auto const tile_dim(
-		fcppt::math::vector::fill<
-			sanguis::tiles::pos
-		>(
-			fcppt::cast::size<
-				sanguis::tiles::unit
-			>(
-				fcppt::cast::to_signed(
-					sanguis::creator::tile_size::value
-				)
-			)
-		)
-	);
+  auto const tile_dim(
+      fcppt::math::vector::fill<sanguis::tiles::pos>(fcppt::cast::size<sanguis::tiles::unit>(
+          fcppt::cast::to_signed(sanguis::creator::tile_size::value))));
 
-	return
-		fcppt::algorithm::map_optional<
-			sanguis::tiles::cell_container
-		>(
-			fcppt::container::grid::make_pos_ref_crange_start_end(
-				_grid,
-				_min,
-				_sup
-			),
-			[
-				tile_dim,
-				&_get_content,
-				_shift
-			](
-				fcppt::container::grid::pos_reference<
-					sanguis::creator::tile_grid<
-						Tile
-					> const
-				> const _element
-			)
-			{
-FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
-				return
-					fcppt::optional::map(
-						_get_content(
-							_element.pos()
-						),
-						[
-							tile_dim,
-							&_element,
-							_shift
-						](
-							sanguis::tiles::impl::content_path const &_content_path
-						)
-						{
-							return
-								sanguis::tiles::cell(
-									fcppt::math::vector::structure_cast<
-										sanguis::tiles::pos,
-										fcppt::cast::size_fun
-									>(
-										fcppt::math::vector::to_signed(
-											_element.pos()
-										)
-									)
-									*
-									tile_dim
-									+
-									_shift.get()
-									,
-									_content_path.content()
-									,
-									_content_path.path()
-									,
-									sanguis::tiles::impl::is_background<
-										Tile
-									>()
-								);
-						}
-					);
-FCPPT_PP_POP_WARNING
-			}
-		);
+  return fcppt::algorithm::map_optional<sanguis::tiles::cell_container>(
+      fcppt::container::grid::make_pos_ref_crange_start_end(_grid, _min, _sup),
+      [tile_dim, &_get_content, _shift](
+          fcppt::container::grid::pos_reference<sanguis::creator::tile_grid<Tile> const> const
+              _element)
+      {
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
+        return fcppt::optional::map(
+            _get_content(_element.pos()),
+            [tile_dim, &_element, _shift](sanguis::tiles::impl::content_path const &_content_path)
+            {
+              return sanguis::tiles::cell(
+                  fcppt::math::vector::structure_cast<sanguis::tiles::pos, fcppt::cast::size_fun>(
+                      fcppt::math::vector::to_signed(_element.pos())) *
+                          tile_dim +
+                      _shift.get(),
+                  _content_path.content(),
+                  _content_path.path(),
+                  sanguis::tiles::impl::is_background<Tile>());
+            });
+        FCPPT_PP_POP_WARNING
+      });
 }
 
 }

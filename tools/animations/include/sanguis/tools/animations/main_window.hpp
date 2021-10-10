@@ -29,10 +29,9 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace Ui
 {
-	class MainWindow;
+class MainWindow;
 }
 
 namespace sanguis::tools::animations
@@ -46,165 +45,89 @@ FCPPT_PP_DISABLE_GCC_WARNING(-Winconsistent-missing-override)
 FCPPT_PP_DISABLE_GCC_WARNING(-Wsuggest-override)
 #endif
 
-class main_window
-:
-	public QMainWindow
+class main_window : public QMainWindow
 {
-	Q_OBJECT
+  Q_OBJECT
 
-	FCPPT_NONMOVABLE(
-		main_window
-	);
+  FCPPT_NONMOVABLE(main_window);
+
 public:
-	explicit
-	main_window(
-		fcppt::reference<
-			sanguis::tools::animations::sge_systems const
-		>
-	);
+  explicit main_window(fcppt::reference<sanguis::tools::animations::sge_systems const>);
 
-	~main_window()
-	override;
+  ~main_window() override;
 
-	void
-	actionJSON();
+  void actionJSON();
 
-	void
-	actionResourcePath();
+  void actionResourcePath();
 
-	void
-	actionSave();
+  void actionSave();
 
-	static void
-	actionQuit();
+  static void actionQuit();
 
-	void
-	actionSound();
+  void actionSound();
 
-	void
-	selectedPartChanged();
+  void selectedPartChanged();
 
-	void
-	selectedWeaponChanged();
+  void selectedWeaponChanged();
 
-	void
-	selectedAnimationChanged();
+  void selectedAnimationChanged();
 
-	void
-	globalDelayChanged(
-		int
-	);
+  void globalDelayChanged(int);
 
-	void
-	delayChanged(
-		int
-	);
+  void delayChanged(int);
 
-	void
-	soundChanged(
-		QString const &
-	);
+  void soundChanged(QString const &);
 
-	void
-	updateFrame();
+  void updateFrame();
 
-	void
-	playFrames();
+  void playFrames();
 
-	void
-	resetFrames();
+  void resetFrames();
+
 private:
-	[[nodiscard]]
-	sanguis::tools::animations::optional_animation_ref
-	current_animation();
+  [[nodiscard]] sanguis::tools::animations::optional_animation_ref current_animation();
 
-	void
-	open_json(
-		std::filesystem::path const &
-	);
+  void open_json(std::filesystem::path const &);
 
-	using
-	optional_part_name
-	=
-	fcppt::optional::object<
-		sanguis::model::part_name
-	>;
+  using optional_part_name = fcppt::optional::object<sanguis::model::part_name>;
 
-	using
-	optional_weapon_category_name
-	=
-	fcppt::optional::object<
-		sanguis::model::weapon_category_name
-	>;
+  using optional_weapon_category_name =
+      fcppt::optional::object<sanguis::model::weapon_category_name>;
 
-	using
-	optional_animation_name
-	=
-	fcppt::optional::object<
-		sanguis::model::animation_name
-	>;
+  using optional_animation_name = fcppt::optional::object<sanguis::model::animation_name>;
 
-	[[nodiscard]]
-	optional_part_name
-	selected_part() const;
+  [[nodiscard]] optional_part_name selected_part() const;
 
-	[[nodiscard]]
-	optional_weapon_category_name
-	selected_weapon_category() const;
+  [[nodiscard]] optional_weapon_category_name selected_weapon_category() const;
 
-	[[nodiscard]]
-	optional_animation_name
-	selected_animation() const;
+  [[nodiscard]] optional_animation_name selected_animation() const;
 
-	using
-	optional_path
-	=
-	fcppt::optional::object<
-		std::filesystem::path
-	>;
+  using optional_path = fcppt::optional::object<std::filesystem::path>;
 
-	[[nodiscard]]
-	optional_path
-	resource_path();
+  [[nodiscard]] optional_path resource_path();
 
-	void
-	update_frame_timer();
+  void update_frame_timer();
 
-	[[nodiscard]]
-	sanguis::model::optional_animation_delay
-	current_animation_delay();
+  [[nodiscard]] sanguis::model::optional_animation_delay current_animation_delay();
 
-	void
-	message_box(
-		QMessageBox::Icon,
-		QString const &,
-		QString const &
-	);
+  void message_box(QMessageBox::Icon, QString const &, QString const &);
 
-	fcppt::reference<
-		sanguis::tools::animations::sge_systems const
-	> const sge_systems_;
+  fcppt::reference<sanguis::tools::animations::sge_systems const> const sge_systems_;
 
-	fcppt::unique_ptr<
-		Ui::MainWindow
-	> const ui_;
+  fcppt::unique_ptr<Ui::MainWindow> const ui_;
 
-	using
-	optional_path_model_pair
-	=
-	fcppt::optional::object<
-		sanguis::tools::animations::path_model_pair
-	>;
+  using optional_path_model_pair =
+      fcppt::optional::object<sanguis::tools::animations::path_model_pair>;
 
-	optional_path_model_pair loaded_model_;
+  optional_path_model_pair loaded_model_;
 
-	sanguis::tools::animations::image_file_map image_files_;
+  sanguis::tools::animations::image_file_map image_files_;
 
-	QTimer frame_timer_;
+  QTimer frame_timer_;
 
-	sanguis::tools::animations::frame_container frames_;
+  sanguis::tools::animations::frame_container frames_;
 
-	sanguis::tools::animations::frame_container::const_iterator frame_iterator_;
+  sanguis::tools::animations::frame_container::const_iterator frame_iterator_;
 };
 
 FCPPT_PP_POP_WARNING

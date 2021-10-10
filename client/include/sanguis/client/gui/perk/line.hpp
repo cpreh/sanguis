@@ -16,54 +16,46 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
-
 namespace sanguis::client::gui::perk
 {
 
 class line
 {
-	FCPPT_NONMOVABLE(
-		line
-	);
+  FCPPT_NONMOVABLE(line);
+
 public:
-	line(
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sge::gui::context_ref,
-		sge::gui::style::const_reference,
-		sanguis::client::perk::state_ref,
-		sanguis::client::perk::info const &
-	);
+  line(
+      sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sge::gui::context_ref,
+      sge::gui::style::const_reference,
+      sanguis::client::perk::state_ref,
+      sanguis::client::perk::info const &);
 
-	~line();
+  ~line();
 
-	[[nodiscard]]
-	sge::gui::widget::box_container &
-	widget();
+  [[nodiscard]] sge::gui::widget::box_container &widget();
+
 private:
-	void
-	on_click();
+  void on_click();
 
-	void
-	on_level_change();
+  void on_level_change();
 
-	[[nodiscard]]
-	sge::gui::text_color
-	text_color() const;
+  [[nodiscard]] sge::gui::text_color text_color() const;
 
-	sanguis::perk_type const perk_type_;
+  sanguis::perk_type const perk_type_;
 
-	sanguis::client::perk::state_ref const state_;
+  sanguis::client::perk::state_ref const state_;
 
-	sge::gui::widget::button button_;
+  sge::gui::widget::button button_;
 
-	sge::gui::widget::text text_;
+  sge::gui::widget::text text_;
 
-	sge::gui::widget::box_container box_;
+  sge::gui::widget::box_container box_;
 
-	fcppt::signal::auto_connection const click_connection_;
+  fcppt::signal::auto_connection const click_connection_;
 
-	fcppt::signal::auto_connection const level_change_connection_;
+  fcppt::signal::auto_connection const level_change_connection_;
 };
 
 }

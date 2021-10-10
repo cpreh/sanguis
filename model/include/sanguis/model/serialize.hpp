@@ -7,16 +7,11 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::model
 {
 
 SANGUIS_MODEL_SYMBOL
-void
-serialize(
-	std::filesystem::path const &,
-	sanguis::model::object const &
-);
+void serialize(std::filesystem::path const &, sanguis::model::object const &);
 
 }
 

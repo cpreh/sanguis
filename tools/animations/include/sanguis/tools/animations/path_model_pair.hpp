@@ -8,49 +8,32 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
 class path_model_pair
 {
-	FCPPT_NONCOPYABLE(
-		path_model_pair
-	);
+  FCPPT_NONCOPYABLE(path_model_pair);
+
 public:
-	path_model_pair(
-		std::filesystem::path &&,
-		sanguis::model::object &&
-	);
+  path_model_pair(std::filesystem::path &&, sanguis::model::object &&);
 
-	path_model_pair(
-		path_model_pair &&
-	)
-	noexcept;
+  path_model_pair(path_model_pair &&) noexcept;
 
-	path_model_pair &
-	operator=(
-		path_model_pair &&
-	)
-	noexcept;
+  path_model_pair &operator=(path_model_pair &&) noexcept;
 
-	~path_model_pair();
+  ~path_model_pair();
 
-	[[nodiscard]]
-	std::filesystem::path const &
-	path() const;
+  [[nodiscard]] std::filesystem::path const &path() const;
 
-	[[nodiscard]]
-	sanguis::model::object &
-	model();
+  [[nodiscard]] sanguis::model::object &model();
 
-	[[nodiscard]]
-	sanguis::model::object const &
-	model() const;
+  [[nodiscard]] sanguis::model::object const &model() const;
+
 private:
-	std::filesystem::path path_;
+  std::filesystem::path path_;
 
-	sanguis::model::object model_;
+  sanguis::model::object model_;
 };
 
 }

@@ -9,19 +9,10 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::hud
 {
 
-using
-weapon_icon_map
-=
-std::map<
-	sanguis::weapon_type,
-	fcppt::reference<
-		sge::texture::part const
-	>
->;
+using weapon_icon_map = std::map<sanguis::weapon_type, fcppt::reference<sge::texture::part const>>;
 
 }
 

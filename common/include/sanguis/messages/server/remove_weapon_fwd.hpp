@@ -6,19 +6,13 @@
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/object_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-remove_weapon
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::remove_weapon
-	>,
-	sanguis::messages::adapted_types::is_primary_weapon
->;
+using remove_weapon = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::remove_weapon>,
+    sanguis::messages::adapted_types::is_primary_weapon>;
 
 }
 

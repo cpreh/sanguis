@@ -4,14 +4,7 @@
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/name.hpp>
 
-
-fcppt::log::location
-sanguis::server::states::log_location()
+fcppt::log::location sanguis::server::states::log_location()
 {
-	return
-		sanguis::server::log_location()
-		/
-		fcppt::log::name{
-			FCPPT_TEXT("states")
-		};
+  return sanguis::server::log_location() / fcppt::log::name{FCPPT_TEXT("states")};
 }

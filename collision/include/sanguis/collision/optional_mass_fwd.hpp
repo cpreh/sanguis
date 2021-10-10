@@ -4,16 +4,10 @@
 #include <sanguis/collision/mass_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::collision
 {
 
-using
-optional_mass
-=
-fcppt::optional::object<
-	sanguis::collision::mass
->;
+using optional_mass = fcppt::optional::object<sanguis::collision::mass>;
 
 }
 

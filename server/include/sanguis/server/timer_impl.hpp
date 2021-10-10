@@ -10,42 +10,33 @@
 #include <boost/asio/basic_waitable_timer.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server
 {
 
 class timer_impl
 {
-	FCPPT_NONMOVABLE(
-		timer_impl
-	);
+  FCPPT_NONMOVABLE(timer_impl);
+
 public:
-	timer_impl(
-		sanguis::io_service_ref,
-		sanguis::server::timer_callback &&,
-		sanguis::server::timer_duration const &
-	);
+  timer_impl(
+      sanguis::io_service_ref,
+      sanguis::server::timer_callback &&,
+      sanguis::server::timer_duration const &);
 
-	~timer_impl();
+  ~timer_impl();
+
 private:
-	void
-	handler();
+  void handler();
 
-	void
-	reset();
+  void reset();
 
-	sanguis::server::timer_callback const callback_;
+  sanguis::server::timer_callback const callback_;
 
-	sanguis::server::timer_duration const duration_;
+  sanguis::server::timer_duration const duration_;
 
-	using
-	timer
-	=
-	boost::asio::basic_waitable_timer<
-		std::chrono::steady_clock
-	>;
+  using timer = boost::asio::basic_waitable_timer<std::chrono::steady_clock>;
 
-	timer deadline_timer_;
+  timer deadline_timer_;
 };
 
 }

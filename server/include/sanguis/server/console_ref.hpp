@@ -4,16 +4,10 @@
 #include <sanguis/server/console_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-console_ref
-=
-fcppt::reference<
-	sanguis::server::console
->;
+using console_ref = fcppt::reference<sanguis::server::console>;
 
 }
 

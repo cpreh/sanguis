@@ -4,16 +4,11 @@
 #include <sanguis/server/entities/with_id_fwd.hpp>
 #include <sanguis/server/world/place_callback.hpp>
 
-
 namespace sanguis::server::world
 {
 
-using
-place_with_id_callback
-=
-sanguis::server::world::place_callback<
-	sanguis::server::entities::with_id
->;
+using place_with_id_callback =
+    sanguis::server::world::place_callback<sanguis::server::entities::with_id>;
 
 }
 

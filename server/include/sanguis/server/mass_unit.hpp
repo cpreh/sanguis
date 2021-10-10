@@ -6,5 +6,4 @@
 #include <boost/units/quantity.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 #endif

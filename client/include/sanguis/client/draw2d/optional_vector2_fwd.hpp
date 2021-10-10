@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/vector2_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
-using
-optional_vector2
-=
-fcppt::optional::object<
-	sanguis::client::draw2d::vector2
->;
+using optional_vector2 = fcppt::optional::object<sanguis::client::draw2d::vector2>;
 
 }
 

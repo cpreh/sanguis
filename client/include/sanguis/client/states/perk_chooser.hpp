@@ -21,7 +21,6 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::states
 {
 
@@ -29,71 +28,36 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
 class perk_chooser
-:
-	public boost::statechart::state<
-		sanguis::client::states::perk_chooser,
-		sanguis::client::states::has_player
-	>
+    : public boost::statechart::
+          state<sanguis::client::states::perk_chooser, sanguis::client::states::has_player>
 {
-	FCPPT_NONMOVABLE(
-		perk_chooser
-	);
+  FCPPT_NONMOVABLE(perk_chooser);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list4<
-		boost::statechart::custom_reaction<
-			sanguis::client::events::action
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::overlay
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::tick
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::input
-		>
-	>;
+  using reactions = boost::mpl::list4<
+      boost::statechart::custom_reaction<sanguis::client::events::action>,
+      boost::statechart::custom_reaction<sanguis::client::events::overlay>,
+      boost::statechart::custom_reaction<sanguis::client::events::tick>,
+      boost::statechart::custom_reaction<sanguis::client::events::input>>;
 
-	explicit
-	perk_chooser(
-		my_context
-	);
+  explicit perk_chooser(my_context);
 
-	~perk_chooser()
-	SANGUIS_STATE_OVERRIDE;
+  ~perk_chooser() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::action const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::action const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::overlay const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::overlay const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::tick const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::tick const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::input const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::input const &);
+
 private:
-	sanguis::client::scoped_pause const pause_;
+  sanguis::client::scoped_pause const pause_;
 
-	sanguis::client::gui::perk::chooser perk_chooser_gui_;
+  sanguis::client::gui::perk::chooser perk_chooser_gui_;
 
-	sanguis::client::gui::hud::scoped_details const hud_details_;
+  sanguis::client::gui::hud::scoped_details const hud_details_;
 };
 
 FCPPT_PP_POP_WARNING

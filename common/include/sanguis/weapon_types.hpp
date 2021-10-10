@@ -5,5 +5,4 @@
 #include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/weapon_types_fwd.hpp>
 
-
 #endif

@@ -3,12 +3,10 @@
 
 #include <sanguis/client/control/scalar.hpp>
 
-
 namespace sanguis::client::control
 {
 
-sanguis::client::control::scalar
-axis_direction_min();
+sanguis::client::control::scalar axis_direction_min();
 
 }
 

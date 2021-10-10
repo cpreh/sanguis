@@ -5,15 +5,11 @@
 #include <sanguis/creator/enemy_type_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::load
 {
 
 SANGUIS_COMMON_SYMBOL
-fcppt::string
-enemy_name(
-	sanguis::creator::enemy_type
-);
+fcppt::string enemy_name(sanguis::creator::enemy_type);
 
 }
 

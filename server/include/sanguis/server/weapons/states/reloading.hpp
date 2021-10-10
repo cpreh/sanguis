@@ -19,7 +19,6 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::states
 {
 
@@ -27,60 +26,31 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
 class reloading
-:
-	public boost::statechart::state<
-		sanguis::server::weapons::states::reloading,
-		sanguis::server::weapons::weapon
-	>
+    : public boost::statechart::
+          state<sanguis::server::weapons::states::reloading, sanguis::server::weapons::weapon>
 {
-	FCPPT_NONMOVABLE(
-		reloading
-	);
+  FCPPT_NONMOVABLE(reloading);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list3<
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::poll
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::shoot
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::stop
-		>
-	>;
+  using reactions = boost::mpl::list3<
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::poll>,
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::shoot>,
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::stop>>;
 
-	explicit
-	reloading(
-		my_context
-	);
+  explicit reloading(my_context);
 
-	~reloading()
-	SANGUIS_STATE_OVERRIDE;
+  ~reloading() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::poll const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::poll const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::shoot const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::shoot const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::stop const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::stop const &);
+
 private:
-	sanguis::diff_timer reload_time_;
+  sanguis::diff_timer reload_time_;
 
-	bool cancelled_;
+  bool cancelled_;
 };
 
 FCPPT_PP_POP_WARNING

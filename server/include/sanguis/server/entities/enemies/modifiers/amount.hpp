@@ -3,12 +3,10 @@
 
 #include <sanguis/server/random/amount.hpp>
 
-
 namespace sanguis::server::entities::enemies::modifiers
 {
 
-sanguis::server::random::amount
-amount();
+sanguis::server::random::amount amount();
 
 }
 

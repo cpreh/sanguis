@@ -5,5 +5,4 @@
 #include <sanguis/weapon_types.hpp>
 #include <fcppt/variant/from_list.hpp>
 
-
 #endif

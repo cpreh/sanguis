@@ -12,57 +12,29 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 namespace
 {
 
-using
-aura_type_array
-=
-fcppt::enum_::array<
-	sanguis::aura_type,
-	fcppt::string
->;
+using aura_type_array = fcppt::enum_::array<sanguis::aura_type, fcppt::string>;
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
 // NOLINTNEXTLINE(cert-err58-cpp)
-aura_type_array const aura_types(
-	fcppt::enum_::array_init<
-		aura_type_array
-	>(
-		&sanguis::client::load::aura_name
-	)
-);
+aura_type_array const
+    aura_types(fcppt::enum_::array_init<aura_type_array>(&sanguis::client::load::aura_name));
 
 FCPPT_PP_POP_WARNING
 
 }
 
-sanguis::aura_type
-sanguis::client::load::auras::lookup_name(
-	fcppt::string const &_name
-)
+sanguis::aura_type sanguis::client::load::auras::lookup_name(fcppt::string const &_name)
 {
-	return
-		fcppt::optional::to_exception(
-			fcppt::enum_::index_of_array(
-				aura_types,
-				_name
-			),
-			[
-				&_name
-			]{
-				return
-					sanguis::exception{
-						FCPPT_TEXT("auras::lookup_name ")
-						+
-						_name
-						+
-						FCPPT_TEXT(" failed!")
-					};
-			}
-		);
+  return fcppt::optional::to_exception(
+      fcppt::enum_::index_of_array(aura_types, _name),
+      [&_name] {
+        return sanguis::exception{
+            FCPPT_TEXT("auras::lookup_name ") + _name + FCPPT_TEXT(" failed!")};
+      });
 }

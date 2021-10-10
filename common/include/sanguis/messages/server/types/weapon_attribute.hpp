@@ -4,5 +4,4 @@
 #include <sanguis/messages/server/adapted_types/weapon_attribute.hpp>
 #include <sanguis/messages/server/types/weapon_attribute_fwd.hpp>
 
-
 #endif

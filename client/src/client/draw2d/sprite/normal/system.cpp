@@ -3,10 +3,5 @@
 #include <sanguis/client/draw2d/sprite/normal/choices.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
 
-
-template
-class
-sanguis::client::draw2d::sprite::system<
-	sanguis::client::draw2d::sprite::normal::choices,
-	sanguis::client::draw2d::z_ordering
->;
+template class sanguis::client::draw2d::sprite::
+    system<sanguis::client::draw2d::sprite::normal::choices, sanguis::client::draw2d::z_ordering>;

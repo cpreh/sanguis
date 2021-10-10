@@ -8,34 +8,17 @@
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
-
 sanguis::string_vector
-sanguis::messages::convert::from_string_vector(
-	sanguis::messages::types::string_vector const &_src
-)
+sanguis::messages::convert::from_string_vector(sanguis::messages::types::string_vector const &_src)
 {
-	return
-		fcppt::algorithm::map<
-			sanguis::string_vector
-		>(
-			_src,
-			[](
-				sge::charconv::utf8_string const &_elem
-			)
-			{
-				return
-					// FIXME
-					fcppt::optional::to_exception(
-						sge::charconv::utf8_string_to_fcppt(
-							_elem
-						),
-						[]{
-							return
-								sanguis::exception{
-									FCPPT_TEXT("Failed to convert message string!")
-								};
-						}
-					);
-			}
-		);
+  return fcppt::algorithm::map<sanguis::string_vector>(
+      _src,
+      [](sge::charconv::utf8_string const &_elem)
+      {
+        return
+            // FIXME
+            fcppt::optional::to_exception(
+                sge::charconv::utf8_string_to_fcppt(_elem),
+                [] { return sanguis::exception{FCPPT_TEXT("Failed to convert message string!")}; });
+      });
 }

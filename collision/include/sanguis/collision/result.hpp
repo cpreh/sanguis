@@ -5,24 +5,18 @@
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/symbol.hpp>
 
-
 namespace sanguis::collision
 {
 
 class result
 {
 public:
-	explicit
-	result(
-		sanguis::collision::speed
-	);
+  explicit result(sanguis::collision::speed);
 
-	[[nodiscard]]
-	SANGUIS_COLLISION_SYMBOL
-	sanguis::collision::speed
-	speed() const;
+  [[nodiscard]] SANGUIS_COLLISION_SYMBOL sanguis::collision::speed speed() const;
+
 private:
-	sanguis::collision::speed speed_;
+  sanguis::collision::speed speed_;
 };
 
 }

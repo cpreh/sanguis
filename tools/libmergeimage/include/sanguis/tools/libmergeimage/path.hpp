@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::libmergeimage
 {
 
-using
-path
-=
-std::vector<
-	fcppt::string
->;
+using path = std::vector<fcppt::string>;
 
 }
 

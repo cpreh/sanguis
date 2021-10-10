@@ -3,15 +3,14 @@
 
 #include <sanguis/client/perk/category_fwd.hpp>
 
-
 namespace sanguis::client::perk
 {
 
 enum class category
 {
-	survival,
-	attack,
-	fcppt_maximum = attack
+  survival,
+  attack,
+  fcppt_maximum = attack
 };
 
 }

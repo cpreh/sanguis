@@ -7,17 +7,14 @@
 #include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/tree_fwd.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-sanguis::client::perk::choosable_state
-choosable(
-	sanguis::perk_type,
-	sanguis::client::perk::tree const &,
-	sanguis::client::player_level,
-	sanguis::client::perk::remaining_levels
-);
+sanguis::client::perk::choosable_state choosable(
+    sanguis::perk_type,
+    sanguis::client::perk::tree const &,
+    sanguis::client::player_level,
+    sanguis::client::perk::remaining_levels);
 
 }
 

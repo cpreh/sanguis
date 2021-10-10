@@ -3,15 +3,14 @@
 
 #include <sanguis/buff_type_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class buff_type
 {
-	burn,
-	slow,
-	fcppt_maximum = slow
+  burn,
+  slow,
+  fcppt_maximum = slow
 };
 
 }

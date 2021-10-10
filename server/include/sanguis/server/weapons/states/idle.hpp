@@ -18,64 +18,32 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::states
 {
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
-class idle
-:
-	public boost::statechart::state<
-		sanguis::server::weapons::states::idle,
-		sanguis::server::weapons::weapon
-	>
+class idle : public boost::statechart::
+                 state<sanguis::server::weapons::states::idle, sanguis::server::weapons::weapon>
 {
-	FCPPT_NONMOVABLE(
-		idle
-	);
+  FCPPT_NONMOVABLE(idle);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list3<
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::shoot
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::reload
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::poll
-		>
-	>;
+  using reactions = boost::mpl::list3<
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::shoot>,
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::reload>,
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::poll>>;
 
-	explicit
-	idle(
-		my_context
-	);
+  explicit idle(my_context);
 
-	~idle()
-	SANGUIS_STATE_OVERRIDE;
+  ~idle() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::shoot const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::shoot const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::reload const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::reload const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::poll const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::poll const &);
 };
 
 FCPPT_PP_POP_WARNING

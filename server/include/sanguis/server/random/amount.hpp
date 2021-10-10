@@ -4,14 +4,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::server::random
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	unsigned,
-	amount
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(unsigned, amount);
 
 }
 

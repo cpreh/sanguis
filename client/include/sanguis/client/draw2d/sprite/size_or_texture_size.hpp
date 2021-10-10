@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/sprite/type_choices.hpp>
 #include <sge/sprite/types/size_or_texture_size.hpp>
 
-
 #endif

@@ -21,65 +21,30 @@
 #include <fcppt/log/optional_level.hpp>
 #include <fcppt/record/get.hpp>
 
-
-awl::main::exit_code
-sanguis::client::start(
-	sanguis::client::args::result const &_args
-)
+awl::main::exit_code sanguis::client::start(sanguis::client::args::result const &_args)
 {
-	// FIXME: Include all log streams
-	awl::main::scoped_output const output(
-		fcppt::io::clog(),
-		sge::config::log_path(
-			sanguis::company_name(),
-			sge::config::app_name(
-				sanguis::app_name()
-			)
-		)
-	);
+  // FIXME: Include all log streams
+  awl::main::scoped_output const output(
+      fcppt::io::clog(),
+      sge::config::log_path(sanguis::company_name(), sge::config::app_name(sanguis::app_name())));
 
-	fcppt::log::context log_context{
-		fcppt::log::optional_level{
-			fcppt::record::get<
-				sanguis::client::args::labels::log_level
-			>(
-				_args
-			)
-		},
-		sanguis::log_level_streams()
-	};
+  fcppt::log::context log_context{
+      fcppt::log::optional_level{
+          fcppt::record::get<sanguis::client::args::labels::log_level>(_args)},
+      sanguis::log_level_streams()};
 
-	log_context.set(
-		sanguis::server::log_location(),
-		fcppt::log::optional_level{
-			fcppt::record::get<
-				sanguis::server::args::labels::log_level
-			>(
-				_args
-			)
-		}
-	);
+  log_context.set(
+      sanguis::server::log_location(),
+      fcppt::log::optional_level{
+          fcppt::record::get<sanguis::server::args::labels::log_level>(_args)});
 
-	log_context.set(
-		sge::log::location(),
-		fcppt::log::optional_level{
-			fcppt::record::get<
-				sanguis::client::args::labels::sge_log_level
-			>(
-				_args
-			)
-		}
-	);
+  log_context.set(
+      sge::log::location(),
+      fcppt::log::optional_level{
+          fcppt::record::get<sanguis::client::args::labels::sge_log_level>(_args)});
 
-	sanguis::client::object_base_unique_ptr const client(
-		sanguis::client::create(
-			fcppt::make_ref(
-				log_context
-			),
-			_args
-		)
-	);
+  sanguis::client::object_base_unique_ptr const client(
+      sanguis::client::create(fcppt::make_ref(log_context), _args));
 
-	return
-		client->run();
+  return client->run();
 }

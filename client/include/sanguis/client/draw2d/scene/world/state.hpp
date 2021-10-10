@@ -28,82 +28,65 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
 class state
 {
-	FCPPT_NONMOVABLE(
-		state
-	);
+  FCPPT_NONMOVABLE(state);
+
 public:
-	state(
-		fcppt::log::context_reference,
-		sanguis::random_generator &, // NOLINT(google-runtime-references)
-		sge::renderer::device::core_ref,
-		sanguis::client::load::tiles::context_ref,
-		sanguis::client::draw::debug,
-		sanguis::client::world_parameters const &,
-		sanguis::client::draw2d::scene::world::parameters const &
-	);
+  state(
+      fcppt::log::context_reference,
+      sanguis::random_generator &, // NOLINT(google-runtime-references)
+      sge::renderer::device::core_ref,
+      sanguis::client::load::tiles::context_ref,
+      sanguis::client::draw::debug,
+      sanguis::client::world_parameters const &,
+      sanguis::client::draw2d::scene::world::parameters const &);
 
-	~state();
+  ~state();
 
-	void
-	update(
-		sanguis::client::slowed_duration
-	);
+  void update(sanguis::client::slowed_duration);
 
-	void
-	draw(
-		sge::renderer::context::core &, // NOLINT(google-runtime-references)
-		sanguis::client::draw2d::translation const &
-	);
+  void draw(
+      sge::renderer::context::core &, // NOLINT(google-runtime-references)
+      sanguis::client::draw2d::translation const &);
 
-	void
-	draw_after(
-		sanguis::client::draw2d::scene::world::render_parameters const &
-	);
+  void draw_after(sanguis::client::draw2d::scene::world::render_parameters const &);
 
-	[[nodiscard]]
-	sanguis::client::draw2d::optional_speed
-	test_collision(
-		sanguis::client::draw2d::collide_parameters const &
-	) const;
+  [[nodiscard]] sanguis::client::draw2d::optional_speed
+  test_collision(sanguis::client::draw2d::collide_parameters const &) const;
 
-	[[nodiscard]]
-	sanguis::creator::optional_background_tile
-	background_tile(
-		sanguis::creator::pos const &
-	) const;
+  [[nodiscard]] sanguis::creator::optional_background_tile
+  background_tile(sanguis::creator::pos const &) const;
+
 private:
-	state(
-		fcppt::log::context_reference,
-		sanguis::random_generator &, // NOLINT(google-runtime-references)
-		sge::renderer::device::core_ref,
-		sanguis::client::load::tiles::context_ref,
-		sanguis::client::draw::debug,
-		sanguis::creator::top_result const &,
-		sanguis::creator::name const &,
-		sanguis::client::draw2d::scene::world::parameters const &
-	);
+  state(
+      fcppt::log::context_reference,
+      sanguis::random_generator &, // NOLINT(google-runtime-references)
+      sge::renderer::device::core_ref,
+      sanguis::client::load::tiles::context_ref,
+      sanguis::client::draw::debug,
+      sanguis::creator::top_result const &,
+      sanguis::creator::name const &,
+      sanguis::client::draw2d::scene::world::parameters const &);
 
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 
-	sge::renderer::device::core_ref const renderer_;
+  sge::renderer::device::core_ref const renderer_;
 
-	sanguis::client::draw2d::scene::world::sprite::buffers sprite_buffers_;
+  sanguis::client::draw2d::scene::world::sprite::buffers sprite_buffers_;
 
-	sanguis::client::draw2d::scene::world::sprite::state sprite_state_;
+  sanguis::client::draw2d::scene::world::sprite::state sprite_state_;
 
-	sanguis::creator::grid const grid_;
+  sanguis::creator::grid const grid_;
 
-	sanguis::creator::background_grid const background_grid_;
+  sanguis::creator::background_grid const background_grid_;
 
-	sanguis::client::draw2d::scene::world::batch_grid const batches_;
+  sanguis::client::draw2d::scene::world::batch_grid const batches_;
 
-	sanguis::client::draw2d::scene::world::base_unique_ptr const effects_;
+  sanguis::client::draw2d::scene::world::base_unique_ptr const effects_;
 };
 
 }

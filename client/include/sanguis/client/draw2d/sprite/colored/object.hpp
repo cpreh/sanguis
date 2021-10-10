@@ -4,5 +4,4 @@
 #include <sanguis/client/draw2d/sprite/colored/object_decl.hpp>
 #include <sge/sprite/object_impl.hpp>
 
-
 #endif

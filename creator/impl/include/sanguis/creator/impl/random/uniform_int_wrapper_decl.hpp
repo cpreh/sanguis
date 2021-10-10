@@ -4,24 +4,16 @@
 #include <sanguis/creator/impl/random/uniform_int_distribution_decl.hpp>
 #include <sanguis/creator/impl/random/uniform_int_wrapper_fwd.hpp>
 
-
 namespace sanguis::creator::impl::random
 {
 
 struct uniform_int_wrapper
 {
-	template<
-		typename Type
-	>
-	struct apply
-	{
-		using
-		type
-		=
-		sanguis::creator::impl::random::uniform_int_distribution<
-			Type
-		>;
-	};
+  template <typename Type>
+  struct apply
+  {
+    using type = sanguis::creator::impl::random::uniform_int_distribution<Type>;
+  };
 };
 
 }

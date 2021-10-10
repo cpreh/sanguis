@@ -5,5 +5,4 @@
 #include <sanguis/creator/grid_crange_fwd.hpp>
 #include <fcppt/container/grid/pos_ref_range_impl.hpp>
 
-
 #endif

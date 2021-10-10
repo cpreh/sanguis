@@ -19,77 +19,50 @@
 #include <boost/logic/tribool_fwd.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::entities::projectiles
 {
 
-class base
-:
-	public virtual sanguis::server::entities::ifaces::with_team,
-	public sanguis::server::entities::with_id,
-	public sanguis::server::entities::with_links,
-	public sanguis::server::entities::with_velocity
+class base : public virtual sanguis::server::entities::ifaces::with_team,
+             public sanguis::server::entities::with_id,
+             public sanguis::server::entities::with_links,
+             public sanguis::server::entities::with_velocity
 {
-	FCPPT_NONMOVABLE(
-		base
-	);
+  FCPPT_NONMOVABLE(base);
+
 protected:
-	base(
-		sanguis::server::team,
-		sanguis::server::entities::movement_speed,
-		sanguis::load::model::path const &,
-		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-		sanguis::server::entities::projectiles::life_time,
-		sanguis::server::direction
-	);
+  base(
+      sanguis::server::team,
+      sanguis::server::entities::movement_speed,
+      sanguis::load::model::path const &,
+      sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+      sanguis::server::entities::projectiles::life_time,
+      sanguis::server::direction);
 
-	~base()
-	override;
+  ~base() override;
 
-	void
-	expire();
+  void expire();
 
-	[[nodiscard]]
-	sanguis::server::team
-	team() const
-	override;
+  [[nodiscard]] sanguis::server::team team() const override;
+
 private:
-	[[nodiscard]]
-	bool
-	dead() const
-	override;
+  [[nodiscard]] bool dead() const override;
 
-	void
-	world_collision()
-	override;
+  void world_collision() override;
 
-	[[nodiscard]]
-	boost::logic::tribool
-	can_collide_with_body(
-		sanguis::server::entities::with_body const &
-	) const
-	override;
+  [[nodiscard]] boost::logic::tribool
+  can_collide_with_body(sanguis::server::entities::with_body const &) const override;
 
-	void
-	collision_with_body(
-		sanguis::server::entities::with_body &
-	)
-	override;
+  void collision_with_body(sanguis::server::entities::with_body &) override;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_group
-	collision_group() const
-	override;
+  [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
 
-	virtual
-	void
-	do_damage(
-		sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
-	) = 0; // NOLINT(google-runtime-references)
+  virtual void
+  do_damage(sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
+            ) = 0; // NOLINT(google-runtime-references)
 
-	sanguis::server::team const team_;
+  sanguis::server::team const team_;
 
-	sanguis::diff_timer life_timer_;
+  sanguis::diff_timer life_timer_;
 };
 
 }

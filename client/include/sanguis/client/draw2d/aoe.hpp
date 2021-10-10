@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::client::draw2d::funit,
-	aoe
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::client::draw2d::funit, aoe);
 
 }
 

@@ -6,16 +6,11 @@
 #include <alda/net/port.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
 SANGUIS_SERVER_SYMBOL
-sanguis::server::object_base_unique_ptr
-create(
-	fcppt::log::context_reference,
-	alda::net::port
-);
+sanguis::server::object_base_unique_ptr create(fcppt::log::context_reference, alda::net::port);
 
 }
 

@@ -4,14 +4,10 @@
 #include <sanguis/duration.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::client
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::duration,
-	slowed_duration
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::duration, slowed_duration);
 
 }
 

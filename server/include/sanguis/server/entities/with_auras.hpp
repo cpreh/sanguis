@@ -8,38 +8,26 @@
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class with_auras
-:
-	public virtual sanguis::server::entities::with_ghosts
+class with_auras : public virtual sanguis::server::entities::with_ghosts
 {
-	FCPPT_NONMOVABLE(
-		with_auras
-	);
+  FCPPT_NONMOVABLE(with_auras);
+
 public:
-	[[nodiscard]]
-	virtual
-	sanguis::collision::world::body_enter_container
-	add_aura(
-		sanguis::server::auras::unique_ptr &&
-	);
+  [[nodiscard]] virtual sanguis::collision::world::body_enter_container
+  add_aura(sanguis::server::auras::unique_ptr &&);
+
 protected:
-	explicit
-	with_auras(
-		sanguis::server::auras::container &&
-	);
+  explicit with_auras(sanguis::server::auras::container &&);
 
-	~with_auras()
-	override;
+  ~with_auras() override;
 
-	[[nodiscard]]
-	sanguis::server::auras::container const &
-	auras() const;
+  [[nodiscard]] sanguis::server::auras::container const &auras() const;
+
 private:
-	sanguis::server::auras::container auras_;
+  sanguis::server::auras::container auras_;
 };
 
 }

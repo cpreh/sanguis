@@ -4,23 +4,18 @@
 #include <sanguis/client/control/actions/nullary_fwd.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 
-
 namespace sanguis::client::control::actions
 {
 
 class nullary
 {
 public:
-	explicit
-	nullary(
-		sanguis::client::control::actions::nullary_type
-	);
+  explicit nullary(sanguis::client::control::actions::nullary_type);
 
-	[[nodiscard]]
-	sanguis::client::control::actions::nullary_type
-	type() const;
+  [[nodiscard]] sanguis::client::control::actions::nullary_type type() const;
+
 private:
-	sanguis::client::control::actions::nullary_type type_;
+  sanguis::client::control::actions::nullary_type type_;
 };
 
 }

@@ -5,15 +5,11 @@
 #include <sanguis/model/animation_fwd.hpp>
 #include <sanguis/model/optional_animation_delay_fwd.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
 sanguis::duration
-make_delay(
-	sanguis::model::animation const &,
-	sanguis::model::optional_animation_delay const &
-);
+make_delay(sanguis::model::animation const &, sanguis::model::optional_animation_delay const &);
 
 }
 

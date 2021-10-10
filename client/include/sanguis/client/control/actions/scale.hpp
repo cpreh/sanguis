@@ -5,29 +5,22 @@
 #include <sanguis/client/control/actions/scale_fwd.hpp>
 #include <sanguis/client/control/actions/scale_type.hpp>
 
-
 namespace sanguis::client::control::actions
 {
 
 class scale
 {
 public:
-	scale(
-		sanguis::client::control::actions::scale_type,
-		sanguis::client::control::key_scale
-	);
+  scale(sanguis::client::control::actions::scale_type, sanguis::client::control::key_scale);
 
-	[[nodiscard]]
-	sanguis::client::control::actions::scale_type
-	type() const;
+  [[nodiscard]] sanguis::client::control::actions::scale_type type() const;
 
-	[[nodiscard]]
-	sanguis::client::control::key_scale
-	get() const;
+  [[nodiscard]] sanguis::client::control::key_scale get() const;
+
 private:
-	sanguis::client::control::actions::scale_type type_;
+  sanguis::client::control::actions::scale_type type_;
 
-	sanguis::client::control::key_scale scale_;
+  sanguis::client::control::key_scale scale_;
 };
 
 }

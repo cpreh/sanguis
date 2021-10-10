@@ -4,5 +4,4 @@
 #include <sanguis/tiles/is_background_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

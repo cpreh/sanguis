@@ -4,16 +4,10 @@
 #include <sanguis/client/perk/info_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-using
-optional_info
-=
-fcppt::optional::object<
-	sanguis::client::perk::info
->;
+using optional_info = fcppt::optional::object<sanguis::client::perk::info>;
 
 }
 

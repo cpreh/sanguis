@@ -3,24 +3,23 @@
 
 #include <sanguis/client/draw2d/z_ordering_fwd.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
 enum class z_ordering
 {
-	ground,
-	destructible,
-	pickup,
-	aura,
-	model_generic,
-	player_lower,
-	bullet_tail,
-	bullet,
-	player_upper,
-	flare,
-	text,
-	fcppt_maximum = text
+  ground,
+  destructible,
+  pickup,
+  aura,
+  model_generic,
+  player_lower,
+  bullet_tail,
+  bullet,
+  player_upper,
+  flare,
+  text,
+  fcppt_maximum = text
 };
 
 }

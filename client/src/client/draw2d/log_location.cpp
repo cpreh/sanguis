@@ -4,14 +4,7 @@
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/name.hpp>
 
-
-fcppt::log::location
-sanguis::client::draw2d::log_location()
+fcppt::log::location sanguis::client::draw2d::log_location()
 {
-	return
-		sanguis::client::log_location()
-		/
-		fcppt::log::name{
-			FCPPT_TEXT("draw2d")
-		};
+  return sanguis::client::log_location() / fcppt::log::name{FCPPT_TEXT("draw2d")};
 }

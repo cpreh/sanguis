@@ -10,29 +10,16 @@
 #include <fcppt/mpl/list/join.hpp>
 #include <fcppt/mpl/list/object.hpp>
 
-
 namespace sanguis::messages::server::parts
 {
 
-using
-add_actor
-=
-fcppt::mpl::list::join<
-	fcppt::mpl::list::object<
-		sanguis::messages::server::parts::add_elements_base,
-		fcppt::mpl::list::object<
-			sanguis::messages::server::parts::speed
-		>,
-		sanguis::messages::server::parts::add_with_health,
-		sanguis::messages::server::parts::add_with_weapon,
-		fcppt::mpl::list::object<
-			sanguis::messages::server::parts::add_with_auras
-		>,
-		fcppt::mpl::list::object<
-			sanguis::messages::server::parts::add_with_buffs
-		>
-	>
->;
+using add_actor = fcppt::mpl::list::join<fcppt::mpl::list::object<
+    sanguis::messages::server::parts::add_elements_base,
+    fcppt::mpl::list::object<sanguis::messages::server::parts::speed>,
+    sanguis::messages::server::parts::add_with_health,
+    sanguis::messages::server::parts::add_with_weapon,
+    fcppt::mpl::list::object<sanguis::messages::server::parts::add_with_auras>,
+    fcppt::mpl::list::object<sanguis::messages::server::parts::add_with_buffs>>>;
 
 }
 

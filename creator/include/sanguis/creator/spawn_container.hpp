@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-spawn_container
-=
-std::vector<
-	sanguis::creator::spawn
->;
+using spawn_container = std::vector<sanguis::creator::spawn>;
 
 }
 

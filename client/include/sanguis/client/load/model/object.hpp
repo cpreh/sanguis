@@ -19,95 +19,55 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
 class object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 public:
-	using
-	const_iterator
-	=
-	sanguis::client::load::model::part_map::const_iterator;
+  using const_iterator = sanguis::client::load::model::part_map::const_iterator;
 
-	using
-	size_type
-	=
-	sanguis::client::load::model::part_map::size_type;
+  using size_type = sanguis::client::load::model::part_map::size_type;
 
-	object(
-		fcppt::log::object &, // NOLINT(google-runtime-references)
-		std::filesystem::path &&,
-		sanguis::client::load::resource::context_cref
-	);
+  object(
+      fcppt::log::object &, // NOLINT(google-runtime-references)
+      std::filesystem::path &&,
+      sanguis::client::load::resource::context_cref);
 
-	~object();
+  ~object();
 
-	[[nodiscard]]
-	sanguis::client::load::model::part const &
-	operator[](
-		fcppt::string const &
-	) const;
+  [[nodiscard]] sanguis::client::load::model::part const &operator[](fcppt::string const &) const;
 
-	[[nodiscard]]
-	sanguis::client::load::model::part const &
-	random_part(
-		sanguis::random_generator & // NOLINT(google-runtime-references)
-	) const; // NOLINT(google-runtime-references)
+  [[nodiscard]] sanguis::client::load::model::part const &
+  random_part(sanguis::random_generator & // NOLINT(google-runtime-references)
+  ) const; // NOLINT(google-runtime-references)
 
-	[[nodiscard]]
-	size_type
-	size() const;
+  [[nodiscard]] size_type size() const;
 
-	[[nodiscard]]
-	const_iterator
-	begin() const;
+  [[nodiscard]] const_iterator begin() const;
 
-	[[nodiscard]]
-	const_iterator
-	end() const;
+  [[nodiscard]] const_iterator end() const;
 
-	[[nodiscard]]
-	sanguis::model::cell_size
-	cell_size() const;
+  [[nodiscard]] sanguis::model::cell_size cell_size() const;
+
 private:
-	[[nodiscard]]
-	sanguis::client::load::model::part_map const &
-	parts() const;
+  [[nodiscard]] sanguis::client::load::model::part_map const &parts() const;
 
-	std::filesystem::path const path_;
+  std::filesystem::path const path_;
 
-	sanguis::client::load::model::part_result const part_result_;
+  sanguis::client::load::model::part_result const part_result_;
 
-	using
-	part_map_distribution
-	=
-	fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_int<
-			sanguis::client::load::model::part_map::size_type
-		>
-	>;
+  using part_map_distribution =
+      fcppt::random::distribution::basic<fcppt::random::distribution::parameters::uniform_int<
+          sanguis::client::load::model::part_map::size_type>>;
 
-	using
-	part_rand
-	=
-	fcppt::random::variate<
-		sanguis::random_generator,
-		part_map_distribution
-	>;
+  using part_rand = fcppt::random::variate<sanguis::random_generator, part_map_distribution>;
 
-	using
-	optional_part_rand
-	=
-	fcppt::optional::object<
-		part_rand
-	>;
+  using optional_part_rand = fcppt::optional::object<part_rand>;
 
-	mutable optional_part_rand random_part_;
+  mutable optional_part_rand random_part_;
 };
 
 }

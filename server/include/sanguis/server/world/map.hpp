@@ -7,17 +7,10 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::world
 {
 
-using
-map
-=
-std::unordered_map<
-	sanguis::world_id,
-	sanguis::server::world::object_unique_ptr
->;
+using map = std::unordered_map<sanguis::world_id, sanguis::server::world::object_unique_ptr>;
 
 }
 

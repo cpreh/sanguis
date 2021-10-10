@@ -5,18 +5,11 @@
 #include <boost/intrusive/list_hook.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-using
-auto_weak_hook
-=
-boost::intrusive::list_base_hook<
-	boost::intrusive::link_mode<
-		boost::intrusive::auto_unlink
-	>
->;
+using auto_weak_hook =
+    boost::intrusive::list_base_hook<boost::intrusive::link_mode<boost::intrusive::auto_unlink>>;
 
 }
 

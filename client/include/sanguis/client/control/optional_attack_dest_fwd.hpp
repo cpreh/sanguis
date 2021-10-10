@@ -4,16 +4,10 @@
 #include <sanguis/client/control/attack_dest_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::control
 {
 
-using
-optional_attack_dest
-=
-fcppt::optional::object<
-	sanguis::client::control::attack_dest
->;
+using optional_attack_dest = fcppt::optional::object<sanguis::client::control::attack_dest>;
 
 }
 

@@ -52,351 +52,152 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::ai::behavior::attack::attack(
-	sanguis::server::ai::context_ref const _context,
-	sanguis::server::ai::sight_range const _sight_range
-)
-:
-	sanguis::server::ai::behavior::base(
-		_context
-	),
-	sight_range_(
-		_sight_range
-	),
-	potential_targets_(),
-	target_(),
-	health_connection_{
-		_context->me().health().register_change_callback(
-			sanguis::server::entities::property::change_callback{
-				[
-					this
-				](
-					sanguis::server::entities::property::change_event const &_event
-				)
-				{
-					this->health_changed(
-						_event
-					);
-				}
-			}
-		)
-	}
+    sanguis::server::ai::context_ref const _context,
+    sanguis::server::ai::sight_range const _sight_range)
+    : sanguis::server::ai::behavior::base(_context),
+      sight_range_(_sight_range),
+      potential_targets_(),
+      target_(),
+      health_connection_{_context->me().health().register_change_callback(
+          sanguis::server::entities::property::change_callback{
+              [this](sanguis::server::entities::property::change_event const &_event)
+              { this->health_changed(_event); }})}
 {
 }
 
 FCPPT_PP_POP_WARNING
 
-sanguis::server::ai::behavior::attack::~attack()
-= default;
+sanguis::server::ai::behavior::attack::~attack() = default;
 
-sanguis::server::entities::transfer_result
-sanguis::server::ai::behavior::attack::transfer()
+sanguis::server::entities::transfer_result sanguis::server::ai::behavior::attack::transfer()
 {
-	return
-		sanguis::server::entities::transfer_result(
-			this->me().add_aura(
-				fcppt::unique_ptr_to_base<
-					sanguis::server::auras::aura
-				>(
-					fcppt::make_unique_ptr<
-						sanguis::server::auras::target
-					>(
-						sanguis::server::radius(
-							sight_range_.get()
-						),
-						this->me().team(),
-						sanguis::server::auras::target_kind::enemy,
-						sanguis::server::add_target_callback{
-							[
-								this
-							](
-								sanguis::server::entities::with_body_ref const _with_body
-							)
-							{
-								this->target_enters(
-									_with_body
-								);
-							}
-						},
-						sanguis::server::remove_target_callback{
-							[
-								this
-							](
-								sanguis::server::entities::with_body &_with_body
-							)
-							{
-								this->target_leaves(
-									_with_body
-								);
-							}
-						}
-					)
-				)
-			)
-		);
+  return sanguis::server::entities::transfer_result(
+      this->me().add_aura(fcppt::unique_ptr_to_base<sanguis::server::auras::aura>(
+          fcppt::make_unique_ptr<sanguis::server::auras::target>(
+              sanguis::server::radius(sight_range_.get()),
+              this->me().team(),
+              sanguis::server::auras::target_kind::enemy,
+              sanguis::server::add_target_callback{
+                  [this](sanguis::server::entities::with_body_ref const _with_body)
+                  { this->target_enters(_with_body); }},
+              sanguis::server::remove_target_callback{
+                  [this](sanguis::server::entities::with_body &_with_body)
+                  { this->target_leaves(_with_body); }}))));
 }
 
-bool
-sanguis::server::ai::behavior::attack::start()
+bool sanguis::server::ai::behavior::attack::start()
 {
-	return
-		target_.get().has_value()
-		||
-		fcppt::optional::maybe(
-			this->closest_visible_target(),
-			fcppt::const_(
-				false
-			),
-			[
-				this
-			](
-				fcppt::reference<
-					sanguis::server::entities::with_body
-				> const _target
-			)
-			{
-				target_ =
-					_target.get().link();
+  return target_.get().has_value() ||
+         fcppt::optional::maybe(
+             this->closest_visible_target(),
+             fcppt::const_(false),
+             [this](fcppt::reference<sanguis::server::entities::with_body> const _target)
+             {
+               target_ = _target.get().link();
 
-				return
-					true;
-			}
-		);
+               return true;
+             });
 }
 
-sanguis::server::ai::status
-sanguis::server::ai::behavior::attack::update(
-	sanguis::duration
-)
+sanguis::server::ai::status sanguis::server::ai::behavior::attack::update(sanguis::duration)
 {
-	fcppt::optional::maybe_void(
-		this->closest_visible_target(),
-		[
-			this
-		](
-			fcppt::reference<
-				sanguis::server::entities::with_body
-			> const _closer_target
-		)
-		{
-			target_ =
-				_closer_target.get().link();
-		}
-	);
+  fcppt::optional::maybe_void(
+      this->closest_visible_target(),
+      [this](fcppt::reference<sanguis::server::entities::with_body> const _closer_target)
+      { target_ = _closer_target.get().link(); });
 
-	return
-		fcppt::optional::maybe(
-			target_.get(),
-			[]{
-				return
-					sanguis::server::ai::status::failure;
-			},
-			[
-				this
-			](
-				fcppt::reference<
-					sanguis::server::entities::with_links
-				> const _target
-			)
-			{
-				sanguis::server::ai::is_visible const is_visible{
-					sanguis::creator::tile_is_visible(
-						this->context().grid(),
-						sanguis::server::world::center_to_grid_pos(
-							_target.get().center()
-						),
-						sanguis::server::world::center_to_grid_pos(
-							this->me().center()
-						)
-					)
-				};
+  return fcppt::optional::maybe(
+      target_.get(),
+      [] { return sanguis::server::ai::status::failure; },
+      [this](fcppt::reference<sanguis::server::entities::with_links> const _target)
+      {
+        sanguis::server::ai::is_visible const is_visible{sanguis::creator::tile_is_visible(
+            this->context().grid(),
+            sanguis::server::world::center_to_grid_pos(_target.get().center()),
+            sanguis::server::world::center_to_grid_pos(this->me().center()))};
 
-				this->me().target(
-					is_visible.get()
-					?
-						sanguis::server::weapons::optional_target(
-							sanguis::server::weapons::target(
-								_target.get().center().get()
-							)
-						)
-					:
-						sanguis::server::weapons::optional_target()
-				);
+        this->me().target(
+            is_visible.get() ? sanguis::server::weapons::optional_target(
+                                   sanguis::server::weapons::target(_target.get().center().get()))
+                             : sanguis::server::weapons::optional_target());
 
-				sanguis::is_primary_weapon const weapon_to_use{
-					true
-				};
+        sanguis::is_primary_weapon const weapon_to_use{true};
 
-				sanguis::server::ai::in_range const in_range{
-					this->me().in_range(
-						weapon_to_use
-					)
-				};
+        sanguis::server::ai::in_range const in_range{this->me().in_range(weapon_to_use)};
 
-				this->me().use_weapon(
-					is_visible.get()
-					&&
-					in_range.get()
-					,
-					weapon_to_use
-				);
+        this->me().use_weapon(is_visible.get() && in_range.get(), weapon_to_use);
 
-				return
-					sanguis::server::ai::go_to_target(
-						this->context(),
-						in_range,
-						is_visible,
-						sanguis::server::ai::target{
-							_target.get().center()
-						},
-						this->speed_factor()
-					)
-					?
-						sanguis::server::ai::status::running
-					:
-						sanguis::server::ai::status::failure
-					;
-			}
-		);
+        return sanguis::server::ai::go_to_target(
+                   this->context(),
+                   in_range,
+                   is_visible,
+                   sanguis::server::ai::target{_target.get().center()},
+                   this->speed_factor())
+                   ? sanguis::server::ai::status::running
+                   : sanguis::server::ai::status::failure;
+      });
 }
 
-void
-sanguis::server::ai::behavior::attack::target_enters(
-	sanguis::server::entities::with_body_ref const _with_body
-)
+void sanguis::server::ai::behavior::attack::target_enters(
+    sanguis::server::entities::with_body_ref const _with_body)
 {
-	FCPPT_ASSERT_ERROR(
-		potential_targets_.insert(
-			_with_body
-		)
-		.second
-	);
+  FCPPT_ASSERT_ERROR(potential_targets_.insert(_with_body).second);
 }
 
-void
-sanguis::server::ai::behavior::attack::target_leaves(
-	sanguis::server::entities::with_body &_with_body
-)
+void sanguis::server::ai::behavior::attack::target_leaves(
+    sanguis::server::entities::with_body &_with_body)
 {
-	FCPPT_ASSERT_ERROR(
-		potential_targets_.erase(
-			fcppt::make_ref(
-				_with_body
-			)
-		)
-		==
-		1U
-	);
+  FCPPT_ASSERT_ERROR(potential_targets_.erase(fcppt::make_ref(_with_body)) == 1U);
 
-	fcppt::optional::maybe_void(
-		target_.get(),
-		[
-			&_with_body,
-			this
-		](
-			fcppt::reference<
-				sanguis::server::entities::with_links
-			> const _target
-		)
-		{
-			if(
-				sanguis::server::entities::same_object(
-					_target.get(),
-					_with_body
-				)
-			)
-			{
-				target_ =
-					sanguis::server::entities::auto_weak_link();
-			}
-		}
-	);
+  fcppt::optional::maybe_void(
+      target_.get(),
+      [&_with_body, this](fcppt::reference<sanguis::server::entities::with_links> const _target)
+      {
+        if (sanguis::server::entities::same_object(_target.get(), _with_body))
+        {
+          target_ = sanguis::server::entities::auto_weak_link();
+        }
+      });
 }
 
-void
-sanguis::server::ai::behavior::attack::health_changed(
-	sanguis::server::entities::property::change_event const &_event
-)
+void sanguis::server::ai::behavior::attack::health_changed(
+    sanguis::server::entities::property::change_event const &_event)
 {
-	if(
-		target_.get().has_value()
-		||
-		_event.diff().get()
-		>=
-		fcppt::literal<
-			sanguis::server::entities::property::value
-		>(
-			0
-		)
-	)
-	{
-		return;
-	}
+  if (target_.get().has_value() ||
+      _event.diff().get() >= fcppt::literal<sanguis::server::entities::property::value>(0))
+  {
+    return;
+  }
 
-	fcppt::optional::maybe_void(
-		sanguis::server::closest_entity(
-			this->me(),
-			potential_targets_,
-			[](
-				sanguis::server::entities::with_body const &
-			)
-			{
-				return
-					true;
-			}
-		),
-		[
-			this
-		](
-			fcppt::reference<
-				sanguis::server::entities::with_body
-			> const _result
-		)
-		{
-			target_ =
-				_result.get().link();
-		}
-	);
+  fcppt::optional::maybe_void(
+      sanguis::server::closest_entity(
+          this->me(),
+          potential_targets_,
+          [](sanguis::server::entities::with_body const &) { return true; }),
+      [this](fcppt::reference<sanguis::server::entities::with_body> const _result)
+      { target_ = _result.get().link(); });
 }
 
 sanguis::server::entities::optional_with_body_ref
 sanguis::server::ai::behavior::attack::closest_visible_target() const
 {
-	return
-		sanguis::server::closest_entity(
-			this->me(),
-			potential_targets_,
-			[
-				this
-			](
-				sanguis::server::entities::with_body const &_ref
-			)
-			{
-				return
-					sanguis::creator::tile_is_visible(
-						this->context().grid(),
-						sanguis::server::world::center_to_grid_pos(
-							_ref.center()
-						),
-						sanguis::server::world::center_to_grid_pos(
-							this->me().center()
-						)
-					);
-			}
-		);
+  return sanguis::server::closest_entity(
+      this->me(),
+      potential_targets_,
+      [this](sanguis::server::entities::with_body const &_ref)
+      {
+        return sanguis::creator::tile_is_visible(
+            this->context().grid(),
+            sanguis::server::world::center_to_grid_pos(_ref.center()),
+            sanguis::server::world::center_to_grid_pos(this->me().center()));
+      });
 }
 
-sanguis::server::ai::speed_factor
-sanguis::server::ai::behavior::attack::speed_factor() const
+sanguis::server::ai::speed_factor sanguis::server::ai::behavior::attack::speed_factor() const
 {
-	return
-		fcppt::literal<
-			sanguis::server::ai::speed_factor
-		>(
-			1
-		);
+  return fcppt::literal<sanguis::server::ai::speed_factor>(1);
 }

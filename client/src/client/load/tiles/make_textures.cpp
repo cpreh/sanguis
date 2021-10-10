@@ -16,61 +16,23 @@
 #include <fcppt/math/box/contains.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
 
-
-sanguis::client::load::tiles::texture_container
-sanguis::client::load::tiles::make_textures(
-	sge::texture::part const &_part,
-	sanguis::tiles::area_container const &_areas
-)
+sanguis::client::load::tiles::texture_container sanguis::client::load::tiles::make_textures(
+    sge::texture::part const &_part, sanguis::tiles::area_container const &_areas)
 {
-	return
-		fcppt::algorithm::map<
-			sanguis::client::load::tiles::texture_container
-		>(
-			_areas,
-			[
-				&_part
-			](
-				sge::image2d::rect const &_rect
-			)
-			{
-				auto const rect(
-					fcppt::math::box::structure_cast<
-						sge::renderer::lock_rect,
-						fcppt::cast::size_fun
-					>(
-						_rect
-					)
-				);
+  return fcppt::algorithm::map<sanguis::client::load::tiles::texture_container>(
+      _areas,
+      [&_part](sge::image2d::rect const &_rect)
+      {
+        auto const rect(
+            fcppt::math::box::structure_cast<sge::renderer::lock_rect, fcppt::cast::size_fun>(
+                _rect));
 
-				if(
-					fcppt::not_(
-						fcppt::math::box::contains(
-							_part.area(),
-							rect
-						)
-					)
-				)
-				{
-					throw
-						sanguis::exception{
-							FCPPT_TEXT("make_textures: area not inside rect")
-						};
-				}
+        if (fcppt::not_(fcppt::math::box::contains(_part.area(), rect)))
+        {
+          throw sanguis::exception{FCPPT_TEXT("make_textures: area not inside rect")};
+        }
 
-				return
-					fcppt::unique_ptr_to_const(
-						fcppt::unique_ptr_to_base<
-							sge::texture::part
-						>(
-							fcppt::make_unique_ptr<
-								sge::texture::part_raw_ref
-							>(
-								_part.texture(),
-								rect
-							)
-						)
-					);
-			}
-		);
+        return fcppt::unique_ptr_to_const(fcppt::unique_ptr_to_base<sge::texture::part>(
+            fcppt::make_unique_ptr<sge::texture::part_raw_ref>(_part.texture(), rect)));
+      });
 }

@@ -12,41 +12,35 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
-
 namespace sanguis::client::draw2d::scene
 {
 
 class light
 {
-	FCPPT_NONMOVABLE(
-		light
-	);
+  FCPPT_NONMOVABLE(light);
+
 public:
-	light(
-		sanguis::client::load::context_cref,
-		sanguis::client::draw2d::sprite::client::system_ref,
-		sge::viewport::manager_ref
-	);
+  light(
+      sanguis::client::load::context_cref,
+      sanguis::client::draw2d::sprite::client::system_ref,
+      sge::viewport::manager_ref);
 
-	~light();
+  ~light();
 
-	void
-	draw(
-		sge::renderer::context::core & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void draw(sge::renderer::context::core & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 private:
-	void
-	reset_viewport();
+  void reset_viewport();
 
-	sanguis::client::draw2d::sprite::client::system_ref const client_system_;
+  sanguis::client::draw2d::sprite::client::system_ref const client_system_;
 
-	sge::texture::part const &texture_;
+  sge::texture::part const &texture_;
 
-	sanguis::client::draw2d::sprite::client::object sprite_;
+  sanguis::client::draw2d::sprite::client::object sprite_;
 
-	sge::renderer::state::core::sampler::object_unique_ptr const sampler_state_;
+  sge::renderer::state::core::sampler::object_unique_ptr const sampler_state_;
 
-	fcppt::signal::auto_connection const viewport_connection_;
+  fcppt::signal::auto_connection const viewport_connection_;
 };
 
 }

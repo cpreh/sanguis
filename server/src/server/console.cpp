@@ -29,129 +29,57 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::console::console(
-	sanguis::server::send_callback &&_send,
-	sanguis::server::unicast_callback &&_unicast
-)
-:
-	object_(
-		sge::console::prefix(
-			SGE_FONT_LIT('/')
-		)
-	),
-	send_(
-		std::move(
-			_send
-		)
-	),
-	unicast_(
-		std::move(
-			_unicast
-		)
-	),
-	known_commands_()
+    sanguis::server::send_callback &&_send, sanguis::server::unicast_callback &&_unicast)
+    : object_(sge::console::prefix(SGE_FONT_LIT('/'))),
+      send_(std::move(_send)),
+      unicast_(std::move(_unicast)),
+      known_commands_()
 {
 }
 
-sanguis::server::console::~console()
-= default;
+sanguis::server::console::~console() = default;
 
-fcppt::signal::auto_connection
-sanguis::server::console::insert(
-	fcppt::string const &_command,
-	sge::console::callback::function &&_callback,
-	fcppt::string const &_description
-)
+fcppt::signal::auto_connection sanguis::server::console::insert(
+    fcppt::string const &_command,
+    sge::console::callback::function &&_callback,
+    fcppt::string const &_description)
 {
-	send_(
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::add_console_command
-			>(
-				sanguis::messages::roles::command_name{} =
-					sge::charconv::fcppt_string_to_utf8(
-						_command
-					),
-				sanguis::messages::roles::command_description{} =
-					sge::charconv::fcppt_string_to_utf8(
-						_description
-					)
-			)
-		)
-	);
+  send_(sanguis::messages::server::create(
+      alda::message::init_record<sanguis::messages::server::add_console_command>(
+          sanguis::messages::roles::command_name{} = sge::charconv::fcppt_string_to_utf8(_command),
+          sanguis::messages::roles::command_description{} =
+              sge::charconv::fcppt_string_to_utf8(_description))));
 
-	// TODO(philipp): we have to know when a command doesn't exist anymore!
-	known_commands_.push_back(
-		sanguis::server::console_command_pair(
-			_command,
-			_description
-		)
-	);
+  // TODO(philipp): we have to know when a command doesn't exist anymore!
+  known_commands_.push_back(sanguis::server::console_command_pair(_command, _description));
 
-	return
-		object_.insert(
-			sge::console::callback::parameters(
-				std::move(
-					_callback
-				),
-				sge::console::callback::name(
-					sge::font::from_fcppt_string(
-						_command
-					)
-				)
-			)
-			.short_description(
-				sge::font::from_fcppt_string(
-					_description
-				)
-			)
-		);
+  return object_.insert(sge::console::callback::parameters(
+                            std::move(_callback),
+                            sge::console::callback::name(sge::font::from_fcppt_string(_command)))
+                            .short_description(sge::font::from_fcppt_string(_description)));
 }
 
-void
-sanguis::server::console::eval(
-	sanguis::server::player_id const _id,
-	sge::console::arg_list _args
-)
+void sanguis::server::console::eval(
+    sanguis::server::player_id const _id, sge::console::arg_list _args)
 {
-	_args.push_back(
-		fcppt::output_to_string<
-			sge::font::string
-		>(
-			_id
-		)
-	);
+  _args.push_back(fcppt::output_to_string<sge::font::string>(_id));
 
-	object_.eval(
-		_args
-	);
+  object_.eval(_args);
 }
 
-void
-sanguis::server::console::print_line(
-	sanguis::server::player_id const _id,
-	fcppt::string const &_line
-)
+void sanguis::server::console::print_line(
+    sanguis::server::player_id const _id, fcppt::string const &_line)
 {
-	unicast_(
-		_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::console_print
-			>(
-				sanguis::messages::roles::console_message{} =
-					sge::charconv::fcppt_string_to_utf8(
-						_line
-					)
-			)
-		)
-	);
+  unicast_(
+      _id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::console_print>(
+              sanguis::messages::roles::console_message{} =
+                  sge::charconv::fcppt_string_to_utf8(_line))));
 }
 
-sanguis::server::console_command_vector const &
-sanguis::server::console::known_commands() const
+sanguis::server::console_command_vector const &sanguis::server::console::known_commands() const
 {
-	return
-		known_commands_;
+  return known_commands_;
 }

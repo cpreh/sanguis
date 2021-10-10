@@ -3,24 +3,23 @@
 
 #include <sanguis/cheat_type_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class cheat_type
 {
-	auras,
-	exp,
-	grenade,
-	heal,
-	kill,
-	monster_spawner,
-	perks,
-	rocket_launcher,
-	sentry,
-	shotgun,
-	spider,
-	fcppt_maximum = spider
+  auras,
+  exp,
+  grenade,
+  heal,
+  kill,
+  monster_spawner,
+  perks,
+  rocket_launcher,
+  sentry,
+  shotgun,
+  spider,
+  fcppt_maximum = spider
 };
 
 }

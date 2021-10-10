@@ -15,109 +15,51 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::tools::animations::image_file_map
-sanguis::tools::animations::load_image_files(
-	std::filesystem::path const &_path,
-	sanguis::model::object const &_model
-)
+sanguis::tools::animations::image_file_map sanguis::tools::animations::load_image_files(
+    std::filesystem::path const &_path, sanguis::model::object const &_model)
 {
-	sanguis::tools::animations::image_file_map result;
+  sanguis::tools::animations::image_file_map result;
 
-	auto const load_image(
-		[
-			&_path,
-			&result
-		](
-			sanguis::model::optional_image_name const &_opt_name
-		)
-		{
-			fcppt::optional::maybe_void(
-				_opt_name,
-				[
-					&_path,
-					&result
-				](
-					sanguis::model::image_name const &_name
-				)
-				{
-					if(
-						fcppt::container::find_opt(
-							result,
-							_name
-						).has_value()
-					)
-					{
-						return;
-					}
+  auto const load_image(
+      [&_path, &result](sanguis::model::optional_image_name const &_opt_name)
+      {
+        fcppt::optional::maybe_void(
+            _opt_name,
+            [&_path, &result](sanguis::model::image_name const &_name)
+            {
+              if (fcppt::container::find_opt(result, _name).has_value())
+              {
+                return;
+              }
 
-					QImage image(
-						sanguis::tools::animations::qtutil::from_fcppt_string(
-							fcppt::filesystem::path_to_string(
-								_path
-								/
-								_name.get()
-							)
-						)
-					);
+              QImage image(sanguis::tools::animations::qtutil::from_fcppt_string(
+                  fcppt::filesystem::path_to_string(_path / _name.get())));
 
-					if(
-						image.isNull()
-					)
-					{
-						return;
-					}
+              if (image.isNull())
+              {
+                return;
+              }
 
-					result.insert(
-						std::make_pair(
-							_name,
-							std::move(
-								image
-							)
-						)
-					);
-				}
-			);
-		}
-	);
+              result.insert(std::make_pair(_name, std::move(image)));
+            });
+      });
 
-	load_image(
-		_model.image_name()
-	);
+  load_image(_model.image_name());
 
-	for(
-		auto const &part
-		:
-		_model.parts()
-	)
-	{
-		load_image(
-			part.second.image_name()
-		);
+  for (auto const &part : _model.parts())
+  {
+    load_image(part.second.image_name());
 
-		for(
-			auto const &weapon
-			:
-			part.second.weapon_categories()
-		)
-		{
-			load_image(
-				weapon.second.image_name()
-			);
+    for (auto const &weapon : part.second.weapon_categories())
+    {
+      load_image(weapon.second.image_name());
 
-			for(
-				auto const &animation
-				:
-				weapon.second.animations()
-			)
-			{
-				load_image(
-					animation.second.image_name()
-				);
-			}
-		}
-	}
+      for (auto const &animation : weapon.second.animations())
+      {
+        load_image(animation.second.image_name());
+      }
+    }
+  }
 
-	return
-		result;
+  return result;
 }

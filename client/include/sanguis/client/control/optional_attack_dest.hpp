@@ -5,5 +5,4 @@
 #include <sanguis/client/control/optional_attack_dest_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

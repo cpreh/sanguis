@@ -4,16 +4,10 @@
 #include <sanguis/tiles/impl/content_path_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-using
-optional_content_path
-=
-fcppt::optional::object<
-	sanguis::tiles::impl::content_path
->;
+using optional_content_path = fcppt::optional::object<sanguis::tiles::impl::content_path>;
 
 }
 

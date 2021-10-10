@@ -4,18 +4,10 @@
 #include <sanguis/server/entities/with_body_ref.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-add_target_callback
-=
-fcppt::function<
-	void (
-		sanguis::server::entities::with_body_ref
-	)
->;
+using add_target_callback = fcppt::function<void(sanguis::server::entities::with_body_ref)>;
 
 }
 

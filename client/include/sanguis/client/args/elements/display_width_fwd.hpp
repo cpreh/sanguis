@@ -5,17 +5,12 @@
 #include <sanguis/client/args/labels/display_width.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::client::args::elements
 {
 
-using
-display_width
-=
-fcppt::record::element<
-	sanguis::client::args::labels::display_width,
-	sanguis::client::args::optional_screen_unit
->;
+using display_width = fcppt::record::element<
+    sanguis::client::args::labels::display_width,
+    sanguis::client::args::optional_screen_unit>;
 
 }
 

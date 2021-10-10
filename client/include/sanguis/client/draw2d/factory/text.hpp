@@ -9,19 +9,16 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 
-
 namespace sanguis::client::draw2d::factory
 {
 
-sanguis::client::draw2d::entities::own_unique_ptr
-text(
-	sanguis::diff_clock_cref,
-	sanguis::client::draw2d::sprite::normal::system_ref,
-	sge::font::object &, // NOLINT(google-runtime-references)
-	sge::font::string const &,
-	sanguis::client::draw2d::sprite::center const &,
-	sanguis::client::draw2d::sprite::normal::color
-);
+sanguis::client::draw2d::entities::own_unique_ptr text(
+    sanguis::diff_clock_cref,
+    sanguis::client::draw2d::sprite::normal::system_ref,
+    sge::font::object &, // NOLINT(google-runtime-references)
+    sge::font::string const &,
+    sanguis::client::draw2d::sprite::center const &,
+    sanguis::client::draw2d::sprite::normal::color);
 
 }
 

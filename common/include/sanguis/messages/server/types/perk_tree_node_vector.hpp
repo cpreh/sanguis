@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::messages::server::types
 {
 
-using
-perk_tree_node_vector
-=
-std::vector<
-	sanguis::messages::server::types::perk_tree_node
->;
+using perk_tree_node_vector = std::vector<sanguis::messages::server::types::perk_tree_node>;
 
 }
 

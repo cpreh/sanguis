@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/scene/world/sprite/range_fwd.hpp>
 #include <sge/sprite/render/range.hpp>
 
-
 #endif

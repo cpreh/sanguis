@@ -19,66 +19,49 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::gui::hud
 {
 
 class weapon_widget
 {
-	FCPPT_NONMOVABLE(
-		weapon_widget
-	);
+  FCPPT_NONMOVABLE(weapon_widget);
+
 public:
-	weapon_widget(
-		sanguis::diff_clock_cref,
-		sanguis::client::load::hud::context_ref,
-		sge::gui::context_ref,
-		sge::gui::style::const_reference,
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sanguis::weapon_description const &
-	);
+  weapon_widget(
+      sanguis::diff_clock_cref,
+      sanguis::client::load::hud::context_ref,
+      sge::gui::context_ref,
+      sge::gui::style::const_reference,
+      sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sanguis::weapon_description const &);
 
-	~weapon_widget();
+  ~weapon_widget();
 
-	void
-	magazine_remaining(
-		sanguis::magazine_remaining
-	);
+  void magazine_remaining(sanguis::magazine_remaining);
 
-	void
-	reload_time(
-		sanguis::duration
-	);
+  void reload_time(sanguis::duration);
 
-	void
-	update();
+  void update();
 
-	[[nodiscard]]
-	sge::gui::widget::box_container &
-	widget();
+  [[nodiscard]] sge::gui::widget::box_container &widget();
 
-	[[nodiscard]]
-	sanguis::weapon_description const &
-	weapon_description() const;
+  [[nodiscard]] sanguis::weapon_description const &weapon_description() const;
+
 private:
-	[[nodiscard]]
-	sge::font::string
-	make_text(
-		sanguis::magazine_remaining
-	) const;
+  [[nodiscard]] sge::font::string make_text(sanguis::magazine_remaining) const;
 
-	sanguis::weapon_description const description_;
+  sanguis::weapon_description const description_;
 
-	sanguis::diff_timer reload_time_;
+  sanguis::diff_timer reload_time_;
 
-	sge::gui::widget::image image_;
+  sge::gui::widget::image image_;
 
-	sge::gui::widget::text text_;
+  sge::gui::widget::text text_;
 
-	sge::gui::widget::bar cooldown_bar_;
+  sge::gui::widget::bar cooldown_bar_;
 
-	sge::gui::widget::box_container container_;
+  sge::gui::widget::box_container container_;
 };
 
 }

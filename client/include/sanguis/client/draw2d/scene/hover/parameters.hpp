@@ -16,71 +16,54 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
 
-
 namespace sanguis::client::draw2d::scene::hover
 {
 
 class parameters
 {
 public:
-	parameters(
-		sge::gui::style::const_reference,
-		sge::gui::renderer::base_ref,
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sanguis::client::load::hud::context_ref,
-		sanguis::client::weapon_pair &&,
-		sanguis::client::draw2d::sprite::center,
-		sanguis::client::draw2d::radius
-	);
+  parameters(
+      sge::gui::style::const_reference,
+      sge::gui::renderer::base_ref,
+      sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sanguis::client::load::hud::context_ref,
+      sanguis::client::weapon_pair &&,
+      sanguis::client::draw2d::sprite::center,
+      sanguis::client::draw2d::radius);
 
-	[[nodiscard]]
-	sge::gui::style::base const &
-	gui_style() const;
+  [[nodiscard]] sge::gui::style::base const &gui_style() const;
 
-	[[nodiscard]]
-	sge::gui::renderer::base &
-	gui_renderer() const;
+  [[nodiscard]] sge::gui::renderer::base &gui_renderer() const;
 
-	[[nodiscard]]
-	sge::renderer::device::ffp &
-	renderer() const;
+  [[nodiscard]] sge::renderer::device::ffp &renderer() const;
 
-	[[nodiscard]]
-	sge::font::object &
-	font() const;
+  [[nodiscard]] sge::font::object &font() const;
 
-	[[nodiscard]]
-	sanguis::client::load::hud::context &
-	load_context() const;
+  [[nodiscard]] sanguis::client::load::hud::context &load_context() const;
 
-	[[nodiscard]]
-	sanguis::client::weapon_pair const &
-	player_weapons() const;
+  [[nodiscard]] sanguis::client::weapon_pair const &player_weapons() const;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::sprite::center
-	center() const;
+  [[nodiscard]] sanguis::client::draw2d::sprite::center center() const;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::radius
-	radius() const;
+  [[nodiscard]] sanguis::client::draw2d::radius radius() const;
+
 private:
-	sge::gui::style::const_reference gui_style_;
+  sge::gui::style::const_reference gui_style_;
 
-	sge::gui::renderer::base_ref gui_renderer_;
+  sge::gui::renderer::base_ref gui_renderer_;
 
-	sge::renderer::device::ffp_ref renderer_;
+  sge::renderer::device::ffp_ref renderer_;
 
-	sge::font::object_ref font_;
+  sge::font::object_ref font_;
 
-	sanguis::client::load::hud::context_ref load_context_;
+  sanguis::client::load::hud::context_ref load_context_;
 
-	sanguis::client::weapon_pair player_weapons_;
+  sanguis::client::weapon_pair player_weapons_;
 
-	sanguis::client::draw2d::sprite::center center_;
+  sanguis::client::draw2d::sprite::center center_;
 
-	sanguis::client::draw2d::radius radius_;
+  sanguis::client::draw2d::radius radius_;
 };
 
 }

@@ -12,25 +12,19 @@
 #include <fcppt/record/disjoint_product.hpp>
 #include <fcppt/record/object_impl.hpp>
 
-
 namespace sanguis::client::args
 {
 
-using
-result
-=
-fcppt::record::disjoint_product<
-	sanguis::server::args::result,
-	fcppt::record::object<
-		sanguis::client::args::elements::display_height,
-		sanguis::client::args::elements::display_width,
-		sanguis::client::args::elements::draw_debug,
-		sanguis::client::args::elements::history_size,
-		sanguis::client::args::elements::log_level,
-		sanguis::client::args::elements::multi_samples,
-		sanguis::client::args::elements::sge_log_level
-	>
->;
+using result = fcppt::record::disjoint_product<
+    sanguis::server::args::result,
+    fcppt::record::object<
+        sanguis::client::args::elements::display_height,
+        sanguis::client::args::elements::display_width,
+        sanguis::client::args::elements::draw_debug,
+        sanguis::client::args::elements::history_size,
+        sanguis::client::args::elements::log_level,
+        sanguis::client::args::elements::multi_samples,
+        sanguis::client::args::elements::sge_log_level>>;
 
 }
 

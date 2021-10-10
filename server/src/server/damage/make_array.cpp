@@ -4,14 +4,8 @@
 #include <sanguis/server/damage/meta.hpp>
 #include <sanguis/server/damage/meta_list.hpp>
 
-
 sanguis::server::damage::array
-sanguis::server::damage::make_array(
-	sanguis::server::damage::meta_list const &_list
-)
+sanguis::server::damage::make_array(sanguis::server::damage::meta_list const &_list)
 {
-	return
-		sanguis::server::damage::basic_make_array(
-			_list
-		);
+  return sanguis::server::damage::basic_make_array(_list);
 }

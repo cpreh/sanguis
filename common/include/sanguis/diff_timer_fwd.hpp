@@ -4,16 +4,10 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sge/timer/basic_fwd.hpp>
 
-
 namespace sanguis
 {
 
-using
-diff_timer
-=
-sge::timer::basic<
-	sanguis::diff_clock
->;
+using diff_timer = sge::timer::basic<sanguis::diff_clock>;
 
 }
 

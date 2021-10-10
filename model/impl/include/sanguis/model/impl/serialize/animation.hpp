@@ -4,14 +4,10 @@
 #include <sanguis/model/animation_fwd.hpp>
 #include <sge/parse/json/object.hpp>
 
-
 namespace sanguis::model::impl::serialize
 {
 
-sge::parse::json::object
-animation(
-	sanguis::model::animation const &
-);
+sge::parse::json::object animation(sanguis::model::animation const &);
 
 }
 

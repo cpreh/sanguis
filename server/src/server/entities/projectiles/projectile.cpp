@@ -21,58 +21,36 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <alda/message/init_record.hpp>
 
-
 sanguis::server::entities::projectiles::projectile::projectile(
-	sanguis::projectile_type const _projectile_type,
-	sanguis::server::team const _team,
-	sanguis::server::entities::movement_speed const _movement_speed,
-	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::entities::projectiles::life_time const _life_time,
-	sanguis::server::direction const _direction
-)
-:
-	sanguis::server::entities::projectiles::base(
-		_team,
-		_movement_speed,
-		sanguis::load::model::projectile_path(
-			_projectile_type
-		),
-		_load_context,
-		_life_time,
-		_direction
-	),
-	projectile_type_{
-		_projectile_type
-	}
+    sanguis::projectile_type const _projectile_type,
+    sanguis::server::team const _team,
+    sanguis::server::entities::movement_speed const _movement_speed,
+    sanguis::server::environment::load_context &_load_context,
+    sanguis::server::entities::projectiles::life_time const _life_time,
+    sanguis::server::direction const _direction)
+    : sanguis::server::entities::projectiles::base(
+          _team,
+          _movement_speed,
+          sanguis::load::model::projectile_path(_projectile_type),
+          _load_context,
+          _life_time,
+          _direction),
+      projectile_type_{_projectile_type}
 {
 }
 
-sanguis::server::entities::projectiles::projectile::~projectile()
-= default;
+sanguis::server::entities::projectiles::projectile::~projectile() = default;
 
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::projectiles::projectile::add_message(
-	sanguis::server::player_id const,
-	sanguis::collision::world::created const _created
-) const
+    sanguis::server::player_id const, sanguis::collision::world::created const _created) const
 {
-	return
-		sanguis::messages::server::create_ptr(
-			alda::message::init_record<
-				sanguis::messages::server::add_projectile
-			>(
-				sanguis::messages::roles::entity_id{} =
-					this->id(),
-				sanguis::messages::roles::center{} =
-					this->center().get(),
-				sanguis::messages::roles::angle{} =
-					this->angle().get(),
-				sanguis::messages::roles::created{} =
-					_created.get(),
-				sanguis::messages::roles::speed{} =
-					this->speed().get(),
-				sanguis::messages::roles::projectile_type{} =
-					projectile_type_
-			)
-		);
+  return sanguis::messages::server::create_ptr(
+      alda::message::init_record<sanguis::messages::server::add_projectile>(
+          sanguis::messages::roles::entity_id{} = this->id(),
+          sanguis::messages::roles::center{} = this->center().get(),
+          sanguis::messages::roles::angle{} = this->angle().get(),
+          sanguis::messages::roles::created{} = _created.get(),
+          sanguis::messages::roles::speed{} = this->speed().get(),
+          sanguis::messages::roles::projectile_type{} = projectile_type_));
 }

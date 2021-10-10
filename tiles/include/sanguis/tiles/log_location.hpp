@@ -4,13 +4,11 @@
 #include <sanguis/tiles/symbol.hpp>
 #include <fcppt/log/location.hpp>
 
-
 namespace sanguis::tiles
 {
 
 SANGUIS_TILES_SYMBOL
-fcppt::log::location
-log_location();
+fcppt::log::location log_location();
 
 }
 

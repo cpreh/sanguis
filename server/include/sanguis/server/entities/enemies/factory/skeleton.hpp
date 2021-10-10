@@ -4,14 +4,11 @@
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters_fwd.hpp>
 
-
 namespace sanguis::server::entities::enemies::factory
 {
 
 sanguis::server::entities::with_id_unique_ptr
-skeleton(
-	sanguis::server::entities::enemies::factory::parameters const &
-);
+skeleton(sanguis::server::entities::enemies::factory::parameters const &);
 
 }
 

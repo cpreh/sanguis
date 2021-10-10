@@ -6,19 +6,12 @@
 #include <boost/intrusive/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::collision::impl::world::simple
 {
 
-using
-body_list
-=
-boost::intrusive::list<
-	sanguis::collision::impl::world::simple::body,
-	boost::intrusive::constant_time_size<
-		false
-	>
->;
+using body_list = boost::intrusive::list<
+    sanguis::collision::impl::world::simple::body,
+    boost::intrusive::constant_time_size<false>>;
 
 }
 

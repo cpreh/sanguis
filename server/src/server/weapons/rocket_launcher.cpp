@@ -28,128 +28,65 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
+sanguis::server::weapons::rocket_launcher::rocket_launcher(
+    sanguis::server::weapons::common_parameters const &_common_parameters,
+    sanguis::weapon_type const _weapon_type,
+    sanguis::server::weapons::rocket_launcher_parameters const &_parameters)
+    : sanguis::server::weapons::weapon(sanguis::server::weapons::parameters{
+          _common_parameters,
+          _weapon_type,
+          sanguis::server::weapons::attributes::optional_accuracy(
+              sanguis::server::weapons::attributes::accuracy(_parameters.accuracy())),
+          _parameters.range(),
+          sanguis::server::weapons::attributes::optional_magazine_size(
+              sanguis::server::weapons::attributes::magazine_size(_parameters.magazine_size())),
+          _parameters.backswing_time(),
+          _parameters.cast_point(),
+          sanguis::server::weapons::optional_reload_time(_parameters.reload_time())}),
+      damage_(_parameters.damage()),
+      aoe_(_parameters.aoe())
+{
+}
+
+sanguis::server::weapons::rocket_launcher::~rocket_launcher() = default;
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
-	sanguis::server::weapons::common_parameters const &_common_parameters,
-	sanguis::weapon_type const _weapon_type,
-	sanguis::server::weapons::rocket_launcher_parameters const &_parameters
-)
-:
-	sanguis::server::weapons::weapon(
-		sanguis::server::weapons::parameters{
-			_common_parameters,
-			_weapon_type,
-			sanguis::server::weapons::attributes::optional_accuracy(
-				sanguis::server::weapons::attributes::accuracy(
-					_parameters.accuracy()
-				)
-			),
-			_parameters.range(),
-			sanguis::server::weapons::attributes::optional_magazine_size(
-				sanguis::server::weapons::attributes::magazine_size(
-					_parameters.magazine_size()
-				)
-			),
-			_parameters.backswing_time(),
-			_parameters.cast_point(),
-			sanguis::server::weapons::optional_reload_time(
-				_parameters.reload_time()
-			)
-		}
-	),
-	damage_(
-		_parameters.damage()
-	),
-	aoe_(
-		_parameters.aoe()
-	)
+    sanguis::server::weapons::parameters const &_parameters,
+    sanguis::server::weapons::attributes::damage const _damage,
+    sanguis::server::weapons::attributes::aoe const _aoe)
+    : sanguis::server::weapons::weapon{_parameters}, damage_{_damage}, aoe_{_aoe}
 {
 }
 
-sanguis::server::weapons::rocket_launcher::~rocket_launcher()
-= default;
-
-sanguis::server::weapons::rocket_launcher::rocket_launcher(
-	sanguis::server::weapons::parameters const &_parameters,
-	sanguis::server::weapons::attributes::damage const _damage,
-	sanguis::server::weapons::attributes::aoe const _aoe
-)
-:
-	sanguis::server::weapons::weapon{
-		_parameters
-	},
-	damage_{
-		_damage
-	},
-	aoe_{
-		_aoe
-	}
+sanguis::server::weapons::unique_ptr sanguis::server::weapons::rocket_launcher::clone() const
 {
+  return fcppt::unique_ptr_to_base<sanguis::server::weapons::weapon>(
+      fcppt::make_unique_ptr<sanguis::server::weapons::rocket_launcher>(
+          this->parameters(), damage_, aoe_));
 }
 
-sanguis::server::weapons::unique_ptr
-sanguis::server::weapons::rocket_launcher::clone() const
+sanguis::server::weapons::attack_result sanguis::server::weapons::rocket_launcher::do_attack(
+    sanguis::server::weapons::attack const &_attack)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::server::weapons::weapon
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::weapons::rocket_launcher
-			>(
-				this->parameters(),
-				damage_,
-				aoe_
-			)
-		);
+  sanguis::server::environment::insert_no_result(
+      _attack.environment(),
+      fcppt::unique_ptr_to_base<sanguis::server::entities::with_id>(
+          fcppt::make_unique_ptr<sanguis::server::entities::projectiles::rocket>(
+              _attack.environment().load_context(),
+              this->owner().team(),
+              damage_.value(),
+              sanguis::server::entities::modify_damages(
+                  this->owner(), sanguis::server::damage::explosive()),
+              aoe_.value(),
+              sanguis::server::direction(_attack.angle().get()))),
+      sanguis::server::entities::insert_parameters(this->owner().center(), _attack.angle()));
+
+  return sanguis::server::weapons::attack_result::success;
 }
 
-sanguis::server::weapons::attack_result
-sanguis::server::weapons::rocket_launcher::do_attack(
-	sanguis::server::weapons::attack const &_attack
-)
+sanguis::weapon_attribute_vector sanguis::server::weapons::rocket_launcher::attributes() const
 {
-	sanguis::server::environment::insert_no_result(
-		_attack.environment(),
-		fcppt::unique_ptr_to_base<
-			sanguis::server::entities::with_id
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::entities::projectiles::rocket
-			>(
-				_attack.environment().load_context(),
-				this->owner().team(),
-				damage_.value(),
-				sanguis::server::entities::modify_damages(
-					this->owner(),
-					sanguis::server::damage::explosive()
-				),
-				aoe_.value(),
-				sanguis::server::direction(
-					_attack.angle().get()
-				)
-			)
-		),
-		sanguis::server::entities::insert_parameters(
-			this->owner().center(),
-			_attack.angle()
-		)
-	);
-
-	return
-		sanguis::server::weapons::attack_result::success;
-}
-
-sanguis::weapon_attribute_vector
-sanguis::server::weapons::rocket_launcher::attributes() const
-{
-	return
-		sanguis::weapon_attribute_vector{
-			sanguis::server::weapons::attributes::make_damage(
-				damage_
-			),
-			sanguis::server::weapons::attributes::make_aoe(
-				aoe_
-			)
-		};
+  return sanguis::weapon_attribute_vector{
+      sanguis::server::weapons::attributes::make_damage(damage_),
+      sanguis::server::weapons::attributes::make_aoe(aoe_)};
 }

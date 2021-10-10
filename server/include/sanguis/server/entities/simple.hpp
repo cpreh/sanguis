@@ -5,22 +5,18 @@
 #include <sanguis/server/entities/simple_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class simple
-:
-	public virtual sanguis::server::entities::base
+class simple : public virtual sanguis::server::entities::base
 {
-	FCPPT_NONMOVABLE(
-		simple
-	);
+  FCPPT_NONMOVABLE(simple);
+
 protected:
-	simple();
+  simple();
+
 public:
-	~simple()
-	override;
+  ~simple() override;
 };
 
 }

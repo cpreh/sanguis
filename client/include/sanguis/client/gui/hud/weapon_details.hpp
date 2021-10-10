@@ -15,41 +15,32 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::gui::hud
 {
 
 class weapon_details
 {
-	FCPPT_NONMOVABLE(
-		weapon_details
-	);
+  FCPPT_NONMOVABLE(weapon_details);
+
 public:
-	weapon_details(
-		sge::gui::context_ref,
-		sge::gui::style::const_reference,
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sanguis::optional_weapon_description const &,
-		sanguis::optional_weapon_description const &
-	);
+  weapon_details(
+      sge::gui::context_ref,
+      sge::gui::style::const_reference,
+      sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sanguis::optional_weapon_description const &,
+      sanguis::optional_weapon_description const &);
 
-	~weapon_details();
+  ~weapon_details();
 
-	[[nodiscard]]
-	sge::gui::widget::base &
-	widget();
+  [[nodiscard]] sge::gui::widget::base &widget();
+
 private:
-	using
-	tooltip_vector
-	=
-	std::vector<
-		sanguis::client::gui::hud::weapon_tooltip_unique_ptr
-	>;
+  using tooltip_vector = std::vector<sanguis::client::gui::hud::weapon_tooltip_unique_ptr>;
 
-	tooltip_vector tooltips_;
+  tooltip_vector tooltips_;
 
-	sge::gui::widget::box_container container_;
+  sge::gui::widget::box_container container_;
 };
 
 }

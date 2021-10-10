@@ -8,38 +8,16 @@
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/enum/make_range.hpp>
 
-
-void
-sanguis::creator::impl::set_opening_tiles(
-	fcppt::reference<
-		sanguis::creator::grid
-	> const _grid,
-	sanguis::creator::opening_container_array const &_openings
-)
+void sanguis::creator::impl::set_opening_tiles(
+    fcppt::reference<sanguis::creator::grid> const _grid,
+    sanguis::creator::opening_container_array const &_openings)
 {
-	for(
-		auto const opening_type
-		:
-		fcppt::enum_::make_range<
-			sanguis::creator::opening_type
-		>()
-	)
-	{
-		for(
-			auto const &opening
-			:
-			_openings[
-				opening_type
-			]
-		)
-		{
-			FCPPT_ASSERT_OPTIONAL_ERROR(
-				fcppt::container::grid::at_optional(
-					_grid.get(),
-					opening.get()
-				)
-			).get() =
-				sanguis::creator::tile::stairs;
-		}
-	}
+  for (auto const opening_type : fcppt::enum_::make_range<sanguis::creator::opening_type>())
+  {
+    for (auto const &opening : _openings[opening_type])
+    {
+      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(_grid.get(), opening.get()))
+          .get() = sanguis::creator::tile::stairs;
+    }
+  }
 }

@@ -5,19 +5,10 @@
 #include <alda/net/port.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client::gui::menu::callbacks
 {
 
-using
-connect
-=
-fcppt::function<
-	void (
-		alda::net::host const &,
-		alda::net::port const &
-	)
->;
+using connect = fcppt::function<void(alda::net::host const &, alda::net::port const &)>;
 
 }
 

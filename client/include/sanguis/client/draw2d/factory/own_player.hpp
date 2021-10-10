@@ -15,25 +15,22 @@
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <sanguis/client/load/auras/context_ref.hpp>
 
-
 namespace sanguis::client::draw2d::factory
 {
 
-sanguis::client::draw2d::entities::unique_ptr
-own_player(
-	sanguis::client::load::auras::context_ref,
-	sanguis::client::draw2d::entities::load_parameters const &,
-	sanguis::client::draw2d::collide_callback &&,
-	sanguis::client::player_health_callback &&,
-	sanguis::optional_primary_weapon_type,
-	sanguis::weapon_status,
-	sanguis::client::draw2d::speed const &,
-	sanguis::client::draw2d::sprite::center const &,
-	sanguis::client::draw2d::sprite::rotation,
-	sanguis::aura_type_vector &&,
-	sanguis::buff_type_vector &&,
-	sanguis::client::health_pair
-);
+sanguis::client::draw2d::entities::unique_ptr own_player(
+    sanguis::client::load::auras::context_ref,
+    sanguis::client::draw2d::entities::load_parameters const &,
+    sanguis::client::draw2d::collide_callback &&,
+    sanguis::client::player_health_callback &&,
+    sanguis::optional_primary_weapon_type,
+    sanguis::weapon_status,
+    sanguis::client::draw2d::speed const &,
+    sanguis::client::draw2d::sprite::center const &,
+    sanguis::client::draw2d::sprite::rotation,
+    sanguis::aura_type_vector &&,
+    sanguis::buff_type_vector &&,
+    sanguis::client::health_pair);
 
 }
 

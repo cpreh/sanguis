@@ -6,5 +6,4 @@
 #include <sanguis/creator/opening_type.hpp>
 #include <fcppt/enum/array.hpp>
 
-
 #endif

@@ -4,16 +4,10 @@
 #include <sanguis/messages/client/base_fwd.hpp>
 #include <fcppt/shared_ptr.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-shared_ptr
-=
-fcppt::shared_ptr<
-	sanguis::messages::client::base
->;
+using shared_ptr = fcppt::shared_ptr<sanguis::messages::client::base>;
 
 }
 

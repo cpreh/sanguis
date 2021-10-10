@@ -18,62 +18,42 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class destructible
-:
-	public sanguis::server::entities::with_body,
-	public sanguis::server::entities::with_id,
-	public sanguis::server::entities::with_health,
-	public sanguis::server::entities::with_links,
-	public virtual sanguis::server::entities::ifaces::with_team
+class destructible : public sanguis::server::entities::with_body,
+                     public sanguis::server::entities::with_id,
+                     public sanguis::server::entities::with_health,
+                     public sanguis::server::entities::with_links,
+                     public virtual sanguis::server::entities::ifaces::with_team
 {
-	FCPPT_NONMOVABLE(
-		destructible
-	);
+  FCPPT_NONMOVABLE(destructible);
+
 public:
-	destructible(
-		sanguis::creator::destructible_type,
-		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-		sanguis::server::health,
-		sanguis::server::damage::armor_array const &,
-		sanguis::server::entities::enemies::difficulty
-	);
+  destructible(
+      sanguis::creator::destructible_type,
+      sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+      sanguis::server::health,
+      sanguis::server::damage::armor_array const &,
+      sanguis::server::entities::enemies::difficulty);
 
-	~destructible()
-	override;
+  ~destructible() override;
+
 private:
-	void
-	update()
-	override;
+  void update() override;
 
-	void
-	remove_from_game()
-	override;
+  void remove_from_game() override;
 
-	[[nodiscard]]
-	sanguis::server::team
-	team() const
-	override;
+  [[nodiscard]] sanguis::server::team team() const override;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_group
-	collision_group() const
-	override;
+  [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
 
-	[[nodiscard]]
-	sanguis::messages::server::unique_ptr
-	add_message(
-		sanguis::server::player_id,
-		sanguis::collision::world::created
-	) const
-	override;
+  [[nodiscard]] sanguis::messages::server::unique_ptr
+      add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
 
-	sanguis::creator::destructible_type const type_;
+  sanguis::creator::destructible_type const type_;
 
-	sanguis::server::entities::enemies::difficulty const difficulty_;
+  sanguis::server::entities::enemies::difficulty const difficulty_;
 };
 
 }

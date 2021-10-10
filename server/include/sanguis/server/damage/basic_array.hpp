@@ -5,5 +5,4 @@
 #include <sanguis/server/damage/type.hpp>
 #include <fcppt/enum/array_impl.hpp>
 
-
 #endif

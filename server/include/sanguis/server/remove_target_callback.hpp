@@ -4,18 +4,10 @@
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-remove_target_callback
-=
-fcppt::function<
-	void (
-		sanguis::server::entities::with_body &
-	)
->;
+using remove_target_callback = fcppt::function<void(sanguis::server::entities::with_body &)>;
 
 }
 

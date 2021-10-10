@@ -3,12 +3,10 @@
 
 #include <sanguis/server/perks/tree/container.hpp>
 
-
 namespace sanguis::server::perks::tree
 {
 
-sanguis::server::perks::tree::container
-create();
+sanguis::server::perks::tree::container create();
 
 }
 

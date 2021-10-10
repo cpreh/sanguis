@@ -5,5 +5,4 @@
 #include <sanguis/messages/adapted_types/length.hpp>
 #include <alda/bindings/dynamic_len.hpp>
 
-
 #endif

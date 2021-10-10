@@ -7,50 +7,29 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::ai::tree::priority_sequence::priority_sequence(
-	sanguis::server::ai::tree::container &&_children
-)
-:
-	sanguis::server::ai::tree::basic_sequence(
-		std::move(
-			_children
-		)
-	)
+    sanguis::server::ai::tree::container &&_children)
+    : sanguis::server::ai::tree::basic_sequence(std::move(_children))
 {
 }
 
-sanguis::server::ai::tree::priority_sequence::~priority_sequence()
-= default;
+sanguis::server::ai::tree::priority_sequence::~priority_sequence() = default;
 
 sanguis::server::ai::status
-sanguis::server::ai::tree::priority_sequence::run(
-	sanguis::duration const _duration
-)
+sanguis::server::ai::tree::priority_sequence::run(sanguis::duration const _duration)
 {
-	for(
-		auto const &child
-		:
-		this->get()
-	)
-	{
-		switch(
-			child->run(
-				_duration
-			)
-		)
-		{
-		case sanguis::server::ai::status::failure:
-			continue;
-		case sanguis::server::ai::status::success:
-			return
-				sanguis::server::ai::status::success;
-		case sanguis::server::ai::status::running:
-			return
-				sanguis::server::ai::status::running;
-		}
-	}
+  for (auto const &child : this->get())
+  {
+    switch (child->run(_duration))
+    {
+    case sanguis::server::ai::status::failure:
+      continue;
+    case sanguis::server::ai::status::success:
+      return sanguis::server::ai::status::success;
+    case sanguis::server::ai::status::running:
+      return sanguis::server::ai::status::running;
+    }
+  }
 
-	return
-		sanguis::server::ai::status::failure;
+  return sanguis::server::ai::status::failure;
 }

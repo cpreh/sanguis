@@ -30,113 +30,66 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
-
 sanguis::server::entities::destructible::destructible(
-	sanguis::creator::destructible_type const _type,
-	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::health const _health,
-	sanguis::server::damage::armor_array const &_armor,
-	sanguis::server::entities::enemies::difficulty const _difficulty
-)
-:
-	sanguis::server::entities::with_body(
-		_load_context.model_size(
-			sanguis::load::model::destructible_path(
-				_type
-			)
-		),
-		sanguis::server::optional_mass()
-	),
-	sanguis::server::entities::with_id(
-		_load_context.next_id()
-	),
-	sanguis::server::entities::with_health(
-		_health,
-		sanguis::server::regeneration(
-			0.F
-		),
-		_armor
-	),
-	sanguis::server::entities::with_links(),
-	type_(
-		_type
-	),
-	difficulty_(
-		_difficulty
-	)
+    sanguis::creator::destructible_type const _type,
+    sanguis::server::environment::load_context &_load_context,
+    sanguis::server::health const _health,
+    sanguis::server::damage::armor_array const &_armor,
+    sanguis::server::entities::enemies::difficulty const _difficulty)
+    : sanguis::server::entities::with_body(
+          _load_context.model_size(sanguis::load::model::destructible_path(_type)),
+          sanguis::server::optional_mass()),
+      sanguis::server::entities::with_id(_load_context.next_id()),
+      sanguis::server::entities::with_health(_health, sanguis::server::regeneration(0.F), _armor),
+      sanguis::server::entities::with_links(),
+      type_(_type),
+      difficulty_(_difficulty)
 {
 }
 
-sanguis::server::entities::destructible::~destructible()
-= default;
+sanguis::server::entities::destructible::~destructible() = default;
 
-void
-sanguis::server::entities::destructible::update()
+void sanguis::server::entities::destructible::update()
 {
-	sanguis::server::entities::with_body::update();
+  sanguis::server::entities::with_body::update();
 
-	sanguis::server::entities::with_health::update();
+  sanguis::server::entities::with_health::update();
 }
 
-void
-sanguis::server::entities::destructible::remove_from_game()
+void sanguis::server::entities::destructible::remove_from_game()
 {
-	fcppt::optional::maybe_void(
-		this->environment(),
-		[
-			this
-		](
-			fcppt::reference<
-				sanguis::server::environment::object
-			> const _environment
-		)
-		{
-			_environment.get().pickup_chance(
-				sanguis::server::pickup_probability(
-					0.1F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-				),
-				difficulty_,
-				this->center()
-			);
-		}
-	);
+  fcppt::optional::maybe_void(
+      this->environment(),
+      [this](fcppt::reference<sanguis::server::environment::object> const _environment)
+      {
+        _environment.get().pickup_chance(
+            sanguis::server::pickup_probability(
+                0.1F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                ),
+            difficulty_,
+            this->center());
+      });
 }
 
-sanguis::server::team
-sanguis::server::entities::destructible::team() const
+sanguis::server::team sanguis::server::entities::destructible::team() const
 {
-	return
-		sanguis::server::team::monsters;
+  return sanguis::server::team::monsters;
 }
 
 sanguis::collision::world::body_group
 sanguis::server::entities::destructible::collision_group() const
 {
-	return
-		sanguis::collision::world::body_group::destructible;
+  return sanguis::collision::world::body_group::destructible;
 }
 
-sanguis::messages::server::unique_ptr
-sanguis::server::entities::destructible::add_message(
-	sanguis::server::player_id const,
-	sanguis::collision::world::created const _created
-) const
+sanguis::messages::server::unique_ptr sanguis::server::entities::destructible::add_message(
+    sanguis::server::player_id const, sanguis::collision::world::created const _created) const
 {
-	return
-		sanguis::messages::server::create_ptr(
-			alda::message::init_record<
-				sanguis::messages::server::add_destructible
-			>(
-				sanguis::messages::roles::entity_id{} =
-					this->id(),
-				sanguis::messages::roles::center{} =
-					this->center().get(),
-				sanguis::messages::roles::angle{} =
-					this->angle().get(),
-				sanguis::messages::roles::created{} =
-					_created.get(),
-				sanguis::messages::roles::destructible_type{} =
-					type_
-			)
-		);
+  return sanguis::messages::server::create_ptr(
+      alda::message::init_record<sanguis::messages::server::add_destructible>(
+          sanguis::messages::roles::entity_id{} = this->id(),
+          sanguis::messages::roles::center{} = this->center().get(),
+          sanguis::messages::roles::angle{} = this->angle().get(),
+          sanguis::messages::roles::created{} = _created.get(),
+          sanguis::messages::roles::destructible_type{} = type_));
 }

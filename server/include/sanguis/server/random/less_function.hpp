@@ -8,25 +8,13 @@
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::random
 {
 
-template<
-	typename Arg
->
-using
-less_function
-=
-fcppt::strong_typedef<
-	fcppt::function<
-		bool (
-			Arg const &,
-			Arg const &
-		)
-	>,
-	sanguis::server::random::less_function_tag
->;
+template <typename Arg>
+using less_function = fcppt::strong_typedef<
+    fcppt::function<bool(Arg const &, Arg const &)>,
+    sanguis::server::random::less_function_tag>;
 
 }
 

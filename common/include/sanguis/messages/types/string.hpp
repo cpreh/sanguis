@@ -3,14 +3,10 @@
 
 #include <sge/charconv/utf8_string.hpp>
 
-
 namespace sanguis::messages::types
 {
 
-using
-string
-=
-sge::charconv::utf8_string;
+using string = sge::charconv::utf8_string;
 
 }
 

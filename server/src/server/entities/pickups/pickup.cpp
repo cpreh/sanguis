@@ -37,151 +37,76 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::server::entities::pickups::pickup::~pickup()
-= default;
+sanguis::server::entities::pickups::pickup::~pickup() = default;
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::pickups::pickup::pickup(
-	sanguis::pickup_type const _pickup_type,
-	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::team const _team
-)
-:
-	sanguis::server::entities::with_body(
-		_load_context.model_size(
-			sanguis::load::model::pickup_path(
-				_pickup_type
-			)
-		),
-		sanguis::server::optional_mass()
-	),
-	sanguis::server::entities::with_id(
-		_load_context.next_id()
-	),
-	sanguis::server::entities::with_links(),
-	team_(
-		_team
-	),
-	pickup_type_(
-		_pickup_type
-	),
-	life_timer_(
-		sanguis::diff_timer::parameters(
-			fcppt::make_cref(
-				this->diff_clock()
-			),
-			std::chrono::seconds(
-				30 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			)
-		)
-	)
+    sanguis::pickup_type const _pickup_type,
+    sanguis::server::environment::load_context &_load_context,
+    sanguis::server::team const _team)
+    : sanguis::server::entities::with_body(
+          _load_context.model_size(sanguis::load::model::pickup_path(_pickup_type)),
+          sanguis::server::optional_mass()),
+      sanguis::server::entities::with_id(_load_context.next_id()),
+      sanguis::server::entities::with_links(),
+      team_(_team),
+      pickup_type_(_pickup_type),
+      life_timer_(sanguis::diff_timer::parameters(
+          fcppt::make_cref(this->diff_clock()),
+          std::chrono::seconds(
+              30 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+              )))
 {
 }
 
 FCPPT_PP_POP_WARNING
 
-bool
-sanguis::server::entities::pickups::pickup::dead() const
+bool sanguis::server::entities::pickups::pickup::dead() const { return life_timer_.expired(); }
+
+sanguis::server::team sanguis::server::entities::pickups::pickup::team() const { return team_; }
+
+boost::logic::tribool sanguis::server::entities::pickups::pickup::can_collide_with_body(
+    sanguis::server::entities::with_body const &_body) const
 {
-	return
-		life_timer_.expired();
+  return fcppt::optional::maybe(
+      fcppt::cast::dynamic<sanguis::server::entities::player const>(_body),
+      fcppt::const_(false),
+      [this](fcppt::reference<sanguis::server::entities::player const> const _player)
+      { return _player.get().team() == this->team(); });
 }
 
-sanguis::server::team
-sanguis::server::entities::pickups::pickup::team() const
+void sanguis::server::entities::pickups::pickup::collision_with_body(
+    sanguis::server::entities::with_body &_body)
 {
-	return
-		team_;
-}
+  // if something is spawned by this pickup that can pickup entities itself
+  // we will get an endless loop
+  if (this->dead())
+  {
+    return;
+  }
 
-boost::logic::tribool
-sanguis::server::entities::pickups::pickup::can_collide_with_body(
-	sanguis::server::entities::with_body const &_body
-) const
-{
-	return
-		fcppt::optional::maybe(
-			fcppt::cast::dynamic<
-				sanguis::server::entities::player const
-			>(
-				_body
-			),
-			fcppt::const_(
-				false
-			),
-			[
-				this
-			](
-				fcppt::reference<
-					sanguis::server::entities::player const
-				> const _player
-			)
-			{
-				return
-					_player.get().team()
-					==
-					this->team();
-			}
-		);
-}
-
-void
-sanguis::server::entities::pickups::pickup::collision_with_body(
-	sanguis::server::entities::with_body &_body
-)
-{
-	// if something is spawned by this pickup that can pickup entities itself
-	// we will get an endless loop
-	if(
-		this->dead()
-	)
-	{
-		return;
-	}
-
-	if(
-		this->do_pickup(
-			_body
-		)
-	)
-	{
-		life_timer_.expired(
-			true
-		);
-	}
+  if (this->do_pickup(_body))
+  {
+    life_timer_.expired(true);
+  }
 }
 
 sanguis::collision::world::body_group
 sanguis::server::entities::pickups::pickup::collision_group() const
 {
-	return
-		sanguis::collision::world::body_group::pickup;
+  return sanguis::collision::world::body_group::pickup;
 }
 
-sanguis::messages::server::unique_ptr
-sanguis::server::entities::pickups::pickup::add_message(
-	sanguis::server::player_id const,
-	sanguis::collision::world::created const _created
-) const
+sanguis::messages::server::unique_ptr sanguis::server::entities::pickups::pickup::add_message(
+    sanguis::server::player_id const, sanguis::collision::world::created const _created) const
 {
-	return
-		sanguis::messages::server::create_ptr(
-			alda::message::init_record<
-				sanguis::messages::server::add_pickup
-			>(
-				sanguis::messages::roles::entity_id{} =
-					this->id(),
-				sanguis::messages::roles::center{} =
-					this->center().get(),
-				sanguis::messages::roles::angle{} =
-					this->angle().get(),
-				sanguis::messages::roles::created{} =
-					_created.get(),
-				sanguis::messages::roles::pickup_type{} =
-					pickup_type_
-			)
-		);
+  return sanguis::messages::server::create_ptr(
+      alda::message::init_record<sanguis::messages::server::add_pickup>(
+          sanguis::messages::roles::entity_id{} = this->id(),
+          sanguis::messages::roles::center{} = this->center().get(),
+          sanguis::messages::roles::angle{} = this->angle().get(),
+          sanguis::messages::roles::created{} = _created.get(),
+          sanguis::messages::roles::pickup_type{} = pickup_type_));
 }

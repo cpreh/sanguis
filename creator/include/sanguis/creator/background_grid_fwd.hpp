@@ -4,16 +4,10 @@
 #include <sanguis/creator/background_tile_fwd.hpp>
 #include <sanguis/creator/tile_grid_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-background_grid
-=
-sanguis::creator::tile_grid<
-	sanguis::creator::background_tile
->;
+using background_grid = sanguis::creator::tile_grid<sanguis::creator::background_tile>;
 
 }
 

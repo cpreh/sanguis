@@ -7,21 +7,13 @@
 #include <alda/bindings/record_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-give_weapon
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::give_weapon
-	>,
-	alda::bindings::record<
-		sanguis::messages::server::parts::weapon_description
-	>
->;
+using give_weapon = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::give_weapon>,
+    alda::bindings::record<sanguis::messages::server::parts::weapon_description>>;
 
 }
 

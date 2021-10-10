@@ -4,13 +4,11 @@
 #include <sanguis/server/symbol.hpp>
 #include <fcppt/log/location.hpp>
 
-
 namespace sanguis::server
 {
 
 SANGUIS_SERVER_SYMBOL
-fcppt::log::location
-log_location();
+fcppt::log::location log_location();
 
 }
 

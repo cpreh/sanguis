@@ -5,12 +5,10 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::config::settings
 {
 
-std::filesystem::path
-file();
+std::filesystem::path file();
 
 }
 

@@ -4,17 +4,10 @@
 #include <sanguis/messages/types/space_unit.hpp>
 #include <fcppt/math/vector/static_fwd.hpp>
 
-
 namespace sanguis::messages::types
 {
 
-using
-vector2
-=
-fcppt::math::vector::static_<
-	sanguis::messages::types::space_unit,
-	2U
->;
+using vector2 = fcppt::math::vector::static_<sanguis::messages::types::space_unit, 2U>;
 
 }
 

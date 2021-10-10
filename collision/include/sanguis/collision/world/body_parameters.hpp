@@ -14,67 +14,50 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
-
 namespace sanguis::collision::world
 {
 
 class body_parameters
 {
 public:
-	SANGUIS_COLLISION_SYMBOL
-	body_parameters(
-		sanguis::collision::log const &,
-		sanguis::collision::center,
-		sanguis::collision::speed,
-		sanguis::collision::radius,
-		sanguis::collision::optional_mass,
-		sanguis::collision::world::body_group,
-		sanguis::collision::world::body_base_ref
-	);
+  SANGUIS_COLLISION_SYMBOL
+  body_parameters(
+      sanguis::collision::log const &,
+      sanguis::collision::center,
+      sanguis::collision::speed,
+      sanguis::collision::radius,
+      sanguis::collision::optional_mass,
+      sanguis::collision::world::body_group,
+      sanguis::collision::world::body_base_ref);
 
-	[[nodiscard]]
-	fcppt::log::object &
-	log() const;
+  [[nodiscard]] fcppt::log::object &log() const;
 
-	[[nodiscard]]
-	sanguis::collision::center
-	center() const;
+  [[nodiscard]] sanguis::collision::center center() const;
 
-	[[nodiscard]]
-	sanguis::collision::speed
-	speed() const;
+  [[nodiscard]] sanguis::collision::speed speed() const;
 
-	[[nodiscard]]
-	sanguis::collision::radius
-	radius() const;
+  [[nodiscard]] sanguis::collision::radius radius() const;
 
-	[[nodiscard]]
-	sanguis::collision::optional_mass
-	mass() const;
+  [[nodiscard]] sanguis::collision::optional_mass mass() const;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_group
-	collision_group() const;
+  [[nodiscard]] sanguis::collision::world::body_group collision_group() const;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_base &
-	body_base() const;
+  [[nodiscard]] sanguis::collision::world::body_base &body_base() const;
+
 private:
-	fcppt::reference<
-		fcppt::log::object
-	> log_;
+  fcppt::reference<fcppt::log::object> log_;
 
-	sanguis::collision::center center_;
+  sanguis::collision::center center_;
 
-	sanguis::collision::speed speed_;
+  sanguis::collision::speed speed_;
 
-	sanguis::collision::radius radius_;
+  sanguis::collision::radius radius_;
 
-	sanguis::collision::optional_mass mass_;
+  sanguis::collision::optional_mass mass_;
 
-	sanguis::collision::world::body_group collision_group_;
+  sanguis::collision::world::body_group collision_group_;
 
-	sanguis::collision::world::body_base_ref body_base_;
+  sanguis::collision::world::body_base_ref body_base_;
 };
 
 }

@@ -7,30 +7,17 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
-
-sge::texture::part const &
-sanguis::client::load::model::make_texture(
-	sanguis::client::load::model::global_parameters const &_parameters
-)
+sge::texture::part const &sanguis::client::load::model::make_texture(
+    sanguis::client::load::model::global_parameters const &_parameters)
 {
-	return
-		_parameters.textures().load(
-			_parameters.path()
-			/
-			fcppt::optional::to_exception(
-				_parameters.image(),
-				[
-					&_parameters
-				]{
-					return
-						sanguis::exception(
-							FCPPT_TEXT("texture not found in ")
-							+
-							fcppt::filesystem::path_to_string(
-								_parameters.path()
-							)
-						);
-				}
-			).get()
-		);
+  return _parameters.textures().load(
+      _parameters.path() / fcppt::optional::to_exception(
+                               _parameters.image(),
+                               [&_parameters]
+                               {
+                                 return sanguis::exception(
+                                     FCPPT_TEXT("texture not found in ") +
+                                     fcppt::filesystem::path_to_string(_parameters.path()));
+                               })
+                               .get());
 }

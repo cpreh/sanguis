@@ -14,42 +14,38 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::scene::hover
 {
 
 class weapon_attribute
 {
-	FCPPT_NONMOVABLE(
-		weapon_attribute
-	);
+  FCPPT_NONMOVABLE(weapon_attribute);
+
 public:
-	weapon_attribute(
-		sge::gui::context_ref,
-		sge::gui::style::const_reference,
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sanguis::weapon_attribute const &,
-		sanguis::client::draw2d::scene::hover::weapon_attribute_diff
-	);
+  weapon_attribute(
+      sge::gui::context_ref,
+      sge::gui::style::const_reference,
+      sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sanguis::weapon_attribute const &,
+      sanguis::client::draw2d::scene::hover::weapon_attribute_diff);
 
-	~weapon_attribute();
+  ~weapon_attribute();
 
-	[[nodiscard]]
-	sge::gui::widget::base &
-	widget();
+  [[nodiscard]] sge::gui::widget::base &widget();
+
 private:
-	sge::gui::widget::static_text name_;
+  sge::gui::widget::static_text name_;
 
-	sge::gui::widget::expander expander1_;
+  sge::gui::widget::expander expander1_;
 
-	sge::gui::widget::static_text value_;
+  sge::gui::widget::static_text value_;
 
-	sge::gui::widget::expander expander2_;
+  sge::gui::widget::expander expander2_;
 
-	sge::gui::widget::static_text diff_;
+  sge::gui::widget::static_text diff_;
 
-	sge::gui::widget::box_container container_;
+  sge::gui::widget::box_container container_;
 };
 
 }

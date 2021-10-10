@@ -11,50 +11,39 @@
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/context_reference.hpp>
 
-
 namespace sanguis::server::world
 {
 
 class parameters
 {
 public:
-	parameters(
-		fcppt::log::context_reference,
-		sanguis::random_generator_ref,
-		sanguis::server::weapons::common_parameters const &,
-		sanguis::server::world::context_ref,
-		sanguis::server::environment::load_context_ref
-	);
+  parameters(
+      fcppt::log::context_reference,
+      sanguis::random_generator_ref,
+      sanguis::server::weapons::common_parameters const &,
+      sanguis::server::world::context_ref,
+      sanguis::server::environment::load_context_ref);
 
-	[[nodiscard]]
-	fcppt::log::context &
-	log_context() const;
+  [[nodiscard]] fcppt::log::context &log_context() const;
 
-	[[nodiscard]]
-	sanguis::random_generator &
-	random_generator() const;
+  [[nodiscard]] sanguis::random_generator &random_generator() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::common_parameters const &
-	weapon_parameters() const;
+  [[nodiscard]] sanguis::server::weapons::common_parameters const &weapon_parameters() const;
 
-	[[nodiscard]]
-	sanguis::server::world::context &
-	context() const;
+  [[nodiscard]] sanguis::server::world::context &context() const;
 
-	[[nodiscard]]
-	sanguis::server::environment::load_context &
-	load_context() const;
+  [[nodiscard]] sanguis::server::environment::load_context &load_context() const;
+
 private:
-	fcppt::log::context_reference log_context_;
+  fcppt::log::context_reference log_context_;
 
-	sanguis::random_generator_ref random_generator_;
+  sanguis::random_generator_ref random_generator_;
 
-	sanguis::server::weapons::common_parameters weapon_parameters_;
+  sanguis::server::weapons::common_parameters weapon_parameters_;
 
-	sanguis::server::world::context_ref context_;
+  sanguis::server::world::context_ref context_;
 
-	sanguis::server::environment::load_context_ref load_context_;
+  sanguis::server::environment::load_context_ref load_context_;
 };
 
 }

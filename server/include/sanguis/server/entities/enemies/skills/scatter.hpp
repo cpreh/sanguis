@@ -10,41 +10,31 @@
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::enemies::skills
 {
 
-class scatter
-:
-	public sanguis::server::entities::enemies::skills::skill
+class scatter : public sanguis::server::entities::enemies::skills::skill
 {
-	FCPPT_NONMOVABLE(
-		scatter
-	);
+  FCPPT_NONMOVABLE(scatter);
+
 public:
-	scatter(
-		sanguis::diff_clock_cref,
-		sanguis::random_generator_ref,
-		sanguis::server::entities::enemies::skills::cooldown
-	);
+  scatter(
+      sanguis::diff_clock_cref,
+      sanguis::random_generator_ref,
+      sanguis::server::entities::enemies::skills::cooldown);
 
-	~scatter()
-	override;
+  ~scatter() override;
+
 private:
-	void
-	update(
-		sanguis::server::entities::enemies::enemy & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void update(sanguis::server::entities::enemies::enemy & // NOLINT(google-runtime-references)
+              ) // NOLINT(google-runtime-references)
+      override;
 
-	[[nodiscard]]
-	sanguis::server::entities::enemies::attribute
-	attribute() const
-	override;
+  [[nodiscard]] sanguis::server::entities::enemies::attribute attribute() const override;
 
-	sanguis::random_generator_ref const random_generator_;
+  sanguis::random_generator_ref const random_generator_;
 
-	sanguis::diff_timer cooldown_timer_;
+  sanguis::diff_timer cooldown_timer_;
 };
 
 }

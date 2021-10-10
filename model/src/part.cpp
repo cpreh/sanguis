@@ -11,116 +11,56 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+sanguis::model::part::part() : weapon_categories_(), image_name_() {}
 
-sanguis::model::part::part()
-:
-	weapon_categories_(),
-	image_name_()
+sanguis::model::part::part(
+    sanguis::model::weapon_category_map &&_weapon_categories,
+    sanguis::model::optional_image_name &&_image_name)
+    : weapon_categories_(std::move(_weapon_categories)), image_name_(std::move(_image_name))
 {
 }
 
-sanguis::model::part::part(
-	sanguis::model::weapon_category_map &&_weapon_categories,
-	sanguis::model::optional_image_name &&_image_name
-)
-:
-	weapon_categories_(
-		std::move(
-			_weapon_categories
-		)
-	),
-	image_name_(
-		std::move(
-			_image_name
-		)
-	)
-{
-}
+sanguis::model::part::part(part &&) noexcept = default;
 
-sanguis::model::part::part(
-	part &&
-)
-noexcept
-= default;
+sanguis::model::part &sanguis::model::part::operator=(part &&) noexcept = default;
 
-sanguis::model::part &
-sanguis::model::part::operator=(
-	part &&
-)
-noexcept
-= default;
-
-sanguis::model::part::~part()
-= default;
+sanguis::model::part::~part() = default;
 
 sanguis::model::weapon_category &
-sanguis::model::part::weapon_category(
-	sanguis::model::weapon_category_name const &_name
-)
+sanguis::model::part::weapon_category(sanguis::model::weapon_category_name const &_name)
 {
-	return
-		fcppt::optional::to_exception(
-			fcppt::container::find_opt_mapped(
-				weapon_categories_,
-				_name
-			),
-			[
-				&_name
-			]
-			{
-				return
-					sanguis::model::exception{
-						FCPPT_TEXT("No weapon category named ")
-						+
-						_name.get()
-					};
-			}
-		).get();
+  return fcppt::optional::to_exception(
+             fcppt::container::find_opt_mapped(weapon_categories_, _name),
+             [&_name] {
+               return sanguis::model::exception{
+                   FCPPT_TEXT("No weapon category named ") + _name.get()};
+             })
+      .get();
 }
 
 sanguis::model::weapon_category const &
-sanguis::model::part::weapon_category(
-	sanguis::model::weapon_category_name const &_name
-) const
+sanguis::model::part::weapon_category(sanguis::model::weapon_category_name const &_name) const
 {
-	return
-		const_cast<
-			sanguis::model::part &
-		>(
-			*this
-		).weapon_category(
-			_name
-		);
+  return const_cast<sanguis::model::part &>(*this).weapon_category(_name);
 }
 
 sanguis::model::weapon_category &
-sanguis::model::part::operator[](
-	sanguis::model::weapon_category_name const &_name
-)
+sanguis::model::part::operator[](sanguis::model::weapon_category_name const &_name)
 {
-	return
-		weapon_categories_[
-			_name
-		];
+  return weapon_categories_[_name];
 }
 
-sanguis::model::weapon_category_map &
-sanguis::model::part::weapon_categories()
+sanguis::model::weapon_category_map &sanguis::model::part::weapon_categories()
 {
-	return
-		weapon_categories_;
+  return weapon_categories_;
 }
 
-sanguis::model::weapon_category_map const &
-sanguis::model::part::weapon_categories() const
+sanguis::model::weapon_category_map const &sanguis::model::part::weapon_categories() const
 {
-	return
-		weapon_categories_;
+  return weapon_categories_;
 }
 
-sanguis::model::optional_image_name const &
-sanguis::model::part::image_name() const
+sanguis::model::optional_image_name const &sanguis::model::part::image_name() const
 {
-	return
-		image_name_;
+  return image_name_;
 }

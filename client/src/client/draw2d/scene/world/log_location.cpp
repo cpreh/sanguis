@@ -5,16 +5,8 @@
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/name.hpp>
 
-
-fcppt::log::location
-sanguis::client::draw2d::scene::world::log_location()
+fcppt::log::location sanguis::client::draw2d::scene::world::log_location()
 {
-	return
-		sanguis::client::draw2d::log_location()
-		/
-		sanguis::client::draw2d::scene::log_name()
-		/
-		fcppt::log::name{
-			FCPPT_TEXT("world")
-		};
+  return sanguis::client::draw2d::log_location() / sanguis::client::draw2d::scene::log_name() /
+         fcppt::log::name{FCPPT_TEXT("world")};
 }

@@ -6,5 +6,4 @@
 #include <sanguis/client/draw2d/entities/hover/weapon.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
-
 #endif

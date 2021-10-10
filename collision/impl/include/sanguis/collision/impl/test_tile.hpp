@@ -9,19 +9,16 @@
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/creator/tile_fwd.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
-sanguis::collision::impl::optional_speed
-test_tile(
-	sanguis::collision::center const &,
-	sanguis::collision::radius const &,
-	sanguis::collision::duration,
-	sanguis::collision::speed const &,
-	sanguis::creator::pos const &,
-	sanguis::creator::tile
-);
+sanguis::collision::impl::optional_speed test_tile(
+    sanguis::collision::center const &,
+    sanguis::collision::radius const &,
+    sanguis::collision::duration,
+    sanguis::collision::speed const &,
+    sanguis::creator::pos const &,
+    sanguis::creator::tile);
 
 }
 

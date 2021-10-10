@@ -4,5 +4,4 @@
 #include <sanguis/messages/adapted_types/time_unit_fwd.hpp>
 #include <alda/bindings/float.hpp>
 
-
 #endif

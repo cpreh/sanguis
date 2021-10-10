@@ -3,26 +3,25 @@
 
 #include <sanguis/messages/client/types/message_fwd.hpp>
 
-
 namespace sanguis::messages::client::types
 {
 
 enum class message
 {
-	attack_dest,
-	change_world,
-	cheat,
-	choose_perk,
-	console_command,
-	direction,
-	drop_or_pickup_weapon,
-	info,
-	pause,
-	reload,
-	start_shooting,
-	stop_shooting,
-	unpause,
-	fcppt_maximum = unpause
+  attack_dest,
+  change_world,
+  cheat,
+  choose_perk,
+  console_command,
+  direction,
+  drop_or_pickup_weapon,
+  info,
+  pause,
+  reload,
+  start_shooting,
+  stop_shooting,
+  unpause,
+  fcppt_maximum = unpause
 };
 
 }

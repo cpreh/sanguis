@@ -18,50 +18,28 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
-
-sanguis::server::world::insert_simple_pair
-sanguis::server::world::make_spawner(
-	sanguis::creator::enemy_type const _enemy_type,
-	sanguis::creator::enemy_kind const _enemy_kind,
-	sanguis::creator::spawn_pos const &_pos,
-	sanguis::server::weapons::common_parameters const &_weapon_parameters,
-	sanguis::random_generator_ref const _random_generator,
-	sanguis::server::world::difficulty const _difficulty
-)
+sanguis::server::world::insert_simple_pair sanguis::server::world::make_spawner(
+    sanguis::creator::enemy_type const _enemy_type,
+    sanguis::creator::enemy_kind const _enemy_kind,
+    sanguis::creator::spawn_pos const &_pos,
+    sanguis::server::weapons::common_parameters const &_weapon_parameters,
+    sanguis::random_generator_ref const _random_generator,
+    sanguis::server::world::difficulty const _difficulty)
 {
-	return
-		sanguis::server::world::insert_simple_pair(
-			fcppt::unique_ptr_to_base<
-				sanguis::server::entities::simple
-			>(
-				fcppt::make_unique_ptr<
-					sanguis::server::entities::spawns::limited
-				>(
-					_random_generator,
-					_weapon_parameters,
-					_enemy_type,
-					_enemy_kind,
-					_difficulty,
-					sanguis::server::entities::spawns::count_per_wave(
-						1U
-					),
-					sanguis::server::entities::spawns::interval(
-						sanguis::duration_second(
-							1.F
-						)
-					),
-					sanguis::server::entities::spawns::limit(
-						1U
-					),
-					sanguis::server::entities::spawns::total_count(
-						5U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-					)
-				)
-			),
-			sanguis::server::entities::insert_parameters_center(
-				sanguis::server::world::grid_pos_to_center(
-					_pos.get()
-				)
-			)
-		);
+  return sanguis::server::world::insert_simple_pair(
+      fcppt::unique_ptr_to_base<sanguis::server::entities::simple>(
+          fcppt::make_unique_ptr<sanguis::server::entities::spawns::limited>(
+              _random_generator,
+              _weapon_parameters,
+              _enemy_type,
+              _enemy_kind,
+              _difficulty,
+              sanguis::server::entities::spawns::count_per_wave(1U),
+              sanguis::server::entities::spawns::interval(sanguis::duration_second(1.F)),
+              sanguis::server::entities::spawns::limit(1U),
+              sanguis::server::entities::spawns::total_count(
+                  5U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  ))),
+      sanguis::server::entities::insert_parameters_center(
+          sanguis::server::world::grid_pos_to_center(_pos.get())));
 }

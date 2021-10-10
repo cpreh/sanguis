@@ -15,11 +15,8 @@ namespace sanguis::creator::impl
  * x 4 3 x
  */
 sanguis::creator::grid::pos
-perimeter_to_coords(
-	sanguis::creator::grid::dim const &,
-	unsigned const &);
+perimeter_to_coords(sanguis::creator::grid::dim const &, unsigned const &);
 
 }
 
 #endif
-

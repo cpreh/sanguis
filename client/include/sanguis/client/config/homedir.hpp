@@ -5,12 +5,10 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::config
 {
 
-std::filesystem::path
-homedir();
+std::filesystem::path homedir();
 
 }
 

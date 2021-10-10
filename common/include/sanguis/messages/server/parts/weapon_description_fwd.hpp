@@ -14,39 +14,27 @@
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server::parts
 {
 
-using
-weapon_description
-=
-fcppt::mpl::list::object<
-	fcppt::record::element<
-		sanguis::messages::roles::weapon_type,
-		sanguis::messages::adapted_types::weapon_type
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::magazine_base_size,
-		sanguis::messages::adapted_types::magazine_size
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::magazine_extra_size,
-		sanguis::messages::adapted_types::magazine_size
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::magazine_remaining,
-		sanguis::messages::adapted_types::magazine_size
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::reload_time,
-		sanguis::messages::adapted_types::duration
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::weapon_attribute_container,
-		sanguis::messages::server::adapted_types::weapon_attribute_vector
-	>
->;
+using weapon_description = fcppt::mpl::list::object<
+    fcppt::record::element<
+        sanguis::messages::roles::weapon_type,
+        sanguis::messages::adapted_types::weapon_type>,
+    fcppt::record::element<
+        sanguis::messages::roles::magazine_base_size,
+        sanguis::messages::adapted_types::magazine_size>,
+    fcppt::record::element<
+        sanguis::messages::roles::magazine_extra_size,
+        sanguis::messages::adapted_types::magazine_size>,
+    fcppt::record::element<
+        sanguis::messages::roles::magazine_remaining,
+        sanguis::messages::adapted_types::magazine_size>,
+    fcppt::record::
+        element<sanguis::messages::roles::reload_time, sanguis::messages::adapted_types::duration>,
+    fcppt::record::element<
+        sanguis::messages::roles::weapon_attribute_container,
+        sanguis::messages::server::adapted_types::weapon_attribute_vector>>;
 
 }
 

@@ -5,5 +5,4 @@
 #include <sanguis/client/control/optional_cursor_position_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

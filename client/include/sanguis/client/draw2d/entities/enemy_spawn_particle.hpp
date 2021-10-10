@@ -7,17 +7,14 @@
 #include <sanguis/creator/enemy_type_fwd.hpp>
 #include <sanguis/creator/optional_background_tile_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-sanguis::client::draw2d::entities::optional_own_unique_ptr
-enemy_spawn_particle(
-	sanguis::client::draw2d::entities::load_parameters const &,
-	sanguis::creator::enemy_type,
-	sanguis::client::draw2d::sprite::center const &,
-	sanguis::creator::optional_background_tile
-);
+sanguis::client::draw2d::entities::optional_own_unique_ptr enemy_spawn_particle(
+    sanguis::client::draw2d::entities::load_parameters const &,
+    sanguis::creator::enemy_type,
+    sanguis::client::draw2d::sprite::center const &,
+    sanguis::creator::optional_background_tile);
 
 }
 

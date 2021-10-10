@@ -5,17 +5,11 @@
 #include <sanguis/server/net/speed_policy_fwd.hpp>
 #include <sanguis/server/net/value_fwd.hpp>
 
-
 namespace sanguis::server::net
 {
 
-using
-speed
-=
-sanguis::server::net::value<
-	sanguis::server::speed,
-	sanguis::server::net::speed_policy
->;
+using speed =
+    sanguis::server::net::value<sanguis::server::speed, sanguis::server::net::speed_policy>;
 
 }
 

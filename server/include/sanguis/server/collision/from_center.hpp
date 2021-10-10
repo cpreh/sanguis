@@ -4,14 +4,10 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/server/center_fwd.hpp>
 
-
 namespace sanguis::server::collision
 {
 
-sanguis::server::center
-from_center(
-	sanguis::collision::center const &
-);
+sanguis::server::center from_center(sanguis::collision::center const &);
 
 }
 

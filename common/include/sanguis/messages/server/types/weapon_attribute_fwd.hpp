@@ -8,16 +8,11 @@
 #include <alda/bindings/strong_typedef_decl.hpp>
 #include <alda/raw/element_type.hpp>
 
-
 namespace sanguis::messages::server::types
 {
 
-using
-weapon_attribute
-=
-alda::raw::element_type<
-	sanguis::messages::server::adapted_types::weapon_attribute
->;
+using weapon_attribute =
+    alda::raw::element_type<sanguis::messages::server::adapted_types::weapon_attribute>;
 
 }
 

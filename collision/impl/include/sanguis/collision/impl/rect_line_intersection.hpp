@@ -5,15 +5,11 @@
 #include <sanguis/collision/impl/optional_intersection_fwd.hpp>
 #include <sanguis/collision/impl/rect_fwd.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
-sanguis::collision::impl::optional_intersection
-rect_line_intersection(
-	sanguis::collision::impl::rect const &,
-	sanguis::collision::impl::line_segment
-);
+sanguis::collision::impl::optional_intersection rect_line_intersection(
+    sanguis::collision::impl::rect const &, sanguis::collision::impl::line_segment);
 
 }
 

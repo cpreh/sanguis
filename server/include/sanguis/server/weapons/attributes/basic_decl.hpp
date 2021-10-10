@@ -4,48 +4,29 @@
 #include <sanguis/server/weapons/attributes/basic_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-template<
-	typename Wrapped
->
+template <typename Wrapped>
 class basic
 {
 public:
-	explicit
-	basic(
-		Wrapped
-	);
+  explicit basic(Wrapped);
 
-	void
-	extra(
-		Wrapped
-	);
+  void extra(Wrapped);
 
-	using
-	optional_extra
-	=
-	fcppt::optional::object<
-		Wrapped
-	>;
+  using optional_extra = fcppt::optional::object<Wrapped>;
 
-	[[nodiscard]]
-	Wrapped
-	base() const;
+  [[nodiscard]] Wrapped base() const;
 
-	[[nodiscard]]
-	optional_extra
-	extra() const;
+  [[nodiscard]] optional_extra extra() const;
 
-	[[nodiscard]]
-	Wrapped
-	value() const;
+  [[nodiscard]] Wrapped value() const;
+
 private:
-	Wrapped base_;
+  Wrapped base_;
 
-	optional_extra extra_;
+  optional_extra extra_;
 };
 
 }

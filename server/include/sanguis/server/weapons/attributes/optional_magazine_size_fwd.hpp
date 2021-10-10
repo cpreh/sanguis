@@ -4,16 +4,11 @@
 #include <sanguis/server/weapons/attributes/magazine_size_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-using
-optional_magazine_size
-=
-fcppt::optional::object<
-	sanguis::server::weapons::attributes::magazine_size
->;
+using optional_magazine_size =
+    fcppt::optional::object<sanguis::server::weapons::attributes::magazine_size>;
 
 }
 

@@ -7,32 +7,23 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::environment
 {
 
 class load_context
 {
-	FCPPT_NONMOVABLE(
-		load_context
-	);
+  FCPPT_NONMOVABLE(load_context);
+
 protected:
-	load_context();
+  load_context();
+
 public:
-	[[nodiscard]]
-	virtual
-	sanguis::server::radius
-	model_size(
-		sanguis::load::model::path const &
-	) const = 0;
+  [[nodiscard]] virtual sanguis::server::radius
+  model_size(sanguis::load::model::path const &) const = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::entity_id
-	next_id() = 0;
+  [[nodiscard]] virtual sanguis::entity_id next_id() = 0;
 
-	virtual
-	~load_context();
+  virtual ~load_context();
 };
 
 }

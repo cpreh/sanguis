@@ -5,14 +5,10 @@
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 
-
 namespace sanguis::server::world
 {
 
-sanguis::creator::pos
-center_to_grid_pos(
-	sanguis::server::center const &
-);
+sanguis::creator::pos center_to_grid_pos(sanguis::server::center const &);
 
 }
 

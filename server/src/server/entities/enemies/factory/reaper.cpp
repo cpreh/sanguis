@@ -39,113 +39,59 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::server::entities::with_id_unique_ptr
-sanguis::server::entities::enemies::factory::reaper(
-	sanguis::server::entities::enemies::factory::parameters const &_parameters
-)
+sanguis::server::entities::with_id_unique_ptr sanguis::server::entities::enemies::factory::reaper(
+    sanguis::server::entities::enemies::factory::parameters const &_parameters)
 {
-	sanguis::server::entities::enemies::parameters enemy_parameters(
-		_parameters.enemy_type(),
-		_parameters.load_context(),
-		sanguis::server::damage::no_armor(),
-		sanguis::server::mass{
-			10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			*
-			boost::units::si::kilogram
-		},
-		sanguis::server::health(
-			100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			*
-			std::sqrt(
-				_parameters.difficulty().get()
-			)
-		),
-		sanguis::server::entities::movement_speed(
-			150.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-		),
-		sanguis::server::ai::create_simple(
-			fcppt::make_ref(
-				_parameters.random_generator()
-			),
-			sanguis::server::ai::sight_range(
-				1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			)
-		),
-		fcppt::unique_ptr_to_base<
-			sanguis::server::weapons::weapon
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::weapons::melee
-			>(
-				_parameters.weapon_parameters(),
-				sanguis::server::weapons::melee_parameters{
-					sanguis::server::weapons::range(
-						75.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-					),
-					sanguis::server::weapons::backswing_time(
-						sanguis::duration_second(
-							2.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						)
-					),
-					sanguis::server::weapons::damage(
-						5.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						*
-						std::sqrt(
-							_parameters.difficulty().get()
-						)
-					),
-					sanguis::server::damage::make_array({
-						sanguis::server::damage::normal =
-							sanguis::server::damage::full
-					})
-				}
-			)
-		),
-		sanguis::server::pickup_probability(
-			0.F
-		),
-		sanguis::server::exp(
-			0.F
-		),
-		_parameters.difficulty(),
-		_parameters.spawn_owner(),
-		sanguis::server::auras::container{}
-	);
+  sanguis::server::entities::enemies::parameters enemy_parameters(
+      _parameters.enemy_type(),
+      _parameters.load_context(),
+      sanguis::server::damage::no_armor(),
+      sanguis::server::mass{
+          10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          * boost::units::si::kilogram},
+      sanguis::server::health(
+          100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          * std::sqrt(_parameters.difficulty().get())),
+      sanguis::server::entities::movement_speed(
+          150.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          ),
+      sanguis::server::ai::create_simple(
+          fcppt::make_ref(_parameters.random_generator()),
+          sanguis::server::ai::sight_range(
+              1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+              )),
+      fcppt::unique_ptr_to_base<
+          sanguis::server::weapons::weapon>(fcppt::make_unique_ptr<sanguis::server::weapons::melee>(
+          _parameters.weapon_parameters(),
+          sanguis::server::weapons::melee_parameters{
+              sanguis::server::weapons::range(
+                  75.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  ),
+              sanguis::server::weapons::backswing_time(sanguis::duration_second(
+                  2.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  )),
+              sanguis::server::weapons::damage(
+                  5.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  * std::sqrt(_parameters.difficulty().get())),
+              sanguis::server::damage::make_array(
+                  {sanguis::server::damage::normal = sanguis::server::damage::full})})),
+      sanguis::server::pickup_probability(0.F),
+      sanguis::server::exp(0.F),
+      _parameters.difficulty(),
+      _parameters.spawn_owner(),
+      sanguis::server::auras::container{});
 
-	sanguis::server::entities::enemies::modifiers::parameters const modifiers_parameters(
-		fcppt::make_ref(
-			_parameters.random_generator()
-		)
-	);
+  sanguis::server::entities::enemies::modifiers::parameters const modifiers_parameters(
+      fcppt::make_ref(_parameters.random_generator()));
 
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::server::entities::with_id
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::entities::enemies::special
-			>(
-				fcppt::make_ref(
-					_parameters.random_generator()
-				),
-				std::move(
-					enemy_parameters
-				),
-				sanguis::server::entities::enemies::attribute_container{
-					sanguis::server::entities::enemies::modifiers::regenerating(
-						fcppt::make_ref(
-							enemy_parameters
-						),
-						modifiers_parameters
-					)
-				},
-				sanguis::server::entities::enemies::skills::factory::container{
-					sanguis::server::entities::enemies::skills::factory::scatter
-				},
-				sanguis::server::entities::enemies::is_unique{
-					true
-				}
-			)
-		);
+  return fcppt::unique_ptr_to_base<sanguis::server::entities::with_id>(
+      fcppt::make_unique_ptr<sanguis::server::entities::enemies::special>(
+          fcppt::make_ref(_parameters.random_generator()),
+          std::move(enemy_parameters),
+          sanguis::server::entities::enemies::attribute_container{
+              sanguis::server::entities::enemies::modifiers::regenerating(
+                  fcppt::make_ref(enemy_parameters), modifiers_parameters)},
+          sanguis::server::entities::enemies::skills::factory::container{
+              sanguis::server::entities::enemies::skills::factory::scatter},
+          sanguis::server::entities::enemies::is_unique{true}));
 }

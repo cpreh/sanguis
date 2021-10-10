@@ -13,78 +13,31 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+sanguis::server::buffs::provider::provider() : buffs_() {}
 
-sanguis::server::buffs::provider::provider()
-:
-	buffs_()
+sanguis::server::buffs::provider::~provider() = default;
+
+void sanguis::server::buffs::provider::add(
+    sanguis::server::entities::with_buffs_ref const _entity,
+    sanguis::server::buffs::unique_ptr &&_buff)
 {
+  using ret_type = std::pair<sanguis::server::buffs::provider::buff_map::iterator, bool>;
+
+  ret_type const ret(buffs_.insert(std::make_pair(_entity, fcppt::make_ref(*_buff))));
+
+  FCPPT_ASSERT_ERROR(ret.second);
+
+  _entity->add_buff(std::move(_buff));
 }
 
-sanguis::server::buffs::provider::~provider()
-= default;
-
-void
-sanguis::server::buffs::provider::add(
-	sanguis::server::entities::with_buffs_ref const _entity,
-	sanguis::server::buffs::unique_ptr &&_buff
-)
+void sanguis::server::buffs::provider::remove(sanguis::server::entities::with_buffs &_entity)
 {
-	using
-	ret_type
-	=
-	std::pair<
-		sanguis::server::buffs::provider::buff_map::iterator,
-		bool
-	>;
+  fcppt::optional::maybe_void(
+      fcppt::container::find_opt_iterator(this->buffs_, fcppt::make_ref(_entity)),
+      [this, &_entity](sanguis::server::buffs::provider::buff_map::iterator const _it)
+      {
+        _entity.remove_buff(_it->second.get());
 
-	ret_type const ret(
-		buffs_.insert(
-			std::make_pair(
-				_entity,
-				fcppt::make_ref(
-					*_buff
-				)
-			)
-		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		ret.second
-	);
-
-	_entity->add_buff(
-		std::move(
-			_buff
-		)
-	);
-}
-
-void
-sanguis::server::buffs::provider::remove(
-	sanguis::server::entities::with_buffs &_entity
-)
-{
-	fcppt::optional::maybe_void(
-		fcppt::container::find_opt_iterator(
-			this->buffs_,
-			fcppt::make_ref(
-				_entity
-			)
-		),
-		[
-			this,
-			&_entity
-		](
-			sanguis::server::buffs::provider::buff_map::iterator const _it
-		)
-		{
-			_entity.remove_buff(
-				_it->second.get()
-			);
-
-			this->buffs_.erase(
-				_it
-			);
-		}
-	);
+        this->buffs_.erase(_it);
+      });
 }

@@ -12,52 +12,37 @@
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::enemies
 {
 
-class special
-:
-	public sanguis::server::entities::enemies::enemy
+class special : public sanguis::server::entities::enemies::enemy
 {
-	FCPPT_NONMOVABLE(
-		special
-	);
+  FCPPT_NONMOVABLE(special);
+
 public:
-	special(
-		sanguis::random_generator_ref,
-		sanguis::server::entities::enemies::parameters &&,
-		sanguis::server::entities::enemies::attribute_container const &,
-		sanguis::server::entities::enemies::skills::factory::container const &,
-		sanguis::server::entities::enemies::is_unique
-	);
+  special(
+      sanguis::random_generator_ref,
+      sanguis::server::entities::enemies::parameters &&,
+      sanguis::server::entities::enemies::attribute_container const &,
+      sanguis::server::entities::enemies::skills::factory::container const &,
+      sanguis::server::entities::enemies::is_unique);
 
-	~special()
-	override;
+  ~special() override;
+
 private:
-	void
-	update()
-	override;
+  void update() override;
 
-	void
-	remove_from_game()
-	override;
+  void remove_from_game() override;
 
-	[[nodiscard]]
-	sanguis::messages::types::string const &
-	name() const
-	override;
+  [[nodiscard]] sanguis::messages::types::string const &name() const override;
 
-	[[nodiscard]]
-	sanguis::enemy_kind
-	enemy_kind() const
-	override;
+  [[nodiscard]] sanguis::enemy_kind enemy_kind() const override;
 
-	sanguis::server::entities::enemies::skills::container const skills_;
+  sanguis::server::entities::enemies::skills::container const skills_;
 
-	sanguis::messages::types::string const name_;
+  sanguis::messages::types::string const name_;
 
-	sanguis::server::entities::enemies::is_unique const is_unique_;
+  sanguis::server::entities::enemies::is_unique const is_unique_;
 };
 
 }

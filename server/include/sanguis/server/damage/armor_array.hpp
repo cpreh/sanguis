@@ -5,5 +5,4 @@
 #include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/basic_array.hpp>
 
-
 #endif

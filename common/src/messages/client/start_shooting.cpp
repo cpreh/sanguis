@@ -4,14 +4,11 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
 // NOLINTNEXTLINE(cert-err58-cpp,fuchsia-statically-constructed-objects)
-SANGUIS_MESSAGES_CLIENT_INSTANTIATE_MESSAGE(
-	sanguis::messages::client::start_shooting
-);
+SANGUIS_MESSAGES_CLIENT_INSTANTIATE_MESSAGE(sanguis::messages::client::start_shooting);
 
 FCPPT_PP_POP_WARNING

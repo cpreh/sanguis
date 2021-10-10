@@ -15,7 +15,6 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace
 {
 
@@ -23,32 +22,20 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
-sanguis::creator::impl::generator_map_type const generators{ // NOLINT(fuchsia-statically-constructed-objects,cert-err58-cpp,fuchsia-default-arguments-calls)
-	std::make_pair(
-		sanguis::creator::start_name(),
-		&sanguis::creator::impl::generators::start
-	),
-	std::make_pair(
-		sanguis::creator::impl::graveyard_name(),
-		&sanguis::creator::impl::generators::graveyard
-	),
-	std::make_pair(
-		sanguis::creator::impl::maze_name(),
-		&sanguis::creator::impl::generators::maze
-	),
-	std::make_pair(
-		sanguis::creator::impl::rooms_name(),
-		&sanguis::creator::impl::generators::rooms
-	)
-};
+sanguis::creator::impl::generator_map_type const generators{
+    // NOLINT(fuchsia-statically-constructed-objects,cert-err58-cpp,fuchsia-default-arguments-calls)
+    std::make_pair(sanguis::creator::start_name(), &sanguis::creator::impl::generators::start),
+    std::make_pair(
+        sanguis::creator::impl::graveyard_name(), &sanguis::creator::impl::generators::graveyard),
+    std::make_pair(sanguis::creator::impl::maze_name(), &sanguis::creator::impl::generators::maze),
+    std::make_pair(
+        sanguis::creator::impl::rooms_name(), &sanguis::creator::impl::generators::rooms)};
 
 FCPPT_PP_POP_WARNING
 
 }
 
-sanguis::creator::impl::generator_map_type const &
-sanguis::creator::impl::generator_map()
+sanguis::creator::impl::generator_map_type const &sanguis::creator::impl::generator_map()
 {
-	return
-		::generators;
+  return ::generators;
 }

@@ -6,28 +6,22 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
 class log
 {
-	FCPPT_NONMOVABLE(
-		log
-	);
+  FCPPT_NONMOVABLE(log);
+
 public:
-	explicit
-	log(
-		fcppt::log::context_reference
-	);
+  explicit log(fcppt::log::context_reference);
 
-	~log();
+  ~log();
 
-	[[nodiscard]]
-	fcppt::log::object &
-	main_log() const;
+  [[nodiscard]] fcppt::log::object &main_log() const;
+
 private:
-	mutable fcppt::log::object main_log_;
+  mutable fcppt::log::object main_log_;
 };
 
 }

@@ -7,29 +7,22 @@
 #include <sanguis/server/weapons/log_cref.hpp>
 #include <sanguis/server/weapons/log_fwd.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
 class common_parameters
 {
 public:
-	common_parameters(
-		sanguis::server::weapons::log_cref,
-		sanguis::random_generator_ref
-	);
+  common_parameters(sanguis::server::weapons::log_cref, sanguis::random_generator_ref);
 
-	[[nodiscard]]
-	sanguis::server::weapons::log const &
-	log() const;
+  [[nodiscard]] sanguis::server::weapons::log const &log() const;
 
-	[[nodiscard]]
-	sanguis::random_generator &
-	random_generator() const;
+  [[nodiscard]] sanguis::random_generator &random_generator() const;
+
 private:
-	sanguis::server::weapons::log_cref log_;
+  sanguis::server::weapons::log_cref log_;
 
-	sanguis::random_generator_ref random_generator_;
+  sanguis::random_generator_ref random_generator_;
 };
 
 }

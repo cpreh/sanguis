@@ -4,16 +4,10 @@
 #include <sanguis/server/auras/aura_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::server::auras
 {
 
-using
-unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::server::auras::aura
->;
+using unique_ptr = fcppt::unique_ptr<sanguis::server::auras::aura>;
 
 }
 

@@ -9,22 +9,15 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-speed
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::speed
-	>,
-	alda::bindings::record_variadic<
-		sanguis::messages::server::parts::entity_id,
-		sanguis::messages::server::parts::speed
-	>
->;
+using speed = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::speed>,
+    alda::bindings::record_variadic<
+        sanguis::messages::server::parts::entity_id,
+        sanguis::messages::server::parts::speed>>;
 
 }
 

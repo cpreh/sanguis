@@ -29,287 +29,137 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::collision::impl::world::simple::ghost::ghost(
-	sanguis::collision::world::ghost_parameters const &_parameters,
-	sanguis::collision::impl::world::simple::ghost_remove_callback &&_ghost_remove_callback
-)
-:
-	ghost_remove_callback_(
-		std::move(
-			_ghost_remove_callback
-		)
-	),
-	radius_(
-		_parameters.radius()
-	),
-	collision_group_(
-		_parameters.collision_group()
-	),
-	center_(
-		_parameters.center()
-	),
-	ghost_base_(
-		_parameters.ghost_base()
-	),
-	bodies_()
+    sanguis::collision::world::ghost_parameters const &_parameters,
+    sanguis::collision::impl::world::simple::ghost_remove_callback &&_ghost_remove_callback)
+    : ghost_remove_callback_(std::move(_ghost_remove_callback)),
+      radius_(_parameters.radius()),
+      collision_group_(_parameters.collision_group()),
+      center_(_parameters.center()),
+      ghost_base_(_parameters.ghost_base()),
+      bodies_()
 {
 }
 
-sanguis::collision::impl::world::simple::ghost::~ghost()
+sanguis::collision::impl::world::simple::ghost::~ghost() { ghost_remove_callback_(*this); }
+
+void sanguis::collision::impl::world::simple::ghost::center(
+    sanguis::collision::center const _center)
 {
-	ghost_remove_callback_(
-		*this
-	);
+  center_ = _center;
 }
 
-void
-sanguis::collision::impl::world::simple::ghost::center(
-	sanguis::collision::center const _center
-)
+sanguis::collision::center sanguis::collision::impl::world::simple::ghost::center() const
 {
-	center_ =
-		_center;
+  return center_;
 }
 
-sanguis::collision::center
-sanguis::collision::impl::world::simple::ghost::center() const
+sanguis::collision::radius sanguis::collision::impl::world::simple::ghost::radius() const
 {
-	return
-		center_;
-}
-
-sanguis::collision::radius
-sanguis::collision::impl::world::simple::ghost::radius() const
-{
-	return
-		radius_;
+  return radius_;
 }
 
 sanguis::collision::world::ghost_group
 sanguis::collision::impl::world::simple::ghost::collision_group() const
 {
-	return
-		collision_group_;
+  return collision_group_;
 }
 
-void
-sanguis::collision::impl::world::simple::ghost::pre_update_bodies()
+void sanguis::collision::impl::world::simple::ghost::pre_update_bodies()
 {
-	for(
-		auto &body
-		:
-		bodies_
-	)
-	{
-		body.second =
-			body_status::marked_for_deletion;
-	}
+  for (auto &body : bodies_)
+  {
+    body.second = body_status::marked_for_deletion;
+  }
 }
 
 sanguis::collision::world::body_exit_container
 sanguis::collision::impl::world::simple::ghost::post_update_bodies()
 {
-	sanguis::collision::world::body_exit_container result;
+  sanguis::collision::world::body_exit_container result;
 
-	fcppt::algorithm::map_iteration(
-		bodies_,
-		[
-			this,
-			&result
-		](
-			body_map::value_type const &_element
-		)
-		{
-			if(
-				_element.second
-				==
-				body_status::marked_for_deletion
-			)
-			{
-				result.push_back(
-					sanguis::collision::world::body_exit(
-						fcppt::make_ref(
-							_element.first.get().body_base()
-						),
-						fcppt::make_ref(
-							ghost_base_
-						)
-					)
-				);
+  fcppt::algorithm::map_iteration(
+      bodies_,
+      [this, &result](body_map::value_type const &_element)
+      {
+        if (_element.second == body_status::marked_for_deletion)
+        {
+          result.push_back(sanguis::collision::world::body_exit(
+              fcppt::make_ref(_element.first.get().body_base()), fcppt::make_ref(ghost_base_)));
 
-				return
-					fcppt::algorithm::update_action::remove;
-			}
+          return fcppt::algorithm::update_action::remove;
+        }
 
-			return
-				fcppt::algorithm::update_action::keep;
-		}
-	);
+        return fcppt::algorithm::update_action::keep;
+      });
 
-	return
-		result;
+  return result;
 }
 
 sanguis::collision::world::optional_body_enter
 sanguis::collision::impl::world::simple::ghost::update_near_body(
-	sanguis::collision::impl::world::simple::body const &_body
-)
+    sanguis::collision::impl::world::simple::body const &_body)
 {
-	return
-		sanguis::collision::impl::collides(
-			sanguis::collision::impl::world::make_circle(
-				_body
-			),
-			sanguis::collision::impl::world::make_circle(
-				*this
-			)
-		)
-		?
-			fcppt::optional::maybe(
-				fcppt::container::find_opt_mapped(
-					bodies_,
-					fcppt::make_cref(
-						_body
-					)
-				),
-				[
-					this,
-					&_body
-				]
-				{
-					bodies_.insert(
-						std::make_pair(
-							fcppt::make_cref(
-								_body
-							),
-							body_status::normal
-						)
-					);
+  return sanguis::collision::impl::collides(
+             sanguis::collision::impl::world::make_circle(_body),
+             sanguis::collision::impl::world::make_circle(*this))
+             ? fcppt::optional::maybe(
+                   fcppt::container::find_opt_mapped(bodies_, fcppt::make_cref(_body)),
+                   [this, &_body]
+                   {
+                     bodies_.insert(std::make_pair(fcppt::make_cref(_body), body_status::normal));
 
-					return
-						sanguis::collision::world::optional_body_enter(
-							sanguis::collision::world::body_enter(
-								fcppt::make_ref(
-									_body.body_base()
-								),
-								fcppt::make_ref(
-									ghost_base_
-								),
-								sanguis::collision::world::created{
-									false
-								}
-							)
-						);
-				},
-				[](
-					fcppt::reference<
-						body_status
-					> const _status
-				)
-				{
-					_status.get() =
-						body_status::normal;
+                     return sanguis::collision::world::optional_body_enter(
+                         sanguis::collision::world::body_enter(
+                             fcppt::make_ref(_body.body_base()),
+                             fcppt::make_ref(ghost_base_),
+                             sanguis::collision::world::created{false}));
+                   },
+                   [](fcppt::reference<body_status> const _status)
+                   {
+                     _status.get() = body_status::normal;
 
-					return
-						sanguis::collision::world::optional_body_enter();
-				}
-			)
-		:
-			sanguis::collision::world::optional_body_enter()
-		;
+                     return sanguis::collision::world::optional_body_enter();
+                   })
+             : sanguis::collision::world::optional_body_enter();
 }
 
 sanguis::collision::world::optional_body_enter
 sanguis::collision::impl::world::simple::ghost::new_body(
-	sanguis::collision::impl::world::simple::body const &_body,
-	sanguis::collision::world::created const _created
-)
+    sanguis::collision::impl::world::simple::body const &_body,
+    sanguis::collision::world::created const _created)
 {
-	if(
-		!sanguis::collision::impl::collides(
-			sanguis::collision::impl::world::make_circle(
-				_body
-			),
-			sanguis::collision::impl::world::make_circle(
-				*this
-			)
-		)
-	)
-	{
-		return
-			sanguis::collision::world::optional_body_enter();
-	}
+  if (!sanguis::collision::impl::collides(
+          sanguis::collision::impl::world::make_circle(_body),
+          sanguis::collision::impl::world::make_circle(*this)))
+  {
+    return sanguis::collision::world::optional_body_enter();
+  }
 
-	FCPPT_ASSERT_ERROR(
-		bodies_.insert(
-			std::make_pair(
-				fcppt::make_cref(
-					_body
-				),
-				body_status::normal
-			)
-		).second
-	);
+  FCPPT_ASSERT_ERROR(
+      bodies_.insert(std::make_pair(fcppt::make_cref(_body), body_status::normal)).second);
 
-	return
-		sanguis::collision::world::optional_body_enter(
-			sanguis::collision::world::body_enter{
-				fcppt::make_ref(
-					_body.body_base()
-				),
-				fcppt::make_ref(
-					ghost_base_
-				),
-				_created
-			}
-		);
+  return sanguis::collision::world::optional_body_enter(sanguis::collision::world::body_enter{
+      fcppt::make_ref(_body.body_base()), fcppt::make_ref(ghost_base_), _created});
 }
 
 sanguis::collision::world::optional_body_exit
 sanguis::collision::impl::world::simple::ghost::remove_body(
-	sanguis::collision::impl::world::simple::body const &_body
-)
+    sanguis::collision::impl::world::simple::body const &_body)
 {
-	return
-		fcppt::optional::map(
-			fcppt::container::find_opt_iterator(
-				bodies_,
-				fcppt::make_cref(
-					_body
-				)
-			),
-			[
-				this,
-				&_body
-			](
-				sanguis::collision::impl::world::simple::ghost::body_map::iterator const _it
-			){
-				bodies_.erase(
-					_it
-				);
+  return fcppt::optional::map(
+      fcppt::container::find_opt_iterator(bodies_, fcppt::make_cref(_body)),
+      [this, &_body](sanguis::collision::impl::world::simple::ghost::body_map::iterator const _it)
+      {
+        bodies_.erase(_it);
 
-				return
-					sanguis::collision::world::body_exit(
-						fcppt::make_ref(
-							_body.body_base()
-						),
-						fcppt::make_ref(
-							ghost_base_
-						)
-					);
-			}
-		);
+        return sanguis::collision::world::body_exit(
+            fcppt::make_ref(_body.body_base()), fcppt::make_ref(ghost_base_));
+      });
 }
 
-void
-sanguis::collision::impl::world::simple::ghost::body_destroyed(
-	sanguis::collision::impl::world::simple::body const &_body
-)
+void sanguis::collision::impl::world::simple::ghost::body_destroyed(
+    sanguis::collision::impl::world::simple::body const &_body)
 {
-	bodies_.erase(
-		fcppt::make_cref(
-			_body
-		)
-	);
+  bodies_.erase(fcppt::make_cref(_body));
 }

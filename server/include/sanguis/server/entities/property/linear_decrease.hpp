@@ -4,30 +4,22 @@
 #include <sanguis/server/entities/property/linear_decrease_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
-
 namespace sanguis::server::entities::property
 {
 
 class linear_decrease
 {
 public:
-	linear_decrease();
+  linear_decrease();
 
-	void
-	mul(
-		sanguis::server::entities::property::value
-	);
+  void mul(sanguis::server::entities::property::value);
 
-	void
-	div(
-		sanguis::server::entities::property::value
-	);
+  void div(sanguis::server::entities::property::value);
 
-	[[nodiscard]]
-	sanguis::server::entities::property::value
-	value() const;
+  [[nodiscard]] sanguis::server::entities::property::value value() const;
+
 private:
-	sanguis::server::entities::property::value value_;
+  sanguis::server::entities::property::value value_;
 };
 
 }

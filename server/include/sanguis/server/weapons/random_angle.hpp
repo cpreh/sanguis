@@ -5,16 +5,13 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-sanguis::server::angle
-random_angle(
-	sanguis::random_generator &, // NOLINT(google-runtime-references)
-	sanguis::server::weapons::accuracy,
-	sanguis::server::angle
-);
+sanguis::server::angle random_angle(
+    sanguis::random_generator &, // NOLINT(google-runtime-references)
+    sanguis::server::weapons::accuracy,
+    sanguis::server::angle);
 
 }
 

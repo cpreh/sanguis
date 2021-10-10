@@ -5,17 +5,12 @@
 #include <sanguis/client/draw2d/entities/hover/weapon_fwd.hpp>
 #include <fcppt/variant/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::entities::hover
 {
 
-using
-variant
-=
-fcppt::variant::object<
-	sanguis::client::draw2d::entities::hover::name_and_health,
-	sanguis::client::draw2d::entities::hover::weapon
->;
+using variant = fcppt::variant::object<
+    sanguis::client::draw2d::entities::hover::name_and_health,
+    sanguis::client::draw2d::entities::hover::weapon>;
 
 }
 

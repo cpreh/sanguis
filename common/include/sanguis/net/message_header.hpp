@@ -5,14 +5,10 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::net
 {
 
-using
-message_header
-=
-std::uint16_t;
+using message_header = std::uint16_t;
 
 }
 

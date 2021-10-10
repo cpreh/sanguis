@@ -6,33 +6,21 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::clock::duration
-sanguis::server::net::slowdown_policy::start_duration()
+sanguis::clock::duration sanguis::server::net::slowdown_policy::start_duration()
 {
-	return
-		std::chrono::seconds(
-			10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-		);
+  return std::chrono::seconds(
+      10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+  );
 }
 
-sanguis::clock::duration
-sanguis::server::net::slowdown_policy::difference(
-	sanguis::slowdown const _slowdown1,
-	sanguis::slowdown const _slowdown2
-)
+sanguis::clock::duration sanguis::server::net::slowdown_policy::difference(
+    sanguis::slowdown const _slowdown1, sanguis::slowdown const _slowdown2)
 {
-	return
-		std::chrono::duration_cast<
-			sanguis::clock::duration
-		>(
-			fcppt::math::diff(
-				_slowdown1.get(),
-				_slowdown2.get()
-			)
-			*
-			std::chrono::seconds(
-				5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			)
-		);
+  return std::chrono::duration_cast<sanguis::clock::duration>(
+      fcppt::math::diff(
+          _slowdown1.get(),
+          _slowdown2.get()) *
+      std::chrono::seconds(
+          5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          ));
 }

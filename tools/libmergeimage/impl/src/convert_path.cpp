@@ -6,36 +6,20 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::tools::libmergeimage::path
-sanguis::tools::libmergeimage::impl::convert_path(
-	std::filesystem::path const &_path
-)
+sanguis::tools::libmergeimage::impl::convert_path(std::filesystem::path const &_path)
 {
-	sanguis::tools::libmergeimage::path result{};
+  sanguis::tools::libmergeimage::path result{};
 
-	for(
-		std::filesystem::path const &elem
-		:
-		_path
-	)
-	{
-		if(
-			result.size()
-			==
-			sanguis::tools::libmergeimage::impl::tree_depth::value
-		)
-		{
-			break;
-		}
+  for (std::filesystem::path const &elem : _path)
+  {
+    if (result.size() == sanguis::tools::libmergeimage::impl::tree_depth::value)
+    {
+      break;
+    }
 
-		result.push_back(
-			fcppt::filesystem::path_to_string(
-				elem
-			)
-		);
-	}
+    result.push_back(fcppt::filesystem::path_to_string(elem));
+  }
 
-	return
-		result;
+  return result;
 }

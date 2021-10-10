@@ -35,132 +35,65 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
-sanguis::client::states::waiting_for_player::waiting_for_player(
-	my_context _ctx
-)
-:
-	my_base(
-		std::move(
-			_ctx
-		)
-	),
-	log_{
-		this->context<
-			sanguis::client::machine
-		>().log_context(),
-		sanguis::client::states::log_location(),
-		fcppt::log::parameters_no_function(
-			fcppt::log::name{
-				FCPPT_TEXT("waiting_for_player")
-			}
-		)
-	}
-{
-	FCPPT_LOG_DEBUG(
-		log_,
-		fcppt::log::out
-			<< FCPPT_TEXT("Entering waiting_for_player")
-	)
-}
+sanguis::client::states::waiting_for_player::waiting_for_player(my_context _ctx)
+    : my_base(std::move(_ctx)),
+      log_{
+          this->context<sanguis::client::machine>().log_context(),
+          sanguis::client::states::log_location(),
+          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("waiting_for_player")})} {
+          FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("Entering waiting_for_player"))}
 
-FCPPT_PP_POP_WARNING
+      FCPPT_PP_POP_WARNING
 
-sanguis::client::states::waiting_for_player::~waiting_for_player()
-= default;
+      sanguis::client::states::waiting_for_player::~waiting_for_player() = default;
 
 boost::statechart::result
-sanguis::client::states::waiting_for_player::react(
-	sanguis::client::events::message const &_event
-)
+sanguis::client::states::waiting_for_player::react(sanguis::client::events::message const &_event)
 {
-	auto const handle_default_msg(
-		[
-			this
-		](
-			sanguis::messages::server::base const &
-		)
-		{
-			return
-				this->forward_event();
-		}
-	);
+  auto const handle_default_msg([this](sanguis::messages::server::base const &)
+                                { return this->forward_event(); });
 
-	return
-		sanguis::client::dispatch<
-			fcppt::mpl::list::object<
-				sanguis::messages::server::add_own_player
-			>
-		>(
-			*this,
-			_event,
-			sanguis::client::dispatch_default_function{
-				handle_default_msg
-			}
-		);
+  return sanguis::client::dispatch<
+      fcppt::mpl::list::object<sanguis::messages::server::add_own_player>>(
+      *this, _event, sanguis::client::dispatch_default_function{handle_default_msg});
 }
 
 boost::statechart::result
-sanguis::client::states::waiting_for_player::react(
-	sanguis::client::events::action const &_event
-)
+sanguis::client::states::waiting_for_player::react(sanguis::client::events::action const &_event)
 {
-	fcppt::optional::maybe_void(
-		fcppt::variant::to_optional<
-			sanguis::client::control::actions::nullary
-		>(
-			_event.value().get()
-		),
-		[
-			this
-		](
-			sanguis::client::control::actions::nullary const &_nullary
-		)
-		{
-			switch(
-				_nullary.type()
-			)
-			{
-			case sanguis::client::control::actions::nullary_type::escape:
-				this->context<
-					sanguis::client::machine
-				>().quit();
+  fcppt::optional::maybe_void(
+      fcppt::variant::to_optional<sanguis::client::control::actions::nullary>(_event.value().get()),
+      [this](sanguis::client::control::actions::nullary const &_nullary)
+      {
+        switch (_nullary.type())
+        {
+        case sanguis::client::control::actions::nullary_type::escape:
+          this->context<sanguis::client::machine>().quit();
 
-				return;
-			case sanguis::client::control::actions::nullary_type::console:
-			case sanguis::client::control::actions::nullary_type::change_world:
-			case sanguis::client::control::actions::nullary_type::drop_primary_weapon:
-			case sanguis::client::control::actions::nullary_type::drop_secondary_weapon:
-			case sanguis::client::control::actions::nullary_type::perk_menu:
-			case sanguis::client::control::actions::nullary_type::reload_primary_weapon:
-			case sanguis::client::control::actions::nullary_type::reload_secondary_weapon:
-				return;
-			}
+          return;
+        case sanguis::client::control::actions::nullary_type::console:
+        case sanguis::client::control::actions::nullary_type::change_world:
+        case sanguis::client::control::actions::nullary_type::drop_primary_weapon:
+        case sanguis::client::control::actions::nullary_type::drop_secondary_weapon:
+        case sanguis::client::control::actions::nullary_type::perk_menu:
+        case sanguis::client::control::actions::nullary_type::reload_primary_weapon:
+        case sanguis::client::control::actions::nullary_type::reload_secondary_weapon:
+          return;
+        }
 
-			FCPPT_ASSERT_UNREACHABLE;
-		}
-	);
+        FCPPT_ASSERT_UNREACHABLE;
+      });
 
-	return
-		this->discard_event();
+  return this->discard_event();
 }
 
-sanguis::messages::call::result
-sanguis::client::states::waiting_for_player::operator()(
-	sanguis::messages::server::add_own_player const &
-)
+sanguis::messages::call::result sanguis::client::states::waiting_for_player::operator()(
+    sanguis::messages::server::add_own_player const &)
 {
-	this->post_event(
-		*this->triggering_event()
-	);
+  this->post_event(*this->triggering_event());
 
-	return
-		sanguis::messages::call::result(
-			this->transit<
-				sanguis::client::states::has_player
-			>()
-		);
+  return sanguis::messages::call::result(this->transit<sanguis::client::states::has_player>());
 }

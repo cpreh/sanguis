@@ -4,14 +4,10 @@
 #include <sanguis/tiles/impl/optional_orientation.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-sanguis::tiles::impl::optional_orientation
-decode_name(
-	fcppt::string const &
-);
+sanguis::tiles::impl::optional_orientation decode_name(fcppt::string const &);
 
 }
 

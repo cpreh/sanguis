@@ -8,16 +8,11 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wweak-template-vtables)
 
-extern
-template
-class
-sanguis::client::draw2d::entities::with_auras_parameters<
-	sanguis::client::draw2d::entities::model::parameters
->;
+extern template class sanguis::client::draw2d::entities::with_auras_parameters<
+    sanguis::client::draw2d::entities::model::parameters>;
 
 FCPPT_PP_POP_WARNING
 

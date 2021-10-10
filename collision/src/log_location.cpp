@@ -4,14 +4,7 @@
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/name.hpp>
 
-
-fcppt::log::location
-sanguis::collision::log_location()
+fcppt::log::location sanguis::collision::log_location()
 {
-	return
-		sanguis::log_location()
-		/
-		fcppt::log::name{
-			FCPPT_TEXT("collision")
-		};
+  return sanguis::log_location() / fcppt::log::name{FCPPT_TEXT("collision")};
 }

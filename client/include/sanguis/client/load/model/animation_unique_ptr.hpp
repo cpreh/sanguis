@@ -4,16 +4,10 @@
 #include <sanguis/client/load/model/animation_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
-using
-animation_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::client::load::model::animation
->;
+using animation_unique_ptr = fcppt::unique_ptr<sanguis::client::load::model::animation>;
 
 }
 

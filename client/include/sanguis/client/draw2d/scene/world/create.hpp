@@ -6,16 +6,13 @@
 #include <sanguis/creator/name_fwd.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
-sanguis::client::draw2d::scene::world::base_unique_ptr
-create(
-	fcppt::log::object &, // NOLINT(google-runtime-references)
-	sanguis::creator::name const &,
-	sanguis::client::draw2d::scene::world::parameters const &
-);
+sanguis::client::draw2d::scene::world::base_unique_ptr create(
+    fcppt::log::object &, // NOLINT(google-runtime-references)
+    sanguis::creator::name const &,
+    sanguis::client::draw2d::scene::world::parameters const &);
 
 }
 

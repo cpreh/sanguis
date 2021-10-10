@@ -4,16 +4,10 @@
 #include <sanguis/messages/adapted_types/fundamental_fwd.hpp>
 #include <sanguis/messages/types/char.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-char_type
-=
-sanguis::messages::adapted_types::fundamental<
-	sanguis::messages::types::char_
->;
+using char_type = sanguis::messages::adapted_types::fundamental<sanguis::messages::types::char_>;
 
 }
 

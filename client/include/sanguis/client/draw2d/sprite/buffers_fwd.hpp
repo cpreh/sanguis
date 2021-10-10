@@ -4,20 +4,11 @@
 #include <sge/sprite/buffers/single_fwd.hpp>
 #include <sge/sprite/buffers/with_declaration_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::sprite
 {
 
-template<
-	typename Choices
->
-using buffers
-=
-sge::sprite::buffers::with_declaration<
-	sge::sprite::buffers::single<
-		Choices
-	>
->;
+template <typename Choices>
+using buffers = sge::sprite::buffers::with_declaration<sge::sprite::buffers::single<Choices>>;
 
 }
 

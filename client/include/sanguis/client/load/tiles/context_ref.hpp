@@ -4,16 +4,10 @@
 #include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::load::tiles
 {
 
-using
-context_ref
-=
-fcppt::reference<
-	sanguis::client::load::tiles::context
->;
+using context_ref = fcppt::reference<sanguis::client::load::tiles::context>;
 
 }
 

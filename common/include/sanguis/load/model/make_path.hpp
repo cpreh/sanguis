@@ -7,15 +7,11 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::load::model
 {
 
 SANGUIS_COMMON_SYMBOL
-std::filesystem::path
-make_path(
-	sanguis::load::model::path const &
-);
+std::filesystem::path make_path(sanguis::load::model::path const &);
 
 }
 

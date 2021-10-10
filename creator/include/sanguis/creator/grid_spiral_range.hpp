@@ -5,5 +5,4 @@
 #include <sanguis/creator/signed_pos.hpp>
 #include <fcppt/container/grid/spiral_range_impl.hpp>
 
-
 #endif

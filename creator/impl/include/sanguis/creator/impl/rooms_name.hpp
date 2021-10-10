@@ -6,10 +6,8 @@
 namespace sanguis::creator::impl
 {
 
-sanguis::creator::name
-rooms_name();
+sanguis::creator::name rooms_name();
 
 }
 
 #endif
-

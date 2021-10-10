@@ -16,26 +16,23 @@
 #include <sanguis/client/load/auras/context_ref.hpp>
 #include <sanguis/creator/enemy_type_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::factory
 {
 
-sanguis::client::draw2d::entities::unique_ptr
-enemy(
-	sanguis::client::draw2d::entities::load_parameters const &,
-	sanguis::client::load::auras::context_ref,
-	sanguis::creator::enemy_type,
-	sanguis::enemy_kind,
-	sanguis::optional_primary_weapon_type,
-	sanguis::weapon_status,
-	sanguis::client::draw2d::speed const &,
-	sanguis::client::draw2d::sprite::center const &,
-	sanguis::client::draw2d::sprite::rotation,
-	sanguis::aura_type_vector &&,
-	sanguis::buff_type_vector &&,
-	sanguis::client::draw2d::entities::name const &,
-	sanguis::client::health_pair
-);
+sanguis::client::draw2d::entities::unique_ptr enemy(
+    sanguis::client::draw2d::entities::load_parameters const &,
+    sanguis::client::load::auras::context_ref,
+    sanguis::creator::enemy_type,
+    sanguis::enemy_kind,
+    sanguis::optional_primary_weapon_type,
+    sanguis::weapon_status,
+    sanguis::client::draw2d::speed const &,
+    sanguis::client::draw2d::sprite::center const &,
+    sanguis::client::draw2d::sprite::rotation,
+    sanguis::aura_type_vector &&,
+    sanguis::buff_type_vector &&,
+    sanguis::client::draw2d::entities::name const &,
+    sanguis::client::health_pair);
 
 }
 

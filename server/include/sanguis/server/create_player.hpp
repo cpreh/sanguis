@@ -10,20 +10,17 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
-sanguis::server::entities::player_unique_ptr
-create_player(
-	sanguis::random_generator_ref,
-	sanguis::server::weapons::common_parameters const &,
-	sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-	sanguis::player_name &&,
-	sanguis::server::unicast_callback const &,
-	sanguis::server::player_id,
-	sanguis::server::console_command_vector const &
-);
+sanguis::server::entities::player_unique_ptr create_player(
+    sanguis::random_generator_ref,
+    sanguis::server::weapons::common_parameters const &,
+    sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+    sanguis::player_name &&,
+    sanguis::server::unicast_callback const &,
+    sanguis::server::player_id,
+    sanguis::server::console_command_vector const &);
 
 }
 

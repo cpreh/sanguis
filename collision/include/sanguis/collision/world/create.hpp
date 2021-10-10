@@ -5,15 +5,11 @@
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
 
-
 namespace sanguis::collision::world
 {
 
 SANGUIS_COLLISION_SYMBOL
-sanguis::collision::world::object_unique_ptr
-create(
-	sanguis::collision::world::parameters const &
-);
+sanguis::collision::world::object_unique_ptr create(sanguis::collision::world::parameters const &);
 
 }
 

@@ -6,21 +6,11 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::world
 {
 
-template<
-	typename Type
->
-using
-insert_pair_container
-=
-std::vector<
-	sanguis::server::world::insert_pair<
-		Type
-	>
->;
+template <typename Type>
+using insert_pair_container = std::vector<sanguis::server::world::insert_pair<Type>>;
 
 }
 

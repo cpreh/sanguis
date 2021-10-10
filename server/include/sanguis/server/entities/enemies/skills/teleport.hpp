@@ -9,38 +9,26 @@
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::enemies::skills
 {
 
-class teleport
-:
-	public sanguis::server::entities::enemies::skills::skill
+class teleport : public sanguis::server::entities::enemies::skills::skill
 {
-	FCPPT_NONMOVABLE(
-		teleport
-	);
+  FCPPT_NONMOVABLE(teleport);
+
 public:
-	teleport(
-		sanguis::diff_clock_cref,
-		sanguis::server::entities::enemies::skills::cooldown
-	);
+  teleport(sanguis::diff_clock_cref, sanguis::server::entities::enemies::skills::cooldown);
 
-	~teleport()
-	override;
+  ~teleport() override;
+
 private:
-	void
-	update(
-		sanguis::server::entities::enemies::enemy & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void update(sanguis::server::entities::enemies::enemy & // NOLINT(google-runtime-references)
+              ) // NOLINT(google-runtime-references)
+      override;
 
-	[[nodiscard]]
-	sanguis::server::entities::enemies::attribute
-	attribute() const
-	override;
+  [[nodiscard]] sanguis::server::entities::enemies::attribute attribute() const override;
 
-	sanguis::diff_timer cooldown_timer_;
+  sanguis::diff_timer cooldown_timer_;
 };
 
 }

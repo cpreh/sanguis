@@ -5,18 +5,9 @@
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
 
-
-void
-sanguis::server::entities::property::add(
-	sanguis::server::entities::property::changeable &_changeable,
-	sanguis::server::entities::property::value const &_value
-)
+void sanguis::server::entities::property::add(
+    sanguis::server::entities::property::changeable &_changeable,
+    sanguis::server::entities::property::value const &_value)
 {
-	_changeable.current(
-		std::min(
-			_changeable.max(),
-			_changeable.current()
-			+ _value
-		)
-	);
+  _changeable.current(std::min(_changeable.max(), _changeable.current() + _value));
 }

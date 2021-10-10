@@ -7,20 +7,9 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::load::model::path
-sanguis::load::model::enemy_path(
-	sanguis::creator::enemy_type const _type
-)
+sanguis::load::model::enemy_path(sanguis::creator::enemy_type const _type)
 {
-	return
-		sanguis::load::model::path{
-			std::filesystem::path{
-				FCPPT_TEXT("enemies")
-			}
-			/
-			sanguis::load::enemy_name(
-				_type
-			)
-		};
+  return sanguis::load::model::path{
+      std::filesystem::path{FCPPT_TEXT("enemies")} / sanguis::load::enemy_name(_type)};
 }

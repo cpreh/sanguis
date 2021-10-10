@@ -4,16 +4,10 @@
 #include <sanguis/collision/impl/intersection_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
-using
-optional_intersection
-=
-fcppt::optional::object<
-	sanguis::collision::impl::intersection
->;
+using optional_intersection = fcppt::optional::object<sanguis::collision::impl::intersection>;
 
 }
 

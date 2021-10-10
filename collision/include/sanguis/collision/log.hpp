@@ -7,30 +7,24 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
-
 namespace sanguis::collision
 {
 
 class log
 {
-	FCPPT_NONMOVABLE(
-		log
-	);
+  FCPPT_NONMOVABLE(log);
+
 public:
-	SANGUIS_COLLISION_SYMBOL
-	explicit
-	log(
-		fcppt::log::context_reference
-	);
+  SANGUIS_COLLISION_SYMBOL
+  explicit log(fcppt::log::context_reference);
 
-	SANGUIS_COLLISION_SYMBOL
-	~log();
+  SANGUIS_COLLISION_SYMBOL
+  ~log();
 
-	[[nodiscard]]
-	fcppt::log::object &
-	body_log() const;
+  [[nodiscard]] fcppt::log::object &body_log() const;
+
 private:
-	mutable fcppt::log::object body_log_;
+  mutable fcppt::log::object body_log_;
 };
 
 }

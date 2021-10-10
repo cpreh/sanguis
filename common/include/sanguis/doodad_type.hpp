@@ -3,14 +3,13 @@
 
 #include <sanguis/doodad_type_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class doodad_type
 {
-	portal_blocker,
-	fcppt_maximum = portal_blocker
+  portal_blocker,
+  fcppt_maximum = portal_blocker
 };
 
 }

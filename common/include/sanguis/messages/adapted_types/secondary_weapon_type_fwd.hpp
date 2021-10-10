@@ -4,16 +4,11 @@
 #include <sanguis/secondary_weapon_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-secondary_weapon_type
-=
-sanguis::messages::adapted_types::enum_<
-	sanguis::secondary_weapon_type
->;
+using secondary_weapon_type =
+    sanguis::messages::adapted_types::enum_<sanguis::secondary_weapon_type>;
 
 }
 

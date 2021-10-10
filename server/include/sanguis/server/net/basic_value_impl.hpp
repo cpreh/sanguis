@@ -7,171 +7,67 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
-template<
-	typename Type,
-	typename Policy,
-	typename Clock
->
-sanguis::server::net::basic_value<
-	Type,
-	Policy,
-	Clock
->::basic_value(
-	sge::timer::clocks::parameter<
-		Clock
-	> _clock
-)
-:
-	timer_(
-		typename
-		timer::parameters{
-			_clock,
-			Policy::start_duration()
-		}.active(
-			false
-		)
-	),
-	old_()
+template <typename Type, typename Policy, typename Clock>
+sanguis::server::net::basic_value<Type, Policy, Clock>::basic_value(
+    sge::timer::clocks::parameter<Clock> _clock)
+    : timer_(typename timer::parameters{_clock, Policy::start_duration()}.active(false)), old_()
 {
 }
 
 namespace sanguis::server::net
 {
-template<
-	typename Type,
-	typename Policy,
-	typename Clock
->
-basic_value<
-	Type,
-	Policy,
-	Clock
->::~basic_value()
-= default;
+template <typename Type, typename Policy, typename Clock>
+basic_value<Type, Policy, Clock>::~basic_value() = default;
 }
 
-template<
-	typename Type,
-	typename Policy,
-	typename Clock
->
-bool
-sanguis::server::net::basic_value<
-	Type,
-	Policy,
-	Clock
->::update()
+template <typename Type, typename Policy, typename Clock>
+bool sanguis::server::net::basic_value<Type, Policy, Clock>::update()
 {
-	if(
-		!timer_.expired()
-	)
-	{
-		return
-			false;
-	}
+  if (!timer_.expired())
+  {
+    return false;
+  }
 
-	timer_.active(
-		false
-	);
+  timer_.active(false);
 
-	return
-		true;
+  return true;
 }
 
-template<
-	typename Type,
-	typename Policy,
-	typename Clock
->
-void
-sanguis::server::net::basic_value<
-	Type,
-	Policy,
-	Clock
->::set(
-	Type const _value
-)
+template <typename Type, typename Policy, typename Clock>
+void sanguis::server::net::basic_value<Type, Policy, Clock>::set(Type const _value)
 {
-	fcppt::optional::maybe(
-		old_,
-		[
-			this
-		]{
-			this->restart_timer();
-		},
-		[
-			_value,
-			this
-		](
-			Type const _old
-		)
-		{
-			if(
-				!timer_.active()
-			)
-			{
-				this->restart_timer();
-			}
+  fcppt::optional::maybe(
+      old_,
+      [this] { this->restart_timer(); },
+      [_value, this](Type const _old)
+      {
+        if (!timer_.active())
+        {
+          this->restart_timer();
+        }
 
-			timer_.interval(
-				timer_.interval()
-				-
-				Policy::difference(
-					_old,
-					_value
-				)
-			);
-		}
-	);
+        timer_.interval(timer_.interval() - Policy::difference(_old, _value));
+      });
 
-	old_ =
-		optional_type{
-			_value
-		};
+  old_ = optional_type{_value};
 }
 
-template<
-	typename Type,
-	typename Policy,
-	typename Clock
->
-void
-sanguis::server::net::basic_value<
-	Type,
-	Policy,
-	Clock
->::reset()
+template <typename Type, typename Policy, typename Clock>
+void sanguis::server::net::basic_value<Type, Policy, Clock>::reset()
 {
-	old_ =
-		optional_type();
+  old_ = optional_type();
 
-	timer_.active(
-		false
-	);
+  timer_.active(false);
 }
 
-template<
-	typename Type,
-	typename Policy,
-	typename Clock
->
-void
-sanguis::server::net::basic_value<
-	Type,
-	Policy,
-	Clock
->::restart_timer()
+template <typename Type, typename Policy, typename Clock>
+void sanguis::server::net::basic_value<Type, Policy, Clock>::restart_timer()
 {
-	timer_.active(
-		true
-	);
+  timer_.active(true);
 
-	timer_.interval(
-		Policy::start_duration()
-	);
+  timer_.interval(Policy::start_duration());
 
-	timer_.reset();
+  timer_.reset();
 }
 
 #endif

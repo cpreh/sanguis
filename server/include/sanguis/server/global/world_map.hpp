@@ -6,45 +6,30 @@
 #include <sanguis/server/world/map.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace sanguis::server::global
 {
 
 class world_map
 {
-	FCPPT_NONCOPYABLE(
-		world_map
-	);
+  FCPPT_NONCOPYABLE(world_map);
+
 public:
-	world_map(
-		sanguis::server::world::map &&,
-		sanguis::server::global::world_connection_map &&
-	);
+  world_map(sanguis::server::world::map &&, sanguis::server::global::world_connection_map &&);
 
-	world_map(
-		world_map &&
-	)
-	noexcept;
+  world_map(world_map &&) noexcept;
 
-	world_map &
-	operator=(
-		world_map &&
-	)
-	noexcept;
+  world_map &operator=(world_map &&) noexcept;
 
-	~world_map();
+  ~world_map();
 
-	[[nodiscard]]
-	sanguis::server::world::map const &
-	worlds() const;
+  [[nodiscard]] sanguis::server::world::map const &worlds() const;
 
-	[[nodiscard]]
-	sanguis::server::global::world_connection_map const &
-	connections() const;
+  [[nodiscard]] sanguis::server::global::world_connection_map const &connections() const;
+
 private:
-	sanguis::server::world::map worlds_;
+  sanguis::server::world::map worlds_;
 
-	sanguis::server::global::world_connection_map connections_;
+  sanguis::server::global::world_connection_map connections_;
 };
 
 }

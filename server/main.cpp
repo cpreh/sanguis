@@ -36,128 +36,62 @@
 #include <iostream>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Wmissing-declarations)
 
-int
-FCPPT_MAIN(
-	int argc,
-	fcppt::args_char **argv
-)
+int FCPPT_MAIN(int argc, fcppt::args_char **argv)
 try
 {
-	return
-		fcppt::variant::match(
-			fcppt::options::parse_help(
-				fcppt::options::default_help_switch(),
-				*sanguis::server::args::create_parser(),
-				fcppt::args_from_second(
-					argc,
-					argv
-				)
-			),
-			[](
-				fcppt::options::result<
-					sanguis::server::args::result
-				> const &_result
-			)
-			{
-				return
-					fcppt::either::match(
-						_result,
-						[](
-							fcppt::options::error const &_error
-						)
-						{
-							fcppt::io::cerr()
-								<<
-								_error
-								<<
-								FCPPT_TEXT('\n');
+  return fcppt::variant::match(
+      fcppt::options::parse_help(
+          fcppt::options::default_help_switch(),
+          *sanguis::server::args::create_parser(),
+          fcppt::args_from_second(argc, argv)),
+      [](fcppt::options::result<sanguis::server::args::result> const &_result)
+      {
+        return fcppt::either::match(
+            _result,
+            [](fcppt::options::error const &_error)
+            {
+              fcppt::io::cerr() << _error << FCPPT_TEXT('\n');
 
-							return
-								EXIT_FAILURE;
-						},
-						[](
-							sanguis::server::args::result const &_args
-						)
-						{
-							fcppt::log::context log_context{
-								fcppt::log::optional_level{
-									fcppt::record::get<
-										sanguis::server::args::labels::log_level
-									>(
-										_args
-									)
-								},
-								sanguis::log_level_streams()
-							};
+              return EXIT_FAILURE;
+            },
+            [](sanguis::server::args::result const &_args)
+            {
+              fcppt::log::context log_context{
+                  fcppt::log::optional_level{
+                      fcppt::record::get<sanguis::server::args::labels::log_level>(_args)},
+                  sanguis::log_level_streams()};
 
-							sanguis::server::object_base_unique_ptr const server(
-								sanguis::server::create(
-									fcppt::make_ref(
-										log_context
-									),
-									fcppt::record::get<
-										sanguis::server::args::labels::port
-									>(
-										_args
-									)
-								)
-							);
+              sanguis::server::object_base_unique_ptr const server(sanguis::server::create(
+                  fcppt::make_ref(log_context),
+                  fcppt::record::get<sanguis::server::args::labels::port>(_args)));
 
-							server->run();
+              server->run();
 
-							return
-								EXIT_SUCCESS;
-						}
-					);
-			},
-			[](
-				fcppt::options::help_text const &_help_text
-			)
-			{
-				fcppt::io::cout()
-					<<
-					_help_text
-					<<
-					FCPPT_TEXT('\n');
+              return EXIT_SUCCESS;
+            });
+      },
+      [](fcppt::options::help_text const &_help_text)
+      {
+        fcppt::io::cout() << _help_text << FCPPT_TEXT('\n');
 
-				return
-					EXIT_SUCCESS;
-			}
-		);
+        return EXIT_SUCCESS;
+      });
 }
-catch(
-	fcppt::exception const &_error
-)
+catch (fcppt::exception const &_error)
 {
-	fcppt::io::cerr()
-		<<
-		FCPPT_TEXT("Caught fcppt exception: ")
-		<<
-		_error.string()
-		<<
-		FCPPT_TEXT('\n');
+  fcppt::io::cerr() << FCPPT_TEXT("Caught fcppt exception: ") << _error.string()
+                    << FCPPT_TEXT('\n');
 
-	return
-		EXIT_FAILURE;
+  return EXIT_FAILURE;
 }
-catch(
-	std::exception const &_error
-)
+catch (std::exception const &_error)
 {
-	std::cout
-		<<
-		"Caught standard exception: "
-		<<
-		_error.what()
-		<<
-		'\n';
+  std::cout << "Caught standard exception: " << _error.what() << '\n';
 
-	return
-		EXIT_FAILURE;
+  return EXIT_FAILURE;
 }
 
 FCPPT_PP_POP_WARNING

@@ -4,5 +4,4 @@
 #include <sanguis/random_variate_fwd.hpp>
 #include <fcppt/random/variate_decl.hpp>
 
-
 #endif

@@ -6,38 +6,12 @@
 #include <fcppt/const.hpp>
 #include <fcppt/optional/maybe.hpp>
 
+sanguis::client::perk::compare::compare(sanguis::perk_type const _type) : type_(_type) {}
 
-sanguis::client::perk::compare::compare(
-	sanguis::perk_type const _type
-)
-:
-	type_(
-		_type
-	)
+bool sanguis::client::perk::compare::operator()(sanguis::client::perk::tree const &_tree) const
 {
-}
-
-bool
-sanguis::client::perk::compare::operator()(
-	sanguis::client::perk::tree const &_tree
-) const
-{
-	return
-		fcppt::optional::maybe(
-			_tree.value(),
-			fcppt::const_(
-				false
-			),
-			[
-				this
-			](
-				sanguis::client::perk::info const &_info
-			)
-			{
-				return
-					_info.perk_type()
-					==
-					type_;
-			}
-		);
+  return fcppt::optional::maybe(
+      _tree.value(),
+      fcppt::const_(false),
+      [this](sanguis::client::perk::info const &_info) { return _info.perk_type() == type_; });
 }

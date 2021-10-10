@@ -4,5 +4,4 @@
 #include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <alda/bindings/unsigned.hpp>
 
-
 #endif

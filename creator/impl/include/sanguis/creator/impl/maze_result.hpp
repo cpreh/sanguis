@@ -7,17 +7,13 @@
 namespace sanguis::creator::impl
 {
 
-struct
-maze_result
+struct maze_result
 {
-	sanguis::creator::impl::region_grid
-	grid;
+  sanguis::creator::impl::region_grid grid;
 
-	sanguis::creator::impl::region_id
-	next_id;
+  sanguis::creator::impl::region_id next_id;
 };
 
 }
 
 #endif
-

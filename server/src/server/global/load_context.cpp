@@ -13,41 +13,21 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::global::load_context::load_context(
-	sanguis::server::load_cref const _model_context,
-	sanguis::server::global::next_id_callback &&_next_id_callback
-)
-:
-	sanguis::server::environment::load_context(),
-	model_context_(
-		_model_context
-	),
-	next_id_callback_(
-		std::move(
-			_next_id_callback
-		)
-	)
+    sanguis::server::load_cref const _model_context,
+    sanguis::server::global::next_id_callback &&_next_id_callback)
+    : sanguis::server::environment::load_context(),
+      model_context_(_model_context),
+      next_id_callback_(std::move(_next_id_callback))
 {
 }
 
-sanguis::server::global::load_context::~load_context()
-= default;
+sanguis::server::global::load_context::~load_context() = default;
 
-sanguis::server::radius
-sanguis::server::global::load_context::model_size(
-	sanguis::load::model::path const &_model_path
-) const
+sanguis::server::radius sanguis::server::global::load_context::model_size(
+    sanguis::load::model::path const &_model_path) const
 {
-	return
-		model_context_->model_dim(
-			_model_path
-		);
+  return model_context_->model_dim(_model_path);
 }
 
-sanguis::entity_id
-sanguis::server::global::load_context::next_id()
-{
-	return
-		next_id_callback_();
-}
+sanguis::entity_id sanguis::server::global::load_context::next_id() { return next_id_callback_(); }

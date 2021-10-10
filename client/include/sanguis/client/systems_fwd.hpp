@@ -11,24 +11,17 @@
 #include <sge/systems/with_renderer_fwd.hpp>
 #include <sge/systems/with_window_fwd.hpp>
 
-
 namespace sanguis::client
 {
 
-using
-systems
-=
-sge::systems::instance<
-	sge::systems::with_window,
-	sge::systems::with_renderer<
-		sge::systems::renderer_caps::ffp
-	>,
-	sge::systems::with_input,
-	sge::systems::with_image2d,
-	sge::systems::with_font,
-	sge::systems::with_audio_loader,
-	sge::systems::with_audio_player
->;
+using systems = sge::systems::instance<
+    sge::systems::with_window,
+    sge::systems::with_renderer<sge::systems::renderer_caps::ffp>,
+    sge::systems::with_input,
+    sge::systems::with_image2d,
+    sge::systems::with_font,
+    sge::systems::with_audio_loader,
+    sge::systems::with_audio_player>;
 
 }
 

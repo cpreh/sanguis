@@ -11,41 +11,16 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::ai::tree
 {
 
-template<
-	typename Behavior,
-	typename... Args
->
-sanguis::server::ai::tree::base_unique_ptr
-make_leaf(
-	Args &&... _args
-)
+template <typename Behavior, typename... Args>
+sanguis::server::ai::tree::base_unique_ptr make_leaf(Args &&..._args)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::server::ai::tree::base
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::ai::tree::leaf
-			>(
-				fcppt::unique_ptr_to_base<
-					sanguis::server::ai::behavior::base
-				>(
-					fcppt::make_unique_ptr<
-						Behavior
-					>(
-						std::forward<
-							Args
-						>(
-							_args
-						)...
-					)
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_base<sanguis::server::ai::tree::base>(
+      fcppt::make_unique_ptr<sanguis::server::ai::tree::leaf>(
+          fcppt::unique_ptr_to_base<sanguis::server::ai::behavior::base>(
+              fcppt::make_unique_ptr<Behavior>(std::forward<Args>(_args)...))));
 }
 
 }

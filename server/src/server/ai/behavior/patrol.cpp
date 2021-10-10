@@ -19,72 +19,37 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
 sanguis::server::ai::behavior::patrol::patrol(
-	sanguis::server::ai::context_ref const _context,
-	sanguis::random_generator_ref const _random_generator
-)
-:
-	sanguis::server::ai::behavior::base(
-		_context
-	),
-	random_generator_(
-		_random_generator
-	),
-	start_pos_{
-		sanguis::server::world::center_to_grid_pos(
-			_context->me().center()
-		)
-	}
+    sanguis::server::ai::context_ref const _context,
+    sanguis::random_generator_ref const _random_generator)
+    : sanguis::server::ai::behavior::base(_context),
+      random_generator_(_random_generator),
+      start_pos_{sanguis::server::world::center_to_grid_pos(_context->me().center())}
 {
 }
 
-sanguis::server::ai::behavior::patrol::~patrol()
-= default;
+sanguis::server::ai::behavior::patrol::~patrol() = default;
 
-bool
-sanguis::server::ai::behavior::patrol::start()
+bool sanguis::server::ai::behavior::patrol::start()
 {
-	return
-		fcppt::optional::maybe(
-			sanguis::server::random::grid_pos_around(
-				random_generator_.get(),
-				this->context().grid().size(),
-				start_pos_,
-				sanguis::server::random::grid_distance{
-					5U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-				}
-			),
-			fcppt::const_(
-				false
-			),
-			[
-				this
-			](
-				sanguis::creator::pos const &_pos
-			)
-			{
-				return
-					sanguis::server::ai::make_path(
-						this->context(),
-						_pos
-					);
-			}
-		);
+  return fcppt::optional::maybe(
+      sanguis::server::random::grid_pos_around(
+          random_generator_.get(),
+          this->context().grid().size(),
+          start_pos_,
+          sanguis::server::random::grid_distance{
+              5U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          }),
+      fcppt::const_(false),
+      [this](sanguis::creator::pos const &_pos)
+      { return sanguis::server::ai::make_path(this->context(), _pos); });
 }
 
-sanguis::server::ai::status
-sanguis::server::ai::behavior::patrol::update(
-	sanguis::duration
-)
+sanguis::server::ai::status sanguis::server::ai::behavior::patrol::update(sanguis::duration)
 {
-	return
-		sanguis::server::ai::go_to_grid_pos(
-			this->context(),
-			fcppt::literal<
-				sanguis::server::ai::speed_factor
-			>(
-				0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			)
-		);
+  return sanguis::server::ai::go_to_grid_pos(
+      this->context(),
+      fcppt::literal<sanguis::server::ai::speed_factor>(
+          0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          ));
 }

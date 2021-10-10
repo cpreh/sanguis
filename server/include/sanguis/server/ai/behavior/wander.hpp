@@ -9,42 +9,29 @@
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::ai::behavior
 {
 
-class wander
-:
-	public sanguis::server::ai::behavior::base
+class wander : public sanguis::server::ai::behavior::base
 {
-	FCPPT_NONMOVABLE(
-		wander
-	);
+  FCPPT_NONMOVABLE(wander);
+
 public:
-	wander(
-		sanguis::server::ai::context_ref,
-		sanguis::random_generator_ref,
-		sanguis::server::ai::speed_factor
-	);
+  wander(
+      sanguis::server::ai::context_ref,
+      sanguis::random_generator_ref,
+      sanguis::server::ai::speed_factor);
 
-	~wander()
-	override;
+  ~wander() override;
 
-	[[nodiscard]]
-	bool
-	start()
-	override;
+  [[nodiscard]] bool start() override;
 
-	[[nodiscard]]
-	sanguis::server::ai::status
-	update(
-		sanguis::duration
-	)
-	override;
+  [[nodiscard]] sanguis::server::ai::status update(sanguis::duration) override;
+
 private:
-	sanguis::random_generator_ref const random_generator_;
+  sanguis::random_generator_ref const random_generator_;
 
-	sanguis::server::ai::speed_factor const speed_factor_;
+  sanguis::server::ai::speed_factor const speed_factor_;
 };
 
 }

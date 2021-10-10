@@ -4,14 +4,10 @@
 #include <sanguis/weapon_attribute_value.hpp>
 #include <sge/font/string.hpp>
 
-
 namespace sanguis::client::gui::hud
 {
 
-sge::font::string
-weapon_attribute_value_to_string(
-	sanguis::weapon_attribute_value
-);
+sge::font::string weapon_attribute_value_to_string(sanguis::weapon_attribute_value);
 
 }
 

@@ -5,16 +5,8 @@
 #include <boost/units/systems/si/length.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::collision::radius
-sanguis::server::collision::to_radius(
-	sanguis::server::radius const _radius
-)
+sanguis::server::collision::to_radius(sanguis::server::radius const _radius)
 {
-	return
-		sanguis::collision::radius{
-			_radius.get()
-			*
-			boost::units::si::meter
-		};
+  return sanguis::collision::radius{_radius.get() * boost::units::si::meter};
 }

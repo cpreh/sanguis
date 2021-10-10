@@ -10,37 +10,24 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::creator
 {
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
-template<
-	typename Type
->
-struct is_tile
-:
-std::false_type
+template <typename Type>
+struct is_tile : std::false_type
 {
 };
 
-template<>
-struct is_tile<
-	sanguis::creator::tile
->
-:
-std::true_type
+template <>
+struct is_tile<sanguis::creator::tile> : std::true_type
 {
 };
 
-template<>
-struct is_tile<
-	sanguis::creator::background_tile
->
-:
-std::true_type
+template <>
+struct is_tile<sanguis::creator::background_tile> : std::true_type
 {
 };
 

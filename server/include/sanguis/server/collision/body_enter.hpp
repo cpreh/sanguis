@@ -3,14 +3,10 @@
 
 #include <sanguis/collision/world/body_enter_container.hpp>
 
-
 namespace sanguis::server::collision
 {
 
-void
-body_enter(
-	sanguis::collision::world::body_enter_container const &
-);
+void body_enter(sanguis::collision::world::body_enter_container const &);
 
 }
 

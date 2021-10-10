@@ -16,55 +16,25 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
 struct magazine_size
 {
-	template<
-		typename Parameters
-	>
-	static
-	void
-	make(
-		sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
-		sanguis::server::entities::enemies::difficulty const _difficulty,
-		fcppt::reference<
-			Parameters
-		> const _parameters
-	)
-	{
-		_parameters.get().extra_magazine_size(
-			sanguis::server::weapons::magazine_size(
-				std::min(
-					fcppt::cast::to_unsigned(
-						fcppt::cast::float_to_int<
-							std::make_signed<
-								sanguis::magazine_type
-							>::type
-						>(
-							std::sqrt(
-								std::sqrt(
-									sanguis::server::weapons::modifiers::random_increase(
-										_random_generator,
-										_difficulty
-									)
-								)
-							)
-						)
-					),
-					_parameters.get().magazine_size().value().get()
-					*
-					fcppt::literal<
-						sanguis::magazine_type
-					>(
-						2
-					)
-				)
-			)
-		);
-	}
+  template <typename Parameters>
+  static void make(
+      sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
+      sanguis::server::entities::enemies::difficulty const _difficulty,
+      fcppt::reference<Parameters> const _parameters)
+  {
+    _parameters.get().extra_magazine_size(sanguis::server::weapons::magazine_size(std::min(
+        fcppt::cast::to_unsigned(
+            fcppt::cast::float_to_int<std::make_signed<sanguis::magazine_type>::type>(
+                std::sqrt(std::sqrt(sanguis::server::weapons::modifiers::random_increase(
+                    _random_generator, _difficulty))))),
+        _parameters.get().magazine_size().value().get() *
+            fcppt::literal<sanguis::magazine_type>(2))));
+  }
 };
 
 }

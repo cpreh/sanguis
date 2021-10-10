@@ -5,15 +5,11 @@
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 
-
 namespace sanguis::server::entities::enemies::factory
 {
 
 sanguis::server::entities::with_id_unique_ptr
-make_boss(
-	sanguis::random_generator_ref,
-	sanguis::server::entities::enemies::parameters &&
-);
+make_boss(sanguis::random_generator_ref, sanguis::server::entities::enemies::parameters &&);
 
 }
 

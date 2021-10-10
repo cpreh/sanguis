@@ -8,48 +8,36 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
 class melee_parameters
 {
 public:
-	melee_parameters(
-		sanguis::server::weapons::range,
-		sanguis::server::weapons::backswing_time,
-		sanguis::server::weapons::damage,
-		sanguis::server::damage::array const &
-	);
+  melee_parameters(
+      sanguis::server::weapons::range,
+      sanguis::server::weapons::backswing_time,
+      sanguis::server::weapons::damage,
+      sanguis::server::damage::array const &);
 
-	[[nodiscard]]
-	sanguis::server::weapons::backswing_time
-	backswing_time() const;
+  [[nodiscard]] sanguis::server::weapons::backswing_time backswing_time() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::attributes::damage
-	damage() const;
+  [[nodiscard]] sanguis::server::weapons::attributes::damage damage() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::range
-	range() const;
+  [[nodiscard]] sanguis::server::weapons::range range() const;
 
-	[[nodiscard]]
-	sanguis::server::damage::array const &
-	damage_values() const;
+  [[nodiscard]] sanguis::server::damage::array const &damage_values() const;
 
-	void
-	extra_damage(
-		sanguis::server::weapons::damage
-	);
+  void extra_damage(sanguis::server::weapons::damage);
+
 private:
-	sanguis::server::weapons::range range_;
+  sanguis::server::weapons::range range_;
 
-	sanguis::server::weapons::backswing_time backswing_time_;
+  sanguis::server::weapons::backswing_time backswing_time_;
 
-	sanguis::server::weapons::attributes::damage damage_;
+  sanguis::server::weapons::attributes::damage damage_;
 
-	sanguis::server::damage::array damage_values_;
+  sanguis::server::damage::array damage_values_;
 };
 
 }

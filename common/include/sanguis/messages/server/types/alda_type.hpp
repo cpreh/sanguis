@@ -4,5 +4,4 @@
 #include <sanguis/messages/server/types/alda_type_fwd.hpp>
 #include <alda/type_enum.hpp>
 
-
 #endif

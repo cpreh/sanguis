@@ -4,31 +4,22 @@
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities::ifaces
 {
 
 class with_orientation
 {
-	FCPPT_NONMOVABLE(
-		with_orientation
-	);
+  FCPPT_NONMOVABLE(with_orientation);
+
 protected:
-	with_orientation();
+  with_orientation();
 
-	virtual
-	~with_orientation();
+  virtual ~with_orientation();
+
 public:
-	virtual
-	void
-	orientation(
-		sanguis::client::draw2d::sprite::rotation
-	) = 0;
+  virtual void orientation(sanguis::client::draw2d::sprite::rotation) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::client::draw2d::sprite::rotation
-	orientation() const = 0;
+  [[nodiscard]] virtual sanguis::client::draw2d::sprite::rotation orientation() const = 0;
 };
 
 }

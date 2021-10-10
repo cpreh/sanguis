@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/with_velocity_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-using
-with_velocity_ref
-=
-fcppt::reference<
-	sanguis::server::entities::with_velocity
->;
+using with_velocity_ref = fcppt::reference<sanguis::server::entities::with_velocity>;
 
 }
 

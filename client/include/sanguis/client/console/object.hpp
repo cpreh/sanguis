@@ -12,53 +12,35 @@
 #include <fcppt/string.hpp>
 #include <fcppt/signal/auto_connection_container.hpp>
 
-
 namespace sanguis::client::console
 {
 
 class object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 public:
-	object(
-		sge::console::gfx::object_ref,
-		sanguis::client::send_callback &&
-	);
+  object(sge::console::gfx::object_ref, sanguis::client::send_callback &&);
 
-	~object();
+  ~object();
 
-	void
-	register_server_command(
-		fcppt::string const &name,
-		fcppt::string const &description
-	);
+  void register_server_command(fcppt::string const &name, fcppt::string const &description);
 
-	void
-	draw(
-		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void draw(sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	void
-	input_event(
-		sge::input::event_base const &
-	);
+  void input_event(sge::input::event_base const &);
 
-	[[nodiscard]]
-	sge::console::object &
-	sge_console();
+  [[nodiscard]] sge::console::object &sge_console();
+
 private:
-	void
-	server_callback(
-		sge::console::arg_list const &
-	);
+  void server_callback(sge::console::arg_list const &);
 
-	sge::console::gfx::object_ref const gfx_;
+  sge::console::gfx::object_ref const gfx_;
 
-	sanguis::client::send_callback const send_;
+  sanguis::client::send_callback const send_;
 
-	fcppt::signal::auto_connection_container server_connections_;
+  fcppt::signal::auto_connection_container server_connections_;
 };
 
 }

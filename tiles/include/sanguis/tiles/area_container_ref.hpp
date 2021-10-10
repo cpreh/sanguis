@@ -4,5 +4,4 @@
 #include <sanguis/tiles/area_container_ref_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 #endif

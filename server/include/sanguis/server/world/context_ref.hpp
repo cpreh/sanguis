@@ -4,16 +4,10 @@
 #include <sanguis/server/world/context_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::world
 {
 
-using
-context_ref
-=
-fcppt::reference<
-	sanguis::server::world::context
->;
+using context_ref = fcppt::reference<sanguis::server::world::context>;
 
 }
 

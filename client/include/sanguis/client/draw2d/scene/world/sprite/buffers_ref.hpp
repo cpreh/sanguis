@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/scene/world/sprite/buffers_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world::sprite
 {
 
-using
-buffers_ref
-=
-fcppt::reference<
-	sanguis::client::draw2d::scene::world::sprite::buffers
->;
+using buffers_ref = fcppt::reference<sanguis::client::draw2d::scene::world::sprite::buffers>;
 
 }
 

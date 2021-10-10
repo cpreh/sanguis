@@ -22,171 +22,102 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::with_velocity::with_velocity(
-	sanguis::server::radius const _radius,
-	sanguis::server::optional_mass const &_mass,
-	sanguis::server::entities::movement_speed_initial const _movement_speed,
-	sanguis::server::direction const _direction
-)
-:
-	sanguis::server::entities::with_body(
-		_radius,
-		_mass
-	),
-	movement_speed_(
-		_movement_speed.get()
-	),
-	direction_(
-		_direction
-	),
-	net_speed_(
-		fcppt::make_cref(
-			this->diff_clock()
-		)
-	),
-	speed_change_(
-		movement_speed_.register_change_callback(
-			sanguis::server::entities::property::change_callback{
-				[
-					this
-				](
-					sanguis::server::entities::property::change_event const &
-				)
-				{
-					this->desired_speed_change();
-				}
-			}
-		)
-	)
+    sanguis::server::radius const _radius,
+    sanguis::server::optional_mass const &_mass,
+    sanguis::server::entities::movement_speed_initial const _movement_speed,
+    sanguis::server::direction const _direction)
+    : sanguis::server::entities::with_body(_radius, _mass),
+      movement_speed_(_movement_speed.get()),
+      direction_(_direction),
+      net_speed_(fcppt::make_cref(this->diff_clock())),
+      speed_change_(movement_speed_.register_change_callback(
+          sanguis::server::entities::property::change_callback{
+              [this](sanguis::server::entities::property::change_event const &)
+              { this->desired_speed_change(); }}))
 {
 }
 
 FCPPT_PP_POP_WARNING
 
-void
-sanguis::server::entities::with_velocity::update()
+void sanguis::server::entities::with_velocity::update()
 {
-	sanguis::server::entities::with_body::update();
+  sanguis::server::entities::with_body::update();
 
-	sanguis::server::environment::object &cur_environment(
-		FCPPT_ASSERT_OPTIONAL_ERROR(
-			this->environment()
-		).get()
-	);
+  sanguis::server::environment::object &cur_environment(
+      FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get());
 
-	if(
-		net_speed_.update()
-	)
-	{
-		cur_environment.speed_changed(
-			this->id(),
-			this->speed()
-		);
-	}
+  if (net_speed_.update())
+  {
+    cur_environment.speed_changed(this->id(), this->speed());
+  }
 }
 
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::with_velocity::on_transfer(
-	sanguis::server::entities::transfer_parameters const &_parameters
-)
+    sanguis::server::entities::transfer_parameters const &_parameters)
 {
-	net_speed_.reset();
+  net_speed_.reset();
 
-	return
-		sanguis::server::entities::with_body::on_transfer(
-			_parameters
-		);
+  return sanguis::server::entities::with_body::on_transfer(_parameters);
 }
 
-sanguis::server::entities::with_velocity::~with_velocity()
-= default;
+sanguis::server::entities::with_velocity::~with_velocity() = default;
 
 sanguis::server::entities::property::changeable &
 sanguis::server::entities::with_velocity::movement_speed()
 {
-	return
-		movement_speed_;
+  return movement_speed_;
 }
 
 sanguis::server::entities::movement_speed
 sanguis::server::entities::with_velocity::max_movement_speed() const
 {
-	return
-		sanguis::server::entities::movement_speed{
-			movement_speed_.max()
-		};
+  return sanguis::server::entities::movement_speed{movement_speed_.max()};
 }
 
-sanguis::server::direction
-sanguis::server::entities::with_velocity::direction() const
+sanguis::server::direction sanguis::server::entities::with_velocity::direction() const
 {
-	return
-		direction_;
+  return direction_;
 }
 
-void
-sanguis::server::entities::with_velocity::direction(
-	sanguis::server::direction const _direction
-)
+void sanguis::server::entities::with_velocity::direction(
+    sanguis::server::direction const _direction)
 {
-	direction_ =
-		_direction;
+  direction_ = _direction;
 
-	this->desired_speed_change();
+  this->desired_speed_change();
 }
 
-sanguis::server::speed
-sanguis::server::entities::with_velocity::speed() const
+sanguis::server::speed sanguis::server::entities::with_velocity::speed() const
 {
-	return
-		this->body_speed();
+  return this->body_speed();
 }
 
-void
-sanguis::server::entities::with_velocity::desired_speed_change()
+void sanguis::server::entities::with_velocity::desired_speed_change()
 {
-	sanguis::server::speed const cur_speed(
-		this->desired_speed()
-	);
+  sanguis::server::speed const cur_speed(this->desired_speed());
 
-	this->body_speed(
-		cur_speed
-	);
+  this->body_speed(cur_speed);
 
-	net_speed_.set(
-		cur_speed
-	);
+  net_speed_.set(cur_speed);
 }
 
-void
-sanguis::server::entities::with_velocity::speed_changed(
-	sanguis::collision::speed const &_speed
-)
+void sanguis::server::entities::with_velocity::speed_changed(
+    sanguis::collision::speed const &_speed)
 {
-	net_speed_.set(
-		sanguis::server::collision::from_speed(
-			_speed
-		)
-	);
+  net_speed_.set(sanguis::server::collision::from_speed(_speed));
 }
 
-sanguis::server::speed
-sanguis::server::entities::with_velocity::desired_speed() const
+sanguis::server::speed sanguis::server::entities::with_velocity::desired_speed() const
 {
-	return
-		sanguis::server::entities::speed_to_abs(
-			this->direction(),
-			movement_speed_.current()
-		);
+  return sanguis::server::entities::speed_to_abs(this->direction(), movement_speed_.current());
 }
 
-sanguis::server::speed
-sanguis::server::entities::with_velocity::initial_speed() const
+sanguis::server::speed sanguis::server::entities::with_velocity::initial_speed() const
 {
-	return
-		this->desired_speed();
+  return this->desired_speed();
 }

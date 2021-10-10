@@ -4,16 +4,11 @@
 #include <sanguis/client/gui/perk/line_unique_ptr.hpp>
 #include <fcppt/container/tree/object_fwd.hpp>
 
-
 namespace sanguis::client::gui::perk
 {
 
-using
-line_unique_ptr_tree
-=
-fcppt::container::tree::object<
-	sanguis::client::gui::perk::line_unique_ptr
->;
+using line_unique_ptr_tree =
+    fcppt::container::tree::object<sanguis::client::gui::perk::line_unique_ptr>;
 
 }
 

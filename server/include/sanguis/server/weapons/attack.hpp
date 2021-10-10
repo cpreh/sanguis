@@ -8,36 +8,29 @@
 #include <sanguis/server/weapons/target.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
 class attack
 {
 public:
-	attack(
-		sanguis::server::angle,
-		sanguis::server::environment::object_ref,
-		sanguis::server::weapons::target
-	);
+  attack(
+      sanguis::server::angle,
+      sanguis::server::environment::object_ref,
+      sanguis::server::weapons::target);
 
-	[[nodiscard]]
-	sanguis::server::angle
-	angle() const;
+  [[nodiscard]] sanguis::server::angle angle() const;
 
-	[[nodiscard]]
-	sanguis::server::environment::object &
-	environment() const;
+  [[nodiscard]] sanguis::server::environment::object &environment() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::target const &
-	target() const;
+  [[nodiscard]] sanguis::server::weapons::target const &target() const;
+
 private:
-	sanguis::server::angle angle_;
+  sanguis::server::angle angle_;
 
-	sanguis::server::environment::object_ref environment_;
+  sanguis::server::environment::object_ref environment_;
 
-	sanguis::server::weapons::target target_;
+  sanguis::server::weapons::target target_;
 };
 
 }

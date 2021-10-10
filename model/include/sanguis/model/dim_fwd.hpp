@@ -4,17 +4,10 @@
 #include <sanguis/model/cell_size_unit.hpp>
 #include <fcppt/math/dim/static_fwd.hpp>
 
-
 namespace sanguis::model
 {
 
-using
-dim
-=
-fcppt::math::dim::static_<
-	sanguis::model::cell_size_unit,
-	2
->;
+using dim = fcppt::math::dim::static_<sanguis::model::cell_size_unit, 2>;
 
 }
 

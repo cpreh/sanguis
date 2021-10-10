@@ -161,1218 +161,605 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::world::object::object(
-	sanguis::server::world::parameters const &_parameters,
-	sanguis::world_id const _id,
-	sanguis::creator::top_result const &_generated_world,
-	sanguis::server::world::difficulty const _difficulty,
-	sanguis::world_name &&_name
-)
-:
-	sanguis::server::environment::object(),
-	log_{
-		fcppt::make_ref(
-			_parameters.log_context()
-		),
-		sanguis::server::log_location(),
-		// TODO(philipp): Add world name?
-		fcppt::log::parameters_no_function(
-			fcppt::log::name{
-				FCPPT_TEXT("world")
-			}
-		)
-	},
-	info_(
-		_id,
-		std::move(
-			_name
-		),
-		_generated_world.seed(),
-		fcppt::copy(
-			_generated_world.name()
-		),
-		_generated_world.spawn_boss(),
-		fcppt::copy(
-			_generated_world.openings()
-		)
-	),
-	difficulty_(
-		_difficulty
-	),
-	grid_(
-		_generated_world.grid()
-	),
-	global_context_(
-		_parameters.context()
-	),
-	load_context_(
-		_parameters.load_context()
-	),
-	collision_log_{
-		// TODO(philipp): Add world name?
-		fcppt::make_ref(
-			_parameters.log_context()
-		)
-	},
-	collision_world_(
-		sanguis::collision::world::create(
-			sanguis::collision::world::parameters(
-				fcppt::make_cref(
-					grid_
-				)
-			)
-		)
-	),
-	sight_ranges_(),
-	entities_(),
-	server_entities_(),
-	portal_blockers_(),
-	portal_block_count_{
-		0U
-	},
-	pickup_spawner_(
-		fcppt::make_ref(
-			_parameters.random_generator()
-		),
-		_parameters.weapon_parameters(),
-		fcppt::make_ref(
-			this->environment()
-		)
-	)
+    sanguis::server::world::parameters const &_parameters,
+    sanguis::world_id const _id,
+    sanguis::creator::top_result const &_generated_world,
+    sanguis::server::world::difficulty const _difficulty,
+    sanguis::world_name &&_name)
+    : sanguis::server::environment::object(),
+      log_{
+          fcppt::make_ref(_parameters.log_context()),
+          sanguis::server::log_location(),
+          // TODO(philipp): Add world name?
+          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("world")})},
+      info_(
+          _id,
+          std::move(_name),
+          _generated_world.seed(),
+          fcppt::copy(_generated_world.name()),
+          _generated_world.spawn_boss(),
+          fcppt::copy(_generated_world.openings())),
+      difficulty_(_difficulty),
+      grid_(_generated_world.grid()),
+      global_context_(_parameters.context()),
+      load_context_(_parameters.load_context()),
+      collision_log_{// TODO(philipp): Add world name?
+                     fcppt::make_ref(_parameters.log_context())},
+      collision_world_(sanguis::collision::world::create(
+          sanguis::collision::world::parameters(fcppt::make_cref(grid_)))),
+      sight_ranges_(),
+      entities_(),
+      server_entities_(),
+      portal_blockers_(),
+      portal_block_count_{0U},
+      pickup_spawner_(
+          fcppt::make_ref(_parameters.random_generator()),
+          _parameters.weapon_parameters(),
+          fcppt::make_ref(this->environment()))
 {
-	this->insert_spawns(
-		_generated_world.spawns(),
-		fcppt::make_ref(
-			_parameters.random_generator()
-		),
-		_parameters.weapon_parameters()
-	);
+  this->insert_spawns(
+      _generated_world.spawns(),
+      fcppt::make_ref(_parameters.random_generator()),
+      _parameters.weapon_parameters());
 
-	this->insert_destructibles(
-		_generated_world.destructibles(),
-		_parameters.random_generator()
-	);
+  this->insert_destructibles(_generated_world.destructibles(), _parameters.random_generator());
 }
 
 FCPPT_PP_POP_WARNING
 
-sanguis::server::world::object::~object()
-= default;
+sanguis::server::world::object::~object() = default;
 
-void
-sanguis::server::world::object::update(
-	sanguis::duration const &_elapsed_time
-)
+void sanguis::server::world::object::update(sanguis::duration const &_elapsed_time)
 {
-	// Don't process worlds that have no players in them
-	if(
-		sight_ranges_.empty()
-	)
-	{
-		return;
-	}
+  // Don't process worlds that have no players in them
+  if (sight_ranges_.empty())
+  {
+    return;
+  }
 
-	sanguis::collision::world::update_result const collision_result(
-		collision_world_->update(
-			_elapsed_time
-		)
-	);
+  sanguis::collision::world::update_result const collision_result(
+      collision_world_->update(_elapsed_time));
 
-	sanguis::server::collision::body_collision(
-		collision_result.body_collision()
-	);
+  sanguis::server::collision::body_collision(collision_result.body_collision());
 
-	sanguis::server::collision::body_enter(
-		collision_result.body_enter()
-	);
+  sanguis::server::collision::body_enter(collision_result.body_enter());
 
-	sanguis::server::collision::body_exit(
-		collision_result.body_exit()
-	);
+  sanguis::server::collision::body_exit(collision_result.body_exit());
 
-	sanguis::server::world::update_entity const update_entity{
-		_elapsed_time
-	};
+  sanguis::server::world::update_entity const update_entity{_elapsed_time};
 
-	fcppt::algorithm::map_iteration_second(
-		entities_,
-		update_entity
-	);
+  fcppt::algorithm::map_iteration_second(entities_, update_entity);
 
-	fcppt::algorithm::sequence_iteration(
-		server_entities_,
-		update_entity
-	);
+  fcppt::algorithm::sequence_iteration(server_entities_, update_entity);
 
-	fcppt::algorithm::sequence_iteration(
-		portal_blockers_,
-		update_entity
-	);
+  fcppt::algorithm::sequence_iteration(portal_blockers_, update_entity);
+}
+
+sanguis::server::entities::optional_base_ref sanguis::server::world::object::insert(
+    sanguis::server::entities::simple_unique_ptr &&_entity,
+    sanguis::server::entities::insert_parameters const &_insert_parameters)
+{
+  return fcppt::optional::map(
+      this->insert_base(server_entities_, std::move(_entity), _insert_parameters),
+      [](fcppt::reference<sanguis::server::entities::simple> const _simple)
+      { return fcppt::reference_to_base<sanguis::server::entities::base>(_simple); });
+}
+
+sanguis::server::entities::optional_base_ref sanguis::server::world::object::insert(
+    sanguis::server::entities::with_id_unique_ptr &&_entity,
+    sanguis::server::entities::insert_parameters const &_insert_parameters)
+{
+  return fcppt::optional::maybe(
+      _entity->transfer(
+          fcppt::make_ref(this->environment()), _insert_parameters, fcppt::make_cref(this->grid_)),
+      [this]
+      {
+        FCPPT_LOG_WARNING(
+            log_,
+            fcppt::log::out << FCPPT_TEXT(
+                "Failed to spawn entity because its spawnpoint is obstructed"))
+
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GNU_GCC_WARNING(-Wmaybe-uninitialized)
+        return sanguis::server::entities::optional_base_ref();
+        FCPPT_PP_POP_WARNING
+      },
+      [this, &_entity](sanguis::server::entities::transfer_result const &_transfer_result)
+      {
+        sanguis::entity_id const id(_entity->id());
+
+        using return_type = std::pair<entity_map::iterator, bool>;
+
+        return_type const ret(entities_.insert(std::make_pair(id, std::move(_entity))));
+
+        FCPPT_ASSERT_ERROR(ret.second);
+
+        sanguis::server::entities::with_id &result(*ret.first->second);
+
+        result.transfer_to_world();
+
+        sanguis::server::collision::body_enter(_transfer_result.body_enter());
+
+        return sanguis::server::entities::optional_base_ref(
+            fcppt::reference_to_base<sanguis::server::entities::base>(fcppt::make_ref(result)));
+      });
 }
 
 sanguis::server::entities::optional_base_ref
-sanguis::server::world::object::insert(
-	sanguis::server::entities::simple_unique_ptr &&_entity,
-	sanguis::server::entities::insert_parameters const &_insert_parameters
-)
+sanguis::server::world::object::insert(sanguis::server::world::insert_with_id_pair &&_pair)
 {
-	return
-		fcppt::optional::map(
-			this->insert_base(
-				server_entities_,
-				std::move(
-					_entity
-				),
-				_insert_parameters
-			),
-			[](
-				fcppt::reference<
-					sanguis::server::entities::simple
-				> const _simple
-			)
-			{
-				return
-					fcppt::reference_to_base<
-						sanguis::server::entities::base
-					>(
-						_simple
-					);
-			}
-		);
+  return this->insert(std::move(_pair.entity()), _pair.insert_parameters());
+}
+
+void sanguis::server::world::object::insert(
+    sanguis::server::world::insert_with_id_pair_container &&_pairs)
+{
+  for (sanguis::server::world::insert_with_id_pair &element : _pairs)
+  {
+    this->insert(std::move(element));
+  }
 }
 
 sanguis::server::entities::optional_base_ref
-sanguis::server::world::object::insert(
-	sanguis::server::entities::with_id_unique_ptr &&_entity,
-	sanguis::server::entities::insert_parameters const &_insert_parameters
-)
+sanguis::server::world::object::insert(sanguis::server::world::insert_simple_pair &&_pair)
 {
-	return
-		fcppt::optional::maybe(
-			_entity->transfer(
-				fcppt::make_ref(
-					this->environment()
-				),
-				_insert_parameters,
-				fcppt::make_cref(
-					this->grid_
-				)
-			),
-			[
-				this
-			]
-			{
-				FCPPT_LOG_WARNING(
-					log_,
-					fcppt::log::out
-						<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
-				)
-
-FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GNU_GCC_WARNING(-Wmaybe-uninitialized)
-				return
-					sanguis::server::entities::optional_base_ref();
-FCPPT_PP_POP_WARNING
-			},
-			[
-				this,
-				&_entity
-			](
-				sanguis::server::entities::transfer_result const &_transfer_result
-			)
-			{
-				sanguis::entity_id const id(
-					_entity->id()
-				);
-
-				using
-				return_type
-				=
-				std::pair<
-					entity_map::iterator,
-					bool
-				>;
-
-				return_type const ret(
-					entities_.insert(
-						std::make_pair(
-							id,
-							std::move(
-								_entity
-							)
-						)
-					)
-				);
-
-				FCPPT_ASSERT_ERROR(
-					ret.second
-				);
-
-				sanguis::server::entities::with_id &result(
-					*ret.first->second
-				);
-
-				result.transfer_to_world();
-
-				sanguis::server::collision::body_enter(
-					_transfer_result.body_enter()
-				);
-
-				return
-					sanguis::server::entities::optional_base_ref(
-						fcppt::reference_to_base<
-							sanguis::server::entities::base
-						>(
-							fcppt::make_ref(
-								result
-							)
-						)
-					);
-			}
-		);
+  return this->insert(std::move(_pair.entity()), _pair.insert_parameters());
 }
 
-sanguis::server::entities::optional_base_ref
-sanguis::server::world::object::insert(
-	sanguis::server::world::insert_with_id_pair &&_pair
-)
+sanguis::server::environment::object &sanguis::server::world::object::environment()
 {
-	return
-		this->insert(
-			std::move(
-				_pair.entity()
-			),
-			_pair.insert_parameters()
-		);
+  return *this;
 }
 
-void
-sanguis::server::world::object::insert(
-	sanguis::server::world::insert_with_id_pair_container &&_pairs
-)
+sanguis::creator::opening_container_array const &sanguis::server::world::object::openings() const
 {
-	for(
-		sanguis::server::world::insert_with_id_pair &element
-		:
-		_pairs
-	) {
-		this->insert(
-			std::move(
-				element
-			)
-		);
-}
+  return info_.openings();
 }
 
-sanguis::server::entities::optional_base_ref
-sanguis::server::world::object::insert(
-	sanguis::server::world::insert_simple_pair &&_pair
-)
+sanguis::world_id sanguis::server::world::object::world_id() const { return info_.world_id(); }
+
+void sanguis::server::world::object::player_insertion(sanguis::server::player_id const _player_id)
 {
-	return
-		this->insert(
-			std::move(
-				_pair.entity()
-			),
-			_pair.insert_parameters()
-		);
+  this->send_player_specific(
+      _player_id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::change_world>(
+              sanguis::messages::roles::world_id{} = this->world_id(),
+              sanguis::messages::roles::seed{} = info_.seed(),
+              sanguis::messages::roles::generator_name{} =
+                  sge::charconv::fcppt_string_to_utf8(info_.generator_name().get()),
+              sanguis::messages::roles::opening_count{} =
+                  fcppt::enum_::array_init<sanguis::messages::types::opening_count_array>(
+                      [this](sanguis::creator::opening_type const _opening_type)
+                      {
+                        return fcppt::cast::size<sanguis::messages::types::size>(
+                            info_.openings()[_opening_type].size());
+                      }),
+              sanguis::messages::roles::world_name{} =
+                  sge::charconv::fcppt_string_to_utf8(info_.world_name().get()),
+              sanguis::messages::roles::spawn_boss{} = info_.spawn_boss().get())));
 }
 
-sanguis::server::environment::object &
-sanguis::server::world::object::environment()
+template <typename Entity>
+fcppt::optional::reference<Entity> sanguis::server::world::object::insert_base(
+    std::vector<fcppt::unique_ptr<Entity>> &_container,
+    fcppt::unique_ptr<Entity> &&_entity,
+    sanguis::server::entities::insert_parameters const &_insert_parameters)
 {
-	return
-		*this;
+  // These are only very simple entities that don't need special treatment
+  return fcppt::optional::map(
+      _entity->transfer(
+          fcppt::make_ref(this->environment()), _insert_parameters, fcppt::make_cref(this->grid_)),
+      [&_container, &_entity](sanguis::server::entities::transfer_result const &_transfer_result)
+      {
+        _container.push_back(std::move(_entity));
+
+        sanguis::server::collision::body_enter(_transfer_result.body_enter());
+
+        return fcppt::make_ref(*_container.back());
+      });
 }
 
-sanguis::creator::opening_container_array const &
-sanguis::server::world::object::openings() const
+void sanguis::server::world::object::add_aura(
+    sanguis::entity_id const _id, sanguis::aura_type const _aura_type)
 {
-	return
-		info_.openings();
+  this->send_entity_specific(
+      _id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::add_aura>(
+              sanguis::messages::roles::entity_id{} = _id,
+              sanguis::messages::roles::aura_type{} = _aura_type)));
 }
 
-sanguis::world_id
-sanguis::server::world::object::world_id() const
+void sanguis::server::world::object::add_buff(
+    sanguis::entity_id const _id, sanguis::buff_type const _buff_type)
 {
-	return
-		info_.world_id();
+  this->send_entity_specific(
+      _id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::add_buff>(
+              sanguis::messages::roles::entity_id{} = _id,
+              sanguis::messages::roles::buff_type{} = _buff_type)));
 }
 
-void
-sanguis::server::world::object::player_insertion(
-	sanguis::server::player_id const _player_id
-)
+void sanguis::server::world::object::remove_buff(
+    sanguis::entity_id const _id, sanguis::buff_type const _buff_type)
 {
-	this->send_player_specific(
-		_player_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::change_world
-			>(
-				sanguis::messages::roles::world_id{} =
-					this->world_id(),
-				sanguis::messages::roles::seed{} =
-					info_.seed(),
-				sanguis::messages::roles::generator_name{} =
-					sge::charconv::fcppt_string_to_utf8(
-						info_.generator_name().get()
-					),
-				sanguis::messages::roles::opening_count{} =
-					fcppt::enum_::array_init<
-						sanguis::messages::types::opening_count_array
-					>(
-						[
-							this
-						](
-							sanguis::creator::opening_type const _opening_type
-						)
-						{
-							return
-								fcppt::cast::size<
-									sanguis::messages::types::size
-								>(
-									info_.openings()[
-										_opening_type
-									].size()
-								);
-						}
-					),
-				sanguis::messages::roles::world_name{} =
-					sge::charconv::fcppt_string_to_utf8(
-						info_.world_name().get()
-					),
-				sanguis::messages::roles::spawn_boss{} =
-					info_.spawn_boss().get()
-			)
-		)
-	);
+  this->send_entity_specific(
+      _id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::remove_buff>(
+              sanguis::messages::roles::entity_id{} = _id,
+              sanguis::messages::roles::buff_type{} = _buff_type)));
 }
 
-template<
-	typename Entity
->
-fcppt::optional::reference<
-	Entity
->
-sanguis::server::world::object::insert_base(
-	std::vector<
-		fcppt::unique_ptr<
-			Entity
-		>
-	> &_container,
-	fcppt::unique_ptr<
-		Entity
-	> &&_entity,
-	sanguis::server::entities::insert_parameters const &_insert_parameters
-)
+void sanguis::server::world::object::weapon_changed(
+    sanguis::entity_id const _id, sanguis::optional_primary_weapon_type const _weapon_type)
 {
-	// These are only very simple entities that don't need special treatment
-	return
-		fcppt::optional::map(
-			_entity->transfer(
-				fcppt::make_ref(
-					this->environment()
-				),
-				_insert_parameters,
-				fcppt::make_cref(
-					this->grid_
-				)
-			),
-			[
-				&_container,
-				&_entity
-			](
-				sanguis::server::entities::transfer_result const &_transfer_result
-			)
-			{
-				_container.push_back(
-					std::move(
-						_entity
-					)
-				);
-
-				sanguis::server::collision::body_enter(
-					_transfer_result.body_enter()
-				);
-
-				return
-					fcppt::make_ref(
-						*_container.back()
-					);
-			}
-		);
+  this->send_entity_specific(
+      _id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::change_weapon>(
+              sanguis::messages::roles::entity_id{} = _id,
+              sanguis::messages::roles::primary_weapon{} = _weapon_type)));
 }
 
-void
-sanguis::server::world::object::add_aura(
-	sanguis::entity_id const _id,
-	sanguis::aura_type const _aura_type
-)
+void sanguis::server::world::object::got_weapon(
+    sanguis::server::player_id const _player_id, sanguis::weapon_description const &_description)
 {
-	this->send_entity_specific(
-		_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::add_aura
-			>(
-				sanguis::messages::roles::entity_id{} =
-					_id,
-				sanguis::messages::roles::aura_type{} =
-					_aura_type
-			)
-		)
-	);
+  this->send_player_specific(
+      _player_id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::give_weapon>(
+              sanguis::messages::roles::weapon_type{} = _description.weapon_type(),
+              sanguis::messages::roles::magazine_base_size{} =
+                  sanguis::messages::convert::to_magazine_size(_description.magazine_size().get()),
+              sanguis::messages::roles::magazine_extra_size{} =
+                  sanguis::messages::convert::to_magazine_size(_description.magazine_extra().get()),
+              sanguis::messages::roles::magazine_remaining{} =
+                  sanguis::messages::convert::to_magazine_size(
+                      _description.magazine_remaining().get()),
+              sanguis::messages::roles::reload_time{} = _description.reload_time().get(),
+              sanguis::messages::roles::weapon_attribute_container{} =
+                  sanguis::messages::convert::to_weapon_attribute_vector(
+                      _description.attributes()))));
 }
 
-void
-sanguis::server::world::object::add_buff(
-	sanguis::entity_id const _id,
-	sanguis::buff_type const _buff_type
-)
+void sanguis::server::world::object::remove_weapon(
+    sanguis::server::player_id const _player_id, sanguis::is_primary_weapon const _is_primary)
 {
-	this->send_entity_specific(
-		_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::add_buff
-			>(
-				sanguis::messages::roles::entity_id{} =
-					_id,
-				sanguis::messages::roles::buff_type{} =
-					_buff_type
-			)
-		)
-	);
+  this->send_player_specific(
+      _player_id,
+      sanguis::messages::server::create(sanguis::messages::server::remove_weapon{_is_primary}));
 }
 
-void
-sanguis::server::world::object::remove_buff(
-	sanguis::entity_id const _id,
-	sanguis::buff_type const _buff_type
-)
+void sanguis::server::world::object::magazine_remaining(
+    sanguis::server::player_id const _player_id,
+    sanguis::is_primary_weapon const _is_primary,
+    sanguis::magazine_remaining const _magazine_remaining)
 {
-	this->send_entity_specific(
-		_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::remove_buff
-			>(
-				sanguis::messages::roles::entity_id{} =
-					_id,
-				sanguis::messages::roles::buff_type{} =
-					_buff_type
-			)
-		)
-	);
+  this->send_player_specific(
+      _player_id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::magazine_remaining>(
+              sanguis::messages::roles::is_primary_weapon{} = _is_primary,
+              sanguis::messages::roles::magazine_remaining{} =
+                  sanguis::messages::convert::to_magazine_size(_magazine_remaining.get()))));
 }
 
-void
-sanguis::server::world::object::weapon_changed(
-	sanguis::entity_id const _id,
-	sanguis::optional_primary_weapon_type const _weapon_type
-)
+void sanguis::server::world::object::reload_time(
+    sanguis::server::player_id const _player_id,
+    sanguis::is_primary_weapon const _is_primary,
+    sanguis::duration const _reload_time)
 {
-	this->send_entity_specific(
-		_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::change_weapon
-			>(
-				sanguis::messages::roles::entity_id{} =
-					_id,
-				sanguis::messages::roles::primary_weapon{} =
-					_weapon_type
-			)
-		)
-	);
+  this->send_player_specific(
+      _player_id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::reload>(
+              sanguis::messages::roles::is_primary_weapon{} = _is_primary,
+              sanguis::messages::roles::reload_time{} = _reload_time)));
 }
 
-void
-sanguis::server::world::object::got_weapon(
-	sanguis::server::player_id const _player_id,
-	sanguis::weapon_description const &_description
-)
+void sanguis::server::world::object::angle_changed(
+    sanguis::entity_id const _entity_id, sanguis::server::angle const _angle)
 {
-	this->send_player_specific(
-		_player_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::give_weapon
-			>(
-				sanguis::messages::roles::weapon_type{} =
-					_description.weapon_type(),
-				sanguis::messages::roles::magazine_base_size{} =
-					sanguis::messages::convert::to_magazine_size(
-						_description.magazine_size().get()
-					),
-				sanguis::messages::roles::magazine_extra_size{} =
-					sanguis::messages::convert::to_magazine_size(
-						_description.magazine_extra().get()
-					),
-				sanguis::messages::roles::magazine_remaining{} =
-					sanguis::messages::convert::to_magazine_size(
-						_description.magazine_remaining().get()
-					),
-				sanguis::messages::roles::reload_time{} =
-					_description.reload_time().get(),
-				sanguis::messages::roles::weapon_attribute_container{} =
-					sanguis::messages::convert::to_weapon_attribute_vector(
-						_description.attributes()
-					)
-			)
-		)
-	);
+  this->send_entity_specific(
+      _entity_id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::rotate>(
+              sanguis::messages::roles::entity_id{} = _entity_id,
+              sanguis::messages::roles::angle{} = _angle.get())));
 }
 
-void
-sanguis::server::world::object::remove_weapon(
-	sanguis::server::player_id const _player_id,
-	sanguis::is_primary_weapon const _is_primary
-)
+void sanguis::server::world::object::center_changed(
+    sanguis::entity_id const _entity_id, sanguis::server::center const _center)
 {
-	this->send_player_specific(
-		_player_id,
-		sanguis::messages::server::create(
-			sanguis::messages::server::remove_weapon{
-				_is_primary
-			}
-		)
-	);
+  this->send_entity_specific(
+      _entity_id,
+      sanguis::messages::server::create(alda::message::init_record<sanguis::messages::server::move>(
+          sanguis::messages::roles::entity_id{} = _entity_id,
+          sanguis::messages::roles::center{} = _center.get())));
 }
 
-void
-sanguis::server::world::object::magazine_remaining(
-	sanguis::server::player_id const _player_id,
-	sanguis::is_primary_weapon const _is_primary,
-	sanguis::magazine_remaining const _magazine_remaining
-)
+void sanguis::server::world::object::speed_changed(
+    sanguis::entity_id const _entity_id, sanguis::server::speed const _speed)
 {
-	this->send_player_specific(
-		_player_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::magazine_remaining
-			>(
-				sanguis::messages::roles::is_primary_weapon{} =
-					_is_primary,
-				sanguis::messages::roles::magazine_remaining{} =
-					sanguis::messages::convert::to_magazine_size(
-						_magazine_remaining.get()
-					)
-			)
-		)
-	);
+  this->send_entity_specific(
+      _entity_id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::speed>(
+              sanguis::messages::roles::entity_id{} = _entity_id,
+              sanguis::messages::roles::speed{} = _speed.get())));
 }
 
-void
-sanguis::server::world::object::reload_time(
-	sanguis::server::player_id const _player_id,
-	sanguis::is_primary_weapon const _is_primary,
-	sanguis::duration const _reload_time
-)
+void sanguis::server::world::object::weapon_status_changed(
+    sanguis::entity_id const _id, sanguis::weapon_status const _weapon_status)
 {
-	this->send_player_specific(
-		_player_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::reload
-			>(
-				sanguis::messages::roles::is_primary_weapon{} =
-					_is_primary,
-				sanguis::messages::roles::reload_time{} =
-					_reload_time
-			)
-		)
-	);
+  this->send_entity_specific(
+      _id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::weapon_status>(
+              sanguis::messages::roles::entity_id{} = _id,
+              sanguis::messages::roles::weapon_status{} = _weapon_status)));
 }
 
-void
-sanguis::server::world::object::angle_changed(
-	sanguis::entity_id const _entity_id,
-	sanguis::server::angle const _angle
-)
+void sanguis::server::world::object::health_changed(
+    sanguis::entity_id const _id, sanguis::server::health const _health)
 {
-	this->send_entity_specific(
-		_entity_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::rotate
-			>(
-				sanguis::messages::roles::entity_id{} =
-					_entity_id,
-				sanguis::messages::roles::angle{} =
-					_angle.get()
-			)
-		)
-	);
+  this->send_entity_specific(
+      _id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::health>(
+              sanguis::messages::roles::entity_id{} = _id,
+              sanguis::messages::roles::health{} = _health.get())));
 }
 
-void
-sanguis::server::world::object::center_changed(
-	sanguis::entity_id const _entity_id,
-	sanguis::server::center const _center
-)
+void sanguis::server::world::object::max_health_changed(
+    sanguis::entity_id const _id, sanguis::server::health const _health)
 {
-	this->send_entity_specific(
-		_entity_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::move
-			>(
-				sanguis::messages::roles::entity_id{} =
-					_entity_id,
-				sanguis::messages::roles::center{} =
-					_center.get()
-			)
-		)
-	);
+  this->send_entity_specific(
+      _id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::max_health>(
+              sanguis::messages::roles::entity_id{} = _id,
+              sanguis::messages::roles::max_health{} = _health.get())));
 }
 
-void
-sanguis::server::world::object::speed_changed(
-	sanguis::entity_id const _entity_id,
-	sanguis::server::speed const _speed
-)
+void sanguis::server::world::object::exp_changed(
+    sanguis::server::player_id const _player_id, sanguis::server::exp const _exp)
 {
-	this->send_entity_specific(
-		_entity_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::speed
-			>(
-				sanguis::messages::roles::entity_id{} =
-					_entity_id,
-				sanguis::messages::roles::speed{} =
-					_speed.get()
-			)
-		)
-	);
+  this->send_player_specific(
+      _player_id,
+      sanguis::messages::server::create(
+          sanguis::messages::server::experience{sanguis::server::exp_to_net(_exp)}));
 }
 
-void
-sanguis::server::world::object::weapon_status_changed(
-	sanguis::entity_id const _id,
-	sanguis::weapon_status const _weapon_status
-)
+void sanguis::server::world::object::level_changed(
+    sanguis::server::player_id const _player_id, sanguis::server::level const _level)
 {
-	this->send_entity_specific(
-		_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::weapon_status
-			>(
-				sanguis::messages::roles::entity_id{} =
-					_id,
-				sanguis::messages::roles::weapon_status{} =
-					_weapon_status
-			)
-		)
-	);
+  this->send_player_specific(
+      _player_id,
+      sanguis::messages::server::create(
+          alda::message::init_record<sanguis::messages::server::level_up>(
+              sanguis::messages::roles::level{} = _level.get(),
+              sanguis::messages::roles::exp_for_next_level{} = sanguis::server::exp_to_net(
+                  sanguis::server::exp_for_level(_level + sanguis::server::level(1U))))));
 }
 
-void
-sanguis::server::world::object::health_changed(
-	sanguis::entity_id const _id,
-	sanguis::server::health const _health
-)
+void sanguis::server::world::object::pickup_chance(
+    sanguis::server::pickup_probability const _spawn_chance,
+    sanguis::server::entities::enemies::difficulty const _difficulty,
+    sanguis::server::center const _center)
 {
-	this->send_entity_specific(
-		_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::health
-			>(
-				sanguis::messages::roles::entity_id{} =
-					_id,
-				sanguis::messages::roles::health{} =
-					_health.get()
-			)
-		)
-	);
+  pickup_spawner_.spawn(_spawn_chance, _center, _difficulty);
 }
 
-void
-sanguis::server::world::object::max_health_changed(
-	sanguis::entity_id const _id,
-	sanguis::server::health const _health
-)
+void sanguis::server::world::object::request_transfer(sanguis::entity_id const _entity_id)
 {
-	this->send_entity_specific(
-		_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::max_health
-			>(
-				sanguis::messages::roles::entity_id{} =
-					_id,
-				sanguis::messages::roles::max_health{} =
-					_health.get()
-			)
-		)
-	);
+  entity_map::iterator const it(
+      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::find_opt_iterator(entities_, _entity_id)));
+
+  sanguis::server::entities::base &cur_entity(*it->second);
+
+  for (auto const opening_type : fcppt::enum_::make_range<sanguis::creator::opening_type>())
+  {
+    if (opening_type == sanguis::creator::opening_type::exit && portal_block_count_ > 0U)
+    {
+      continue;
+    }
+
+    for (sanguis::creator::opening const &opening : info_.openings()[opening_type])
+    {
+      sanguis::server::global::source_world_pair const source_pair{
+          sanguis::server::source_world_id(this->world_id()), opening};
+
+      if (sanguis::server::world::center_in_grid_pos(cur_entity.center(), opening.get()) &&
+          global_context_.request_transfer(source_pair)
+
+      )
+      {
+        sanguis::server::collision::body_exit(cur_entity.remove_from_world().body_exit());
+
+        sanguis::server::entities::with_id_unique_ptr entity_ptr(
+            fcppt::unique_ptr_to_base<sanguis::server::entities::with_id>(std::move(it->second)));
+
+        entities_.erase(it);
+
+        global_context_.transfer_entity(source_pair, std::move(entity_ptr));
+
+        return;
+      }
+    }
+  }
 }
 
-void
-sanguis::server::world::object::exp_changed(
-	sanguis::server::player_id const _player_id,
-	sanguis::server::exp const _exp
-)
+void sanguis::server::world::object::add_portal_blocker()
 {
-	this->send_player_specific(
-		_player_id,
-		sanguis::messages::server::create(
-			sanguis::messages::server::experience{
-				sanguis::server::exp_to_net(
-					_exp
-				)
-			}
-		)
-	);
+  if (portal_block_count_ == 0U)
+  {
+    for (auto const &portal : info_.openings()[sanguis::creator::opening_type::exit])
+    {
+      this->insert_base(
+          portal_blockers_,
+          sanguis::server::world::make_portal_blocker(this->load_context()),
+          sanguis::server::entities::insert_parameters_center(
+              sanguis::server::world::grid_pos_to_center(portal.get())));
+    }
+  }
+
+  ++portal_block_count_;
 }
 
-void
-sanguis::server::world::object::level_changed(
-	sanguis::server::player_id const _player_id,
-	sanguis::server::level const _level
-)
+void sanguis::server::world::object::remove_portal_blocker()
 {
-	this->send_player_specific(
-		_player_id,
-		sanguis::messages::server::create(
-			alda::message::init_record<
-				sanguis::messages::server::level_up
-			>(
-				sanguis::messages::roles::level{} =
-					_level.get(),
-				sanguis::messages::roles::exp_for_next_level{} =
-					sanguis::server::exp_to_net(
-						sanguis::server::exp_for_level(
-							_level
-							+
-							sanguis::server::level(
-								1U
-							)
-						)
-					)
-			)
-		)
-	);
+  FCPPT_ASSERT_ERROR(portal_block_count_ > 0U);
+
+  --portal_block_count_;
+
+  if (portal_block_count_ == 0U)
+  {
+    for (auto const &portal_blocker : portal_blockers_)
+    {
+      portal_blocker->kill();
+    }
+  }
 }
 
-void
-sanguis::server::world::object::pickup_chance(
-	sanguis::server::pickup_probability const _spawn_chance,
-	sanguis::server::entities::enemies::difficulty const _difficulty,
-	sanguis::server::center const _center
-)
+sanguis::server::world::difficulty sanguis::server::world::object::difficulty() const
 {
-	pickup_spawner_.spawn(
-		_spawn_chance,
-		_center,
-		_difficulty
-	);
+  return difficulty_;
 }
 
-void
-sanguis::server::world::object::request_transfer(
-	sanguis::entity_id const _entity_id
-)
+sanguis::collision::log const &sanguis::server::world::object::collision_log() const
 {
-	entity_map::iterator const it(
-		FCPPT_ASSERT_OPTIONAL_ERROR(
-			fcppt::container::find_opt_iterator(
-				entities_,
-				_entity_id
-			)
-		)
-	);
-
-	sanguis::server::entities::base &cur_entity(
-		*it->second
-	);
-
-	for(
-		auto const opening_type
-		:
-		fcppt::enum_::make_range<
-			sanguis::creator::opening_type
-		>()
-	)
-	{
-		if(
-			opening_type
-			==
-			sanguis::creator::opening_type::exit
-			&&
-			portal_block_count_
-			>
-			0U
-		)
-		{
-			continue;
-		}
-
-		for(
-			sanguis::creator::opening const &opening
-			:
-			info_.openings()[
-				opening_type
-			]
-		)
-		{
-			sanguis::server::global::source_world_pair const source_pair{
-				sanguis::server::source_world_id(
-					this->world_id()
-				),
-				opening
-			};
-
-			if(
-				sanguis::server::world::center_in_grid_pos(
-					cur_entity.center(),
-					opening.get()
-				)
-				&&
-				global_context_.request_transfer(
-					source_pair
-				)
-
-			)
-			{
-				sanguis::server::collision::body_exit(
-					cur_entity.remove_from_world().body_exit()
-				);
-
-				sanguis::server::entities::with_id_unique_ptr entity_ptr(
-					fcppt::unique_ptr_to_base<
-						sanguis::server::entities::with_id
-					>(
-						std::move(
-							it->second
-						)
-					)
-				);
-
-				entities_.erase(
-					it
-				);
-
-				global_context_.transfer_entity(
-					source_pair,
-					std::move(
-						entity_ptr
-					)
-				);
-
-				return;
-			}
-		}
-	}
+  return collision_log_;
 }
 
-void
-sanguis::server::world::object::add_portal_blocker()
+sanguis::collision::world::object &sanguis::server::world::object::collision_world() const
 {
-	if(
-		portal_block_count_
-		==
-		0U
-	)
-	{
-		for(
-			auto const &portal
-			:
-			info_.openings()[
-				sanguis::creator::opening_type::exit
-			]
-		)
-		{
-			this->insert_base(
-				portal_blockers_,
-				sanguis::server::world::make_portal_blocker(
-					this->load_context()
-				),
-				sanguis::server::entities::insert_parameters_center(
-					sanguis::server::world::grid_pos_to_center(
-						portal.get()
-					)
-				)
-			);
-		}
-	}
-
-	++portal_block_count_;
+  return *collision_world_;
 }
 
-void
-sanguis::server::world::object::remove_portal_blocker()
+sanguis::creator::grid const &sanguis::server::world::object::grid() const { return grid_; }
+
+sanguis::server::environment::load_context &sanguis::server::world::object::load_context() const
 {
-	FCPPT_ASSERT_ERROR(
-		portal_block_count_
-		>
-		0U
-	);
-
-	--portal_block_count_;
-
-	if(
-		portal_block_count_
-		==
-		0U
-	)
-	{
-		for(
-			auto const &portal_blocker
-			:
-			portal_blockers_
-		)
-		{
-			portal_blocker->kill();
-		}
-	}
+  return load_context_;
 }
 
-sanguis::server::world::difficulty
-sanguis::server::world::object::difficulty() const
+void sanguis::server::world::object::add_sight_range(
+    sanguis::server::player_id const _player_id,
+    sanguis::server::entities::with_id const &_target,
+    sanguis::collision::world::created const _created)
 {
-	return
-		difficulty_;
+  sight_ranges_[_player_id].add(_target.id());
+
+  this->send_player_specific(_player_id, *_target.add_message(_player_id, _created));
 }
 
-sanguis::collision::log const &
-sanguis::server::world::object::collision_log() const
+void sanguis::server::world::object::remove_sight_range(
+    sanguis::server::player_id const _player_id, sanguis::server::entities::with_id const &_target)
 {
-	return
-		collision_log_;
+  {
+    sanguis::server::world::sight_range_map::iterator const sight_it(FCPPT_ASSERT_OPTIONAL_ERROR(
+        fcppt::container::find_opt_iterator(sight_ranges_, _player_id)));
+
+    sight_it->second.remove(_target.id());
+
+    // If the player sees nothing here, he must have been deleted
+    // or moved, because the player always sees himself.
+    if (sight_it->second.empty())
+    {
+      sight_ranges_.erase(sight_it);
+    }
+  }
+
+  if (_target.dead())
+  {
+    this->send_player_specific(
+        _player_id,
+        sanguis::messages::server::create(
+            alda::message::init_record<sanguis::messages::server::die>(
+                sanguis::messages::roles::entity_id{} = _target.id())));
+  }
+  else
+  {
+    this->send_player_specific(
+        _player_id,
+        sanguis::messages::server::create(
+            alda::message::init_record<sanguis::messages::server::remove>(
+                sanguis::messages::roles::entity_id{} = _target.id())));
+  }
 }
 
-sanguis::collision::world::object &
-sanguis::server::world::object::collision_world() const
+void sanguis::server::world::object::remove_player(sanguis::server::player_id const _player_id)
 {
-	return
-		*collision_world_;
+  global_context_.remove_player(_player_id);
 }
 
-sanguis::creator::grid const &
-sanguis::server::world::object::grid() const
+void sanguis::server::world::object::send_entity_specific(
+    sanguis::entity_id const _id, sanguis::messages::server::base const &_msg)
 {
-	return
-		grid_;
+  for (sanguis::server::world::sight_range_map::value_type const &sight_range : sight_ranges_)
+  {
+    if (sight_range.second.contains(_id))
+    {
+      global_context_.send_to_player(sight_range.first, _msg);
+    }
+  }
 }
 
-sanguis::server::environment::load_context &
-sanguis::server::world::object::load_context() const
+void sanguis::server::world::object::send_player_specific(
+    sanguis::server::player_id const _player_id, sanguis::messages::server::base const &_msg)
 {
-	return
-		load_context_;
+  global_context_.send_to_player(_player_id, _msg);
 }
 
-void
-sanguis::server::world::object::add_sight_range(
-	sanguis::server::player_id const _player_id,
-	sanguis::server::entities::with_id const &_target,
-	sanguis::collision::world::created const _created
-)
+void sanguis::server::world::object::insert_spawns(
+    sanguis::creator::spawn_container const &_spawns,
+    sanguis::random_generator_ref const _random_generator,
+    sanguis::server::weapons::common_parameters const &_weapon_parameters)
 {
-	sight_ranges_[
-		_player_id
-	].add(
-		_target.id()
-	);
+  for (sanguis::creator::spawn const &spawn : _spawns)
+  {
+    switch (spawn.spawn_type())
+    {
+    case sanguis::creator::spawn_type::single:
+      this->insert(sanguis::server::world::generate_single_spawns(
+          spawn.enemy_type(),
+          spawn.enemy_kind(),
+          spawn.pos(),
+          _weapon_parameters,
+          _random_generator,
+          this->load_context(),
+          difficulty_));
+      continue;
+    case sanguis::creator::spawn_type::spawner:
+      this->insert(sanguis::server::world::make_spawner(
+          spawn.enemy_type(),
+          spawn.enemy_kind(),
+          spawn.pos(),
+          _weapon_parameters,
+          _random_generator,
+          difficulty_));
+      continue;
+    }
 
-	this->send_player_specific(
-		_player_id,
-		*_target.add_message(
-			_player_id,
-			_created
-		)
-	);
+    FCPPT_ASSERT_UNREACHABLE;
+  }
 }
 
-void
-sanguis::server::world::object::remove_sight_range(
-	sanguis::server::player_id const _player_id,
-	sanguis::server::entities::with_id const &_target
-)
+void sanguis::server::world::object::insert_destructibles(
+    sanguis::creator::destructible_container const &_destructibles,
+    sanguis::random_generator &_random_generator)
 {
-	{
-		sanguis::server::world::sight_range_map::iterator const sight_it(
-			FCPPT_ASSERT_OPTIONAL_ERROR(
-				fcppt::container::find_opt_iterator(
-					sight_ranges_,
-					_player_id
-				)
-			)
-		);
-
-		sight_it->second.remove(
-			_target.id()
-		);
-
-		// If the player sees nothing here, he must have been deleted
-		// or moved, because the player always sees himself.
-		if(
-			sight_it->second.empty()
-		)
-		{
-			sight_ranges_.erase(
-				sight_it
-			);
-		}
-	}
-
-	if(
-		_target.dead()
-	)
-	{
-		this->send_player_specific(
-			_player_id,
-			sanguis::messages::server::create(
-				alda::message::init_record<
-					sanguis::messages::server::die
-				>(
-					sanguis::messages::roles::entity_id{} =
-						_target.id()
-				)
-			)
-		);
-	}
-	else
-	{
-		this->send_player_specific(
-			_player_id,
-			sanguis::messages::server::create(
-				alda::message::init_record<
-					sanguis::messages::server::remove
-				>(
-					sanguis::messages::roles::entity_id{} =
-						_target.id()
-				)
-			)
-		);
-	}
-}
-
-void
-sanguis::server::world::object::remove_player(
-	sanguis::server::player_id const _player_id
-)
-{
-	global_context_.remove_player(
-		_player_id
-	);
-}
-
-void
-sanguis::server::world::object::send_entity_specific(
-	sanguis::entity_id const _id,
-	sanguis::messages::server::base const &_msg
-)
-{
-	for(
-		sanguis::server::world::sight_range_map::value_type const &sight_range
-		:
-		sight_ranges_
-	)
-	{
-		if(
-			sight_range.second.contains(
-				_id
-			)
-		)
-		{
-			global_context_.send_to_player(
-				sight_range.first,
-				_msg
-			);
-		}
-	}
-}
-
-void
-sanguis::server::world::object::send_player_specific(
-	sanguis::server::player_id const _player_id,
-	sanguis::messages::server::base const &_msg
-)
-{
-	global_context_.send_to_player(
-		_player_id,
-		_msg
-	);
-}
-
-void
-sanguis::server::world::object::insert_spawns(
-	sanguis::creator::spawn_container const &_spawns,
-	sanguis::random_generator_ref const _random_generator,
-	sanguis::server::weapons::common_parameters const &_weapon_parameters
-)
-{
-	for(
-		sanguis::creator::spawn const &spawn
-		:
-		_spawns
-	)
-	{
-		switch(
-			spawn.spawn_type()
-		)
-		{
-		case sanguis::creator::spawn_type::single:
-			this->insert(
-				sanguis::server::world::generate_single_spawns(
-					spawn.enemy_type(),
-					spawn.enemy_kind(),
-					spawn.pos(),
-					_weapon_parameters,
-					_random_generator,
-					this->load_context(),
-					difficulty_
-				)
-			);
-			continue;
-		case sanguis::creator::spawn_type::spawner:
-			this->insert(
-				sanguis::server::world::make_spawner(
-					spawn.enemy_type(),
-					spawn.enemy_kind(),
-					spawn.pos(),
-					_weapon_parameters,
-					_random_generator,
-					difficulty_
-				)
-			);
-			continue;
-		}
-
-		FCPPT_ASSERT_UNREACHABLE;
-	}
-}
-
-void
-sanguis::server::world::object::insert_destructibles(
-	sanguis::creator::destructible_container const &_destructibles,
-	sanguis::random_generator &_random_generator
-)
-{
-	for(
-		sanguis::creator::destructible const &destructible
-		:
-		_destructibles
-	)
-	{
-		this->insert(
-			sanguis::server::world::generate_destructibles(
-				_random_generator,
-				destructible,
-				this->load_context(),
-				difficulty_
-			)
-		);
-	}
+  for (sanguis::creator::destructible const &destructible : _destructibles)
+  {
+    this->insert(sanguis::server::world::generate_destructibles(
+        _random_generator, destructible, this->load_context(), difficulty_));
+  }
 }

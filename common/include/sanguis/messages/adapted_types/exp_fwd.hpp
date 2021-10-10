@@ -4,16 +4,10 @@
 #include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <sanguis/messages/types/exp.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-exp
-=
-sanguis::messages::adapted_types::unsigned_<
-	sanguis::messages::types::exp
->;
+using exp = sanguis::messages::adapted_types::unsigned_<sanguis::messages::types::exp>;
 
 }
 

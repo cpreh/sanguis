@@ -14,52 +14,37 @@
 #include <sanguis/server/entities/with_body_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::auras
 {
 
-class buff
-:
-	public sanguis::server::auras::aura
+class buff : public sanguis::server::auras::aura
 {
-	FCPPT_NONMOVABLE(
-		buff
-	);
+  FCPPT_NONMOVABLE(buff);
+
 public:
-	buff(
-		sanguis::server::radius,
-		sanguis::server::team,
-		sanguis::aura_type,
-		sanguis::server::auras::influence,
-		sanguis::server::buffs::create_callback &&
-	);
+  buff(
+      sanguis::server::radius,
+      sanguis::server::team,
+      sanguis::aura_type,
+      sanguis::server::auras::influence,
+      sanguis::server::buffs::create_callback &&);
 
-	~buff()
-	override;
+  ~buff() override;
+
 private:
-	[[nodiscard]]
-	sanguis::optional_aura_type
-	type() const
-	override;
+  [[nodiscard]] sanguis::optional_aura_type type() const override;
 
-	void
-	enter(
-		sanguis::server::entities::with_body_ref,
-		sanguis::collision::world::created
-	)
-	override;
+  void enter(sanguis::server::entities::with_body_ref, sanguis::collision::world::created) override;
 
-	void
-	leave(
-		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void leave(sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
+             ) // NOLINT(google-runtime-references)
+      override;
 
-	sanguis::aura_type const aura_type_;
+  sanguis::aura_type const aura_type_;
 
-	sanguis::server::buffs::create_callback const create_callback_;
+  sanguis::server::buffs::create_callback const create_callback_;
 
-	sanguis::server::buffs::provider provider_;
+  sanguis::server::buffs::provider provider_;
 };
 
 }

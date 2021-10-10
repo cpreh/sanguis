@@ -6,10 +6,6 @@
 #include <sanguis/server/net/center_policy.hpp>
 #include <sanguis/server/net/declare_value.hpp>
 
-
-SANGUIS_SERVER_NET_DECLARE_VALUE(
-	sanguis::server::center,
-	sanguis::server::net::center_policy
-);
+SANGUIS_SERVER_NET_DECLARE_VALUE(sanguis::server::center, sanguis::server::net::center_policy);
 
 #endif

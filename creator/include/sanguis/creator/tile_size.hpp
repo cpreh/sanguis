@@ -6,17 +6,13 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-tile_size
-=
-std::integral_constant<
-	sanguis::creator::size_type,
-	96 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
->;
+using tile_size = std::integral_constant<
+    sanguis::creator::size_type,
+    96 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+    >;
 
 }
 

@@ -5,25 +5,9 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::model::optional_animation_delay
-sanguis::tools::animations::int_to_delay(
-	int const _value
-)
+sanguis::model::optional_animation_delay sanguis::tools::animations::int_to_delay(int const _value)
 {
-	return
-		_value
-		!=
-		0
-		?
-			sanguis::model::optional_animation_delay(
-				sanguis::model::animation_delay(
-					std::chrono::milliseconds(
-						_value
-					)
-				)
-			)
-		:
-			sanguis::model::optional_animation_delay()
-		;
+  return _value != 0 ? sanguis::model::optional_animation_delay(
+                           sanguis::model::animation_delay(std::chrono::milliseconds(_value)))
+                     : sanguis::model::optional_animation_delay();
 }

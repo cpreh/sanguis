@@ -15,98 +15,67 @@
 #include <sanguis/server/weapons/attributes/magazine_size.hpp>
 #include <sanguis/server/weapons/attributes/spread_radius.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
 class shotgun_parameters
 {
 public:
-	shotgun_parameters(
-		sanguis::server::weapons::accuracy,
-		sanguis::server::weapons::backswing_time,
-		sanguis::server::weapons::cast_point,
-		sanguis::server::weapons::spread_radius,
-		sanguis::server::weapons::shells,
-		sanguis::server::weapons::damage,
-		sanguis::server::weapons::magazine_size,
-		sanguis::server::weapons::reload_time,
-		sanguis::server::weapons::range
-	);
+  shotgun_parameters(
+      sanguis::server::weapons::accuracy,
+      sanguis::server::weapons::backswing_time,
+      sanguis::server::weapons::cast_point,
+      sanguis::server::weapons::spread_radius,
+      sanguis::server::weapons::shells,
+      sanguis::server::weapons::damage,
+      sanguis::server::weapons::magazine_size,
+      sanguis::server::weapons::reload_time,
+      sanguis::server::weapons::range);
 
-	[[nodiscard]]
-	sanguis::server::weapons::attributes::accuracy
-	accuracy() const;
+  [[nodiscard]] sanguis::server::weapons::attributes::accuracy accuracy() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::backswing_time
-	backswing_time() const;
+  [[nodiscard]] sanguis::server::weapons::backswing_time backswing_time() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::cast_point
-	cast_point() const;
+  [[nodiscard]] sanguis::server::weapons::cast_point cast_point() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::attributes::spread_radius
-	spread_radius() const;
+  [[nodiscard]] sanguis::server::weapons::attributes::spread_radius spread_radius() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::shells
-	shells() const;
+  [[nodiscard]] sanguis::server::weapons::shells shells() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::attributes::damage
-	damage() const;
+  [[nodiscard]] sanguis::server::weapons::attributes::damage damage() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::attributes::magazine_size
-	magazine_size() const;
+  [[nodiscard]] sanguis::server::weapons::attributes::magazine_size magazine_size() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::reload_time
-	reload_time() const;
+  [[nodiscard]] sanguis::server::weapons::reload_time reload_time() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::range
-	range() const;
+  [[nodiscard]] sanguis::server::weapons::range range() const;
 
-	void
-	extra_accuracy(
-		sanguis::server::weapons::accuracy
-	);
+  void extra_accuracy(sanguis::server::weapons::accuracy);
 
-	void
-	extra_spread_radius(
-		sanguis::server::weapons::spread_radius
-	);
+  void extra_spread_radius(sanguis::server::weapons::spread_radius);
 
-	void
-	extra_damage(
-		sanguis::server::weapons::damage
-	);
+  void extra_damage(sanguis::server::weapons::damage);
 
-	void
-	extra_magazine_size(
-		sanguis::server::weapons::magazine_size
-	);
+  void extra_magazine_size(sanguis::server::weapons::magazine_size);
+
 private:
-	sanguis::server::weapons::attributes::accuracy accuracy_;
+  sanguis::server::weapons::attributes::accuracy accuracy_;
 
-	sanguis::server::weapons::backswing_time backswing_time_;
+  sanguis::server::weapons::backswing_time backswing_time_;
 
-	sanguis::server::weapons::cast_point cast_point_;
+  sanguis::server::weapons::cast_point cast_point_;
 
-	sanguis::server::weapons::attributes::spread_radius spread_radius_;
+  sanguis::server::weapons::attributes::spread_radius spread_radius_;
 
-	sanguis::server::weapons::shells shells_;
+  sanguis::server::weapons::shells shells_;
 
-	sanguis::server::weapons::attributes::damage damage_;
+  sanguis::server::weapons::attributes::damage damage_;
 
-	sanguis::server::weapons::attributes::magazine_size magazine_size_;
+  sanguis::server::weapons::attributes::magazine_size magazine_size_;
 
-	sanguis::server::weapons::reload_time reload_time_;
+  sanguis::server::weapons::reload_time reload_time_;
 
-	sanguis::server::weapons::range range_;
+  sanguis::server::weapons::range range_;
 };
 
 }

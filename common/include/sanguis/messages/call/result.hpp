@@ -9,30 +9,23 @@
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::messages::call
 {
 
 class result
 {
 public:
-	SANGUIS_COMMON_SYMBOL
-	explicit
-	result(
-		boost::statechart::result
-	);
+  SANGUIS_COMMON_SYMBOL
+  explicit result(boost::statechart::result);
 
-	SANGUIS_COMMON_SYMBOL
-	explicit
-	result(
-		sanguis::messages::call::forward_to_default
-	);
+  SANGUIS_COMMON_SYMBOL
+  explicit result(sanguis::messages::call::forward_to_default);
 
-	SANGUIS_COMMON_SYMBOL
-	sanguis::messages::call::result_variant const &
-	get() const;
+  SANGUIS_COMMON_SYMBOL
+  sanguis::messages::call::result_variant const &get() const;
+
 private:
-	sanguis::messages::call::result_variant variant_;
+  sanguis::messages::call::result_variant variant_;
 };
 
 }

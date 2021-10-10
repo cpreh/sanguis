@@ -14,48 +14,18 @@
 #include <QWidget>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::tools::animations::frame_container
-sanguis::tools::animations::make_frames(
-	QImage const &_image,
-	fcppt::reference<
-		QWidget
-	> const _parent,
-	sanguis::model::object const &_model,
-	sanguis::model::animation const &_animation
-)
+sanguis::tools::animations::frame_container sanguis::tools::animations::make_frames(
+    QImage const &_image,
+    fcppt::reference<QWidget> const _parent,
+    sanguis::model::object const &_model,
+    sanguis::model::animation const &_animation)
 {
-	return
-		fcppt::algorithm::map<
-			sanguis::tools::animations::frame_container
-		>(
-			sanguis::model::make_cell_areas(
-				sanguis::model::image_size(
-					sanguis::model::image_size::value_type(
-						fcppt::cast::to_unsigned(
-							_image.width()
-						),
-						fcppt::cast::to_unsigned(
-							_image.height()
-						)
-					)
-				),
-				_model.cell_size(),
-				_animation.animation_range()
-			),
-			[
-				&_parent,
-				&_image
-			](
-				sanguis::model::cell_area const &_area
-			)
-			{
-				return
-					sanguis::tools::animations::frame(
-						_parent,
-						_image,
-						_area
-					);
-			}
-		);
+  return fcppt::algorithm::map<sanguis::tools::animations::frame_container>(
+      sanguis::model::make_cell_areas(
+          sanguis::model::image_size(sanguis::model::image_size::value_type(
+              fcppt::cast::to_unsigned(_image.width()), fcppt::cast::to_unsigned(_image.height()))),
+          _model.cell_size(),
+          _animation.animation_range()),
+      [&_parent, &_image](sanguis::model::cell_area const &_area)
+      { return sanguis::tools::animations::frame(_parent, _image, _area); });
 }

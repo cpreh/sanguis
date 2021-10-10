@@ -10,34 +10,26 @@
 #include <sanguis/server/entities/with_auras.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::projectiles
 {
 
-class aoe_damage
-:
-	public sanguis::server::entities::with_auras,
-	public sanguis::server::entities::simple,
-	private sanguis::server::entities::center_ghost
+class aoe_damage : public sanguis::server::entities::with_auras,
+                   public sanguis::server::entities::simple,
+                   private sanguis::server::entities::center_ghost
 {
-	FCPPT_NONMOVABLE(
-		aoe_damage
-	);
-public:
-	aoe_damage(
-		sanguis::server::team,
-		sanguis::server::aoe,
-		sanguis::server::damage::unit,
-		sanguis::server::damage::modified_array const &
-	);
+  FCPPT_NONMOVABLE(aoe_damage);
 
-	~aoe_damage()
-	override;
+public:
+  aoe_damage(
+      sanguis::server::team,
+      sanguis::server::aoe,
+      sanguis::server::damage::unit,
+      sanguis::server::damage::modified_array const &);
+
+  ~aoe_damage() override;
+
 private:
-	[[nodiscard]]
-	bool
-	dead() const
-	override;
+  [[nodiscard]] bool dead() const override;
 };
 
 }

@@ -6,41 +6,23 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::events
 {
 
-class poll
-:
-	public boost::statechart::event<
-		sanguis::server::weapons::events::poll
-	>
+class poll : public boost::statechart::event<sanguis::server::weapons::events::poll>
 {
 public:
-	poll();
+  poll();
 
-	poll(
-		poll &&
-	)
-	noexcept;
+  poll(poll &&) noexcept;
 
-	poll(
-		poll const &
-	);
+  poll(poll const &);
 
-	poll &
-	operator=(
-		poll &&
-	)
-	noexcept;
+  poll &operator=(poll &&) noexcept;
 
-	poll &
-	operator=(
-		poll const &
-	);
+  poll &operator=(poll const &);
 
-	~poll()
-	override;
+  ~poll() override;
 };
 
 }

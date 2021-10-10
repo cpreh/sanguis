@@ -3,16 +3,10 @@
 
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client::gui::menu::callbacks
 {
 
-using
-cancel_connect
-=
-fcppt::function<
-	void ()
->;
+using cancel_connect = fcppt::function<void()>;
 
 }
 

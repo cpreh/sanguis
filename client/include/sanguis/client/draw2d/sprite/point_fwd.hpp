@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/sprite/type_choices.hpp>
 #include <sge/sprite/types/vector_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::sprite
 {
 
-using
-point
-=
-sge::sprite::types::vector<
-	sanguis::client::draw2d::sprite::type_choices
->;
+using point = sge::sprite::types::vector<sanguis::client::draw2d::sprite::type_choices>;
 
 }
 

@@ -6,31 +6,15 @@
 #include <alda/message/object.hpp>
 #include <fcppt/record/get.hpp>
 
-
 namespace sanguis::client::draw2d::translate
 {
 
-template<
-	typename Id,
-	typename Type
->
-inline
-sanguis::client::draw2d::sprite::rotation
-rotation(
-	alda::message::object<
-		Id,
-		Type
-	> const &_message
-)
+template <typename Id, typename Type>
+inline sanguis::client::draw2d::sprite::rotation
+rotation(alda::message::object<Id, Type> const &_message)
 {
-	return
-		sanguis::client::draw2d::sprite::rotation{
-			fcppt::record::get<
-				sanguis::messages::roles::angle
-			>(
-				_message.get()
-			)
-		};
+  return sanguis::client::draw2d::sprite::rotation{
+      fcppt::record::get<sanguis::messages::roles::angle>(_message.get())};
 }
 
 }

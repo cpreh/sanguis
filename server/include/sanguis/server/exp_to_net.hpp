@@ -4,14 +4,10 @@
 #include <sanguis/messages/types/exp.hpp>
 #include <sanguis/server/exp.hpp>
 
-
 namespace sanguis::server
 {
 
-sanguis::messages::types::exp
-exp_to_net(
-	sanguis::server::exp
-);
+sanguis::messages::types::exp exp_to_net(sanguis::server::exp);
 
 }
 

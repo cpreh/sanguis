@@ -4,5 +4,4 @@
 #include <sanguis/server/environment/optional_object_ref_fwd.hpp>
 #include <fcppt/optional/reference.hpp>
 
-
 #endif

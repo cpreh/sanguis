@@ -5,14 +5,10 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::messages::types
 {
 
-using
-exp
-=
-std::uint32_t;
+using exp = std::uint32_t;
 
 }
 

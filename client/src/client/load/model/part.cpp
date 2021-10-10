@@ -14,73 +14,34 @@
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
 sanguis::client::load::model::part::part(
-	fcppt::log::object &_log,
-	sanguis::model::part const &_part,
-	sanguis::client::load::model::global_parameters const &_param
-)
-:
-	categories_(
-		sanguis::client::load::model::make_weapon_categories(
-			_log,
-			_part,
-			_param
-		)
-	)
+    fcppt::log::object &_log,
+    sanguis::model::part const &_part,
+    sanguis::client::load::model::global_parameters const &_param)
+    : categories_(sanguis::client::load::model::make_weapon_categories(_log, _part, _param))
 {
 }
 
-sanguis::client::load::model::part::~part()
-= default;
+sanguis::client::load::model::part::~part() = default;
 
-sanguis::client::load::model::weapon_category const &
-sanguis::client::load::model::part::operator[](
-	sanguis::optional_primary_weapon_type const _type
-) const
+sanguis::client::load::model::weapon_category const &sanguis::client::load::model::part::operator[](
+    sanguis::optional_primary_weapon_type const _type) const
 {
-	return
-		fcppt::optional::maybe(
-			fcppt::container::find_opt_mapped(
-				categories_,
-				_type
-			),
-			[
-				_type,
-				this
-			]()
-			{
-				sanguis::optional_primary_weapon_type const fallback{};
+  return fcppt::optional::maybe(
+             fcppt::container::find_opt_mapped(categories_, _type),
+             [_type, this]()
+             {
+               sanguis::optional_primary_weapon_type const fallback{};
 
-				if(
-					_type
-					==
-					fallback
-				)
-				{
-					throw
-						sanguis::exception{
-							FCPPT_TEXT("Unarmed weapon model missing in TODO")
-						};
-				}
+               if (_type == fallback)
+               {
+                 throw sanguis::exception{FCPPT_TEXT("Unarmed weapon model missing in TODO")};
+               }
 
-				return
-					fcppt::make_cref(
-						(*this)[
-							fallback
-						]
-					);
-			},
-			[](
-				fcppt::reference<
-					sanguis::client::load::model::weapon_category_unique_ptr const
-				> const _found
-			)
-			{
-				return
-					fcppt::make_cref(
-						*_found.get()
-					);
-			}
-		).get();
+               return fcppt::make_cref((*this)[fallback]);
+             },
+             [](fcppt::reference<
+                 sanguis::client::load::model::weapon_category_unique_ptr const> const _found)
+             { return fcppt::make_cref(*_found.get()); })
+      .get();
 }

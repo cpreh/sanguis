@@ -4,14 +4,10 @@
 #include <sanguis/optional_weapon_type_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::client::load::hud
 {
 
-sanguis::optional_weapon_type
-weapon_type(
-	fcppt::string const &
-);
+sanguis::optional_weapon_type weapon_type(fcppt::string const &);
 
 }
 

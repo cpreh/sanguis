@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/with_id_fwd.hpp>
 #include <sanguis/server/world/insert_pair_fwd.hpp>
 
-
 namespace sanguis::server::world
 {
 
-using
-insert_with_id_pair
-=
-sanguis::server::world::insert_pair<
-	sanguis::server::entities::with_id
->;
+using insert_with_id_pair = sanguis::server::world::insert_pair<sanguis::server::entities::with_id>;
 
 }
 

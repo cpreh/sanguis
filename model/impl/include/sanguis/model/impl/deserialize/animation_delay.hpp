@@ -4,14 +4,10 @@
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sge/parse/json/object_fwd.hpp>
 
-
 namespace sanguis::model::impl::deserialize
 {
 
-sanguis::model::optional_animation_delay
-animation_delay(
-	sge::parse::json::object const &
-);
+sanguis::model::optional_animation_delay animation_delay(sge::parse::json::object const &);
 
 }
 

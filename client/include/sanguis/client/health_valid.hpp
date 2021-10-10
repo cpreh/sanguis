@@ -3,14 +3,10 @@
 
 #include <sanguis/client/health.hpp>
 
-
 namespace sanguis::client
 {
 
-bool
-health_valid(
-	sanguis::client::health
-);
+bool health_valid(sanguis::client::health);
 
 }
 

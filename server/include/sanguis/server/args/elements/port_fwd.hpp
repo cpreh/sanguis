@@ -5,17 +5,10 @@
 #include <alda/net/port_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::server::args::elements
 {
 
-using
-port
-=
-fcppt::record::element<
-	sanguis::server::args::labels::port,
-	alda::net::port
->;
+using port = fcppt::record::element<sanguis::server::args::labels::port, alda::net::port>;
 
 }
 

@@ -4,14 +4,11 @@
 #include <sanguis/collision/impl/world/ghost_group_container.hpp>
 #include <sanguis/collision/world/body_group_fwd.hpp>
 
-
 namespace sanguis::collision::impl::world
 {
 
 sanguis::collision::impl::world::ghost_group_container const &
-ghost_groups_for_body_group(
-	sanguis::collision::world::body_group
-);
+    ghost_groups_for_body_group(sanguis::collision::world::body_group);
 
 }
 

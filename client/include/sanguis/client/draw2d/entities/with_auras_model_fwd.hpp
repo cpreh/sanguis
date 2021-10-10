@@ -4,16 +4,11 @@
 #include <sanguis/client/draw2d/entities/with_auras_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-using
-with_auras_model
-=
-sanguis::client::draw2d::entities::with_auras<
-	sanguis::client::draw2d::entities::model::object
->;
+using with_auras_model =
+    sanguis::client::draw2d::entities::with_auras<sanguis::client::draw2d::entities::model::object>;
 
 }
 

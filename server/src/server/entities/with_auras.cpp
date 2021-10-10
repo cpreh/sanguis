@@ -11,57 +11,26 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::collision::world::body_enter_container
-sanguis::server::entities::with_auras::add_aura(
-	sanguis::server::auras::unique_ptr &&_aura
-)
+sanguis::server::entities::with_auras::add_aura(sanguis::server::auras::unique_ptr &&_aura)
 {
-	auras_.push_back(
-		std::move(
-			_aura
-		)
-	);
+  auras_.push_back(std::move(_aura));
 
-	return
-		this->sanguis::server::entities::with_ghosts::add_ghost(
-			auras_.back()->create_ghost()
-		);
+  return this->sanguis::server::entities::with_ghosts::add_ghost(auras_.back()->create_ghost());
 }
 
-sanguis::server::entities::with_auras::with_auras(
-	sanguis::server::auras::container &&_auras
-)
-:
-	auras_(
-		std::move(
-			_auras
-		)
-	)
+sanguis::server::entities::with_auras::with_auras(sanguis::server::auras::container &&_auras)
+    : auras_(std::move(_auras))
 {
-	// TODO(philipp): Can we initialize this directly?
-	this->init_ghosts(
-		fcppt::algorithm::map<
-			sanguis::server::collision::ghost_container
-		>(
-			auras_,
-			[](
-				sanguis::server::auras::unique_ptr const &_aura
-			)
-			{
-				return
-					_aura->create_ghost();
-			}
-		)
-	);
+  // TODO(philipp): Can we initialize this directly?
+  this->init_ghosts(fcppt::algorithm::map<sanguis::server::collision::ghost_container>(
+      auras_,
+      [](sanguis::server::auras::unique_ptr const &_aura) { return _aura->create_ghost(); }));
 }
 
-sanguis::server::entities::with_auras::~with_auras()
-= default;
+sanguis::server::entities::with_auras::~with_auras() = default;
 
-sanguis::server::auras::container const &
-sanguis::server::entities::with_auras::auras() const
+sanguis::server::auras::container const &sanguis::server::entities::with_auras::auras() const
 {
-	return
-		auras_;
+  return auras_;
 }

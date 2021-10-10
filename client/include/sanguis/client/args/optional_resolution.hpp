@@ -5,5 +5,4 @@
 #include <sge/renderer/screen_size.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

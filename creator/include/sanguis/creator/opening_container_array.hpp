@@ -5,5 +5,4 @@
 #include <sanguis/creator/opening_type.hpp>
 #include <fcppt/enum/array_impl.hpp>
 
-
 #endif

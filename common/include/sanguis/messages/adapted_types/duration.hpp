@@ -5,5 +5,4 @@
 #include <sanguis/messages/adapted_types/time_unit.hpp>
 #include <alda/bindings/duration.hpp>
 
-
 #endif

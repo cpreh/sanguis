@@ -16,67 +16,30 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::client::load::auras::context::context(
-	sanguis::client::load::resource::textures_cref const _resources
-)
-:
-	textures_(
-		fcppt::algorithm::map<
-			texture_map
-		>(
-			fcppt::iterator::make_range(
-				std::filesystem::directory_iterator(
-					sanguis::media_path()
-					/
-					FCPPT_TEXT("auras")
-				),
-				std::filesystem::directory_iterator()
-			),
-			[
-				&_resources
-			](
-				std::filesystem::path const &_path
-			)
-			{
-				return
-					std::make_pair(
-						sanguis::client::load::auras::lookup_name(
-							fcppt::filesystem::stem(
-								_path
-							)
-						),
-						fcppt::make_cref(
-							_resources->load(
-								_path
-							)
-						)
-					);
-			}
-		)
-	)
+    sanguis::client::load::resource::textures_cref const _resources)
+    : textures_(fcppt::algorithm::map<texture_map>(
+          fcppt::iterator::make_range(
+              std::filesystem::directory_iterator(sanguis::media_path() / FCPPT_TEXT("auras")),
+              std::filesystem::directory_iterator()),
+          [&_resources](std::filesystem::path const &_path)
+          {
+            return std::make_pair(
+                sanguis::client::load::auras::lookup_name(fcppt::filesystem::stem(_path)),
+                fcppt::make_cref(_resources->load(_path)));
+          }))
 {
 }
 
-sanguis::client::load::auras::context::~context()
-= default;
+sanguis::client::load::auras::context::~context() = default;
 
 sge::texture::part const &
-sanguis::client::load::auras::context::texture(
-	sanguis::aura_type const _aura_type
-)
+sanguis::client::load::auras::context::texture(sanguis::aura_type const _aura_type)
 {
-	auto const it(
-		textures_.find(
-			_aura_type
-		)
-	);
+  auto const it(textures_.find(_aura_type));
 
-	// TODO(philipp): Better error
-	FCPPT_ASSERT_ERROR(
-		it != textures_.end()
-	);
+  // TODO(philipp): Better error
+  FCPPT_ASSERT_ERROR(it != textures_.end());
 
-	return
-		it->second.get();
+  return it->second.get();
 }

@@ -4,16 +4,10 @@
 #include <sanguis/collision/world/ghost_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::collision::world
 {
 
-using
-ghost_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::collision::world::ghost
->;
+using ghost_unique_ptr = fcppt::unique_ptr<sanguis::collision::world::ghost>;
 
 }
 

@@ -3,12 +3,10 @@
 
 #include <fcppt/log/name.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-fcppt::log::name
-log_name();
+fcppt::log::name log_name();
 
 }
 

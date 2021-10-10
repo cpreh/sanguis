@@ -6,5 +6,4 @@
 #include <sanguis/messages/server/parts/add_with_weapon_fwd.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

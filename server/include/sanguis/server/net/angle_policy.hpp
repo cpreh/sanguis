@@ -5,22 +5,14 @@
 #include <sanguis/server/angle_fwd.hpp>
 #include <sanguis/server/net/angle_policy_fwd.hpp>
 
-
 namespace sanguis::server::net
 {
 
 struct angle_policy
 {
-	static
-	sanguis::duration
-	start_duration();
+  static sanguis::duration start_duration();
 
-	static
-	sanguis::duration
-	difference(
-		sanguis::server::angle,
-		sanguis::server::angle
-	);
+  static sanguis::duration difference(sanguis::server::angle, sanguis::server::angle);
 };
 
 }

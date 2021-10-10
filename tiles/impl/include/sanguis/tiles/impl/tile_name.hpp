@@ -4,14 +4,10 @@
 #include <sanguis/creator/tile_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-fcppt::string
-tile_name(
-	sanguis::creator::tile
-);
+fcppt::string tile_name(sanguis::creator::tile);
 
 }
 

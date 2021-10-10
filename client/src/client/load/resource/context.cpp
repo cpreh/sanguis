@@ -8,48 +8,29 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/log/context_reference.hpp>
 
-
 sanguis::client::load::resource::textures const &
 sanguis::client::load::resource::context::textures() const
 {
-	return
-		*textures_;
+  return *textures_;
 }
 
 sanguis::client::load::resource::sounds const &
 sanguis::client::load::resource::context::sounds() const
 {
-	return
-		*sounds_;
+  return *sounds_;
 }
 
 sanguis::client::load::resource::context::context(
-	fcppt::log::context_reference const _log_context,
-	sge::renderer::device::core_ref const _renderer,
-	sge::image2d::system_ref const _image_loader,
-	sge::audio::loader_ref const _audio_loader,
-	sge::audio::player_ref const _audio_player
-)
-:
-	textures_(
-		fcppt::make_unique_ptr<
-			sanguis::client::load::resource::textures
-		>(
-			_log_context,
-			_renderer,
-			_image_loader
-		)
-	),
-	sounds_(
-		fcppt::make_unique_ptr<
-			sanguis::client::load::resource::sounds
-		>(
-			_audio_loader,
-			_audio_player
-		)
-	)
+    fcppt::log::context_reference const _log_context,
+    sge::renderer::device::core_ref const _renderer,
+    sge::image2d::system_ref const _image_loader,
+    sge::audio::loader_ref const _audio_loader,
+    sge::audio::player_ref const _audio_player)
+    : textures_(fcppt::make_unique_ptr<sanguis::client::load::resource::textures>(
+          _log_context, _renderer, _image_loader)),
+      sounds_(fcppt::make_unique_ptr<sanguis::client::load::resource::sounds>(
+          _audio_loader, _audio_player))
 {
 }
 
-sanguis::client::load::resource::context::~context()
-= default;
+sanguis::client::load::resource::context::~context() = default;

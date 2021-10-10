@@ -4,5 +4,4 @@
 #include <sanguis/creator/min_fwd.hpp>
 #include <fcppt/container/grid/min_from_pos.hpp>
 
-
 #endif

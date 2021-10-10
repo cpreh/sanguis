@@ -3,12 +3,10 @@
 
 #include <sanguis/creator/impl/generator_map_type.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
-sanguis::creator::impl::generator_map_type const &
-generator_map();
+sanguis::creator::impl::generator_map_type const &generator_map();
 
 }
 

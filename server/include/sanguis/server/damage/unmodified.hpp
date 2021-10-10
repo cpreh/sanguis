@@ -4,14 +4,10 @@
 #include <sanguis/server/damage/array_fwd.hpp>
 #include <sanguis/server/damage/modified_array.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-sanguis::server::damage::modified_array
-unmodified(
-	sanguis::server::damage::array const &
-);
+sanguis::server::damage::modified_array unmodified(sanguis::server::damage::array const &);
 
 }
 

@@ -6,17 +6,12 @@
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::server::ai::pathing
 {
 
-sanguis::server::ai::pathing::optional_target
-update_trail(
-	fcppt::reference<
-		sanguis::server::ai::pathing::trail
-	>,
-	sanguis::server::entities::with_ai const &
-);
+sanguis::server::ai::pathing::optional_target update_trail(
+    fcppt::reference<sanguis::server::ai::pathing::trail>,
+    sanguis::server::entities::with_ai const &);
 
 }
 

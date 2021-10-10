@@ -5,5 +5,4 @@
 #include <sge/parse/ini/section.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

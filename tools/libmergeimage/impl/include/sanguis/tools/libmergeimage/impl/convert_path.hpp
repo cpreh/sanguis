@@ -6,14 +6,10 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
-sanguis::tools::libmergeimage::path
-convert_path(
-	std::filesystem::path const &
-);
+sanguis::tools::libmergeimage::path convert_path(std::filesystem::path const &);
 
 }
 

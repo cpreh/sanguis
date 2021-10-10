@@ -4,14 +4,10 @@
 #include <sanguis/weapon_attribute_fwd.hpp>
 #include <sanguis/server/weapons/attributes/aoe_fwd.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-sanguis::weapon_attribute
-make_aoe(
-	sanguis::server::weapons::attributes::aoe const &
-);
+sanguis::weapon_attribute make_aoe(sanguis::server::weapons::attributes::aoe const &);
 
 }
 

@@ -13,50 +13,35 @@
 #include <sanguis/server/entities/with_body_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::auras
 {
 
-class aoe_damage
-:
-	public sanguis::server::auras::aura
+class aoe_damage : public sanguis::server::auras::aura
 {
-	FCPPT_NONMOVABLE(
-		aoe_damage
-	);
+  FCPPT_NONMOVABLE(aoe_damage);
+
 public:
-	aoe_damage(
-		sanguis::server::team,
-		sanguis::server::aoe,
-		sanguis::server::auras::influence,
-		sanguis::server::damage::unit,
-		sanguis::server::damage::modified_array const &
-	);
+  aoe_damage(
+      sanguis::server::team,
+      sanguis::server::aoe,
+      sanguis::server::auras::influence,
+      sanguis::server::damage::unit,
+      sanguis::server::damage::modified_array const &);
 
-	~aoe_damage()
-	override;
+  ~aoe_damage() override;
+
 private:
-	[[nodiscard]]
-	sanguis::optional_aura_type
-	type() const
-	override;
+  [[nodiscard]] sanguis::optional_aura_type type() const override;
 
-	void
-	enter(
-		sanguis::server::entities::with_body_ref,
-		sanguis::collision::world::created
-	)
-	override;
+  void enter(sanguis::server::entities::with_body_ref, sanguis::collision::world::created) override;
 
-	void
-	leave(
-		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void leave(sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
+             ) // NOLINT(google-runtime-references)
+      override;
 
-	sanguis::server::damage::unit const damage_;
+  sanguis::server::damage::unit const damage_;
 
-	sanguis::server::damage::modified_array const damage_values_;
+  sanguis::server::damage::modified_array const damage_values_;
 };
 
 }

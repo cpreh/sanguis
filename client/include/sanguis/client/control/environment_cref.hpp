@@ -4,16 +4,10 @@
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::control
 {
 
-using
-environment_cref
-=
-fcppt::reference<
-	sanguis::client::control::environment const
->;
+using environment_cref = fcppt::reference<sanguis::client::control::environment const>;
 
 }
 

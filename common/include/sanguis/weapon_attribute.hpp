@@ -7,40 +7,30 @@
 #include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/common/symbol.hpp>
 
-
 namespace sanguis
 {
 
 class weapon_attribute
 {
 public:
-	SANGUIS_COMMON_SYMBOL
-	weapon_attribute(
-		sanguis::weapon_attribute_type,
-		sanguis::weapon_attribute_base,
-		sanguis::weapon_attribute_extra
-	);
+  SANGUIS_COMMON_SYMBOL
+  weapon_attribute(
+      sanguis::weapon_attribute_type,
+      sanguis::weapon_attribute_base,
+      sanguis::weapon_attribute_extra);
 
-	[[nodiscard]]
-	SANGUIS_COMMON_SYMBOL
-	sanguis::weapon_attribute_type
-	type() const;
+  [[nodiscard]] SANGUIS_COMMON_SYMBOL sanguis::weapon_attribute_type type() const;
 
-	[[nodiscard]]
-	SANGUIS_COMMON_SYMBOL
-	sanguis::weapon_attribute_base
-	base() const;
+  [[nodiscard]] SANGUIS_COMMON_SYMBOL sanguis::weapon_attribute_base base() const;
 
-	[[nodiscard]]
-	SANGUIS_COMMON_SYMBOL
-	sanguis::weapon_attribute_extra
-	extra() const;
+  [[nodiscard]] SANGUIS_COMMON_SYMBOL sanguis::weapon_attribute_extra extra() const;
+
 private:
-	sanguis::weapon_attribute_type type_;
+  sanguis::weapon_attribute_type type_;
 
-	sanguis::weapon_attribute_base base_;
+  sanguis::weapon_attribute_base base_;
 
-	sanguis::weapon_attribute_extra extra_;
+  sanguis::weapon_attribute_extra extra_;
 };
 
 }

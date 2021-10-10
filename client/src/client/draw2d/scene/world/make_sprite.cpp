@@ -20,55 +20,28 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/map.hpp>
 
-
 sanguis::client::draw2d::scene::world::sprite::optional_object
 sanguis::client::draw2d::scene::world::make_sprite(
-	sanguis::random_generator &_random_generator,
-	sanguis::client::draw::debug const _debug,
-	sanguis::client::load::tiles::context_ref const _tiles,
-	sanguis::tiles::cell const &_cell
-)
+    sanguis::random_generator &_random_generator,
+    sanguis::client::draw::debug const _debug,
+    sanguis::client::load::tiles::context_ref const _tiles,
+    sanguis::tiles::cell const &_cell)
 {
-	return
-		fcppt::optional::map(
-			sanguis::client::draw2d::scene::world::make_texture(
-				_random_generator,
-				_debug,
-				_tiles,
-				_cell.path().get(),
-				_cell.content()
-			),
-			[
-				&_cell
-			](
-				fcppt::reference<
-					sge::texture::part const
-				> const _texture
-			)
-			{
-				return
-					sanguis::client::draw2d::scene::world::sprite::object(
-						sge::sprite::roles::pos{} =
-							fcppt::math::vector::structure_cast<
-								sanguis::client::draw2d::scene::world::sprite::vector,
-								fcppt::cast::size_fun
-							>(
-								_cell.pos()
-							),
-						sge::sprite::roles::size{} =
-							fcppt::math::dim::fill<
-								sanguis::client::draw2d::scene::world::sprite::dim
-							>(
-								sanguis::client::draw2d::scene::world::tile_size::value
-							),
-						sge::sprite::roles::texture0{} =
-							sanguis::client::draw2d::scene::world::sprite::object::texture_type{
-								_texture.get()
-							},
-						sanguis::client::draw2d::scene::world::sprite::is_background_role{} =
-							_cell.is_background().get()
-					);
-			}
-		);
+  return fcppt::optional::map(
+      sanguis::client::draw2d::scene::world::make_texture(
+          _random_generator, _debug, _tiles, _cell.path().get(), _cell.content()),
+      [&_cell](fcppt::reference<sge::texture::part const> const _texture)
+      {
+        return sanguis::client::draw2d::scene::world::sprite::object(
+            sge::sprite::roles::pos{} = fcppt::math::vector::structure_cast<
+                sanguis::client::draw2d::scene::world::sprite::vector,
+                fcppt::cast::size_fun>(_cell.pos()),
+            sge::sprite::roles::size{} =
+                fcppt::math::dim::fill<sanguis::client::draw2d::scene::world::sprite::dim>(
+                    sanguis::client::draw2d::scene::world::tile_size::value),
+            sge::sprite::roles::texture0{} =
+                sanguis::client::draw2d::scene::world::sprite::object::texture_type{_texture.get()},
+            sanguis::client::draw2d::scene::world::sprite::is_background_role{} =
+                _cell.is_background().get());
+      });
 }
-

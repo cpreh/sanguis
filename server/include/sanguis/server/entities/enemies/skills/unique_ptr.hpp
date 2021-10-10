@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/enemies/skills/skill_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::server::entities::enemies::skills
 {
 
-using
-unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::server::entities::enemies::skills::skill
->;
+using unique_ptr = fcppt::unique_ptr<sanguis::server::entities::enemies::skills::skill>;
 
 }
 

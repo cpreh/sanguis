@@ -22,63 +22,48 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class with_ai
-:
-	public virtual sanguis::server::entities::ifaces::with_angle,
-	public virtual sanguis::server::entities::ifaces::with_health,
-	public virtual sanguis::server::entities::ifaces::with_links,
-	public virtual sanguis::server::entities::ifaces::with_radius,
-	public virtual sanguis::server::entities::ifaces::with_team,
-	public virtual sanguis::server::entities::ifaces::with_velocity,
-	public sanguis::server::entities::with_auras_id,
-	public sanguis::server::entities::with_weapon
+class with_ai : public virtual sanguis::server::entities::ifaces::with_angle,
+                public virtual sanguis::server::entities::ifaces::with_health,
+                public virtual sanguis::server::entities::ifaces::with_links,
+                public virtual sanguis::server::entities::ifaces::with_radius,
+                public virtual sanguis::server::entities::ifaces::with_team,
+                public virtual sanguis::server::entities::ifaces::with_velocity,
+                public sanguis::server::entities::with_auras_id,
+                public sanguis::server::entities::with_weapon
 {
-	FCPPT_NONMOVABLE(
-		with_ai
-	);
+  FCPPT_NONMOVABLE(with_ai);
+
 protected:
-	with_ai(
-		sanguis::server::ai::create_function &&,
-		sanguis::server::weapons::unique_ptr &&,
-		sanguis::server::auras::container &&,
-		sanguis::server::weapons::ias,
-		sanguis::server::weapons::irs
-	);
+  with_ai(
+      sanguis::server::ai::create_function &&,
+      sanguis::server::weapons::unique_ptr &&,
+      sanguis::server::auras::container &&,
+      sanguis::server::weapons::ias,
+      sanguis::server::weapons::irs);
 
-	~with_ai()
-	override;
+  ~with_ai() override;
 
-	void
-	update()
-	override;
+  void update() override;
 
-	[[nodiscard]]
-	sanguis::server::entities::transfer_result
-	on_create()
-	override;
+  [[nodiscard]] sanguis::server::entities::transfer_result on_create() override;
+
 public:
-	[[nodiscard]]
-	sanguis::server::ai::create_function const &
-	create_ai() const;
+  [[nodiscard]] sanguis::server::ai::create_function const &create_ai() const;
+
 private:
-	sanguis::diff_timer update_timer_;
+  sanguis::diff_timer update_timer_;
 
-	sanguis::server::ai::create_function const create_ai_;
+  sanguis::server::ai::create_function const create_ai_;
 
-	sanguis::server::ai::context ai_context_;
+  sanguis::server::ai::context ai_context_;
 
-	using
-	optional_ai_unique_ptr
-	=
-	fcppt::optional::object<
-		sanguis::server::ai::tree::base_unique_ptr
-	>;
+  using optional_ai_unique_ptr =
+      fcppt::optional::object<sanguis::server::ai::tree::base_unique_ptr>;
 
-	optional_ai_unique_ptr ai_;
+  optional_ai_unique_ptr ai_;
 };
 
 }

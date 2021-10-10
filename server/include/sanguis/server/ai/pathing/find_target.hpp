@@ -6,17 +6,13 @@
 #include <sanguis/server/ai/pathing/start_fwd.hpp>
 #include <sanguis/server/ai/pathing/target_fwd.hpp>
 
-
 namespace sanguis::server::ai::pathing
 {
 
-[[nodiscard]]
-sanguis::server::ai::pathing::optional_trail
-find_target(
-	sanguis::creator::grid const &,
-	sanguis::server::ai::pathing::start const &,
-	sanguis::server::ai::pathing::target const &
-);
+[[nodiscard]] sanguis::server::ai::pathing::optional_trail find_target(
+    sanguis::creator::grid const &,
+    sanguis::server::ai::pathing::start const &,
+    sanguis::server::ai::pathing::target const &);
 
 }
 

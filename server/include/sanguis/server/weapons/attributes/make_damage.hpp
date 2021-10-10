@@ -4,14 +4,10 @@
 #include <sanguis/weapon_attribute_fwd.hpp>
 #include <sanguis/server/weapons/attributes/damage_fwd.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-sanguis::weapon_attribute
-make_damage(
-	sanguis::server::weapons::attributes::damage const &
-);
+sanguis::weapon_attribute make_damage(sanguis::server::weapons::attributes::damage const &);
 
 }
 

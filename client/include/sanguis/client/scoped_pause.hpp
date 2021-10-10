@@ -4,24 +4,20 @@
 #include <sanguis/client/send_callback.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client
 {
 
 class scoped_pause
 {
-	FCPPT_NONMOVABLE(
-		scoped_pause
-	);
-public:
-	explicit
-	scoped_pause(
-		sanguis::client::send_callback &&
-	);
+  FCPPT_NONMOVABLE(scoped_pause);
 
-	~scoped_pause();
+public:
+  explicit scoped_pause(sanguis::client::send_callback &&);
+
+  ~scoped_pause();
+
 private:
-	sanguis::client::send_callback const send_;
+  sanguis::client::send_callback const send_;
 };
 
 }

@@ -9,37 +9,24 @@
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class with_auras_id
-:
-	public virtual sanguis::server::entities::ifaces::with_id,
-	public sanguis::server::entities::with_auras
+class with_auras_id : public virtual sanguis::server::entities::ifaces::with_id,
+                      public sanguis::server::entities::with_auras
 {
-	FCPPT_NONMOVABLE(
-		with_auras_id
-	);
+  FCPPT_NONMOVABLE(with_auras_id);
+
 public:
-	[[nodiscard]]
-	sanguis::collision::world::body_enter_container
-	add_aura(
-		sanguis::server::auras::unique_ptr &&
-	)
-	override;
+  [[nodiscard]] sanguis::collision::world::body_enter_container
+  add_aura(sanguis::server::auras::unique_ptr &&) override;
+
 protected:
-	explicit
-	with_auras_id(
-		sanguis::server::auras::container &&
-	);
+  explicit with_auras_id(sanguis::server::auras::container &&);
 
-	~with_auras_id()
-	override;
+  ~with_auras_id() override;
 
-	[[nodiscard]]
-	sanguis::aura_type_vector
-	aura_types() const;
+  [[nodiscard]] sanguis::aura_type_vector aura_types() const;
 };
 
 }

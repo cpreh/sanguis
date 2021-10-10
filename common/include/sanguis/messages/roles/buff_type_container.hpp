@@ -3,13 +3,10 @@
 
 #include <fcppt/record/make_label.hpp>
 
-
 namespace sanguis::messages::roles
 {
 
-FCPPT_RECORD_MAKE_LABEL(
-	buff_type_container
-);
+FCPPT_RECORD_MAKE_LABEL(buff_type_container);
 
 }
 

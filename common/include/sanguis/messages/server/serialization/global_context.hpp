@@ -4,13 +4,11 @@
 #include <sanguis/common/symbol.hpp>
 #include <sanguis/messages/server/serialization/context_fwd.hpp>
 
-
 namespace sanguis::messages::server::serialization
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::messages::server::serialization::context &
-global_context();
+sanguis::messages::server::serialization::context &global_context();
 
 }
 

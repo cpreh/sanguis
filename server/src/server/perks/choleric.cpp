@@ -35,167 +35,90 @@
 #include <numbers>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::perks::choleric::choleric(
-	sanguis::diff_clock_cref const _diff_clock,
-	sanguis::random_generator_ref const _random_generator
-)
-:
-	sanguis::server::perks::perk(
-		sanguis::perk_type::choleric
-	),
-	shoot_timer_(
-		sanguis::diff_timer::parameters(
-			_diff_clock,
-			std::chrono::seconds(
-				5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			)
-		)
-	),
-	rand_(
-		_random_generator,
-		sanguis::server::perks::choleric::distribution(
-			sanguis::server::perks::choleric::distribution::param_type::min(
-				0.F
-			),
-			sanguis::server::perks::choleric::distribution::param_type::sup(
-				std::numbers::pi_v<
-					sanguis::server::space_unit
-				>
-				*
-				fcppt::literal<
-					sanguis::server::space_unit
-				>(
-					2
-				)
-			)
-		)
-	)
+    sanguis::diff_clock_cref const _diff_clock,
+    sanguis::random_generator_ref const _random_generator)
+    : sanguis::server::perks::perk(sanguis::perk_type::choleric),
+      shoot_timer_(sanguis::diff_timer::parameters(
+          _diff_clock,
+          std::chrono::seconds(
+              5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+              ))),
+      rand_(
+          _random_generator,
+          sanguis::server::perks::choleric::distribution(
+              sanguis::server::perks::choleric::distribution::param_type::min(0.F),
+              sanguis::server::perks::choleric::distribution::param_type::sup(
+                  std::numbers::pi_v<sanguis::server::space_unit> *
+                  fcppt::literal<sanguis::server::space_unit>(2))))
 {
 }
 
-sanguis::server::perks::choleric::~choleric()
-= default;
+sanguis::server::perks::choleric::~choleric() = default;
 
-void
-sanguis::server::perks::choleric::update(
-	sanguis::server::entities::with_perks &_entity,
-	sanguis::server::environment::object &_env
-)
+void sanguis::server::perks::choleric::update(
+    sanguis::server::entities::with_perks &_entity, sanguis::server::environment::object &_env)
 {
-	if(
-		!sge::timer::reset_when_expired(
-			fcppt::make_ref(
-				shoot_timer_
-			)
-		)
-	)
-	{
-		return;
-	}
+  if (!sge::timer::reset_when_expired(fcppt::make_ref(shoot_timer_)))
+  {
+    return;
+  }
 
-	sanguis::server::level const rocket_level(
-		10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-	);
+  sanguis::server::level const rocket_level(
+      10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+  );
 
-	bool const spawn_bullets(
-		this->level() < rocket_level
-	);
+  bool const spawn_bullets(this->level() < rocket_level);
 
-	fcppt::algorithm::repeat(
-		spawn_bullets
-		?
-			fcppt::literal<
-				sanguis::server::level::value_type
-			>(
-				3 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			)
-			+
-			this->level().get()
-			*
-			fcppt::literal<
-				sanguis::server::level::value_type
-			>(
-				2
-			)
-		:
-			this->level().get()
-		,
-		[
-			this,
-			&_env,
-			&_entity,
-			spawn_bullets
-		]
-		()
-		{
-			sanguis::server::direction const direction(
-				rand_()
-			);
+  fcppt::algorithm::repeat(
+      spawn_bullets
+          ? fcppt::literal<sanguis::server::level::value_type>(
+                3 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                ) +
+                this->level().get() * fcppt::literal<sanguis::server::level::value_type>(2)
+          : this->level().get(),
+      [this, &_env, &_entity, spawn_bullets]()
+      {
+        sanguis::server::direction const direction(rand_());
 
-			sanguis::server::environment::insert_no_result(
-				_env,
-				spawn_bullets
-				?
-					fcppt::unique_ptr_to_base<
-						sanguis::server::entities::with_id
-					>(
-						fcppt::make_unique_ptr<
-							sanguis::server::entities::projectiles::simple_bullet
-						>(
-							_env.load_context(),
-							_entity.team(),
-							sanguis::server::damage::unit(
-								10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							),
-							sanguis::server::entities::modify_damages(
-								_entity,
-								sanguis::server::damage::make_array({
-									sanguis::server::damage::piercing =
-										sanguis::server::damage::full
-								})
-							),
-							direction
-						)
-					)
-				:
-					fcppt::unique_ptr_to_base<
-						sanguis::server::entities::with_id
-					>(
-						fcppt::make_unique_ptr<
-							sanguis::server::entities::projectiles::rocket
-						>(
-							_env.load_context(),
-							_entity.team(),
-							sanguis::server::damage::unit(
-								15.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							),
-							sanguis::server::entities::modify_damages(
-								_entity,
-								sanguis::server::damage::explosive()
-							),
-							sanguis::server::aoe(
-								90.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							),
-							direction
-						)
-					)
-				,
-				sanguis::server::entities::insert_parameters(
-					_entity.center(),
-					sanguis::server::angle(
-						direction.get()
-					)
-				)
-			);
-		}
-	);
+        sanguis::server::environment::insert_no_result(
+            _env,
+            spawn_bullets
+                ? fcppt::unique_ptr_to_base<
+                      sanguis::server::entities::
+                          with_id>(fcppt::make_unique_ptr<
+                                   sanguis::server::entities::projectiles::simple_bullet>(
+                      _env.load_context(),
+                      _entity.team(),
+                      sanguis::server::damage::unit(
+                          10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                          ),
+                      sanguis::server::entities::modify_damages(
+                          _entity,
+                          sanguis::server::damage::make_array(
+                              {sanguis::server::damage::piercing = sanguis::server::damage::full})),
+                      direction))
+                : fcppt::unique_ptr_to_base<
+                      sanguis::server::entities::
+                          with_id>(fcppt::make_unique_ptr<
+                                   sanguis::server::entities::projectiles::rocket>(
+                      _env.load_context(),
+                      _entity.team(),
+                      sanguis::server::damage::unit(
+                          15.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                          ),
+                      sanguis::server::entities::modify_damages(
+                          _entity, sanguis::server::damage::explosive()),
+                      sanguis::server::aoe(
+                          90.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                          ),
+                      direction)),
+            sanguis::server::entities::insert_parameters(
+                _entity.center(), sanguis::server::angle(direction.get())));
+      });
 }
 
-void
-sanguis::server::perks::choleric::change(
-	sanguis::server::entities::with_perks &,
-	sanguis::server::perks::level_diff
-)
+void sanguis::server::perks::choleric::change(
+    sanguis::server::entities::with_perks &, sanguis::server::perks::level_diff)
 {
 }

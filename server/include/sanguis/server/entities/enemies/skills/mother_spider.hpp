@@ -6,33 +6,22 @@
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::enemies::skills
 {
 
-class mother_spider
-:
-	public sanguis::server::entities::enemies::skills::skill
+class mother_spider : public sanguis::server::entities::enemies::skills::skill
 {
-	FCPPT_NONMOVABLE(
-		mother_spider
-	);
+  FCPPT_NONMOVABLE(mother_spider);
+
 public:
-	mother_spider();
+  mother_spider();
 
-	~mother_spider()
-	override;
+  ~mother_spider() override;
+
 private:
-	void
-	on_die(
-		sanguis::server::entities::enemies::enemy const &
-	)
-	override;
+  void on_die(sanguis::server::entities::enemies::enemy const &) override;
 
-	[[nodiscard]]
-	sanguis::server::entities::enemies::attribute
-	attribute() const
-	override;
+  [[nodiscard]] sanguis::server::entities::enemies::attribute attribute() const override;
 };
 
 }

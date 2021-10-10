@@ -81,478 +81,206 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::machine::machine(
-	fcppt::log::context_reference const _log_context,
-	sanguis::client::config::settings::object_ref const _settings,
-	sanguis::client::args::result &&_options,
-	sanguis::client::server_callback &&_server_callback,
-	sanguis::client::load::context_cref const _resources,
-	sge::gui::style::const_reference const _gui_style,
-	sge::window::system_ref const _window_system,
-	sge::font::object_ref const _font_object,
-	sge::console::gfx::object_ref const _console_gfx,
-	sge::renderer::device::ffp_ref const _renderer,
-	sanguis::io_service_ref const _io_service,
-	sge::viewport::manager_ref const _viewport_manager,
-	sanguis::client::cursor_ref const _cursor_gfx
-)
-:
-	log_context_{
-		_log_context
-	},
-	log_{
-		_log_context,
-		sanguis::client::log_location(),
-		fcppt::log::parameters_no_function(
-			fcppt::log::name{
-				FCPPT_TEXT("machine")
-			}
-		)
-	},
-	settings_(
-		_settings
-	),
-	options_(
-		std::move(
-			_options
-		)
-	),
-	resources_(
-		_resources
-	),
-	gui_style_(
-		_gui_style
-	),
-	renderer_(
-		_renderer
-	),
-	viewport_manager_(
-		_viewport_manager
-	),
-	net_(
-		alda::net::parameters(
-			_log_context,
-			_io_service->impl(),
-			sanguis::net::send_buffer_size(),
-			sanguis::net::receive_buffer_size()
-		)
-	),
-	s_conn_(
-		net_.register_connect(
-			alda::net::client::connect_callback{
-				[
-					this
-				]{
-					this->connect_callback();
-				}
-			}
-		)
-	),
-	s_disconn_(
-		net_.register_error(
-			alda::net::client::error_callback{
-				[
-					this
-				](
-					fcppt::string const &_message,
-					boost::system::error_code const &_error
-				)
-				{
-					this->error_callback(
-						_message,
-						_error
-					);
-				}
-			}
-		)
-	),
-	s_data_(
-		net_.register_data(
-			alda::net::client::data_callback{
-				[
-					this
-				](
-					alda::net::buffer::circular_receive::streambuf &_data
-				)
-				{
-					this->data_callback(
-						_data
-					);
-				}
-			}
-		)
-	),
-	window_system_(
-		_window_system
-	),
-	font_object_(
-		_font_object
-	),
-	console_gfx_(
-		_console_gfx
-	),
-	server_callback_(
-		std::move(
-			_server_callback
-		)
-	),
-	cursor_gfx_(
-		_cursor_gfx
-	)
+    fcppt::log::context_reference const _log_context,
+    sanguis::client::config::settings::object_ref const _settings,
+    sanguis::client::args::result &&_options,
+    sanguis::client::server_callback &&_server_callback,
+    sanguis::client::load::context_cref const _resources,
+    sge::gui::style::const_reference const _gui_style,
+    sge::window::system_ref const _window_system,
+    sge::font::object_ref const _font_object,
+    sge::console::gfx::object_ref const _console_gfx,
+    sge::renderer::device::ffp_ref const _renderer,
+    sanguis::io_service_ref const _io_service,
+    sge::viewport::manager_ref const _viewport_manager,
+    sanguis::client::cursor_ref const _cursor_gfx)
+    : log_context_{_log_context},
+      log_{
+          _log_context,
+          sanguis::client::log_location(),
+          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("machine")})},
+      settings_(_settings),
+      options_(std::move(_options)),
+      resources_(_resources),
+      gui_style_(_gui_style),
+      renderer_(_renderer),
+      viewport_manager_(_viewport_manager),
+      net_(alda::net::parameters(
+          _log_context,
+          _io_service->impl(),
+          sanguis::net::send_buffer_size(),
+          sanguis::net::receive_buffer_size())),
+      s_conn_(net_.register_connect(
+          alda::net::client::connect_callback{[this] { this->connect_callback(); }})),
+      s_disconn_(net_.register_error(alda::net::client::error_callback{
+          [this](fcppt::string const &_message, boost::system::error_code const &_error)
+          { this->error_callback(_message, _error); }})),
+      s_data_(net_.register_data(alda::net::client::data_callback{
+          [this](alda::net::buffer::circular_receive::streambuf &_data)
+          { this->data_callback(_data); }})),
+      window_system_(_window_system),
+      font_object_(_font_object),
+      console_gfx_(_console_gfx),
+      server_callback_(std::move(_server_callback)),
+      cursor_gfx_(_cursor_gfx)
 {
 }
 
 FCPPT_PP_POP_WARNING
 
-sanguis::client::machine::~machine()
-= default;
+sanguis::client::machine::~machine() = default;
 
-void
-sanguis::client::machine::quickstart(
-	alda::net::port const _port
-)
+void sanguis::client::machine::quickstart(alda::net::port const _port)
 {
-	FCPPT_LOG_DEBUG(
-		log_,
-		fcppt::log::out
-			<< FCPPT_TEXT("quickstart()")
-	)
+  FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("quickstart()"))
 
-	try
-	{
-		server_callback_(
-			_port
-		);
-	}
-	catch(
-		boost::system::system_error const &_error
-	)
-	{
-		this->error_callback(
-			fcppt::from_std_string(
-				_error.what()
-			),
-			_error.code()
-		);
+  try
+  {
+    server_callback_(_port);
+  }
+  catch (boost::system::system_error const &_error)
+  {
+    this->error_callback(fcppt::from_std_string(_error.what()), _error.code());
 
-		return;
-	}
+    return;
+  }
 
-	this->connect(
-		alda::net::host(
-			"localhost"
-		),
-		_port
-	);
+  this->connect(alda::net::host("localhost"), _port);
 }
 
-void
-sanguis::client::machine::connect(
-	alda::net::host const &_host,
-	alda::net::port const _port
-)
+void sanguis::client::machine::connect(alda::net::host const &_host, alda::net::port const _port)
 {
-	net_.connect(
-		_host,
-		_port
-	);
+  net_.connect(_host, _port);
 }
 
-void
-sanguis::client::machine::disconnect()
+void sanguis::client::machine::disconnect() { net_.disconnect(); }
+
+void sanguis::client::machine::send(sanguis::messages::client::base const &_message)
 {
-	net_.disconnect();
+  if (!sanguis::client::net::serialize_to_circular_buffer(_message, net_.send_buffer()))
+  {
+    FCPPT_LOG_ERROR(log_, fcppt::log::out << FCPPT_TEXT("Not enough space left in the send_buffer"))
+    // FIXME: We have to wait for free space here!
+    // Any client message except the very first message (which is part of the handshake)
+    // can technically be lost, so leave this for now.
+  }
+
+  net_.queue_send();
 }
 
-void
-sanguis::client::machine::send(
-	sanguis::messages::client::base const &_message
-)
+bool sanguis::client::machine::process(sanguis::duration const &_time)
 {
-	if(
-		!sanguis::client::net::serialize_to_circular_buffer(
-			_message,
-			net_.send_buffer()
-		)
-	)
-	{
-		FCPPT_LOG_ERROR(
-			log_,
-			fcppt::log::out
-				<< FCPPT_TEXT("Not enough space left in the send_buffer")
-		)
-		// FIXME: We have to wait for free space here!
-		// Any client message except the very first message (which is part of the handshake)
-		// can technically be lost, so leave this for now.
-	}
+  this->process_event(sanguis::client::events::tick(_time));
 
-	net_.queue_send();
+  return fcppt::either::match(
+      window_system_->poll(),
+      [](
+          // TODO(philipp): Return this from client::object
+          awl::main::exit_code const /*_result*/
+      ) { return false; },
+      [this](awl::event::container const &_events)
+      {
+        for (awl::event::base_unique_ptr const &event : _events)
+        {
+          this->process_sge_event(*event);
+        }
+
+        return true;
+      });
 }
 
-bool
-sanguis::client::machine::process(
-	sanguis::duration const &_time
-)
+void sanguis::client::machine::quit()
 {
-	this->process_event(
-		sanguis::client::events::tick(
-			_time
-		)
-	);
+  FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("Exiting the client!"))
 
-	return
-		fcppt::either::match(
-			window_system_->poll(),
-			[](
-				// TODO(philipp): Return this from client::object
-				awl::main::exit_code const  /*_result*/
-			)
-			{
-				return
-					false;
-			},
-			[
-				this
-			](
-				awl::event::container const &_events
-			)
-			{
-				for(
-					awl::event::base_unique_ptr const &event
-					:
-					_events
-				)
-				{
-					this->process_sge_event(
-						*event
-					);
-				}
-
-				return
-					true;
-			}
-		);
+  window_system_->quit(awl::main::exit_success());
 }
 
-void
-sanguis::client::machine::quit()
+sanguis::client::config::settings::object &sanguis::client::machine::settings()
 {
-	FCPPT_LOG_DEBUG(
-		log_,
-		fcppt::log::out
-			<< FCPPT_TEXT("Exiting the client!")
-	)
-
-	window_system_->quit(
-		awl::main::exit_success()
-	);
+  return settings_.get();
 }
 
-sanguis::client::config::settings::object &
-sanguis::client::machine::settings()
+sanguis::client::args::result const &sanguis::client::machine::options() const { return options_; }
+
+sge::gui::style::base const &sanguis::client::machine::gui_style() const
 {
-	return
-		settings_.get();
+  return gui_style_.get();
 }
 
-sanguis::client::args::result const &
-sanguis::client::machine::options() const
+sge::renderer::device::ffp &sanguis::client::machine::renderer() const { return renderer_.get(); }
+
+sge::font::object &sanguis::client::machine::font_object() const { return font_object_.get(); }
+
+sge::console::gfx::object &sanguis::client::machine::console_gfx() { return console_gfx_.get(); }
+
+sanguis::client::load::context const &sanguis::client::machine::resources() const
 {
-	return
-		options_;
+  return resources_.get();
 }
 
-sge::gui::style::base const &
-sanguis::client::machine::gui_style() const
+sge::viewport::manager &sanguis::client::machine::viewport_manager() const
 {
-	return
-		gui_style_.get();
+  return viewport_manager_.get();
 }
 
-sge::renderer::device::ffp &
-sanguis::client::machine::renderer() const
+sanguis::client::cursor &sanguis::client::machine::cursor_gfx() const { return cursor_gfx_.get(); }
+
+fcppt::log::context_reference sanguis::client::machine::log_context() const { return log_context_; }
+
+void sanguis::client::machine::draw()
 {
-	return
-		renderer_.get();
+  sge::renderer::context::scoped_ffp const block(
+      renderer_,
+      fcppt::reference_to_base<sge::renderer::target::base>(
+          fcppt::make_ref(renderer_->onscreen_target())));
+
+  this->process_event(sanguis::client::events::render(fcppt::make_ref(block.get())));
 }
 
-sge::font::object &
-sanguis::client::machine::font_object() const
+void sanguis::client::machine::process_sge_event(awl::event::base const &_event)
 {
-	return
-		font_object_.get();
+  fcppt::optional::maybe_void(
+      fcppt::variant::dynamic_cast_<
+          fcppt::mpl::list::
+              object<sge::renderer::event::render const, sge::input::event_base const>,
+          fcppt::cast::dynamic_fun>(_event),
+      [this](auto const &_variant)
+      {
+        fcppt::variant::match(
+            _variant,
+            [this](fcppt::reference<sge::renderer::event::render const>) { this->draw(); },
+            [this](fcppt::reference<sge::input::event_base const> const _input_event)
+            { this->process_event(sanguis::client::events::input(_input_event)); });
+      });
 }
 
-sge::console::gfx::object &
-sanguis::client::machine::console_gfx()
+void sanguis::client::machine::connect_callback()
 {
-	return
-		console_gfx_.get();
+  this->process_event(sanguis::client::events::connected());
 }
 
-sanguis::client::load::context const &
-sanguis::client::machine::resources() const
+void sanguis::client::machine::error_callback(
+    fcppt::string const &_message, boost::system::error_code const &_error)
 {
-	return
-		resources_.get();
+  this->process_event(sanguis::client::events::net_error(fcppt::copy(_message), _error));
 }
 
-sge::viewport::manager &
-sanguis::client::machine::viewport_manager() const
+void sanguis::client::machine::data_callback(alda::net::buffer::circular_receive::streambuf &_data)
 {
-	return
-		viewport_manager_.get();
-}
+  while (fcppt::optional::maybe(
+      sanguis::client::net::deserialize(_data),
+      fcppt::const_(false),
+      [this](sanguis::messages::server::unique_ptr &&_message)
+      {
+        this->process_event(sanguis::client::events::message(std::move(_message)));
 
-sanguis::client::cursor &
-sanguis::client::machine::cursor_gfx() const
-{
-	return
-		cursor_gfx_.get();
-}
-
-fcppt::log::context_reference
-sanguis::client::machine::log_context() const
-{
-	return
-		log_context_;
-}
-
-void
-sanguis::client::machine::draw()
-{
-	sge::renderer::context::scoped_ffp const block(
-		renderer_,
-		fcppt::reference_to_base<
-			sge::renderer::target::base
-		>(
-			fcppt::make_ref(
-				renderer_->onscreen_target()
-			)
-		)
-	);
-
-	this->process_event(
-		sanguis::client::events::render(
-			fcppt::make_ref(
-				block.get()
-			)
-		)
-	);
-}
-
-void
-sanguis::client::machine::process_sge_event(
-	awl::event::base const &_event
-)
-{
-	fcppt::optional::maybe_void(
-		fcppt::variant::dynamic_cast_<
-			fcppt::mpl::list::object<
-				sge::renderer::event::render const,
-				sge::input::event_base const
-			>,
-			fcppt::cast::dynamic_fun
-		>(
-			_event
-		),
-		[
-			this
-		](
-			auto const &_variant
-		)
-		{
-			fcppt::variant::match(
-				_variant,
-				[
-					this
-				](
-					fcppt::reference<
-						sge::renderer::event::render const
-					>
-				)
-				{
-					this->draw();
-				},
-				[
-					this
-				](
-					fcppt::reference<
-						sge::input::event_base const
-					> const _input_event
-				)
-				{
-					this->process_event(
-						sanguis::client::events::input(
-							_input_event
-						)
-					);
-				}
-			);
-		}
-	);
-}
-
-void
-sanguis::client::machine::connect_callback()
-{
-	this->process_event(
-		sanguis::client::events::connected()
-	);
-}
-
-void
-sanguis::client::machine::error_callback(
-	fcppt::string const &_message,
-	boost::system::error_code const &_error
-)
-{
-	this->process_event(
-		sanguis::client::events::net_error(
-			fcppt::copy(
-				_message
-			),
-			_error
-		)
-	);
-}
-
-void
-sanguis::client::machine::data_callback(
-	alda::net::buffer::circular_receive::streambuf &_data
-)
-{
-	while(
-		fcppt::optional::maybe(
-			sanguis::client::net::deserialize(
-				_data
-			),
-			fcppt::const_(
-				false
-			),
-			[
-				this
-			](
-				sanguis::messages::server::unique_ptr &&_message
-			)
-			{
-				this->process_event(
-					sanguis::client::events::message(
-						std::move(
-							_message
-						)
-					)
-				);
-
-				return
-					true;
-			}
-		)
-	)
-	{
-	}
+        return true;
+      }))
+  {
+  }
 }

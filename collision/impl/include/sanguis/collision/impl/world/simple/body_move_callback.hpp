@@ -5,20 +5,11 @@
 #include <fcppt/function_impl.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::collision::impl::world::simple
 {
 
-using
-body_move_callback
-=
-fcppt::function<
-	void (
-		fcppt::reference<
-			sanguis::collision::impl::world::simple::body
-		>
-	)
->;
+using body_move_callback =
+    fcppt::function<void(fcppt::reference<sanguis::collision::impl::world::simple::body>)>;
 
 }
 

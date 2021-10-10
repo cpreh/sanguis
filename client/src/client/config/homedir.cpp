@@ -5,12 +5,7 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
-std::filesystem::path
-sanguis::client::config::homedir()
+std::filesystem::path sanguis::client::config::homedir()
 {
-	return
-		sge::config::config_path(
-			sanguis::config_app_name()
-		);
+  return sge::config::config_path(sanguis::config_app_name());
 }

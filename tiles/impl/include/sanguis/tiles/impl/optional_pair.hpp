@@ -5,5 +5,4 @@
 #include <sanguis/tiles/impl/optional_pair_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

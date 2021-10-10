@@ -5,5 +5,4 @@
 #include <sanguis/messages/server/parts/speed_fwd.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

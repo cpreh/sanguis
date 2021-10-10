@@ -9,17 +9,12 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
-using
-weapon_category_map
-=
-std::map<
-	sanguis::optional_primary_weapon_type,
-	sanguis::client::load::model::weapon_category_unique_ptr
->;
+using weapon_category_map = std::map<
+    sanguis::optional_primary_weapon_type,
+    sanguis::client::load::model::weapon_category_unique_ptr>;
 
 }
 

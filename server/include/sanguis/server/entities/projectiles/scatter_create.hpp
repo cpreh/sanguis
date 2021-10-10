@@ -7,20 +7,11 @@
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server::entities::projectiles
 {
 
-using
-scatter_create
-=
-fcppt::function<
-	sanguis::server::entities::with_id_unique_ptr(
-		sanguis::server::environment::object &,
-		sanguis::server::team,
-		sanguis::server::angle
-	)
->;
+using scatter_create = fcppt::function<sanguis::server::entities::with_id_unique_ptr(
+    sanguis::server::environment::object &, sanguis::server::team, sanguis::server::angle)>;
 
 }
 

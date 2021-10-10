@@ -4,16 +4,10 @@
 #include <sanguis/client/object_base_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::client
 {
 
-using
-object_base_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::client::object_base
->;
+using object_base_unique_ptr = fcppt::unique_ptr<sanguis::client::object_base>;
 
 }
 

@@ -15,56 +15,40 @@
 #include <sanguis/server/weapons/attributes/spread_radius.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-class shotgun
-:
-	public sanguis::server::weapons::weapon
+class shotgun : public sanguis::server::weapons::weapon
 {
-	FCPPT_NONMOVABLE(
-		shotgun
-	);
+  FCPPT_NONMOVABLE(shotgun);
+
 public:
-	shotgun(
-		sanguis::server::weapons::common_parameters const &,
-		sanguis::weapon_type,
-		sanguis::server::weapons::shotgun_parameters const &
-	);
+  shotgun(
+      sanguis::server::weapons::common_parameters const &,
+      sanguis::weapon_type,
+      sanguis::server::weapons::shotgun_parameters const &);
 
-	~shotgun()
-	override;
+  ~shotgun() override;
 
-	shotgun(
-		sanguis::server::weapons::parameters const &,
-		sanguis::server::weapons::attributes::spread_radius,
-		sanguis::server::weapons::shells,
-		sanguis::server::weapons::attributes::damage
-	);
+  shotgun(
+      sanguis::server::weapons::parameters const &,
+      sanguis::server::weapons::attributes::spread_radius,
+      sanguis::server::weapons::shells,
+      sanguis::server::weapons::attributes::damage);
+
 private:
-	[[nodiscard]]
-	sanguis::server::weapons::unique_ptr
-	clone() const
-	override;
+  [[nodiscard]] sanguis::server::weapons::unique_ptr clone() const override;
 
-	[[nodiscard]]
-	sanguis::server::weapons::attack_result
-	do_attack(
-		sanguis::server::weapons::attack const &
-	)
-	override;
+  [[nodiscard]] sanguis::server::weapons::attack_result
+  do_attack(sanguis::server::weapons::attack const &) override;
 
-	[[nodiscard]]
-	sanguis::weapon_attribute_vector
-	attributes() const
-	override;
+  [[nodiscard]] sanguis::weapon_attribute_vector attributes() const override;
 
-	sanguis::server::weapons::attributes::spread_radius const spread_radius_;
+  sanguis::server::weapons::attributes::spread_radius const spread_radius_;
 
-	sanguis::server::weapons::shells const shells_;
+  sanguis::server::weapons::shells const shells_;
 
-	sanguis::server::weapons::attributes::damage const damage_;
+  sanguis::server::weapons::attributes::damage const damage_;
 };
 
 }

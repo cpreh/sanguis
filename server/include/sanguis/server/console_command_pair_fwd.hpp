@@ -4,17 +4,10 @@
 #include <fcppt/string.hpp>
 #include <fcppt/tuple/object_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-console_command_pair
-=
-fcppt::tuple::object<
-	fcppt::string,
-	fcppt::string
->;
+using console_command_pair = fcppt::tuple::object<fcppt::string, fcppt::string>;
 
 }
 

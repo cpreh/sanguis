@@ -4,14 +4,11 @@
 #include <sanguis/client/draw2d/z_ordering_fwd.hpp>
 #include <sanguis/client/draw2d/entities/order_function.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
 sanguis::client::draw2d::entities::order_function
-constant_order(
-	sanguis::client::draw2d::z_ordering
-);
+    constant_order(sanguis::client::draw2d::z_ordering);
 
 }
 

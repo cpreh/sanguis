@@ -4,5 +4,4 @@
 #include <sanguis/client/slowed_duration_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

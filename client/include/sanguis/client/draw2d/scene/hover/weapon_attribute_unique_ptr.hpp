@@ -4,16 +4,11 @@
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::client::draw2d::scene::hover
 {
 
-using
-weapon_attribute_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::client::draw2d::scene::hover::weapon_attribute
->;
+using weapon_attribute_unique_ptr =
+    fcppt::unique_ptr<sanguis::client::draw2d::scene::hover::weapon_attribute>;
 
 }
 

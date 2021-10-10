@@ -5,5 +5,4 @@
 #include <fcppt/string.hpp>
 #include <fcppt/tuple/object_impl.hpp>
 
-
 #endif

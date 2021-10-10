@@ -3,14 +3,13 @@
 
 #include <sanguis/client/draw2d/sprite/animation/loop_method_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::sprite::animation
 {
 
 enum class loop_method
 {
-	repeat,
-	stop_at_end
+  repeat,
+  stop_at_end
 };
 
 }

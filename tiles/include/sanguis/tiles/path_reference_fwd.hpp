@@ -6,16 +6,10 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tiles
 {
 
-using
-path_reference
-=
-fcppt::reference<
-	std::filesystem::path const
->;
+using path_reference = fcppt::reference<std::filesystem::path const>;
 
 }
 

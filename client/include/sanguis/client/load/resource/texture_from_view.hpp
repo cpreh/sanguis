@@ -5,15 +5,11 @@
 #include <sge/renderer/device/core_ref.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 
-
 namespace sanguis::client::load::resource
 {
 
 sge::texture::const_part_unique_ptr
-texture_from_view(
-	sge::renderer::device::core_ref,
-	sge::image2d::view::const_object const &
-);
+texture_from_view(sge::renderer::device::core_ref, sge::image2d::view::const_object const &);
 
 }
 

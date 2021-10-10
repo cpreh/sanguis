@@ -4,17 +4,10 @@
 #include <sanguis/client/control/scalar.hpp>
 #include <fcppt/math/vector/static_fwd.hpp>
 
-
 namespace sanguis::client::control
 {
 
-using
-attack_dest
-=
-fcppt::math::vector::static_<
-	sanguis::client::control::scalar,
-	2
->;
+using attack_dest = fcppt::math::vector::static_<sanguis::client::control::scalar, 2>;
 
 }
 

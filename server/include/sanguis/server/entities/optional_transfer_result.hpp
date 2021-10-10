@@ -5,5 +5,4 @@
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

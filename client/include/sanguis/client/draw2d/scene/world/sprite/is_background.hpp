@@ -6,27 +6,18 @@
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world::sprite
 {
 
 struct is_background
 {
-	template<
-		typename Choices
-	>
-	struct apply
-	{
-		using
-		type
-		=
-		fcppt::mpl::list::object<
-			fcppt::record::element<
-				sanguis::client::draw2d::scene::world::sprite::is_background_role,
-				bool
-			>
-		>;
-	};
+  template <typename Choices>
+  struct apply
+  {
+    using type = fcppt::mpl::list::object<fcppt::record::element<
+        sanguis::client::draw2d::scene::world::sprite::is_background_role,
+        bool>>;
+  };
 };
 
 }

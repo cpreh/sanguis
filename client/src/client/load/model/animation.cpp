@@ -9,50 +9,27 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
-
 sanguis::client::load::model::animation::animation(
-	fcppt::log::object &_log,
-	sanguis::model::animation const &_animation,
-	sanguis::client::load::model::global_parameters const &_parameters
-)
-:
-	texture_(
-		sanguis::client::load::model::make_texture(
-			_parameters
-		)
-	),
-	series_(
-		sanguis::client::load::model::make_series(
-			_animation,
-			_parameters,
-			texture_
-		)
-	),
-	sound_(
-		sanguis::client::load::model::make_sound(
-			_log,
-			_animation.animation_sound(),
-			fcppt::make_cref(
-				_parameters.sounds()
-			)
-		)
-	)
+    fcppt::log::object &_log,
+    sanguis::model::animation const &_animation,
+    sanguis::client::load::model::global_parameters const &_parameters)
+    : texture_(sanguis::client::load::model::make_texture(_parameters)),
+      series_(sanguis::client::load::model::make_series(_animation, _parameters, texture_)),
+      sound_(sanguis::client::load::model::make_sound(
+          _log, _animation.animation_sound(), fcppt::make_cref(_parameters.sounds())))
 {
 }
 
-sanguis::client::load::model::animation::~animation()
-= default;
+sanguis::client::load::model::animation::~animation() = default;
 
 sanguis::client::load::resource::animation::series const &
 sanguis::client::load::model::animation::series() const
 {
-	return
-		series_;
+  return series_;
 }
 
 sanguis::client::load::resource::optional_sound const &
 sanguis::client::load::model::animation::sound() const
 {
-	return
-		sound_;
+  return sound_;
 }

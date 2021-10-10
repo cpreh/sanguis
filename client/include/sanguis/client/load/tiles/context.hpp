@@ -17,63 +17,38 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::tiles
 {
 
 class context
 {
-	FCPPT_NONMOVABLE(
-		context
-	);
+  FCPPT_NONMOVABLE(context);
+
 public:
-	explicit
-	context(
-		sanguis::client::load::resource::textures_cref
-	);
+  explicit context(sanguis::client::load::resource::textures_cref);
 
-	~context();
+  ~context();
 
-	[[nodiscard]]
-	sanguis::client::load::tiles::texture_container const &
-	set(
-		std::filesystem::path const &,
-		sanguis::tiles::area_container_ref const &
-	);
+  [[nodiscard]] sanguis::client::load::tiles::texture_container const &
+  set(std::filesystem::path const &, sanguis::tiles::area_container_ref const &);
 
-	[[nodiscard]]
-	sanguis::tiles::collection &
-	collection();
+  [[nodiscard]] sanguis::tiles::collection &collection();
 
-	[[nodiscard]]
-	sge::texture::part const &
-	missing_texture(
-		sanguis::tiles::error
-	) const;
+  [[nodiscard]] sge::texture::part const &missing_texture(sanguis::tiles::error) const;
+
 private:
-	using
-	map_type
-	=
-	std::map<
-		std::filesystem::path,
-		sanguis::client::load::tiles::set
-	>;
+  using map_type = std::map<std::filesystem::path, sanguis::client::load::tiles::set>;
 
-	sanguis::tiles::collection collection_;
+  sanguis::tiles::collection collection_;
 
-	sanguis::client::load::resource::textures_cref const textures_;
+  sanguis::client::load::resource::textures_cref const textures_;
 
-	map_type sets_;
+  map_type sets_;
 
-	using
-	missing_texture_array
-	=
-	fcppt::enum_::array<
-		sanguis::tiles::error,
-		sge::texture::const_part_unique_ptr
-	>;
+  using missing_texture_array =
+      fcppt::enum_::array<sanguis::tiles::error, sge::texture::const_part_unique_ptr>;
 
-	missing_texture_array const missing_textures_;
+  missing_texture_array const missing_textures_;
 };
 
 }

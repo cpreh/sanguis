@@ -24,103 +24,49 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-template<
-	typename Tile
->
-sanguis::tiles::impl::optional_content_path
-connecting_images(
-	fcppt::log::object &_log, // NOLINT(google-runtime-references)
-	sanguis::tiles::collection_ref const _collection,
-	sanguis::tiles::error const _error_code,
-	sanguis::creator::tile_grid<
-		Tile
-	> const &_grid,
-	sanguis::creator::pos const _pos
-)
+template <typename Tile>
+sanguis::tiles::impl::optional_content_path connecting_images(
+    fcppt::log::object &_log, // NOLINT(google-runtime-references)
+    sanguis::tiles::collection_ref const _collection,
+    sanguis::tiles::error const _error_code,
+    sanguis::creator::tile_grid<Tile> const &_grid,
+    sanguis::creator::pos const _pos)
 {
-	sanguis::tiles::impl::neighbors<
-		Tile
-	> const neighbors(
-		sanguis::tiles::impl::make_neighbors(
-			_grid,
-			_pos
-		)
-	);
+  sanguis::tiles::impl::neighbors<Tile> const neighbors(
+      sanguis::tiles::impl::make_neighbors(_grid, _pos));
 
-	return
-		fcppt::optional::maybe(
-			sanguis::tiles::impl::make_pair(
-				neighbors
-			),
-			[
-				&_log,
-				&neighbors
-			]
-			{
-				FCPPT_LOG_ERROR(
-					_log,
-					fcppt::log::out
-						<<
-						FCPPT_TEXT("Tile combination ")
-						<<
-						sanguis::tiles::impl::neighbors_to_string(
-							neighbors
-						)
-						<<
-						FCPPT_TEXT(" consists of too many tiles.")
-				)
+  return fcppt::optional::maybe(
+      sanguis::tiles::impl::make_pair(neighbors),
+      [&_log, &neighbors]
+      {
+        FCPPT_LOG_ERROR(
+            _log,
+            fcppt::log::out << FCPPT_TEXT("Tile combination ")
+                            << sanguis::tiles::impl::neighbors_to_string(neighbors)
+                            << FCPPT_TEXT(" consists of too many tiles."))
 
-				return
-					sanguis::tiles::impl::optional_content_path();
-			},
-			[
-				_error_code,
-				&_log,
-				&_collection,
-				&neighbors
-			](
-				sanguis::tiles::pair<
-					Tile
-				> const _pair
-			)
-			{
-FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
-				return
-					sanguis::tiles::impl::filter_connecting(
-						_pair
-					)
-					?
-						sanguis::tiles::impl::optional_content_path{}
-					:
-						sanguis::tiles::impl::images_base(
-							_log,
-							_collection,
-							_error_code,
-							_pair,
-							sanguis::tiles::impl::make_orientation(
-								_pair,
-								neighbors
-							),
-							sanguis::tiles::impl::error_message_function{
-								[
-									&neighbors
-								]{
-									return
-										sanguis::tiles::impl::neighbors_to_string(
-											neighbors
-										);
-								}
-							}
-						)
-					;
-FCPPT_PP_POP_WARNING
-			}
-		);
+        return sanguis::tiles::impl::optional_content_path();
+      },
+      [_error_code, &_log, &_collection, &neighbors](sanguis::tiles::pair<Tile> const _pair)
+      {
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
+        return sanguis::tiles::impl::filter_connecting(_pair)
+                   ? sanguis::tiles::impl::optional_content_path{}
+                   : sanguis::tiles::impl::images_base(
+                         _log,
+                         _collection,
+                         _error_code,
+                         _pair,
+                         sanguis::tiles::impl::make_orientation(_pair, neighbors),
+                         sanguis::tiles::impl::error_message_function{[&neighbors] {
+                           return sanguis::tiles::impl::neighbors_to_string(neighbors);
+                         }});
+        FCPPT_PP_POP_WARNING
+      });
 }
 
 }

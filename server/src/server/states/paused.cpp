@@ -34,144 +34,62 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
-sanguis::server::states::paused::paused(
-	my_context _ctx
-)
-:
-	my_base(
-		std::move(
-			_ctx
-		)
-	),
-	log_{
-		this->context<
-			sanguis::server::machine
-		>().log_context(),
-		sanguis::server::states::log_location(),
-		fcppt::log::parameters_no_function(
-			fcppt::log::name{
-				FCPPT_TEXT("paused")
-			}
-		)
-	}
+sanguis::server::states::paused::paused(my_context _ctx)
+    : my_base(std::move(_ctx)),
+      log_{
+          this->context<sanguis::server::machine>().log_context(),
+          sanguis::server::states::log_location(),
+          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("paused")})} {
+          FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("create"))}
+
+      FCPPT_PP_POP_WARNING
+
+      sanguis::server::states::paused::~paused(){
+          FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("destroy"))}
+
+      boost::statechart::result sanguis::server::states::paused::react(
+          sanguis::server::events::message const &_message)
 {
-	FCPPT_LOG_DEBUG(
-		log_,
-		fcppt::log::out
-			<< FCPPT_TEXT("create")
-	)
+  auto const handle_default_msg(
+      [this](sanguis::server::player_id, sanguis::messages::client::base const &)
+      { return this->forward_event(); });
+
+  return sanguis::server::dispatch<fcppt::mpl::list::object<
+      sanguis::messages::client::info,
+      sanguis::messages::client::pause,
+      sanguis::messages::client::unpause>>(
+      *this, _message, sanguis::server::dispatch_default_function{handle_default_msg});
 }
 
-FCPPT_PP_POP_WARNING
-
-sanguis::server::states::paused::~paused()
+sanguis::messages::call::result sanguis::server::states::paused::operator()(
+    sanguis::server::player_id, sanguis::messages::client::info const &)
 {
-	FCPPT_LOG_DEBUG(
-		log_,
-		fcppt::log::out
-			<< FCPPT_TEXT("destroy")
-	)
+  this->post_event(*this->triggering_event());
+
+  return sanguis::messages::call::result(this->unpause_impl());
 }
 
-boost::statechart::result
-sanguis::server::states::paused::react(
-	sanguis::server::events::message const &_message
-)
+sanguis::messages::call::result sanguis::server::states::paused::operator()(
+    sanguis::server::player_id, sanguis::messages::client::unpause const &)
 {
-	auto const handle_default_msg(
-		[
-			this
-		](
-			sanguis::server::player_id,
-			sanguis::messages::client::base const &
-		)
-		{
-			return
-				this->forward_event();
-		}
-	);
-
-	return
-		sanguis::server::dispatch<
-			fcppt::mpl::list::object<
-				sanguis::messages::client::info,
-				sanguis::messages::client::pause,
-				sanguis::messages::client::unpause
-			>
-		>(
-			*this,
-			_message,
-			sanguis::server::dispatch_default_function{
-				handle_default_msg
-			}
-		);
+  return sanguis::messages::call::result(this->unpause_impl());
 }
 
-sanguis::messages::call::result
-sanguis::server::states::paused::operator()(
-	sanguis::server::player_id,
-	sanguis::messages::client::info const &
-)
+sanguis::messages::call::result sanguis::server::states::paused::operator()(
+    sanguis::server::player_id, sanguis::messages::client::pause const &)
 {
-	this->post_event(
-		*this->triggering_event()
-	);
+  FCPPT_LOG_WARNING(log_, fcppt::log::out << FCPPT_TEXT("Got superfluous pause"))
 
-	return
-		sanguis::messages::call::result(
-			this->unpause_impl()
-		);
+  return sanguis::messages::call::result(this->discard_event());
 }
 
-sanguis::messages::call::result
-sanguis::server::states::paused::operator()(
-	sanguis::server::player_id,
-	sanguis::messages::client::unpause const &
-)
+boost::statechart::result sanguis::server::states::paused::unpause_impl()
 {
-	return
-		sanguis::messages::call::result(
-			this->unpause_impl()
-		);
-}
+  this->context<sanguis::server::machine>().send_to_all(
+      sanguis::messages::server::create(sanguis::messages::server::unpause(fcppt::unit{})));
 
-sanguis::messages::call::result
-sanguis::server::states::paused::operator()(
-	sanguis::server::player_id,
-	sanguis::messages::client::pause const &
-)
-{
-	FCPPT_LOG_WARNING(
-		log_,
-		fcppt::log::out
-			<< FCPPT_TEXT("Got superfluous pause")
-	)
-
-	return
-		sanguis::messages::call::result(
-			this->discard_event()
-		);
-}
-
-boost::statechart::result
-sanguis::server::states::paused::unpause_impl()
-{
-	this->context<
-		sanguis::server::machine
-	>().send_to_all(
-		sanguis::messages::server::create(
-			sanguis::messages::server::unpause(
-				fcppt::unit{}
-			)
-		)
-	);
-
-	return
-		this->transit<
-			sanguis::server::states::unpaused
-		>();
+  return this->transit<sanguis::server::states::unpaused>();
 }

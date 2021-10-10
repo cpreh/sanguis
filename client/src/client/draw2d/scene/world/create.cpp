@@ -15,70 +15,30 @@
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/out.hpp>
 
-
 sanguis::client::draw2d::scene::world::base_unique_ptr
 sanguis::client::draw2d::scene::world::create(
-	fcppt::log::object &_log,
-	sanguis::creator::name const &_name,
-	sanguis::client::draw2d::scene::world::parameters const &_parameters
-)
+    fcppt::log::object &_log,
+    sanguis::creator::name const &_name,
+    sanguis::client::draw2d::scene::world::parameters const &_parameters)
 {
-	if(
-		_name.get()
-		==
-		FCPPT_TEXT("graveyard")
-	)
-	{
-		return
-			fcppt::unique_ptr_to_base<
-				sanguis::client::draw2d::scene::world::base
-			>(
-				fcppt::make_unique_ptr<
-					sanguis::client::draw2d::scene::world::graveyard
-				>(
-					fcppt::make_cref(
-						_parameters.load_context()
-					),
-					fcppt::make_ref(
-						_parameters.client_system()
-					),
-					fcppt::make_ref(
-						_parameters.viewport_manager()
-					)
-				)
-			);
-	}
+  if (_name.get() == FCPPT_TEXT("graveyard"))
+  {
+    return fcppt::unique_ptr_to_base<sanguis::client::draw2d::scene::world::base>(
+        fcppt::make_unique_ptr<sanguis::client::draw2d::scene::world::graveyard>(
+            fcppt::make_cref(_parameters.load_context()),
+            fcppt::make_ref(_parameters.client_system()),
+            fcppt::make_ref(_parameters.viewport_manager())));
+  }
 
-	if(
-		_name.get()
-		==
-		FCPPT_TEXT("start_area")
-	)
-	{
-		return
-			fcppt::unique_ptr_to_base<
-				sanguis::client::draw2d::scene::world::base
-			>(
-				fcppt::make_unique_ptr<
-					sanguis::client::draw2d::scene::world::none
-				>()
-			);
-	}
+  if (_name.get() == FCPPT_TEXT("start_area"))
+  {
+    return fcppt::unique_ptr_to_base<sanguis::client::draw2d::scene::world::base>(
+        fcppt::make_unique_ptr<sanguis::client::draw2d::scene::world::none>());
+  }
 
-	FCPPT_LOG_ERROR(
-		_log,
-		fcppt::log::out
-			<< FCPPT_TEXT("World ")
-			<< _name
-			<< FCPPT_TEXT(" not implemented.")
-	)
+  FCPPT_LOG_ERROR(
+      _log, fcppt::log::out << FCPPT_TEXT("World ") << _name << FCPPT_TEXT(" not implemented."))
 
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::client::draw2d::scene::world::base
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::client::draw2d::scene::world::none
-			>()
-		);
+  return fcppt::unique_ptr_to_base<sanguis::client::draw2d::scene::world::base>(
+      fcppt::make_unique_ptr<sanguis::client::draw2d::scene::world::none>());
 }

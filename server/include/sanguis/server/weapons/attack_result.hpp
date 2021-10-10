@@ -3,14 +3,13 @@
 
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
 enum class attack_result
 {
-	success,
-	failure
+  success,
+  failure
 };
 
 }

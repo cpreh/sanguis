@@ -4,5 +4,4 @@
 #include <sanguis/messages/adapted_types/fundamental_fwd.hpp>
 #include <alda/bindings/fundamental.hpp>
 
-
 #endif

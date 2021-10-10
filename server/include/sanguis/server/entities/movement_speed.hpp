@@ -4,5 +4,4 @@
 #include <sanguis/server/entities/movement_speed_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

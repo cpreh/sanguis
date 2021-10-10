@@ -5,5 +5,4 @@
 #include <sanguis/collision/result_pair.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

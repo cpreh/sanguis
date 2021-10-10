@@ -6,19 +6,13 @@
 #include <alda/bindings/unit_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-pause
-=
-alda::message::object<
-	sanguis::messages::client::types::make_message_id<
-		sanguis::messages::client::types::message::pause
-	>,
-	alda::bindings::unit
->;
+using pause = alda::message::object<
+    sanguis::messages::client::types::make_message_id<
+        sanguis::messages::client::types::message::pause>,
+    alda::bindings::unit>;
 
 }
 

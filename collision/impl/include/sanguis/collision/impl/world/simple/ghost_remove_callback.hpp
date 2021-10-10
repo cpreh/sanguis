@@ -4,18 +4,11 @@
 #include <sanguis/collision/impl/world/simple/ghost_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::collision::impl::world::simple
 {
 
-using
-ghost_remove_callback
-=
-fcppt::function<
-	void (
-		sanguis::collision::impl::world::simple::ghost &
-	)
->;
+using ghost_remove_callback =
+    fcppt::function<void(sanguis::collision::impl::world::simple::ghost &)>;
 
 }
 

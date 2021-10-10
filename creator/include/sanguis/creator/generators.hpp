@@ -4,13 +4,11 @@
 #include <sanguis/creator/generator_vector.hpp>
 #include <sanguis/creator/symbol.hpp>
 
-
 namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-sanguis::creator::generator_vector const &
-generators();
+sanguis::creator::generator_vector const &generators();
 
 }
 

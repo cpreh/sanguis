@@ -5,17 +5,12 @@
 #include <sanguis/creator/impl/random/uniform_size_fwd.hpp>
 #include <fcppt/random/variate_fwd.hpp>
 
-
 namespace sanguis::creator::impl::random
 {
 
-using
-uniform_size_variate
-=
-fcppt::random::variate<
-	sanguis::creator::impl::random::generator,
-	sanguis::creator::impl::random::uniform_size
->;
+using uniform_size_variate = fcppt::random::variate<
+    sanguis::creator::impl::random::generator,
+    sanguis::creator::impl::random::uniform_size>;
 
 }
 

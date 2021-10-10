@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-using
-unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::client::draw2d::entities::base
->;
+using unique_ptr = fcppt::unique_ptr<sanguis::client::draw2d::entities::base>;
 
 }
 

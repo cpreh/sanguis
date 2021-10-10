@@ -21,7 +21,6 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 namespace sanguis::collision::impl::world::simple
 {
 
@@ -29,92 +28,57 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Wnon-virtual-dtor)
 
 class body // NOLINT(fuchsia-multiple-inheritance)
-:
-	public sanguis::collision::world::body,
-	public sanguis::collision::impl::world::simple::body_base_hook
+    : public sanguis::collision::world::body,
+      public sanguis::collision::impl::world::simple::body_base_hook
 {
-	FCPPT_NONMOVABLE(
-		body
-	);
+  FCPPT_NONMOVABLE(body);
+
 public:
-	body(
-		sanguis::collision::world::body_parameters const &,
-		sanguis::collision::impl::world::simple::body_remove_callback &&,
-		sanguis::collision::impl::world::simple::body_move_callback &&
-	);
+  body(
+      sanguis::collision::world::body_parameters const &,
+      sanguis::collision::impl::world::simple::body_remove_callback &&,
+      sanguis::collision::impl::world::simple::body_move_callback &&);
 
-	~body()
-	override;
+  ~body() override;
 
-	void
-	center(
-		sanguis::collision::center
-	)
-	override;
+  void center(sanguis::collision::center) override;
 
-	void
-	move(
-		sanguis::collision::optional_result const &,
-		sanguis::collision::duration
-	);
+  void move(sanguis::collision::optional_result const &, sanguis::collision::duration);
 
-	void
-	push(
-		sanguis::collision::result const &
-	);
+  void push(sanguis::collision::result const &);
 
-	[[nodiscard]]
-	sanguis::collision::center
-	center() const
-	override;
+  [[nodiscard]] sanguis::collision::center center() const override;
 
-	void
-	speed(
-		sanguis::collision::speed
-	)
-	override;
+  void speed(sanguis::collision::speed) override;
 
-	[[nodiscard]]
-	sanguis::collision::speed
-	speed() const
-	override;
+  [[nodiscard]] sanguis::collision::speed speed() const override;
 
-	[[nodiscard]]
-	sanguis::collision::radius
-	radius() const
-	override;
+  [[nodiscard]] sanguis::collision::radius radius() const override;
 
-	[[nodiscard]]
-	sanguis::collision::optional_mass
-	mass() const
-	override;
+  [[nodiscard]] sanguis::collision::optional_mass mass() const override;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_group
-	collision_group() const;
+  [[nodiscard]] sanguis::collision::world::body_group collision_group() const;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_base &
-	body_base() const;
+  [[nodiscard]] sanguis::collision::world::body_base &body_base() const;
+
 private:
-	void
-	speed_changed();
+  void speed_changed();
 
-	sanguis::collision::impl::world::simple::body_remove_callback const body_remove_callback_;
+  sanguis::collision::impl::world::simple::body_remove_callback const body_remove_callback_;
 
-	sanguis::collision::impl::world::simple::body_move_callback const body_move_callback_;
+  sanguis::collision::impl::world::simple::body_move_callback const body_move_callback_;
 
-	sanguis::collision::radius const radius_;
+  sanguis::collision::radius const radius_;
 
-	sanguis::collision::optional_mass const mass_;
+  sanguis::collision::optional_mass const mass_;
 
-	sanguis::collision::world::body_group const collision_group_;
+  sanguis::collision::world::body_group const collision_group_;
 
-	sanguis::collision::world::body_base &body_base_;
+  sanguis::collision::world::body_base &body_base_;
 
-	sanguis::collision::center center_;
+  sanguis::collision::center center_;
 
-	sanguis::collision::speed speed_;
+  sanguis::collision::speed speed_;
 };
 
 FCPPT_PP_POP_WARNING

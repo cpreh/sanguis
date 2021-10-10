@@ -10,19 +10,14 @@
 #include <QWidget>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
-sanguis::tools::animations::frame_container
-make_frames(
-	QImage const &,
-	fcppt::reference<
-		QWidget
-	>,
-	sanguis::model::object const &,
-	sanguis::model::animation const &
-);
+sanguis::tools::animations::frame_container make_frames(
+    QImage const &,
+    fcppt::reference<QWidget>,
+    sanguis::model::object const &,
+    sanguis::model::animation const &);
 
 }
 

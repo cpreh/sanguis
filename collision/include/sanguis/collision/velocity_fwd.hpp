@@ -7,17 +7,10 @@
 #include <boost/units/systems/si/velocity.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::collision
 {
 
-using
-velocity
-=
-boost::units::quantity<
-	boost::units::si::velocity,
-	sanguis::collision::unit
->;
+using velocity = boost::units::quantity<boost::units::si::velocity, sanguis::collision::unit>;
 
 }
 

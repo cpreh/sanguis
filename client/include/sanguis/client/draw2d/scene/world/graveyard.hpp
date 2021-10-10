@@ -10,40 +10,27 @@
 #include <sge/viewport/manager_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
-class graveyard
-:
-	public sanguis::client::draw2d::scene::world::base
+class graveyard : public sanguis::client::draw2d::scene::world::base
 {
-	FCPPT_NONMOVABLE(
-		graveyard
-	);
+  FCPPT_NONMOVABLE(graveyard);
+
 public:
-	graveyard(
-		sanguis::client::load::context_cref,
-		sanguis::client::draw2d::sprite::client::system_ref,
-		sge::viewport::manager_ref
-	);
+  graveyard(
+      sanguis::client::load::context_cref,
+      sanguis::client::draw2d::sprite::client::system_ref,
+      sge::viewport::manager_ref);
 
-	~graveyard()
-	override;
+  ~graveyard() override;
+
 private:
-	void
-	update(
-		sanguis::client::slowed_duration
-	)
-	override;
+  void update(sanguis::client::slowed_duration) override;
 
-	void
-	draw_after(
-		sanguis::client::draw2d::scene::world::render_parameters const &
-	)
-	override;
+  void draw_after(sanguis::client::draw2d::scene::world::render_parameters const &) override;
 
-	sanguis::client::draw2d::scene::light light_;
+  sanguis::client::draw2d::scene::light light_;
 };
 
 }

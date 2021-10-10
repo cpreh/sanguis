@@ -4,14 +4,10 @@
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <sanguis/creator/pos.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
-sanguis::creator::pos
-center_to_grid_pos(
-	sanguis::client::draw2d::sprite::center const &
-);
+sanguis::creator::pos center_to_grid_pos(sanguis::client::draw2d::sprite::center const &);
 
 }
 

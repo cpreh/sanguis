@@ -4,18 +4,10 @@
 #include <sanguis/messages/client/base_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client
 {
 
-using
-send_callback
-=
-fcppt::function<
-	void(
-		sanguis::messages::client::base const &
-	)
->;
+using send_callback = fcppt::function<void(sanguis::messages::client::base const &)>;
 
 }
 

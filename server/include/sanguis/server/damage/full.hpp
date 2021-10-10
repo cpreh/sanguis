@@ -3,7 +3,6 @@
 
 #include <sanguis/server/damage/unit.hpp>
 
-
 namespace sanguis::server::damage
 {
 

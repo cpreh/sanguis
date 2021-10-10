@@ -5,17 +5,11 @@
 #include <sanguis/messages/types/vector2_fwd.hpp>
 #include <alda/bindings/static_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-vector2
-=
-alda::bindings::static_<
-	sanguis::messages::types::vector2,
-	sanguis::messages::adapted_types::space_unit
->;
+using vector2 = alda::bindings::
+    static_<sanguis::messages::types::vector2, sanguis::messages::adapted_types::space_unit>;
 
 }
 

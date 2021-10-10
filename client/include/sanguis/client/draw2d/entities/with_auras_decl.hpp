@@ -14,72 +14,40 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-template<
-	typename Base
->
-class with_auras
-:
-	public sanguis::client::draw2d::entities::ifaces::with_auras,
-	public Base
+template <typename Base>
+class with_auras : public sanguis::client::draw2d::entities::ifaces::with_auras, public Base
 {
-	FCPPT_NONMOVABLE(
-		with_auras
-	);
+  FCPPT_NONMOVABLE(with_auras);
+
 public:
-	using
-	base_parameters
-	=
-	typename
-	Base::parameters_type;
+  using base_parameters = typename Base::parameters_type;
 
-	using
-	parameters_type
-	=
-	sanguis::client::draw2d::entities::with_auras_parameters<
-		base_parameters
-	>;
+  using parameters_type = sanguis::client::draw2d::entities::with_auras_parameters<base_parameters>;
 
-	explicit
-	with_auras(
-		parameters_type const &
-	);
+  explicit with_auras(parameters_type const &);
 
-	~with_auras()
-	override;
+  ~with_auras() override;
+
 protected:
-	void
-	update()
-	override;
+  void update() override;
 
-	void
-	on_die()
-	override;
+  void on_die() override;
+
 private:
-	void
-	add_aura(
-		sanguis::aura_type
-	)
-	override;
+  void add_aura(sanguis::aura_type) override;
 
-	sanguis::client::load::auras::context_ref const aura_load_context_;
+  sanguis::client::load::auras::context_ref const aura_load_context_;
 
-	sanguis::client::draw2d::sprite::normal::system_ref const normal_system_;
+  sanguis::client::draw2d::sprite::normal::system_ref const normal_system_;
 
-	sanguis::diff_timer rotate_timer_;
+  sanguis::diff_timer rotate_timer_;
 
-	using
-	sprite_map
-	=
-	std::map<
-		sanguis::aura_type,
-		sanguis::client::draw2d::sprite::normal::object
-	>;
+  using sprite_map = std::map<sanguis::aura_type, sanguis::client::draw2d::sprite::normal::object>;
 
-	sprite_map sprites_;
+  sprite_map sprites_;
 };
 
 }

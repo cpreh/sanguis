@@ -4,14 +4,10 @@
 #include <sanguis/server/damage/unit_value.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::server::damage::unit_value,
-	modified_unit
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::server::damage::unit_value, modified_unit);
 
 }
 

@@ -8,23 +8,13 @@
 #include <fcppt/text.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
-
-void
-sanguis::server::perks::tree::choose(
-	sanguis::server::perks::tree::container &_tree,
-	sanguis::perk_type const _perk_type
-)
+void sanguis::server::perks::tree::choose(
+    sanguis::server::perks::tree::container &_tree, sanguis::perk_type const _perk_type)
 {
-	fcppt::optional::to_exception(
-		sanguis::server::perks::tree::find_node(
-			_tree,
-			_perk_type
-		),
-		[]{
-			return
-				sanguis::exception{
-					FCPPT_TEXT("Perk not found in the tree!")
-				};
-		}
-	).get().value().choose();
+  fcppt::optional::to_exception(
+      sanguis::server::perks::tree::find_node(_tree, _perk_type),
+      [] { return sanguis::exception{FCPPT_TEXT("Perk not found in the tree!")}; })
+      .get()
+      .value()
+      .choose();
 }

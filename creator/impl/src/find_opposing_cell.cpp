@@ -11,85 +11,34 @@
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 // Finds an empty neighboring cell in the grid that isn't
 // already part of the maze. There should at most be one
 // such cell.
-fcppt::optional::object<
-	sanguis::creator::pos
->
-sanguis::creator::impl::find_opposing_cell
-(
-	sanguis::creator::impl::reachable_grid const &grid,
-	sanguis::creator::pos const &cell
-)
+fcppt::optional::object<sanguis::creator::pos> sanguis::creator::impl::find_opposing_cell(
+    sanguis::creator::impl::reachable_grid const &grid, sanguis::creator::pos const &cell)
 {
-	// discard border tiles
-	if (
-		cell.x() == grid.size().w() - 1
-		||
-		cell.x() == 0
-		||
-		cell.y() == grid.size().h() - 1
-		||
-		cell.y() == 0
-	)
-	{
-		return fcppt::optional::object<
-			sanguis::creator::pos
-		>();
-	}
+  // discard border tiles
+  if (cell.x() == grid.size().w() - 1 || cell.x() == 0 || cell.y() == grid.size().h() - 1 ||
+      cell.y() == 0)
+  {
+    return fcppt::optional::object<sanguis::creator::pos>();
+  }
 
-	for(
-		auto const &n
-		:
-		fcppt::container::grid::neumann_neighbors(
-			cell)
+  for (auto const &n : fcppt::container::grid::neumann_neighbors(cell)
 
-	)
-	{
-		sanguis::creator::pos const opposite(
-			cell
-			-
-			(
-				n
-				-
-				cell
-			)
-		);
+  )
+  {
+    sanguis::creator::pos const opposite(cell - (n - cell));
 
-		if(
-			FCPPT_ASSERT_OPTIONAL_ERROR(
-				fcppt::container::grid::at_optional(
-					grid,
-					n
-				)
-			).get()
-			==
-			sanguis::creator::impl::reachable(true)
-		)
-		{
-			return
-				FCPPT_ASSERT_OPTIONAL_ERROR(
-					fcppt::container::grid::at_optional(
-						grid,
-						opposite
-					)
-				).get()
-				==
-				sanguis::creator::impl::reachable(true)
-				?
-					fcppt::optional::object<
-						sanguis::creator::pos
-					>()
-				:
-					fcppt::optional::object<
-						sanguis::creator::pos
-					>(
-						opposite
-					);
-		}
-	}
+    if (FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(grid, n)).get() ==
+        sanguis::creator::impl::reachable(true))
+    {
+      return FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(grid, opposite))
+                         .get() == sanguis::creator::impl::reachable(true)
+                 ? fcppt::optional::object<sanguis::creator::pos>()
+                 : fcppt::optional::object<sanguis::creator::pos>(opposite);
+    }
+  }
 
-	FCPPT_ASSERT_UNREACHABLE;
+  FCPPT_ASSERT_UNREACHABLE;
 }

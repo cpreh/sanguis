@@ -4,18 +4,10 @@
 #include <sanguis/client/control/actions/any_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client::control::actions
 {
 
-using
-callback
-=
-fcppt::function<
-	void (
-		sanguis::client::control::actions::any const &
-	)
->;
+using callback = fcppt::function<void(sanguis::client::control::actions::any const &)>;
 
 }
 

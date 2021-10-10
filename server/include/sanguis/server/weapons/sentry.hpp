@@ -13,51 +13,35 @@
 #include <sanguis/server/weapons/attributes/health.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-class sentry
-:
-	public sanguis::server::weapons::spawn
+class sentry : public sanguis::server::weapons::spawn
 {
-	FCPPT_NONMOVABLE(
-		sentry
-	);
+  FCPPT_NONMOVABLE(sentry);
+
 public:
-	sentry(
-		sanguis::server::weapons::common_parameters const &,
-		sanguis::server::weapons::spawn_weapon &&,
-		sanguis::server::weapons::sentry_parameters const &
-	);
+  sentry(
+      sanguis::server::weapons::common_parameters const &,
+      sanguis::server::weapons::spawn_weapon &&,
+      sanguis::server::weapons::sentry_parameters const &);
 
-	~sentry()
-	override;
+  ~sentry() override;
 
-	sentry(
-		sanguis::server::weapons::spawn_parameters const &,
-		sanguis::server::weapons::attributes::health
-	);
+  sentry(
+      sanguis::server::weapons::spawn_parameters const &,
+      sanguis::server::weapons::attributes::health);
+
 private:
-	[[nodiscard]]
-	sanguis::server::weapons::unique_ptr
-	clone() const
-	override;
+  [[nodiscard]] sanguis::server::weapons::unique_ptr clone() const override;
 
-	[[nodiscard]]
-	sanguis::server::entities::optional_base_ref
-	do_spawn(
-		sanguis::server::weapons::attack const &,
-		sanguis::server::weapons::spawn_weapon const &
-	)
-	override;
+  [[nodiscard]] sanguis::server::entities::optional_base_ref do_spawn(
+      sanguis::server::weapons::attack const &,
+      sanguis::server::weapons::spawn_weapon const &) override;
 
-	[[nodiscard]]
-	sanguis::weapon_attribute_vector
-	extra_attributes() const
-	override;
+  [[nodiscard]] sanguis::weapon_attribute_vector extra_attributes() const override;
 
-	sanguis::server::weapons::attributes::health const health_;
+  sanguis::server::weapons::attributes::health const health_;
 };
 
 }

@@ -7,35 +7,17 @@
 #include <fcppt/math/vector/length.hpp>
 #include <fcppt/math/vector/map.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
-inline
-bool
-collides(
-	sanguis::collision::impl::circle const &_left,
-	sanguis::collision::impl::circle const &_right
-)
+inline bool collides(
+    sanguis::collision::impl::circle const &_left, sanguis::collision::impl::circle const &_right)
 {
-	return
-		// TODO(philipp): Can we do this on boost::units directly?
-		fcppt::math::vector::length(
-			fcppt::math::vector::map(
-				_left.origin()
-				-
-				_right.origin()
-				,
-				fcppt::boost_units_value{}
-			)
-		)
-		<=
-		(
-			_left.radius()
-			+
-			_right.radius()
-		).value()
-		;
+  return
+      // TODO(philipp): Can we do this on boost::units directly?
+      fcppt::math::vector::length(
+          fcppt::math::vector::map(_left.origin() - _right.origin(), fcppt::boost_units_value{})) <=
+      (_left.radius() + _right.radius()).value();
 }
 
 }

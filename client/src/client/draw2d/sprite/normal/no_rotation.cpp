@@ -3,14 +3,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 
-
-sanguis::client::draw2d::sprite::rotation
-sanguis::client::draw2d::sprite::normal::no_rotation()
+sanguis::client::draw2d::sprite::rotation sanguis::client::draw2d::sprite::normal::no_rotation()
 {
-	return
-		fcppt::literal<
-			sanguis::client::draw2d::sprite::rotation
-		>(
-			0
-		);
+  return fcppt::literal<sanguis::client::draw2d::sprite::rotation>(0);
 }

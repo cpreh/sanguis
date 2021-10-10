@@ -9,77 +9,40 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
-bool
-sanguis::server::perks::tree::choosable(
-	sanguis::server::perks::tree::container const &_tree,
-	sanguis::perk_type const _perk,
-	sanguis::server::level const _player_level
-)
+bool sanguis::server::perks::tree::choosable(
+    sanguis::server::perks::tree::container const &_tree,
+    sanguis::perk_type const _perk,
+    sanguis::server::level const _player_level)
 {
-	return
-		fcppt::optional::maybe(
-			sanguis::server::perks::tree::find_node(
-				_tree,
-				_perk
-			),
-			fcppt::const_(
-				false
-			),
-			[
-				_player_level
-			](
-				fcppt::reference<
-					sanguis::server::perks::tree::object const
-				> const _node
-			)
-			{
-				{
-					sanguis::server::perks::tree::status const &current(
-						_node.get().value()
-					);
+  return fcppt::optional::maybe(
+      sanguis::server::perks::tree::find_node(_tree, _perk),
+      fcppt::const_(false),
+      [_player_level](fcppt::reference<sanguis::server::perks::tree::object const> const _node)
+      {
+        {
+          sanguis::server::perks::tree::status const &current(_node.get().value());
 
-					if(
-						current.required_player_level().get()
-						>
-						_player_level.get()
-						||
-						current.level().get()
-						==
-						current.max_level().get()
-					)
-					{
-						return
-							false;
-					}
-				}
+          if (current.required_player_level().get() > _player_level.get() ||
+              current.level().get() == current.max_level().get())
+          {
+            return false;
+          }
+        }
 
-				// TODO(philipp): Do this differently
-				for(
-					sanguis::server::perks::tree::object::const_optional_ref pos(
-						_node
-					);
-					pos.get_unsafe().get().parent().has_value();
-					pos = pos.get_unsafe().get().parent()
-				)
-				{
-					sanguis::server::perks::tree::status const &cur_status(
-						pos.get_unsafe().get().value()
-					);
+        // TODO(philipp): Do this differently
+        for (sanguis::server::perks::tree::object::const_optional_ref pos(_node);
+             pos.get_unsafe().get().parent().has_value();
+             pos = pos.get_unsafe().get().parent())
+        {
+          sanguis::server::perks::tree::status const &cur_status(pos.get_unsafe().get().value());
 
-					if(
-						cur_status.required_parent_level().get()
-						>
-						pos.get_unsafe().get().parent().get_unsafe().get().value().level().get()
-					)
-					{
-						return
-							false;
-					}
-				}
+          if (cur_status.required_parent_level().get() >
+              pos.get_unsafe().get().parent().get_unsafe().get().value().level().get())
+          {
+            return false;
+          }
+        }
 
-				return
-					true;
-			}
-		);
+        return true;
+      });
 }

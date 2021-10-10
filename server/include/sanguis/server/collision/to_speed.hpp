@@ -4,14 +4,10 @@
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 
-
 namespace sanguis::server::collision
 {
 
-sanguis::collision::speed
-to_speed(
-	sanguis::server::speed const &
-);
+sanguis::collision::speed to_speed(sanguis::server::speed const &);
 
 }
 

@@ -29,152 +29,56 @@
 #include <numbers>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::server::world::insert_with_id_pair_container
-sanguis::server::world::place_multiple(
-	sanguis::random_generator &_random_generator,
-	sanguis::server::world::place_with_id_callback const &_place,
-	sanguis::creator::pos const &_pos,
-	sanguis::server::radius const _radius
-)
+sanguis::server::world::insert_with_id_pair_container sanguis::server::world::place_multiple(
+    sanguis::random_generator &_random_generator,
+    sanguis::server::world::place_with_id_callback const &_place,
+    sanguis::creator::pos const &_pos,
+    sanguis::server::radius const _radius)
 {
-	sanguis::server::center const center(
-		sanguis::server::world::grid_pos_to_center(
-			_pos
-		)
-	);
+  sanguis::server::center const center(sanguis::server::world::grid_pos_to_center(_pos));
 
-	using
-	uniform_space_unit
-	=
-	fcppt::random::distribution::parameters::uniform_real<
-		sanguis::server::space_unit
-	>;
+  using uniform_space_unit =
+      fcppt::random::distribution::parameters::uniform_real<sanguis::server::space_unit>;
 
-	using
-	uniform_angle
-	=
-	fcppt::random::distribution::parameters::uniform_real<
-		sanguis::server::angle
-	>;
+  using uniform_angle =
+      fcppt::random::distribution::parameters::uniform_real<sanguis::server::angle>;
 
-	auto const tile_size_half(
-		fcppt::cast::int_to_float<
-			sanguis::server::space_unit
-		>(
-			sanguis::creator::tile_size::value
-			/
-			2
-		)
-	);
+  auto const tile_size_half(fcppt::cast::int_to_float<sanguis::server::space_unit>(
+      sanguis::creator::tile_size::value / 2));
 
-	sanguis::server::space_unit const space(
-		tile_size_half
-		-
-		_radius.get()
-	);
+  sanguis::server::space_unit const space(tile_size_half - _radius.get());
 
-	if(
-		space <= 0.F
-	)
-	{
-		return
-			sanguis::server::world::insert_with_id_pair_container();
-	}
+  if (space <= 0.F)
+  {
+    return sanguis::server::world::insert_with_id_pair_container();
+  }
 
-	auto random_coordinate(
-		fcppt::random::make_variate(
-			fcppt::make_ref(
-				_random_generator
-			),
-			fcppt::random::distribution::make_basic(
-				uniform_space_unit(
-					uniform_space_unit::min(
-						-space
-					),
-					uniform_space_unit::sup(
-						+space
-					)
-				)
-			)
-		)
-	);
+  auto random_coordinate(fcppt::random::make_variate(
+      fcppt::make_ref(_random_generator),
+      fcppt::random::distribution::make_basic(
+          uniform_space_unit(uniform_space_unit::min(-space), uniform_space_unit::sup(+space)))));
 
-	auto random_angle(
-		fcppt::random::make_variate(
-			fcppt::make_ref(
-				_random_generator
-			),
-			fcppt::random::distribution::make_basic(
-				uniform_angle(
-					uniform_angle::min(
-						sanguis::server::angle(
-							0.F
-						)
-					),
-					uniform_angle::sup(
-						sanguis::server::angle(
-							std::numbers::pi_v<
-								sanguis::server::space_unit
-							>
-						)
-						*
-						fcppt::literal<
-							sanguis::server::angle
-						>(
-							2
-						)
-					)
-				)
-			)
-		)
-	);
+  auto random_angle(fcppt::random::make_variate(
+      fcppt::make_ref(_random_generator),
+      fcppt::random::distribution::make_basic(uniform_angle(
+          uniform_angle::min(sanguis::server::angle(0.F)),
+          uniform_angle::sup(
+              sanguis::server::angle(std::numbers::pi_v<sanguis::server::space_unit>) *
+              fcppt::literal<sanguis::server::angle>(2))))));
 
-	sanguis::server::space_unit const num_fits(
-		tile_size_half
-		/
-		_radius.get()
-	);
+  sanguis::server::space_unit const num_fits(tile_size_half / _radius.get());
 
-	return
-		fcppt::algorithm::map<
-			sanguis::server::world::insert_with_id_pair_container
-		>(
-			fcppt::make_int_range_count(
-				fcppt::cast::to_unsigned(
-					fcppt::cast::float_to_int<
-						int
-					>(
-						num_fits
-						*
-						num_fits
-					)
-				)
-			),
-			[
-				center,
-				&random_coordinate,
-				&random_angle,
-				&_place
-			](
-				unsigned
-			)
-			{
-				return
-					sanguis::server::world::insert_with_id_pair(
-						_place(),
-						sanguis::server::entities::insert_parameters(
-							sanguis::server::center(
-								sanguis::server::vector(
-									random_coordinate(),
-									random_coordinate()
-								)
-							)
-							+
-							center,
-							random_angle()
-						)
-					);
-			}
-		);
+  return fcppt::algorithm::map<sanguis::server::world::insert_with_id_pair_container>(
+      fcppt::make_int_range_count(
+          fcppt::cast::to_unsigned(fcppt::cast::float_to_int<int>(num_fits * num_fits))),
+      [center, &random_coordinate, &random_angle, &_place](unsigned)
+      {
+        return sanguis::server::world::insert_with_id_pair(
+            _place(),
+            sanguis::server::entities::insert_parameters(
+                sanguis::server::center(
+                    sanguis::server::vector(random_coordinate(), random_coordinate())) +
+                    center,
+                random_angle()));
+      });
 }

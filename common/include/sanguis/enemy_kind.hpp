@@ -3,17 +3,16 @@
 
 #include <sanguis/enemy_kind_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class enemy_kind
 {
-	normal,
-	champion,
-	unique,
-	boss,
-	fcppt_maximum = boss
+  normal,
+  champion,
+  unique,
+  boss,
+  fcppt_maximum = boss
 };
 
 }

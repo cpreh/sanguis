@@ -4,16 +4,10 @@
 #include <sanguis/tiles/area_container.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::tiles
 {
 
-using
-area_container_ref
-=
-fcppt::reference<
-	sanguis::tiles::area_container const
->;
+using area_container_ref = fcppt::reference<sanguis::tiles::area_container const>;
 
 }
 

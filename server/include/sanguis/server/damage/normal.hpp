@@ -6,7 +6,6 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 namespace sanguis::server::damage
 {
 

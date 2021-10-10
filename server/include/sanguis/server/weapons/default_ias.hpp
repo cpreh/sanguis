@@ -3,12 +3,10 @@
 
 #include <sanguis/server/weapons/ias.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-sanguis::server::weapons::ias
-default_ias();
+sanguis::server::weapons::ias default_ias();
 
 }
 

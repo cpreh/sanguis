@@ -13,50 +13,32 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
 class collection
 {
-	FCPPT_NONMOVABLE(
-		collection
-	);
+  FCPPT_NONMOVABLE(collection);
+
 public:
-	[[nodiscard]]
-	sanguis::client::load::model::object const &
-	operator[](
-		sanguis::load::model::path const &
-	) const;
+  [[nodiscard]] sanguis::client::load::model::object const &
+  operator[](sanguis::load::model::path const &) const;
 
-	[[nodiscard]]
-	collection(
-		fcppt::log::context_reference,
-		sanguis::client::load::resource::context_cref
-	);
+  [[nodiscard]] collection(
+      fcppt::log::context_reference, sanguis::client::load::resource::context_cref);
 
-	~collection();
+  ~collection();
+
 private:
-	mutable fcppt::log::object log_;
+  mutable fcppt::log::object log_;
 
-	sanguis::client::load::resource::context_cref const resources_;
+  sanguis::client::load::resource::context_cref const resources_;
 
-	using
-	model_unique_ptr
-	=
-	fcppt::unique_ptr<
-		sanguis::client::load::model::object
-	>;
+  using model_unique_ptr = fcppt::unique_ptr<sanguis::client::load::model::object>;
 
-	using
-	model_map
-	=
-	std::map<
-		sanguis::load::model::path,
-		model_unique_ptr
-	>;
+  using model_map = std::map<sanguis::load::model::path, model_unique_ptr>;
 
-	mutable model_map models_;
+  mutable model_map models_;
 };
 
 }

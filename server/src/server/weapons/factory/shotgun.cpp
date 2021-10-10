@@ -24,72 +24,50 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
-
-sanguis::server::weapons::unique_ptr
-sanguis::server::weapons::factory::shotgun(
-	sanguis::server::weapons::factory::parameters const &_parameters
-)
+sanguis::server::weapons::unique_ptr sanguis::server::weapons::factory::shotgun(
+    sanguis::server::weapons::factory::parameters const &_parameters)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::server::weapons::weapon
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::weapons::shotgun
-			>(
-				_parameters.common_parameters(),
-				_parameters.weapon_type(),
-				sanguis::server::weapons::modifiers::apply(
-					_parameters.random_generator(),
-					_parameters.difficulty(),
-					sanguis::server::weapons::modifiers::make_guaranteed<
-						sanguis::server::weapons::shotgun_parameters
-					>(
-						sanguis::server::weapons::modifiers::damage{}
-					),
-					sanguis::server::weapons::modifiers::make_potential<
-						sanguis::server::weapons::shotgun_parameters
-					>(
-						sanguis::server::weapons::modifiers::accuracy{},
-						sanguis::server::weapons::modifiers::spread_radius{},
-						sanguis::server::weapons::modifiers::magazine_size{}
-					),
-					sanguis::server::weapons::shotgun_parameters(
-						sanguis::server::weapons::accuracy(
-							0.9F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						),
-						sanguis::server::weapons::backswing_time(
-							sanguis::duration_second(
-								0.5F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							)
-						),
-						sanguis::server::weapons::cast_point(
-							sanguis::duration_second(
-								0.5F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							)
-						),
-						sanguis::server::weapons::spread_radius(
-							0.2F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						),
-						sanguis::server::weapons::shells(
-							10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						),
-						sanguis::server::weapons::damage(
-							2.5F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						),
-						sanguis::server::weapons::magazine_size(
-							8U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						),
-						sanguis::server::weapons::reload_time(
-							sanguis::duration_second(
-								3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							)
-						),
-						sanguis::server::weapons::range(
-							1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						)
-					)
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_base<
+      sanguis::server::weapons::weapon>(fcppt::make_unique_ptr<sanguis::server::weapons::shotgun>(
+      _parameters.common_parameters(),
+      _parameters.weapon_type(),
+      sanguis::server::weapons::modifiers::apply(
+          _parameters.random_generator(),
+          _parameters.difficulty(),
+          sanguis::server::weapons::modifiers::make_guaranteed<
+              sanguis::server::weapons::shotgun_parameters>(
+              sanguis::server::weapons::modifiers::damage{}),
+          sanguis::server::weapons::modifiers::make_potential<
+              sanguis::server::weapons::shotgun_parameters>(
+              sanguis::server::weapons::modifiers::accuracy{},
+              sanguis::server::weapons::modifiers::spread_radius{},
+              sanguis::server::weapons::modifiers::magazine_size{}),
+          sanguis::server::weapons::shotgun_parameters(
+              sanguis::server::weapons::accuracy(
+                  0.9F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  ),
+              sanguis::server::weapons::backswing_time(sanguis::duration_second(
+                  0.5F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  )),
+              sanguis::server::weapons::cast_point(sanguis::duration_second(
+                  0.5F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  )),
+              sanguis::server::weapons::spread_radius(
+                  0.2F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  ),
+              sanguis::server::weapons::shells(
+                  10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  ),
+              sanguis::server::weapons::damage(
+                  2.5F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  ),
+              sanguis::server::weapons::magazine_size(
+                  8U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  ),
+              sanguis::server::weapons::reload_time(sanguis::duration_second(
+                  3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  )),
+              sanguis::server::weapons::range(
+                  1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  )))));
 }

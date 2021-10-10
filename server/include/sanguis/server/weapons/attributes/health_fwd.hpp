@@ -4,16 +4,10 @@
 #include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/weapons/attributes/basic_fwd.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-using
-health
-=
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::health
->;
+using health = sanguis::server::weapons::attributes::basic<sanguis::server::health>;
 
 }
 

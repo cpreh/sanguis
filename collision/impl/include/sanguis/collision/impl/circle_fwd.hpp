@@ -4,16 +4,10 @@
 #include <sanguis/collision/length_fwd.hpp>
 #include <fcppt/math/sphere/circle_fwd.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
-using
-circle
-=
-fcppt::math::sphere::circle<
-	sanguis::collision::length
->;
+using circle = fcppt::math::sphere::circle<sanguis::collision::length>;
 
 }
 

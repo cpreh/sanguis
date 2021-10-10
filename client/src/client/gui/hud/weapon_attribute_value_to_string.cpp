@@ -5,23 +5,14 @@
 #include <sstream>
 #include <fcppt/config/external_end.hpp>
 
-
-sge::font::string
-sanguis::client::gui::hud::weapon_attribute_value_to_string(
-	sanguis::weapon_attribute_value const _value
-)
+sge::font::string sanguis::client::gui::hud::weapon_attribute_value_to_string(
+    sanguis::weapon_attribute_value const _value)
 {
-	std::basic_ostringstream<
-		sge::font::char_type
-	> stream;
+  std::basic_ostringstream<sge::font::char_type> stream;
 
-	stream.precision(
-		4
-	);
+  stream.precision(4);
 
-	stream <<
-		_value;
+  stream << _value;
 
-	return
-		stream.str();
+  return stream.str();
 }

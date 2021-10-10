@@ -4,14 +4,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	fcppt::string,
-	world_name
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(fcppt::string, world_name);
 
 }
 

@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/scene/world/sprite/state_fwd.hpp>
 #include <sge/sprite/state/object.hpp>
 
-
 #endif

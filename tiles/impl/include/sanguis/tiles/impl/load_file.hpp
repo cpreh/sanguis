@@ -7,15 +7,11 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
 sge::image2d::optional_file_unique_ptr
-load_file(
-	sge::image2d::system_ref,
-	std::filesystem::path const &
-);
+load_file(sge::image2d::system_ref, std::filesystem::path const &);
 
 }
 

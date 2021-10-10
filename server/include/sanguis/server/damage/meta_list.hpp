@@ -4,16 +4,10 @@
 #include <sanguis/server/damage/basic_meta_list.hpp>
 #include <sanguis/server/damage/unit.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-using
-meta_list
-=
-sanguis::server::damage::basic_meta_list<
-	sanguis::server::damage::unit
->;
+using meta_list = sanguis::server::damage::basic_meta_list<sanguis::server::damage::unit>;
 
 }
 

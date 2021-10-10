@@ -11,47 +11,28 @@
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
 struct accuracy
 {
-	template<
-		typename Parameters
-	>
-	static
-	void
-	make(
-		sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
-		sanguis::server::entities::enemies::difficulty const _difficulty,
-		fcppt::reference<
-			Parameters
-		> const _parameters
-	)
-	{
-		_parameters.get().extra_accuracy(
-			std::min(
-				sanguis::server::weapons::accuracy(
-					1.F
-					-
-					std::exp(
-						-std::sqrt(
-							sanguis::server::weapons::modifiers::random_increase(
-								_random_generator,
-								_difficulty
-							)
-						)
-						/
-						100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-					)
-				),
-				sanguis::server::weapons::accuracy(
-					1.F
-				)
-			)
-		);
-	}
+  template <typename Parameters>
+  static void make(
+      sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
+      sanguis::server::entities::enemies::difficulty const _difficulty,
+      fcppt::reference<Parameters> const _parameters)
+  {
+    _parameters.get().extra_accuracy(std::min(
+        sanguis::server::weapons::accuracy(
+            1.F -
+            std::exp(
+                -std::sqrt(sanguis::server::weapons::modifiers::random_increase(
+                    _random_generator,
+                    _difficulty)) /
+                100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                )),
+        sanguis::server::weapons::accuracy(1.F)));
+  }
 };
 
 }

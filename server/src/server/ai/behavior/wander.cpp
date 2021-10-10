@@ -18,72 +18,31 @@
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
 sanguis::server::ai::behavior::wander::wander(
-	sanguis::server::ai::context_ref const _context,
-	sanguis::random_generator_ref const _random_generator,
-	sanguis::server::ai::speed_factor const _speed_factor
-)
-:
-	sanguis::server::ai::behavior::base(
-		_context
-	),
-	random_generator_(
-		_random_generator
-	),
-	speed_factor_{
-		_speed_factor
-	}
+    sanguis::server::ai::context_ref const _context,
+    sanguis::random_generator_ref const _random_generator,
+    sanguis::server::ai::speed_factor const _speed_factor)
+    : sanguis::server::ai::behavior::base(_context),
+      random_generator_(_random_generator),
+      speed_factor_{_speed_factor}
 {
 }
 
-sanguis::server::ai::behavior::wander::~wander()
-= default;
+sanguis::server::ai::behavior::wander::~wander() = default;
 
-bool
-sanguis::server::ai::behavior::wander::start()
+bool sanguis::server::ai::behavior::wander::start()
 {
-	return
-		fcppt::optional::maybe(
-			sanguis::server::random::grid_pos(
-				this->random_generator_.get(),
-				sanguis::creator::min{
-					fcppt::math::vector::null<
-						sanguis::creator::pos
-					>()
-				},
-				sanguis::creator::sup{
-					fcppt::math::dim::to_vector(
-						this->context().grid().size()
-					)
-				}
-			),
-			fcppt::const_(
-				false
-			),
-			[
-				this
-			](
-				sanguis::creator::pos const &_pos
-			)
-			{
-				return
-					sanguis::server::ai::make_path(
-						this->context(),
-						_pos
-					);
-			}
-		);
+  return fcppt::optional::maybe(
+      sanguis::server::random::grid_pos(
+          this->random_generator_.get(),
+          sanguis::creator::min{fcppt::math::vector::null<sanguis::creator::pos>()},
+          sanguis::creator::sup{fcppt::math::dim::to_vector(this->context().grid().size())}),
+      fcppt::const_(false),
+      [this](sanguis::creator::pos const &_pos)
+      { return sanguis::server::ai::make_path(this->context(), _pos); });
 }
 
-sanguis::server::ai::status
-sanguis::server::ai::behavior::wander::update(
-	sanguis::duration
-)
+sanguis::server::ai::status sanguis::server::ai::behavior::wander::update(sanguis::duration)
 {
-	return
-		sanguis::server::ai::go_to_grid_pos(
-			this->context(),
-			speed_factor_
-		);
+  return sanguis::server::ai::go_to_grid_pos(this->context(), speed_factor_);
 }

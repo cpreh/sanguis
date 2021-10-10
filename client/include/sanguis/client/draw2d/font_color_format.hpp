@@ -3,12 +3,10 @@
 
 #include <sge/image/color/format.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
-sge::image::color::format
-font_color_format();
+sge::image::color::format font_color_format();
 
 }
 

@@ -6,7 +6,6 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 namespace sanguis::server::damage
 {
 
@@ -15,11 +14,11 @@ FCPPT_PP_DISABLE_GCC_WARNING(-Wshadow)
 
 enum class type
 {
-	normal,
-	piercing,
-	fire,
-	ice,
-	fcppt_maximum = ice
+  normal,
+  piercing,
+  fire,
+  ice,
+  fcppt_maximum = ice
 };
 
 FCPPT_PP_POP_WARNING

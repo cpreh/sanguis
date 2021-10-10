@@ -4,16 +4,10 @@
 #include <sanguis/client/health_pair_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client
 {
 
-using
-optional_health_pair
-=
-fcppt::optional::object<
-	sanguis::client::health_pair
->;
+using optional_health_pair = fcppt::optional::object<sanguis::client::health_pair>;
 
 }
 

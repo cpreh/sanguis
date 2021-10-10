@@ -13,29 +13,15 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/unique_ptr_to_const.hpp>
 
-
-sge::texture::const_part_unique_ptr
-sanguis::client::load::resource::texture_from_view(
-	sge::renderer::device::core_ref const _renderer,
-	sge::image2d::view::const_object const &_view
-)
+sge::texture::const_part_unique_ptr sanguis::client::load::resource::texture_from_view(
+    sge::renderer::device::core_ref const _renderer, sge::image2d::view::const_object const &_view)
 {
-	return
-		fcppt::unique_ptr_to_const(
-			fcppt::unique_ptr_to_base<
-				sge::texture::part
-			>(
-				fcppt::make_unique_ptr<
-					sge::texture::part_raw_ptr
-				>(
-					sge::renderer::texture::create_planar_from_view(
-						_renderer,
-						_view,
-						sge::renderer::texture::mipmap::off(),
-						sge::renderer::resource_flags_field::null(),
-						sge::renderer::texture::emulate_srgb::no
-					)
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_const(fcppt::unique_ptr_to_base<sge::texture::part>(
+      fcppt::make_unique_ptr<sge::texture::part_raw_ptr>(
+          sge::renderer::texture::create_planar_from_view(
+              _renderer,
+              _view,
+              sge::renderer::texture::mipmap::off(),
+              sge::renderer::resource_flags_field::null(),
+              sge::renderer::texture::emulate_srgb::no))));
 }

@@ -4,5 +4,4 @@
 #include <sanguis/player_name_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

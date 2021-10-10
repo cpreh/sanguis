@@ -11,19 +11,11 @@
 namespace sanguis::client::gui::style
 {
 
-using
-spacing
-=
-std::integral_constant<
-	sge::rucksack::scalar,
-	(
-		sanguis::client::gui::style::inner_border::value
-		+
-		sanguis::client::gui::style::outer_border::value
-	)
-	*
-	2
->;
+using spacing = std::integral_constant<
+    sge::rucksack::scalar,
+    (sanguis::client::gui::style::inner_border::value +
+     sanguis::client::gui::style::outer_border::value) *
+        2>;
 
 }
 

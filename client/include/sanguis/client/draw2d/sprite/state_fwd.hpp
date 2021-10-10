@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/sprite/state_choices_fwd.hpp>
 #include <sge/sprite/state/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::sprite
 {
 
-using
-state
-=
-sge::sprite::state::object<
-	sanguis::client::draw2d::sprite::state_choices
->;
+using state = sge::sprite::state::object<sanguis::client::draw2d::sprite::state_choices>;
 
 }
 

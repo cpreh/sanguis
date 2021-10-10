@@ -11,33 +11,29 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::gui::perk
 {
 
 class state
 {
-	FCPPT_NONMOVABLE(
-		state
-	);
+  FCPPT_NONMOVABLE(state);
+
 public:
-	state(
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sge::gui::context_ref,
-		sge::gui::style::const_reference,
-		sanguis::client::perk::state_ref
-	);
+  state(
+      sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sge::gui::context_ref,
+      sge::gui::style::const_reference,
+      sanguis::client::perk::state_ref);
 
-	~state();
+  ~state();
 
-	[[nodiscard]]
-	sge::gui::widget::tab &
-	widget();
+  [[nodiscard]] sge::gui::widget::tab &widget();
+
 private:
-	sanguis::client::gui::perk::tab_unique_ptr_vector tabs_;
+  sanguis::client::gui::perk::tab_unique_ptr_vector tabs_;
 
-	sge::gui::widget::tab main_tab_;
+  sge::gui::widget::tab main_tab_;
 };
 
 }

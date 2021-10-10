@@ -3,13 +3,10 @@
 
 #include <fcppt/record/make_label.hpp>
 
-
 namespace sanguis::server::args::labels
 {
 
-FCPPT_RECORD_MAKE_LABEL(
-	port
-);
+FCPPT_RECORD_MAKE_LABEL(port);
 
 }
 

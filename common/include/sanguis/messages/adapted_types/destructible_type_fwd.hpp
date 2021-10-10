@@ -4,16 +4,11 @@
 #include <sanguis/creator/destructible_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-destructible_type
-=
-sanguis::messages::adapted_types::enum_<
-	sanguis::creator::destructible_type
->;
+using destructible_type =
+    sanguis::messages::adapted_types::enum_<sanguis::creator::destructible_type>;
 
 }
 

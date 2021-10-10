@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
-using
-frame_container
-=
-std::vector<
-	sanguis::tools::animations::frame
->;
+using frame_container = std::vector<sanguis::tools::animations::frame>;
 
 }
 

@@ -10,187 +10,71 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
-template<
-	typename IntType
->
-sanguis::creator::impl::random::uniform_int_distribution<
-	IntType
->::param_type::param_type(
-	IntType const _min,
-	IntType const _max
-)
-:
-	min_(
-		_min
-	),
-	max_(
-		_max
-	)
+template <typename IntType>
+sanguis::creator::impl::random::uniform_int_distribution<IntType>::param_type::param_type(
+    IntType const _min, IntType const _max)
+    : min_(_min), max_(_max)
 {
-	if(
-		min_
-		>
-		max_
-	)
-	{
-		throw
-			sanguis::creator::exception{
-				FCPPT_TEXT("uniform_int_distribution: min > max")
-			};
-	}
+  if (min_ > max_)
+  {
+    throw sanguis::creator::exception{FCPPT_TEXT("uniform_int_distribution: min > max")};
+  }
 }
 
-template<
-	typename IntType
->
-IntType
-sanguis::creator::impl::random::uniform_int_distribution<
-	IntType
->::param_type::min() const
+template <typename IntType>
+IntType sanguis::creator::impl::random::uniform_int_distribution<IntType>::param_type::min() const
 {
-	return
-		min_;
+  return min_;
 }
 
-template<
-	typename IntType
->
-IntType
-sanguis::creator::impl::random::uniform_int_distribution<
-	IntType
->::param_type::max() const
+template <typename IntType>
+IntType sanguis::creator::impl::random::uniform_int_distribution<IntType>::param_type::max() const
 {
-	return
-		max_;
+  return max_;
 }
 
-template<
-	typename IntType
->
-sanguis::creator::impl::random::uniform_int_distribution<
-	IntType
->::uniform_int_distribution(
-	param_type const &_params
-)
-:
-	min_(
-		_params.min()
-	),
-	max_(
-		_params.max()
-	)
+template <typename IntType>
+sanguis::creator::impl::random::uniform_int_distribution<IntType>::uniform_int_distribution(
+    param_type const &_params)
+    : min_(_params.min()), max_(_params.max())
 {
 }
 
-template<
-	typename IntType
->
-typename
-sanguis::creator::impl::random::uniform_int_distribution<
-	IntType
->::result_type
-sanguis::creator::impl::random::uniform_int_distribution<
-	IntType
->::operator()(
-	sanguis::creator::impl::random::generator &_randgen
-)
+template <typename IntType>
+typename sanguis::creator::impl::random::uniform_int_distribution<IntType>::result_type
+sanguis::creator::impl::random::uniform_int_distribution<IntType>::operator()(
+    sanguis::creator::impl::random::generator &_randgen)
 {
-	using
-	unsigned_result_type
-	=
-	std::make_unsigned_t<
-		result_type
-	>;
+  using unsigned_result_type = std::make_unsigned_t<result_type>;
 
-	using
-	result_common_type
-	=
-	std::common_type_t<
-		sanguis::creator::impl::random::value,
-		unsigned_result_type
-	>;
+  using result_common_type =
+      std::common_type_t<sanguis::creator::impl::random::value, unsigned_result_type>;
 
-	auto const input_range(
-		static_cast<
-			result_common_type
-		>(
-			max_
-		)
-		-
-		static_cast<
-			result_common_type
-		>(
-			min_
-		)
-	);
+  auto const input_range(
+      static_cast<result_common_type>(max_) - static_cast<result_common_type>(min_));
 
-	auto const rng_range(
-		static_cast<
-			result_common_type
-		>(
-			sanguis::creator::impl::random::generator::max()
-		)
-	);
+  auto const rng_range(
+      static_cast<result_common_type>(sanguis::creator::impl::random::generator::max()));
 
-	if(
-		input_range
-		==
-		rng_range
-	)
-	{
-		return
-			static_cast<
-				result_type
-			>(
-				_randgen()
-			)
-			+
-			min_;
-	}
+  if (input_range == rng_range)
+  {
+    return static_cast<result_type>(_randgen()) + min_;
+  }
 
-	result_common_type const extended_input_range(
-		input_range
-		+
-		1
-	);
+  result_common_type const extended_input_range(input_range + 1);
 
-	result_common_type const scaling(
-		rng_range
-		/
-		extended_input_range
-	);
+  result_common_type const scaling(rng_range / extended_input_range);
 
-	result_common_type const to_discard(
-		extended_input_range
-		*
-		scaling
-	);
+  result_common_type const to_discard(extended_input_range * scaling);
 
-	result_common_type result(
-		to_discard
-	);
+  result_common_type result(to_discard);
 
-	while(
-		result
-		>=
-		to_discard
-	)
-	{
-		result =
-			_randgen();
-	}
+  while (result >= to_discard)
+  {
+    result = _randgen();
+  }
 
-	return
-		static_cast<
-			result_type
-		>(
-			result
-			/
-			scaling
-		)
-		+
-		min_;
+  return static_cast<result_type>(result / scaling) + min_;
 }
 
 #endif

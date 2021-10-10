@@ -6,16 +6,13 @@
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-sanguis::server::weapons::unique_ptr
-create(
-	sanguis::server::weapons::common_parameters const &,
-	sanguis::weapon_type,
-	sanguis::server::entities::enemies::difficulty
-);
+sanguis::server::weapons::unique_ptr create(
+    sanguis::server::weapons::common_parameters const &,
+    sanguis::weapon_type,
+    sanguis::server::entities::enemies::difficulty);
 
 }
 

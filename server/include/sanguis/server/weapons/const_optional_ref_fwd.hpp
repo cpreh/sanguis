@@ -4,16 +4,10 @@
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-using
-const_optional_ref
-=
-fcppt::optional::reference<
-	sanguis::server::weapons::weapon const
->;
+using const_optional_ref = fcppt::optional::reference<sanguis::server::weapons::weapon const>;
 
 }
 

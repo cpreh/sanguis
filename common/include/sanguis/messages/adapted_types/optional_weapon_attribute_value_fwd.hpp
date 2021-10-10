@@ -5,17 +5,12 @@
 #include <sanguis/messages/adapted_types/weapon_attribute_value_fwd.hpp>
 #include <alda/bindings/optional_decl.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-optional_weapon_attribute_value
-=
-alda::bindings::optional<
-	sanguis::weapon_attribute_value,
-	sanguis::messages::adapted_types::weapon_attribute_value
->;
+using optional_weapon_attribute_value = alda::bindings::optional<
+    sanguis::weapon_attribute_value,
+    sanguis::messages::adapted_types::weapon_attribute_value>;
 
 }
 

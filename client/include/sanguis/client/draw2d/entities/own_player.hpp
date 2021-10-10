@@ -18,72 +18,50 @@
 #include <sanguis/client/load/auras/context_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class own_player
-:
-	public sanguis::client::draw2d::entities::player
+class own_player : public sanguis::client::draw2d::entities::player
 {
-	FCPPT_NONMOVABLE(
-		own_player
-	);
+  FCPPT_NONMOVABLE(own_player);
+
 public:
-	own_player(
-		sanguis::client::load::auras::context_ref,
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::collide_callback &&,
-		sanguis::client::player_health_callback &&,
-		sanguis::optional_primary_weapon_type,
-		sanguis::weapon_status,
-		sanguis::client::draw2d::speed const &,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::rotation,
-		sanguis::aura_type_vector &&,
-		sanguis::buff_type_vector &&,
-		sanguis::client::health_pair
-	);
+  own_player(
+      sanguis::client::load::auras::context_ref,
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::client::draw2d::collide_callback &&,
+      sanguis::client::player_health_callback &&,
+      sanguis::optional_primary_weapon_type,
+      sanguis::weapon_status,
+      sanguis::client::draw2d::speed const &,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::rotation,
+      sanguis::aura_type_vector &&,
+      sanguis::buff_type_vector &&,
+      sanguis::client::health_pair);
 
-	~own_player()
-	override;
+  ~own_player() override;
+
 private:
-	void
-	health(
-		sanguis::client::health
-	)
-	override;
+  void health(sanguis::client::health) override;
 
-	void
-	max_health(
-		sanguis::client::max_health
-	)
-	override;
+  void max_health(sanguis::client::max_health) override;
 
-	void
-	speed(
-		sanguis::client::draw2d::speed const &
-	)
-	override;
+  void speed(sanguis::client::draw2d::speed const &) override;
 
-	using sanguis::client::draw2d::entities::player::speed;
+  using sanguis::client::draw2d::entities::player::speed;
 
-	void
-	update()
-	override;
+  void update() override;
 
-	void
-	on_die()
-	override;
+  void on_die() override;
 
-	void
-	update_health();
+  void update_health();
 
-	sanguis::client::draw2d::collide_callback const collide_;
+  sanguis::client::draw2d::collide_callback const collide_;
 
-	sanguis::client::player_health_callback const player_health_callback_;
+  sanguis::client::player_health_callback const player_health_callback_;
 
-	sanguis::client::draw2d::speed desired_speed_;
+  sanguis::client::draw2d::speed desired_speed_;
 };
 
 }

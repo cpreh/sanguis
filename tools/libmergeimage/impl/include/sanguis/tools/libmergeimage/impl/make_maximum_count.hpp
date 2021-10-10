@@ -4,14 +4,11 @@
 #include <sanguis/tools/libmergeimage/impl/cell_size_fwd.hpp>
 #include <sanguis/tools/libmergeimage/impl/count_maximum.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
 sanguis::tools::libmergeimage::impl::count_maximum
-make_maximum_count(
-	sanguis::tools::libmergeimage::impl::cell_size const &
-);
+make_maximum_count(sanguis::tools::libmergeimage::impl::cell_size const &);
 
 }
 

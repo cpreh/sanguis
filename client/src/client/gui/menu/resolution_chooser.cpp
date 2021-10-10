@@ -31,127 +31,58 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
-	sge::gui::context_ref const _context,
-	sge::gui::style::const_reference const _style,
-	sge::font::object_ref const _font,
-	sge::renderer::device::ffp_ref const _renderer
-)
-:
-	display_modes_(
-		_renderer.get().display_modes()
-	),
-	renderer_(
-		_renderer
-	),
-	choices_(
-		_context,
-		_style,
-		_renderer,
-		_font,
-		// TODO(philipp): Add window mode
-		fcppt::algorithm::map<
-			sge::gui::string_container
-		>(
-			display_modes_,
-			[](
-				sge::renderer::display_mode::object const &_display_mode
-			)
-			{
-				return
-					sge::font::from_fcppt_string(
-						fcppt::output_to_fcppt_string(
-							_display_mode
-						)
-					);
-			}
-		),
-		display_modes_.empty()
-		?
-			sge::gui::optional_index()
-		:
-			sge::gui::optional_index(
-				// TODO(philipp)
-				sge::gui::index(
-					0U
-				)
-			)
-	),
-	apply_button_(
-		_style,
-		_renderer,
-		_font,
-		SGE_FONT_LIT("Apply"),
-		sge::gui::optional_needed_width()
-	),
-	widget_(
-		_context,
-		sge::gui::widget::reference_alignment_vector{
-			sge::gui::widget::reference_alignment_pair{
-				sge::gui::widget::reference{
-					choices_
-				},
-				sge::rucksack::alignment::center
-			},
-			sge::gui::widget::reference_alignment_pair{
-				sge::gui::widget::reference{
-					apply_button_
-				},
-				sge::rucksack::alignment::center
-			}
-		},
-		sge::rucksack::axis::y
-	),
-	apply_connection_{
-		apply_button_.click(
-			sge::gui::click_callback{
-				[
-					this
-				]{
-					this->on_apply();
-				}
-			}
-		)
-	}
+    sge::gui::context_ref const _context,
+    sge::gui::style::const_reference const _style,
+    sge::font::object_ref const _font,
+    sge::renderer::device::ffp_ref const _renderer)
+    : display_modes_(_renderer.get().display_modes()),
+      renderer_(_renderer),
+      choices_(
+          _context,
+          _style,
+          _renderer,
+          _font,
+          // TODO(philipp): Add window mode
+          fcppt::algorithm::map<sge::gui::string_container>(
+              display_modes_,
+              [](sge::renderer::display_mode::object const &_display_mode) {
+                return sge::font::from_fcppt_string(fcppt::output_to_fcppt_string(_display_mode));
+              }),
+          display_modes_.empty() ? sge::gui::optional_index()
+                                 : sge::gui::optional_index(
+                                       // TODO(philipp)
+                                       sge::gui::index(0U))),
+      apply_button_(
+          _style, _renderer, _font, SGE_FONT_LIT("Apply"), sge::gui::optional_needed_width()),
+      widget_(
+          _context,
+          sge::gui::widget::reference_alignment_vector{
+              sge::gui::widget::reference_alignment_pair{
+                  sge::gui::widget::reference{choices_}, sge::rucksack::alignment::center},
+              sge::gui::widget::reference_alignment_pair{
+                  sge::gui::widget::reference{apply_button_}, sge::rucksack::alignment::center}},
+          sge::rucksack::axis::y),
+      apply_connection_{apply_button_.click(sge::gui::click_callback{[this] { this->on_apply(); }})}
 {
 }
 
 FCPPT_PP_POP_WARNING
 
-sanguis::client::gui::menu::resolution_chooser::~resolution_chooser()
-= default;
+sanguis::client::gui::menu::resolution_chooser::~resolution_chooser() = default;
 
-sge::gui::widget::base &
-sanguis::client::gui::menu::resolution_chooser::widget()
-{
-	return
-		widget_;
-}
+sge::gui::widget::base &sanguis::client::gui::menu::resolution_chooser::widget() { return widget_; }
 
-void
-sanguis::client::gui::menu::resolution_chooser::on_apply()
+void sanguis::client::gui::menu::resolution_chooser::on_apply()
 {
-	fcppt::optional::maybe_void(
-		choices_.index(),
-		[
-			this
-		](
-			sge::gui::index const _index
-		)
-		{
-			renderer_.get().fullscreen(
-				sge::renderer::display_mode::optional_fullscreen(
-					sge::renderer::display_mode::fullscreen{
-						display_modes_[
-							_index.get()
-						]
-					}
-				)
-			);
-		}
-	);
+  fcppt::optional::maybe_void(
+      choices_.index(),
+      [this](sge::gui::index const _index)
+      {
+        renderer_.get().fullscreen(sge::renderer::display_mode::optional_fullscreen(
+            sge::renderer::display_mode::fullscreen{display_modes_[_index.get()]}));
+      });
 }

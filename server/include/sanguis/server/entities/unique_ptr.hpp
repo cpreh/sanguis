@@ -4,7 +4,6 @@
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis
 {
 namespace server
@@ -12,12 +11,7 @@ namespace server
 namespace entities
 {
 
-using
-unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::server::entities::base
->;
+using unique_ptr = fcppt::unique_ptr<sanguis::server::entities::base>;
 
 }
 }

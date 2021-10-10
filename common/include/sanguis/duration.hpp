@@ -6,16 +6,10 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis
 {
 
-using
-duration
-=
-std::chrono::duration<
-	sanguis::time_unit
->;
+using duration = std::chrono::duration<sanguis::time_unit>;
 
 }
 

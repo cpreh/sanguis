@@ -5,17 +5,13 @@
 #include <sanguis/server/ai/speed_factor_fwd.hpp>
 #include <sanguis/server/ai/target_fwd.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-[[nodiscard]]
-bool
-go_close_to_target(
-	sanguis::server::ai::context &, // NOLINT(google-runtime-references)
-	sanguis::server::ai::target const &,
-	sanguis::server::ai::speed_factor
-);
+[[nodiscard]] bool go_close_to_target(
+    sanguis::server::ai::context &, // NOLINT(google-runtime-references)
+    sanguis::server::ai::target const &,
+    sanguis::server::ai::speed_factor);
 
 }
 

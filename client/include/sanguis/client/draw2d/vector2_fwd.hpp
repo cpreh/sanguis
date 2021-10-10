@@ -4,17 +4,10 @@
 #include <sanguis/client/draw2d/funit.hpp>
 #include <fcppt/math/vector/static_fwd.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
-using
-vector2
-=
-fcppt::math::vector::static_<
-	sanguis::client::draw2d::funit,
-	2
->;
+using vector2 = fcppt::math::vector::static_<sanguis::client::draw2d::funit, 2>;
 
 }
 

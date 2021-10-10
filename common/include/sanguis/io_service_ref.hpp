@@ -4,16 +4,10 @@
 #include <sanguis/io_service_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis
 {
 
-using
-io_service_ref
-=
-fcppt::reference<
-	sanguis::io_service
->;
+using io_service_ref = fcppt::reference<sanguis::io_service>;
 
 }
 

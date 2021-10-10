@@ -6,16 +6,13 @@
 #include <sanguis/model/part_fwd.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
-sanguis::client::load::model::weapon_category_map
-make_weapon_categories(
-	fcppt::log::object &, // NOLINT(google-runtime-references)
-	sanguis::model::part const &,
-	sanguis::client::load::model::global_parameters const &
-);
+sanguis::client::load::model::weapon_category_map make_weapon_categories(
+    fcppt::log::object &, // NOLINT(google-runtime-references)
+    sanguis::model::part const &,
+    sanguis::client::load::model::global_parameters const &);
 
 }
 

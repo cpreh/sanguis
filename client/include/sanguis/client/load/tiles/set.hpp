@@ -14,53 +14,32 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::tiles
 {
 
 class set
 {
-	FCPPT_NONCOPYABLE(
-		set
-	);
+  FCPPT_NONCOPYABLE(set);
+
 public:
-	set(
-		sanguis::client::load::resource::textures_cref,
-		std::filesystem::path const &
-	);
+  set(sanguis::client::load::resource::textures_cref, std::filesystem::path const &);
 
-	set(
-		set &&
-	)
-	noexcept;
+  set(set &&) noexcept;
 
-	set &
-	operator=(
-		set &&
-	)
-	noexcept;
+  set &operator=(set &&) noexcept;
 
-	~set();
+  ~set();
 
-	[[nodiscard]]
-	sanguis::client::load::tiles::texture_container const &
-	areas(
-		sanguis::tiles::area_container_ref
-	);
+  [[nodiscard]] sanguis::client::load::tiles::texture_container const &
+      areas(sanguis::tiles::area_container_ref);
+
 private:
-	fcppt::reference<
-		sge::texture::part const
-	> texture_;
+  fcppt::reference<sge::texture::part const> texture_;
 
-	using
-	element_map
-	=
-	std::map<
-		sanguis::tiles::area_container_ref,
-		sanguis::client::load::tiles::texture_container
-	>;
+  using element_map =
+      std::map<sanguis::tiles::area_container_ref, sanguis::client::load::tiles::texture_container>;
 
-	element_map elements_;
+  element_map elements_;
 };
 
 }

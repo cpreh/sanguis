@@ -18,70 +18,32 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::ai::behavior::follow_owner::follow_owner(
-	sanguis::server::ai::context_ref const _context,
-	sanguis::server::entities::spawn_owner _spawn_owner
-)
-:
-	sanguis::server::ai::behavior::base(
-		_context
-	),
-	spawn_owner_{
-		std::move(
-			_spawn_owner
-		)
-	}
+    sanguis::server::ai::context_ref const _context,
+    sanguis::server::entities::spawn_owner _spawn_owner)
+    : sanguis::server::ai::behavior::base(_context), spawn_owner_{std::move(_spawn_owner)}
 {
 }
 
-sanguis::server::ai::behavior::follow_owner::~follow_owner()
-= default;
+sanguis::server::ai::behavior::follow_owner::~follow_owner() = default;
 
-bool
-sanguis::server::ai::behavior::follow_owner::start()
+bool sanguis::server::ai::behavior::follow_owner::start()
 {
-	return
-		spawn_owner_.get().get().has_value();
+  return spawn_owner_.get().get().has_value();
 }
 
-sanguis::server::ai::status
-sanguis::server::ai::behavior::follow_owner::update(
-	sanguis::duration
-)
+sanguis::server::ai::status sanguis::server::ai::behavior::follow_owner::update(sanguis::duration)
 {
-	return
-		fcppt::optional::maybe(
-			spawn_owner_.get().get(),
-			[]{
-				return
-					sanguis::server::ai::status::failure;
-			},
-			[
-				this
-			](
-				fcppt::reference<
-					sanguis::server::entities::with_links
-				> const _spawn_owner
-			)
-			{
-				return
-					sanguis::server::ai::go_close_to_target(
-						this->context(),
-						sanguis::server::ai::target{
-							_spawn_owner.get().center()
-						},
-						fcppt::literal<
-							sanguis::server::ai::speed_factor
-						>(
-							1
-						)
-					)
-					?
-						sanguis::server::ai::status::running
-					:
-						sanguis::server::ai::status::failure
-					;
-			}
-		);
+  return fcppt::optional::maybe(
+      spawn_owner_.get().get(),
+      [] { return sanguis::server::ai::status::failure; },
+      [this](fcppt::reference<sanguis::server::entities::with_links> const _spawn_owner)
+      {
+        return sanguis::server::ai::go_close_to_target(
+                   this->context(),
+                   sanguis::server::ai::target{_spawn_owner.get().center()},
+                   fcppt::literal<sanguis::server::ai::speed_factor>(1))
+                   ? sanguis::server::ai::status::running
+                   : sanguis::server::ai::status::failure;
+      });
 }

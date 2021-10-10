@@ -6,41 +6,23 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::events
 {
 
-class reload
-:
-	public boost::statechart::event<
-		sanguis::server::weapons::events::reload
-	>
+class reload : public boost::statechart::event<sanguis::server::weapons::events::reload>
 {
 public:
-	reload();
+  reload();
 
-	reload(
-		reload &&
-	)
-	noexcept;
+  reload(reload &&) noexcept;
 
-	reload(
-		reload const &
-	);
+  reload(reload const &);
 
-	reload &
-	operator=(
-		reload &&
-	)
-	noexcept;
+  reload &operator=(reload &&) noexcept;
 
-	reload &
-	operator=(
-		reload const &
-	);
+  reload &operator=(reload const &);
 
-	~reload()
-	override;
+  ~reload() override;
 };
 
 }

@@ -4,57 +4,26 @@
 #include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
-
-fcppt::string
-sanguis::load::enemy_name(
-	sanguis::creator::enemy_type const _type
-)
+fcppt::string sanguis::load::enemy_name(sanguis::creator::enemy_type const _type)
 {
-#define SANGUIS_LOAD_ENEMY_NAME_CASE(\
-	name\
-)\
-case sanguis::creator::enemy_type::name:\
-	return \
-		FCPPT_TEXT(\
-			#name\
-		)
-	switch(
-		_type
-	)
-	{
-		SANGUIS_LOAD_ENEMY_NAME_CASE(
-			wolf_black
-		);
-		SANGUIS_LOAD_ENEMY_NAME_CASE(
-			wolf_brown
-		);
-		SANGUIS_LOAD_ENEMY_NAME_CASE(
-			wolf_white
-		);
-		SANGUIS_LOAD_ENEMY_NAME_CASE(
-			zombie00
-		);
-		SANGUIS_LOAD_ENEMY_NAME_CASE(
-			zombie01
-		);
-		SANGUIS_LOAD_ENEMY_NAME_CASE(
-			spider
-		);
-		SANGUIS_LOAD_ENEMY_NAME_CASE(
-			skeleton
-		);
-		SANGUIS_LOAD_ENEMY_NAME_CASE(
-			ghost
-		);
-		SANGUIS_LOAD_ENEMY_NAME_CASE(
-			maggot
-		);
-		SANGUIS_LOAD_ENEMY_NAME_CASE(
-			reaper
-		);
-	}
+#define SANGUIS_LOAD_ENEMY_NAME_CASE(name) \
+  case sanguis::creator::enemy_type::name: \
+    return FCPPT_TEXT(#name)
+  switch (_type)
+  {
+    SANGUIS_LOAD_ENEMY_NAME_CASE(wolf_black);
+    SANGUIS_LOAD_ENEMY_NAME_CASE(wolf_brown);
+    SANGUIS_LOAD_ENEMY_NAME_CASE(wolf_white);
+    SANGUIS_LOAD_ENEMY_NAME_CASE(zombie00);
+    SANGUIS_LOAD_ENEMY_NAME_CASE(zombie01);
+    SANGUIS_LOAD_ENEMY_NAME_CASE(spider);
+    SANGUIS_LOAD_ENEMY_NAME_CASE(skeleton);
+    SANGUIS_LOAD_ENEMY_NAME_CASE(ghost);
+    SANGUIS_LOAD_ENEMY_NAME_CASE(maggot);
+    SANGUIS_LOAD_ENEMY_NAME_CASE(reaper);
+  }
 
-	FCPPT_ASSERT_UNREACHABLE;
+  FCPPT_ASSERT_UNREACHABLE;
 
 #undef SANGUIS_LOAD_ENEMY_NAME_CASE
 }

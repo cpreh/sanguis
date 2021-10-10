@@ -3,14 +3,13 @@
 
 #include <sanguis/projectile_type_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class projectile_type
 {
-	bullet,
-	fcppt_maximum = bullet
+  bullet,
+  fcppt_maximum = bullet
 };
 
 }

@@ -4,16 +4,10 @@
 #include <sanguis/tiles/collection_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::tiles
 {
 
-using
-collection_ref
-=
-fcppt::reference<
-	sanguis::tiles::collection
->;
+using collection_ref = fcppt::reference<sanguis::tiles::collection>;
 
 }
 

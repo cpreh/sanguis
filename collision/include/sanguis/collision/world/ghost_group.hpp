@@ -3,18 +3,17 @@
 
 #include <sanguis/collision/world/ghost_group_fwd.hpp>
 
-
 namespace sanguis::collision::world
 {
 
 enum class ghost_group
 {
-	enemy_aggro,
-	player_sight,
-	target_enemy,
-	target_player,
-	weapon_pickup_sight,
-	fcppt_maximum = weapon_pickup_sight
+  enemy_aggro,
+  player_sight,
+  target_enemy,
+  target_player,
+  weapon_pickup_sight,
+  fcppt_maximum = weapon_pickup_sight
 };
 
 }

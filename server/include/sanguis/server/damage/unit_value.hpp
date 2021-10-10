@@ -3,14 +3,10 @@
 
 #include <sanguis/server/space_unit.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-using
-unit_value
-=
-sanguis::server::space_unit;
+using unit_value = sanguis::server::space_unit;
 
 }
 

@@ -5,5 +5,4 @@
 #include <sanguis/messages/adapted_types/buff_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
 
-
 #endif

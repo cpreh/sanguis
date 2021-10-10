@@ -5,5 +5,4 @@
 #include <sanguis/creator/pos.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

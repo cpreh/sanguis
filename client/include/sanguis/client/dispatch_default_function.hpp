@@ -7,18 +7,11 @@
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client
 {
 
-using
-dispatch_default_function
-=
-fcppt::function<
-	boost::statechart::result (
-		sanguis::messages::server::base const &
-	)
->;
+using dispatch_default_function =
+    fcppt::function<boost::statechart::result(sanguis::messages::server::base const &)>;
 
 }
 

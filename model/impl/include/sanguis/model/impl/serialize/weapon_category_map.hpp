@@ -4,14 +4,10 @@
 #include <sanguis/model/weapon_category_map.hpp>
 #include <sge/parse/json/member.hpp>
 
-
 namespace sanguis::model::impl::serialize
 {
 
-sge::parse::json::member
-weapon_category_map(
-	sanguis::model::weapon_category_map const &
-);
+sge::parse::json::member weapon_category_map(sanguis::model::weapon_category_map const &);
 
 }
 

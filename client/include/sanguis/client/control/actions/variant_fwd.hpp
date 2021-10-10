@@ -7,19 +7,14 @@
 #include <sanguis/client/control/actions/scale_fwd.hpp>
 #include <fcppt/variant/object_fwd.hpp>
 
-
 namespace sanguis::client::control::actions
 {
 
-using
-variant
-=
-fcppt::variant::object<
-	sanguis::client::control::actions::binary,
-	sanguis::client::control::actions::cursor,
-	sanguis::client::control::actions::nullary,
-	sanguis::client::control::actions::scale
->;
+using variant = fcppt::variant::object<
+    sanguis::client::control::actions::binary,
+    sanguis::client::control::actions::cursor,
+    sanguis::client::control::actions::nullary,
+    sanguis::client::control::actions::scale>;
 
 }
 

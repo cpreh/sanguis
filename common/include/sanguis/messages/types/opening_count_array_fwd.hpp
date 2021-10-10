@@ -5,17 +5,11 @@
 #include <sanguis/messages/types/size.hpp>
 #include <fcppt/enum/array_fwd.hpp>
 
-
 namespace sanguis::messages::types
 {
 
-using
-opening_count_array
-=
-fcppt::enum_::array<
-	sanguis::creator::opening_type,
-	sanguis::messages::types::size
->;
+using opening_count_array =
+    fcppt::enum_::array<sanguis::creator::opening_type, sanguis::messages::types::size>;
 
 }
 

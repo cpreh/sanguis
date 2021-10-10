@@ -12,49 +12,38 @@
 #include <sanguis/client/load/resource/animation/series_cref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class particle
-:
-	public sanguis::client::draw2d::entities::own
+class particle : public sanguis::client::draw2d::entities::own
 {
-	FCPPT_NONMOVABLE(
-		particle
-	);
+  FCPPT_NONMOVABLE(particle);
+
 public:
-	particle(
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::entities::particle_name const &,
-		sanguis::client::draw2d::z_ordering,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::optional_dim const &
-	);
+  particle(
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::client::draw2d::entities::particle_name const &,
+      sanguis::client::draw2d::z_ordering,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::optional_dim const &);
 
-	~particle()
-	override;
+  ~particle() override;
+
 private:
-	particle(
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::z_ordering,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::optional_dim const &,
-		sanguis::client::load::resource::animation::series_cref
-	);
+  particle(
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::client::draw2d::z_ordering,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::optional_dim const &,
+      sanguis::client::load::resource::animation::series_cref);
 
-	void
-	update()
-	override;
+  void update() override;
 
-	[[nodiscard]]
-	bool
-	may_be_removed() const
-	override;
+  [[nodiscard]] bool may_be_removed() const override;
 
-	sanguis::client::draw2d::sprite::animation::texture animation_;
+  sanguis::client::draw2d::sprite::animation::texture animation_;
 
-	sanguis::client::draw2d::sprite::normal::object sprite_;
+  sanguis::client::draw2d::sprite::normal::object sprite_;
 };
 
 }

@@ -6,19 +6,13 @@
 #include <sanguis/messages/client/types/message.hpp>
 #include <alda/message/object_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-drop_or_pickup_weapon
-=
-alda::message::object<
-	sanguis::messages::client::types::make_message_id<
-		sanguis::messages::client::types::message::drop_or_pickup_weapon
-	>,
-	sanguis::messages::adapted_types::is_primary_weapon
->;
+using drop_or_pickup_weapon = alda::message::object<
+    sanguis::messages::client::types::make_message_id<
+        sanguis::messages::client::types::message::drop_or_pickup_weapon>,
+    sanguis::messages::adapted_types::is_primary_weapon>;
 
 }
 

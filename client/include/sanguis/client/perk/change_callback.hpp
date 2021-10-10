@@ -4,16 +4,10 @@
 #include <sanguis/client/perk/change_function.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-using
-change_callback
-=
-fcppt::function<
-	sanguis::client::perk::change_function
->;
+using change_callback = fcppt::function<sanguis::client::perk::change_function>;
 
 }
 

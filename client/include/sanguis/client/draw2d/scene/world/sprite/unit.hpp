@@ -6,16 +6,10 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world::sprite
 {
 
-using
-unit
-=
-std::make_signed_t<
-	sanguis::creator::size_type
->;
+using unit = std::make_signed_t<sanguis::creator::size_type>;
 
 }
 

@@ -7,12 +7,7 @@
 namespace sanguis::creator::impl
 {
 
-using
-reachable_grid
-=
-sanguis::creator::tile_grid<
-	sanguis::creator::impl::reachable
->;
+using reachable_grid = sanguis::creator::tile_grid<sanguis::creator::impl::reachable>;
 
 }
 

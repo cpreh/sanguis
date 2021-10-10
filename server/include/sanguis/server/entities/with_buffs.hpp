@@ -14,51 +14,32 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class with_buffs
-:
-	public virtual sanguis::server::entities::base,
-	public virtual sanguis::server::entities::ifaces::with_id
+class with_buffs : public virtual sanguis::server::entities::base,
+                   public virtual sanguis::server::entities::ifaces::with_id
 {
-	FCPPT_NONMOVABLE(
-		with_buffs
-	);
+  FCPPT_NONMOVABLE(with_buffs);
+
 public:
-	void
-	add_buff(
-		sanguis::server::buffs::unique_ptr &&
-	);
+  void add_buff(sanguis::server::buffs::unique_ptr &&);
 
-	void
-	remove_buff(
-		sanguis::server::buffs::buff & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void remove_buff(sanguis::server::buffs::buff & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 protected:
-	with_buffs();
+  with_buffs();
 
-	~with_buffs()
-	override;
+  ~with_buffs() override;
 
-	void
-	update()
-	override;
+  void update() override;
 
-	[[nodiscard]]
-	sanguis::buff_type_vector
-	buff_types() const;
+  [[nodiscard]] sanguis::buff_type_vector buff_types() const;
+
 private:
-	using
-	buff_map
-	=
-	std::unordered_map<
-		std::type_index,
-		sanguis::server::buffs::stack
-	>;
+  using buff_map = std::unordered_map<std::type_index, sanguis::server::buffs::stack>;
 
-	buff_map buffs_;
+  buff_map buffs_;
 };
 
 }

@@ -4,25 +4,20 @@
 #include <sanguis/entity_id.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::ifaces
 {
 
 class with_id
 {
-	FCPPT_NONMOVABLE(
-		with_id
-	);
-protected:
-	with_id();
-public:
-	[[nodiscard]]
-	virtual
-	sanguis::entity_id
-	id() const = 0;
+  FCPPT_NONMOVABLE(with_id);
 
-	virtual
-	~with_id();
+protected:
+  with_id();
+
+public:
+  [[nodiscard]] virtual sanguis::entity_id id() const = 0;
+
+  virtual ~with_id();
 };
 
 }

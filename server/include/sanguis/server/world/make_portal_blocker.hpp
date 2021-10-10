@@ -4,13 +4,11 @@
 #include <sanguis/server/entities/doodad_unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 
-
 namespace sanguis::server::world
 {
 
-sanguis::server::entities::doodad_unique_ptr
-make_portal_blocker(
-	sanguis::server::environment::load_context & // NOLINT(google-runtime-references)
+sanguis::server::entities::doodad_unique_ptr make_portal_blocker(
+    sanguis::server::environment::load_context & // NOLINT(google-runtime-references)
 ); // NOLINT(google-runtime-references)
 
 }

@@ -4,7 +4,6 @@
 #include <sanguis/server/entities/enemies/enemy_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis
 {
 namespace server
@@ -14,12 +13,7 @@ namespace entities
 namespace enemies
 {
 
-using
-unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::server::entities::enemies::enemy
->;
+using unique_ptr = fcppt::unique_ptr<sanguis::server::entities::enemies::enemy>;
 
 }
 }

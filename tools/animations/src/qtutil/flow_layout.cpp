@@ -43,154 +43,160 @@
 #include <QtWidgets>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::tools::animations::qtutil::FlowLayout::FlowLayout(QWidget *_parent, int _margin, int hSpacing, int vSpacing)
+sanguis::tools::animations::qtutil::FlowLayout::FlowLayout(
+    QWidget *_parent, int _margin, int hSpacing, int vSpacing)
     : QLayout(_parent), itemList(), m_hSpace(hSpacing), m_vSpace(vSpacing)
 {
-    setContentsMargins(_margin, _margin, _margin, _margin);
+  setContentsMargins(_margin, _margin, _margin, _margin);
 }
 
 sanguis::tools::animations::qtutil::FlowLayout::FlowLayout(int _margin, int hSpacing, int vSpacing)
     : QLayout(), itemList(), m_hSpace(hSpacing), m_vSpace(vSpacing)
 {
-    setContentsMargins(_margin, _margin, _margin, _margin);
+  setContentsMargins(_margin, _margin, _margin, _margin);
 }
 
 sanguis::tools::animations::qtutil::FlowLayout::~FlowLayout()
 {
-    QLayoutItem *item = nullptr;
-    while ((item = takeAt(0)) != nullptr) {
-        delete item;
-}
+  QLayoutItem *item = nullptr;
+  while ((item = takeAt(0)) != nullptr)
+  {
+    delete item;
+  }
 }
 
 void sanguis::tools::animations::qtutil::FlowLayout::addItem(QLayoutItem *item)
 {
-    itemList.append(item);
+  itemList.append(item);
 }
 
 int sanguis::tools::animations::qtutil::FlowLayout::horizontalSpacing() const
 {
-    if (m_hSpace >= 0) {
-        return m_hSpace;
-    }         return smartSpacing(QStyle::PM_LayoutHorizontalSpacing);
-   
+  if (m_hSpace >= 0)
+  {
+    return m_hSpace;
+  }
+  return smartSpacing(QStyle::PM_LayoutHorizontalSpacing);
 }
 
 int sanguis::tools::animations::qtutil::FlowLayout::verticalSpacing() const
 {
-    if (m_vSpace >= 0) {
-        return m_vSpace;
-    }         return smartSpacing(QStyle::PM_LayoutVerticalSpacing);
-   
+  if (m_vSpace >= 0)
+  {
+    return m_vSpace;
+  }
+  return smartSpacing(QStyle::PM_LayoutVerticalSpacing);
 }
 
-int sanguis::tools::animations::qtutil::FlowLayout::count() const
-{
-    return itemList.size();
-}
+int sanguis::tools::animations::qtutil::FlowLayout::count() const { return itemList.size(); }
 
 QLayoutItem *sanguis::tools::animations::qtutil::FlowLayout::itemAt(int index) const
 {
-    return itemList.value(index);
+  return itemList.value(index);
 }
 
 QLayoutItem *sanguis::tools::animations::qtutil::FlowLayout::takeAt(int index)
 {
-    if (index >= 0 && index < itemList.size()) {
-        return itemList.takeAt(index);
-    }         return nullptr;
+  if (index >= 0 && index < itemList.size())
+  {
+    return itemList.takeAt(index);
+  }
+  return nullptr;
 }
 
 Qt::Orientations sanguis::tools::animations::qtutil::FlowLayout::expandingDirections() const
 {
-    return Qt::Orientations{};
+  return Qt::Orientations{};
 }
 
-bool sanguis::tools::animations::qtutil::FlowLayout::hasHeightForWidth() const
-{
-    return true;
-}
+bool sanguis::tools::animations::qtutil::FlowLayout::hasHeightForWidth() const { return true; }
 
 int sanguis::tools::animations::qtutil::FlowLayout::heightForWidth(int width) const
 {
-    int height = doLayout(QRect(0, 0, width, 0), true);
-    return height;
+  int height = doLayout(QRect(0, 0, width, 0), true);
+  return height;
 }
 
 void sanguis::tools::animations::qtutil::FlowLayout::setGeometry(const QRect &rect)
 {
-    QLayout::setGeometry(rect);
-    doLayout(rect, false);
+  QLayout::setGeometry(rect);
+  doLayout(rect, false);
 }
 
-QSize sanguis::tools::animations::qtutil::FlowLayout::sizeHint() const
-{
-    return minimumSize();
-}
+QSize sanguis::tools::animations::qtutil::FlowLayout::sizeHint() const { return minimumSize(); }
 
 QSize sanguis::tools::animations::qtutil::FlowLayout::minimumSize() const
 {
-    QSize size;
-    QLayoutItem *item = nullptr;
-    foreach (item, itemList)
-        size = size.expandedTo(item->minimumSize());
+  QSize size;
+  QLayoutItem *item = nullptr;
+  foreach (item, itemList)
+    size = size.expandedTo(item->minimumSize());
 
-    size += QSize(2*margin(), 2*margin());
-    return size;
+  size += QSize(2 * margin(), 2 * margin());
+  return size;
 }
 
 int sanguis::tools::animations::qtutil::FlowLayout::doLayout(const QRect &rect, bool testOnly) const
 {
-    int left;
-    int top;
-    int right;
-    int bottom;
-    getContentsMargins(&left, &top, &right, &bottom);
-    QRect effectiveRect = rect.adjusted(+left, +top, -right, -bottom);
-    int x = effectiveRect.x();
-    int y = effectiveRect.y();
-    int lineHeight = 0;
+  int left;
+  int top;
+  int right;
+  int bottom;
+  getContentsMargins(&left, &top, &right, &bottom);
+  QRect effectiveRect = rect.adjusted(+left, +top, -right, -bottom);
+  int x = effectiveRect.x();
+  int y = effectiveRect.y();
+  int lineHeight = 0;
 
-    QLayoutItem *item = nullptr;
-    foreach (item, itemList) {
-        QWidget *wid = item->widget();
-        int spaceX = horizontalSpacing();
-        if (spaceX == -1) {
-            spaceX = wid->style()->layoutSpacing(
-                QSizePolicy::PushButton, QSizePolicy::PushButton, Qt::Horizontal);
-}
-        int spaceY = verticalSpacing();
-        if (spaceY == -1) {
-            spaceY = wid->style()->layoutSpacing(
-                QSizePolicy::PushButton, QSizePolicy::PushButton, Qt::Vertical);
-}
-        int nextX = x + item->sizeHint().width() + spaceX;
-        if (nextX - spaceX > effectiveRect.right() && lineHeight > 0) {
-            x = effectiveRect.x();
-            y = y + lineHeight + spaceY;
-            nextX = x + item->sizeHint().width() + spaceX;
-            lineHeight = 0;
-        }
-
-        if (!testOnly) {
-            item->setGeometry(QRect(QPoint(x, y), item->sizeHint()));
-}
-
-        x = nextX;
-        lineHeight = qMax(lineHeight, item->sizeHint().height());
+  QLayoutItem *item = nullptr;
+  foreach (item, itemList)
+  {
+    QWidget *wid = item->widget();
+    int spaceX = horizontalSpacing();
+    if (spaceX == -1)
+    {
+      spaceX = wid->style()->layoutSpacing(
+          QSizePolicy::PushButton, QSizePolicy::PushButton, Qt::Horizontal);
     }
-    return y + lineHeight - rect.y() + bottom;
+    int spaceY = verticalSpacing();
+    if (spaceY == -1)
+    {
+      spaceY = wid->style()->layoutSpacing(
+          QSizePolicy::PushButton, QSizePolicy::PushButton, Qt::Vertical);
+    }
+    int nextX = x + item->sizeHint().width() + spaceX;
+    if (nextX - spaceX > effectiveRect.right() && lineHeight > 0)
+    {
+      x = effectiveRect.x();
+      y = y + lineHeight + spaceY;
+      nextX = x + item->sizeHint().width() + spaceX;
+      lineHeight = 0;
+    }
+
+    if (!testOnly)
+    {
+      item->setGeometry(QRect(QPoint(x, y), item->sizeHint()));
+    }
+
+    x = nextX;
+    lineHeight = qMax(lineHeight, item->sizeHint().height());
+  }
+  return y + lineHeight - rect.y() + bottom;
 }
 int sanguis::tools::animations::qtutil::FlowLayout::smartSpacing(QStyle::PixelMetric pm) const
 {
-    QObject *cur_parent = this->parent();
-    if (cur_parent == nullptr) {
-        return -1;
-    } if (cur_parent->isWidgetType()) {
-        QWidget *pw = static_cast<QWidget *>(cur_parent);
-        return pw->style()->pixelMetric(pm, nullptr, pw);
-    } else {
-        return static_cast<QLayout *>(cur_parent)->spacing();
-    }
+  QObject *cur_parent = this->parent();
+  if (cur_parent == nullptr)
+  {
+    return -1;
+  }
+  if (cur_parent->isWidgetType())
+  {
+    QWidget *pw = static_cast<QWidget *>(cur_parent);
+    return pw->style()->pixelMetric(pm, nullptr, pw);
+  }
+  else
+  {
+    return static_cast<QLayout *>(cur_parent)->spacing();
+  }
 }

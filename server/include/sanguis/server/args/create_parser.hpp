@@ -4,13 +4,11 @@
 #include <sanguis/server/symbol.hpp>
 #include <sanguis/server/args/parser_unique_ptr.hpp>
 
-
 namespace sanguis::server::args
 {
 
 SANGUIS_SERVER_SYMBOL
-sanguis::server::args::parser_unique_ptr
-create_parser();
+sanguis::server::args::parser_unique_ptr create_parser();
 
 }
 

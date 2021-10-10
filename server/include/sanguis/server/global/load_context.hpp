@@ -9,41 +9,27 @@
 #include <sanguis/server/global/next_id_callback.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::global
 {
 
-class load_context
-:
-	public sanguis::server::environment::load_context
+class load_context : public sanguis::server::environment::load_context
 {
-	FCPPT_NONMOVABLE(
-		load_context
-	);
+  FCPPT_NONMOVABLE(load_context);
+
 public:
-	load_context(
-		sanguis::server::load_cref,
-		sanguis::server::global::next_id_callback &&
-	);
+  load_context(sanguis::server::load_cref, sanguis::server::global::next_id_callback &&);
 
-	~load_context()
-	override;
+  ~load_context() override;
+
 private:
-	[[nodiscard]]
-	sanguis::server::radius
-	model_size(
-		sanguis::load::model::path const &
-	) const
-	override;
+  [[nodiscard]] sanguis::server::radius
+  model_size(sanguis::load::model::path const &) const override;
 
-	[[nodiscard]]
-	sanguis::entity_id
-	next_id()
-	override;
+  [[nodiscard]] sanguis::entity_id next_id() override;
 
-	sanguis::server::load_cref const model_context_;
+  sanguis::server::load_cref const model_context_;
 
-	sanguis::server::global::next_id_callback const next_id_callback_;
+  sanguis::server::global::next_id_callback const next_id_callback_;
 };
 
 }

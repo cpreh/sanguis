@@ -7,17 +7,10 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::model
 {
 
-using
-animation_map
-=
-std::unordered_map<
-	sanguis::model::animation_name,
-	sanguis::model::animation
->;
+using animation_map = std::unordered_map<sanguis::model::animation_name, sanguis::model::animation>;
 
 }
 

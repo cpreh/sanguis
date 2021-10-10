@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::server::weapons::create_function,
-	spawn_weapon
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::server::weapons::create_function, spawn_weapon);
 
 }
 

@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 
-
 #endif

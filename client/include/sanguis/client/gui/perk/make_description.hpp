@@ -4,14 +4,10 @@
 #include <sanguis/client/perk/info_fwd.hpp>
 #include <sge/font/string.hpp>
 
-
 namespace sanguis::client::gui::perk
 {
 
-sge::font::string
-make_description(
-	sanguis::client::perk::info const &
-);
+sge::font::string make_description(sanguis::client::perk::info const &);
 
 }
 

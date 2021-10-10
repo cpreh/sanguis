@@ -5,5 +5,4 @@
 #include <sanguis/creator/impl/random/uniform_int_fwd.hpp>
 #include <sanguis/creator/impl/random/uniform_int_impl.hpp>
 
-
 #endif

@@ -3,15 +3,11 @@
 
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-sanguis::server::entities::transfer_result
-combine_transfer(
-	sanguis::server::entities::transfer_result &&,
-	sanguis::server::entities::transfer_result &&
-);
+sanguis::server::entities::transfer_result combine_transfer(
+    sanguis::server::entities::transfer_result &&, sanguis::server::entities::transfer_result &&);
 
 }
 

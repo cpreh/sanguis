@@ -3,12 +3,10 @@
 
 #include <sge/gui/text_color.hpp>
 
-
 namespace sanguis::client::gui
 {
 
-sge::gui::text_color
-default_text_color();
+sge::gui::text_color default_text_color();
 
 }
 

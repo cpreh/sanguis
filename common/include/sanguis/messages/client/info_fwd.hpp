@@ -9,24 +9,15 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-info
-=
-alda::message::object<
-	sanguis::messages::client::types::make_message_id<
-		sanguis::messages::client::types::message::info
-	>,
-	alda::bindings::record_variadic<
-		fcppt::record::element<
-			sanguis::messages::roles::player_name,
-			sanguis::messages::adapted_types::string
-		>
-	>
->;
+using info = alda::message::object<
+    sanguis::messages::client::types::make_message_id<
+        sanguis::messages::client::types::message::info>,
+    alda::bindings::record_variadic<fcppt::record::element<
+        sanguis::messages::roles::player_name,
+        sanguis::messages::adapted_types::string>>>;
 
 }
 

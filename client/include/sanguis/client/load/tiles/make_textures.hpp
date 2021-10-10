@@ -5,15 +5,11 @@
 #include <sanguis/tiles/area_container.hpp>
 #include <sge/texture/part_fwd.hpp>
 
-
 namespace sanguis::client::load::tiles
 {
 
 sanguis::client::load::tiles::texture_container
-make_textures(
-	sge::texture::part const &,
-	sanguis::tiles::area_container const &
-);
+make_textures(sge::texture::part const &, sanguis::tiles::area_container const &);
 
 }
 

@@ -5,14 +5,10 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::messages::types
 {
 
-using
-enum_
-=
-std::uint8_t;
+using enum_ = std::uint8_t;
 
 }
 

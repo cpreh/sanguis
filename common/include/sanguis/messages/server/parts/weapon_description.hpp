@@ -8,5 +8,4 @@
 #include <sanguis/messages/server/parts/weapon_description_fwd.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

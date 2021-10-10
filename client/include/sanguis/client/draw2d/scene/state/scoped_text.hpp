@@ -7,27 +7,21 @@
 #include <sge/renderer/state/ffp/sampler/scoped.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::scene::state
 {
 
-class scoped_text
-:
-	public sanguis::client::draw2d::scene::state::scoped
+class scoped_text : public sanguis::client::draw2d::scene::state::scoped
 {
-	FCPPT_NONMOVABLE(
-		scoped_text
-	);
-public:
-	scoped_text(
-		sge::renderer::context::ffp_ref,
-		sge::renderer::state::ffp::sampler::const_object_ref
-	);
+  FCPPT_NONMOVABLE(scoped_text);
 
-	~scoped_text()
-	override;
+public:
+  scoped_text(
+      sge::renderer::context::ffp_ref, sge::renderer::state::ffp::sampler::const_object_ref);
+
+  ~scoped_text() override;
+
 private:
-	sge::renderer::state::ffp::sampler::scoped const state_;
+  sge::renderer::state::ffp::sampler::scoped const state_;
 };
 
 }

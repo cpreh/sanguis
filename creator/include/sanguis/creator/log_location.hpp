@@ -4,13 +4,11 @@
 #include <sanguis/creator/symbol.hpp>
 #include <fcppt/log/location.hpp>
 
-
 namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-fcppt::log::location
-log_location();
+fcppt::log::location log_location();
 
 }
 

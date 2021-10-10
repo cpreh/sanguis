@@ -5,26 +5,20 @@
 #include <sanguis/collision/world/ghost_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::collision::world
 {
 
 class ghost
 {
-	FCPPT_NONMOVABLE(
-		ghost
-	);
-protected:
-	ghost();
-public:
-	virtual
-	~ghost();
+  FCPPT_NONMOVABLE(ghost);
 
-	virtual
-	void
-	center(
-		sanguis::collision::center
-	) = 0;
+protected:
+  ghost();
+
+public:
+  virtual ~ghost();
+
+  virtual void center(sanguis::collision::center) = 0;
 };
 
 }

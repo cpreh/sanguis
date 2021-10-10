@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::server::random
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::server::random::amount,
-	min
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::server::random::amount, min);
 
 }
 

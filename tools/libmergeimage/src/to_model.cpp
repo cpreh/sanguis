@@ -19,92 +19,40 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size.hpp>
 
-
-sanguis::model::object
-sanguis::tools::libmergeimage::to_model(
-	sanguis::model::cell_size const &_cell_size,
-	sanguis::tools::libmergeimage::saved_image_vector const &_images
-)
+sanguis::model::object sanguis::tools::libmergeimage::to_model(
+    sanguis::model::cell_size const &_cell_size,
+    sanguis::tools::libmergeimage::saved_image_vector const &_images)
 {
-	sanguis::model::object result(
-		_cell_size,
-		sanguis::model::optional_animation_delay(),
-		sanguis::model::part_map(),
-		sanguis::model::optional_image_name()
-	);
+  sanguis::model::object result(
+      _cell_size,
+      sanguis::model::optional_animation_delay(),
+      sanguis::model::part_map(),
+      sanguis::model::optional_image_name());
 
-	for(
-		sanguis::tools::libmergeimage::saved_image const &image
-		:
-		_images
-	)
-	{
-		sanguis::model::animation_index cell_index(
-			0U
-		);
+  for (sanguis::tools::libmergeimage::saved_image const &image : _images)
+  {
+    sanguis::model::animation_index cell_index(0U);
 
-		for(
-			sanguis::tools::libmergeimage::path_count_pair const &element
-			:
-			image.paths()
-		)
-		{
-			sanguis::tools::libmergeimage::path const &path(
-				element.path()
-			);
+    for (sanguis::tools::libmergeimage::path_count_pair const &element : image.paths())
+    {
+      sanguis::tools::libmergeimage::path const &path(element.path());
 
-			FCPPT_ASSERT_ERROR(
-				path.size()
-				==
-				sanguis::tools::libmergeimage::impl::tree_depth::value
-			);
+      FCPPT_ASSERT_ERROR(path.size() == sanguis::tools::libmergeimage::impl::tree_depth::value);
 
-			auto const range(
-				fcppt::cast::size<
-					sanguis::model::animation_index
-				>(
-					element.count()
-				)
-			);
+      auto const range(fcppt::cast::size<sanguis::model::animation_index>(element.count()));
 
-			result[
-				sanguis::model::part_name(
-					path[
-						0
-					]
-				)
-			][
-				sanguis::model::weapon_category_name(
-					path[
-						1
-					]
-				)
-			].insert(
-				sanguis::model::animation_name(
-					path[
-						2
-					]
-				),
-				sanguis::model::animation(
-					sanguis::model::animation_range(
-						cell_index,
-						cell_index
-						+
-						range
-					),
-					sanguis::model::optional_animation_delay(),
-					sanguis::model::optional_animation_sound(),
-					sanguis::model::optional_image_name(
-						image.image_name()
-					)
-				)
-			);
+      result[sanguis::model::part_name(path[0])][sanguis::model::weapon_category_name(path[1])]
+          .insert(
+              sanguis::model::animation_name(path[2]),
+              sanguis::model::animation(
+                  sanguis::model::animation_range(cell_index, cell_index + range),
+                  sanguis::model::optional_animation_delay(),
+                  sanguis::model::optional_animation_sound(),
+                  sanguis::model::optional_image_name(image.image_name())));
 
-			cell_index +=
-				range;
-		}
-	}
+      cell_index += range;
+    }
+  }
 
-	return
-		result;
+  return result;
 }

@@ -4,14 +4,10 @@
 #include <sanguis/client/load/model/global_parameters_fwd.hpp>
 #include <sge/texture/part_fwd.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
-sge::texture::part const &
-make_texture(
-	sanguis::client::load::model::global_parameters const &
-);
+sge::texture::part const &make_texture(sanguis::client::load::model::global_parameters const &);
 
 }
 

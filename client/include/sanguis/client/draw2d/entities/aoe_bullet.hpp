@@ -11,41 +11,33 @@
 #include <sanguis/load/model/path_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class aoe_bullet
-:
-	public sanguis::client::draw2d::entities::model::object
+class aoe_bullet : public sanguis::client::draw2d::entities::model::object
 {
-	FCPPT_NONMOVABLE(
-		aoe_bullet
-	);
+  FCPPT_NONMOVABLE(aoe_bullet);
+
 public:
-	aoe_bullet(
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::insert_own_callback &&,
-		sanguis::load::model::path &&,
-		sanguis::client::draw2d::speed const &,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::rotation,
-		sanguis::client::draw2d::aoe
-	);
+  aoe_bullet(
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::client::draw2d::insert_own_callback &&,
+      sanguis::load::model::path &&,
+      sanguis::client::draw2d::speed const &,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::rotation,
+      sanguis::client::draw2d::aoe);
 
-	~aoe_bullet()
-	override;
+  ~aoe_bullet() override;
+
 private:
-	void
-	on_die()
-	override;
+  void on_die() override;
 
-	sanguis::client::draw2d::entities::load_parameters const load_parameters_;
+  sanguis::client::draw2d::entities::load_parameters const load_parameters_;
 
-	sanguis::client::draw2d::insert_own_callback const insert_;
+  sanguis::client::draw2d::insert_own_callback const insert_;
 
-	sanguis::client::draw2d::aoe const aoe_;
-
+  sanguis::client::draw2d::aoe const aoe_;
 };
 
 }

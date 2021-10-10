@@ -4,29 +4,22 @@
 #include <sanguis/client/control/actions/binary_fwd.hpp>
 #include <sanguis/client/control/actions/binary_type.hpp>
 
-
 namespace sanguis::client::control::actions
 {
 
 class binary
 {
 public:
-	binary(
-		sanguis::client::control::actions::binary_type,
-		bool
-	);
+  binary(sanguis::client::control::actions::binary_type, bool);
 
-	[[nodiscard]]
-	sanguis::client::control::actions::binary_type
-	type() const;
+  [[nodiscard]] sanguis::client::control::actions::binary_type type() const;
 
-	[[nodiscard]]
-	bool
-	value() const;
+  [[nodiscard]] bool value() const;
+
 private:
-	sanguis::client::control::actions::binary_type type_;
+  sanguis::client::control::actions::binary_type type_;
 
-	bool value_;
+  bool value_;
 };
 
 }

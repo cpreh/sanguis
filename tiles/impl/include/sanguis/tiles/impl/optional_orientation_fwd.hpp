@@ -4,16 +4,10 @@
 #include <sanguis/tiles/orientation_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-using
-optional_orientation
-=
-fcppt::optional::object<
-	sanguis::tiles::orientation
->;
+using optional_orientation = fcppt::optional::object<sanguis::tiles::orientation>;
 
 }
 

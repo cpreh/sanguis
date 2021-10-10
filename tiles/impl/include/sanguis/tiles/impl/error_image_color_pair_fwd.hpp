@@ -4,17 +4,11 @@
 #include <sge/image/color/any/object_fwd.hpp>
 #include <fcppt/tuple/object_fwd.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-using
-error_image_color_pair
-=
-fcppt::tuple::object<
-	sge::image::color::any::object,
-	sge::image::color::any::object
->;
+using error_image_color_pair =
+    fcppt::tuple::object<sge::image::color::any::object, sge::image::color::any::object>;
 
 }
 

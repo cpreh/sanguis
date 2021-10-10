@@ -5,5 +5,4 @@
 #include <sanguis/client/args/elements/display_width_fwd.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

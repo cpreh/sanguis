@@ -4,13 +4,11 @@
 #include <sanguis/messages/server/optional_unique_ptr.hpp>
 #include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>
 
-
 namespace sanguis::client::net
 {
 
 sanguis::messages::server::optional_unique_ptr
-deserialize(
-	alda::net::buffer::circular_receive::streambuf & // NOLINT(google-runtime-references)
+deserialize(alda::net::buffer::circular_receive::streambuf & // NOLINT(google-runtime-references)
 ); // NOLINT(google-runtime-references)
 
 }

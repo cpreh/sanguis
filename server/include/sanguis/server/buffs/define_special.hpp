@@ -3,23 +3,15 @@
 
 #include <fcppt/nonmovable.hpp>
 
-
-#define SANGUIS_SERVER_BUFFS_DEFINE_SPECIAL(\
-	derived,\
-	base\
-)\
-class derived \
-: \
-	public sanguis::server::buffs::base \
-{ \
-	FCPPT_NONMOVABLE(\
-		derived\
-	);\
-public:\
-	using sanguis::server::buffs::base::base;\
+#define SANGUIS_SERVER_BUFFS_DEFINE_SPECIAL(derived, base) \
+  class derived : public sanguis::server::buffs::base \
+  { \
+    FCPPT_NONMOVABLE(derived); \
 \
-	~derived() override\
-	= default; \
-}
+  public: \
+    using sanguis::server::buffs::base::base; \
+\
+    ~derived() override = default; \
+  }
 
 #endif

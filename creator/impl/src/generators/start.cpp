@@ -36,204 +36,75 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::creator::impl::result
-sanguis::creator::impl::generators::start(
-	sanguis::creator::impl::parameters const &_parameters
-)
+sanguis::creator::impl::generators::start(sanguis::creator::impl::parameters const &_parameters)
 {
-	if(
-		_parameters.opening_count_array()[
-			sanguis::creator::opening_type::entry
-		]
-		>
-		sanguis::creator::opening_count{
-			1U
-		}
-		||
-		_parameters.opening_count_array()[
-			sanguis::creator::opening_type::exit
-		]
-		>
-		sanguis::creator::opening_count{
-			1U
-		}
-	)
-	{
-		throw
-			sanguis::creator::exception{
-				FCPPT_TEXT("The start level can only deal with 0 or 1 opening each.")
-			};
-	}
+  if (_parameters.opening_count_array()[sanguis::creator::opening_type::entry] >
+          sanguis::creator::opening_count{1U} ||
+      _parameters.opening_count_array()[sanguis::creator::opening_type::exit] >
+          sanguis::creator::opening_count{1U})
+  {
+    throw sanguis::creator::exception{
+        FCPPT_TEXT("The start level can only deal with 0 or 1 opening each.")};
+  }
 
-	sanguis::creator::dim const grid_size{
-		fcppt::math::dim::fill<
-			sanguis::creator::dim
-		>(
-			10
-		)
-	};
+  sanguis::creator::dim const grid_size{fcppt::math::dim::fill<sanguis::creator::dim>(10)};
 
-	sanguis::creator::grid grid{
-		grid_size,
-		sanguis::creator::tile::concrete_wall
-	};
+  sanguis::creator::grid grid{grid_size, sanguis::creator::tile::concrete_wall};
 
-	for(
-		auto const pos
-		:
-		sanguis::creator::impl::interior_range(
-			fcppt::make_ref(
-				grid
-			)
-		)
-	)
-	{
-		pos.value() =
-			sanguis::creator::tile::nothing;
-	}
+  for (auto const pos : sanguis::creator::impl::interior_range(fcppt::make_ref(grid)))
+  {
+    pos.value() = sanguis::creator::tile::nothing;
+  }
 
-	sanguis::creator::opening const start_portal{
-		sanguis::creator::pos{
-			1U,
-			grid_size.h()
-			/
-			2U
-		}
-	};
+  sanguis::creator::opening const start_portal{sanguis::creator::pos{1U, grid_size.h() / 2U}};
 
-	sanguis::creator::opening const exit_portal{
-		sanguis::creator::pos{
-			grid_size.w()
-			-
-			2U,
-			grid_size.h()
-			/
-			2U
-		}
-	};
+  sanguis::creator::opening const exit_portal{
+      sanguis::creator::pos{grid_size.w() - 2U, grid_size.h() / 2U}};
 
-	sanguis::creator::background_grid bg_grid{
-		grid_size,
-		sanguis::creator::background_tile::dirt
-	};
+  sanguis::creator::background_grid bg_grid{grid_size, sanguis::creator::background_tile::dirt};
 
-	using
-	uniform_int2
-	=
-	fcppt::random::distribution::basic<
-		sanguis::creator::impl::random::uniform_int<
-			unsigned
-		>
-	>;
+  using uniform_int2 =
+      fcppt::random::distribution::basic<sanguis::creator::impl::random::uniform_int<unsigned>>;
 
-	auto random_dirt_grass(
-		fcppt::random::make_variate(
-			fcppt::make_ref(
-				_parameters.randgen()
-			),
-			uniform_int2{
-				uniform_int2::param_type::min{
-					0U
-				},
-				uniform_int2::param_type::max{
-					1U
-				}
-			}
-		)
-	);
+  auto random_dirt_grass(fcppt::random::make_variate(
+      fcppt::make_ref(_parameters.randgen()),
+      uniform_int2{uniform_int2::param_type::min{0U}, uniform_int2::param_type::max{1U}}));
 
-	for(
-		auto const pos
-		:
-		sanguis::creator::impl::interior_range(
-			fcppt::make_ref(
-				bg_grid
-			)
-		)
-	)
-	{
-		pos.value() =
-			random_dirt_grass()
-			!=
-			0U
-			?
-			sanguis::creator::background_tile::dirt
-			:
-			sanguis::creator::background_tile::grass;
-	}
+  for (auto const pos : sanguis::creator::impl::interior_range(fcppt::make_ref(bg_grid)))
+  {
+    pos.value() = random_dirt_grass() != 0U ? sanguis::creator::background_tile::dirt
+                                            : sanguis::creator::background_tile::grass;
+  }
 
-	FCPPT_ASSERT_OPTIONAL_ERROR(
-		fcppt::container::grid::at_optional(
-			grid,
-			exit_portal.get()
-		)
-	).get() =
-		sanguis::creator::tile::stairs;
+  FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(grid, exit_portal.get())).get() =
+      sanguis::creator::tile::stairs;
 
-	return
-		sanguis::creator::impl::result{
-			std::move(
-				grid
-			),
-			std::move(
-				bg_grid
-			),
-			fcppt::enum_::array_init<
-				sanguis::creator::opening_container_array
-			>(
-				[
-					&_parameters,
-					start_portal,
-					exit_portal
-				](
-					sanguis::creator::opening_type const _opening_type
-				)
-				{
-					if(
-						_parameters.opening_count_array()[
-							_opening_type
-						]
-						==
-						sanguis::creator::opening_count{
-							0U
-						}
-					)
-					{
-						return
-							sanguis::creator::opening_container{};
-					}
+  return sanguis::creator::impl::result{
+      std::move(grid),
+      std::move(bg_grid),
+      fcppt::enum_::array_init<sanguis::creator::opening_container_array>(
+          [&_parameters, start_portal, exit_portal](
+              sanguis::creator::opening_type const _opening_type)
+          {
+            if (_parameters.opening_count_array()[_opening_type] ==
+                sanguis::creator::opening_count{0U})
+            {
+              return sanguis::creator::opening_container{};
+            }
 
-					switch(
-						_opening_type
-					)
-					{
-					case sanguis::creator::opening_type::entry:
-						return
-							sanguis::creator::opening_container{
-								start_portal
-							};
-					case sanguis::creator::opening_type::exit:
-						return
-							sanguis::creator::opening_container{
-								exit_portal
-							};
-					}
+            switch (_opening_type)
+            {
+            case sanguis::creator::opening_type::entry:
+              return sanguis::creator::opening_container{start_portal};
+            case sanguis::creator::opening_type::exit:
+              return sanguis::creator::opening_container{exit_portal};
+            }
 
-					FCPPT_ASSERT_UNREACHABLE;
-				}
-			),
-			sanguis::creator::spawn_container(),
-			sanguis::creator::destructible_container{
-				sanguis::creator::destructible(
-					sanguis::creator::destructible_pos(
-						sanguis::creator::pos(
-							2U,
-							2U
-						)
-					),
-					sanguis::creator::destructible_type::barrel
-				)
-			}
-		};
+            FCPPT_ASSERT_UNREACHABLE;
+          }),
+      sanguis::creator::spawn_container(),
+      sanguis::creator::destructible_container{sanguis::creator::destructible(
+          sanguis::creator::destructible_pos(sanguis::creator::pos(2U, 2U)),
+          sanguis::creator::destructible_type::barrel)}};
 }

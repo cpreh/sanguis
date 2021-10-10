@@ -5,12 +5,6 @@
 #include <sanguis/server/weapons/attributes/aoe_fwd.hpp>
 #include <sanguis/server/weapons/attributes/basic_decl.hpp>
 
-
-extern
-template
-class
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::weapons::aoe
->;
+extern template class sanguis::server::weapons::attributes::basic<sanguis::server::weapons::aoe>;
 
 #endif

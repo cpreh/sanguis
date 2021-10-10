@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::server
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::world_id,
-	source_world_id
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::world_id, source_world_id);
 
 }
 

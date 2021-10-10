@@ -6,15 +6,10 @@
 #include <QRect>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations::qtutil
 {
 
-QImage
-sub_image(
-	QImage const &,
-	QRect
-);
+QImage sub_image(QImage const &, QRect);
 
 }
 

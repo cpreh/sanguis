@@ -15,56 +15,45 @@
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class text
-:
-	public sanguis::client::draw2d::entities::own
+class text : public sanguis::client::draw2d::entities::own
 {
-	FCPPT_NONMOVABLE(
-		text
-	);
+  FCPPT_NONMOVABLE(text);
+
 public:
-	text(
-		sanguis::diff_clock_cref,
-		sanguis::client::draw2d::sprite::normal::system_ref,
-		sge::font::object &, // NOLINT(google-runtime-references)
-		sge::font::string const &,
-		sanguis::client::draw2d::z_ordering,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::normal::color
-	);
+  text(
+      sanguis::diff_clock_cref,
+      sanguis::client::draw2d::sprite::normal::system_ref,
+      sge::font::object &, // NOLINT(google-runtime-references)
+      sge::font::string const &,
+      sanguis::client::draw2d::z_ordering,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::normal::color);
 
-	~text()
-	override;
+  ~text() override;
+
 private:
-	text(
-		sanguis::diff_clock_cref,
-		sanguis::client::draw2d::sprite::normal::system_ref,
-		sge::font::text_unique_ptr &&,
-		sanguis::client::draw2d::z_ordering,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::normal::color
-	);
+  text(
+      sanguis::diff_clock_cref,
+      sanguis::client::draw2d::sprite::normal::system_ref,
+      sge::font::text_unique_ptr &&,
+      sanguis::client::draw2d::z_ordering,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::normal::color);
 
-	void
-	update()
-	override;
+  void update() override;
 
-	[[nodiscard]]
-	bool
-	may_be_removed() const
-	override;
+  [[nodiscard]] bool may_be_removed() const override;
 
-	sanguis::diff_timer life_time_;
+  sanguis::diff_timer life_time_;
 
-	sge::texture::const_part_unique_ptr const texture_;
+  sge::texture::const_part_unique_ptr const texture_;
 
-	sanguis::client::draw2d::sprite::normal::object sprite_;
+  sanguis::client::draw2d::sprite::normal::object sprite_;
 
-	sanguis::client::draw2d::sprite::center const origin_;
+  sanguis::client::draw2d::sprite::center const origin_;
 };
 
 }

@@ -21,67 +21,31 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::buffs
 {
 
-template<
-	typename Buff
->
+template <typename Buff>
 sanguis::server::buffs::create_callback
-slow_create(
-	sanguis::server::buffs::slow_factor const _factor
-)
+slow_create(sanguis::server::buffs::slow_factor const _factor)
 {
-	static_assert(
-		std::is_base_of_v<
-			sanguis::server::buffs::slow,
-			Buff
-		>,
-		"Buff must derive from buffs::slow"
-	);
+  static_assert(
+      std::is_base_of_v<sanguis::server::buffs::slow, Buff>, "Buff must derive from buffs::slow");
 
-	return
-		sanguis::server::buffs::create_callback{
-			[
-				_factor
-			](
-				sanguis::server::entities::base_ref const _entity
-			)
-			{
-FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
-				return
-					fcppt::optional::map(
-						fcppt::cast::dynamic<
-							sanguis::server::entities::with_velocity
-						>(
-							_entity.get()
-						),
-						[
-							_factor
-						](
-							fcppt::reference<
-								sanguis::server::entities::with_velocity
-							> const _with_velocity
-						)
-						{
-							return
-								fcppt::unique_ptr_to_base<
-									sanguis::server::buffs::buff
-								>(
-									fcppt::make_unique_ptr<
-										Buff
-									>(
-										_with_velocity,
-										_factor
-									)
-								);
-						}
-					);
-FCPPT_PP_POP_WARNING
-			}
-		};
+  return sanguis::server::buffs::create_callback{
+      [_factor](sanguis::server::entities::base_ref const _entity)
+      {
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
+        return fcppt::optional::map(
+            fcppt::cast::dynamic<sanguis::server::entities::with_velocity>(_entity.get()),
+            [_factor](
+                fcppt::reference<sanguis::server::entities::with_velocity> const _with_velocity)
+            {
+              return fcppt::unique_ptr_to_base<sanguis::server::buffs::buff>(
+                  fcppt::make_unique_ptr<Buff>(_with_velocity, _factor));
+            });
+        FCPPT_PP_POP_WARNING
+      }};
 }
 
 }

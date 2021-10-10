@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::resource::animation
 {
 
-using
-entity_vector
-=
-std::vector<
-	sanguis::client::load::resource::animation::entity
->;
+using entity_vector = std::vector<sanguis::client::load::resource::animation::entity>;
 
 }
 

@@ -10,18 +10,15 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
-sge::texture::const_optional_part_ref
-make_texture(
-	sanguis::random_generator &, // NOLINT(google-runtime-references)
-	sanguis::client::draw::debug,
-	sanguis::client::load::tiles::context_ref,
-	std::filesystem::path const &,
-	sanguis::tiles::content const &
-);
+sge::texture::const_optional_part_ref make_texture(
+    sanguis::random_generator &, // NOLINT(google-runtime-references)
+    sanguis::client::draw::debug,
+    sanguis::client::load::tiles::context_ref,
+    std::filesystem::path const &,
+    sanguis::tiles::content const &);
 
 }
 

@@ -6,17 +6,12 @@
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
-[[nodiscard]]
-sanguis::creator::impl::maze_result
-generate_maze(
-	fcppt::reference<
-		sanguis::creator::impl::reachable_grid
-	>,
-	sanguis::creator::impl::random::generator & // NOLINT(google-runtime-references)
+[[nodiscard]] sanguis::creator::impl::maze_result generate_maze(
+    fcppt::reference<sanguis::creator::impl::reachable_grid>,
+    sanguis::creator::impl::random::generator & // NOLINT(google-runtime-references)
 ); // NOLINT(google-runtime-references)
 
 }

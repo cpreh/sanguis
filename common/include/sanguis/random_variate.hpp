@@ -3,5 +3,4 @@
 
 #include <sanguis/random_variate_impl.hpp>
 
-
 #endif

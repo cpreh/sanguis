@@ -5,5 +5,4 @@
 #include <alda/net/port.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

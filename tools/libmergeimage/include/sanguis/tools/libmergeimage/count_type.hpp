@@ -5,14 +5,10 @@
 #include <cstddef>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::libmergeimage
 {
 
-using
-count_type
-=
-std::size_t;
+using count_type = std::size_t;
 
 }
 

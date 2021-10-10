@@ -3,14 +3,10 @@
 
 #include <sanguis/reload_time.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-using
-reload_time
-=
-sanguis::reload_time;
+using reload_time = sanguis::reload_time;
 
 }
 

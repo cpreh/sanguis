@@ -4,16 +4,10 @@
 #include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <sanguis/messages/types/level.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-level
-=
-sanguis::messages::adapted_types::unsigned_<
-	sanguis::messages::types::level
->;
+using level = sanguis::messages::adapted_types::unsigned_<sanguis::messages::types::level>;
 
 }
 

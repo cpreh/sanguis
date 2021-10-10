@@ -3,14 +3,10 @@
 
 #include <sanguis/collision/world/body_exit_container.hpp>
 
-
 namespace sanguis::server::collision
 {
 
-void
-body_exit(
-	sanguis::collision::world::body_exit_container const &
-);
+void body_exit(sanguis::collision::world::body_exit_container const &);
 
 }
 

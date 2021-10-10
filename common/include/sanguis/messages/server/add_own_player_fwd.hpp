@@ -11,26 +11,15 @@
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-add_own_player
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::add_own_player
-	>,
-	alda::bindings::record<
-		fcppt::mpl::list::append<
-			fcppt::mpl::list::object<
-				sanguis::messages::server::parts::entity_id
-			>,
-			sanguis::messages::server::parts::add_player
-		>
-	>
->;
+using add_own_player = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::add_own_player>,
+    alda::bindings::record<fcppt::mpl::list::append<
+        fcppt::mpl::list::object<sanguis::messages::server::parts::entity_id>,
+        sanguis::messages::server::parts::add_player>>>;
 
 }
 

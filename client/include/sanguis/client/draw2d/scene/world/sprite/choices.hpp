@@ -10,5 +10,4 @@
 #include <sge/sprite/config/texture_level_count.hpp>
 #include <sge/sprite/config/with_texture.hpp>
 
-
 #endif

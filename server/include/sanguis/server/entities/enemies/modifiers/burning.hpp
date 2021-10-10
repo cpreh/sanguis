@@ -6,17 +6,12 @@
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::server::entities::enemies::modifiers
 {
 
-sanguis::server::entities::enemies::attribute
-burning(
-	fcppt::reference<
-		sanguis::server::entities::enemies::parameters
-	>,
-	sanguis::server::entities::enemies::modifiers::parameters const &
-);
+sanguis::server::entities::enemies::attribute burning(
+    fcppt::reference<sanguis::server::entities::enemies::parameters>,
+    sanguis::server::entities::enemies::modifiers::parameters const &);
 
 }
 

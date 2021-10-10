@@ -6,41 +6,23 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::events
 {
 
-class menu
-:
-	public boost::statechart::event<
-		sanguis::client::events::menu
-	>
+class menu : public boost::statechart::event<sanguis::client::events::menu>
 {
 public:
-	menu();
+  menu();
 
-	menu(
-		menu &&
-	)
-	noexcept;
+  menu(menu &&) noexcept;
 
-	menu(
-		menu const &
-	);
+  menu(menu const &);
 
-	menu &
-	operator=(
-		menu &&
-	)
-	noexcept;
+  menu &operator=(menu &&) noexcept;
 
-	menu &
-	operator=(
-		menu const &
-	);
+  menu &operator=(menu const &);
 
-	~menu()
-	override;
+  ~menu() override;
 };
 
 }

@@ -7,15 +7,11 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
 sanguis::tiles::orientation_map
-make_orientation_map(
-	std::filesystem::path const &,
-	sge::image2d::dim const &
-);
+make_orientation_map(std::filesystem::path const &, sge::image2d::dim const &);
 
 }
 

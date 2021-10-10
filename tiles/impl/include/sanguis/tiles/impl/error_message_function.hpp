@@ -4,16 +4,10 @@
 #include <fcppt/function_impl.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-using
-error_message_function
-=
-fcppt::function<
-	fcppt::string ()
->;
+using error_message_function = fcppt::function<fcppt::string()>;
 
 }
 

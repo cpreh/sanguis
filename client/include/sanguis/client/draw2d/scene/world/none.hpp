@@ -6,34 +6,22 @@
 #include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
-class none
-:
-	public sanguis::client::draw2d::scene::world::base
+class none : public sanguis::client::draw2d::scene::world::base
 {
-	FCPPT_NONMOVABLE(
-		none
-	);
+  FCPPT_NONMOVABLE(none);
+
 public:
-	none();
+  none();
 
-	~none()
-	override;
+  ~none() override;
+
 private:
-	void
-	update(
-		sanguis::client::slowed_duration
-	)
-	override;
+  void update(sanguis::client::slowed_duration) override;
 
-	void
-	draw_after(
-		sanguis::client::draw2d::scene::world::render_parameters const &
-	)
-	override;
+  void draw_after(sanguis::client::draw2d::scene::world::render_parameters const &) override;
 };
 
 }

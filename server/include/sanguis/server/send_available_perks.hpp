@@ -4,15 +4,11 @@
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/entities/player_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
-void
-send_available_perks(
-	sanguis::server::entities::player const &,
-	sanguis::server::unicast_callback const &
-);
+void send_available_perks(
+    sanguis::server::entities::player const &, sanguis::server::unicast_callback const &);
 
 }
 

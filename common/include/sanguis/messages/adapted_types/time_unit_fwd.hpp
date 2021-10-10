@@ -3,14 +3,10 @@
 
 #include <alda/bindings/float_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-time_unit
-=
-alda::bindings::float_;
+using time_unit = alda::bindings::float_;
 
 }
 

@@ -7,62 +7,32 @@
 #include <sanguis/tiles/symbol.hpp>
 #include <fcppt/tuple/object_impl.hpp>
 
-
 namespace sanguis::tiles
 {
 
-template<
-	typename Tile
->
+template <typename Tile>
 class pair
 {
 public:
-	static_assert(
-		sanguis::creator::is_tile<
-			Tile
-		>::value,
-		"Tile must be a tile type"
-	);
+  static_assert(sanguis::creator::is_tile<Tile>::value, "Tile must be a tile type");
 
-	SANGUIS_TILES_SYMBOL
-	pair(
-		Tile,
-		Tile
-	);
+  SANGUIS_TILES_SYMBOL
+  pair(Tile, Tile);
 
-	[[nodiscard]]
-	Tile
-	first() const;
+  [[nodiscard]] Tile first() const;
 
-	[[nodiscard]]
-	Tile
-	second() const;
+  [[nodiscard]] Tile second() const;
+
 private:
-	using
-	impl_type
-	=
-	fcppt::tuple::object<
-		Tile,
-		Tile
-	>;
+  using impl_type = fcppt::tuple::object<Tile, Tile>;
 
-	impl_type impl_;
+  impl_type impl_;
 };
 
 }
 
-#define SANGUIS_TILES_DECLARE_TILE(\
-	tile_type\
-)\
-extern \
-template \
-class \
-sanguis::tiles::pair<\
-	tile_type \
->
+#define SANGUIS_TILES_DECLARE_TILE(tile_type) extern template class sanguis::tiles::pair<tile_type>
 
-SANGUIS_CREATOR_INSTANTIATE_TILE(
-	SANGUIS_TILES_DECLARE_TILE
-);
+SANGUIS_CREATOR_INSTANTIATE_TILE(SANGUIS_TILES_DECLARE_TILE);
 
 #endif

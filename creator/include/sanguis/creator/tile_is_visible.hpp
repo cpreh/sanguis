@@ -5,17 +5,12 @@
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/creator/symbol.hpp>
 
-
 namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-bool
-tile_is_visible(
-	sanguis::creator::grid const &,
-	sanguis::creator::pos const &,
-	sanguis::creator::pos const &
-);
+bool tile_is_visible(
+    sanguis::creator::grid const &, sanguis::creator::pos const &, sanguis::creator::pos const &);
 
 }
 

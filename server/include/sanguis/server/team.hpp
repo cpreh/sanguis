@@ -3,14 +3,13 @@
 
 #include <sanguis/server/team_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
 enum class team
 {
-	players,
-	monsters
+  players,
+  monsters
 };
 
 }

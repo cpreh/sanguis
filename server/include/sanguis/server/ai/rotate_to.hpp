@@ -4,15 +4,12 @@
 #include <sanguis/server/angle_fwd.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-void
-rotate_to(
-	sanguis::server::entities::with_ai &, // NOLINT(google-runtime-references)
-	sanguis::server::angle
-);
+void rotate_to(
+    sanguis::server::entities::with_ai &, // NOLINT(google-runtime-references)
+    sanguis::server::angle);
 
 }
 

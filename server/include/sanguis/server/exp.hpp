@@ -4,5 +4,4 @@
 #include <sanguis/server/exp_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

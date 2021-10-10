@@ -7,43 +7,31 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
-
 namespace sanguis::client::draw2d::entities::buffs
 {
 
-class slow
-:
-	public sanguis::client::draw2d::entities::buffs::base
+class slow : public sanguis::client::draw2d::entities::buffs::base
 {
-	FCPPT_NONMOVABLE(
-		slow
-	);
+  FCPPT_NONMOVABLE(slow);
+
 public:
-	slow();
+  slow();
 
-	~slow()
-	override;
+  ~slow() override;
+
 private:
-	void
-	apply(
-		sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void apply(sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
+             ) // NOLINT(google-runtime-references)
+      override;
 
-	void
-	remove(
-		sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void
+  remove(sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
+         ) // NOLINT(google-runtime-references)
+      override;
 
-	using
-	optional_color
-	=
-	fcppt::optional::object<
-		sanguis::client::draw2d::sprite::normal::color
-	>;
+  using optional_color = fcppt::optional::object<sanguis::client::draw2d::sprite::normal::color>;
 
-	optional_color previous_color_;
+  optional_color previous_color_;
 };
 
 }

@@ -13,23 +13,20 @@
 #include <sanguis/server/entities/enemies/factory/parameters_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 
-
 namespace sanguis::server::entities::enemies::factory
 {
 
-sanguis::server::entities::with_id_unique_ptr
-make(
-	sanguis::server::entities::enemies::factory::parameters const &,
-	sanguis::server::damage::armor_array const &,
-	sanguis::server::mass const &,
-	sanguis::server::health,
-	sanguis::server::entities::movement_speed,
-	sanguis::server::ai::create_function &&,
-	sanguis::server::weapons::unique_ptr &&,
-	sanguis::server::pickup_probability,
-	sanguis::server::exp,
-	sanguis::server::auras::container &&
-);
+sanguis::server::entities::with_id_unique_ptr make(
+    sanguis::server::entities::enemies::factory::parameters const &,
+    sanguis::server::damage::armor_array const &,
+    sanguis::server::mass const &,
+    sanguis::server::health,
+    sanguis::server::entities::movement_speed,
+    sanguis::server::ai::create_function &&,
+    sanguis::server::weapons::unique_ptr &&,
+    sanguis::server::pickup_probability,
+    sanguis::server::exp,
+    sanguis::server::auras::container &&);
 
 }
 

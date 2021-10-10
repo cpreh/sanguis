@@ -4,16 +4,11 @@
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-using
-optional_own_unique_ptr
-=
-fcppt::optional::object<
-	sanguis::client::draw2d::entities::own_unique_ptr
->;
+using optional_own_unique_ptr =
+    fcppt::optional::object<sanguis::client::draw2d::entities::own_unique_ptr>;
 
 }
 

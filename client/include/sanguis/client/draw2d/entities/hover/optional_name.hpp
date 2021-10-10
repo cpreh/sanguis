@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/entities/hover/optional_name_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

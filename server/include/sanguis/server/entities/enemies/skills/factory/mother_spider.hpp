@@ -4,14 +4,11 @@
 #include <sanguis/server/entities/enemies/skills/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp>
 
-
 namespace sanguis::server::entities::enemies::skills::factory
 {
 
 sanguis::server::entities::enemies::skills::unique_ptr
-mother_spider(
-	sanguis::server::entities::enemies::skills::factory::parameters const &
-);
+mother_spider(sanguis::server::entities::enemies::skills::factory::parameters const &);
 
 }
 

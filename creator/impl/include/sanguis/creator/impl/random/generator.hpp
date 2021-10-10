@@ -7,45 +7,30 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/random/generator/mt19937_decl.hpp>
 
-
 namespace sanguis::creator::impl::random
 {
 
 class generator
 {
-	FCPPT_NONMOVABLE(
-		generator
-	);
+  FCPPT_NONMOVABLE(generator);
+
 public:
-	explicit
-	generator(
-		sanguis::creator::seed const &
-	);
+  explicit generator(sanguis::creator::seed const &);
 
-	~generator();
+  ~generator();
 
-	using
-	result_type
-	=
-	sanguis::creator::impl::random::value;
+  using result_type = sanguis::creator::impl::random::value;
 
-	sanguis::creator::impl::random::generator::result_type
-	operator()();
+  sanguis::creator::impl::random::generator::result_type operator()();
 
-	static
-	sanguis::creator::impl::random::generator::result_type
-	min();
+  static sanguis::creator::impl::random::generator::result_type min();
 
-	static
-	sanguis::creator::impl::random::generator::result_type
-	max();
+  static sanguis::creator::impl::random::generator::result_type max();
+
 private:
-	using
-	generator_type
-	=
-	fcppt::random::generator::mt19937;
+  using generator_type = fcppt::random::generator::mt19937;
 
-	generator_type generator_;
+  generator_type generator_;
 };
 
 }

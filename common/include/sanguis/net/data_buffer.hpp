@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::net
 {
 
-using
-data_buffer
-=
-std::vector<
-	alda::net::value_type
->;
+using data_buffer = std::vector<alda::net::value_type>;
 
 }
 

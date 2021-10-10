@@ -5,5 +5,4 @@
 #include <sanguis/messages/call/result_variant_fwd.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
-
 #endif

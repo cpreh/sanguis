@@ -4,5 +4,4 @@
 #include <sanguis/creator/impl/random/uniform_int_distribution_impl.hpp>
 #include <sanguis/creator/impl/random/uniform_int_wrapper_decl.hpp>
 
-
 #endif

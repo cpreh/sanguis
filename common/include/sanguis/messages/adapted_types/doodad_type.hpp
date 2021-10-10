@@ -5,5 +5,4 @@
 #include <sanguis/messages/adapted_types/doodad_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
 
-
 #endif

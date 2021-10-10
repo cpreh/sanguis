@@ -4,5 +4,4 @@
 #include <sanguis/messages/adapted_types/char_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/fundamental.hpp>
 
-
 #endif

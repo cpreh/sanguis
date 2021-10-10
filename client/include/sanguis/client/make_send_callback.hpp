@@ -5,16 +5,10 @@
 #include <sanguis/client/send_callback.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::client
 {
 
-sanguis::client::send_callback
-make_send_callback(
-	fcppt::reference<
-		sanguis::client::machine
-	>
-);
+sanguis::client::send_callback make_send_callback(fcppt::reference<sanguis::client::machine>);
 
 }
 

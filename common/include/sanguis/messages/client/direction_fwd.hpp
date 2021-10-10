@@ -9,24 +9,15 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-direction
-=
-alda::message::object<
-	sanguis::messages::client::types::make_message_id<
-		sanguis::messages::client::types::message::direction
-	>,
-	alda::bindings::record_variadic<
-		fcppt::record::element<
-			sanguis::messages::roles::direction,
-			sanguis::messages::adapted_types::vector2
-		>
-	>
->;
+using direction = alda::message::object<
+    sanguis::messages::client::types::make_message_id<
+        sanguis::messages::client::types::message::direction>,
+    alda::bindings::record_variadic<fcppt::record::element<
+        sanguis::messages::roles::direction,
+        sanguis::messages::adapted_types::vector2>>>;
 
 }
 

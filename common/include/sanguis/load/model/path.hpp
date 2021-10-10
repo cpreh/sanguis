@@ -4,5 +4,4 @@
 #include <sanguis/load/model/path_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

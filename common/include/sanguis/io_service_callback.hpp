@@ -3,16 +3,10 @@
 
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis
 {
 
-using
-io_service_callback
-=
-fcppt::function<
-	void ()
->;
+using io_service_callback = fcppt::function<void()>;
 
 }
 

@@ -10,25 +10,16 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-move
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::move
-	>,
-	alda::bindings::record_variadic<
-		sanguis::messages::server::parts::entity_id,
-		fcppt::record::element<
-			sanguis::messages::roles::center,
-			sanguis::messages::adapted_types::vector2
-		>
-	>
->;
+using move = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::move>,
+    alda::bindings::record_variadic<
+        sanguis::messages::server::parts::entity_id,
+        fcppt::record::
+            element<sanguis::messages::roles::center, sanguis::messages::adapted_types::vector2>>>;
 
 }
 

@@ -4,22 +4,12 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::collision::impl::intersection::intersection(
-	sanguis::collision::impl::dir _dir
-)
-:
-	dir_(
-		std::move(
-			_dir
-		)
-	)
+sanguis::collision::impl::intersection::intersection(sanguis::collision::impl::dir _dir)
+    : dir_(std::move(_dir))
 {
 }
 
-sanguis::collision::impl::dir const &
-sanguis::collision::impl::intersection::dir() const
+sanguis::collision::impl::dir const &sanguis::collision::impl::intersection::dir() const
 {
-	return
-		dir_;
+  return dir_;
 }

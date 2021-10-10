@@ -5,5 +5,4 @@
 #include <sanguis/messages/adapted_types/aura_type_vector_fwd.hpp>
 #include <sanguis/messages/adapted_types/dynamic_len.hpp>
 
-
 #endif

@@ -3,13 +3,10 @@
 
 #include <fcppt/record/make_label.hpp>
 
-
 namespace sanguis::client::args::labels
 {
 
-FCPPT_RECORD_MAKE_LABEL(
-	multi_samples
-);
+FCPPT_RECORD_MAKE_LABEL(multi_samples);
 
 }
 

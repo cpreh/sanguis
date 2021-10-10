@@ -9,34 +9,26 @@
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class weapon_pickup
-:
-	public sanguis::client::draw2d::entities::model::object
+class weapon_pickup : public sanguis::client::draw2d::entities::model::object
 {
-	FCPPT_NONMOVABLE(
-		weapon_pickup
-	);
+  FCPPT_NONMOVABLE(weapon_pickup);
+
 public:
-	weapon_pickup(
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::rotation,
-		sanguis::weapon_description const &
-	);
+  weapon_pickup(
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::rotation,
+      sanguis::weapon_description const &);
 
-	~weapon_pickup()
-	override;
+  ~weapon_pickup() override;
+
 private:
-	[[nodiscard]]
-	sanguis::client::draw2d::entities::hover::optional_info
-	hover() const
-	override;
+  [[nodiscard]] sanguis::client::draw2d::entities::hover::optional_info hover() const override;
 
-	sanguis::weapon_description const weapon_description_;
+  sanguis::weapon_description const weapon_description_;
 };
 
 }

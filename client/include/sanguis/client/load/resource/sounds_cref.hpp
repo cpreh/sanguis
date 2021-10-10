@@ -4,16 +4,10 @@
 #include <sanguis/client/load/resource/sounds_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::load::resource
 {
 
-using
-sounds_cref
-=
-fcppt::reference<
-	sanguis::client::load::resource::sounds const
->;
+using sounds_cref = fcppt::reference<sanguis::client::load::resource::sounds const>;
 
 }
 

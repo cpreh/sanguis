@@ -5,20 +5,12 @@
 #include <QString>
 #include <fcppt/config/external_end.hpp>
 
-
-QString
-sanguis::tools::animations::qtutil::from_fcppt_string(
-	fcppt::string const &_string
-)
+QString sanguis::tools::animations::qtutil::from_fcppt_string(fcppt::string const &_string)
 {
-	return
+  return
 #if defined(FCPPT_NARROW_STRING)
-		QString::fromStdString(
-			_string
-		);
+      QString::fromStdString(_string);
 #else
-		QString::fromStdWString(
-			_string
-		);
+      QString::fromStdWString(_string);
 #endif
 }

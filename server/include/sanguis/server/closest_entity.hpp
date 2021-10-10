@@ -13,100 +13,48 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 namespace sanguis::server
 {
 
-template<
-	typename Container,
-	typename Predicate
->
-fcppt::optional::reference<
-	typename
-	Container::value_type::type
->
-closest_entity(
-	sanguis::server::entities::base const &_ref,
-	Container const &_entities,
-	Predicate const _predicate
-)
+template <typename Container, typename Predicate>
+fcppt::optional::reference<typename Container::value_type::type> closest_entity(
+    sanguis::server::entities::base const &_ref,
+    Container const &_entities,
+    Predicate const _predicate)
 {
-FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_PUSH_WARNING
 #if defined(FCPPT_CONFIG_GNU_GCC_COMPILER)
-FCPPT_PP_DISABLE_GCC_WARNING(-Wmaybe-uninitialized)
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wmaybe-uninitialized)
 #endif
-	using
-	result_type
-	=
-	fcppt::optional::reference<
-		typename
-		Container::value_type::type
-	>;
+  using result_type = fcppt::optional::reference<typename Container::value_type::type>;
 
-	result_type ret{};
+  result_type ret{};
 
-	using
-	optional_space_unit
-	=
-	fcppt::optional::object<
-		sanguis::server::space_unit
-	>;
+  using optional_space_unit = fcppt::optional::object<sanguis::server::space_unit>;
 
-	optional_space_unit distance{};
+  optional_space_unit distance{};
 
-	for(
-		auto const &entity
-		:
-		_entities
-	)
-	{
-		sanguis::server::space_unit const new_distance(
-			sanguis::server::collision::distance_entity_entity(
-				_ref,
-				entity.get()
-			)
-		);
+  for (auto const &entity : _entities)
+  {
+    sanguis::server::space_unit const new_distance(
+        sanguis::server::collision::distance_entity_entity(_ref, entity.get()));
 
-		if(
-			_predicate(
-				entity.get()
-			)
-			&&
-			fcppt::optional::maybe(
-				distance,
-				fcppt::const_(
-					true
-				),
-				[
-					new_distance
-				](
-					sanguis::server::space_unit const _old_distance
-				)
-				{
-					return
-						new_distance
-						<
-						_old_distance;
-				}
-			)
-		)
-		{
-			distance =
-				optional_space_unit(
-					new_distance
-				);
+    if (_predicate(entity.get()) &&
+        fcppt::optional::maybe(
+            distance,
+            fcppt::const_(true),
+            [new_distance](sanguis::server::space_unit const _old_distance)
+            { return new_distance < _old_distance; }))
+    {
+      distance = optional_space_unit(new_distance);
 
-			ret =
-				result_type(
-					entity
-				);
-		}
-	}
+      ret = result_type(entity);
+    }
+  }
 
-	return
-		ret;
+  return ret;
 
-FCPPT_PP_POP_WARNING
+  FCPPT_PP_POP_WARNING
 }
 
 }

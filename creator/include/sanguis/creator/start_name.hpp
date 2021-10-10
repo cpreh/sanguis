@@ -4,13 +4,11 @@
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/symbol.hpp>
 
-
 namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-sanguis::creator::name
-start_name();
+sanguis::creator::name start_name();
 
 }
 

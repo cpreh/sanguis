@@ -12,31 +12,16 @@
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::entities::enemies::skills::unique_ptr
 sanguis::server::entities::enemies::skills::factory::teleport(
-	sanguis::server::entities::enemies::skills::factory::parameters const &_parameters
-)
+    sanguis::server::entities::enemies::skills::factory::parameters const &_parameters)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::server::entities::enemies::skills::skill
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::entities::enemies::skills::teleport
-			>(
-				fcppt::make_cref(
-					_parameters.diff_clock()
-				),
-				sanguis::server::entities::enemies::skills::cooldown(
-					sanguis::duration_second(
-						10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-					)
-					/
-					std::sqrt(
-						_parameters.difficulty().get()
-					)
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_base<sanguis::server::entities::enemies::skills::skill>(
+      fcppt::make_unique_ptr<sanguis::server::entities::enemies::skills::teleport>(
+          fcppt::make_cref(_parameters.diff_clock()),
+          sanguis::server::entities::enemies::skills::cooldown(
+              sanguis::duration_second(
+                  10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  ) /
+              std::sqrt(_parameters.difficulty().get()))));
 }

@@ -4,5 +4,4 @@
 #include <sanguis/messages/server/optional_unique_ptr_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

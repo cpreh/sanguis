@@ -5,5 +5,4 @@
 #include <sanguis/collision/impl/circle_fwd.hpp>
 #include <fcppt/math/sphere/circle.hpp>
 
-
 #endif

@@ -15,73 +15,30 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
-sge::texture::const_optional_part_ref
-sanguis::client::draw2d::scene::world::make_texture(
-	sanguis::random_generator &_random_generator,
-	sanguis::client::draw::debug const _debug,
-	sanguis::client::load::tiles::context_ref const _context,
-	std::filesystem::path const &_path,
-	sanguis::tiles::content const &_content
-)
+sge::texture::const_optional_part_ref sanguis::client::draw2d::scene::world::make_texture(
+    sanguis::random_generator &_random_generator,
+    sanguis::client::draw::debug const _debug,
+    sanguis::client::load::tiles::context_ref const _context,
+    std::filesystem::path const &_path,
+    sanguis::tiles::content const &_content)
 {
-	return
-		fcppt::variant::match(
-			_content,
-			[
-				&_random_generator,
-				&_path,
-				&_context
-			](
-				sanguis::tiles::area_container_ref const &_areas
-			)
-			{
-				sanguis::client::load::tiles::texture_container const &textures(
-					_context->set(
-						_path,
-						_areas
-					)
-				);
+  return fcppt::variant::match(
+      _content,
+      [&_random_generator, &_path, &_context](sanguis::tiles::area_container_ref const &_areas)
+      {
+        sanguis::client::load::tiles::texture_container const &textures(
+            _context->set(_path, _areas));
 
-				auto random_part(
-					FCPPT_ASSERT_OPTIONAL_ERROR(
-						fcppt::random::wrapper::make_uniform_container(
-							fcppt::make_cref(
-								textures
-							)
-						)
-					)
-				);
+        auto random_part(FCPPT_ASSERT_OPTIONAL_ERROR(
+            fcppt::random::wrapper::make_uniform_container(fcppt::make_cref(textures))));
 
-				return
-					sge::texture::const_optional_part_ref(
-						fcppt::make_cref(
-							*random_part(
-								_random_generator
-							)
-						)
-					);
-			},
-			[
-				&_context,
-				_debug
-			](
-				sanguis::tiles::error const _error
-			)
-			{
-				return
-					_debug.get()
-					?
-						sge::texture::const_optional_part_ref(
-							fcppt::make_cref(
-								_context->missing_texture(
-									_error
-								)
-							)
-						)
-					:
-						sge::texture::const_optional_part_ref()
-					;
-			}
-		);
+        return sge::texture::const_optional_part_ref(
+            fcppt::make_cref(*random_part(_random_generator)));
+      },
+      [&_context, _debug](sanguis::tiles::error const _error)
+      {
+        return _debug.get() ? sge::texture::const_optional_part_ref(
+                                  fcppt::make_cref(_context->missing_texture(_error)))
+                            : sge::texture::const_optional_part_ref();
+      });
 }

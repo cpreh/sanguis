@@ -4,5 +4,4 @@
 #include <sanguis/client/draw2d/entities/optional_own_unique_ptr_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

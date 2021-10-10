@@ -9,32 +9,27 @@
 #include <sge/texture/const_part_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client
 {
 
 class cursor
 {
-	FCPPT_NONMOVABLE(
-		cursor
-	);
+  FCPPT_NONMOVABLE(cursor);
+
 public:
-	cursor(
-		sge::renderer::device::ffp_ref,
-		sge::input::const_processor_ref,
-		sanguis::client::load::resource::textures_cref
-	);
+  cursor(
+      sge::renderer::device::ffp_ref,
+      sge::input::const_processor_ref,
+      sanguis::client::load::resource::textures_cref);
 
-	~cursor();
+  ~cursor();
 
-	void
-	draw(
-		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void draw(sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 private:
-	sge::texture::const_part_ref const texture_;
+  sge::texture::const_part_ref const texture_;
 
-	sge::cursor::object cursor_;
+  sge::cursor::object cursor_;
 };
 
 }

@@ -10,38 +10,29 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
 class weapon_category
 {
-	FCPPT_NONMOVABLE(
-		weapon_category
-	);
+  FCPPT_NONMOVABLE(weapon_category);
+
 public:
-	weapon_category(
-		fcppt::log::object &, // NOLINT(google-runtime-references)
-		sanguis::model::weapon_category const &,
-		sanguis::client::load::model::global_parameters const &
-	);
+  weapon_category(
+      fcppt::log::object &, // NOLINT(google-runtime-references)
+      sanguis::model::weapon_category const &,
+      sanguis::client::load::model::global_parameters const &);
 
-	~weapon_category();
+  ~weapon_category();
 
-	// TODO(philipp): optionals
-	[[nodiscard]]
-	sanguis::client::load::model::animation const &
-	operator[](
-		sanguis::client::load::animation_type
-	) const;
+  // TODO(philipp): optionals
+  [[nodiscard]] sanguis::client::load::model::animation const &
+  operator[](sanguis::client::load::animation_type) const;
 
-	[[nodiscard]]
-	bool
-	has_animation(
-		sanguis::client::load::animation_type
-	) const;
+  [[nodiscard]] bool has_animation(sanguis::client::load::animation_type) const;
+
 private:
-	sanguis::client::load::model::animation_map const animations_;
+  sanguis::client::load::model::animation_map const animations_;
 };
 
 }

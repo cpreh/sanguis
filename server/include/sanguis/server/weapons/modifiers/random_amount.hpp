@@ -4,15 +4,12 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/random/amount.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
-sanguis::server::random::amount
-random_amount(
-	sanguis::random_generator &, // NOLINT(google-runtime-references)
-	sanguis::server::random::amount
-);
+sanguis::server::random::amount random_amount(
+    sanguis::random_generator &, // NOLINT(google-runtime-references)
+    sanguis::server::random::amount);
 
 }
 

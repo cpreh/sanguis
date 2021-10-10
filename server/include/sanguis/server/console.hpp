@@ -13,54 +13,37 @@
 #include <fcppt/string.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
 class console
 {
-	FCPPT_NONMOVABLE(
-		console
-	);
+  FCPPT_NONMOVABLE(console);
+
 public:
-	console(
-		sanguis::server::send_callback &&,
-		sanguis::server::unicast_callback &&
-	);
+  console(sanguis::server::send_callback &&, sanguis::server::unicast_callback &&);
 
-	~console();
+  ~console();
 
-	[[nodiscard]]
-	fcppt::signal::auto_connection
-	insert(
-		fcppt::string const &command,
-		sge::console::callback::function &&,
-		fcppt::string const &description
-	);
+  [[nodiscard]] fcppt::signal::auto_connection insert(
+      fcppt::string const &command,
+      sge::console::callback::function &&,
+      fcppt::string const &description);
 
-	void
-	eval(
-		server::player_id,
-		sge::console::arg_list
-	);
+  void eval(server::player_id, sge::console::arg_list);
 
-	void
-	print_line(
-		server::player_id,
-		fcppt::string const &
-	);
+  void print_line(server::player_id, fcppt::string const &);
 
-	[[nodiscard]]
-	sanguis::server::console_command_vector const &
-	known_commands() const;
+  [[nodiscard]] sanguis::server::console_command_vector const &known_commands() const;
+
 private:
-	sge::console::object object_;
+  sge::console::object object_;
 
-	sanguis::server::send_callback const send_;
+  sanguis::server::send_callback const send_;
 
-	sanguis::server::unicast_callback const unicast_;
+  sanguis::server::unicast_callback const unicast_;
 
-	sanguis::server::console_command_vector known_commands_;
+  sanguis::server::console_command_vector known_commands_;
 };
 
 }

@@ -3,12 +3,10 @@
 
 #include <fcppt/log/location.hpp>
 
-
 namespace sanguis::client::config
 {
 
-fcppt::log::location
-log_location();
+fcppt::log::location log_location();
 
 }
 

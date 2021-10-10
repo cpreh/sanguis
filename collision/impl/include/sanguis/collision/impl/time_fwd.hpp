@@ -7,17 +7,10 @@
 #include <boost/units/systems/si/time.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
-using
-time
-=
-boost::units::quantity<
-	boost::units::si::time,
-	sanguis::collision::unit
->;
+using time = boost::units::quantity<boost::units::si::time, sanguis::collision::unit>;
 
 }
 

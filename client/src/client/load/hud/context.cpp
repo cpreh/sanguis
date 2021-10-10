@@ -15,57 +15,23 @@
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/from.hpp>
 
-
 sanguis::client::load::hud::context::context(
-	fcppt::log::context_reference const _log_context,
-	sanguis::client::load::resource::textures_cref const _textures
-)
-:
-	log_{
-		_log_context,
-		sanguis::client::load::log_location(),
-		fcppt::log::parameters_no_function(
-			fcppt::log::name{
-				FCPPT_TEXT("hud")
-			}
-		)
-	},
-	weapon_icons_(
-		sanguis::client::load::hud::make_weapon_icons(
-			log_,
-			_textures
-		)
-	),
-	missing_texture_(
-		_textures->missing_texture()
-	)
+    fcppt::log::context_reference const _log_context,
+    sanguis::client::load::resource::textures_cref const _textures)
+    : log_{_log_context, sanguis::client::load::log_location(), fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("hud")})},
+      weapon_icons_(sanguis::client::load::hud::make_weapon_icons(log_, _textures)),
+      missing_texture_(_textures->missing_texture())
 {
 }
 
-sanguis::client::load::hud::context::~context()
-= default;
+sanguis::client::load::hud::context::~context() = default;
 
 sge::texture::part const &
-sanguis::client::load::hud::context::weapon_icon(
-	sanguis::weapon_type const _weapon_type
-)
+sanguis::client::load::hud::context::weapon_icon(sanguis::weapon_type const _weapon_type)
 {
-	return
-		fcppt::optional::from(
-			fcppt::optional::copy_value(
-				fcppt::container::find_opt_mapped(
-					weapon_icons_,
-					_weapon_type
-				)
-			),
-			[
-				this
-			]()
-			{
-				return
-					fcppt::make_cref(
-						missing_texture_
-					);
-			}
-		).get();
+  return fcppt::optional::from(
+             fcppt::optional::copy_value(
+                 fcppt::container::find_opt_mapped(weapon_icons_, _weapon_type)),
+             [this]() { return fcppt::make_cref(missing_texture_); })
+      .get();
 }

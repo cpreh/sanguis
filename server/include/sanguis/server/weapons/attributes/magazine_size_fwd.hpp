@@ -4,16 +4,11 @@
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/attributes/basic_fwd.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-using
-magazine_size
-=
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::weapons::magazine_size
->;
+using magazine_size =
+    sanguis::server::weapons::attributes::basic<sanguis::server::weapons::magazine_size>;
 
 }
 

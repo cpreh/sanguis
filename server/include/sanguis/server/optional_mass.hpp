@@ -5,5 +5,4 @@
 #include <sanguis/server/optional_mass_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

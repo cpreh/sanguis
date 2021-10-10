@@ -5,5 +5,4 @@
 #include <sge/systems/instance.hpp>
 #include <sge/systems/with_image2d.hpp>
 
-
 #endif

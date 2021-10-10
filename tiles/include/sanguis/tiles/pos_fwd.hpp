@@ -4,17 +4,10 @@
 #include <sanguis/tiles/unit.hpp>
 #include <fcppt/math/vector/static_fwd.hpp>
 
-
 namespace sanguis::tiles
 {
 
-using
-pos
-=
-fcppt::math::vector::static_<
-	sanguis::tiles::unit,
-	2
->;
+using pos = fcppt::math::vector::static_<sanguis::tiles::unit, 2>;
 
 }
 

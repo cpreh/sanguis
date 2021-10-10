@@ -4,16 +4,10 @@
 #include <sanguis/primary_weapon_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-primary_weapon_type
-=
-sanguis::messages::adapted_types::enum_<
-	sanguis::primary_weapon_type
->;
+using primary_weapon_type = sanguis::messages::adapted_types::enum_<sanguis::primary_weapon_type>;
 
 }
 

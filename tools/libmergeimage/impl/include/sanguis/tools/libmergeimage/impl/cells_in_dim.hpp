@@ -5,15 +5,11 @@
 #include <sanguis/tools/libmergeimage/impl/cell_size_fwd.hpp>
 #include <sge/image/size_type.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
 sanguis::tools::libmergeimage::count_type
-cells_in_dim(
-	sge::image::size_type,
-	sanguis::tools::libmergeimage::impl::cell_size const &
-);
+cells_in_dim(sge::image::size_type, sanguis::tools::libmergeimage::impl::cell_size const &);
 
 }
 

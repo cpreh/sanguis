@@ -6,5 +6,4 @@
 #include <sanguis/messages/adapted_types/world_id_fwd.hpp>
 #include <alda/bindings/strong_typedef.hpp>
 
-
 #endif

@@ -19,77 +19,31 @@
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
 
-
-sanguis::creator::opening_container_array
-sanguis::creator::impl::place_openings(
-	fcppt::reference<
-		sanguis::creator::grid
-	> const _grid,
-	sanguis::creator::impl::random::generator &_generator,
-	sanguis::creator::opening_count_array const _opening_count_array
-)
+sanguis::creator::opening_container_array sanguis::creator::impl::place_openings(
+    fcppt::reference<sanguis::creator::grid> const _grid,
+    sanguis::creator::impl::random::generator &_generator,
+    sanguis::creator::opening_count_array const _opening_count_array)
 {
-	sanguis::creator::impl::random::uniform_pos random_pos{
-		fcppt::make_ref(
-			_generator
-		),
-		_grid->size()
-	};
+  sanguis::creator::impl::random::uniform_pos random_pos{
+      fcppt::make_ref(_generator), _grid->size()};
 
-	auto result(
-		fcppt::enum_::array_init<
-			sanguis::creator::opening_container_array
-		>(
-			[
-				&random_pos,
-				&_grid,
-				&_opening_count_array
-			](
-				sanguis::creator::opening_type const _opening
-			)
-			{
-				return
-					fcppt::algorithm::map<
-						sanguis::creator::opening_container
-					>(
-						fcppt::make_int_range_count(
-							_opening_count_array[
-								_opening
-							]
-						),
-						[
-							&random_pos,
-							&_grid
-						](
-							sanguis::creator::opening_count
-						)
-						{
-							return
-								sanguis::creator::opening{
-									fcppt::optional::to_exception(
-										sanguis::creator::impl::closest_empty(
-											_grid.get(),
-											random_pos()
-										),
-										[]{
-											return
-												sanguis::creator::exception{
-													FCPPT_TEXT("Unable to find a free tile for an opening.")
-												};
-										}
-									)
-								};
-						}
-					);
-			}
-		)
-	);
+  auto result(fcppt::enum_::array_init<sanguis::creator::opening_container_array>(
+      [&random_pos, &_grid, &_opening_count_array](sanguis::creator::opening_type const _opening)
+      {
+        return fcppt::algorithm::map<sanguis::creator::opening_container>(
+            fcppt::make_int_range_count(_opening_count_array[_opening]),
+            [&random_pos, &_grid](sanguis::creator::opening_count)
+            {
+              return sanguis::creator::opening{fcppt::optional::to_exception(
+                  sanguis::creator::impl::closest_empty(_grid.get(), random_pos()),
+                  [] {
+                    return sanguis::creator::exception{
+                        FCPPT_TEXT("Unable to find a free tile for an opening.")};
+                  })};
+            });
+      }));
 
-	sanguis::creator::impl::set_opening_tiles(
-		_grid,
-		result
-	);
+  sanguis::creator::impl::set_opening_tiles(_grid, result);
 
-	return
-		result;
+  return result;
 }

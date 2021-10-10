@@ -23,91 +23,35 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::client::load::hud::weapon_icon_map
-sanguis::client::load::hud::make_weapon_icons(
-	fcppt::log::object &_log,
-	sanguis::client::load::resource::textures_cref const _textures
-)
+sanguis::client::load::hud::weapon_icon_map sanguis::client::load::hud::make_weapon_icons(
+    fcppt::log::object &_log, sanguis::client::load::resource::textures_cref const _textures)
 {
-	return
-		fcppt::algorithm::map_optional<
-			sanguis::client::load::hud::weapon_icon_map
-		>(
-			boost::make_iterator_range(
-				std::filesystem::directory_iterator(
-					sanguis::media_path()
-					/
-					FCPPT_TEXT("hud")
-					/
-					FCPPT_TEXT("icons")
-					/
-					FCPPT_TEXT("weapons")
-				),
-				std::filesystem::directory_iterator()
-			),
-			[
-				&_log,
-				&_textures
-			](
-				std::filesystem::path const &_path
-			)
-			{
-				using
-				result_type
-				=
-				fcppt::optional::object<
-					sanguis::client::load::hud::weapon_icon_map::value_type
-				>;
+  return fcppt::algorithm::map_optional<sanguis::client::load::hud::weapon_icon_map>(
+      boost::make_iterator_range(
+          std::filesystem::directory_iterator(
+              sanguis::media_path() / FCPPT_TEXT("hud") / FCPPT_TEXT("icons") /
+              FCPPT_TEXT("weapons")),
+          std::filesystem::directory_iterator()),
+      [&_log, &_textures](std::filesystem::path const &_path)
+      {
+        using result_type =
+            fcppt::optional::object<sanguis::client::load::hud::weapon_icon_map::value_type>;
 
-				return
-					fcppt::optional::maybe(
-						sanguis::client::load::hud::weapon_type(
-							fcppt::filesystem::stem(
-								_path
-							)
-						),
-						[
-							&_log,
-							&_path
-						]
-						{
-							FCPPT_LOG_WARNING(
-								_log,
-								fcppt::log::out
-									<<
-									FCPPT_TEXT("Hud weapon icon ")
-									<<
-									fcppt::filesystem::path_to_string(
-										_path
-									)
-									<<
-									FCPPT_TEXT(" is not recognized.")
-							)
+        return fcppt::optional::maybe(
+            sanguis::client::load::hud::weapon_type(fcppt::filesystem::stem(_path)),
+            [&_log, &_path]
+            {
+              FCPPT_LOG_WARNING(
+                  _log,
+                  fcppt::log::out << FCPPT_TEXT("Hud weapon icon ")
+                                  << fcppt::filesystem::path_to_string(_path)
+                                  << FCPPT_TEXT(" is not recognized."))
 
-							return
-								result_type();
-						},
-						[
-							&_textures,
-							&_path
-						](
-							sanguis::weapon_type const _weapon_type
-						)
-						{
-							return
-								result_type(
-									std::make_pair(
-										_weapon_type,
-										fcppt::make_cref(
-											_textures->load(
-												_path
-											)
-										)
-									)
-								);
-						}
-					);
-			}
-		);
+              return result_type();
+            },
+            [&_textures, &_path](sanguis::weapon_type const _weapon_type) {
+              return result_type(
+                  std::make_pair(_weapon_type, fcppt::make_cref(_textures->load(_path))));
+            });
+      });
 }

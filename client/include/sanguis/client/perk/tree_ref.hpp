@@ -4,16 +4,10 @@
 #include <sanguis/client/perk/tree_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-using
-tree_ref
-=
-fcppt::reference<
-	sanguis::client::perk::tree
->;
+using tree_ref = fcppt::reference<sanguis::client::perk::tree>;
 
 }
 

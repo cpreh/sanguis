@@ -8,50 +8,28 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::events
 {
 
-class overlay
-:
-	public boost::statechart::event<
-		sanguis::client::events::overlay
-	>
+class overlay : public boost::statechart::event<sanguis::client::events::overlay>
 {
 public:
-	explicit
-	overlay(
-		sge::renderer::context::ffp_ref
-	);
+  explicit overlay(sge::renderer::context::ffp_ref);
 
-	overlay(
-		overlay &&
-	)
-	noexcept;
+  overlay(overlay &&) noexcept;
 
-	overlay(
-		overlay const &
-	);
+  overlay(overlay const &);
 
-	overlay &
-	operator=(
-		overlay &&
-	)
-	noexcept;
+  overlay &operator=(overlay &&) noexcept;
 
-	overlay &
-	operator=(
-		overlay const &
-	);
+  overlay &operator=(overlay const &);
 
-	~overlay()
-	override;
+  ~overlay() override;
 
-	[[nodiscard]]
-	sge::renderer::context::ffp &
-	context() const;
+  [[nodiscard]] sge::renderer::context::ffp &context() const;
+
 private:
-	sge::renderer::context::ffp_ref context_;
+  sge::renderer::context::ffp_ref context_;
 };
 
 }

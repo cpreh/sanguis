@@ -9,27 +9,23 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::server
 {
 
 class timer
 {
-	FCPPT_NONMOVABLE(
-		timer
-	);
-public:
-	timer(
-		sanguis::io_service_ref,
-		sanguis::server::timer_callback &&,
-		sanguis::server::timer_duration const &
-	);
+  FCPPT_NONMOVABLE(timer);
 
-	~timer();
+public:
+  timer(
+      sanguis::io_service_ref,
+      sanguis::server::timer_callback &&,
+      sanguis::server::timer_duration const &);
+
+  ~timer();
+
 private:
-	fcppt::unique_ptr<
-		sanguis::server::timer_impl
-	> const impl_;
+  fcppt::unique_ptr<sanguis::server::timer_impl> const impl_;
 };
 
 }

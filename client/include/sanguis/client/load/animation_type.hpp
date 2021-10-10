@@ -3,19 +3,18 @@
 
 #include <sanguis/client/load/animation_type_fwd.hpp>
 
-
 namespace sanguis::client::load
 {
 
 enum class animation_type
 {
-	none,
-	attacking,
-	walking,
-	dying,
-	deploying,
-	reloading,
-	fcppt_maximum = reloading
+  none,
+  attacking,
+  walking,
+  dying,
+  deploying,
+  reloading,
+  fcppt_maximum = reloading
 };
 
 }

@@ -4,16 +4,10 @@
 #include <sanguis/server/damage/basic_array_fwd.hpp>
 #include <sanguis/server/damage/unit_fwd.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-using
-array
-=
-sanguis::server::damage::basic_array<
-	sanguis::server::damage::unit
->;
+using array = sanguis::server::damage::basic_array<sanguis::server::damage::unit>;
 
 }
 

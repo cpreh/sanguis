@@ -4,5 +4,4 @@
 #include <sanguis/tiles/orientation_fwd.hpp>
 #include <fcppt/container/bitfield/object.hpp>
 
-
 #endif

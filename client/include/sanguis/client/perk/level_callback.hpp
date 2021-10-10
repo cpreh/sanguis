@@ -4,16 +4,10 @@
 #include <sanguis/client/perk/level_function.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-using
-level_callback
-=
-fcppt::function<
-	sanguis::client::perk::level_function
->;
+using level_callback = fcppt::function<sanguis::client::perk::level_function>;
 
 }
 

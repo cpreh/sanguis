@@ -17,120 +17,50 @@
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 
-
-sanguis::creator::destructible_container
-sanguis::creator::impl::place_destructibles(
-	fcppt::reference<
-		sanguis::creator::grid
-	> const _grid,
-	sanguis::creator::impl::random::generator &_generator
-)
+sanguis::creator::destructible_container sanguis::creator::impl::place_destructibles(
+    fcppt::reference<sanguis::creator::grid> const _grid,
+    sanguis::creator::impl::random::generator &_generator)
 {
-	sanguis::creator::destructible_container result{};
+  sanguis::creator::destructible_container result{};
 
-	using
-	uniform_int2
-	=
-	fcppt::random::distribution::basic<
-		sanguis::creator::impl::random::uniform_int<
-			unsigned
-		>
-	>;
+  using uniform_int2 =
+      fcppt::random::distribution::basic<sanguis::creator::impl::random::uniform_int<unsigned>>;
 
-	auto roll_d8(
-		fcppt::random::make_variate(
-			fcppt::make_ref(
-				_generator
-			),
-			uniform_int2{
-				uniform_int2::param_type::min{
-					1U
-				},
-				uniform_int2::param_type::max{
-					8U
-				}
-			}
-		)
-	);
+  auto roll_d8(fcppt::random::make_variate(
+      fcppt::make_ref(_generator),
+      uniform_int2{uniform_int2::param_type::min{1U}, uniform_int2::param_type::max{8U}}));
 
-	auto place_stuff_random(
-		[&]
-		(unsigned _cutoff)
-		-> bool
-		{
+  auto place_stuff_random([&](unsigned _cutoff) -> bool { return roll_d8() <= _cutoff; });
 
-			return roll_d8() <= _cutoff;
-		}
-	);
+  auto number_of_wall_neighbors(
+      [&](sanguis::creator::pos const &_pos)
+      {
+        unsigned res = 0U;
 
-	auto number_of_wall_neighbors(
-		[&]
-		(sanguis::creator::pos const &_pos)
-		{
-			unsigned res = 0U;
+        auto neighbors(fcppt::container::grid::neumann_neighbors(_pos));
 
-			auto neighbors(
-				fcppt::container::grid::neumann_neighbors(
-					_pos));
+        for (auto &n : neighbors)
+        {
+          if (FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(_grid.get(), n))
+                  .get() == sanguis::creator::tile::concrete_wall)
+          {
+            res++;
+          }
+        }
 
-			for(
-				auto &n
-				:
-				neighbors
-			)
-			{
-				if(
-					FCPPT_ASSERT_OPTIONAL_ERROR(
-						fcppt::container::grid::at_optional(
-							_grid.get(),
-							n
-						)
-					).get()
-					==
-					sanguis::creator::tile::concrete_wall
-				)
-				{
-					res++;
-				}
-			}
+        return res;
+      });
 
-			return res;
-		}
-	);
+  for (auto const entry : fcppt::container::grid::make_pos_ref_crange(_grid.get()))
+  {
+    if (!sanguis::creator::tile_is_solid(entry.value()) &&
+        place_stuff_random(number_of_wall_neighbors(entry.pos())))
+    {
+      result.push_back(sanguis::creator::destructible(
+          sanguis::creator::destructible_pos(entry.pos()),
+          sanguis::creator::destructible_type::barrel));
+    }
+  }
 
-	for(
-		auto const entry
-		:
-		fcppt::container::grid::make_pos_ref_crange(
-			_grid.get()
-		)
-	)
-	{
-		if
-		(
-			!
-			sanguis::creator::tile_is_solid(
-				entry.value()
-			)
-			&&
-			place_stuff_random(
-				number_of_wall_neighbors(
-					entry.pos()
-				)
-			)
-		)
-		{
-			result.push_back(
-				sanguis::creator::destructible(
-					sanguis::creator::destructible_pos(
-						entry.pos()
-					),
-					sanguis::creator::destructible_type::barrel
-				)
-			);
-		}
-	}
-
-	return
-		result;
+  return result;
 }

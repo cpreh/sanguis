@@ -8,42 +8,23 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
 struct damage
 {
-	template<
-		typename Parameters
-	>
-	static
-	void
-	make(
-		sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
-		sanguis::server::entities::enemies::difficulty const _difficulty,
-		fcppt::reference<
-			Parameters
-		> const _parameters
-	)
-	{
-		_parameters.get().extra_damage(
-			_parameters.get().damage().base()
-			*
-			sanguis::server::weapons::damage(
-				sanguis::server::weapons::modifiers::random_increase(
-					_random_generator,
-					_difficulty
-				)
-				-
-				fcppt::literal<
-					sanguis::server::weapons::damage::value_type
-				>(
-					1
-				)
-			)
-		);
-	}
+  template <typename Parameters>
+  static void make(
+      sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
+      sanguis::server::entities::enemies::difficulty const _difficulty,
+      fcppt::reference<Parameters> const _parameters)
+  {
+    _parameters.get().extra_damage(
+        _parameters.get().damage().base() *
+        sanguis::server::weapons::damage(
+            sanguis::server::weapons::modifiers::random_increase(_random_generator, _difficulty) -
+            fcppt::literal<sanguis::server::weapons::damage::value_type>(1)));
+  }
 };
 
 }

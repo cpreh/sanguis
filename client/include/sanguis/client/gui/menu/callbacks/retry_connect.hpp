@@ -3,7 +3,6 @@
 
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis
 {
 namespace client
@@ -15,12 +14,7 @@ namespace menu
 namespace callbacks
 {
 
-using
-retry_connect
-=
-fcppt::function<
-	void ()
->;
+using retry_connect = fcppt::function<void()>;
 
 }
 }

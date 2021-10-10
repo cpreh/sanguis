@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/sprite/colored/object_fwd.hpp>
 #include <sge/sprite/object_decl.hpp>
 
-
 #endif

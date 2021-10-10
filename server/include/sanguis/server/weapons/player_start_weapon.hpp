@@ -4,14 +4,11 @@
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
 sanguis::server::weapons::unique_ptr
-player_start_weapon(
-	sanguis::server::weapons::common_parameters const &
-);
+player_start_weapon(sanguis::server::weapons::common_parameters const &);
 
 }
 

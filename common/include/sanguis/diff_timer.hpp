@@ -5,5 +5,4 @@
 #include <sanguis/diff_timer_fwd.hpp>
 #include <sge/timer/basic.hpp>
 
-
 #endif

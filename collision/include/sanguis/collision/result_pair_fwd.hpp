@@ -4,17 +4,10 @@
 #include <sanguis/collision/result_fwd.hpp>
 #include <fcppt/tuple/object_fwd.hpp>
 
-
 namespace sanguis::collision
 {
 
-using
-result_pair
-=
-fcppt::tuple::object<
-	sanguis::collision::result,
-	sanguis::collision::result
->;
+using result_pair = fcppt::tuple::object<sanguis::collision::result, sanguis::collision::result>;
 
 }
 

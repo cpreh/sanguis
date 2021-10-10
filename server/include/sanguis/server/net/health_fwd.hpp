@@ -5,17 +5,11 @@
 #include <sanguis/server/net/health_policy_fwd.hpp>
 #include <sanguis/server/net/value_fwd.hpp>
 
-
 namespace sanguis::server::net
 {
 
-using
-health
-=
-sanguis::server::net::value<
-	sanguis::server::health,
-	sanguis::server::net::health_policy
->;
+using health =
+    sanguis::server::net::value<sanguis::server::health, sanguis::server::net::health_policy>;
 
 }
 

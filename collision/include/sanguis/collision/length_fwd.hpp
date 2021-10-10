@@ -7,17 +7,10 @@
 #include <boost/units/systems/si/length.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::collision
 {
 
-using
-length
-=
-boost::units::quantity<
-	boost::units::si::length,
-	sanguis::collision::unit
->;
+using length = boost::units::quantity<boost::units::si::length, sanguis::collision::unit>;
 
 }
 

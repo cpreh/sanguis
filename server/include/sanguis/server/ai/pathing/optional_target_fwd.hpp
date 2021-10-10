@@ -4,16 +4,10 @@
 #include <sanguis/server/ai/pathing/target_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::server::ai::pathing
 {
 
-using
-optional_target
-=
-fcppt::optional::object<
-	sanguis::server::ai::pathing::target
->;
+using optional_target = fcppt::optional::object<sanguis::server::ai::pathing::target>;
 
 }
 

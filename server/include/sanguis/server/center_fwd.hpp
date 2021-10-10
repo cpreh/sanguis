@@ -4,14 +4,10 @@
 #include <sanguis/server/vector_fwd.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::server
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::server::vector,
-	center
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::server::vector, center);
 
 }
 

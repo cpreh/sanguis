@@ -17,7 +17,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_HPP_INCLUDED
 
@@ -30,50 +29,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <sge/texture/const_part_ref_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace sanguis::client::draw2d::sprite::animation
 {
 
 class texture
 {
-	FCPPT_NONCOPYABLE(
-		texture
-	);
+  FCPPT_NONCOPYABLE(texture);
+
 public:
-	texture(
-		sanguis::client::load::resource::animation::series_cref,
-		sanguis::client::draw2d::sprite::animation::loop_method,
-		sanguis::diff_clock_cref
-	);
+  texture(
+      sanguis::client::load::resource::animation::series_cref,
+      sanguis::client::draw2d::sprite::animation::loop_method,
+      sanguis::diff_clock_cref);
 
-	texture(
-		texture &&
-	)
-	noexcept;
+  texture(texture &&) noexcept;
 
-	texture &
-	operator=(
-		texture &&
-	)
-	noexcept;
+  texture &operator=(texture &&) noexcept;
 
-	~texture();
+  ~texture();
 
-	[[nodiscard]]
-	sge::texture::const_part_ref
-	current_texture();
+  [[nodiscard]] sge::texture::const_part_ref current_texture();
 
-	[[nodiscard]]
-	bool
-	ended() const;
+  [[nodiscard]] bool ended() const;
+
 private:
-	sanguis::client::load::resource::animation::series_cref series_;
+  sanguis::client::load::resource::animation::series_cref series_;
 
-	sanguis::client::draw2d::sprite::animation::loop_method loop_method_;
+  sanguis::client::draw2d::sprite::animation::loop_method loop_method_;
 
-	sanguis::client::load::resource::animation::series::const_iterator pos_;
+  sanguis::client::load::resource::animation::series::const_iterator pos_;
 
-	sanguis::diff_timer cur_timer_;
+  sanguis::diff_timer cur_timer_;
 };
 
 }

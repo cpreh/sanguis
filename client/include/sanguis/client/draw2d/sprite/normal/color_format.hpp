@@ -3,14 +3,10 @@
 
 #include <sge/image/color/rgba8_format.hpp>
 
-
 namespace sanguis::client::draw2d::sprite::normal
 {
 
-using
-color_format
-=
-sge::image::color::rgba8_format;
+using color_format = sge::image::color::rgba8_format;
 
 }
 

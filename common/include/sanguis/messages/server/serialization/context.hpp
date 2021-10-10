@@ -5,9 +5,6 @@
 #include <sanguis/messages/server/types/alda_type.hpp>
 #include <alda/serialization/declare_context.hpp>
 
-
-ALDA_SERIALIZATION_DECLARE_CONTEXT(
-	sanguis::messages::server::types::alda_type
-);
+ALDA_SERIALIZATION_DECLARE_CONTEXT(sanguis::messages::server::types::alda_type);
 
 #endif

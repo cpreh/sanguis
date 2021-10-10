@@ -10,25 +10,17 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-remove_buff
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::remove_buff
-	>,
-	alda::bindings::record_variadic<
-		sanguis::messages::server::parts::entity_id,
-		fcppt::record::element<
-			sanguis::messages::roles::buff_type,
-			sanguis::messages::adapted_types::buff_type
-		>
-	>
->;
+using remove_buff = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::remove_buff>,
+    alda::bindings::record_variadic<
+        sanguis::messages::server::parts::entity_id,
+        fcppt::record::element<
+            sanguis::messages::roles::buff_type,
+            sanguis::messages::adapted_types::buff_type>>>;
 
 }
 

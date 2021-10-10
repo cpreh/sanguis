@@ -4,14 +4,10 @@
 #include <sanguis/creator/pos_fwd.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::server::ai::pathing
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::creator::pos,
-	start
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::creator::pos, start);
 
 }
 

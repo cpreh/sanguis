@@ -10,48 +10,31 @@
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class with_id
-:
-	public virtual sanguis::server::entities::base,
-	public virtual sanguis::server::entities::ifaces::with_id
+class with_id : public virtual sanguis::server::entities::base,
+                public virtual sanguis::server::entities::ifaces::with_id
 {
-	FCPPT_NONMOVABLE(
-		with_id
-	);
+  FCPPT_NONMOVABLE(with_id);
+
 protected:
-	explicit
-	with_id(
-		sanguis::entity_id
-	);
+  explicit with_id(sanguis::entity_id);
+
 public:
-	~with_id()
-	override = 0;
+  ~with_id() override = 0;
 
-	[[nodiscard]]
-	sanguis::entity_id
-	id() const
-	override;
+  [[nodiscard]] sanguis::entity_id id() const override;
 
-	virtual
-	void
-	transfer_to_world();
+  virtual void transfer_to_world();
 
-	void
-	transfer_from_world();
+  void transfer_from_world();
 
-	[[nodiscard]]
-	virtual
-	sanguis::messages::server::unique_ptr
-	add_message(
-		sanguis::server::player_id,
-		sanguis::collision::world::created
-	) const = 0;
+  [[nodiscard]] virtual sanguis::messages::server::unique_ptr
+      add_message(sanguis::server::player_id, sanguis::collision::world::created) const = 0;
+
 private:
-	sanguis::entity_id const id_;
+  sanguis::entity_id const id_;
 };
 
 }

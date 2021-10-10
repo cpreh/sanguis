@@ -24,7 +24,6 @@
 #include <sge/rucksack/axis.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
 sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 	sge::gui::context_ref const _gui_context,
 	sge::gui::style::const_reference const _gui_style,
@@ -151,12 +150,9 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 {
 }
 
-sanguis::client::draw2d::scene::hover::weapon_attribute::~weapon_attribute()
-= default;
+sanguis::client::draw2d::scene::hover::weapon_attribute::~weapon_attribute() = default;
 
-sge::gui::widget::base &
-sanguis::client::draw2d::scene::hover::weapon_attribute::widget()
+sge::gui::widget::base &sanguis::client::draw2d::scene::hover::weapon_attribute::widget()
 {
-	return
-		container_;
+  return container_;
 }

@@ -10,34 +10,26 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
-
 namespace sanguis::client::load::hud
 {
 
 class context
 {
-	FCPPT_NONMOVABLE(
-		context
-	);
+  FCPPT_NONMOVABLE(context);
+
 public:
-	context(
-		fcppt::log::context_reference,
-		sanguis::client::load::resource::textures_cref
-	);
+  context(fcppt::log::context_reference, sanguis::client::load::resource::textures_cref);
 
-	~context();
+  ~context();
 
-	[[nodiscard]]
-	sge::texture::part const &
-	weapon_icon(
-		sanguis::weapon_type
-	);
+  [[nodiscard]] sge::texture::part const &weapon_icon(sanguis::weapon_type);
+
 private:
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 
-	sanguis::client::load::hud::weapon_icon_map const weapon_icons_;
+  sanguis::client::load::hud::weapon_icon_map const weapon_icons_;
 
-	sge::texture::part const &missing_texture_;
+  sge::texture::part const &missing_texture_;
 };
 
 }

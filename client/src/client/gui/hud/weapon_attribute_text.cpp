@@ -7,36 +7,20 @@
 #include <sge/font/string.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
-
 sge::font::string
-sanguis::client::gui::hud::weapon_attribute_text(
-	sanguis::weapon_attribute const &_attribute
-)
+sanguis::client::gui::hud::weapon_attribute_text(sanguis::weapon_attribute const &_attribute)
 {
-	sge::font::string result(
-		sanguis::client::gui::hud::weapon_attribute_value_to_string(
-			_attribute.base().get()
-		)
-	);
+  sge::font::string result(
+      sanguis::client::gui::hud::weapon_attribute_value_to_string(_attribute.base().get()));
 
-	fcppt::optional::maybe_void(
-		_attribute.extra().get(),
-		[
-			&result
-		](
-			sanguis::weapon_attribute_value const _extra
-		)
-		{
-			result +=
-				SGE_FONT_LIT(' ');
+  fcppt::optional::maybe_void(
+      _attribute.extra().get(),
+      [&result](sanguis::weapon_attribute_value const _extra)
+      {
+        result += SGE_FONT_LIT(' ');
 
-			result +=
-				sanguis::client::gui::hud::weapon_attribute_diff_to_string(
-					_extra
-				);
-		}
-	);
+        result += sanguis::client::gui::hud::weapon_attribute_diff_to_string(_extra);
+      });
 
-	return
-		result;
+  return result;
 }

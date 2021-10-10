@@ -3,15 +3,14 @@
 
 #include <sanguis/pickup_type_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class pickup_type
 {
-	health,
-	monster,
-	fcppt_maximum = monster
+  health,
+  monster,
+  fcppt_maximum = monster
 };
 
 }

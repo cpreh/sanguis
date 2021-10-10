@@ -4,16 +4,10 @@
 #include <sanguis/creator/grid_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-grid_cref
-=
-fcppt::reference<
-	sanguis::creator::grid const
->;
+using grid_cref = fcppt::reference<sanguis::creator::grid const>;
 
 }
 

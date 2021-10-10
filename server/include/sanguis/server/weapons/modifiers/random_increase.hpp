@@ -5,15 +5,12 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
-sanguis::server::space_unit
-random_increase(
-	sanguis::random_generator &, // NOLINT(google-runtime-references)
-	sanguis::server::entities::enemies::difficulty
-);
+sanguis::server::space_unit random_increase(
+    sanguis::random_generator &, // NOLINT(google-runtime-references)
+    sanguis::server::entities::enemies::difficulty);
 
 }
 

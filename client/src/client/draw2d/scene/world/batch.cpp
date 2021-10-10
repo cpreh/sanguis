@@ -11,51 +11,29 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::client::draw2d::scene::world::batch::batch(
-	sanguis::client::draw2d::scene::world::sprite::range &&_range
-)
-:
-	range_(
-		std::move(
-			_range
-		)
-	)
+    sanguis::client::draw2d::scene::world::sprite::range &&_range)
+    : range_(std::move(_range))
 {
 }
 
-sanguis::client::draw2d::scene::world::batch::batch(
-	batch &&
-)
-noexcept
-= default;
+sanguis::client::draw2d::scene::world::batch::batch(batch &&) noexcept = default;
 
 sanguis::client::draw2d::scene::world::batch &
-sanguis::client::draw2d::scene::world::batch::operator=(
-	batch &&
-)
-noexcept
-= default;
+sanguis::client::draw2d::scene::world::batch::operator=(batch &&) noexcept = default;
 
-sanguis::client::draw2d::scene::world::batch::~batch()
-= default;
+sanguis::client::draw2d::scene::world::batch::~batch() = default;
 
-void
-sanguis::client::draw2d::scene::world::batch::draw(
-	sge::renderer::context::core &_render_context,
-	sge::renderer::vertex::declaration const &_vertex_declaration,
-	sanguis::client::draw2d::scene::world::sprite::state &_state
-) const
+void sanguis::client::draw2d::scene::world::batch::draw(
+    sge::renderer::context::core &_render_context,
+    sge::renderer::vertex::declaration const &_vertex_declaration,
+    sanguis::client::draw2d::scene::world::sprite::state &_state) const
 {
-	sge::sprite::render::range_with_options(
-		_render_context,
-		_vertex_declaration,
-		range_,
-		_state,
-		sge::sprite::state::options<
-			sanguis::client::draw2d::scene::world::sprite::state_choices
-		>(
-			sge::sprite::state::vertex_options::buffer
-		)
-	);
+  sge::sprite::render::range_with_options(
+      _render_context,
+      _vertex_declaration,
+      range_,
+      _state,
+      sge::sprite::state::options<sanguis::client::draw2d::scene::world::sprite::state_choices>(
+          sge::sprite::state::vertex_options::buffer));
 }

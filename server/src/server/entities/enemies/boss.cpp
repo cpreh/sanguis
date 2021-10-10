@@ -13,58 +13,35 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::entities::enemies::boss::boss(
-	sanguis::server::entities::enemies::parameters &&_parameters
-)
-:
-	sanguis::server::entities::enemies::enemy(
-		std::move(
-			_parameters
-		)
-	),
-	name_{
-		sge::charconv::fcppt_string_to_utf8(
-			FCPPT_TEXT("TODO Some boss name")
-		)
-	}
+    sanguis::server::entities::enemies::parameters &&_parameters)
+    : sanguis::server::entities::enemies::enemy(std::move(_parameters)),
+      name_{sge::charconv::fcppt_string_to_utf8(FCPPT_TEXT("TODO Some boss name"))}
 {
 }
 
-sanguis::server::entities::enemies::boss::~boss()
-= default;
+sanguis::server::entities::enemies::boss::~boss() = default;
 
-sanguis::server::entities::transfer_result
-sanguis::server::entities::enemies::boss::on_create()
+sanguis::server::entities::transfer_result sanguis::server::entities::enemies::boss::on_create()
 {
-	FCPPT_ASSERT_OPTIONAL_ERROR(
-		this->environment()
-	).get().add_portal_blocker();
+  FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get().add_portal_blocker();
 
-	return
-		sanguis::server::entities::with_ai::on_create();
+  return sanguis::server::entities::with_ai::on_create();
 }
 
-void
-sanguis::server::entities::enemies::boss::remove_from_game()
+void sanguis::server::entities::enemies::boss::remove_from_game()
 {
-	sanguis::server::entities::enemies::enemy::remove_from_game();
+  sanguis::server::entities::enemies::enemy::remove_from_game();
 
-	FCPPT_ASSERT_OPTIONAL_ERROR(
-		this->environment()
-	).get().remove_portal_blocker();
+  FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get().remove_portal_blocker();
 }
 
-sanguis::messages::types::string const &
-sanguis::server::entities::enemies::boss::name() const
+sanguis::messages::types::string const &sanguis::server::entities::enemies::boss::name() const
 {
-	return
-		name_;
+  return name_;
 }
 
-sanguis::enemy_kind
-sanguis::server::entities::enemies::boss::enemy_kind() const
+sanguis::enemy_kind sanguis::server::entities::enemies::boss::enemy_kind() const
 {
-	return
-		sanguis::enemy_kind::boss;
+  return sanguis::enemy_kind::boss;
 }

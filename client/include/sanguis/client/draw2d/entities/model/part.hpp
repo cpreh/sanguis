@@ -15,90 +15,60 @@
 #include <sge/texture/const_part_ref_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace sanguis::client::draw2d::entities::model
 {
 
 class part
 {
-	FCPPT_NONCOPYABLE(
-		part
-	);
+  FCPPT_NONCOPYABLE(part);
+
 public:
-	part(
-		sanguis::diff_clock_cref,
-		sanguis::client::sound_manager_ref,
-		sanguis::client::load::model::part_cref,
-		sanguis::optional_primary_weapon_type,
-		sanguis::client::draw2d::sprite::rotation,
-		sanguis::client::load::animation_type
-	);
+  part(
+      sanguis::diff_clock_cref,
+      sanguis::client::sound_manager_ref,
+      sanguis::client::load::model::part_cref,
+      sanguis::optional_primary_weapon_type,
+      sanguis::client::draw2d::sprite::rotation,
+      sanguis::client::load::animation_type);
 
-	part(
-		part &&
-	)
-	noexcept;
+  part(part &&) noexcept;
 
-	part &
-	operator=(
-		part &&
-	)
-	noexcept;
+  part &operator=(part &&) noexcept;
 
-	~part();
+  ~part();
 
-	void
-	pause(
-		bool
-	);
+  void pause(bool);
 
-	void
-	animation(
-		sanguis::client::load::animation_type
-	);
+  void animation(sanguis::client::load::animation_type);
 
-	void
-	weapon(
-		sanguis::optional_primary_weapon_type
-	);
+  void weapon(sanguis::optional_primary_weapon_type);
 
-	void
-	update(
-		sanguis::client::draw2d::sprite::normal::object & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void update(sanguis::client::draw2d::sprite::normal::object & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	void
-	orientation(
-		sanguis::client::draw2d::sprite::rotation
-	);
+  void orientation(sanguis::client::draw2d::sprite::rotation);
 
-	[[nodiscard]]
-	bool
-	ended() const;
+  [[nodiscard]] bool ended() const;
 
-	[[nodiscard]]
-	sge::texture::const_part_ref
-	texture();
+  [[nodiscard]] sge::texture::const_part_ref texture();
+
 private:
-	[[nodiscard]]
-	sanguis::client::draw2d::entities::model::animation
-	load_animation(
-		sanguis::client::load::animation_type
-	);
+  [[nodiscard]] sanguis::client::draw2d::entities::model::animation
+      load_animation(sanguis::client::load::animation_type);
 
-	sanguis::diff_clock_cref diff_clock_;
+  sanguis::diff_clock_cref diff_clock_;
 
-	sanguis::client::sound_manager_ref sound_manager_;
+  sanguis::client::sound_manager_ref sound_manager_;
 
-	sanguis::diff_timer rotation_timer_;
+  sanguis::diff_timer rotation_timer_;
 
-	sanguis::client::draw2d::entities::model::desired_orientation desired_orientation_;
+  sanguis::client::draw2d::entities::model::desired_orientation desired_orientation_;
 
-	sanguis::client::load::model::part_cref load_part_;
+  sanguis::client::load::model::part_cref load_part_;
 
-	sanguis::optional_primary_weapon_type weapon_;
+  sanguis::optional_primary_weapon_type weapon_;
 
-	sanguis::client::draw2d::entities::model::animation animation_;
+  sanguis::client::draw2d::entities::model::animation animation_;
 };
 
 }

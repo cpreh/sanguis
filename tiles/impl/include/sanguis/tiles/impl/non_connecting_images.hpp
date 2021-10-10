@@ -20,76 +20,35 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-template<
-	typename Tile
->
-sanguis::tiles::impl::optional_content_path
-non_connecting_images(
-	fcppt::log::object &_log, // NOLINT(google-runtime-references)
-	sanguis::tiles::collection_ref const _collection,
-	sanguis::tiles::error const _error_code,
-	sanguis::creator::tile_grid<
-		Tile
-	> const &_grid,
-	sanguis::creator::pos const _pos
-)
+template <typename Tile>
+sanguis::tiles::impl::optional_content_path non_connecting_images(
+    fcppt::log::object &_log, // NOLINT(google-runtime-references)
+    sanguis::tiles::collection_ref const _collection,
+    sanguis::tiles::error const _error_code,
+    sanguis::creator::tile_grid<Tile> const &_grid,
+    sanguis::creator::pos const _pos)
 {
-FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
-	return
-		fcppt::optional::bind(
-			fcppt::container::grid::at_optional(
-				_grid,
-				_pos
-			),
-			[
-				&_log,
-				&_collection,
-				_error_code
-			](
-				fcppt::reference<
-					Tile const
-				> const _tile
-			)
-			{
-				return
-					sanguis::tiles::impl::filter_non_connecting(
-						_tile.get()
-					)
-					?
-						sanguis::tiles::impl::optional_content_path{}
-					:
-						sanguis::tiles::impl::images_base(
-							_log,
-							_collection,
-							_error_code,
-							sanguis::tiles::pair<
-								Tile
-							>(
-								_tile.get(),
-								_tile.get()
-							),
-							sanguis::tiles::orientation::null(),
-							sanguis::tiles::impl::error_message_function{
-								[
-									_tile
-								]
-								{
-									return
-										sanguis::tiles::impl::to_string(
-											_tile.get()
-										);
-								}
-							}
-						)
-					;
-			}
-		);
-FCPPT_PP_POP_WARNING
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
+  return fcppt::optional::bind(
+      fcppt::container::grid::at_optional(_grid, _pos),
+      [&_log, &_collection, _error_code](fcppt::reference<Tile const> const _tile)
+      {
+        return sanguis::tiles::impl::filter_non_connecting(_tile.get())
+                   ? sanguis::tiles::impl::optional_content_path{}
+                   : sanguis::tiles::impl::images_base(
+                         _log,
+                         _collection,
+                         _error_code,
+                         sanguis::tiles::pair<Tile>(_tile.get(), _tile.get()),
+                         sanguis::tiles::orientation::null(),
+                         sanguis::tiles::impl::error_message_function{
+                             [_tile] { return sanguis::tiles::impl::to_string(_tile.get()); }});
+      });
+  FCPPT_PP_POP_WARNING
 }
 
 }

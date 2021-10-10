@@ -10,37 +10,28 @@
 #include <sanguis/client/load/model/collection_cref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities::buffs
 {
 
-class burn
-:
-	public sanguis::client::draw2d::entities::buffs::base
+class burn : public sanguis::client::draw2d::entities::buffs::base
 {
-	FCPPT_NONMOVABLE(
-		burn
-	);
+  FCPPT_NONMOVABLE(burn);
+
 public:
-	burn(
-		sanguis::diff_clock_cref,
-		sanguis::client::draw2d::sprite::normal::system_ref,
-		sanguis::client::load::model::collection_cref,
-		sanguis::client::draw2d::entities::model::object const &
-	);
+  burn(
+      sanguis::diff_clock_cref,
+      sanguis::client::draw2d::sprite::normal::system_ref,
+      sanguis::client::load::model::collection_cref,
+      sanguis::client::draw2d::entities::model::object const &);
 
-	~burn()
-	override;
+  ~burn() override;
+
 private:
-	void
-	update(
-		sanguis::client::draw2d::entities::model::object const &
-	)
-	override;
+  void update(sanguis::client::draw2d::entities::model::object const &) override;
 
-	sanguis::client::draw2d::sprite::animation::texture animation_;
+  sanguis::client::draw2d::sprite::animation::texture animation_;
 
-	sanguis::client::draw2d::sprite::normal::object sprite_;
+  sanguis::client::draw2d::sprite::normal::object sprite_;
 };
 
 }

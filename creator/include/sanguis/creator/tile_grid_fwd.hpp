@@ -3,20 +3,11 @@
 
 #include <fcppt/container/grid/object_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-template<
-	typename Tile
->
-using
-tile_grid
-=
-fcppt::container::grid::object<
-	Tile,
-	2U
->;
+template <typename Tile>
+using tile_grid = fcppt::container::grid::object<Tile, 2U>;
 
 }
 

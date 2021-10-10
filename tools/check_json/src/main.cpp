@@ -33,140 +33,62 @@
 #include <iostream>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Wmissing-declarations)
 
-int
-FCPPT_MAIN(
-	int argc,
-	fcppt::args_char **argv
-)
+int FCPPT_MAIN(int argc, fcppt::args_char **argv)
 try
 {
-	FCPPT_RECORD_MAKE_LABEL(
-		path_label
-	);
+  FCPPT_RECORD_MAKE_LABEL(path_label);
 
-	using
-	parser_type
-	=
-	fcppt::options::argument<
-		path_label,
-		fcppt::string
-	>;
+  using parser_type = fcppt::options::argument<path_label, fcppt::string>;
 
-	using
-	result_type
-	=
-	fcppt::options::result_of<
-		parser_type
-	>;
+  using result_type = fcppt::options::result_of<parser_type>;
 
-	parser_type const parser{
-		fcppt::options::long_name{
-			FCPPT_TEXT("filename")
-		},
-		fcppt::options::optional_help_text{}
-	};
+  parser_type const parser{
+      fcppt::options::long_name{FCPPT_TEXT("filename")}, fcppt::options::optional_help_text{}};
 
-	fcppt::options::help_result<
-		result_type
-	> const result{
-		fcppt::options::parse_help(
-			fcppt::options::default_help_switch(),
-			parser,
-			fcppt::args_from_second(
-				argc,
-				argv
-			)
-		)
-	};
+  fcppt::options::help_result<result_type> const result{fcppt::options::parse_help(
+      fcppt::options::default_help_switch(), parser, fcppt::args_from_second(argc, argv))};
 
-	return
-		fcppt::variant::match(
-			result,
-			[](
-				fcppt::options::result<
-					result_type
-				> const &_result
-			)
-			{
-				return
-					fcppt::either::match(
-						_result,
-						[](
-							fcppt::options::error const &_error
-						)
-						{
-							fcppt::io::cerr()
-								<<
-								_error
-								<<
-								FCPPT_TEXT('\n');
+  return fcppt::variant::match(
+      result,
+      [](fcppt::options::result<result_type> const &_result)
+      {
+        return fcppt::either::match(
+            _result,
+            [](fcppt::options::error const &_error)
+            {
+              fcppt::io::cerr() << _error << FCPPT_TEXT('\n');
 
-							return
-								EXIT_FAILURE;
-						},
-						[](
-							result_type const &_args
-						)
-						{
-							sanguis::model::deserialize(
-								std::filesystem::path(
-									fcppt::record::get<
-										path_label
-									>(
-										_args
-									)
-								)
-							);
+              return EXIT_FAILURE;
+            },
+            [](result_type const &_args)
+            {
+              sanguis::model::deserialize(
+                  std::filesystem::path(fcppt::record::get<path_label>(_args)));
 
-							return
-								EXIT_SUCCESS;
-						}
-					);
-			},
-			[](
-				fcppt::options::help_text const &_help_text
-			)
-			{
-				fcppt::io::cout()
-					<<
-					_help_text
-					<<
-					FCPPT_TEXT('\n');
+              return EXIT_SUCCESS;
+            });
+      },
+      [](fcppt::options::help_text const &_help_text)
+      {
+        fcppt::io::cout() << _help_text << FCPPT_TEXT('\n');
 
-				return
-					EXIT_SUCCESS;
-			}
-		);
+        return EXIT_SUCCESS;
+      });
 }
-catch(
-	fcppt::exception const &_error
-)
+catch (fcppt::exception const &_error)
 {
-	fcppt::io::cerr()
-		<<
-		_error.string()
-		<<
-		FCPPT_TEXT('\n');
+  fcppt::io::cerr() << _error.string() << FCPPT_TEXT('\n');
 
-	return
-		EXIT_FAILURE;
+  return EXIT_FAILURE;
 }
-catch(
-	std::exception const  &_error
-)
+catch (std::exception const &_error)
 {
-	std::cerr
-		<<
-		_error.what()
-		<<
-		'\n';
+  std::cerr << _error.what() << '\n';
 
-	return
-		EXIT_FAILURE;
+  return EXIT_FAILURE;
 }
 
 FCPPT_PP_POP_WARNING

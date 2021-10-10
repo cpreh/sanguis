@@ -6,60 +6,23 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::random
 {
 
-template<
-	typename Container
->
-std::vector<
-	std::pair<
-		typename
-		Container::value_type,
-		typename
-		Container::size_type
-	>
->
-map_with_index(
-	Container const &_source
-)
+template <typename Container>
+std::vector<std::pair<typename Container::value_type, typename Container::size_type>>
+map_with_index(Container const &_source)
 {
-	std::vector<
-		std::pair<
-			typename
-			Container::value_type,
-			typename
-			Container::size_type
-		>
-	>
-	result{};
+  std::vector<std::pair<typename Container::value_type, typename Container::size_type>> result{};
 
-	result.reserve(
-		_source.size()
-	);
+  result.reserve(_source.size());
 
-	for(
-		typename
-		Container::size_type index(
-			0U
-		);
-		index < _source.size();
-		++index
-	)
-	{
-		result.push_back(
-			std::make_pair(
-				_source.get_unsafe(
-					index
-				),
-				index
-			)
-		);
-	}
+  for (typename Container::size_type index(0U); index < _source.size(); ++index)
+  {
+    result.push_back(std::make_pair(_source.get_unsafe(index), index));
+  }
 
-	return
-		result;
+  return result;
 }
 
 }

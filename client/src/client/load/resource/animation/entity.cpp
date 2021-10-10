@@ -17,7 +17,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #include <sanguis/duration.hpp>
 #include <sanguis/client/load/resource/animation/entity.hpp>
 #include <sge/renderer/dim2.hpp>
@@ -28,56 +27,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::client::load::resource::animation::entity::entity(
-	sanguis::duration const _delay,
-	sge::texture::const_part_unique_ptr &&_texture
-)
-:
-	delay_(
-		_delay
-	),
-	texture_(
-		std::move(
-			_texture
-		)
-	)
+    sanguis::duration const _delay, sge::texture::const_part_unique_ptr &&_texture)
+    : delay_(_delay), texture_(std::move(_texture))
 {
 }
 
-sanguis::client::load::resource::animation::entity::entity(
-	entity &&
-)
-noexcept
-= default;
+sanguis::client::load::resource::animation::entity::entity(entity &&) noexcept = default;
 
 sanguis::client::load::resource::animation::entity &
-sanguis::client::load::resource::animation::entity::operator=(
-	entity &&
-)
-noexcept
-= default;
+sanguis::client::load::resource::animation::entity::operator=(entity &&) noexcept = default;
 
-sanguis::client::load::resource::animation::entity::~entity()
-= default;
+sanguis::client::load::resource::animation::entity::~entity() = default;
 
-sanguis::duration
-sanguis::client::load::resource::animation::entity::delay() const
+sanguis::duration sanguis::client::load::resource::animation::entity::delay() const
 {
-	return
-		delay_;
+  return delay_;
 }
 
-sge::texture::part const &
-sanguis::client::load::resource::animation::entity::texture() const
+sge::texture::part const &sanguis::client::load::resource::animation::entity::texture() const
 {
-	return
-		*texture_;
+  return *texture_;
 }
 
-sge::renderer::dim2
-sanguis::client::load::resource::animation::entity::dim() const
+sge::renderer::dim2 sanguis::client::load::resource::animation::entity::dim() const
 {
-	return
-		this->texture().area().size();
+  return this->texture().area().size();
 }

@@ -5,5 +5,4 @@
 #include <sanguis/collision/length2.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

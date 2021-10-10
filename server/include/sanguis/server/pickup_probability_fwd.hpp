@@ -3,14 +3,10 @@
 
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::server
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	float,
-	pickup_probability
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(float, pickup_probability);
 
 }
 

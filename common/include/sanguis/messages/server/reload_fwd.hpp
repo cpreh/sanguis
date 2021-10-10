@@ -11,28 +11,19 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-reload
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::reload
-	>,
-	alda::bindings::record_variadic<
-		fcppt::record::element<
-			sanguis::messages::roles::is_primary_weapon,
-			sanguis::messages::adapted_types::is_primary_weapon
-		>,
-		fcppt::record::element<
-			sanguis::messages::roles::reload_time,
-			sanguis::messages::adapted_types::duration
-		>
-	>
->;
+using reload = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::reload>,
+    alda::bindings::record_variadic<
+        fcppt::record::element<
+            sanguis::messages::roles::is_primary_weapon,
+            sanguis::messages::adapted_types::is_primary_weapon>,
+        fcppt::record::element<
+            sanguis::messages::roles::reload_time,
+            sanguis::messages::adapted_types::duration>>>;
 
 }
 

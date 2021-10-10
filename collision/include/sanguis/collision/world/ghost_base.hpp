@@ -6,22 +6,20 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/symbol/class.hpp>
 
-
 namespace sanguis::collision::world
 {
 
 class FCPPT_SYMBOL_CLASS ghost_base
 {
-	FCPPT_NONMOVABLE(
-		ghost_base
-	);
+  FCPPT_NONMOVABLE(ghost_base);
+
 protected:
-	SANGUIS_COLLISION_SYMBOL
-	ghost_base();
+  SANGUIS_COLLISION_SYMBOL
+  ghost_base();
+
 public:
-	SANGUIS_COLLISION_SYMBOL
-	virtual
-	~ghost_base();
+  SANGUIS_COLLISION_SYMBOL
+  virtual ~ghost_base();
 };
 
 }

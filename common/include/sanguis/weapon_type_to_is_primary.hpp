@@ -5,15 +5,11 @@
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/common/symbol.hpp>
 
-
 namespace sanguis
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::is_primary_weapon
-weapon_type_to_is_primary(
-	sanguis::weapon_type const &
-);
+sanguis::is_primary_weapon weapon_type_to_is_primary(sanguis::weapon_type const &);
 
 }
 

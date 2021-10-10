@@ -4,24 +4,18 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/perk/tree.hpp>
 
-
 namespace sanguis::client::perk
 {
 
 class compare
 {
 public:
-	explicit
-	compare(
-		sanguis::perk_type
-	);
+  explicit compare(sanguis::perk_type);
 
-	bool
-	operator()(
-		sanguis::client::perk::tree const &
-	) const;
+  bool operator()(sanguis::client::perk::tree const &) const;
+
 private:
-	sanguis::perk_type type_;
+  sanguis::perk_type type_;
 };
 
 }

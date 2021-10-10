@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis
 {
 
-using
-buff_type_vector
-=
-std::vector<
-	sanguis::buff_type
->;
+using buff_type_vector = std::vector<sanguis::buff_type>;
 
 }
 

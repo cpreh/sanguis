@@ -4,18 +4,10 @@
 #include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client
 {
 
-using
-player_health_callback
-=
-fcppt::function<
-	void(
-		sanguis::client::optional_health_pair const &
-	)
->;
+using player_health_callback = fcppt::function<void(sanguis::client::optional_health_pair const &)>;
 
 }
 

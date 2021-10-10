@@ -3,14 +3,10 @@
 
 #include <sanguis/server/aoe.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-using
-aoe
-=
-sanguis::server::aoe;
+using aoe = sanguis::server::aoe;
 
 }
 

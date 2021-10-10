@@ -6,29 +6,22 @@
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/context/core_ref.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
 class render_parameters
 {
 public:
-	render_parameters(
-		sge::renderer::context::core_ref,
-		sanguis::client::draw2d::translation
-	);
+  render_parameters(sge::renderer::context::core_ref, sanguis::client::draw2d::translation);
 
-	[[nodiscard]]
-	sge::renderer::context::core &
-	render_context() const;
+  [[nodiscard]] sge::renderer::context::core &render_context() const;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::translation
-	translation() const;
+  [[nodiscard]] sanguis::client::draw2d::translation translation() const;
+
 private:
-	sge::renderer::context::core_ref render_context_;
+  sge::renderer::context::core_ref render_context_;
 
-	sanguis::client::draw2d::translation translation_;
+  sanguis::client::draw2d::translation translation_;
 };
 
 }

@@ -7,20 +7,11 @@
 #include <cstddef>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::random
 {
 
-template<
-	std::size_t Size
->
-using
-split_array
-=
-fcppt::array::object<
-	sanguis::server::random::amount,
-	Size
->;
+template <std::size_t Size>
+using split_array = fcppt::array::object<sanguis::server::random::amount, Size>;
 
 }
 

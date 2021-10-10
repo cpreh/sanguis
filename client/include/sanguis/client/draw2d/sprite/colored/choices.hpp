@@ -8,5 +8,4 @@
 #include <sge/sprite/config/pos.hpp>
 #include <sge/sprite/config/with_color.hpp>
 
-
 #endif

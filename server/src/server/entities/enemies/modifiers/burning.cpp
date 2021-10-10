@@ -15,40 +15,18 @@
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::burning(
-	fcppt::reference<
-		sanguis::server::entities::enemies::parameters
-	> const _parameters,
-	sanguis::server::entities::enemies::modifiers::parameters const &
-)
+    fcppt::reference<sanguis::server::entities::enemies::parameters> const _parameters,
+    sanguis::server::entities::enemies::modifiers::parameters const &)
 {
-	_parameters->add_aura(
-		sanguis::server::auras::burn_create<
-			sanguis::server::buffs::burn
-		>(
-			sanguis::server::radius(
-				400.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			),
-			sanguis::server::team::monsters,
-			sanguis::server::buffs::burn_interval(
-				sanguis::duration_second(
-					1.F
-				)
-			),
-			sanguis::server::damage::unit(
-				1.F
-				*
-				std::sqrt(
-					_parameters->difficulty().get()
-				)
-			)
-		)
-	);
+  _parameters->add_aura(sanguis::server::auras::burn_create<sanguis::server::buffs::burn>(
+      sanguis::server::radius(
+          400.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          ),
+      sanguis::server::team::monsters,
+      sanguis::server::buffs::burn_interval(sanguis::duration_second(1.F)),
+      sanguis::server::damage::unit(1.F * std::sqrt(_parameters->difficulty().get()))));
 
-	return
-		sanguis::server::entities::enemies::attribute(
-			FCPPT_TEXT("burning")
-		);
+  return sanguis::server::entities::enemies::attribute(FCPPT_TEXT("burning"));
 }

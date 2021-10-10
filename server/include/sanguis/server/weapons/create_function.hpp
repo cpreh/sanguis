@@ -4,16 +4,10 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-using
-create_function
-=
-fcppt::function<
-	sanguis::server::weapons::unique_ptr ()
->;
+using create_function = fcppt::function<sanguis::server::weapons::unique_ptr()>;
 
 }
 

@@ -8,16 +8,13 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::libmergeimage
 {
 
 SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
-sanguis::tools::libmergeimage::merge_result
-merge_images(
-	sge::image2d::system &, // NOLINT(google-runtime-references)
-	std::filesystem::path const &
-);
+sanguis::tools::libmergeimage::merge_result merge_images(
+    sge::image2d::system &, // NOLINT(google-runtime-references)
+    std::filesystem::path const &);
 
 }
 

@@ -5,5 +5,4 @@
 #include <sanguis/perk_type.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

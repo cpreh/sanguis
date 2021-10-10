@@ -18,68 +18,43 @@
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::pickups
 {
 
-class weapon
-:
-	public virtual sanguis::server::entities::ifaces::with_team,
-	public sanguis::server::entities::with_body,
-	public sanguis::server::entities::with_id,
-	public sanguis::server::entities::with_links
+class weapon : public virtual sanguis::server::entities::ifaces::with_team,
+               public sanguis::server::entities::with_body,
+               public sanguis::server::entities::with_id,
+               public sanguis::server::entities::with_links
 {
-	FCPPT_NONMOVABLE(
-		weapon
-	);
+  FCPPT_NONMOVABLE(weapon);
+
 public:
-	weapon(
-		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-		sanguis::server::team,
-		sanguis::server::weapons::unique_ptr &&
-	);
+  weapon(
+      sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+      sanguis::server::team,
+      sanguis::server::weapons::unique_ptr &&);
 
-	~weapon()
-	override;
+  ~weapon() override;
 
-	[[nodiscard]]
-	sanguis::server::weapons::unique_ptr
-	obtain();
+  [[nodiscard]] sanguis::server::weapons::unique_ptr obtain();
 
-	[[nodiscard]]
-	sanguis::weapon_type
-	weapon_type() const;
+  [[nodiscard]] sanguis::weapon_type weapon_type() const;
+
 private:
-	[[nodiscard]]
-	bool
-	dead() const
-	override;
+  [[nodiscard]] bool dead() const override;
 
-	[[nodiscard]]
-	sanguis::server::team
-	team() const
-	override;
+  [[nodiscard]] sanguis::server::team team() const override;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_group
-	collision_group() const
-	override;
+  [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
 
-	[[nodiscard]]
-	sanguis::messages::server::unique_ptr
-	add_message(
-		sanguis::server::player_id,
-		sanguis::collision::world::created
-	) const
-	override;
+  [[nodiscard]] sanguis::messages::server::unique_ptr
+      add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
 
-	[[nodiscard]]
-	sanguis::server::weapons::weapon &
-	get() const;
+  [[nodiscard]] sanguis::server::weapons::weapon &get() const;
 
-	sanguis::server::team const team_;
+  sanguis::server::team const team_;
 
-	sanguis::server::weapons::optional_unique_ptr weapon_;
+  sanguis::server::weapons::optional_unique_ptr weapon_;
 };
 
 }

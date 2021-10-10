@@ -7,81 +7,31 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/enum/make_range.hpp>
 
-
-template<
-	typename Tile
->
-sanguis::creator::enable_if_tile<
-	Tile,
-	sanguis::tiles::orientation
->
+template <typename Tile>
+sanguis::creator::enable_if_tile<Tile, sanguis::tiles::orientation>
 sanguis::tiles::impl::make_orientation(
-	sanguis::tiles::pair<
-		Tile
-	> const &_pair,
-	sanguis::tiles::impl::neighbors<
-		Tile
-	> const &_neighbors
-)
+    sanguis::tiles::pair<Tile> const &_pair,
+    sanguis::tiles::impl::neighbors<Tile> const &_neighbors)
 {
-	sanguis::tiles::orientation orientation{
-		sanguis::tiles::orientation::null()
-	};
+  sanguis::tiles::orientation orientation{sanguis::tiles::orientation::null()};
 
-	// TODO(philipp): Check if the tile is _pair.second?
-	for(
-		sanguis::tiles::direction const value
-		:
-		fcppt::enum_::make_range<
-			sanguis::tiles::direction
-		>()
-	)
-	{
-		Tile const tile(
-			_neighbors[
-				value
-			]
-		);
+  // TODO(philipp): Check if the tile is _pair.second?
+  for (sanguis::tiles::direction const value :
+       fcppt::enum_::make_range<sanguis::tiles::direction>())
+  {
+    Tile const tile(_neighbors[value]);
 
-		FCPPT_ASSERT_ERROR(
-			tile
-			==
-			_pair.first()
-			||
-			tile
-			==
-			_pair.second()
-		);
+    FCPPT_ASSERT_ERROR(tile == _pair.first() || tile == _pair.second());
 
-		orientation[
-			value
-		] =
-			tile
-			==
-			_pair.first();
-	}
+    orientation[value] = tile == _pair.first();
+  }
 
-	return
-		orientation;
+  return orientation;
 }
 
-#define SANGUIS_TILES_INSTANTIATE_MAKE_ORIENTATION(\
-	tile_type\
-)\
-template \
-sanguis::creator::enable_if_tile< \
-	tile_type, \
-	sanguis::tiles::orientation \
-> \
-sanguis::tiles::impl::make_orientation(\
-	sanguis::tiles::pair<\
-		tile_type\
-	> const &,\
-	sanguis::tiles::impl::neighbors<\
-		tile_type\
-	> const & \
-)
+#define SANGUIS_TILES_INSTANTIATE_MAKE_ORIENTATION(tile_type) \
+  template sanguis::creator::enable_if_tile<tile_type, sanguis::tiles::orientation> \
+  sanguis::tiles::impl::make_orientation( \
+      sanguis::tiles::pair<tile_type> const &, sanguis::tiles::impl::neighbors<tile_type> const &)
 
-SANGUIS_CREATOR_INSTANTIATE_TILE(
-	SANGUIS_TILES_INSTANTIATE_MAKE_ORIENTATION
-);
+SANGUIS_CREATOR_INSTANTIATE_TILE(SANGUIS_TILES_INSTANTIATE_MAKE_ORIENTATION);

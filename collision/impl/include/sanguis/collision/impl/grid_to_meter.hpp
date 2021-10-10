@@ -9,24 +9,12 @@
 #include <boost/units/systems/si/length.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
-inline
-sanguis::collision::length
-grid_to_meter(
-	sanguis::creator::size_type const _val
-)
+inline sanguis::collision::length grid_to_meter(sanguis::creator::size_type const _val)
 {
-	return
-		fcppt::cast::int_to_float<
-			sanguis::collision::unit
-		>(
-			_val
-		)
-		*
-		boost::units::si::meter;
+  return fcppt::cast::int_to_float<sanguis::collision::unit>(_val) * boost::units::si::meter;
 }
 
 }

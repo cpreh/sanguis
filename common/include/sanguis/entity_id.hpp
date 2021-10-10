@@ -4,5 +4,4 @@
 #include <sanguis/entity_id_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

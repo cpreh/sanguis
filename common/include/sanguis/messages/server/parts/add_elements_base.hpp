@@ -7,5 +7,4 @@
 #include <sanguis/messages/server/parts/add_elements_base_fwd.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

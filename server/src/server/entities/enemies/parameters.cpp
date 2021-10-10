@@ -27,350 +27,216 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::entities::enemies::parameters::parameters(
-	sanguis::creator::enemy_type const _enemy_type,
-	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::damage::armor_array const &_armor,
-	sanguis::server::mass _mass,
-	sanguis::server::health const _health,
-	sanguis::server::entities::movement_speed const _movement_speed,
-	sanguis::server::ai::create_function &&_ai_create_function,
-	sanguis::server::weapons::unique_ptr &&_weapon,
-	sanguis::server::pickup_probability const _pickup_probability,
-	sanguis::server::exp const _exp,
-	sanguis::server::entities::enemies::difficulty const _difficulty,
-	sanguis::server::entities::spawn_owner _spawn_owner,
-	sanguis::server::auras::container &&_auras
-)
-:
-	enemy_type_(
-		_enemy_type
-	),
-	load_context_(
-		_load_context
-	),
-	armor_(
-		_armor
-	),
-	mass_(
-		std::move(
-			_mass
-		)
-	),
-	health_(
-		_health
-	),
-	regeneration_(
-		fcppt::literal<
-			sanguis::server::regeneration::value_type
-		>(
-			0
-		)
-	),
-	movement_speed_(
-		_movement_speed
-	),
-	ai_create_function_(
-		std::move(
-			_ai_create_function
-		)
-	),
-	weapon_(
-		std::move(
-			_weapon
-		)
-	),
-	pickup_probability_(
-		_pickup_probability
-	),
-	exp_(
-		_exp
-	),
-	difficulty_(
-		_difficulty
-	),
-	spawn_owner_(
-		std::move(
-			_spawn_owner
-		)
-	),
-	auras_(
-		std::move(
-			_auras
-		)
-	),
-	ias_(
-		sanguis::server::weapons::default_ias()
-	),
-	irs_(
-		sanguis::server::weapons::default_irs()
-	)
+    sanguis::creator::enemy_type const _enemy_type,
+    sanguis::server::environment::load_context &_load_context,
+    sanguis::server::damage::armor_array const &_armor,
+    sanguis::server::mass _mass,
+    sanguis::server::health const _health,
+    sanguis::server::entities::movement_speed const _movement_speed,
+    sanguis::server::ai::create_function &&_ai_create_function,
+    sanguis::server::weapons::unique_ptr &&_weapon,
+    sanguis::server::pickup_probability const _pickup_probability,
+    sanguis::server::exp const _exp,
+    sanguis::server::entities::enemies::difficulty const _difficulty,
+    sanguis::server::entities::spawn_owner _spawn_owner,
+    sanguis::server::auras::container &&_auras)
+    : enemy_type_(_enemy_type),
+      load_context_(_load_context),
+      armor_(_armor),
+      mass_(std::move(_mass)),
+      health_(_health),
+      regeneration_(fcppt::literal<sanguis::server::regeneration::value_type>(0)),
+      movement_speed_(_movement_speed),
+      ai_create_function_(std::move(_ai_create_function)),
+      weapon_(std::move(_weapon)),
+      pickup_probability_(_pickup_probability),
+      exp_(_exp),
+      difficulty_(_difficulty),
+      spawn_owner_(std::move(_spawn_owner)),
+      auras_(std::move(_auras)),
+      ias_(sanguis::server::weapons::default_ias()),
+      irs_(sanguis::server::weapons::default_irs())
 {
 }
 
-sanguis::server::entities::enemies::parameters::parameters(
-	parameters &&
-)
-noexcept
-= default;
+sanguis::server::entities::enemies::parameters::parameters(parameters &&) noexcept = default;
 
 sanguis::server::entities::enemies::parameters &
-sanguis::server::entities::enemies::parameters::operator=(
-	parameters &&
-)
-noexcept
-= default;
+sanguis::server::entities::enemies::parameters::operator=(parameters &&) noexcept = default;
 
-sanguis::server::entities::enemies::parameters::~parameters()
-= default;
+sanguis::server::entities::enemies::parameters::~parameters() = default;
 
-sanguis::creator::enemy_type
-sanguis::server::entities::enemies::parameters::enemy_type() const
+sanguis::creator::enemy_type sanguis::server::entities::enemies::parameters::enemy_type() const
 {
-	return
-		enemy_type_;
+  return enemy_type_;
 }
 
 sanguis::server::environment::load_context &
 sanguis::server::entities::enemies::parameters::load_context() const
 {
-	return
-		load_context_.get();
+  return load_context_.get();
 }
 
 sanguis::server::damage::armor_array const &
 sanguis::server::entities::enemies::parameters::armor() const
 {
-	return
-		armor_;
+  return armor_;
 }
 
-sanguis::server::mass
-sanguis::server::entities::enemies::parameters::mass() const
+sanguis::server::mass sanguis::server::entities::enemies::parameters::mass() const { return mass_; }
+
+sanguis::server::health sanguis::server::entities::enemies::parameters::health() const
 {
-	return
-		mass_;
+  return health_;
 }
 
-sanguis::server::health
-sanguis::server::entities::enemies::parameters::health() const
+sanguis::server::regeneration sanguis::server::entities::enemies::parameters::regeneration() const
 {
-	return
-		health_;
-}
-
-sanguis::server::regeneration
-sanguis::server::entities::enemies::parameters::regeneration() const
-{
-	return
-		regeneration_;
+  return regeneration_;
 }
 
 sanguis::server::entities::movement_speed
 sanguis::server::entities::enemies::parameters::movement_speed() const
 {
-	return
-		movement_speed_;
+  return movement_speed_;
 }
 
 sanguis::server::ai::create_function const &
 sanguis::server::entities::enemies::parameters::ai_create_function() const
 {
-	return
-		ai_create_function_;
+  return ai_create_function_;
 }
 
-sanguis::server::weapons::unique_ptr &
-sanguis::server::entities::enemies::parameters::weapon()
+sanguis::server::weapons::unique_ptr &sanguis::server::entities::enemies::parameters::weapon()
 {
-	return
-		weapon_;
+  return weapon_;
 }
 
 sanguis::server::pickup_probability
 sanguis::server::entities::enemies::parameters::pickup_probability() const
 {
-	return
-		pickup_probability_;
+  return pickup_probability_;
 }
 
-sanguis::server::exp
-sanguis::server::entities::enemies::parameters::exp() const
-{
-	return
-		exp_;
-}
+sanguis::server::exp sanguis::server::entities::enemies::parameters::exp() const { return exp_; }
 
 sanguis::server::entities::enemies::difficulty
 sanguis::server::entities::enemies::parameters::difficulty() const
 {
-	return
-		difficulty_;
+  return difficulty_;
 }
 
 sanguis::server::entities::spawn_owner const &
 sanguis::server::entities::enemies::parameters::spawn_owner() const
 {
-	return
-		spawn_owner_;
+  return spawn_owner_;
 }
 
-sanguis::server::auras::container &
-sanguis::server::entities::enemies::parameters::auras()
+sanguis::server::auras::container &sanguis::server::entities::enemies::parameters::auras()
 {
-	return
-		auras_;
+  return auras_;
 }
 
-sanguis::server::weapons::ias
-sanguis::server::entities::enemies::parameters::ias() const
+sanguis::server::weapons::ias sanguis::server::entities::enemies::parameters::ias() const
 {
-	return
-		ias_;
+  return ias_;
 }
 
-sanguis::server::weapons::irs
-sanguis::server::entities::enemies::parameters::irs() const
+sanguis::server::weapons::irs sanguis::server::entities::enemies::parameters::irs() const
 {
-	return
-		irs_;
+  return irs_;
 }
 
 sanguis::server::entities::enemies::parameters &
-sanguis::server::entities::enemies::parameters::health(
-	sanguis::server::health const _health
-)
+sanguis::server::entities::enemies::parameters::health(sanguis::server::health const _health)
 {
-	health_ =
-		_health;
+  health_ = _health;
 
-	return
-		*this;
+  return *this;
 }
 
 sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::regeneration(
-	sanguis::server::regeneration const _regeneration
-)
+    sanguis::server::regeneration const _regeneration)
 {
-	regeneration_ =
-		_regeneration;
+  regeneration_ = _regeneration;
 
-	return
-		*this;
+  return *this;
 }
 
 sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::movement_speed(
-	sanguis::server::entities::movement_speed const _movement_speed
-)
+    sanguis::server::entities::movement_speed const _movement_speed)
 {
-	movement_speed_ =
-		_movement_speed;
+  movement_speed_ = _movement_speed;
 
-	return
-		*this;
+  return *this;
 }
 
 sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::pickup_probability(
-	sanguis::server::pickup_probability const _pickup_probability
-)
+    sanguis::server::pickup_probability const _pickup_probability)
 {
-	pickup_probability_ =
-		_pickup_probability;
+  pickup_probability_ = _pickup_probability;
 
-	return
-		*this;
+  return *this;
 }
 
 sanguis::server::entities::enemies::parameters &
-sanguis::server::entities::enemies::parameters::exp(
-	sanguis::server::exp const _exp
-)
+sanguis::server::entities::enemies::parameters::exp(sanguis::server::exp const _exp)
 {
-	exp_ =
-		_exp;
+  exp_ = _exp;
 
-	return
-		*this;
+  return *this;
 }
 
 sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::difficulty(
-	sanguis::server::entities::enemies::difficulty const _difficulty
-)
+    sanguis::server::entities::enemies::difficulty const _difficulty)
 {
-	difficulty_ =
-		_difficulty;
+  difficulty_ = _difficulty;
 
-	return
-		*this;
+  return *this;
 }
 
 sanguis::server::entities::enemies::parameters &
-sanguis::server::entities::enemies::parameters::ias(
-	sanguis::server::weapons::ias const _ias
-)
+sanguis::server::entities::enemies::parameters::ias(sanguis::server::weapons::ias const _ias)
 {
-	ias_
-		= _ias;
+  ias_ = _ias;
 
-	return
-		*this;
+  return *this;
 }
 
 sanguis::server::entities::enemies::parameters &
-sanguis::server::entities::enemies::parameters::irs(
-	sanguis::server::weapons::irs const _irs
-)
+sanguis::server::entities::enemies::parameters::irs(sanguis::server::weapons::irs const _irs)
 {
-	irs_
-		= _irs;
+  irs_ = _irs;
 
-	return
-		*this;
+  return *this;
 }
 
 sanguis::server::entities::enemies::parameters &
-sanguis::server::entities::enemies::parameters::add_aura(
-	sanguis::server::auras::unique_ptr &&_aura
-)
+sanguis::server::entities::enemies::parameters::add_aura(sanguis::server::auras::unique_ptr &&_aura)
 {
-	auras_.push_back(
-		std::move(
-			_aura
-		)
-	);
+  auras_.push_back(std::move(_aura));
 
-	return
-		*this;
+  return *this;
 }
 
 sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::armor_element(
-	sanguis::server::damage::type const _type,
-	sanguis::server::damage::armor_unit const _unit
-)
+    sanguis::server::damage::type const _type, sanguis::server::damage::armor_unit const _unit)
 {
-	armor_[
-		_type
-	] =
-		_unit;
+  armor_[_type] = _unit;
 
-	return
-		*this;
+  return *this;
 }
 
-sanguis::server::entities::enemies::parameters &
-sanguis::server::entities::enemies::parameters::ai(
-	sanguis::server::ai::create_function const &_ai_create_function
-)
+sanguis::server::entities::enemies::parameters &sanguis::server::entities::enemies::parameters::ai(
+    sanguis::server::ai::create_function const &_ai_create_function)
 {
-	ai_create_function_ =
-		_ai_create_function;
+  ai_create_function_ = _ai_create_function;
 
-	return
-		*this;
+  return *this;
 }

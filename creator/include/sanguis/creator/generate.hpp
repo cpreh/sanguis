@@ -5,15 +5,11 @@
 #include <sanguis/creator/top_parameters_fwd.hpp>
 #include <sanguis/creator/top_result_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-sanguis::creator::top_result
-generate(
-	sanguis::creator::top_parameters const &
-);
+sanguis::creator::top_result generate(sanguis::creator::top_parameters const &);
 
 }
 

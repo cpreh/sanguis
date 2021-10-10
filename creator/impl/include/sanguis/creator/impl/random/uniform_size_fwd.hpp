@@ -5,18 +5,11 @@
 #include <sanguis/creator/impl/random/uniform_int_fwd.hpp>
 #include <fcppt/random/distribution/basic_fwd.hpp>
 
-
 namespace sanguis::creator::impl::random
 {
 
-using
-uniform_size
-=
-fcppt::random::distribution::basic<
-	sanguis::creator::impl::random::uniform_int<
-		sanguis::creator::size_type
-	>
->;
+using uniform_size = fcppt::random::distribution::basic<
+    sanguis::creator::impl::random::uniform_int<sanguis::creator::size_type>>;
 
 }
 

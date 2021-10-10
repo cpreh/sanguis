@@ -22,120 +22,52 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/tree/map.hpp>
 
-
 sanguis::client::gui::perk::tab::tab(
-	sge::renderer::device::ffp_ref const _renderer,
-	sge::font::object_ref const _font,
-	sge::gui::context_ref const _context,
-	sge::gui::style::const_reference const _style,
-	sanguis::client::perk::state_ref const _state,
-	sanguis::client::perk::const_tree_range const &_range
-)
-:
-	tree_widgets_(
-		fcppt::algorithm::map<
-			sanguis::client::gui::perk::line_unique_ptr_tree_vector
-		>(
-			_range,
-			[
-				&_renderer,
-				&_font,
-				&_context,
-				&_style,
-				&_state
-			](
-				sanguis::client::perk::tree const &_element
-			)
-			{
-				return
-					fcppt::container::tree::map<
-						sanguis::client::gui::perk::line_unique_ptr_tree
-					>(
-						_element,
-						[
-							&_renderer,
-							&_font,
-							&_context,
-							&_style,
-							&_state
-						](
-							sanguis::client::perk::optional_info const &_info
-						)
-						{
-							return
-								fcppt::make_unique_ptr<
-									sanguis::client::gui::perk::line
-								>(
-									_renderer,
-									_font,
-									_context,
-									_style,
-									_state,
-									FCPPT_ASSERT_OPTIONAL_ERROR(
-										_info
-									)
-								);
-						}
-					);
-			}
-		)
-	),
-	tree_(
-		_context,
-		fcppt::algorithm::map<
-			sge::gui::widget::reference_tree_vector
-		>(
-			tree_widgets_,
-			[](
-				sanguis::client::gui::perk::line_unique_ptr_tree const &_tree
-			)
-			{
-				return
-					fcppt::container::tree::map<
-						sge::gui::widget::reference_tree
-					>(
-						_tree,
-						[](
-							sanguis::client::gui::perk::line_unique_ptr const &_line
-						)
-						{
-							return
-								sge::gui::widget::reference(
-									_line->widget()
-								);
-						}
-					);
-			}
-		)
-	),
-	name_(
-		sge::font::from_fcppt_string(
-			sanguis::client::perk::category_to_string(
-				sanguis::client::perk::to_category(
-					// TODO(philipp): This is unsafe!
-					FCPPT_ASSERT_OPTIONAL_ERROR(
-						_range.begin()->value()
-					).perk_type()
-				)
-			)
-		)
-	)
+    sge::renderer::device::ffp_ref const _renderer,
+    sge::font::object_ref const _font,
+    sge::gui::context_ref const _context,
+    sge::gui::style::const_reference const _style,
+    sanguis::client::perk::state_ref const _state,
+    sanguis::client::perk::const_tree_range const &_range)
+    : tree_widgets_(fcppt::algorithm::map<sanguis::client::gui::perk::line_unique_ptr_tree_vector>(
+          _range,
+          [&_renderer, &_font, &_context, &_style, &_state](
+              sanguis::client::perk::tree const &_element)
+          {
+            return fcppt::container::tree::map<sanguis::client::gui::perk::line_unique_ptr_tree>(
+                _element,
+                [&_renderer, &_font, &_context, &_style, &_state](
+                    sanguis::client::perk::optional_info const &_info)
+                {
+                  return fcppt::make_unique_ptr<sanguis::client::gui::perk::line>(
+                      _renderer,
+                      _font,
+                      _context,
+                      _style,
+                      _state,
+                      FCPPT_ASSERT_OPTIONAL_ERROR(_info));
+                });
+          })),
+      tree_(
+          _context,
+          fcppt::algorithm::map<sge::gui::widget::reference_tree_vector>(
+              tree_widgets_,
+              [](sanguis::client::gui::perk::line_unique_ptr_tree const &_tree)
+              {
+                return fcppt::container::tree::map<sge::gui::widget::reference_tree>(
+                    _tree,
+                    [](sanguis::client::gui::perk::line_unique_ptr const &_line)
+                    { return sge::gui::widget::reference(_line->widget()); });
+              })),
+      name_(sge::font::from_fcppt_string(
+          sanguis::client::perk::category_to_string(sanguis::client::perk::to_category(
+              // TODO(philipp): This is unsafe!
+              FCPPT_ASSERT_OPTIONAL_ERROR(_range.begin()->value()).perk_type()))))
 {
 }
 
-sanguis::client::gui::perk::tab::~tab()
-= default;
+sanguis::client::gui::perk::tab::~tab() = default;
 
-sge::gui::widget::tree &
-sanguis::client::gui::perk::tab::widget()
-{
-	return
-		tree_;
-}
+sge::gui::widget::tree &sanguis::client::gui::perk::tab::widget() { return tree_; }
 
-sge::font::string const &
-sanguis::client::gui::perk::tab::name() const
-{
-	return
-		name_;
-}
+sge::font::string const &sanguis::client::gui::perk::tab::name() const { return name_; }

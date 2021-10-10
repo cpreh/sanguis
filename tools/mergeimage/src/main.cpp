@@ -49,98 +49,37 @@
 #include <iostream>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace
 {
 
-FCPPT_RECORD_MAKE_LABEL(
-	input_path_label
-);
+FCPPT_RECORD_MAKE_LABEL(input_path_label);
 
-FCPPT_RECORD_MAKE_LABEL(
-	output_file_label
-);
+FCPPT_RECORD_MAKE_LABEL(output_file_label);
 
-using
-argument_record
-=
-fcppt::record::object<
-	fcppt::record::element<
-		input_path_label,
-		fcppt::string
-	>,
-	fcppt::record::element<
-		output_file_label,
-		fcppt::string
-	>
->;
+using argument_record = fcppt::record::object<
+    fcppt::record::element<input_path_label, fcppt::string>,
+    fcppt::record::element<output_file_label, fcppt::string>>;
 
-void
-execute_main(
-	argument_record const &_args
-)
+void execute_main(argument_record const &_args)
 {
-	sge::systems::instance<
-		sge::systems::with_image2d
-	> const sys(
-		sge::systems::make_list
-		(
-			sge::systems::image2d(
-				sge::media::optional_extension_set()
-			)
-		)
-	);
+  sge::systems::instance<sge::systems::with_image2d> const sys(
+      sge::systems::make_list(sge::systems::image2d(sge::media::optional_extension_set())));
 
-	sanguis::tools::libmergeimage::merge_result const result(
-		sanguis::tools::libmergeimage::merge_images(
-			sys.image_system(),
-			fcppt::filesystem::normalize(
-				std::filesystem::path(
-					fcppt::record::get<
-						input_path_label
-					>(
-						_args
-					)
-				)
-			)
-		)
-	);
+  sanguis::tools::libmergeimage::merge_result const result(
+      sanguis::tools::libmergeimage::merge_images(
+          sys.image_system(),
+          fcppt::filesystem::normalize(
+              std::filesystem::path(fcppt::record::get<input_path_label>(_args)))));
 
-	std::filesystem::path const output_path(
-		fcppt::filesystem::normalize(
-			std::filesystem::path(
-				fcppt::record::get<
-					output_file_label
-				>(
-					_args
-				)
-			)
-		)
-	);
+  std::filesystem::path const output_path(fcppt::filesystem::normalize(
+      std::filesystem::path(fcppt::record::get<output_file_label>(_args))));
 
-	sanguis::tools::libmergeimage::saved_image_vector const saved_images(
-		sanguis::tools::libmergeimage::save_images(
-			sys.image_system(),
-			output_path,
-			result.images()
-		)
-	);
+  sanguis::tools::libmergeimage::saved_image_vector const saved_images(
+      sanguis::tools::libmergeimage::save_images(sys.image_system(), output_path, result.images()));
 
-	sanguis::model::serialize(
-		output_path
-		/
-		(
-			fcppt::filesystem::stem(
-				output_path
-			)
-			+
-			FCPPT_TEXT(".json")
-		),
-		sanguis::tools::libmergeimage::to_model(
-			result.cell_size(),
-			saved_images
-		)
-	);
+  sanguis::model::serialize(
+      output_path / (fcppt::filesystem::stem(output_path) + FCPPT_TEXT(".json")),
+      sanguis::tools::libmergeimage::to_model(result.cell_size(), saved_images));
 }
 
 }
@@ -148,148 +87,61 @@ execute_main(
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Wmissing-declarations)
 
-int
-FCPPT_MAIN(
-	int argc,
-	fcppt::args_char **argv
-)
+int FCPPT_MAIN(int argc, fcppt::args_char **argv)
 try
 {
-	auto const parser{
-		fcppt::options::apply(
-			fcppt::options::argument<
-				input_path_label,
-				fcppt::string
-			>{
-				fcppt::options::long_name{
-					FCPPT_TEXT("input-path")
-				},
-				fcppt::options::optional_help_text{
-					fcppt::options::help_text{
-						FCPPT_TEXT("Path where the input files are.")
-					}
-				}
-			},
-			fcppt::options::argument<
-				output_file_label,
-				fcppt::string
-			>{
-				fcppt::options::long_name{
-					FCPPT_TEXT("output-file")
-				},
-				fcppt::options::optional_help_text{
-					fcppt::options::help_text{
-						FCPPT_TEXT("Path to the output file.")
-					}
-				}
-			}
-		)
-	};
+  auto const parser{fcppt::options::apply(
+      fcppt::options::argument<input_path_label, fcppt::string>{
+          fcppt::options::long_name{FCPPT_TEXT("input-path")},
+          fcppt::options::optional_help_text{
+              fcppt::options::help_text{FCPPT_TEXT("Path where the input files are.")}}},
+      fcppt::options::argument<output_file_label, fcppt::string>{
+          fcppt::options::long_name{FCPPT_TEXT("output-file")},
+          fcppt::options::optional_help_text{
+              fcppt::options::help_text{FCPPT_TEXT("Path to the output file.")}}})};
 
-	using
-	result_type
-	=
-	fcppt::options::result_of<
-		decltype(
-			parser
-		)
-	>;
+  using result_type = fcppt::options::result_of<decltype(parser)>;
 
-	fcppt::options::help_result<
-		result_type
-	> const result{
-		fcppt::options::parse_help(
-			fcppt::options::default_help_switch(),
-			parser,
-			fcppt::args_from_second(
-				argc,
-				argv
-			)
-		)
-	};
+  fcppt::options::help_result<result_type> const result{fcppt::options::parse_help(
+      fcppt::options::default_help_switch(), parser, fcppt::args_from_second(argc, argv))};
 
-	return
-		fcppt::variant::match(
-			result,
-			[](
-				fcppt::options::result<
-					result_type
-				> const &_result
-			)
-			{
-				return
-					fcppt::either::match(
-						_result,
-						[](
-							fcppt::options::error const &_error
-						)
-						{
-							fcppt::io::cerr()
-								<<
-								_error
-								<<
-								FCPPT_TEXT('\n');
+  return fcppt::variant::match(
+      result,
+      [](fcppt::options::result<result_type> const &_result)
+      {
+        return fcppt::either::match(
+            _result,
+            [](fcppt::options::error const &_error)
+            {
+              fcppt::io::cerr() << _error << FCPPT_TEXT('\n');
 
-							return
-								EXIT_FAILURE;
-						},
-						[](
-							result_type const &_args
-						)
-						{
-							execute_main(
-								fcppt::record::permute<
-									argument_record
-								>(
-									_args
-								)
-							);
+              return EXIT_FAILURE;
+            },
+            [](result_type const &_args)
+            {
+              execute_main(fcppt::record::permute<argument_record>(_args));
 
-							return
-								EXIT_SUCCESS;
-						}
-					);
-			},
-			[](
-				fcppt::options::help_text const &_help_text
-			)
-			{
-				fcppt::io::cout()
-					<<
-					_help_text
-					<<
-					FCPPT_TEXT('\n');
+              return EXIT_SUCCESS;
+            });
+      },
+      [](fcppt::options::help_text const &_help_text)
+      {
+        fcppt::io::cout() << _help_text << FCPPT_TEXT('\n');
 
-				return
-					EXIT_SUCCESS;
-			}
-		);
+        return EXIT_SUCCESS;
+      });
 }
-catch(
-	fcppt::exception const &_error
-)
+catch (fcppt::exception const &_error)
 {
-	fcppt::io::cerr()
-		<<
-		_error.string()
-		<<
-		FCPPT_TEXT('\n');
+  fcppt::io::cerr() << _error.string() << FCPPT_TEXT('\n');
 
-	return
-		EXIT_FAILURE;
+  return EXIT_FAILURE;
 }
-catch(
-	std::exception const &_error
-)
+catch (std::exception const &_error)
 {
-	std::cerr
-		<<
-		_error.what()
-		<<
-		'\n';
+  std::cerr << _error.what() << '\n';
 
-	return
-		EXIT_FAILURE;
+  return EXIT_FAILURE;
 }
 
 FCPPT_PP_POP_WARNING

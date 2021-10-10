@@ -3,14 +3,10 @@
 
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::tiles
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	bool,
-	is_background
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(bool, is_background);
 
 }
 

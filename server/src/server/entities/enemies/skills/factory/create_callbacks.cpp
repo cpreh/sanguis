@@ -6,7 +6,6 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 namespace
 {
 
@@ -16,9 +15,8 @@ FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
 // NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
 sanguis::server::entities::enemies::skills::factory::container const callbacks{
-	&sanguis::server::entities::enemies::skills::factory::teleport,
-	&sanguis::server::entities::enemies::skills::factory::mother_spider
-};
+    &sanguis::server::entities::enemies::skills::factory::teleport,
+    &sanguis::server::entities::enemies::skills::factory::mother_spider};
 
 FCPPT_PP_POP_WARNING
 
@@ -27,6 +25,5 @@ FCPPT_PP_POP_WARNING
 sanguis::server::entities::enemies::skills::factory::container const &
 sanguis::server::entities::enemies::skills::factory::create_callbacks()
 {
-	return
-		callbacks;
+  return callbacks;
 }

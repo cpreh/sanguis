@@ -6,29 +6,20 @@
 #include <sge/renderer/context/ffp_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::scene::state
 {
 
-class dummy
-:
-	public sanguis::client::draw2d::scene::state::base
+class dummy : public sanguis::client::draw2d::scene::state::base
 {
-	FCPPT_NONMOVABLE(
-		dummy
-	);
+  FCPPT_NONMOVABLE(dummy);
+
 public:
-	dummy();
+  dummy();
 
-	~dummy()
-	override;
+  ~dummy() override;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr
-	create_scoped(
-		sge::renderer::context::ffp_ref
-	) const
-	override;
+  [[nodiscard]] sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr
+      create_scoped(sge::renderer::context::ffp_ref) const override;
 };
 
 }

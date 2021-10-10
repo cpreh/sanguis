@@ -5,14 +5,10 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client
 {
 
-using
-exp_value
-=
-std::uint64_t;
+using exp_value = std::uint64_t;
 
 }
 

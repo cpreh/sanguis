@@ -4,5 +4,4 @@
 #include <sanguis/model/impl/animation_range_vector_fwd.hpp>
 #include <fcppt/math/vector/static.hpp>
 
-
 #endif

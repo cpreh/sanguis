@@ -22,82 +22,63 @@
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
-
 namespace sanguis::client::gui::perk
 {
 
 class chooser
 {
-	FCPPT_NONMOVABLE(
-		chooser
-	);
+  FCPPT_NONMOVABLE(chooser);
+
 public:
-	chooser(
-		sanguis::client::perk::state_ref,
-		sge::gui::style::const_reference,
-		sge::renderer::device::ffp_ref,
-		sge::viewport::manager_ref,
-		sge::font::object_ref
-	);
+  chooser(
+      sanguis::client::perk::state_ref,
+      sge::gui::style::const_reference,
+      sge::renderer::device::ffp_ref,
+      sge::viewport::manager_ref,
+      sge::font::object_ref);
 
-	~chooser();
+  ~chooser();
 
-	void
-	process(
-		sanguis::duration const &
-	);
+  void process(sanguis::duration const &);
 
-	void
-	draw(
-		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void draw(sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	void
-	input(
-		sge::input::event_base const &
-	);
+  void input(sge::input::event_base const &);
+
 private:
-	void
-	perks();
+  void perks();
 
-	void
-	level();
+  void level();
 
-	[[nodiscard]]
-	sge::font::string
-	make_top_text() const;
+  [[nodiscard]] sge::font::string make_top_text() const;
 
-	sanguis::client::perk::state_ref const state_;
+  sanguis::client::perk::state_ref const state_;
 
-	sge::gui::style::const_reference const style_;
+  sge::gui::style::const_reference const style_;
 
-	sge::renderer::device::ffp_ref const renderer_;
+  sge::renderer::device::ffp_ref const renderer_;
 
-	sge::font::object_ref const font_;
+  sge::font::object_ref const font_;
 
-	sge::gui::context gui_context_;
+  sge::gui::context gui_context_;
 
-	sge::gui::widget::text top_text_;
+  sge::gui::widget::text top_text_;
 
-	using
-	state_unique_ptr
-	=
-	fcppt::unique_ptr<
-		sanguis::client::gui::perk::state
-	>;
+  using state_unique_ptr = fcppt::unique_ptr<sanguis::client::gui::perk::state>;
 
-	state_unique_ptr gui_state_;
+  state_unique_ptr gui_state_;
 
-	sge::gui::widget::box_container main_container_;
+  sge::gui::widget::box_container main_container_;
 
-	sge::gui::main_area::screen_corner gui_area_;
+  sge::gui::main_area::screen_corner gui_area_;
 
-	sge::gui::master gui_master_;
+  sge::gui::master gui_master_;
 
-	sge::gui::background::colored gui_background_;
+  sge::gui::background::colored gui_background_;
 
-	fcppt::signal::auto_connection const perk_connection_;
-	fcppt::signal::auto_connection const level_connection_;
+  fcppt::signal::auto_connection const perk_connection_;
+  fcppt::signal::auto_connection const level_connection_;
 };
 
 }

@@ -5,24 +5,14 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
-template<
-	typename Parameters
->
-using
-callback
-=
-void
-(*)(
-	sanguis::random_generator &,
-	sanguis::server::entities::enemies::difficulty,
-	fcppt::reference<
-		Parameters
-	>
-);
+template <typename Parameters>
+using callback = void (*)(
+    sanguis::random_generator &,
+    sanguis::server::entities::enemies::difficulty,
+    fcppt::reference<Parameters>);
 
 }
 

@@ -4,15 +4,11 @@
 #include <sanguis/creator/symbol.hpp>
 #include <sanguis/creator/tile_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-bool
-tile_connects(
-	sanguis::creator::tile
-);
+bool tile_connects(sanguis::creator::tile);
 
 }
 

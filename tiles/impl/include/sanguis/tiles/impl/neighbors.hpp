@@ -5,5 +5,4 @@
 #include <sanguis/tiles/impl/neighbors_fwd.hpp>
 #include <fcppt/enum/array_impl.hpp>
 
-
 #endif

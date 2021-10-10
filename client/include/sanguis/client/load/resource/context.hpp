@@ -12,43 +12,33 @@
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
-
 namespace sanguis::client::load::resource
 {
 
 class context
 {
-	FCPPT_NONMOVABLE(
-		context
-	);
+  FCPPT_NONMOVABLE(context);
+
 public:
-	[[nodiscard]]
-	sanguis::client::load::resource::textures const &
-	textures() const;
+  [[nodiscard]] sanguis::client::load::resource::textures const &textures() const;
 
-	[[nodiscard]]
-	sanguis::client::load::resource::sounds const &
-	sounds() const;
+  [[nodiscard]] sanguis::client::load::resource::sounds const &sounds() const;
+
 private:
-	friend class sanguis::client::load::context;
+  friend class sanguis::client::load::context;
 
-	context(
-		fcppt::log::context_reference,
-		sge::renderer::device::core_ref,
-		sge::image2d::system_ref,
-		sge::audio::loader_ref,
-		sge::audio::player_ref
-	);
+  context(
+      fcppt::log::context_reference,
+      sge::renderer::device::core_ref,
+      sge::image2d::system_ref,
+      sge::audio::loader_ref,
+      sge::audio::player_ref);
 
-	~context();
+  ~context();
 
-	fcppt::unique_ptr<
-		sanguis::client::load::resource::textures
-	> const textures_;
+  fcppt::unique_ptr<sanguis::client::load::resource::textures> const textures_;
 
-	fcppt::unique_ptr<
-		sanguis::client::load::resource::sounds
-	> const sounds_;
+  fcppt::unique_ptr<sanguis::client::load::resource::sounds> const sounds_;
 };
 
 }

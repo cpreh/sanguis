@@ -20,51 +20,39 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class enemy
-:
-	public sanguis::client::draw2d::entities::with_buffs_auras_model
+class enemy : public sanguis::client::draw2d::entities::with_buffs_auras_model
 {
-	FCPPT_NONMOVABLE(
-		enemy
-	);
+  FCPPT_NONMOVABLE(enemy);
+
 public:
-	enemy(
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::load::auras::context_ref,
-		sanguis::creator::enemy_type,
-		sanguis::enemy_kind,
-		sanguis::optional_primary_weapon_type,
-		sanguis::weapon_status,
-		sanguis::client::draw2d::speed const &,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::rotation,
-		sanguis::aura_type_vector &&,
-		sanguis::buff_type_vector &&,
-		sanguis::client::draw2d::entities::name const &,
-		sanguis::client::health_pair
-	);
+  enemy(
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::client::load::auras::context_ref,
+      sanguis::creator::enemy_type,
+      sanguis::enemy_kind,
+      sanguis::optional_primary_weapon_type,
+      sanguis::weapon_status,
+      sanguis::client::draw2d::speed const &,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::rotation,
+      sanguis::aura_type_vector &&,
+      sanguis::buff_type_vector &&,
+      sanguis::client::draw2d::entities::name const &,
+      sanguis::client::health_pair);
 
-	~enemy()
-	override;
+  ~enemy() override;
+
 private:
-	void
-	on_create(
-		sanguis::client::draw2d::entities::create_parameters const &
-	)
-	override;
+  void on_create(sanguis::client::draw2d::entities::create_parameters const &) override;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::entities::hover::optional_info
-	hover() const
-	override;
+  [[nodiscard]] sanguis::client::draw2d::entities::hover::optional_info hover() const override;
 
-	sanguis::creator::enemy_type const enemy_type_;
+  sanguis::creator::enemy_type const enemy_type_;
 
-	sanguis::client::draw2d::entities::hover::name const name_;
+  sanguis::client::draw2d::entities::hover::name const name_;
 };
 
 }

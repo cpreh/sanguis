@@ -4,14 +4,10 @@
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/server/radius_fwd.hpp>
 
-
 namespace sanguis::server::collision
 {
 
-sanguis::server::radius
-from_radius(
-	sanguis::collision::radius const &
-);
+sanguis::server::radius from_radius(sanguis::collision::radius const &);
 
 }
 

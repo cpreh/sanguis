@@ -7,16 +7,8 @@
 #include <sanguis/messages/server/types/alda_type.hpp>
 #include <alda/message/instantiate_concrete.hpp>
 
-
-#define SANGUIS_MESSAGES_SERVER_INSTANTIATE_MESSAGE(\
-	msg\
-) \
-SANGUIS_MESSAGES_SERVER_SERIALIZATION_INSTANTIATE_MESSAGE(\
-	msg\
-)\
-ALDA_MESSAGE_INSTANTIATE_CONCRETE(\
-	sanguis::messages::server::types::alda_type,\
-	msg\
-)\
+#define SANGUIS_MESSAGES_SERVER_INSTANTIATE_MESSAGE(msg) \
+  SANGUIS_MESSAGES_SERVER_SERIALIZATION_INSTANTIATE_MESSAGE(msg) \
+  ALDA_MESSAGE_INSTANTIATE_CONCRETE(sanguis::messages::server::types::alda_type, msg)
 
 #endif

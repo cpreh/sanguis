@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/speed_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
-using
-optional_speed
-=
-fcppt::optional::object<
-	sanguis::client::draw2d::speed
->;
+using optional_speed = fcppt::optional::object<sanguis::client::draw2d::speed>;
 
 }
 

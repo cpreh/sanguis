@@ -4,14 +4,11 @@
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 
-
 namespace sanguis::server::entities
 {
 
 sanguis::server::entities::insert_parameters
-insert_parameters_center(
-	sanguis::server::center const &
-);
+insert_parameters_center(sanguis::server::center const &);
 
 }
 

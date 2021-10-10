@@ -5,22 +5,14 @@
 #include <sanguis/slowdown_fwd.hpp>
 #include <sanguis/server/net/slowdown_policy_fwd.hpp>
 
-
 namespace sanguis::server::net
 {
 
 struct slowdown_policy
 {
-	static
-	sanguis::clock::duration
-	start_duration();
+  static sanguis::clock::duration start_duration();
 
-	static
-	sanguis::clock::duration
-	difference(
-		sanguis::slowdown,
-		sanguis::slowdown
-	);
+  static sanguis::clock::duration difference(sanguis::slowdown, sanguis::slowdown);
 };
 
 }

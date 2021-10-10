@@ -16,44 +16,27 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
-
 namespace sanguis::server::auras
 {
 
-template<
-	typename Buff
->
-sanguis::server::auras::unique_ptr
-burn_create(
-	sanguis::server::radius const _radius,
-	sanguis::server::team const _team,
-	sanguis::server::buffs::burn_interval const _interval,
-	sanguis::server::damage::unit const _damage
-)
+template <typename Buff>
+sanguis::server::auras::unique_ptr burn_create(
+    sanguis::server::radius const _radius,
+    sanguis::server::team const _team,
+    sanguis::server::buffs::burn_interval const _interval,
+    sanguis::server::damage::unit const _damage)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::server::auras::aura
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::auras::buff
-			>(
-				_radius,
-				_team,
-				sanguis::aura_type::burn,
-				sanguis::server::auras::influence::debuff,
-				sanguis::server::buffs::burn_create<
-					Buff
-				>(
-					_interval,
-					_damage,
-					sanguis::server::damage::make_array({
-						sanguis::server::damage::fire =
-							sanguis::server::damage::full
-					})
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_base<sanguis::server::auras::aura>(
+      fcppt::make_unique_ptr<sanguis::server::auras::buff>(
+          _radius,
+          _team,
+          sanguis::aura_type::burn,
+          sanguis::server::auras::influence::debuff,
+          sanguis::server::buffs::burn_create<Buff>(
+              _interval,
+              _damage,
+              sanguis::server::damage::make_array(
+                  {sanguis::server::damage::fire = sanguis::server::damage::full}))));
 }
 
 }

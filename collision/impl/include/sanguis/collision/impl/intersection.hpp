@@ -4,23 +4,18 @@
 #include <sanguis/collision/impl/dir.hpp>
 #include <sanguis/collision/impl/intersection_fwd.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
 class intersection
 {
 public:
-	explicit
-	intersection(
-		sanguis::collision::impl::dir
-	);
+  explicit intersection(sanguis::collision::impl::dir);
 
-	[[nodiscard]]
-	sanguis::collision::impl::dir const &
-	dir() const;
+  [[nodiscard]] sanguis::collision::impl::dir const &dir() const;
+
 private:
-	sanguis::collision::impl::dir dir_;
+  sanguis::collision::impl::dir dir_;
 };
 
 }

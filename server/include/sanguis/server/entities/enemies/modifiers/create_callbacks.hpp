@@ -3,12 +3,10 @@
 
 #include <sanguis/server/entities/enemies/modifiers/container.hpp>
 
-
 namespace sanguis::server::entities::enemies::modifiers
 {
 
-sanguis::server::entities::enemies::modifiers::container const &
-create_callbacks();
+sanguis::server::entities::enemies::modifiers::container const &create_callbacks();
 
 }
 

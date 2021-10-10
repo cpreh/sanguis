@@ -4,16 +4,10 @@
 #include <sanguis/perk_type_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis
 {
 
-using
-optional_perk_type
-=
-fcppt::optional::object<
-	sanguis::perk_type
->;
+using optional_perk_type = fcppt::optional::object<sanguis::perk_type>;
 
 }
 

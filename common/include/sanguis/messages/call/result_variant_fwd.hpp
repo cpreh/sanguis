@@ -7,17 +7,11 @@
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::messages::call
 {
 
-using
-result_variant
-=
-fcppt::variant::object<
-	boost::statechart::result,
-	sanguis::messages::call::forward_to_default
->;
+using result_variant =
+    fcppt::variant::object<boost::statechart::result, sanguis::messages::call::forward_to_default>;
 
 }
 

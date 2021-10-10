@@ -6,16 +6,10 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::collision
 {
 
-using
-duration
-=
-std::chrono::duration<
-	sanguis::collision::unit
->;
+using duration = std::chrono::duration<sanguis::collision::unit>;
 
 }
 

@@ -5,15 +5,11 @@
 #include <sanguis/common/symbol.hpp>
 #include <sanguis/model/cell_size_fwd.hpp>
 
-
 namespace sanguis::load::model
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::collision::radius
-radius(
-	sanguis::model::cell_size const &
-);
+sanguis::collision::radius radius(sanguis::model::cell_size const &);
 
 }
 

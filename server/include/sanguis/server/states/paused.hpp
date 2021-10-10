@@ -21,74 +21,40 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::states
 {
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
-class paused
-:
-	public
-		boost::statechart::state<
-			sanguis::server::states::paused,
-			sanguis::server::states::running
-		>
+class paused : public boost::statechart::
+                   state<sanguis::server::states::paused, sanguis::server::states::running>
 {
-	FCPPT_NONMOVABLE(
-		paused
-	);
+  FCPPT_NONMOVABLE(paused);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list1<
-		boost::statechart::custom_reaction<
-			sanguis::server::events::message
-		>
-	>;
+  using reactions =
+      boost::mpl::list1<boost::statechart::custom_reaction<sanguis::server::events::message>>;
 
-	explicit
-	paused(
-		my_context
-	);
+  explicit paused(my_context);
 
-	~paused()
-	SANGUIS_STATE_OVERRIDE;
+  ~paused() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::events::message const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::events::message const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::info const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::info const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::unpause const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::unpause const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::pause const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::pause const &);
+
 private:
-	[[nodiscard]]
-	boost::statechart::result
-	unpause_impl();
+  [[nodiscard]] boost::statechart::result unpause_impl();
 
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 };
 
 FCPPT_PP_POP_WARNING

@@ -8,50 +8,28 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::events
 {
 
-class render
-:
-	public boost::statechart::event<
-		sanguis::client::events::render
-	>
+class render : public boost::statechart::event<sanguis::client::events::render>
 {
 public:
-	explicit
-	render(
-		sge::renderer::context::ffp_ref
-	);
+  explicit render(sge::renderer::context::ffp_ref);
 
-	render(
-		render &&
-	)
-	noexcept;
+  render(render &&) noexcept;
 
-	render(
-		render const &
-	);
+  render(render const &);
 
-	render &
-	operator=(
-		render &&
-	)
-	noexcept;
+  render &operator=(render &&) noexcept;
 
-	render &
-	operator=(
-		render const &
-	);
+  render &operator=(render const &);
 
-	~render()
-	override;
+  ~render() override;
 
-	[[nodiscard]]
-	sge::renderer::context::ffp &
-	context() const;
+  [[nodiscard]] sge::renderer::context::ffp &context() const;
+
 private:
-	sge::renderer::context::ffp_ref context_;
+  sge::renderer::context::ffp_ref context_;
 };
 
 }

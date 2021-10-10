@@ -4,17 +4,10 @@
 #include <sanguis/creator/size_type.hpp>
 #include <fcppt/container/grid/pos_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-pos
-=
-fcppt::container::grid::pos<
-	sanguis::creator::size_type,
-	2U
->;
+using pos = fcppt::container::grid::pos<sanguis::creator::size_type, 2U>;
 
 }
 

@@ -8,39 +8,24 @@
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::ai::behavior
 {
 
-class stay
-:
-	public sanguis::server::ai::behavior::base
+class stay : public sanguis::server::ai::behavior::base
 {
-	FCPPT_NONMOVABLE(
-		stay
-	);
+  FCPPT_NONMOVABLE(stay);
+
 public:
-	explicit
-	stay(
-		sanguis::server::ai::context_ref
-	);
+  explicit stay(sanguis::server::ai::context_ref);
 
-	~stay()
-	override;
+  ~stay() override;
 
-	[[nodiscard]]
-	bool
-	start()
-	override;
+  [[nodiscard]] bool start() override;
 
-	[[nodiscard]]
-	sanguis::server::ai::status
-	update(
-		sanguis::duration
-	)
-	override;
+  [[nodiscard]] sanguis::server::ai::status update(sanguis::duration) override;
+
 private:
-	sanguis::server::center const start_pos_;
+  sanguis::server::center const start_pos_;
 };
 
 }

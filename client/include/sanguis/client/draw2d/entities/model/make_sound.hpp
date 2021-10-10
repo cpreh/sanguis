@@ -6,16 +6,13 @@
 #include <sanguis/client/draw2d/sprite/animation/loop_method_fwd.hpp>
 #include <sge/audio/buffer_ref.hpp>
 
-
 namespace sanguis::client::draw2d::entities::model
 {
 
-sanguis::client::draw2d::entities::model::optional_sound
-make_sound(
-	sge::audio::buffer_ref,
-	sanguis::client::sound_manager &, // NOLINT(google-runtime-references)
-	sanguis::client::draw2d::sprite::animation::loop_method
-);
+sanguis::client::draw2d::entities::model::optional_sound make_sound(
+    sge::audio::buffer_ref,
+    sanguis::client::sound_manager &, // NOLINT(google-runtime-references)
+    sanguis::client::draw2d::sprite::animation::loop_method);
 
 }
 

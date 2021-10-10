@@ -5,5 +5,4 @@
 #include <sanguis/messages/server/adapted_types/weapon_attribute.hpp>
 #include <sanguis/messages/server/adapted_types/weapon_attribute_vector_fwd.hpp>
 
-
 #endif

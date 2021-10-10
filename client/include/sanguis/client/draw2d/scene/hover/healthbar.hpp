@@ -15,63 +15,40 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/mpl/list/object.hpp>
 
-
 namespace sanguis::client::draw2d::scene::hover
 {
 
 class healthbar
 {
-	FCPPT_NONMOVABLE(
-		healthbar
-	);
+  FCPPT_NONMOVABLE(healthbar);
+
 public:
-	healthbar(
-		sge::renderer::device::core_ref,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::radius,
-		sanguis::client::health_pair
-	);
+  healthbar(
+      sge::renderer::device::core_ref,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::radius,
+      sanguis::client::health_pair);
 
-	~healthbar();
+  ~healthbar();
 
-	void
-	draw(
-		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void draw(sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 private:
-	using
-	sge_buffers
-	=
-	sanguis::client::draw2d::sprite::buffers<
-		sanguis::client::draw2d::sprite::colored::choices
-	>;
+  using sge_buffers =
+      sanguis::client::draw2d::sprite::buffers<sanguis::client::draw2d::sprite::colored::choices>;
 
-	sge_buffers buffers_;
+  sge_buffers buffers_;
 
-	using
-	sprite_range
-	=
-	sge::sprite::render::range<
-		sanguis::client::draw2d::sprite::colored::choices
-	>;
+  using sprite_range =
+      sge::sprite::render::range<sanguis::client::draw2d::sprite::colored::choices>;
 
-	sprite_range range_;
+  sprite_range range_;
 
-	using
-	state_choices
-	=
-	sge::sprite::state::choices<
-		fcppt::mpl::list::object<>
-	>;
+  using state_choices = sge::sprite::state::choices<fcppt::mpl::list::object<>>;
 
-	using
-	sge_state
-	=
-	sge::sprite::state::object<
-		state_choices
-	>;
+  using sge_state = sge::sprite::state::object<state_choices>;
 
-	sge_state state_;
+  sge_state state_;
 };
 
 }

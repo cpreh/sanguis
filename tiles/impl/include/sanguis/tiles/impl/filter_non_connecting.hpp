@@ -5,35 +5,15 @@
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_connects.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-inline
-bool
-filter_non_connecting(
-	sanguis::creator::tile const _tile
-)
+inline bool filter_non_connecting(sanguis::creator::tile const _tile)
 {
-	return
-		_tile
-		==
-		sanguis::creator::tile::nothing
-		||
-		sanguis::creator::tile_connects(
-			_tile
-		);
+  return _tile == sanguis::creator::tile::nothing || sanguis::creator::tile_connects(_tile);
 }
 
-inline
-bool
-filter_non_connecting(
-	sanguis::creator::background_tile
-)
-{
-	return
-		false;
-}
+inline bool filter_non_connecting(sanguis::creator::background_tile) { return false; }
 
 }
 

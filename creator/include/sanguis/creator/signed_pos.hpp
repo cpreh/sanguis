@@ -4,5 +4,4 @@
 #include <sanguis/creator/signed_pos_fwd.hpp>
 #include <fcppt/container/grid/pos.hpp>
 
-
 #endif

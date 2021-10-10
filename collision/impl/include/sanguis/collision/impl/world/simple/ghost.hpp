@@ -21,107 +21,65 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::collision::impl::world::simple
 {
 
-class ghost
-:
-	public sanguis::collision::world::ghost
+class ghost : public sanguis::collision::world::ghost
 {
-	FCPPT_NONMOVABLE(
-		ghost
-	);
+  FCPPT_NONMOVABLE(ghost);
+
 public:
-	ghost(
-		sanguis::collision::world::ghost_parameters const &,
-		sanguis::collision::impl::world::simple::ghost_remove_callback &&
-	);
+  ghost(
+      sanguis::collision::world::ghost_parameters const &,
+      sanguis::collision::impl::world::simple::ghost_remove_callback &&);
 
-	~ghost()
-	override;
+  ~ghost() override;
 
-	void
-	center(
-		sanguis::collision::center
-	)
-	override;
+  void center(sanguis::collision::center) override;
 
-	[[nodiscard]]
-	sanguis::collision::center
-	center() const;
+  [[nodiscard]] sanguis::collision::center center() const;
 
-	[[nodiscard]]
-	sanguis::collision::radius
-	radius() const;
+  [[nodiscard]] sanguis::collision::radius radius() const;
 
-	[[nodiscard]]
-	sanguis::collision::world::ghost_group
-	collision_group() const;
+  [[nodiscard]] sanguis::collision::world::ghost_group collision_group() const;
 
-	void
-	pre_update_bodies();
+  void pre_update_bodies();
 
-	[[nodiscard]]
-	sanguis::collision::world::body_exit_container
-	post_update_bodies();
+  [[nodiscard]] sanguis::collision::world::body_exit_container post_update_bodies();
 
-	[[nodiscard]]
-	sanguis::collision::world::optional_body_enter
-	update_near_body(
-		sanguis::collision::impl::world::simple::body const &
-	);
+  [[nodiscard]] sanguis::collision::world::optional_body_enter
+  update_near_body(sanguis::collision::impl::world::simple::body const &);
 
-	[[nodiscard]]
-	sanguis::collision::world::optional_body_enter
-	new_body(
-		sanguis::collision::impl::world::simple::body const &,
-		sanguis::collision::world::created
-	);
+  [[nodiscard]] sanguis::collision::world::optional_body_enter new_body(
+      sanguis::collision::impl::world::simple::body const &, sanguis::collision::world::created);
 
-	[[nodiscard]]
-	sanguis::collision::world::optional_body_exit
-	remove_body(
-		sanguis::collision::impl::world::simple::body const &
-	);
+  [[nodiscard]] sanguis::collision::world::optional_body_exit
+  remove_body(sanguis::collision::impl::world::simple::body const &);
 
-	void
-	body_destroyed(
-		sanguis::collision::impl::world::simple::body const &
-	);
+  void body_destroyed(sanguis::collision::impl::world::simple::body const &);
+
 private:
-	sanguis::collision::impl::world::simple::ghost_remove_callback const ghost_remove_callback_;
+  sanguis::collision::impl::world::simple::ghost_remove_callback const ghost_remove_callback_;
 
-	sanguis::collision::radius const radius_;
+  sanguis::collision::radius const radius_;
 
-	sanguis::collision::world::ghost_group const collision_group_;
+  sanguis::collision::world::ghost_group const collision_group_;
 
-	sanguis::collision::center center_;
+  sanguis::collision::center center_;
 
-	sanguis::collision::world::ghost_base &ghost_base_;
+  sanguis::collision::world::ghost_base &ghost_base_;
 
-	enum class body_status
-	{
-		marked_for_deletion,
-		normal
-	};
+  enum class body_status
+  {
+    marked_for_deletion,
+    normal
+  };
 
-	using
-	const_body_ref
-	=
-	fcppt::reference<
-		sanguis::collision::impl::world::simple::body const
-	>;
+  using const_body_ref = fcppt::reference<sanguis::collision::impl::world::simple::body const>;
 
-	using
-	body_map
-	=
-	std::unordered_map<
-		const_body_ref,
-		body_status
-	>;
+  using body_map = std::unordered_map<const_body_ref, body_status>;
 
-	body_map bodies_;
+  body_map bodies_;
 };
 
 }

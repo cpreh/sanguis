@@ -4,5 +4,4 @@
 #include <sanguis/collision/impl/world/simple/body_list_grid_fwd.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 
-
 #endif

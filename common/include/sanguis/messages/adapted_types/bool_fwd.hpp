@@ -3,14 +3,10 @@
 
 #include <alda/bindings/bool_decl.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-bool_
-=
-alda::bindings::bool_;
+using bool_ = alda::bindings::bool_;
 
 }
 

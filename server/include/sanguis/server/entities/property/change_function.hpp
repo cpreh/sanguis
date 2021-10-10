@@ -3,16 +3,10 @@
 
 #include <sanguis/server/entities/property/change_event_fwd.hpp>
 
-
 namespace sanguis::server::entities::property
 {
 
-using
-change_function
-=
-void (
-	sanguis::server::entities::property::change_event const &
-);
+using change_function = void(sanguis::server::entities::property::change_event const &);
 
 }
 

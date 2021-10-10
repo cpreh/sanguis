@@ -6,19 +6,13 @@
 #include <sanguis/messages/client/types/message.hpp>
 #include <alda/message/object_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-start_shooting
-=
-alda::message::object<
-	sanguis::messages::client::types::make_message_id<
-		sanguis::messages::client::types::message::start_shooting
-	>,
-	sanguis::messages::adapted_types::is_primary_weapon
->;
+using start_shooting = alda::message::object<
+    sanguis::messages::client::types::make_message_id<
+        sanguis::messages::client::types::message::start_shooting>,
+    sanguis::messages::adapted_types::is_primary_weapon>;
 
 }
 

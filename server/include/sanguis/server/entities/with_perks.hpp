@@ -15,50 +15,33 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class with_perks
-:
-	public virtual sanguis::server::entities::base,
-	public virtual sanguis::server::entities::ifaces::with_health,
-	public virtual sanguis::server::entities::ifaces::with_velocity,
-	public virtual sanguis::server::entities::ifaces::with_weapon,
-	public virtual sanguis::server::entities::ifaces::with_team
+class with_perks : public virtual sanguis::server::entities::base,
+                   public virtual sanguis::server::entities::ifaces::with_health,
+                   public virtual sanguis::server::entities::ifaces::with_velocity,
+                   public virtual sanguis::server::entities::ifaces::with_weapon,
+                   public virtual sanguis::server::entities::ifaces::with_team
 {
-	FCPPT_NONMOVABLE(
-		with_perks
-	);
+  FCPPT_NONMOVABLE(with_perks);
+
 public:
-	void
-	add_perk(
-		sanguis::perk_type
-	);
+  void add_perk(sanguis::perk_type);
+
 protected:
-	explicit
-	with_perks(
-		sanguis::random_generator_ref
-	);
+  explicit with_perks(sanguis::random_generator_ref);
 
-	~with_perks()
-	override;
+  ~with_perks() override;
 
-	void
-	update()
-	override;
+  void update() override;
+
 private:
-	using
-	perk_container
-	=
-	std::map<
-		sanguis::perk_type,
-		sanguis::server::perks::unique_ptr
-	>;
+  using perk_container = std::map<sanguis::perk_type, sanguis::server::perks::unique_ptr>;
 
-	sanguis::random_generator_ref const random_generator_;
+  sanguis::random_generator_ref const random_generator_;
 
-	perk_container perks_;
+  perk_container perks_;
 };
 
 }

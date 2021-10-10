@@ -18,55 +18,23 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
-sanguis::creator::grid_spiral_range
-sanguis::collision::impl::make_spiral_range(
-	sanguis::collision::center const &_center,
-	sanguis::collision::radius const &_radius
-)
+sanguis::creator::grid_spiral_range sanguis::collision::impl::make_spiral_range(
+    sanguis::collision::center const &_center, sanguis::collision::radius const &_radius)
 {
-	sanguis::creator::difference_type const tile_size(
-		fcppt::cast::to_signed(
-			sanguis::creator::tile_size::value
-		)
-	);
+  sanguis::creator::difference_type const tile_size(
+      fcppt::cast::to_signed(sanguis::creator::tile_size::value));
 
-	fcppt::optional::object<
-		sanguis::creator::signed_pos
-	> const optional_pos{
-		fcppt::math::vector::structure_cast<
-			sanguis::creator::signed_pos,
-			fcppt::cast::float_to_int_fun
-		>(
-			fcppt::math::vector::map(
-				_center.get(),
-				fcppt::boost_units_value{}
-			)
-		)
-		/
-		tile_size
-	};
+  fcppt::optional::object<sanguis::creator::signed_pos> const optional_pos{
+      fcppt::math::vector::
+          structure_cast<sanguis::creator::signed_pos, fcppt::cast::float_to_int_fun>(
+              fcppt::math::vector::map(_center.get(), fcppt::boost_units_value{})) /
+      tile_size};
 
-	return
-		fcppt::container::grid::make_spiral_range(
-			FCPPT_ASSERT_OPTIONAL_ERROR(
-				optional_pos
-			),
-			fcppt::literal<
-				sanguis::creator::difference_type
-			>(
-				4 // TODO(philipp)
-			)
-			*
-			FCPPT_ASSERT_OPTIONAL_ERROR(
-				fcppt::math::ceil_div_signed(
-					fcppt::cast::float_to_int<
-						sanguis::creator::difference_type
-					>(
-						_radius.get().value()
-					),
-					tile_size
-				)
-			)
-		);
+  return fcppt::container::grid::make_spiral_range(
+      FCPPT_ASSERT_OPTIONAL_ERROR(optional_pos),
+      fcppt::literal<sanguis::creator::difference_type>(4 // TODO(philipp)
+                                                        ) *
+          FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::math::ceil_div_signed(
+              fcppt::cast::float_to_int<sanguis::creator::difference_type>(_radius.get().value()),
+              tile_size)));
 }

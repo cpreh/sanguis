@@ -5,5 +5,4 @@
 #include <sge/console/gfx/output_line_limit.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

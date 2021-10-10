@@ -4,16 +4,10 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::environment
 {
 
-using
-load_context_ref
-=
-fcppt::reference<
-	sanguis::server::environment::load_context
->;
+using load_context_ref = fcppt::reference<sanguis::server::environment::load_context>;
 
 }
 

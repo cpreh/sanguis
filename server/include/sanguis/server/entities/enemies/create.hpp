@@ -11,21 +11,18 @@
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 
-
 namespace sanguis::server::entities::enemies
 {
 
-sanguis::server::entities::with_id_unique_ptr
-create(
-	sanguis::random_generator_ref,
-	sanguis::server::weapons::common_parameters const &,
-	sanguis::creator::enemy_type,
-	sanguis::creator::enemy_kind,
-	sanguis::server::world::difficulty,
-	sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-	sanguis::server::entities::spawn_owner const &,
-	sanguis::server::entities::enemies::special_chance
-);
+sanguis::server::entities::with_id_unique_ptr create(
+    sanguis::random_generator_ref,
+    sanguis::server::weapons::common_parameters const &,
+    sanguis::creator::enemy_type,
+    sanguis::creator::enemy_kind,
+    sanguis::server::world::difficulty,
+    sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+    sanguis::server::entities::spawn_owner const &,
+    sanguis::server::entities::enemies::special_chance);
 
 }
 

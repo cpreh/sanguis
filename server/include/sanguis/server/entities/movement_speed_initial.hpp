@@ -5,5 +5,4 @@
 #include <sanguis/server/entities/property/initial.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

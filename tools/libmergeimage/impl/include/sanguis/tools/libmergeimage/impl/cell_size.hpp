@@ -5,5 +5,4 @@
 #include <sge/image2d/dim.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

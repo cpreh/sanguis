@@ -8,5 +8,4 @@
 #include <sanguis/client/control/actions/variant_fwd.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
-
 #endif

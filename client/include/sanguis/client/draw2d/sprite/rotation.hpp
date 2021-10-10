@@ -4,5 +4,4 @@
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

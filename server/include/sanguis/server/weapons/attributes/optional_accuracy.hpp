@@ -5,5 +5,4 @@
 #include <sanguis/server/weapons/attributes/optional_accuracy_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

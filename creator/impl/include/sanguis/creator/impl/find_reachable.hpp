@@ -5,15 +5,11 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
 sanguis::creator::impl::reachable_grid
-find_reachable(
-	sanguis::creator::grid const &,
-	sanguis::creator::pos const &
-);
+find_reachable(sanguis::creator::grid const &, sanguis::creator::pos const &);
 
 }
 

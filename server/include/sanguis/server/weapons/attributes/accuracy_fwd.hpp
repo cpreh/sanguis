@@ -4,16 +4,10 @@
 #include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/attributes/basic_fwd.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-using
-accuracy
-=
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::weapons::accuracy
->;
+using accuracy = sanguis::server::weapons::attributes::basic<sanguis::server::weapons::accuracy>;
 
 }
 

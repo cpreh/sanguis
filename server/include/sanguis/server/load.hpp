@@ -9,35 +9,24 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server
 {
 
 class load
 {
-	FCPPT_NONMOVABLE(
-		load
-	);
+  FCPPT_NONMOVABLE(load);
+
 public:
-	load();
+  load();
 
-	~load();
+  ~load();
 
-	[[nodiscard]]
-	sanguis::server::radius
-	model_dim(
-		sanguis::load::model::path const &
-	) const;
+  [[nodiscard]] sanguis::server::radius model_dim(sanguis::load::model::path const &) const;
+
 private:
-	using
-	dim_map
-	=
-	std::map<
-		sanguis::load::model::path,
-		sanguis::server::radius
-	>;
+  using dim_map = std::map<sanguis::load::model::path, sanguis::server::radius>;
 
-	mutable dim_map dims_;
+  mutable dim_map dims_;
 };
 
 }

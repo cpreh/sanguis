@@ -5,17 +5,11 @@
 #include <sanguis/creator/opening_container_array_fwd.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
-void
-set_opening_tiles(
-	fcppt::reference<
-		sanguis::creator::grid
-	>,
-	sanguis::creator::opening_container_array const &
-);
+void set_opening_tiles(
+    fcppt::reference<sanguis::creator::grid>, sanguis::creator::opening_container_array const &);
 
 }
 

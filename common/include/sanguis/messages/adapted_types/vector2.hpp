@@ -6,5 +6,4 @@
 #include <sanguis/messages/types/vector2.hpp>
 #include <alda/bindings/static.hpp>
 
-
 #endif

@@ -14,59 +14,37 @@
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
-
 namespace sanguis::client::draw2d::scene::hover
 {
 
-class name_and_health
-:
-	public sanguis::client::draw2d::scene::hover::base
+class name_and_health : public sanguis::client::draw2d::scene::hover::base
 {
-	FCPPT_NONMOVABLE(
-		name_and_health
-	);
+  FCPPT_NONMOVABLE(name_and_health);
+
 public:
-	name_and_health(
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::radius,
-		sanguis::client::draw2d::entities::hover::name_and_health const &
-	);
+  name_and_health(
+      sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::radius,
+      sanguis::client::draw2d::entities::hover::name_and_health const &);
 
-	~name_and_health()
-	override;
+  ~name_and_health() override;
+
 private:
-	void
-	draw(
-		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void draw(sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+            ) // NOLINT(google-runtime-references)
+      override;
 
-	using
-	optional_name
-	=
-	fcppt::optional::object<
-		sanguis::client::draw2d::scene::hover::name
-	>;
+  using optional_name = fcppt::optional::object<sanguis::client::draw2d::scene::hover::name>;
 
-	using
-	healthbar_unique_ptr
-	=
-	fcppt::unique_ptr<
-		sanguis::client::draw2d::scene::hover::healthbar
-	>;
+  using healthbar_unique_ptr = fcppt::unique_ptr<sanguis::client::draw2d::scene::hover::healthbar>;
 
-	using
-	optional_healthbar
-	=
-	fcppt::optional::object<
-		healthbar_unique_ptr
-	>;
+  using optional_healthbar = fcppt::optional::object<healthbar_unique_ptr>;
 
-	optional_healthbar healthbar_;
+  optional_healthbar healthbar_;
 
-	optional_name name_;
+  optional_name name_;
 };
 
 }

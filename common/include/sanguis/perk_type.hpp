@@ -3,20 +3,19 @@
 
 #include <sanguis/perk_type_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class perk_type
 {
-	choleric,
-	health,
-	fire_damage,
-	piercing_damage,
-	ias,
-	ims,
-	irs,
-	fcppt_maximum = irs
+  choleric,
+  health,
+  fire_damage,
+  piercing_damage,
+  ias,
+  ims,
+  irs,
+  fcppt_maximum = irs
 };
 
 }

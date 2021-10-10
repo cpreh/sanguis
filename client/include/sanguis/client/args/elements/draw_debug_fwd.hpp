@@ -5,17 +5,11 @@
 #include <sanguis/client/draw/debug.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::client::args::elements
 {
 
-using
-draw_debug
-=
-fcppt::record::element<
-	sanguis::client::args::labels::draw_debug,
-	sanguis::client::draw::debug
->;
+using draw_debug =
+    fcppt::record::element<sanguis::client::args::labels::draw_debug, sanguis::client::draw::debug>;
 
 }
 

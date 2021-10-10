@@ -8,26 +8,13 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::timer::timer(
-	sanguis::io_service_ref const _io_service,
-	sanguis::server::timer_callback &&_callback,
-	sanguis::server::timer_duration const &_duration
-)
-:
-	impl_(
-		fcppt::make_unique_ptr<
-			sanguis::server::timer_impl
-		>(
-			_io_service,
-			std::move(
-				_callback
-			),
-			_duration
-		)
-	)
+    sanguis::io_service_ref const _io_service,
+    sanguis::server::timer_callback &&_callback,
+    sanguis::server::timer_duration const &_duration)
+    : impl_(fcppt::make_unique_ptr<sanguis::server::timer_impl>(
+          _io_service, std::move(_callback), _duration))
 {
 }
 
-sanguis::server::timer::~timer()
-= default;
+sanguis::server::timer::~timer() = default;

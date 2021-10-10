@@ -7,22 +7,9 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/context_reference.hpp>
 
-
-sanguis::client::object_base_unique_ptr
-sanguis::client::create(
-	fcppt::log::context_reference const _log_context,
-	sanguis::client::args::result const &_args
-)
+sanguis::client::object_base_unique_ptr sanguis::client::create(
+    fcppt::log::context_reference const _log_context, sanguis::client::args::result const &_args)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::client::object_base
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::client::object
-			>(
-				_log_context,
-				_args
-			)
-		);
+  return fcppt::unique_ptr_to_base<sanguis::client::object_base>(
+      fcppt::make_unique_ptr<sanguis::client::object>(_log_context, _args));
 }

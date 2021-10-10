@@ -6,17 +6,14 @@
 #include <sanguis/server/ai/target_fwd.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-void
-move_to_target(
-	sanguis::server::entities::with_ai &, // NOLINT(google-runtime-references)
-	sanguis::server::optional_angle,
-	sanguis::server::ai::target const &,
-	sanguis::server::ai::speed_factor
-);
+void move_to_target(
+    sanguis::server::entities::with_ai &, // NOLINT(google-runtime-references)
+    sanguis::server::optional_angle,
+    sanguis::server::ai::target const &,
+    sanguis::server::ai::speed_factor);
 
 }
 

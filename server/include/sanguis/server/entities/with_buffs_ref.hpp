@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/with_buffs_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-using
-with_buffs_ref
-=
-fcppt::reference<
-	sanguis::server::entities::with_buffs
->;
+using with_buffs_ref = fcppt::reference<sanguis::server::entities::with_buffs>;
 
 }
 

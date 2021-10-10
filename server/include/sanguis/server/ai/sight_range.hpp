@@ -4,5 +4,4 @@
 #include <sanguis/server/ai/sight_range_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

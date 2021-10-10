@@ -10,58 +10,35 @@
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::ai::behavior
 {
 
 class base
 {
-	FCPPT_NONMOVABLE(
-		base
-	);
+  FCPPT_NONMOVABLE(base);
+
 protected:
-	explicit
-	base(
-		sanguis::server::ai::context_ref
-	);
+  explicit base(sanguis::server::ai::context_ref);
+
 public:
-	virtual
-	~base() = 0;
+  virtual ~base() = 0;
 
-	[[nodiscard]]
-	virtual
-	bool
-	start() = 0;
+  [[nodiscard]] virtual bool start() = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::ai::status
-	update(
-		sanguis::duration
-	) = 0;
+  [[nodiscard]] virtual sanguis::server::ai::status update(sanguis::duration) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::entities::transfer_result
-	transfer();
+  [[nodiscard]] virtual sanguis::server::entities::transfer_result transfer();
 
-	[[nodiscard]]
-	sanguis::server::ai::context &
-	context();
+  [[nodiscard]] sanguis::server::ai::context &context();
 
-	[[nodiscard]]
-	sanguis::server::ai::context const &
-	context() const;
+  [[nodiscard]] sanguis::server::ai::context const &context() const;
 
-	[[nodiscard]]
-	sanguis::server::entities::with_ai &
-	me();
+  [[nodiscard]] sanguis::server::entities::with_ai &me();
 
-	[[nodiscard]]
-	sanguis::server::entities::with_ai const &
-	me() const;
+  [[nodiscard]] sanguis::server::entities::with_ai const &me() const;
+
 private:
-	sanguis::server::ai::context_ref const context_;
+  sanguis::server::ai::context_ref const context_;
 };
 
 }

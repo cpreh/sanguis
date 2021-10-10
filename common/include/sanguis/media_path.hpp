@@ -6,13 +6,11 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis
 {
 
 SANGUIS_COMMON_SYMBOL
-std::filesystem::path
-media_path();
+std::filesystem::path media_path();
 
 }
 

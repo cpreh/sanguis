@@ -4,16 +4,10 @@
 #include <sanguis/messages/client/types/alda_type.hpp>
 #include <alda/serialization/context_fwd.hpp>
 
-
 namespace sanguis::messages::client::serialization
 {
 
-using
-context
-=
-alda::serialization::context<
-	sanguis::messages::client::types::alda_type
->;
+using context = alda::serialization::context<sanguis::messages::client::types::alda_type>;
 
 }
 

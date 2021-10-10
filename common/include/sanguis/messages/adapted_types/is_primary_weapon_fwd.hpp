@@ -5,17 +5,11 @@
 #include <sanguis/messages/adapted_types/bool_fwd.hpp>
 #include <alda/bindings/strong_typedef_decl.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-is_primary_weapon
-=
-alda::bindings::strong_typedef<
-	sanguis::is_primary_weapon,
-	sanguis::messages::adapted_types::bool_
->;
+using is_primary_weapon = alda::bindings::
+    strong_typedef<sanguis::is_primary_weapon, sanguis::messages::adapted_types::bool_>;
 
 }
 

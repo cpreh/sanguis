@@ -6,29 +6,22 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::perks
 {
 
-class fire_damage
-:
-	public sanguis::server::perks::perk
+class fire_damage : public sanguis::server::perks::perk
 {
-	FCPPT_NONMOVABLE(
-		fire_damage
-	);
-public:
-	fire_damage();
+  FCPPT_NONMOVABLE(fire_damage);
 
-	~fire_damage()
-	override;
+public:
+  fire_damage();
+
+  ~fire_damage() override;
+
 private:
-	void
-	change(
-		sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
-		sanguis::server::perks::level_diff
-	)
-	override;
+  void change(
+      sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
+      sanguis::server::perks::level_diff) override;
 };
 
 }

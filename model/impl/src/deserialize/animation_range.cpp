@@ -8,32 +8,14 @@
 #include <sge/parse/json/convert/to_static_container.hpp>
 #include <fcppt/make_cref.hpp>
 
-
 sanguis::model::animation_range
-sanguis::model::impl::deserialize::animation_range(
-	sge::parse::json::object const &_object
-)
+sanguis::model::impl::deserialize::animation_range(sge::parse::json::object const &_object)
 {
-	auto const result(
-		sge::parse::json::convert::to_static_container<
-			sanguis::model::impl::animation_range_vector
-		>(
-			sge::parse::json::find_member_exn<
-				sge::parse::json::array
-			>(
-				fcppt::make_cref(
-					_object.members
-				),
-				sge::charconv::utf8_string{
-					"range"
-				}
-			).get()
-		)
-	);
+  auto const result(
+      sge::parse::json::convert::to_static_container<sanguis::model::impl::animation_range_vector>(
+          sge::parse::json::find_member_exn<sge::parse::json::array>(
+              fcppt::make_cref(_object.members), sge::charconv::utf8_string{"range"})
+              .get()));
 
-	return
-		sanguis::model::animation_range(
-			result.x(),
-			result.y()
-		);
+  return sanguis::model::animation_range(result.x(), result.y());
 }

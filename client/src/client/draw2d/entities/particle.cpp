@@ -42,108 +42,64 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
+sanguis::client::draw2d::entities::particle::particle(
+    sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
+    sanguis::client::draw2d::entities::particle_name const &_name,
+    sanguis::client::draw2d::z_ordering const _z_ordering,
+    sanguis::client::draw2d::sprite::center const &_center,
+    sanguis::client::draw2d::sprite::optional_dim const &_size)
+    : sanguis::client::draw2d::entities::particle{
+          _load_parameters,
+          _z_ordering,
+          _center,
+          _size,
+          fcppt::make_cref(
+              _load_parameters
+                  .collection()[sanguis::load::model::path{
+                      std::filesystem::path{FCPPT_TEXT("particles")} / _name.get()}]
+                  .random_part(_load_parameters
+                                   .random_generator())[sanguis::optional_primary_weapon_type()]
+                                                       [sanguis::client::load::animation_type::none]
+                  .series())}
+{
+}
+
+sanguis::client::draw2d::entities::particle::~particle() = default;
 
 sanguis::client::draw2d::entities::particle::particle(
-	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
-	sanguis::client::draw2d::entities::particle_name const &_name,
-	sanguis::client::draw2d::z_ordering const _z_ordering,
-	sanguis::client::draw2d::sprite::center const &_center,
-	sanguis::client::draw2d::sprite::optional_dim const &_size
-)
-:
-	sanguis::client::draw2d::entities::particle{
-		_load_parameters,
-		_z_ordering,
-		_center,
-		_size,
-		fcppt::make_cref(
-			_load_parameters.collection()[
-				sanguis::load::model::path{
-					std::filesystem::path{
-						FCPPT_TEXT("particles")
-					}
-					/
-					_name.get()
-				}
-			].random_part(
-				_load_parameters.random_generator()
-			)
-			[
-				sanguis::optional_primary_weapon_type()
-			][
-				sanguis::client::load::animation_type::none
-			]
-			.series()
-		)
-	}
+    sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
+    sanguis::client::draw2d::z_ordering const _z_ordering,
+    sanguis::client::draw2d::sprite::center const &_center,
+    sanguis::client::draw2d::sprite::optional_dim const &_opt_size,
+    sanguis::client::load::resource::animation::series_cref const _animation_series)
+    : sanguis::client::draw2d::entities::own(),
+      animation_(
+          _animation_series,
+          sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end,
+          fcppt::make_cref(_load_parameters.diff_clock())),
+      sprite_(
+          sge::sprite::roles::connection{} =
+              _load_parameters.normal_system().connection(_z_ordering),
+          sge::sprite::roles::center{} = _center.get(),
+          sge::sprite::roles::rotation{} =
+              sanguis::client::draw2d::sprite::normal::no_rotation().get(),
+          sge::sprite::roles::size_or_texture_size{} = fcppt::optional::maybe(
+              _opt_size,
+              fcppt::const_(sanguis::client::draw2d::sprite::size_or_texture_size{
+                  sge::sprite::types::texture_size()}),
+              [](sanguis::client::draw2d::sprite::dim const &_size)
+              { return sanguis::client::draw2d::sprite::size_or_texture_size{_size}; }),
+          sge::sprite::roles::texture0{} = animation_.current_texture(),
+          sge::sprite::roles::color{} = sanguis::client::draw2d::sprite::normal::white())
 {
 }
 
-sanguis::client::draw2d::entities::particle::~particle()
-= default;
-
-sanguis::client::draw2d::entities::particle::particle(
-	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
-	sanguis::client::draw2d::z_ordering const _z_ordering,
-	sanguis::client::draw2d::sprite::center const &_center,
-	sanguis::client::draw2d::sprite::optional_dim const &_opt_size,
-	sanguis::client::load::resource::animation::series_cref const _animation_series
-)
-:
-	sanguis::client::draw2d::entities::own(),
-	animation_(
-		_animation_series,
-		sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end,
-		fcppt::make_cref(
-			_load_parameters.diff_clock()
-		)
-	),
-	sprite_(
-		sge::sprite::roles::connection{} =
-			_load_parameters.normal_system().connection(
-				_z_ordering
-			),
-		sge::sprite::roles::center{} =
-			_center.get(),
-		sge::sprite::roles::rotation{} =
-			sanguis::client::draw2d::sprite::normal::no_rotation().get(),
-		sge::sprite::roles::size_or_texture_size{} =
-			fcppt::optional::maybe(
-				_opt_size,
-				fcppt::const_(
-					sanguis::client::draw2d::sprite::size_or_texture_size{
-						sge::sprite::types::texture_size()
-					}
-				),
-				[](
-					sanguis::client::draw2d::sprite::dim const &_size
-				)
-				{
-					return
-						sanguis::client::draw2d::sprite::size_or_texture_size{
-							_size
-						};
-				}
-			),
-		sge::sprite::roles::texture0{} =
-			animation_.current_texture(),
-		sge::sprite::roles::color{} =
-			sanguis::client::draw2d::sprite::normal::white()
-	)
+void sanguis::client::draw2d::entities::particle::update()
 {
+  sprite_.texture(animation_.current_texture());
 }
 
-void
-sanguis::client::draw2d::entities::particle::update()
+bool sanguis::client::draw2d::entities::particle::may_be_removed() const
 {
-	sprite_.texture(
-		animation_.current_texture()
-	);
-}
-
-bool
-sanguis::client::draw2d::entities::particle::may_be_removed() const
-{
-	return
-		animation_.ended();
+  return animation_.ended();
 }

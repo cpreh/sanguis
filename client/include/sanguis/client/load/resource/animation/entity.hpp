@@ -8,49 +8,32 @@
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace sanguis::client::load::resource::animation
 {
 
 class entity
 {
-	FCPPT_NONCOPYABLE(
-		entity
-	);
+  FCPPT_NONCOPYABLE(entity);
+
 public:
-	entity(
-		sanguis::duration,
-		sge::texture::const_part_unique_ptr &&
-	);
+  entity(sanguis::duration, sge::texture::const_part_unique_ptr &&);
 
-	entity(
-		entity &&
-	)
-	noexcept;
+  entity(entity &&) noexcept;
 
-	entity &
-	operator=(
-		entity &&
-	)
-	noexcept;
+  entity &operator=(entity &&) noexcept;
 
-	~entity();
+  ~entity();
 
-	[[nodiscard]]
-	sanguis::duration
-	delay() const;
+  [[nodiscard]] sanguis::duration delay() const;
 
-	[[nodiscard]]
-	sge::texture::part const &
-	texture() const;
+  [[nodiscard]] sge::texture::part const &texture() const;
 
-	[[nodiscard]]
-	sge::renderer::dim2
-	dim() const;
+  [[nodiscard]] sge::renderer::dim2 dim() const;
+
 private:
-	sanguis::duration delay_;
+  sanguis::duration delay_;
 
-	sge::texture::const_part_unique_ptr texture_;
+  sge::texture::const_part_unique_ptr texture_;
 };
 
 }

@@ -7,50 +7,28 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::events
 {
 
-class disconnect
-:
-	public boost::statechart::event<
-		disconnect
-	>
+class disconnect : public boost::statechart::event<disconnect>
 {
 public:
-	explicit
-	disconnect(
-		alda::net::id
-	);
+  explicit disconnect(alda::net::id);
 
-	disconnect(
-		disconnect &&
-	)
-	noexcept;
+  disconnect(disconnect &&) noexcept;
 
-	disconnect(
-		disconnect const &
-	);
+  disconnect(disconnect const &);
 
-	disconnect &
-	operator=(
-		disconnect &&
-	)
-	noexcept;
+  disconnect &operator=(disconnect &&) noexcept;
 
-	disconnect &
-	operator=(
-		disconnect const &
-	);
+  disconnect &operator=(disconnect const &);
 
-	~disconnect()
-	override;
+  ~disconnect() override;
 
-	[[nodiscard]]
-	alda::net::id
-	id() const;
+  [[nodiscard]] alda::net::id id() const;
+
 private:
-	alda::net::id id_;
+  alda::net::id id_;
 };
 
 }

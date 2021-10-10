@@ -9,41 +9,26 @@
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::ai::behavior
 {
 
-class patrol
-:
-	public sanguis::server::ai::behavior::base
+class patrol : public sanguis::server::ai::behavior::base
 {
-	FCPPT_NONMOVABLE(
-		patrol
-	);
+  FCPPT_NONMOVABLE(patrol);
+
 public:
-	patrol(
-		sanguis::server::ai::context_ref,
-		sanguis::random_generator_ref
-	);
+  patrol(sanguis::server::ai::context_ref, sanguis::random_generator_ref);
 
-	~patrol()
-	override;
+  ~patrol() override;
 
-	[[nodiscard]]
-	bool
-	start()
-	override;
+  [[nodiscard]] bool start() override;
 
-	[[nodiscard]]
-	sanguis::server::ai::status
-	update(
-		sanguis::duration
-	)
-	override;
+  [[nodiscard]] sanguis::server::ai::status update(sanguis::duration) override;
+
 private:
-	sanguis::random_generator_ref const random_generator_;
+  sanguis::random_generator_ref const random_generator_;
 
-	sanguis::creator::pos const start_pos_;
+  sanguis::creator::pos const start_pos_;
 };
 
 }

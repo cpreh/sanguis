@@ -4,26 +4,20 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities::ifaces
 {
 
 class with_center
 {
-	FCPPT_NONMOVABLE(
-		with_center
-	);
-protected:
-	with_center();
+  FCPPT_NONMOVABLE(with_center);
 
-	virtual
-	~with_center();
+protected:
+  with_center();
+
+  virtual ~with_center();
+
 public:
-	virtual
-	void
-	center(
-		sanguis::client::draw2d::sprite::center const &
-	) = 0;
+  virtual void center(sanguis::client::draw2d::sprite::center const &) = 0;
 };
 
 }

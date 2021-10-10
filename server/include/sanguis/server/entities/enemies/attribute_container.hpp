@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::entities::enemies
 {
 
-using
-attribute_container
-=
-std::vector<
-	sanguis::server::entities::enemies::attribute
->;
+using attribute_container = std::vector<sanguis::server::entities::enemies::attribute>;
 
 }
 

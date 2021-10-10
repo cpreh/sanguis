@@ -19,7 +19,6 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::states
 {
 
@@ -27,60 +26,31 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
 class waiting_for_player
-:
-	public boost::statechart::state<
-		sanguis::client::states::waiting_for_player,
-		sanguis::client::states::running
-	>
+    : public boost::statechart::
+          state<sanguis::client::states::waiting_for_player, sanguis::client::states::running>
 {
-	FCPPT_NONMOVABLE(
-		waiting_for_player
-	);
+  FCPPT_NONMOVABLE(waiting_for_player);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list2<
-		boost::statechart::custom_reaction<
-			sanguis::client::events::message
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::action
-		>
-	>;
+  using reactions = boost::mpl::list2<
+      boost::statechart::custom_reaction<sanguis::client::events::message>,
+      boost::statechart::custom_reaction<sanguis::client::events::action>>;
 
-	explicit
-	waiting_for_player(
-		my_context
-	);
+  explicit waiting_for_player(my_context);
 
-	~waiting_for_player()
-	SANGUIS_STATE_OVERRIDE;
+  ~waiting_for_player() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::message const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::message const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::action const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::action const &);
 
-	using
-	result_type
-	=
-	sanguis::messages::call::result;
+  using result_type = sanguis::messages::call::result;
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::add_own_player const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::add_own_player const &);
+
 private:
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 };
 
 FCPPT_PP_POP_WARNING

@@ -3,15 +3,10 @@
 
 #include <sanguis/creator/pos_fwd.hpp>
 
-
 namespace sanguis::server::ai::pathing
 {
 
-bool
-positions_are_close(
-	sanguis::creator::pos const &,
-	sanguis::creator::pos const &
-);
+bool positions_are_close(sanguis::creator::pos const &, sanguis::creator::pos const &);
 
 }
 

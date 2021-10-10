@@ -4,35 +4,24 @@
 #include <sanguis/client/draw2d/entities/own_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
 class own
 {
-	FCPPT_NONMOVABLE(
-		own
-	);
+  FCPPT_NONMOVABLE(own);
+
 protected:
-	own();
+  own();
+
 public:
-	virtual
-	void
-	update() = 0;
+  virtual void update() = 0;
 
-	[[nodiscard]]
-	virtual
-	bool
-	may_be_removed() const = 0;
+  [[nodiscard]] virtual bool may_be_removed() const = 0;
 
-	virtual
-	~own() = 0;
+  virtual ~own() = 0;
 
-	virtual
-	void
-	pause(
-		bool
-	);
+  virtual void pause(bool);
 };
 
 }

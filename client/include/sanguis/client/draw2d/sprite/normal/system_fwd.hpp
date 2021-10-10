@@ -5,17 +5,11 @@
 #include <sanguis/client/draw2d/sprite/system_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/choices_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::sprite::normal
 {
 
-using
-system
-=
-sanguis::client::draw2d::sprite::system<
-	sanguis::client::draw2d::sprite::normal::choices,
-	sanguis::client::draw2d::z_ordering
->;
+using system = sanguis::client::draw2d::sprite::
+    system<sanguis::client::draw2d::sprite::normal::choices, sanguis::client::draw2d::z_ordering>;
 
 }
 

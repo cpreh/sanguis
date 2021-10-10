@@ -5,36 +5,24 @@
 #include <sanguis/server/world/sight_range_entry_set.hpp>
 #include <sanguis/server/world/sight_range_fwd.hpp>
 
-
 namespace sanguis::server::world
 {
 
 class sight_range
 {
 public:
-	sight_range();
+  sight_range();
 
-	void
-	add(
-		sanguis::entity_id
-	);
+  void add(sanguis::entity_id);
 
-	void
-	remove(
-		sanguis::entity_id
-	);
+  void remove(sanguis::entity_id);
 
-	[[nodiscard]]
-	bool
-	contains(
-		sanguis::entity_id
-	) const;
+  [[nodiscard]] bool contains(sanguis::entity_id) const;
 
-	[[nodiscard]]
-	bool
-	empty() const;
+  [[nodiscard]] bool empty() const;
+
 private:
-	sanguis::server::world::sight_range_entry_set entries_;
+  sanguis::server::world::sight_range_entry_set entries_;
 };
 
 }

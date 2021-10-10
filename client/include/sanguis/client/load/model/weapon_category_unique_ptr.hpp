@@ -4,16 +4,10 @@
 #include <sanguis/client/load/model/weapon_category_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
-using
-weapon_category_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::client::load::model::weapon_category
->;
+using weapon_category_unique_ptr = fcppt::unique_ptr<sanguis::client::load::model::weapon_category>;
 
 }
 

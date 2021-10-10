@@ -29,114 +29,68 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
-
-sanguis::server::weapons::unique_ptr
-sanguis::server::weapons::factory::spider(
-	sanguis::server::weapons::factory::parameters const &_parameters
-)
+sanguis::server::weapons::unique_ptr sanguis::server::weapons::factory::spider(
+    sanguis::server::weapons::factory::parameters const &_parameters)
 {
-	sanguis::random_generator &random_generator(
-		_parameters.random_generator()
-	);
+  sanguis::random_generator &random_generator(_parameters.random_generator());
 
-	sanguis::server::weapons::common_parameters const common_parameters{
-		_parameters.common_parameters()
-	};
+  sanguis::server::weapons::common_parameters const common_parameters{
+      _parameters.common_parameters()};
 
-	sanguis::server::entities::enemies::difficulty const difficulty(
-		_parameters.difficulty()
-	);
+  sanguis::server::entities::enemies::difficulty const difficulty(_parameters.difficulty());
 
-	sanguis::server::weapons::create_function const spawn_weapon{
-		[
-			&random_generator,
-			common_parameters,
-			difficulty
-		]
-		{
-			return
-				fcppt::unique_ptr_to_base<
-					sanguis::server::weapons::weapon
-				>(
-					fcppt::make_unique_ptr<
-						sanguis::server::weapons::melee
-					>(
-						common_parameters,
-						sanguis::server::weapons::modifiers::apply(
-							random_generator,
-							difficulty,
-							sanguis::server::weapons::modifiers::make_guaranteed<
-								sanguis::server::weapons::melee_parameters
-							>(
-								sanguis::server::weapons::modifiers::damage{}
-							),
-							sanguis::server::weapons::modifiers::make_potential<
-								sanguis::server::weapons::melee_parameters
-							>(),
-							sanguis::server::weapons::melee_parameters(
-								sanguis::server::weapons::range(
-									100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-								),
-								sanguis::server::weapons::backswing_time(
-									sanguis::duration_second(
-										0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-									)
-								),
-								sanguis::server::weapons::damage{
-									3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-								},
-								sanguis::server::damage::make_array({
-									sanguis::server::damage::normal =
-										sanguis::server::damage::full
-								})
-							)
-						)
-					)
-				);
-		}
-	};
+  sanguis::server::weapons::create_function const spawn_weapon{
+      [&random_generator, common_parameters, difficulty]
+      {
+        return fcppt::unique_ptr_to_base<
+            sanguis::server::weapons::weapon>(fcppt::make_unique_ptr<
+                                              sanguis::server::weapons::melee>(
+            common_parameters,
+            sanguis::server::weapons::modifiers::apply(
+                random_generator,
+                difficulty,
+                sanguis::server::weapons::modifiers::make_guaranteed<
+                    sanguis::server::weapons::melee_parameters>(
+                    sanguis::server::weapons::modifiers::damage{}),
+                sanguis::server::weapons::modifiers::make_potential<
+                    sanguis::server::weapons::melee_parameters>(),
+                sanguis::server::weapons::melee_parameters(
+                    sanguis::server::weapons::range(
+                        100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                        ),
+                    sanguis::server::weapons::backswing_time(sanguis::duration_second(
+                        0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                        )),
+                    sanguis::server::weapons::damage{
+                        3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                    },
+                    sanguis::server::damage::make_array(
+                        {sanguis::server::damage::normal = sanguis::server::damage::full})))));
+      }};
 
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::server::weapons::weapon
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::weapons::spider
-			>(
-				common_parameters,
-				sanguis::server::weapons::spawn_weapon(
-					spawn_weapon
-				),
-				sanguis::server::weapons::modifiers::apply(
-					_parameters.random_generator(),
-					_parameters.difficulty(),
-					sanguis::server::weapons::modifiers::make_guaranteed<
-						sanguis::server::weapons::spider_parameters
-					>(),
-					sanguis::server::weapons::modifiers::make_potential<
-						sanguis::server::weapons::spider_parameters
-					>(
-						sanguis::server::weapons::modifiers::health{}
-					),
-					sanguis::server::weapons::spider_parameters(
-						sanguis::server::health(
-							100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						),
-						sanguis::server::weapons::backswing_time(
-							sanguis::duration_second(
-								3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							)
-						),
-						sanguis::server::weapons::cast_point(
-							sanguis::duration_second(
-								0.1F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							)
-						),
-						sanguis::server::weapons::range(
-							1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-						)
-					)
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_base<
+      sanguis::server::weapons::weapon>(fcppt::make_unique_ptr<sanguis::server::weapons::spider>(
+      common_parameters,
+      sanguis::server::weapons::spawn_weapon(spawn_weapon),
+      sanguis::server::weapons::modifiers::apply(
+          _parameters.random_generator(),
+          _parameters.difficulty(),
+          sanguis::server::weapons::modifiers::make_guaranteed<
+              sanguis::server::weapons::spider_parameters>(),
+          sanguis::server::weapons::modifiers::make_potential<
+              sanguis::server::weapons::spider_parameters>(
+              sanguis::server::weapons::modifiers::health{}),
+          sanguis::server::weapons::spider_parameters(
+              sanguis::server::health(
+                  100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  ),
+              sanguis::server::weapons::backswing_time(sanguis::duration_second(
+                  3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  )),
+              sanguis::server::weapons::cast_point(sanguis::duration_second(
+                  0.1F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  )),
+              sanguis::server::weapons::range(
+                  1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                  )))));
 }

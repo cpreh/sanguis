@@ -9,26 +9,12 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>
 
-
-bool
-sanguis::server::world::center_in_grid_pos(
-	sanguis::server::center const &_center,
-	sanguis::creator::pos const &_pos
-)
+bool sanguis::server::world::center_in_grid_pos(
+    sanguis::server::center const &_center, sanguis::creator::pos const &_pos)
 {
-	return
-		(
-			fcppt::math::vector::to_unsigned(
-				fcppt::math::vector::structure_cast<
-					sanguis::creator::signed_pos,
-					fcppt::cast::float_to_int_fun
-				>(
-					_center.get()
-				)
-			)
-			/
-			sanguis::creator::tile_size::value
-		).get_unsafe()
-		==
-		_pos;
+  return (fcppt::math::vector::to_unsigned(fcppt::math::vector::structure_cast<
+                                           sanguis::creator::signed_pos,
+                                           fcppt::cast::float_to_int_fun>(_center.get())) /
+          sanguis::creator::tile_size::value)
+             .get_unsafe() == _pos;
 }

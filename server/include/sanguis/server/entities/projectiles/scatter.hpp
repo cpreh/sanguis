@@ -16,60 +16,40 @@
 #include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
 
-
 namespace sanguis::server::entities::projectiles
 {
 
-class scatter
-:
-	public sanguis::server::entities::projectiles::projectile
+class scatter : public sanguis::server::entities::projectiles::projectile
 {
-	FCPPT_NONMOVABLE(
-		scatter
-	);
+  FCPPT_NONMOVABLE(scatter);
+
 public:
-	scatter(
-		sanguis::random_generator_ref,
-		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-		sanguis::server::team,
-		sanguis::server::direction,
-		sanguis::server::entities::projectiles::scatter_create &&
-	);
+  scatter(
+      sanguis::random_generator_ref,
+      sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+      sanguis::server::team,
+      sanguis::server::direction,
+      sanguis::server::entities::projectiles::scatter_create &&);
 
-	~scatter()
-	override;
+  ~scatter() override;
+
 private:
-	void
-	update()
-	override;
+  void update() override;
 
-	void
-	do_damage(
-		sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void do_damage(sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
+                 ) // NOLINT(google-runtime-references)
+      override;
 
-	sanguis::server::entities::projectiles::scatter_create const create_;
+  sanguis::server::entities::projectiles::scatter_create const create_;
 
-	sanguis::diff_timer shoot_timer_;
+  sanguis::diff_timer shoot_timer_;
 
-	using
-	angle_distribution
-	=
-	fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_real<
-			sanguis::server::angle
-		>
-	>;
+  using angle_distribution = fcppt::random::distribution::basic<
+      fcppt::random::distribution::parameters::uniform_real<sanguis::server::angle>>;
 
-	using
-	angle_rng
-	=
-	sanguis::random_variate<
-		angle_distribution
-	>;
+  using angle_rng = sanguis::random_variate<angle_distribution>;
 
-	angle_rng angle_rng_;
+  angle_rng angle_rng_;
 };
 
 }

@@ -5,14 +5,10 @@
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::client::load::resource
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	fcppt::string,
-	texture_identifier
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(fcppt::string, texture_identifier);
 
 }
 

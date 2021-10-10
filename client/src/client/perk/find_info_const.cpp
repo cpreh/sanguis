@@ -4,18 +4,8 @@
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/client/perk/tree_cref.hpp>
 
-
-sanguis::client::perk::tree const &
-sanguis::client::perk::find_info_const(
-	sanguis::perk_type const _type,
-	sanguis::client::perk::tree_cref const _tree
-)
+sanguis::client::perk::tree const &sanguis::client::perk::find_info_const(
+    sanguis::perk_type const _type, sanguis::client::perk::tree_cref const _tree)
 {
-	return
-		sanguis::client::perk::find_info_any<
-			sanguis::client::perk::tree const
-		>(
-			_type,
-			_tree
-		);
+  return sanguis::client::perk::find_info_any<sanguis::client::perk::tree const>(_type, _tree);
 }

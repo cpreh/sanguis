@@ -7,46 +7,31 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::perk
 {
 
 class const_tree_range
 {
 public:
-	const_tree_range(
-		sanguis::client::perk::tree::const_iterator,
-		sanguis::client::perk::tree::const_iterator
-	);
+  const_tree_range(
+      sanguis::client::perk::tree::const_iterator, sanguis::client::perk::tree::const_iterator);
 
-	using
-	pair
-	=
-	std::pair<
-		sanguis::client::perk::tree::const_iterator,
-		sanguis::client::perk::tree::const_iterator
-	>;
+  using pair = std::pair<
+      sanguis::client::perk::tree::const_iterator,
+      sanguis::client::perk::tree::const_iterator>;
 
-	explicit
-	const_tree_range(
-		pair const &
-	);
+  explicit const_tree_range(pair const &);
 
-	[[nodiscard]]
-	sanguis::client::perk::tree::const_iterator
-	begin() const;
+  [[nodiscard]] sanguis::client::perk::tree::const_iterator begin() const;
 
-	[[nodiscard]]
-	sanguis::client::perk::tree::const_iterator
-	end() const;
+  [[nodiscard]] sanguis::client::perk::tree::const_iterator end() const;
 
-	[[nodiscard]]
-	bool
-	empty() const;
+  [[nodiscard]] bool empty() const;
+
 private:
-	sanguis::client::perk::tree::const_iterator begin_;
+  sanguis::client::perk::tree::const_iterator begin_;
 
-	sanguis::client::perk::tree::const_iterator end_;
+  sanguis::client::perk::tree::const_iterator end_;
 };
 
 }

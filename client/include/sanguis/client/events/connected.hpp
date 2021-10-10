@@ -6,41 +6,23 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::events
 {
 
-class connected
-:
-	public boost::statechart::event<
-		sanguis::client::events::connected
-	>
+class connected : public boost::statechart::event<sanguis::client::events::connected>
 {
 public:
-	connected();
+  connected();
 
-	connected(
-		connected &&
-	)
-	noexcept;
+  connected(connected &&) noexcept;
 
-	connected(
-		connected const &
-	);
+  connected(connected const &);
 
-	connected &
-	operator=(
-		connected &&
-	)
-	noexcept;
+  connected &operator=(connected &&) noexcept;
 
-	connected &
-	operator=(
-		connected const &
-	);
+  connected &operator=(connected const &);
 
-	~connected()
-	override;
+  ~connected() override;
 };
 
 }

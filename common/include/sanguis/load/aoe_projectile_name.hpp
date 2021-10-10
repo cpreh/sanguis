@@ -5,15 +5,11 @@
 #include <sanguis/common/symbol.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::load
 {
 
 SANGUIS_COMMON_SYMBOL
-fcppt::string
-aoe_projectile_name(
-	sanguis::aoe_projectile_type
-);
+fcppt::string aoe_projectile_name(sanguis::aoe_projectile_type);
 
 }
 

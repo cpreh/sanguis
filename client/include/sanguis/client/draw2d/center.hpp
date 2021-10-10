@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

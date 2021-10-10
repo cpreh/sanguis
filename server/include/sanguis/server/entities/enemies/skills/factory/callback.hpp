@@ -4,17 +4,11 @@
 #include <sanguis/server/entities/enemies/skills/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp>
 
-
 namespace sanguis::server::entities::enemies::skills::factory
 {
 
-using
-callback
-=
-sanguis::server::entities::enemies::skills::unique_ptr
-(*)(
-	sanguis::server::entities::enemies::skills::factory::parameters const &
-);
+using callback = sanguis::server::entities::enemies::skills::unique_ptr (*)(
+    sanguis::server::entities::enemies::skills::factory::parameters const &);
 
 }
 

@@ -27,107 +27,56 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::states
 {
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
-class has_player
-:
-	public boost::statechart::state<
-		sanguis::client::states::has_player,
-		sanguis::client::states::running,
-		sanguis::client::states::ingame
-	>
+class has_player : public boost::statechart::state<
+                       sanguis::client::states::has_player,
+                       sanguis::client::states::running,
+                       sanguis::client::states::ingame>
 {
-	FCPPT_NONMOVABLE(
-		has_player
-	);
+  FCPPT_NONMOVABLE(has_player);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list3<
-		boost::statechart::custom_reaction<
-			sanguis::client::events::message
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::tick
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::action
-		>
-	>;
+  using reactions = boost::mpl::list3<
+      boost::statechart::custom_reaction<sanguis::client::events::message>,
+      boost::statechart::custom_reaction<sanguis::client::events::tick>,
+      boost::statechart::custom_reaction<sanguis::client::events::action>>;
 
-	explicit
-	has_player(
-		my_context
-	);
+  explicit has_player(my_context);
 
-	~has_player()
-	SANGUIS_STATE_OVERRIDE;
+  ~has_player() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::message const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::message const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::tick const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::tick const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::action const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::action const &);
 
-	using
-	result_type
-	=
-	sanguis::messages::call::result;
+  using result_type = sanguis::messages::call::result;
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::available_perks const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::available_perks const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::level_up const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::level_up const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::remove_id const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::remove_id const &);
 
-	[[nodiscard]]
-	sanguis::client::perk::state &
-	perk_state();
+  [[nodiscard]] sanguis::client::perk::state &perk_state();
+
 private:
-	void
-	send_perk_choose(
-		sanguis::perk_type
-	);
+  void send_perk_choose(sanguis::perk_type);
 
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 
-	fcppt::unique_ptr<
-		sanguis::client::control::action_handler
-	> const action_handler_;
+  fcppt::unique_ptr<sanguis::client::control::action_handler> const action_handler_;
 
-	fcppt::unique_ptr<
-		sanguis::client::perk::state
-	> const perk_state_;
+  fcppt::unique_ptr<sanguis::client::perk::state> const perk_state_;
 };
 
 FCPPT_PP_POP_WARNING
@@ -135,4 +84,3 @@ FCPPT_PP_POP_WARNING
 }
 
 #endif
-

@@ -4,18 +4,10 @@
 #include <alda/net/port.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client
 {
 
-using
-server_callback
-=
-fcppt::function<
-	void (
-		alda::net::port
-	)
->;
+using server_callback = fcppt::function<void(alda::net::port)>;
 
 }
 

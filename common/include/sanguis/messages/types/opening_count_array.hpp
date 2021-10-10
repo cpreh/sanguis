@@ -5,5 +5,4 @@
 #include <sanguis/messages/types/opening_count_array_fwd.hpp>
 #include <fcppt/enum/array_impl.hpp>
 
-
 #endif

@@ -16,60 +16,28 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::tools::libmergeimage::saved_image_vector
-sanguis::tools::libmergeimage::save_images(
-	sge::image2d::system &_image_system,
-	std::filesystem::path const &_directory,
-	sanguis::tools::libmergeimage::image_vector const &_images
-)
+sanguis::tools::libmergeimage::saved_image_vector sanguis::tools::libmergeimage::save_images(
+    sge::image2d::system &_image_system,
+    std::filesystem::path const &_directory,
+    sanguis::tools::libmergeimage::image_vector const &_images)
 {
-	sanguis::tools::libmergeimage::saved_image_vector result{};
+  sanguis::tools::libmergeimage::saved_image_vector result{};
 
-	for(
-		sanguis::tools::libmergeimage::image_vector::size_type const index
-		:
-		fcppt::make_int_range_count(
-			_images.size()
-		)
-	)
-	{
-		sanguis::tools::libmergeimage::image const &image(
-			_images[
-				index
-			]
-		);
+  for (sanguis::tools::libmergeimage::image_vector::size_type const index :
+       fcppt::make_int_range_count(_images.size()))
+  {
+    sanguis::tools::libmergeimage::image const &image(_images[index]);
 
-		fcppt::string const file_name(
-			fcppt::output_to_fcppt_string(
-				index
-			)
-			+
-			FCPPT_TEXT(".png")
-		);
+    fcppt::string const file_name(fcppt::output_to_fcppt_string(index) + FCPPT_TEXT(".png"));
 
-		sge::image2d::save_from_view(
-			_image_system,
-			sge::image2d::view::const_object(
-				image.store().const_wrapped_view()
-			),
-			_directory
-			/
-			file_name
-		);
+    sge::image2d::save_from_view(
+        _image_system,
+        sge::image2d::view::const_object(image.store().const_wrapped_view()),
+        _directory / file_name);
 
-		result.push_back(
-			sanguis::tools::libmergeimage::saved_image(
-				fcppt::copy(
-					image.paths()
-				),
-				sanguis::model::image_name(
-					file_name
-				)
-			)
-		);
-	}
+    result.push_back(sanguis::tools::libmergeimage::saved_image(
+        fcppt::copy(image.paths()), sanguis::model::image_name(file_name)));
+  }
 
-	return
-		result;
+  return result;
 }

@@ -6,29 +6,22 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::perks
 {
 
-class ims
-:
-	public sanguis::server::perks::perk
+class ims : public sanguis::server::perks::perk
 {
-	FCPPT_NONMOVABLE(
-		ims
-	);
-public:
-	ims();
+  FCPPT_NONMOVABLE(ims);
 
-	~ims()
-	override;
+public:
+  ims();
+
+  ~ims() override;
+
 private:
-	void
-	change(
-		sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
-		sanguis::server::perks::level_diff
-	)
-	override;
+  void change(
+      sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
+      sanguis::server::perks::level_diff) override;
 };
 
 }

@@ -23,92 +23,57 @@
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/assert/optional_error.hpp>
 
+sanguis::server::entities::enemies::skills::mother_spider::mother_spider() = default;
 
-sanguis::server::entities::enemies::skills::mother_spider::mother_spider()
-= default;
+sanguis::server::entities::enemies::skills::mother_spider::~mother_spider() = default;
 
-sanguis::server::entities::enemies::skills::mother_spider::~mother_spider()
-= default;
-
-void
-sanguis::server::entities::enemies::skills::mother_spider::on_die(
-	sanguis::server::entities::enemies::enemy const &_enemy
-)
+void sanguis::server::entities::enemies::skills::mother_spider::on_die(
+    sanguis::server::entities::enemies::enemy const &_enemy)
 {
-	sanguis::server::weapons::weapon const &primary_weapon(
-		FCPPT_ASSERT_OPTIONAL_ERROR(
-			_enemy.primary_weapon()
-		).get()
-	);
+  sanguis::server::weapons::weapon const &primary_weapon(
+      FCPPT_ASSERT_OPTIONAL_ERROR(_enemy.primary_weapon()).get());
 
-	sanguis::server::environment::object &environment(
-		FCPPT_ASSERT_OPTIONAL_ERROR(
-			_enemy.environment()
-		).get()
-	);
+  sanguis::server::environment::object &environment(
+      FCPPT_ASSERT_OPTIONAL_ERROR(_enemy.environment()).get());
 
-	// TODO(philipp): Make copies of enemies smaller
-	fcppt::algorithm::repeat(
-		1U,
-		[
-			&_enemy,
-			&primary_weapon,
-			&environment
-		]
-		{
-			sanguis::server::environment::insert_no_result(
-				environment,
-				fcppt::unique_ptr_to_base<
-					sanguis::server::entities::with_id
-				>(
-					fcppt::make_unique_ptr<
-						sanguis::server::entities::enemies::normal
-					>(
-						sanguis::server::entities::enemies::parameters{
-							_enemy.enemy_type(),
-							environment.load_context(),
-							_enemy.armor(),
-							_enemy.mass(),
-							// TODO(philipp): This parameter should probably be of type max_health
-							sanguis::server::health{
-								_enemy.max_health().get()
-								/
-								4.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							},
-							_enemy.max_movement_speed(),
-							fcppt::copy(
-								_enemy.create_ai()
-							),
-							primary_weapon.clone(),
-							sanguis::server::pickup_probability{
-								0.F
-							},
-							sanguis::server::exp{
-								_enemy.exp().get()
-								/
-								4.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-							},
-							_enemy.difficulty(),
-							sanguis::server::entities::spawn_owner(
-								sanguis::server::entities::auto_weak_link{}
-							),
-							sanguis::server::auras::container{}
-						}
-					)
-				),
-				sanguis::server::entities::insert_parameters_center(
-					_enemy.center()
-				)
-			);
-		}
-	);
+  // TODO(philipp): Make copies of enemies smaller
+  fcppt::algorithm::repeat(
+      1U,
+      [&_enemy, &primary_weapon, &environment]
+      {
+        sanguis::server::environment::insert_no_result(
+            environment,
+            fcppt::unique_ptr_to_base<
+                sanguis::server::entities::
+                    with_id>(fcppt::make_unique_ptr<
+                             sanguis::server::entities::enemies::
+                                 normal>(sanguis::server::entities::enemies::parameters{
+                _enemy.enemy_type(),
+                environment.load_context(),
+                _enemy.armor(),
+                _enemy.mass(),
+                // TODO(philipp): This parameter should probably be of type max_health
+                sanguis::server::health{
+                    _enemy.max_health().get() /
+                    4.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                },
+                _enemy.max_movement_speed(),
+                fcppt::copy(_enemy.create_ai()),
+                primary_weapon.clone(),
+                sanguis::server::pickup_probability{0.F},
+                sanguis::server::exp{
+                    _enemy.exp().get() /
+                    4.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                },
+                _enemy.difficulty(),
+                sanguis::server::entities::spawn_owner(sanguis::server::entities::auto_weak_link{}),
+                sanguis::server::auras::container{}})),
+            sanguis::server::entities::insert_parameters_center(_enemy.center()));
+      });
 }
 
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::skills::mother_spider::attribute() const
 {
-	return
-		sanguis::server::entities::enemies::attribute(
-			FCPPT_TEXT("mother spider")
-		);
+  return sanguis::server::entities::enemies::attribute(FCPPT_TEXT("mother spider"));
 }

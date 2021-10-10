@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::ai::tree
 {
 
-using
-container
-=
-std::vector<
-	sanguis::server::ai::tree::base_unique_ptr
->;
+using container = std::vector<sanguis::server::ai::tree::base_unique_ptr>;
 
 }
 

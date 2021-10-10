@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::collision::world
 {
 
-using
-body_enter_container
-=
-std::vector<
-	sanguis::collision::world::body_enter
->;
+using body_enter_container = std::vector<sanguis::collision::world::body_enter>;
 
 }
 

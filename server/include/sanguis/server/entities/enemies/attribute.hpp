@@ -4,23 +4,18 @@
 #include <sanguis/server/entities/enemies/attribute_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::server::entities::enemies
 {
 
 class attribute
 {
 public:
-	explicit
-	attribute(
-		fcppt::string &&
-	);
+  explicit attribute(fcppt::string &&);
 
-	[[nodiscard]]
-	fcppt::string const &
-	text() const;
+  [[nodiscard]] fcppt::string const &text() const;
+
 private:
-	fcppt::string text_;
+  fcppt::string text_;
 };
 
 }

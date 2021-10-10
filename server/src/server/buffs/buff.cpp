@@ -1,40 +1,16 @@
 #include <sanguis/server/buffs/buff.hpp>
 
+void sanguis::server::buffs::buff::add() { this->apply(sanguis::server::buffs::buff::added(true)); }
 
-void
-sanguis::server::buffs::buff::add()
+void sanguis::server::buffs::buff::remove()
 {
-	this->apply(
-		sanguis::server::buffs::buff::added(
-			true
-		)
-	);
+  this->apply(sanguis::server::buffs::buff::added(false));
 }
 
-void
-sanguis::server::buffs::buff::remove()
-{
-	this->apply(
-		sanguis::server::buffs::buff::added(
-			false
-		)
-	);
-}
+void sanguis::server::buffs::buff::update() {}
 
-void
-sanguis::server::buffs::buff::update()
-{
-}
+sanguis::server::buffs::buff::~buff() = default;
 
-sanguis::server::buffs::buff::~buff()
-= default;
+sanguis::server::buffs::buff::buff() = default;
 
-sanguis::server::buffs::buff::buff()
-= default;
-
-void
-sanguis::server::buffs::buff::apply(
-	sanguis::server::buffs::buff::added
-)
-{
-}
+void sanguis::server::buffs::buff::apply(sanguis::server::buffs::buff::added) {}

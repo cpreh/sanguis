@@ -4,16 +4,11 @@
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-using
-optional_transfer_result
-=
-fcppt::optional::object<
-	sanguis::server::entities::transfer_result
->;
+using optional_transfer_result =
+    fcppt::optional::object<sanguis::server::entities::transfer_result>;
 
 }
 

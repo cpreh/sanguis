@@ -16,63 +16,27 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-template<
-	typename Base,
-	typename Entity,
-	typename Object
->
-fcppt::optional::reference<
-	Entity
->
-insert_with_result(
-	Object &_object,
-	fcppt::unique_ptr<
-		Entity
-	> &&_entity,
-	sanguis::server::entities::insert_parameters const &_parameters
-)
+template <typename Base, typename Entity, typename Object>
+fcppt::optional::reference<Entity> insert_with_result(
+    Object &_object,
+    fcppt::unique_ptr<Entity> &&_entity,
+    sanguis::server::entities::insert_parameters const &_parameters)
 {
-	return
-		fcppt::optional::map(
-			_object.insert(
-				fcppt::unique_ptr_to_base<
-					Base
-				>(
-					std::move(
-						_entity
-					)
-				),
-				_parameters
-			),
-			[](
-				// TODO(philipp)
-				auto const &_inserted
-			)
-			->
-			fcppt::reference<
-				Entity
-			>
-			{
-				return
-					fcppt::optional::to_exception(
-						fcppt::cast::dynamic<
-							Entity
-						>(
-							_inserted.get()
-						),
-						[]{
-							return
-								sanguis::exception{
-									FCPPT_TEXT("Invalid dynamic_cast in insert_with_result")
-								};
-						}
-					);
-			}
-		);
+  return fcppt::optional::map(
+      _object.insert(fcppt::unique_ptr_to_base<Base>(std::move(_entity)), _parameters),
+      [](
+          // TODO(philipp)
+          auto const &_inserted) -> fcppt::reference<Entity>
+      {
+        return fcppt::optional::to_exception(
+            fcppt::cast::dynamic<Entity>(_inserted.get()),
+            [] {
+              return sanguis::exception{FCPPT_TEXT("Invalid dynamic_cast in insert_with_result")};
+            });
+      });
 }
 
 }

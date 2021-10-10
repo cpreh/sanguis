@@ -16,51 +16,28 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::states
 {
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
-class ingame
-:
-	public boost::statechart::state<
-		sanguis::client::states::ingame,
-		sanguis::client::states::has_player
-	>
+class ingame : public boost::statechart::
+                   state<sanguis::client::states::ingame, sanguis::client::states::has_player>
 {
-	FCPPT_NONMOVABLE(
-		ingame
-	);
+  FCPPT_NONMOVABLE(ingame);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list1<
-		boost::statechart::custom_reaction<
-			sanguis::client::events::action
-		>
-	>;
+  using reactions =
+      boost::mpl::list1<boost::statechart::custom_reaction<sanguis::client::events::action>>;
 
-	explicit
-	ingame(
-		my_context
-	);
+  explicit ingame(my_context);
 
-	~ingame()
-	SANGUIS_STATE_OVERRIDE;
+  ~ingame() SANGUIS_STATE_OVERRIDE;
 
-	using
-	result_type
-	=
-	boost::statechart::result;
+  using result_type = boost::statechart::result;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::action const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::action const &);
 };
 
 FCPPT_PP_POP_WARNING

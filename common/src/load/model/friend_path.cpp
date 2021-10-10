@@ -7,20 +7,8 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::load::model::path
-sanguis::load::model::friend_path(
-	sanguis::friend_type const _type
-)
+sanguis::load::model::path sanguis::load::model::friend_path(sanguis::friend_type const _type)
 {
-	return
-		sanguis::load::model::path{
-			std::filesystem::path{
-				FCPPT_TEXT("friends")
-			}
-			/
-			sanguis::load::friend_name(
-				_type
-			)
-		};
+  return sanguis::load::model::path{
+      std::filesystem::path{FCPPT_TEXT("friends")} / sanguis::load::friend_name(_type)};
 }

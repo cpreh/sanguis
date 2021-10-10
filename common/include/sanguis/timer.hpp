@@ -4,5 +4,4 @@
 #include <sanguis/timer_fwd.hpp>
 #include <sge/timer/basic.hpp>
 
-
 #endif

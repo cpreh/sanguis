@@ -3,12 +3,10 @@
 
 #include <sanguis/duration.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-sanguis::duration
-update_interval();
+sanguis::duration update_interval();
 
 }
 

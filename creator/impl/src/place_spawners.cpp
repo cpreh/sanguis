@@ -33,159 +33,76 @@
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
 
-
-sanguis::creator::spawn_container
-sanguis::creator::impl::place_spawners(
-	fcppt::log::object &_log,
-	fcppt::reference<
-		sanguis::creator::grid
-	> const _grid,
-	sanguis::creator::opening_container_array const &_openings,
-	sanguis::creator::count const _spawner_count,
-	sanguis::creator::impl::random::generator &_generator,
-	sanguis::creator::impl::enemy_type_container const &_enemy_types,
-	sanguis::creator::spawn_boss const _spawn_boss,
-	sanguis::creator::tile const _spawner_tile
-)
+sanguis::creator::spawn_container sanguis::creator::impl::place_spawners(
+    fcppt::log::object &_log,
+    fcppt::reference<sanguis::creator::grid> const _grid,
+    sanguis::creator::opening_container_array const &_openings,
+    sanguis::creator::count const _spawner_count,
+    sanguis::creator::impl::random::generator &_generator,
+    sanguis::creator::impl::enemy_type_container const &_enemy_types,
+    sanguis::creator::spawn_boss const _spawn_boss,
+    sanguis::creator::tile const _spawner_tile)
 {
-	sanguis::creator::impl::random::uniform_pos
-	random_pos{
-		fcppt::make_ref(
-			_generator
-		),
-		_grid->size()
-	};
+  sanguis::creator::impl::random::uniform_pos random_pos{
+      fcppt::make_ref(_generator), _grid->size()};
 
-	auto random_monster(
-		FCPPT_ASSERT_OPTIONAL_ERROR(
-			fcppt::random::wrapper::make_uniform_container_advanced<
-				sanguis::creator::impl::random::uniform_int_wrapper
-			>(
-				fcppt::make_cref(
-					_enemy_types
-				)
-			)
-		)
-	);
+  auto random_monster(FCPPT_ASSERT_OPTIONAL_ERROR(
+      fcppt::random::wrapper::make_uniform_container_advanced<
+          sanguis::creator::impl::random::uniform_int_wrapper>(fcppt::make_cref(_enemy_types))));
 
-	sanguis::creator::spawn_container spawners{};
+  sanguis::creator::spawn_container spawners{};
 
-	if(
-		_spawn_boss.get()
-	)
-	{
-		spawners.push_back(
-			sanguis::creator::impl::place_boss(
-				_openings
-			)
-		);
-	}
+  if (_spawn_boss.get())
+  {
+    spawners.push_back(sanguis::creator::impl::place_boss(_openings));
+  }
 
-	sanguis::creator::spawn_container::size_type
-	current_spawners{
-		0U
-	};
+  sanguis::creator::spawn_container::size_type current_spawners{0U};
 
-	sanguis::creator::count iterations{
-		0U
-	};
+  sanguis::creator::count iterations{0U};
 
-	while(
-		current_spawners
-		<
-		_spawner_count
-	)
-	{
-		sanguis::creator::pos const candidate{
-			fcppt::optional::to_exception(
-				sanguis::creator::impl::closest_empty(
-					_grid.get(),
-					random_pos()
-				),
-				[]{
-					return
-						sanguis::creator::exception{
-							FCPPT_TEXT(
-								"Could not find a free tile anywhere!"
-							)
-						};
-				}
-			)
-		};
+  while (current_spawners < _spawner_count)
+  {
+    sanguis::creator::pos const candidate{fcppt::optional::to_exception(
+        sanguis::creator::impl::closest_empty(_grid.get(), random_pos()),
+        [] {
+          return sanguis::creator::exception{FCPPT_TEXT("Could not find a free tile anywhere!")};
+        })};
 
-		if(
-			// TODO(philipp): Use any_of for ranges
-			!fcppt::algorithm::fold(
-				_openings[
-					sanguis::creator::opening_type::entry
-				],
-				false,
-				[
-					&_grid,
-					&candidate
-				](
-					sanguis::creator::opening const &_cur,
-					bool const _value
-				)
-				{
-					return
-						_value
-						||
-						sanguis::creator::tile_is_visible(
-							_grid.get(),
-							candidate,
-							_cur.get()
-						);
-				}
-			)
-		)
-		{
-			FCPPT_ASSERT_OPTIONAL_ERROR(
-				fcppt::container::grid::at_optional(
-					_grid.get(),
-					candidate
-				)
-			).get() =
-				_spawner_tile;
+    if (
+        // TODO(philipp): Use any_of for ranges
+        !fcppt::algorithm::fold(
+            _openings[sanguis::creator::opening_type::entry],
+            false,
+            [&_grid, &candidate](sanguis::creator::opening const &_cur, bool const _value) {
+              return _value ||
+                     sanguis::creator::tile_is_visible(_grid.get(), candidate, _cur.get());
+            }))
+    {
+      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(_grid.get(), candidate))
+          .get() = _spawner_tile;
 
-			spawners.push_back(
-				sanguis::creator::spawn{
-					sanguis::creator::spawn_pos{
-						candidate
-					},
-					random_monster(
-						_generator
-					),
-					sanguis::creator::spawn_type::spawner,
-					sanguis::creator::enemy_kind::normal
-				}
-			);
+      spawners.push_back(sanguis::creator::spawn{
+          sanguis::creator::spawn_pos{candidate},
+          random_monster(_generator),
+          sanguis::creator::spawn_type::spawner,
+          sanguis::creator::enemy_kind::normal});
 
-			++current_spawners;
-		}
+      ++current_spawners;
+    }
 
-		if(
-			++iterations
-			>
-			_spawner_count * 5
-		)
-		{
-			FCPPT_LOG_ERROR(
-				_log,
-				fcppt::log::out
-					<< FCPPT_TEXT("gave up on placing ")
-					<< (_spawner_count - current_spawners)
-					<< FCPPT_TEXT(" spawners due to visibility after ")
-					<< iterations
-					<< FCPPT_TEXT(" tries.")
-			)
+    if (++iterations > _spawner_count * 5)
+    {
+      FCPPT_LOG_ERROR(
+          _log,
+          fcppt::log::out << FCPPT_TEXT("gave up on placing ")
+                          << (_spawner_count - current_spawners)
+                          << FCPPT_TEXT(" spawners due to visibility after ") << iterations
+                          << FCPPT_TEXT(" tries."))
 
-			break;
-		}
-	}
+      break;
+    }
+  }
 
-	return
-		spawners;
+  return spawners;
 }
-
-

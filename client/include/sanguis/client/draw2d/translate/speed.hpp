@@ -7,33 +7,14 @@
 #include <alda/message/object.hpp>
 #include <fcppt/record/get.hpp>
 
-
 namespace sanguis::client::draw2d::translate
 {
 
-template<
-	typename Id,
-	typename Type
->
-inline
-sanguis::client::draw2d::speed
-speed(
-	alda::message::object<
-		Id,
-		Type
-	> const &_message
-)
+template <typename Id, typename Type>
+inline sanguis::client::draw2d::speed speed(alda::message::object<Id, Type> const &_message)
 {
-	return
-		sanguis::client::draw2d::speed(
-			sanguis::client::draw2d::translate::vector_to_client(
-				fcppt::record::get<
-					sanguis::messages::roles::speed
-				>(
-					_message.get()
-				)
-			)
-		);
+  return sanguis::client::draw2d::speed(sanguis::client::draw2d::translate::vector_to_client(
+      fcppt::record::get<sanguis::messages::roles::speed>(_message.get())));
 }
 
 }

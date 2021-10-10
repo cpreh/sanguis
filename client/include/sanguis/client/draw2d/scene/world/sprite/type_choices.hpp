@@ -6,5 +6,4 @@
 #include <sge/sprite/config/type_choices.hpp>
 #include <sge/sprite/config/unit_type.hpp>
 
-
 #endif

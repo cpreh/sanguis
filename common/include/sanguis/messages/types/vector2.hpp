@@ -4,5 +4,4 @@
 #include <sanguis/messages/types/vector2_fwd.hpp>
 #include <fcppt/math/vector/static.hpp>
 
-
 #endif

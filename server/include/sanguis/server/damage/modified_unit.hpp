@@ -4,5 +4,4 @@
 #include <sanguis/server/damage/modified_unit_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

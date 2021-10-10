@@ -13,43 +13,20 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::client::load::model::animation_map
-sanguis::client::load::model::make_animations(
-	fcppt::log::object &_log,
-	sanguis::model::weapon_category const &_weapon_category,
-	sanguis::client::load::model::global_parameters const &_parameters
-)
+sanguis::client::load::model::animation_map sanguis::client::load::model::make_animations(
+    fcppt::log::object &_log,
+    sanguis::model::weapon_category const &_weapon_category,
+    sanguis::client::load::model::global_parameters const &_parameters)
 {
-	return
-		fcppt::algorithm::map<
-			sanguis::client::load::model::animation_map
-		>(
-			_weapon_category.animations(),
-			[
-				&_log,
-				&_parameters
-			](
-				sanguis::model::animation_map::value_type const &_animation_pair
-			)
-			{
-				return
-					std::make_pair(
-						sanguis::client::load::model::lookup_animation_name(
-							_animation_pair.first
-						),
-						fcppt::make_unique_ptr<
-							sanguis::client::load::model::animation
-						>(
-							_log,
-							_animation_pair.second,
-							_parameters.new_image(
-								fcppt::copy(
-									_animation_pair.second.image_name()
-								)
-							)
-						)
-					);
-			}
-		);
+  return fcppt::algorithm::map<sanguis::client::load::model::animation_map>(
+      _weapon_category.animations(),
+      [&_log, &_parameters](sanguis::model::animation_map::value_type const &_animation_pair)
+      {
+        return std::make_pair(
+            sanguis::client::load::model::lookup_animation_name(_animation_pair.first),
+            fcppt::make_unique_ptr<sanguis::client::load::model::animation>(
+                _log,
+                _animation_pair.second,
+                _parameters.new_image(fcppt::copy(_animation_pair.second.image_name()))));
+      });
 }

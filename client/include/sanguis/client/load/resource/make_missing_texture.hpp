@@ -6,17 +6,14 @@
 #include <sge/renderer/device/core_ref.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 
-
 namespace sanguis::client::load::resource
 {
 
-sge::texture::const_part_unique_ptr
-make_missing_texture(
-	sge::renderer::device::core_ref,
-	sge::image::size_type,
-	sge::image::color::any::object const &,
-	sge::image::color::any::object const &
-);
+sge::texture::const_part_unique_ptr make_missing_texture(
+    sge::renderer::device::core_ref,
+    sge::image::size_type,
+    sge::image::color::any::object const &,
+    sge::image::color::any::object const &);
 
 }
 

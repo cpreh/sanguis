@@ -6,19 +6,12 @@
 #include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <alda/bindings/strong_typedef_decl.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-entity_id
-=
-alda::bindings::strong_typedef<
-	sanguis::entity_id,
-	sanguis::messages::adapted_types::unsigned_<
-		sanguis::entity_id_type
-	>
->;
+using entity_id = alda::bindings::strong_typedef<
+    sanguis::entity_id,
+    sanguis::messages::adapted_types::unsigned_<sanguis::entity_id_type>>;
 
 }
 

@@ -5,35 +5,15 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::client::draw2d::entities::hover::name::name(
-	fcppt::string &&_text,
-	sge::image::color::any::object _color
-)
-:
-	text_{
-		std::move(
-			_text
-		)
-	},
-	color_{
-		std::move(
-			_color
-		)
-	}
+    fcppt::string &&_text, sge::image::color::any::object _color)
+    : text_{std::move(_text)}, color_{std::move(_color)}
 {
 }
 
-fcppt::string const &
-sanguis::client::draw2d::entities::hover::name::text() const
-{
-	return
-		text_;
-}
+fcppt::string const &sanguis::client::draw2d::entities::hover::name::text() const { return text_; }
 
-sge::image::color::any::object const &
-sanguis::client::draw2d::entities::hover::name::color() const
+sge::image::color::any::object const &sanguis::client::draw2d::entities::hover::name::color() const
 {
-	return
-		color_;
+  return color_;
 }

@@ -4,16 +4,10 @@
 #include <sanguis/entity_id.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server::global
 {
 
-using
-next_id_callback
-=
-fcppt::function<
-	sanguis::entity_id ()
->;
+using next_id_callback = fcppt::function<sanguis::entity_id()>;
 
 }
 

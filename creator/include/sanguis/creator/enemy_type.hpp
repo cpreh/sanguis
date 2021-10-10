@@ -3,23 +3,22 @@
 
 #include <sanguis/creator/enemy_type_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
 enum class enemy_type
 {
-	wolf_black,
-	wolf_brown,
-	wolf_white,
-	zombie00,
-	zombie01,
-	spider,
-	skeleton,
-	ghost,
-	maggot,
-	reaper,
-	fcppt_maximum = reaper
+  wolf_black,
+  wolf_brown,
+  wolf_white,
+  zombie00,
+  zombie01,
+  spider,
+  skeleton,
+  ghost,
+  maggot,
+  reaper,
+  fcppt_maximum = reaper
 };
 
 }

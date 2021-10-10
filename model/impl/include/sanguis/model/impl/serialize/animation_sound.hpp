@@ -5,16 +5,11 @@
 #include <sge/parse/json/member.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 namespace sanguis::model::impl::serialize
 {
 
-fcppt::optional::object<
-	sge::parse::json::member
->
-animation_sound(
-	sanguis::model::optional_animation_sound const &
-);
+fcppt::optional::object<sge::parse::json::member>
+animation_sound(sanguis::model::optional_animation_sound const &);
 
 }
 

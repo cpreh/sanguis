@@ -4,16 +4,10 @@
 #include <sanguis/primary_weapon_type_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis
 {
 
-using
-optional_primary_weapon_type
-=
-fcppt::optional::object<
-	sanguis::primary_weapon_type
->;
+using optional_primary_weapon_type = fcppt::optional::object<sanguis::primary_weapon_type>;
 
 }
 

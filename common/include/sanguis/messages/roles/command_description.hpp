@@ -3,13 +3,10 @@
 
 #include <fcppt/record/make_label.hpp>
 
-
 namespace sanguis::messages::roles
 {
 
-FCPPT_RECORD_MAKE_LABEL(
-	command_description
-);
+FCPPT_RECORD_MAKE_LABEL(command_description);
 
 }
 

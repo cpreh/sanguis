@@ -4,16 +4,10 @@
 #include <sanguis/creator/pos.hpp>
 #include <fcppt/container/grid/min_from_pos_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-min
-=
-fcppt::container::grid::min_from_pos<
-	sanguis::creator::pos
->;
+using min = fcppt::container::grid::min_from_pos<sanguis::creator::pos>;
 
 }
 

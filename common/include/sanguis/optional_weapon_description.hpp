@@ -5,5 +5,4 @@
 #include <sanguis/weapon_description.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

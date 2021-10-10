@@ -5,5 +5,4 @@
 #include <alda/bindings/enum.hpp>
 #include <alda/bindings/unsigned.hpp>
 
-
 #endif

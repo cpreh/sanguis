@@ -20,128 +20,59 @@
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/map.hpp>
 
-
-sanguis::server::ai::context::context(
-	sanguis::server::entities::with_ai_ref const _me
-)
-:
-	me_(
-		_me
-	),
-	trail_()
+sanguis::server::ai::context::context(sanguis::server::entities::with_ai_ref const _me)
+    : me_(_me), trail_()
 {
 }
 
-sanguis::server::ai::context::~context()
-= default;
+sanguis::server::ai::context::~context() = default;
 
-bool
-sanguis::server::ai::context::path_find(
-	sanguis::creator::pos const &_pos
-)
+bool sanguis::server::ai::context::path_find(sanguis::creator::pos const &_pos)
 {
-	trail_ =
-		fcppt::optional::map(
-			sanguis::server::ai::pathing::find_target(
-				this->grid(),
-				sanguis::server::ai::pathing::start(
-					sanguis::server::world::center_to_grid_pos(
-						this->me().center()
-					)
-				),
-				sanguis::server::ai::pathing::target(
-					_pos
-				)
-			),
-			[
-				this
-			](
-				sanguis::server::ai::pathing::trail const &_trail
-			)
-			{
-				return
-					sanguis::server::ai::pathing::simplify(
-						_trail,
-						this->grid()
-					);
-			}
-		);
+  trail_ = fcppt::optional::map(
+      sanguis::server::ai::pathing::find_target(
+          this->grid(),
+          sanguis::server::ai::pathing::start(
+              sanguis::server::world::center_to_grid_pos(this->me().center())),
+          sanguis::server::ai::pathing::target(_pos)),
+      [this](sanguis::server::ai::pathing::trail const &_trail)
+      { return sanguis::server::ai::pathing::simplify(_trail, this->grid()); });
 
-	return
-		trail_.has_value();
+  return trail_.has_value();
 }
 
-void
-sanguis::server::ai::context::clear_path()
+void sanguis::server::ai::context::clear_path()
 {
-	trail_ =
-		sanguis::server::ai::pathing::optional_trail();
+  trail_ = sanguis::server::ai::pathing::optional_trail();
 }
 
-sanguis::creator::optional_pos
-sanguis::server::ai::context::destination() const
+sanguis::creator::optional_pos sanguis::server::ai::context::destination() const
 {
-	return
-		fcppt::optional::bind(
-			trail_,
-			[](
-				sanguis::server::ai::pathing::trail const &_trail
-			)
-			{
-				return
-					sanguis::creator::optional_pos{
-						fcppt::optional::copy_value(
-							fcppt::container::maybe_front(
-								_trail
-							)
-						)
-					};
-			}
-		);
+  return fcppt::optional::bind(
+      trail_,
+      [](sanguis::server::ai::pathing::trail const &_trail)
+      {
+        return sanguis::creator::optional_pos{
+            fcppt::optional::copy_value(fcppt::container::maybe_front(_trail))};
+      });
 }
 
-sanguis::server::ai::pathing::optional_target
-sanguis::server::ai::context::continue_path()
+sanguis::server::ai::pathing::optional_target sanguis::server::ai::context::continue_path()
 {
-	return
-		fcppt::optional::bind(
-			trail_,
-			[
-				this
-			](
-				sanguis::server::ai::pathing::trail &_trail
-			)
-			{
-				return
-					sanguis::server::ai::pathing::update_trail(
-						fcppt::make_ref(
-							_trail
-						),
-						this->me()
-					);
-			}
-		);
+  return fcppt::optional::bind(
+      trail_,
+      [this](sanguis::server::ai::pathing::trail &_trail)
+      { return sanguis::server::ai::pathing::update_trail(fcppt::make_ref(_trail), this->me()); });
 }
 
-sanguis::creator::grid const &
-sanguis::server::ai::context::grid() const
+sanguis::creator::grid const &sanguis::server::ai::context::grid() const
 {
-	return
-		FCPPT_ASSERT_OPTIONAL_ERROR(
-			this->me().environment()
-		).get().grid();
+  return FCPPT_ASSERT_OPTIONAL_ERROR(this->me().environment()).get().grid();
 }
 
-sanguis::server::entities::with_ai &
-sanguis::server::ai::context::me()
-{
-	return
-		me_.get();
-}
+sanguis::server::entities::with_ai &sanguis::server::ai::context::me() { return me_.get(); }
 
-sanguis::server::entities::with_ai const &
-sanguis::server::ai::context::me() const
+sanguis::server::entities::with_ai const &sanguis::server::ai::context::me() const
 {
-	return
-		me_.get();
+  return me_.get();
 }

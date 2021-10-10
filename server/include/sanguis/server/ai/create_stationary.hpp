@@ -4,14 +4,10 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/sight_range_fwd.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-sanguis::server::ai::create_function
-create_stationary(
-	sanguis::server::ai::sight_range
-);
+sanguis::server::ai::create_function create_stationary(sanguis::server::ai::sight_range);
 
 }
 

@@ -6,16 +6,13 @@
 #include <sanguis/creator/optional_pos.hpp>
 #include <sanguis/creator/sup_fwd.hpp>
 
-
 namespace sanguis::server::random
 {
 
-sanguis::creator::optional_pos
-grid_pos(
-	sanguis::random_generator &, // NOLINT(google-runtime-references)
-	sanguis::creator::min const &,
-	sanguis::creator::sup const &
-);
+sanguis::creator::optional_pos grid_pos(
+    sanguis::random_generator &, // NOLINT(google-runtime-references)
+    sanguis::creator::min const &,
+    sanguis::creator::sup const &);
 
 }
 

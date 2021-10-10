@@ -7,50 +7,28 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::events
 {
 
-class action
-:
-	public boost::statechart::event<
-		sanguis::client::events::action
-	>
+class action : public boost::statechart::event<sanguis::client::events::action>
 {
 public:
-	explicit
-	action(
-		sanguis::client::control::actions::any
-	);
+  explicit action(sanguis::client::control::actions::any);
 
-	action(
-		action &&
-	)
-	noexcept;
+  action(action &&) noexcept;
 
-	action(
-		action const &
-	);
+  action(action const &);
 
-	action &
-	operator=(
-		action &&
-	)
-	noexcept;
+  action &operator=(action &&) noexcept;
 
-	action &
-	operator=(
-		action const &
-	);
+  action &operator=(action const &);
 
-	~action()
-	override;
+  ~action() override;
 
-	[[nodiscard]]
-	sanguis::client::control::actions::any const &
-	value() const;
+  [[nodiscard]] sanguis::client::control::actions::any const &value() const;
+
 private:
-	sanguis::client::control::actions::any value_;
+  sanguis::client::control::actions::any value_;
 };
 
 }

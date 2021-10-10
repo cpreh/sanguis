@@ -4,23 +4,18 @@
 #include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/control/actions/variant.hpp>
 
-
 namespace sanguis::client::control::actions
 {
 
 class any
 {
 public:
-	explicit
-	any(
-		sanguis::client::control::actions::variant
-	);
+  explicit any(sanguis::client::control::actions::variant);
 
-	[[nodiscard]]
-	sanguis::client::control::actions::variant const &
-	get() const;
+  [[nodiscard]] sanguis::client::control::actions::variant const &get() const;
+
 private:
-	sanguis::client::control::actions::variant variant_;
+  sanguis::client::control::actions::variant variant_;
 };
 
 }

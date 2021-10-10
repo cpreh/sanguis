@@ -4,16 +4,10 @@
 #include <sanguis/model/animation_delay_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::model
 {
 
-using
-optional_animation_delay
-=
-fcppt::optional::object<
-	sanguis::model::animation_delay
->;
+using optional_animation_delay = fcppt::optional::object<sanguis::model::animation_delay>;
 
 }
 

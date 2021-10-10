@@ -8,41 +8,28 @@
 #include <list>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client
 {
 
 class sound_manager
 {
-	FCPPT_NONMOVABLE(
-		sound_manager
-	);
+  FCPPT_NONMOVABLE(sound_manager);
+
 public:
-	sound_manager();
+  sound_manager();
 
-	~sound_manager();
+  ~sound_manager();
 
-	void
-	add(
-		sge::audio::sound::base_unique_ptr &&
-	);
+  void add(sge::audio::sound::base_unique_ptr &&);
 
-	void
-	pause(
-		bool
-	);
+  void pause(bool);
 
-	void
-	update();
+  void update();
+
 private:
-	using
-	sound_list
-	=
-	std::list<
-		sge::audio::sound::base_unique_ptr
-	>;
+  using sound_list = std::list<sge::audio::sound::base_unique_ptr>;
 
-	sound_list sounds_;
+  sound_list sounds_;
 };
 
 }

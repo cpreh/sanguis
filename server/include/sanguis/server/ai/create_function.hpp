@@ -5,18 +5,11 @@
 #include <sanguis/server/ai/tree/base_unique_ptr.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-using
-create_function
-=
-fcppt::function<
-	sanguis::server::ai::tree::base_unique_ptr (
-		sanguis::server::ai::context_ref
-	)
->;
+using create_function =
+    fcppt::function<sanguis::server::ai::tree::base_unique_ptr(sanguis::server::ai::context_ref)>;
 
 }
 

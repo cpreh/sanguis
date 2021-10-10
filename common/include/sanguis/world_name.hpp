@@ -4,5 +4,4 @@
 #include <sanguis/world_name_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

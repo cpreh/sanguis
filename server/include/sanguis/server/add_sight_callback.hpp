@@ -5,19 +5,11 @@
 #include <sanguis/server/entities/with_id_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-add_sight_callback
-=
-fcppt::function<
-	void (
-		sanguis::server::entities::with_id const &,
-		sanguis::collision::world::created
-	)
->;
+using add_sight_callback = fcppt::function<void(
+    sanguis::server::entities::with_id const &, sanguis::collision::world::created)>;
 
 }
 

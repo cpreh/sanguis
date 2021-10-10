@@ -22,144 +22,59 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::server::ai::pathing::optional_trail
-sanguis::server::ai::pathing::find_target(
-	sanguis::creator::grid const &_grid,
-	sanguis::server::ai::pathing::start const &_start,
-	sanguis::server::ai::pathing::target const &_target
-)
+sanguis::server::ai::pathing::optional_trail sanguis::server::ai::pathing::find_target(
+    sanguis::creator::grid const &_grid,
+    sanguis::server::ai::pathing::start const &_start,
+    sanguis::server::ai::pathing::target const &_target)
 {
-	using
-	pos_queue
-	=
-	std::queue<
-		sanguis::creator::pos
-	>;
+  using pos_queue = std::queue<sanguis::creator::pos>;
 
-	using
-	predecessor_map
-	=
-	std::unordered_map<
-		sanguis::creator::pos,
-		sanguis::creator::pos
-	>;
+  using predecessor_map = std::unordered_map<sanguis::creator::pos, sanguis::creator::pos>;
 
-	predecessor_map predecessors;
+  predecessor_map predecessors;
 
-	predecessors.insert(
-		std::make_pair(
-			_start.get(),
-			_start.get()
-		)
-	);
+  predecessors.insert(std::make_pair(_start.get(), _start.get()));
 
-	pos_queue positions;
+  pos_queue positions;
 
-	positions.push(
-		_start.get()
-	);
+  positions.push(_start.get());
 
-	while(
-		!positions.empty()
-	)
-	{
-		sanguis::creator::pos const cur(
-			positions.front()
-		);
+  while (!positions.empty())
+  {
+    sanguis::creator::pos const cur(positions.front());
 
-		if(
-			cur
-			==
-			_target.get()
-		)
-		{
-			sanguis::server::ai::pathing::trail result{
-				cur
-			};
+    if (cur == _target.get())
+    {
+      sanguis::server::ai::pathing::trail result{cur};
 
-			for(
-				sanguis::creator::pos trail_pos(
-					cur
-				);
-				trail_pos
-				!=
-				_start.get();
-				trail_pos
-				=
-				result.back()
-			)
-			{
-				result.push_back(
-					FCPPT_ASSERT_OPTIONAL_ERROR(
-						fcppt::container::find_opt_mapped(
-							predecessors,
-							trail_pos
-						)
-					).get()
-				);
-			}
+      for (sanguis::creator::pos trail_pos(cur); trail_pos != _start.get();
+           trail_pos = result.back())
+      {
+        result.push_back(
+            FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::find_opt_mapped(predecessors, trail_pos))
+                .get());
+      }
 
-			return
-				sanguis::server::ai::pathing::optional_trail{
-					std::move(
-						result
-					)
-				};
-		}
+      return sanguis::server::ai::pathing::optional_trail{std::move(result)};
+    }
 
-		positions.pop();
+    positions.pop();
 
-		for(
-			sanguis::creator::pos const &pos
-			:
-			fcppt::container::grid::neumann_neighbors(
-				cur
-			)
-		)
-		{
-			if(
-				!fcppt::container::find_opt(
-					predecessors,
-					pos
-				).has_value()
-				&&
-				fcppt::optional::maybe(
-					fcppt::container::grid::at_optional(
-						_grid,
-						pos
-					),
-					fcppt::const_(
-						false
-					),
-					[](
-						fcppt::reference<
-							sanguis::creator::tile const
-						> const _tile
-					)
-					{
-						return
-							!sanguis::creator::tile_is_solid(
-								_tile.get()
-							);
-					}
-				)
-			)
-			{
-				positions.push(
-					pos
-				);
+    for (sanguis::creator::pos const &pos : fcppt::container::grid::neumann_neighbors(cur))
+    {
+      if (!fcppt::container::find_opt(predecessors, pos).has_value() &&
+          fcppt::optional::maybe(
+              fcppt::container::grid::at_optional(_grid, pos),
+              fcppt::const_(false),
+              [](fcppt::reference<sanguis::creator::tile const> const _tile)
+              { return !sanguis::creator::tile_is_solid(_tile.get()); }))
+      {
+        positions.push(pos);
 
-				predecessors.insert(
-					std::make_pair(
-						pos,
-						cur
-					)
-				);
-			}
-		}
-	}
+        predecessors.insert(std::make_pair(pos, cur));
+      }
+    }
+  }
 
-	return
-		sanguis::server::ai::pathing::optional_trail{};
+  return sanguis::server::ai::pathing::optional_trail{};
 }

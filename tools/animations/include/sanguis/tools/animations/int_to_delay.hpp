@@ -3,14 +3,10 @@
 
 #include <sanguis/model/optional_animation_delay.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
-sanguis::model::optional_animation_delay
-int_to_delay(
-	int
-);
+sanguis::model::optional_animation_delay int_to_delay(int);
 
 }
 

@@ -28,123 +28,61 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::states
 {
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
-class unpaused
-:
-	public
-		boost::statechart::state<
-			sanguis::server::states::unpaused,
-			sanguis::server::states::running
-		>
+class unpaused : public boost::statechart::
+                     state<sanguis::server::states::unpaused, sanguis::server::states::running>
 {
-	FCPPT_NONMOVABLE(
-		unpaused
-	);
+  FCPPT_NONMOVABLE(unpaused);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list2<
-		boost::statechart::custom_reaction<
-			sanguis::server::events::tick
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::server::events::message
-		>
-	>;
+  using reactions = boost::mpl::list2<
+      boost::statechart::custom_reaction<sanguis::server::events::tick>,
+      boost::statechart::custom_reaction<sanguis::server::events::message>>;
 
-	explicit
-	unpaused(
-		my_context
-	);
+  explicit unpaused(my_context);
 
-	~unpaused()
-	SANGUIS_STATE_OVERRIDE;
+  ~unpaused() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::events::tick const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::events::tick const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::events::message const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::events::message const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::attack_dest const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::attack_dest const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::change_world const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::change_world const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::direction const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::direction const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::drop_or_pickup_weapon const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::drop_or_pickup_weapon const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::reload const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::reload const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::start_shooting const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::start_shooting const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::stop_shooting const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::stop_shooting const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::unpause const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::unpause const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::client::pause const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::server::player_id, sanguis::messages::client::pause const &);
+
 private:
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 
-	sanguis::server::net::slowdown slowdown_;
+  sanguis::server::net::slowdown slowdown_;
 };
 
 FCPPT_PP_POP_WARNING

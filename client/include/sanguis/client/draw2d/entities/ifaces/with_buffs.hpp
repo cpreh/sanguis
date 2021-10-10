@@ -4,32 +4,22 @@
 #include <sanguis/buff_type_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities::ifaces
 {
 
 class with_buffs
 {
-	FCPPT_NONMOVABLE(
-		with_buffs
-	);
+  FCPPT_NONMOVABLE(with_buffs);
+
 protected:
-	with_buffs();
+  with_buffs();
 
-	virtual
-	~with_buffs();
+  virtual ~with_buffs();
+
 public:
-	virtual
-	void
-	add_buff(
-		sanguis::buff_type
-	) = 0;
+  virtual void add_buff(sanguis::buff_type) = 0;
 
-	virtual
-	void
-	remove_buff(
-		sanguis::buff_type
-	) = 0;
+  virtual void remove_buff(sanguis::buff_type) = 0;
 };
 
 }

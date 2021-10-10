@@ -5,17 +5,11 @@
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server::parts
 {
 
-using
-entity_id
-=
-fcppt::record::element<
-	sanguis::messages::roles::entity_id,
-	sanguis::messages::adapted_types::entity_id
->;
+using entity_id = fcppt::record::
+    element<sanguis::messages::roles::entity_id, sanguis::messages::adapted_types::entity_id>;
 
 }
 

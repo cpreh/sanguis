@@ -5,15 +5,11 @@
 #include <sanguis/creator/destructible_type_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::load
 {
 
 SANGUIS_COMMON_SYMBOL
-fcppt::string
-destructible_name(
-	sanguis::creator::destructible_type
-);
+fcppt::string destructible_name(sanguis::creator::destructible_type);
 
 }
 

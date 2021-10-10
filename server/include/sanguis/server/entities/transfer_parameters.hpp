@@ -12,57 +12,44 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 
-
 namespace sanguis::server::entities
 {
 
 class transfer_parameters
 {
 public:
-	transfer_parameters(
-		sanguis::collision::log_cref,
-		sanguis::collision::world::object_ref,
-		sanguis::collision::world::created,
-		sanguis::creator::grid_cref,
-		sanguis::server::center,
-		sanguis::server::angle
-	);
+  transfer_parameters(
+      sanguis::collision::log_cref,
+      sanguis::collision::world::object_ref,
+      sanguis::collision::world::created,
+      sanguis::creator::grid_cref,
+      sanguis::server::center,
+      sanguis::server::angle);
 
-	[[nodiscard]]
-	sanguis::collision::log const &
-	log() const;
+  [[nodiscard]] sanguis::collision::log const &log() const;
 
-	[[nodiscard]]
-	sanguis::collision::world::object &
-	world() const;
+  [[nodiscard]] sanguis::collision::world::object &world() const;
 
-	[[nodiscard]]
-	sanguis::collision::world::created
-	created() const;
+  [[nodiscard]] sanguis::collision::world::created created() const;
 
-	[[nodiscard]]
-	sanguis::creator::grid const &
-	grid() const;
+  [[nodiscard]] sanguis::creator::grid const &grid() const;
 
-	[[nodiscard]]
-	sanguis::server::center
-	center() const;
+  [[nodiscard]] sanguis::server::center center() const;
 
-	[[nodiscard]]
-	sanguis::server::angle
-	angle() const;
+  [[nodiscard]] sanguis::server::angle angle() const;
+
 private:
-	sanguis::collision::log_cref log_;
+  sanguis::collision::log_cref log_;
 
-	sanguis::collision::world::object_ref world_;
+  sanguis::collision::world::object_ref world_;
 
-	sanguis::collision::world::created created_;
+  sanguis::collision::world::created created_;
 
-	sanguis::creator::grid_cref grid_;
+  sanguis::creator::grid_cref grid_;
 
-	sanguis::server::center center_;
+  sanguis::server::center center_;
 
-	sanguis::server::angle angle_;
+  sanguis::server::angle angle_;
 };
 
 }

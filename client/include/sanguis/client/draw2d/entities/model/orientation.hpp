@@ -5,17 +5,14 @@
 #include <sanguis/client/draw2d/entities/model/desired_orientation_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 
-
 namespace sanguis::client::draw2d::entities::model
 {
 
-sanguis::client::draw2d::sprite::rotation
-orientation(
-	// TODO(philipp): Different type here
-	sanguis::client::draw2d::funit delta,
-	sanguis::client::draw2d::sprite::rotation,
-	sanguis::client::draw2d::entities::model::desired_orientation
-);
+sanguis::client::draw2d::sprite::rotation orientation(
+    // TODO(philipp): Different type here
+    sanguis::client::draw2d::funit delta,
+    sanguis::client::draw2d::sprite::rotation,
+    sanguis::client::draw2d::entities::model::desired_orientation);
 
 }
 

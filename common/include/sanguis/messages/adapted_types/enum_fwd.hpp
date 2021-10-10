@@ -5,21 +5,12 @@
 #include <sanguis/messages/types/enum.hpp>
 #include <alda/bindings/enum_decl.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-template<
-	typename Enum
->
-using enum_
-=
-alda::bindings::enum_<
-	Enum,
-	sanguis::messages::adapted_types::unsigned_<
-		sanguis::messages::types::enum_
-	>
->;
+template <typename Enum>
+using enum_ = alda::bindings::
+    enum_<Enum, sanguis::messages::adapted_types::unsigned_<sanguis::messages::types::enum_>>;
 
 }
 

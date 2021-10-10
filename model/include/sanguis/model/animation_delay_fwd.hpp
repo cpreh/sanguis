@@ -6,14 +6,10 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::model
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	std::chrono::milliseconds,
-	animation_delay
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(std::chrono::milliseconds, animation_delay);
 
 }
 

@@ -5,15 +5,11 @@
 #include <sanguis/server/ai/sight_range_fwd.hpp>
 #include <sanguis/server/entities/spawn_owner_fwd.hpp>
 
-
 namespace sanguis::server::ai
 {
 
 sanguis::server::ai::create_function
-create_friend(
-	sanguis::server::ai::sight_range,
-	sanguis::server::entities::spawn_owner const &
-);
+create_friend(sanguis::server::ai::sight_range, sanguis::server::entities::spawn_owner const &);
 
 }
 

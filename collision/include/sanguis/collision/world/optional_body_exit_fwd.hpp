@@ -4,16 +4,10 @@
 #include <sanguis/collision/world/body_exit_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::collision::world
 {
 
-using
-optional_body_exit
-=
-fcppt::optional::object<
-	sanguis::collision::world::body_exit
->;
+using optional_body_exit = fcppt::optional::object<sanguis::collision::world::body_exit>;
 
 }
 

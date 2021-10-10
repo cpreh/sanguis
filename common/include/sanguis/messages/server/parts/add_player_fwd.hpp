@@ -8,22 +8,14 @@
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server::parts
 {
 
-using
-add_player
-=
-fcppt::mpl::list::append<
-	sanguis::messages::server::parts::add_actor,
-	fcppt::mpl::list::object<
-		fcppt::record::element<
-			sanguis::messages::roles::name,
-			sanguis::messages::adapted_types::string
-		>
-	>
->;
+using add_player = fcppt::mpl::list::append<
+    sanguis::messages::server::parts::add_actor,
+    fcppt::mpl::list::object<fcppt::record::element<
+        sanguis::messages::roles::name,
+        sanguis::messages::adapted_types::string>>>;
 
 }
 

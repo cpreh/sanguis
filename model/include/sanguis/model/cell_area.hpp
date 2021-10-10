@@ -4,5 +4,4 @@
 #include <sanguis/model/cell_area_fwd.hpp>
 #include <fcppt/math/box/rect.hpp>
 
-
 #endif

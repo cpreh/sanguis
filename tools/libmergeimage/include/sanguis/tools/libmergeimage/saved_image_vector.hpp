@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::libmergeimage
 {
 
-using
-saved_image_vector
-=
-std::vector<
-	sanguis::tools::libmergeimage::saved_image
->;
+using saved_image_vector = std::vector<sanguis::tools::libmergeimage::saved_image>;
 
 }
 

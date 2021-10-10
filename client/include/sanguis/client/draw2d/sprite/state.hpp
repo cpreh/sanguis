@@ -4,5 +4,4 @@
 #include <sanguis/client/draw2d/sprite/state_decl.hpp>
 #include <sge/sprite/state/object_impl.hpp>
 
-
 #endif

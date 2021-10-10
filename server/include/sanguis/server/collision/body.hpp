@@ -17,80 +17,55 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
-
 namespace sanguis::server::collision
 {
 
 class body
 {
-	FCPPT_NONMOVABLE(
-		body
-	);
+  FCPPT_NONMOVABLE(body);
+
 public:
-	body(
-		sanguis::server::radius,
-		sanguis::server::optional_mass,
-		sanguis::collision::world::body_base_ref
-	);
+  body(
+      sanguis::server::radius,
+      sanguis::server::optional_mass,
+      sanguis::collision::world::body_base_ref);
 
-	~body();
+  ~body();
 
-	void
-	center(
-		sanguis::server::center const &
-	);
+  void center(sanguis::server::center const &);
 
-	[[nodiscard]]
-	sanguis::server::center
-	center() const;
+  [[nodiscard]] sanguis::server::center center() const;
 
-	void
-	speed(
-		sanguis::server::speed const &
-	);
+  void speed(sanguis::server::speed const &);
 
-	[[nodiscard]]
-	sanguis::server::speed
-	speed() const;
+  [[nodiscard]] sanguis::server::speed speed() const;
 
-	[[nodiscard]]
-	sanguis::server::radius
-	radius() const;
+  [[nodiscard]] sanguis::server::radius radius() const;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_enter_container
-	transfer(
-		sanguis::collision::log const &,
-		sanguis::collision::world::object &, // NOLINT(google-runtime-references)
-		sanguis::collision::world::created,
-		sanguis::server::center const &,
-		sanguis::server::speed const &,
-		sanguis::collision::world::body_group
-	);
+  [[nodiscard]] sanguis::collision::world::body_enter_container transfer(
+      sanguis::collision::log const &,
+      sanguis::collision::world::object &, // NOLINT(google-runtime-references)
+      sanguis::collision::world::created,
+      sanguis::server::center const &,
+      sanguis::server::speed const &,
+      sanguis::collision::world::body_group);
 
-	[[nodiscard]]
-	sanguis::collision::world::body_exit_container
-	remove(
-		sanguis::collision::world::object & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  [[nodiscard]] sanguis::collision::world::body_exit_container
+  remove(sanguis::collision::world::object & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 private:
-	sanguis::server::radius const radius_;
+  sanguis::server::radius const radius_;
 
-	sanguis::server::optional_mass const mass_;
+  sanguis::server::optional_mass const mass_;
 
-	sanguis::collision::world::body_base_ref const body_base_;
+  sanguis::collision::world::body_base_ref const body_base_;
 
-	using
-	optional_body_unique_ptr
-	=
-	fcppt::optional::object<
-		sanguis::collision::world::body_unique_ptr
-	>;
+  using optional_body_unique_ptr =
+      fcppt::optional::object<sanguis::collision::world::body_unique_ptr>;
 
-	optional_body_unique_ptr body_;
+  optional_body_unique_ptr body_;
 };
 
 }
 
 #endif
-

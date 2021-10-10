@@ -16,71 +16,32 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::model::impl::deserialize
 {
 
-template<
-	typename Result
->
+template <typename Result>
 Result
-map(
-	sge::parse::json::object const &_object,
-	sge::charconv::utf8_string const &_name,
-	typename
-	Result::mapped_type (
-		*_deserialize_inner
-	)(
-		sge::parse::json::object const &
-	)
-)
+map(sge::parse::json::object const &_object,
+    sge::charconv::utf8_string const &_name,
+    typename Result::mapped_type (*_deserialize_inner)(sge::parse::json::object const &))
 {
-	return
-		fcppt::algorithm::map<
-			Result
-		>(
-			sge::parse::json::find_member_exn<
-				sge::parse::json::object
-			>(
-				fcppt::make_cref(
-					_object.members
-				),
-				_name
-			).get().members,
-			[
-				_deserialize_inner
-			](
-				sge::parse::json::member const &_member
-			)
-			{
-				return
-					std::make_pair(
-						typename
-						Result::key_type(
-							fcppt::optional::to_exception(
-								sge::charconv::utf8_string_to_fcppt(
-									_member.first
-								),
-								[]{
-									return
-										sanguis::model::exception{
-											FCPPT_TEXT("Failed to convert animation name")
-										};
-								}
-							)
-						),
-						_deserialize_inner(
-							sge::parse::json::get_exn<
-								sge::parse::json::object
-							>(
-								fcppt::make_cref(
-									_member.second.get()
-								)
-							).get()
-						)
-					);
-			}
-		);
+  return fcppt::algorithm::map<Result>(
+      sge::parse::json::find_member_exn<sge::parse::json::object>(
+          fcppt::make_cref(_object.members), _name)
+          .get()
+          .members,
+      [_deserialize_inner](sge::parse::json::member const &_member)
+      {
+        return std::make_pair(
+            typename Result::key_type(fcppt::optional::to_exception(
+                sge::charconv::utf8_string_to_fcppt(_member.first),
+                [] {
+                  return sanguis::model::exception{FCPPT_TEXT("Failed to convert animation name")};
+                })),
+            _deserialize_inner(sge::parse::json::get_exn<sge::parse::json::object>(
+                                   fcppt::make_cref(_member.second.get()))
+                                   .get()));
+      });
 }
 
 }

@@ -5,5 +5,4 @@
 #include <fcppt/log/level.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

@@ -5,5 +5,4 @@
 #include <sanguis/tiles/impl/optional_orientation_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

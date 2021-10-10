@@ -5,22 +5,13 @@
 #include <sanguis/server/weapons/modifiers/potential_tag.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
-template<
-	typename Parameters
->
-using
-potential
-=
-fcppt::strong_typedef<
-	sanguis::server::weapons::modifiers::container<
-		Parameters
-	>,
-	sanguis::server::weapons::modifiers::potential_tag
->;
+template <typename Parameters>
+using potential = fcppt::strong_typedef<
+    sanguis::server::weapons::modifiers::container<Parameters>,
+    sanguis::server::weapons::modifiers::potential_tag>;
 
 }
 

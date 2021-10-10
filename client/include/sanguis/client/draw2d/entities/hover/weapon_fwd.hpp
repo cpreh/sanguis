@@ -4,14 +4,10 @@
 #include <sanguis/weapon_description_fwd.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::client::draw2d::entities::hover
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::weapon_description,
-	weapon
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::weapon_description, weapon);
 
 }
 

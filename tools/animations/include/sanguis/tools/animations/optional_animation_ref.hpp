@@ -4,5 +4,4 @@
 #include <sanguis/tools/animations/optional_animation_ref_fwd.hpp>
 #include <fcppt/optional/reference.hpp>
 
-
 #endif

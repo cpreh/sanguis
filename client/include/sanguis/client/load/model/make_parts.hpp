@@ -8,16 +8,13 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
-sanguis::client::load::model::part_result
-make_parts(
-	fcppt::log::object &, // NOLINT(google-runtime-references)
-	std::filesystem::path const &,
-	sanguis::client::load::resource::context_cref
-);
+sanguis::client::load::model::part_result make_parts(
+    fcppt::log::object &, // NOLINT(google-runtime-references)
+    std::filesystem::path const &,
+    sanguis::client::load::resource::context_cref);
 
 }
 

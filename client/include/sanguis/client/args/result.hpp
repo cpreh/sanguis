@@ -3,5 +3,4 @@
 
 #include <sanguis/client/args/result_fwd.hpp>
 
-
 #endif

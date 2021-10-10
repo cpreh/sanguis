@@ -7,19 +7,13 @@
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
-[[nodiscard]]
-sanguis::creator::opening_container_array
-place_openings(
-	fcppt::reference<
-		sanguis::creator::grid
-	>,
-	sanguis::creator::impl::random::generator &, // NOLINT(google-runtime-references)
-	sanguis::creator::opening_count_array
-);
+[[nodiscard]] sanguis::creator::opening_container_array place_openings(
+    fcppt::reference<sanguis::creator::grid>,
+    sanguis::creator::impl::random::generator &, // NOLINT(google-runtime-references)
+    sanguis::creator::opening_count_array);
 
 }
 

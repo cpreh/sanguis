@@ -4,16 +4,11 @@
 #include <sanguis/server/weapons/spread_radius.hpp>
 #include <sanguis/server/weapons/attributes/basic_fwd.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-using
-spread_radius
-=
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::weapons::spread_radius
->;
+using spread_radius =
+    sanguis::server::weapons::attributes::basic<sanguis::server::weapons::spread_radius>;
 
 }
 

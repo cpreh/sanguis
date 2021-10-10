@@ -3,14 +3,13 @@
 
 #include <sanguis/server/auras/influence_fwd.hpp>
 
-
 namespace sanguis::server::auras
 {
 
 enum class influence
 {
-	buff,
-	debuff
+  buff,
+  debuff
 };
 
 }

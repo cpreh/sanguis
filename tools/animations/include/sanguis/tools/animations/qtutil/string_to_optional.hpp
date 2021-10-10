@@ -7,40 +7,17 @@
 #include <QString>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations::qtutil
 {
 
-template<
-	typename Result
->
-fcppt::optional::object<
-	Result
->
-string_to_optional(
-	QString const &_string
-)
+template <typename Result>
+fcppt::optional::object<Result> string_to_optional(QString const &_string)
 {
-	using
-	result_type
-	=
-	fcppt::optional::object<
-		Result
-	>;
+  using result_type = fcppt::optional::object<Result>;
 
-	return
-		_string.isEmpty()
-		?
-			result_type()
-		:
-			result_type(
-				Result(
-					sanguis::tools::animations::qtutil::to_fcppt_string(
-						_string
-					)
-				)
-			)
-		;
+  return _string.isEmpty()
+             ? result_type()
+             : result_type(Result(sanguis::tools::animations::qtutil::to_fcppt_string(_string)));
 }
 
 }

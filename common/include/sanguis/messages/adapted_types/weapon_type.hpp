@@ -7,5 +7,4 @@
 #include <sanguis/messages/adapted_types/weapon_type_fwd.hpp>
 #include <alda/bindings/variant.hpp>
 
-
 #endif

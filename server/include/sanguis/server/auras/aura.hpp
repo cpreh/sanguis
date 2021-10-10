@@ -16,71 +16,42 @@
 #include <boost/logic/tribool_fwd.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::auras
 {
 
-class aura
-:
-	private sanguis::server::collision::ghost_base
+class aura : private sanguis::server::collision::ghost_base
 {
-	FCPPT_NONMOVABLE(
-		aura
-	);
+  FCPPT_NONMOVABLE(aura);
+
 public:
-	~aura()
-	override;
+  ~aura() override;
 
-	[[nodiscard]]
-	sanguis::server::collision::ghost
-	create_ghost();
+  [[nodiscard]] sanguis::server::collision::ghost create_ghost();
 
-	[[nodiscard]]
-	virtual
-	sanguis::optional_aura_type
-	type() const = 0;
+  [[nodiscard]] virtual sanguis::optional_aura_type type() const = 0;
+
 protected:
-	aura(
-		sanguis::server::radius,
-		sanguis::collision::world::ghost_group
-	);
+  aura(sanguis::server::radius, sanguis::collision::world::ghost_group);
+
 private:
-	[[nodiscard]]
-	boost::logic::tribool
-	can_collide_with(
-		sanguis::collision::world::body_base const &
-	) const
-	override;
+  [[nodiscard]] boost::logic::tribool
+  can_collide_with(sanguis::collision::world::body_base const &) const override;
 
-	void
-	on_body_enter(
-		sanguis::collision::world::body_base_ref,
-		sanguis::collision::world::created
-	)
-	override;
+  void on_body_enter(
+      sanguis::collision::world::body_base_ref, sanguis::collision::world::created) override;
 
-	void
-	on_body_exit(
-		sanguis::collision::world::body_base & // NOLINT(google-runtime-references)
-	)
-	override;
+  void on_body_exit(sanguis::collision::world::body_base & // NOLINT(google-runtime-references)
+                    ) override;
 
-	virtual
-	void
-	enter(
-		sanguis::server::entities::with_body_ref,
-		sanguis::collision::world::created
-	) = 0;
+  virtual void
+      enter(sanguis::server::entities::with_body_ref, sanguis::collision::world::created) = 0;
 
-	virtual
-	void
-	leave(
-		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
-	) = 0; // NOLINT(google-runtime-references)
+  virtual void leave(sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
+                     ) = 0; // NOLINT(google-runtime-references)
 
-	sanguis::server::radius const radius_;
+  sanguis::server::radius const radius_;
 
-	sanguis::collision::world::ghost_group const collision_group_;
+  sanguis::collision::world::ghost_group const collision_group_;
 };
 
 }

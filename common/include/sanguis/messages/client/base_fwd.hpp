@@ -4,16 +4,10 @@
 #include <sanguis/messages/client/types/alda_type.hpp>
 #include <alda/message/base_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-base
-=
-alda::message::base<
-	sanguis::messages::client::types::alda_type
->;
+using base = alda::message::base<sanguis::messages::client::types::alda_type>;
 
 }
 

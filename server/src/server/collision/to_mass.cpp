@@ -2,12 +2,7 @@
 #include <sanguis/server/mass.hpp>
 #include <sanguis/server/collision/to_mass.hpp>
 
-
-sanguis::collision::mass
-sanguis::server::collision::to_mass(
-	sanguis::server::mass const &_mass
-)
+sanguis::collision::mass sanguis::server::collision::to_mass(sanguis::server::mass const &_mass)
 {
-	return
-		_mass.get();
+  return _mass.get();
 }

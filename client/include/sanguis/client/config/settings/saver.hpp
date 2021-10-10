@@ -5,28 +5,20 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::config::settings
 {
 
 class saver
 {
-	FCPPT_NONMOVABLE(
-		saver
-	);
-public:
-	explicit
-	saver(
-		fcppt::reference<
-			sanguis::client::config::settings::object const
-		>
-	);
+  FCPPT_NONMOVABLE(saver);
 
-	~saver();
+public:
+  explicit saver(fcppt::reference<sanguis::client::config::settings::object const>);
+
+  ~saver();
+
 private:
-	fcppt::reference<
-		sanguis::client::config::settings::object const
-	> const object_;
+  fcppt::reference<sanguis::client::config::settings::object const> const object_;
 };
 
 }

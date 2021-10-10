@@ -3,14 +3,10 @@
 
 #include <alda/bindings/float_type.hpp>
 
-
 namespace sanguis::messages::types
 {
 
-using
-space_unit
-=
-alda::bindings::float_type;
+using space_unit = alda::bindings::float_type;
 
 }
 

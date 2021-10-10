@@ -14,46 +14,28 @@
 #include <alda/bindings/record_variadic_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server::adapted_types
 {
 
-using
-perk_tree_node
-=
-alda::bindings::record_variadic<
-	fcppt::record::element<
-		sanguis::messages::roles::perk_label,
-		sanguis::messages::adapted_types::enum_<
-			sanguis::perk_type
-		>
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::perk_level,
-		sanguis::messages::adapted_types::level
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::required_perk_player_level,
-		sanguis::messages::adapted_types::level
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::required_perk_parent_level,
-		sanguis::messages::adapted_types::level
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::max_perk_level,
-		sanguis::messages::adapted_types::level
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::perk_parent,
-		alda::bindings::optional<
-			sanguis::perk_type,
-			sanguis::messages::adapted_types::enum_<
-				sanguis::perk_type
-			>
-		>
-	>
->;
+using perk_tree_node = alda::bindings::record_variadic<
+    fcppt::record::element<
+        sanguis::messages::roles::perk_label,
+        sanguis::messages::adapted_types::enum_<sanguis::perk_type>>,
+    fcppt::record::
+        element<sanguis::messages::roles::perk_level, sanguis::messages::adapted_types::level>,
+    fcppt::record::element<
+        sanguis::messages::roles::required_perk_player_level,
+        sanguis::messages::adapted_types::level>,
+    fcppt::record::element<
+        sanguis::messages::roles::required_perk_parent_level,
+        sanguis::messages::adapted_types::level>,
+    fcppt::record::
+        element<sanguis::messages::roles::max_perk_level, sanguis::messages::adapted_types::level>,
+    fcppt::record::element<
+        sanguis::messages::roles::perk_parent,
+        alda::bindings::optional<
+            sanguis::perk_type,
+            sanguis::messages::adapted_types::enum_<sanguis::perk_type>>>>;
 
 }
 

@@ -13,52 +13,36 @@
 #include <sanguis/server/weapons/attributes/damage.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-class melee
-:
-	public sanguis::server::weapons::weapon
+class melee : public sanguis::server::weapons::weapon
 {
-	FCPPT_NONMOVABLE(
-		melee
-	);
+  FCPPT_NONMOVABLE(melee);
+
 public:
-	melee(
-		sanguis::server::weapons::common_parameters const &,
-		sanguis::server::weapons::melee_parameters const &
-	);
+  melee(
+      sanguis::server::weapons::common_parameters const &,
+      sanguis::server::weapons::melee_parameters const &);
 
-	~melee()
-	override;
+  ~melee() override;
 
-	melee(
-		sanguis::server::weapons::parameters const &,
-		sanguis::server::weapons::attributes::damage,
-		sanguis::server::damage::array const &
-	);
+  melee(
+      sanguis::server::weapons::parameters const &,
+      sanguis::server::weapons::attributes::damage,
+      sanguis::server::damage::array const &);
+
 private:
-	[[nodiscard]]
-	sanguis::server::weapons::unique_ptr
-	clone() const
-	override;
+  [[nodiscard]] sanguis::server::weapons::unique_ptr clone() const override;
 
-	[[nodiscard]]
-	sanguis::server::weapons::attack_result
-	do_attack(
-		sanguis::server::weapons::attack const &
-	)
-	override;
+  [[nodiscard]] sanguis::server::weapons::attack_result
+  do_attack(sanguis::server::weapons::attack const &) override;
 
-	[[nodiscard]]
-	sanguis::weapon_attribute_vector
-	attributes() const
-	override;
+  [[nodiscard]] sanguis::weapon_attribute_vector attributes() const override;
 
-	sanguis::server::weapons::attributes::damage const damage_;
+  sanguis::server::weapons::attributes::damage const damage_;
 
-	sanguis::server::damage::array const damage_values_;
+  sanguis::server::damage::array const damage_values_;
 };
 
 }

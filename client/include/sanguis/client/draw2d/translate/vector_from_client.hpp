@@ -4,14 +4,10 @@
 #include <sanguis/client/draw2d/vector2_fwd.hpp>
 #include <sanguis/messages/types/vector2_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::translate
 {
 
-sanguis::messages::types::vector2
-vector_from_client(
-	sanguis::client::draw2d::vector2 const &
-);
+sanguis::messages::types::vector2 vector_from_client(sanguis::client::draw2d::vector2 const &);
 
 }
 

@@ -13,64 +13,32 @@
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server
 {
 
-template<
-	typename MessageTypes,
-	typename State
->
-boost::statechart::result
-dispatch(
-	State &_state,
-	sanguis::server::events::message const &_message,
-	sanguis::server::dispatch_default_function const &_handle_default_msg
-)
+template <typename MessageTypes, typename State>
+boost::statechart::result dispatch(
+    State &_state,
+    sanguis::server::events::message const &_message,
+    sanguis::server::dispatch_default_function const &_handle_default_msg)
 {
-	using
-	function_type
-	=
-	sanguis::server::message_function<
-		State
-	>;
+  using function_type = sanguis::server::message_function<State>;
 
-	FCPPT_PP_PUSH_WARNING
-	FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
-	static
-	sanguis::messages::client::call::object<
-		MessageTypes,
-		function_type
-	>
-	dispatcher;
+  static sanguis::messages::client::call::object<MessageTypes, function_type> dispatcher;
 
-	FCPPT_PP_POP_WARNING
+  FCPPT_PP_POP_WARNING
 
-	function_type function(
-		_state,
-		_message.id()
-	);
+  function_type function(_state, _message.id());
 
-	return
-		sanguis::messages::call::dispatch(
-			dispatcher,
-			function,
-			_message,
-			[
-				&_message,
-				&_handle_default_msg
-			](
-				auto const &_inner_message
-			)
-			{
-				return
-					_handle_default_msg(
-						_message.id(),
-						_inner_message
-					);
-			}
-		);
+  return sanguis::messages::call::dispatch(
+      dispatcher,
+      function,
+      _message,
+      [&_message, &_handle_default_msg](auto const &_inner_message)
+      { return _handle_default_msg(_message.id(), _inner_message); });
 }
 
 }

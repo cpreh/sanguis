@@ -4,15 +4,10 @@
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
-
 namespace sanguis::server::ai::pathing
 {
 
-bool
-tile_reached(
-	sanguis::server::entities::with_ai const &,
-	sanguis::creator::pos const &
-);
+bool tile_reached(sanguis::server::entities::with_ai const &, sanguis::creator::pos const &);
 
 }
 

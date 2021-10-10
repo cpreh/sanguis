@@ -5,31 +5,22 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::gui::hud
 {
 
 class scoped_details
 {
-	FCPPT_NONMOVABLE(
-		scoped_details
-	);
+  FCPPT_NONMOVABLE(scoped_details);
+
 public:
-	using
-	object_ref
-	=
-	fcppt::reference<
-		sanguis::client::gui::hud::object
-	>;
+  using object_ref = fcppt::reference<sanguis::client::gui::hud::object>;
 
-	explicit
-	scoped_details(
-		object_ref
-	);
+  explicit scoped_details(object_ref);
 
-	~scoped_details();
+  ~scoped_details();
+
 private:
-	object_ref hud_;
+  object_ref hud_;
 };
 
 }

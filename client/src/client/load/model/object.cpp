@@ -25,171 +25,87 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::client::load::model::object::object(
-	fcppt::log::object &_log,
-	std::filesystem::path &&_path,
-	sanguis::client::load::resource::context_cref const _context
-)
-try
-:
-	path_(
-		std::move(
-			_path
-		)
-	),
-	part_result_(
-		sanguis::client::load::model::make_parts(
-			_log,
-			path_,
-			_context
-		)
-	),
-	random_part_()
+    fcppt::log::object &_log,
+    std::filesystem::path &&_path,
+    sanguis::client::load::resource::context_cref const _context)
+try : path_(std::move(_path)),
+    part_result_(sanguis::client::load::model::make_parts(_log, path_, _context)), random_part_()
 {
-	FCPPT_LOG_DEBUG(
-		_log,
-		fcppt::log::out
-			<<
-			FCPPT_TEXT("Entering ")
-			<<
-			fcppt::filesystem::path_to_string(
-				_path
-			)
-	)
+  FCPPT_LOG_DEBUG(
+      _log, fcppt::log::out << FCPPT_TEXT("Entering ") << fcppt::filesystem::path_to_string(_path))
 }
-catch(
-	sge::core::exception const &_error
-)
+catch (sge::core::exception const &_error)
 {
-	FCPPT_LOG_ERROR(
-		_log,
-		fcppt::log::out
-			<<
-			FCPPT_TEXT("model \"")
-			<<
-			fcppt::filesystem::path_to_string(
-				_path
-			)
-			<<
-			FCPPT_TEXT("\": \"")
-			<<
-			_error.string()
-			<<
-			FCPPT_TEXT('"')
-	)
+  FCPPT_LOG_ERROR(
+      _log,
+      fcppt::log::out << FCPPT_TEXT("model \"") << fcppt::filesystem::path_to_string(_path)
+                      << FCPPT_TEXT("\": \"") << _error.string() << FCPPT_TEXT('"'))
 
-	throw;
+  throw;
 }
 
-sanguis::client::load::model::object::~object()
-= default;
+sanguis::client::load::model::object::~object() = default;
 
 sanguis::client::load::model::part const &
-sanguis::client::load::model::object::operator[](
-	fcppt::string const &_name
-) const
+sanguis::client::load::model::object::operator[](fcppt::string const &_name) const
 {
-	// TODO(philipp): optionals
-	auto const it(
-		this->parts().find(
-			_name
-		)
-	);
+  // TODO(philipp): optionals
+  auto const it(this->parts().find(_name));
 
-	if(
-		it
-		==
-		this->parts().end()
-	)
-	{
-		throw sanguis::exception(
-			FCPPT_TEXT("Category \"")
-			+
-			_name
-			+
-			FCPPT_TEXT("\" not found in ")
-			+
-			fcppt::filesystem::path_to_string(
-				path_
-			)
-		);
-	}
+  if (it == this->parts().end())
+  {
+    throw sanguis::exception(
+        FCPPT_TEXT("Category \"") + _name + FCPPT_TEXT("\" not found in ") +
+        fcppt::filesystem::path_to_string(path_));
+  }
 
-	return
-		*it->second;
+  return *it->second;
 }
 
-sanguis::client::load::model::part const &
-sanguis::client::load::model::object::random_part(
-	sanguis::random_generator &_random_generator
-) const
+sanguis::client::load::model::part const &sanguis::client::load::model::object::random_part(
+    sanguis::random_generator &_random_generator) const
 {
-	if(
-		!random_part_.has_value()
-	)
-	{
-		random_part_ =
-			optional_part_rand(
-				part_rand(
-					fcppt::make_ref(
-						_random_generator
-					),
-					part_map_distribution(
-						part_map_distribution::param_type::min(
-							0U
-						),
-						part_map_distribution::param_type::max(
-							this->parts().size() - 1U
-						)
-					)
-				)
-			);
-	}
+  if (!random_part_.has_value())
+  {
+    random_part_ = optional_part_rand(part_rand(
+        fcppt::make_ref(_random_generator),
+        part_map_distribution(
+            part_map_distribution::param_type::min(0U),
+            part_map_distribution::param_type::max(this->parts().size() - 1U))));
+  }
 
-	return
-		*std::next(
-			this->parts().begin(),
-			fcppt::cast::to_signed(
-				(
-					// TODO(philipp):
-					random_part_.get_unsafe()
-				)()
-			)
-		)->second;
+  return *std::next(
+              this->parts().begin(),
+              fcppt::cast::to_signed((
+                  // TODO(philipp):
+                  random_part_.get_unsafe())()))
+              ->second;
 }
 
-sanguis::client::load::model::object::size_type
-sanguis::client::load::model::object::size() const
+sanguis::client::load::model::object::size_type sanguis::client::load::model::object::size() const
 {
-	return
-		this->parts().size();
+  return this->parts().size();
 }
 
 sanguis::client::load::model::object::const_iterator
 sanguis::client::load::model::object::begin() const
 {
-	return
-		this->parts().begin();
+  return this->parts().begin();
 }
 
 sanguis::client::load::model::object::const_iterator
 sanguis::client::load::model::object::end() const
 {
-	return
-		this->parts().end();
+  return this->parts().end();
 }
 
-sanguis::model::cell_size
-sanguis::client::load::model::object::cell_size() const
+sanguis::model::cell_size sanguis::client::load::model::object::cell_size() const
 {
-	return
-		part_result_.cell_size();
+  return part_result_.cell_size();
 }
 
-sanguis::client::load::model::part_map const &
-sanguis::client::load::model::object::parts() const
+sanguis::client::load::model::part_map const &sanguis::client::load::model::object::parts() const
 {
-	return
-		part_result_.parts();
+  return part_result_.parts();
 }

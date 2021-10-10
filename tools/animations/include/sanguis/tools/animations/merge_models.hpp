@@ -3,15 +3,10 @@
 
 #include <sanguis/model/object.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
-sanguis::model::object
-merge_models(
-	sanguis::model::object const &,
-	sanguis::model::object &&
-);
+sanguis::model::object merge_models(sanguis::model::object const &, sanguis::model::object &&);
 
 }
 

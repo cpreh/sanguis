@@ -4,5 +4,4 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/random/generator/mt19937_impl.hpp>
 
-
 #endif

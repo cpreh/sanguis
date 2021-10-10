@@ -5,5 +5,4 @@
 #include <sanguis/creator/impl/random/uniform_int_wrapper_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int_decl.hpp>
 
-
 #endif

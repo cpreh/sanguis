@@ -3,14 +3,10 @@
 
 #include <sge/timer/clocks/standard.hpp>
 
-
 namespace sanguis
 {
 
-using
-clock
-=
-sge::timer::clocks::standard;
+using clock = sge::timer::clocks::standard;
 
 }
 

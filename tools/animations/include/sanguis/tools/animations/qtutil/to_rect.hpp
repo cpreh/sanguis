@@ -6,50 +6,19 @@
 #include <QRect>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations::qtutil
 {
 
-template<
-	typename T
->
-QRect
-to_rect(
-	fcppt::math::box::rect<
-		T
-	> const &_rect
-)
+template <typename T>
+QRect to_rect(fcppt::math::box::rect<T> const &_rect)
 {
-	typename
-	fcppt::math::box::rect<
-		T
-	>::dim const size(
-		_rect.size()
-	);
+  typename fcppt::math::box::rect<T>::dim const size(_rect.size());
 
-	return
-		QRect(
-			static_cast<
-				int
-			>(
-				_rect.left()
-			),
-			static_cast<
-				int
-			>(
-				_rect.top()
-			),
-			static_cast<
-				int
-			>(
-				size.w()
-			),
-			static_cast<
-				int
-			>(
-				size.h()
-			)
-		);
+  return QRect(
+      static_cast<int>(_rect.left()),
+      static_cast<int>(_rect.top()),
+      static_cast<int>(size.w()),
+      static_cast<int>(size.h()));
 }
 
 }

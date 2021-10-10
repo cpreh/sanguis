@@ -11,61 +11,34 @@
 #include <sge/input/focus/event/key_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::control
 {
 
 class input_translator
 {
-	FCPPT_NONMOVABLE(
-		input_translator
-	);
+  FCPPT_NONMOVABLE(input_translator);
+
 public:
-	explicit
-	input_translator(
-		sanguis::client::control::actions::callback &&
-	);
+  explicit input_translator(sanguis::client::control::actions::callback &&);
 
-	~input_translator();
+  ~input_translator();
 
-	void
-	on_event(
-		sge::input::event_base const &
-	);
+  void on_event(sge::input::event_base const &);
+
 private:
-	void
-	key_event(
-		sge::input::focus::event::key const &
-	);
+  void key_event(sge::input::focus::event::key const &);
 
-	void
-	move_event(
-		sge::input::cursor::event::move const &
-	);
+  void move_event(sge::input::cursor::event::move const &);
 
-	void
-	button_event(
-		sge::input::cursor::event::button const &
-	);
+  void button_event(sge::input::cursor::event::button const &);
 
-	void
-	direction_event(
-		sge::input::focus::event::key const &
-	);
+  void direction_event(sge::input::focus::event::key const &);
 
-	void
-	nullary_event(
-		bool pressed,
-		sanguis::client::control::actions::nullary_type
-	);
+  void nullary_event(bool pressed, sanguis::client::control::actions::nullary_type);
 
-	void
-	binary_event(
-		bool pressed,
-		sanguis::client::control::actions::binary_type
-	);
+  void binary_event(bool pressed, sanguis::client::control::actions::binary_type);
 
-	sanguis::client::control::actions::callback const callback_;
+  sanguis::client::control::actions::callback const callback_;
 };
 
 }

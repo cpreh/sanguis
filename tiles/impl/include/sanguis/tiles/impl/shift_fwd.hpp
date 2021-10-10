@@ -4,14 +4,10 @@
 #include <sanguis/tiles/pos_fwd.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::tiles::pos,
-	shift
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::tiles::pos, shift);
 
 }
 

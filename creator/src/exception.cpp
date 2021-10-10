@@ -6,45 +6,18 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::creator::exception::exception(
-	fcppt::string &&_message
-)
-:
-	fcppt::exception(
-		FCPPT_TEXT("creator: ")
-		+
-		std::move(
-			_message
-		)
-	)
+sanguis::creator::exception::exception(fcppt::string &&_message)
+    : fcppt::exception(FCPPT_TEXT("creator: ") + std::move(_message))
 {
 }
 
-sanguis::creator::exception::exception(
-	exception &&
-)
-noexcept
-= default;
+sanguis::creator::exception::exception(exception &&) noexcept = default;
 
-sanguis::creator::exception::exception(
-	exception const &
-)
-= default;
+sanguis::creator::exception::exception(exception const &) = default;
 
 sanguis::creator::exception &
-sanguis::creator::exception::operator=(
-	exception &&
-)
-noexcept
-= default;
+sanguis::creator::exception::operator=(exception &&) noexcept = default;
 
-sanguis::creator::exception &
-sanguis::creator::exception::operator=(
-	exception const &
-)
-= default;
+sanguis::creator::exception &sanguis::creator::exception::operator=(exception const &) = default;
 
-sanguis::creator::exception::~exception()
-noexcept
-= default;
+sanguis::creator::exception::~exception() noexcept = default;

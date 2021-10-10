@@ -5,20 +5,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
-
 sanguis::collision::world::object_unique_ptr
-sanguis::collision::world::create(
-	sanguis::collision::world::parameters const &_parameters
-)
+sanguis::collision::world::create(sanguis::collision::world::parameters const &_parameters)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::collision::world::object
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::collision::impl::world::simple::object
-			>(
-				_parameters
-			)
-		);
+  return fcppt::unique_ptr_to_base<sanguis::collision::world::object>(
+      fcppt::make_unique_ptr<sanguis::collision::impl::world::simple::object>(_parameters));
 }

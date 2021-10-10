@@ -4,14 +4,10 @@
 #include <sanguis/weapon_attribute_fwd.hpp>
 #include <sanguis/server/weapons/attributes/health_fwd.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-sanguis::weapon_attribute
-make_health(
-	sanguis::server::weapons::attributes::health const &
-);
+sanguis::weapon_attribute make_health(sanguis::server::weapons::attributes::health const &);
 
 }
 

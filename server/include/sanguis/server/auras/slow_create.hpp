@@ -12,38 +12,22 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
-
 namespace sanguis::server::auras
 {
 
-template<
-	typename Buff
->
-sanguis::server::auras::unique_ptr
-slow_create(
-	sanguis::server::radius const _radius,
-	sanguis::server::team const _team,
-	sanguis::server::buffs::slow_factor const _factor
-)
+template <typename Buff>
+sanguis::server::auras::unique_ptr slow_create(
+    sanguis::server::radius const _radius,
+    sanguis::server::team const _team,
+    sanguis::server::buffs::slow_factor const _factor)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			sanguis::server::auras::aura
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::auras::buff
-			>(
-				_radius,
-				_team,
-				sanguis::aura_type::slow,
-				sanguis::server::auras::influence::debuff,
-				sanguis::server::buffs::slow_create<
-					Buff
-				>(
-					_factor
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_base<sanguis::server::auras::aura>(
+      fcppt::make_unique_ptr<sanguis::server::auras::buff>(
+          _radius,
+          _team,
+          sanguis::aura_type::slow,
+          sanguis::server::auras::influence::debuff,
+          sanguis::server::buffs::slow_create<Buff>(_factor)));
 }
 
 }

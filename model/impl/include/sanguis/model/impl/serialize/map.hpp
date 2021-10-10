@@ -9,55 +9,26 @@
 #include <sge/parse/json/object.hpp>
 #include <fcppt/algorithm/map.hpp>
 
-
 namespace sanguis::model::impl::serialize
 {
 
-template<
-	typename Map
->
+template <typename Map>
 sge::parse::json::member
-map(
-	Map const &_map,
-	sge::charconv::utf8_string const &_name,
-	sge::parse::json::object (
-		*_serialize_inner
-	)(
-		typename Map::mapped_type const &
-	)
-)
+map(Map const &_map,
+    sge::charconv::utf8_string const &_name,
+    sge::parse::json::object (*_serialize_inner)(typename Map::mapped_type const &))
 {
-	return
-		sge::parse::json::member(
-			_name,
-			sge::parse::json::make_value(
-				sge::parse::json::object(
-					fcppt::algorithm::map<
-						sge::parse::json::member_map
-					>(
-						_map,
-						[
-							_serialize_inner
-						](
-							typename Map::value_type const &_pair
-						)
-						{
-							return
-								sge::parse::json::member(
-									sge::charconv::fcppt_string_to_utf8(
-										_pair.first.get()
-									),
-									sge::parse::json::make_value(
-										_serialize_inner(
-											_pair.second
-										)
-									)
-								);
-						}
-					)
-				)
-			)
-		);
+  return sge::parse::json::member(
+      _name,
+      sge::parse::json::make_value(
+          sge::parse::json::object(fcppt::algorithm::map<sge::parse::json::member_map>(
+              _map,
+              [_serialize_inner](typename Map::value_type const &_pair)
+              {
+                return sge::parse::json::member(
+                    sge::charconv::fcppt_string_to_utf8(_pair.first.get()),
+                    sge::parse::json::make_value(_serialize_inner(_pair.second)));
+              }))));
 }
 
 }

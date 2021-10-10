@@ -8,39 +8,15 @@
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::server::space_unit
-sanguis::server::weapons::modifiers::random_increase(
-	sanguis::random_generator &_random_generator,
-	sanguis::server::entities::enemies::difficulty const _difficulty
-)
+sanguis::server::space_unit sanguis::server::weapons::modifiers::random_increase(
+    sanguis::random_generator &_random_generator,
+    sanguis::server::entities::enemies::difficulty const _difficulty)
 {
-	using
-	parameters
-	=
-	fcppt::random::distribution::parameters::uniform_real<
-		sanguis::server::space_unit
-	>;
+  using parameters =
+      fcppt::random::distribution::parameters::uniform_real<sanguis::server::space_unit>;
 
-	auto distribution(
-		fcppt::random::distribution::make_basic(
-			parameters(
-				parameters::min(
-					1.F
-				),
-				parameters::sup(
-					std::sqrt(
-						std::sqrt(
-							_difficulty.get()
-						)
-					)
-				)
-			)
-		)
-	);
+  auto distribution(fcppt::random::distribution::make_basic(
+      parameters(parameters::min(1.F), parameters::sup(std::sqrt(std::sqrt(_difficulty.get()))))));
 
-	return
-		distribution(
-			_random_generator
-		);
+  return distribution(_random_generator);
 }

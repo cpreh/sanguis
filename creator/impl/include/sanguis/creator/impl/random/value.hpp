@@ -5,7 +5,6 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::creator::impl::random
 {
 

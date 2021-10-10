@@ -5,15 +5,11 @@
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/creator/impl/optional_pos.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
 sanguis::creator::impl::optional_pos
-closest_empty(
-	sanguis::creator::grid const &,
-	sanguis::creator::pos const &
-);
+closest_empty(sanguis::creator::grid const &, sanguis::creator::pos const &);
 
 }
 

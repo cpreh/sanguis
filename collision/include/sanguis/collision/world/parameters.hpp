@@ -6,28 +6,19 @@
 #include <sanguis/creator/grid_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::collision::world
 {
 
 class parameters
 {
 public:
-	SANGUIS_COLLISION_SYMBOL
-	explicit
-	parameters(
-		fcppt::reference<
-			sanguis::creator::grid const
-		>
-	);
+  SANGUIS_COLLISION_SYMBOL
+  explicit parameters(fcppt::reference<sanguis::creator::grid const>);
 
-	[[nodiscard]]
-	sanguis::creator::grid const &
-	grid() const;
+  [[nodiscard]] sanguis::creator::grid const &grid() const;
+
 private:
-	fcppt::reference<
-		sanguis::creator::grid const
-	> grid_;
+  fcppt::reference<sanguis::creator::grid const> grid_;
 };
 
 }

@@ -4,16 +4,10 @@
 #include <sanguis/creator/signed_pos_fwd.hpp>
 #include <fcppt/container/grid/spiral_range_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-grid_spiral_range
-=
-fcppt::container::grid::spiral_range<
-	sanguis::creator::signed_pos
->;
+using grid_spiral_range = fcppt::container::grid::spiral_range<sanguis::creator::signed_pos>;
 
 }
 

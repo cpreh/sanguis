@@ -5,15 +5,11 @@
 #include <sanguis/common/symbol.hpp>
 #include <sanguis/messages/types/string_vector.hpp>
 
-
 namespace sanguis::messages::convert
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::messages::types::string_vector
-to_string_vector(
-	sanguis::string_vector const &
-);
+sanguis::messages::types::string_vector to_string_vector(sanguis::string_vector const &);
 
 }
 

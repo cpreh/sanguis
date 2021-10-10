@@ -4,17 +4,10 @@
 #include <sanguis/client/control/cursor_unit.hpp>
 #include <fcppt/math/vector/static_fwd.hpp>
 
-
 namespace sanguis::client::control
 {
 
-using
-cursor_position
-=
-fcppt::math::vector::static_<
-	sanguis::client::control::cursor_unit,
-	2
->;
+using cursor_position = fcppt::math::vector::static_<sanguis::client::control::cursor_unit, 2>;
 
 }
 

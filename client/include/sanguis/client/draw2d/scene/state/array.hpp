@@ -4,5 +4,4 @@
 #include <sanguis/client/draw2d/scene/state/array_fwd.hpp>
 #include <fcppt/enum/array_impl.hpp>
 
-
 #endif

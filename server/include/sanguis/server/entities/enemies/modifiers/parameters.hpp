@@ -5,23 +5,18 @@
 #include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 
-
 namespace sanguis::server::entities::enemies::modifiers
 {
 
 class parameters
 {
 public:
-	explicit
-	parameters(
-		sanguis::random_generator_ref
-	);
+  explicit parameters(sanguis::random_generator_ref);
 
-	[[nodiscard]]
-	sanguis::random_generator &
-	random_generator() const;
+  [[nodiscard]] sanguis::random_generator &random_generator() const;
+
 private:
-	sanguis::random_generator_ref random_generator_;
+  sanguis::random_generator_ref random_generator_;
 };
 
 }

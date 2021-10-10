@@ -24,69 +24,41 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
-	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
-	sanguis::client::draw2d::insert_own_callback &&_insert,
-	sanguis::load::model::path &&_path,
-	sanguis::client::draw2d::speed const &_speed,
-	sanguis::client::draw2d::sprite::center const &_center,
-	sanguis::client::draw2d::sprite::rotation const _rotation,
-	sanguis::client::draw2d::aoe const _aoe
-)
-:
-	sanguis::client::draw2d::entities::model::object(
-		sanguis::client::draw2d::entities::model::parameters(
-			_load_parameters,
-			std::move(
-				_path
-			),
-			sanguis::client::draw2d::entities::constant_order(
-				sanguis::client::draw2d::z_ordering::bullet
-			),
-			sanguis::client::optional_health_pair(),
-			sanguis::client::draw2d::entities::model::decay_option::immediate,
-			sanguis::optional_primary_weapon_type(),
-			sanguis::weapon_status::nothing,
-			_speed,
-			_center,
-			_rotation,
-			sanguis::client::draw2d::sprite::normal::white()
-		)
-	),
-	load_parameters_{
-		_load_parameters
-	},
-	insert_(
-		std::move(
-			_insert
-		)
-	),
-	aoe_(
-		_aoe
-	)
+    sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
+    sanguis::client::draw2d::insert_own_callback &&_insert,
+    sanguis::load::model::path &&_path,
+    sanguis::client::draw2d::speed const &_speed,
+    sanguis::client::draw2d::sprite::center const &_center,
+    sanguis::client::draw2d::sprite::rotation const _rotation,
+    sanguis::client::draw2d::aoe const _aoe)
+    : sanguis::client::draw2d::entities::model::object(
+          sanguis::client::draw2d::entities::model::parameters(
+              _load_parameters,
+              std::move(_path),
+              sanguis::client::draw2d::entities::constant_order(
+                  sanguis::client::draw2d::z_ordering::bullet),
+              sanguis::client::optional_health_pair(),
+              sanguis::client::draw2d::entities::model::decay_option::immediate,
+              sanguis::optional_primary_weapon_type(),
+              sanguis::weapon_status::nothing,
+              _speed,
+              _center,
+              _rotation,
+              sanguis::client::draw2d::sprite::normal::white())),
+      load_parameters_{_load_parameters},
+      insert_(std::move(_insert)),
+      aoe_(_aoe)
 {
 }
 
-sanguis::client::draw2d::entities::aoe_bullet::~aoe_bullet()
-= default;
+sanguis::client::draw2d::entities::aoe_bullet::~aoe_bullet() = default;
 
-void
-sanguis::client::draw2d::entities::aoe_bullet::on_die()
+void sanguis::client::draw2d::entities::aoe_bullet::on_die()
 {
-	insert_(
-		fcppt::unique_ptr_to_base<
-			sanguis::client::draw2d::entities::own
-		>(
-			fcppt::make_unique_ptr<
-				sanguis::client::draw2d::entities::explosion
-			>(
-				load_parameters_,
-				this->center(),
-				aoe_
-			)
-		)
-	);
+  insert_(fcppt::unique_ptr_to_base<sanguis::client::draw2d::entities::own>(
+      fcppt::make_unique_ptr<sanguis::client::draw2d::entities::explosion>(
+          load_parameters_, this->center(), aoe_)));
 
-	sanguis::client::draw2d::entities::model::object::on_die();
+  sanguis::client::draw2d::entities::model::object::on_die();
 }

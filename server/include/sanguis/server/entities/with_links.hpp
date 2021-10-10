@@ -8,41 +8,32 @@
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class with_links
-:
-	public virtual sanguis::server::entities::base,
-	public virtual sanguis::server::entities::ifaces::with_links
+class with_links : public virtual sanguis::server::entities::base,
+                   public virtual sanguis::server::entities::ifaces::with_links
 {
-	FCPPT_NONMOVABLE(
-		with_links
-	);
+  FCPPT_NONMOVABLE(with_links);
+
 protected:
-	with_links();
+  with_links();
+
 public:
-	~with_links()
-	override = 0;
+  ~with_links() override = 0;
 
-	[[nodiscard]]
-	sanguis::server::entities::auto_weak_link
-	link()
-	final;
+  [[nodiscard]] sanguis::server::entities::auto_weak_link link() final;
+
 protected:
-	void
-	reset_links()
-	override;
+  void reset_links() override;
+
 private:
-	friend class sanguis::server::entities::auto_weak_link;
+  friend class sanguis::server::entities::auto_weak_link;
 
-	void
-	insert_link(
-		sanguis::server::entities::auto_weak_link & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void insert_link(sanguis::server::entities::auto_weak_link & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	sanguis::server::entities::link_container links_;
+  sanguis::server::entities::link_container links_;
 };
 
 }

@@ -7,43 +7,34 @@
 #include <sanguis/client/gui/menu/callbacks/quickstart.hpp>
 #include <sanguis/client/gui/menu/callbacks/quit.hpp>
 
-
 namespace sanguis::client::gui::menu::callbacks
 {
 
 class object
 {
 public:
-	object(
-		sanguis::client::gui::menu::callbacks::connect &&,
-		sanguis::client::gui::menu::callbacks::cancel_connect &&,
-		sanguis::client::gui::menu::callbacks::quickstart &&,
-		sanguis::client::gui::menu::callbacks::quit &&
-	);
+  object(
+      sanguis::client::gui::menu::callbacks::connect &&,
+      sanguis::client::gui::menu::callbacks::cancel_connect &&,
+      sanguis::client::gui::menu::callbacks::quickstart &&,
+      sanguis::client::gui::menu::callbacks::quit &&);
 
-	[[nodiscard]]
-	sanguis::client::gui::menu::callbacks::connect const &
-	connect() const;
+  [[nodiscard]] sanguis::client::gui::menu::callbacks::connect const &connect() const;
 
-	[[nodiscard]]
-	sanguis::client::gui::menu::callbacks::cancel_connect const &
-	cancel_connect() const;
+  [[nodiscard]] sanguis::client::gui::menu::callbacks::cancel_connect const &cancel_connect() const;
 
-	[[nodiscard]]
-	sanguis::client::gui::menu::callbacks::quickstart const &
-	quickstart() const;
+  [[nodiscard]] sanguis::client::gui::menu::callbacks::quickstart const &quickstart() const;
 
-	[[nodiscard]]
-	sanguis::client::gui::menu::callbacks::quit const &
-	quit() const;
+  [[nodiscard]] sanguis::client::gui::menu::callbacks::quit const &quit() const;
+
 private:
-	sanguis::client::gui::menu::callbacks::connect connect_;
+  sanguis::client::gui::menu::callbacks::connect connect_;
 
-	sanguis::client::gui::menu::callbacks::cancel_connect cancel_connect_;
+  sanguis::client::gui::menu::callbacks::cancel_connect cancel_connect_;
 
-	sanguis::client::gui::menu::callbacks::quickstart quickstart_;
+  sanguis::client::gui::menu::callbacks::quickstart quickstart_;
 
-	sanguis::client::gui::menu::callbacks::quit quit_;
+  sanguis::client::gui::menu::callbacks::quit quit_;
 };
 
 }

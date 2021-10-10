@@ -4,13 +4,10 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/seed.hpp>
 
-
 namespace sanguis::server::world
 {
 
-sanguis::creator::seed
-random_seed(
-	sanguis::random_generator & // NOLINT(google-runtime-references)
+sanguis::creator::seed random_seed(sanguis::random_generator & // NOLINT(google-runtime-references)
 ); // NOLINT(google-runtime-references)
 
 }

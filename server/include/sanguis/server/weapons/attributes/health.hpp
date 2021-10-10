@@ -5,12 +5,6 @@
 #include <sanguis/server/weapons/attributes/basic_decl.hpp>
 #include <sanguis/server/weapons/attributes/health_fwd.hpp>
 
-
-extern
-template
-class
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::health
->;
+extern template class sanguis::server::weapons::attributes::basic<sanguis::server::health>;
 
 #endif

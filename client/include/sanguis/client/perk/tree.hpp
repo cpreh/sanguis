@@ -5,5 +5,4 @@
 #include <sanguis/client/perk/tree_fwd.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 
-
 #endif

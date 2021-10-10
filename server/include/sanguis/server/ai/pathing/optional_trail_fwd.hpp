@@ -4,16 +4,10 @@
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::server::ai::pathing
 {
 
-using
-optional_trail
-=
-fcppt::optional::object<
-	sanguis::server::ai::pathing::trail
->;
+using optional_trail = fcppt::optional::object<sanguis::server::ai::pathing::trail>;
 
 }
 

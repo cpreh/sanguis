@@ -4,16 +4,10 @@
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/attributes/basic_fwd.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-using
-damage
-=
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::weapons::damage
->;
+using damage = sanguis::server::weapons::attributes::basic<sanguis::server::weapons::damage>;
 
 }
 

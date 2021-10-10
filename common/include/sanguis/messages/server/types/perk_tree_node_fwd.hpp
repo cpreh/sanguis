@@ -8,16 +8,11 @@
 #include <alda/bindings/strong_typedef_decl.hpp>
 #include <alda/raw/element_type.hpp>
 
-
 namespace sanguis::messages::server::types
 {
 
-using
-perk_tree_node
-=
-alda::raw::element_type<
-	sanguis::messages::server::adapted_types::perk_tree_node
->;
+using perk_tree_node =
+    alda::raw::element_type<sanguis::messages::server::adapted_types::perk_tree_node>;
 
 }
 

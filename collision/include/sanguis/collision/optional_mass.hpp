@@ -5,5 +5,4 @@
 #include <sanguis/collision/optional_mass_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

@@ -4,14 +4,10 @@
 #include <sanguis/duration.hpp>
 #include <sge/gui/duration.hpp>
 
-
 namespace sanguis::client::gui
 {
 
-sge::gui::duration
-to_duration(
-	sanguis::duration const &
-);
+sge::gui::duration to_duration(sanguis::duration const &);
 
 }
 

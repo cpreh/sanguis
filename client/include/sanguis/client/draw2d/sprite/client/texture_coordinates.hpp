@@ -4,5 +4,4 @@
 #include <sanguis/client/draw2d/sprite/client/texture_coordinates_fwd.hpp>
 #include <sge/sprite/types/texture_coordinates.hpp>
 
-
 #endif

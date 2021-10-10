@@ -4,14 +4,11 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/factory/parameters_fwd.hpp>
 
-
 namespace sanguis::server::weapons::factory
 {
 
 sanguis::server::weapons::unique_ptr
-rocket_launcher(
-	sanguis::server::weapons::factory::parameters const &
-);
+rocket_launcher(sanguis::server::weapons::factory::parameters const &);
 
 }
 

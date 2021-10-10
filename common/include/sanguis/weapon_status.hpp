@@ -3,16 +3,15 @@
 
 #include <sanguis/weapon_status_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class weapon_status
 {
-	nothing,
-	attacking,
-	reloading,
-	fcppt_maximum = reloading
+  nothing,
+  attacking,
+  reloading,
+  fcppt_maximum = reloading
 };
 
 }

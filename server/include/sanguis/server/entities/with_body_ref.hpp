@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-using
-with_body_ref
-=
-fcppt::reference<
-	sanguis::server::entities::with_body
->;
+using with_body_ref = fcppt::reference<sanguis::server::entities::with_body>;
 
 }
 

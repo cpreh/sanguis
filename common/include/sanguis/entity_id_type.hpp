@@ -5,14 +5,10 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis
 {
 
-using
-entity_id_type
-=
-std::uint32_t;
+using entity_id_type = std::uint32_t;
 
 }
 

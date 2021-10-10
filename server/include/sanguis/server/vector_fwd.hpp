@@ -4,17 +4,10 @@
 #include <sanguis/server/space_unit.hpp>
 #include <fcppt/math/vector/static_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-vector
-=
-fcppt::math::vector::static_<
-	sanguis::server::space_unit,
-	2
->;
+using vector = fcppt::math::vector::static_<sanguis::server::space_unit, 2>;
 
 }
 

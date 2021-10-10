@@ -10,20 +10,17 @@
 #include <sanguis/creator/grid_fwd.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
-sanguis::client::draw2d::scene::world::batch_grid
-generate_batches(
-	fcppt::log::context_reference,
-	sanguis::random_generator &, // NOLINT(google-runtime-references)
-	sanguis::client::draw::debug,
-	sanguis::creator::grid const &,
-	sanguis::creator::background_grid const &,
-	sanguis::client::load::tiles::context_ref,
-	sanguis::client::draw2d::scene::world::sprite::buffers_ref
-);
+sanguis::client::draw2d::scene::world::batch_grid generate_batches(
+    fcppt::log::context_reference,
+    sanguis::random_generator &, // NOLINT(google-runtime-references)
+    sanguis::client::draw::debug,
+    sanguis::creator::grid const &,
+    sanguis::creator::background_grid const &,
+    sanguis::client::load::tiles::context_ref,
+    sanguis::client::draw2d::scene::world::sprite::buffers_ref);
 
 }
 

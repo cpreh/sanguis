@@ -4,14 +4,10 @@
 #include <sanguis/duration.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::server::entities::spawns
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::duration,
-	interval
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::duration, interval);
 
 }
 

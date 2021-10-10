@@ -4,14 +4,10 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/factory/parameters_fwd.hpp>
 
-
 namespace sanguis::server::weapons::factory
 {
 
-sanguis::server::weapons::unique_ptr
-shotgun(
-	sanguis::server::weapons::factory::parameters const &
-);
+sanguis::server::weapons::unique_ptr shotgun(sanguis::server::weapons::factory::parameters const &);
 
 }
 

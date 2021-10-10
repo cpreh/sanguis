@@ -7,17 +7,14 @@
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/server/random/grid_distance.hpp>
 
-
 namespace sanguis::server::random
 {
 
-sanguis::creator::optional_pos
-grid_pos_around(
-	sanguis::random_generator &, // NOLINT(google-runtime-references)
-	sanguis::creator::dim const &,
-	sanguis::creator::pos const &,
-	sanguis::server::random::grid_distance
-);
+sanguis::creator::optional_pos grid_pos_around(
+    sanguis::random_generator &, // NOLINT(google-runtime-references)
+    sanguis::creator::dim const &,
+    sanguis::creator::pos const &,
+    sanguis::server::random::grid_distance);
 
 }
 

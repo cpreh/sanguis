@@ -4,5 +4,4 @@
 #include <sanguis/client/control/direction_vector_fwd.hpp>
 #include <fcppt/math/vector/static.hpp>
 
-
 #endif

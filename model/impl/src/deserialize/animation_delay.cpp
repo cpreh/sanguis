@@ -12,36 +12,12 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::model::optional_animation_delay
-sanguis::model::impl::deserialize::animation_delay(
-	sge::parse::json::object const &_object
-)
+sanguis::model::impl::deserialize::animation_delay(sge::parse::json::object const &_object)
 {
-	return
-		fcppt::optional::map(
-			fcppt::optional::copy_value(
-				sge::parse::json::find_member<
-					sge::parse::json::int_type
-				>(
-					fcppt::make_cref(
-						_object.members
-					),
-					sge::charconv::utf8_string{
-						"delay"
-					}
-				)
-			),
-			[](
-				sge::parse::json::int_type const _value
-			)
-			{
-				return
-					sanguis::model::animation_delay{
-						std::chrono::milliseconds{
-							_value
-						}
-					};
-			}
-		);
+  return fcppt::optional::map(
+      fcppt::optional::copy_value(sge::parse::json::find_member<sge::parse::json::int_type>(
+          fcppt::make_cref(_object.members), sge::charconv::utf8_string{"delay"})),
+      [](sge::parse::json::int_type const _value)
+      { return sanguis::model::animation_delay{std::chrono::milliseconds{_value}}; });
 }

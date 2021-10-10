@@ -7,17 +7,10 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::global
 {
 
-using
-dest_world_pair
-=
-std::pair<
-	sanguis::server::dest_world_id,
-	sanguis::creator::opening
->;
+using dest_world_pair = std::pair<sanguis::server::dest_world_id, sanguis::creator::opening>;
 
 }
 

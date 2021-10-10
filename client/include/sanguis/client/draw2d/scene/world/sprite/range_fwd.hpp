@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/scene/world/sprite/choices_fwd.hpp>
 #include <sge/sprite/render/range_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world::sprite
 {
 
-using
-range
-=
-sge::sprite::render::range<
-	sanguis::client::draw2d::scene::world::sprite::choices
->;
+using range = sge::sprite::render::range<sanguis::client::draw2d::scene::world::sprite::choices>;
 
 }
 

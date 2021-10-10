@@ -3,14 +3,10 @@
 
 #include <sanguis/client/draw2d/funit.hpp>
 
-
 namespace sanguis::client::draw2d::sprite
 {
 
-using
-float_unit
-=
-sanguis::client::draw2d::funit;
+using float_unit = sanguis::client::draw2d::funit;
 
 }
 

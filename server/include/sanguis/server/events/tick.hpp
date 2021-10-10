@@ -8,56 +8,32 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::events
 {
 
-class tick
-:
-	public boost::statechart::event<
-		tick
-	>
+class tick : public boost::statechart::event<tick>
 {
 public:
-	tick(
-		sanguis::duration const &,
-		sanguis::slowdown
-	);
+  tick(sanguis::duration const &, sanguis::slowdown);
 
-	tick(
-		tick &&
-	)
-	noexcept;
+  tick(tick &&) noexcept;
 
-	tick(
-		tick const &
-	);
+  tick(tick const &);
 
-	tick &
-	operator=(
-		tick &&
-	)
-	noexcept;
+  tick &operator=(tick &&) noexcept;
 
-	tick &
-	operator=(
-		tick const &
-	);
+  tick &operator=(tick const &);
 
-	~tick()
-	override;
+  ~tick() override;
 
-	[[nodiscard]]
-	sanguis::duration const &
-	delta() const;
+  [[nodiscard]] sanguis::duration const &delta() const;
 
-	[[nodiscard]]
-	sanguis::slowdown
-	slowdown() const;
+  [[nodiscard]] sanguis::slowdown slowdown() const;
+
 private:
-	sanguis::duration delta_;
+  sanguis::duration delta_;
 
-	sanguis::slowdown slowdown_;
+  sanguis::slowdown slowdown_;
 };
 
 }

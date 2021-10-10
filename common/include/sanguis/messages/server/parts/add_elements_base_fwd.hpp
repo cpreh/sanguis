@@ -10,27 +10,16 @@
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server::parts
 {
 
-using
-add_elements_base
-=
-fcppt::mpl::list::object<
-	fcppt::record::element<
-		sanguis::messages::roles::center,
-		sanguis::messages::adapted_types::vector2
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::angle,
-		sanguis::messages::adapted_types::space_unit
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::created,
-		sanguis::messages::adapted_types::bool_
-	>
->;
+using add_elements_base = fcppt::mpl::list::object<
+    fcppt::record::
+        element<sanguis::messages::roles::center, sanguis::messages::adapted_types::vector2>,
+    fcppt::record::
+        element<sanguis::messages::roles::angle, sanguis::messages::adapted_types::space_unit>,
+    fcppt::record::
+        element<sanguis::messages::roles::created, sanguis::messages::adapted_types::bool_>>;
 
 }
 

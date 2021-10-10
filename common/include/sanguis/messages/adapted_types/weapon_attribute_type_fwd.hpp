@@ -4,16 +4,11 @@
 #include <sanguis/weapon_attribute_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-weapon_attribute_type
-=
-sanguis::messages::adapted_types::enum_<
-	sanguis::weapon_attribute_type
->;
+using weapon_attribute_type =
+    sanguis::messages::adapted_types::enum_<sanguis::weapon_attribute_type>;
 
 }
 

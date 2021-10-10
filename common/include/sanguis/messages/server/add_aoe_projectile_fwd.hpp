@@ -17,41 +17,23 @@
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-add_aoe_projectile
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::add_aoe_projectile
-	>,
-	alda::bindings::record<
-		fcppt::mpl::list::join<
-			fcppt::mpl::list::object<
-				fcppt::mpl::list::object<
-					sanguis::messages::server::parts::entity_id
-				>,
-				sanguis::messages::server::parts::add_elements_base,
-				fcppt::mpl::list::object<
-					sanguis::messages::server::parts::speed,
-					fcppt::record::element<
-						sanguis::messages::roles::aoe,
-						sanguis::messages::adapted_types::space_unit
-					>,
-					fcppt::record::element<
-						sanguis::messages::roles::aoe_projectile_type,
-						sanguis::messages::adapted_types::enum_<
-							sanguis::aoe_projectile_type
-						>
-					>
-				>
-			>
-		>
-	>
->;
+using add_aoe_projectile = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::add_aoe_projectile>,
+    alda::bindings::record<fcppt::mpl::list::join<fcppt::mpl::list::object<
+        fcppt::mpl::list::object<sanguis::messages::server::parts::entity_id>,
+        sanguis::messages::server::parts::add_elements_base,
+        fcppt::mpl::list::object<
+            sanguis::messages::server::parts::speed,
+            fcppt::record::element<
+                sanguis::messages::roles::aoe,
+                sanguis::messages::adapted_types::space_unit>,
+            fcppt::record::element<
+                sanguis::messages::roles::aoe_projectile_type,
+                sanguis::messages::adapted_types::enum_<sanguis::aoe_projectile_type>>>>>>>;
 
 }
 

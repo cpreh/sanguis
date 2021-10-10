@@ -4,13 +4,11 @@
 #include <sanguis/core/symbol.hpp>
 #include <sge/config/company_name.hpp>
 
-
 namespace sanguis
 {
 
 SANGUIS_CORE_SYMBOL
-sge::config::company_name
-company_name();
+sge::config::company_name company_name();
 
 }
 

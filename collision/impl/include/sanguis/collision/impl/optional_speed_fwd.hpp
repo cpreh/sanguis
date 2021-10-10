@@ -4,16 +4,10 @@
 #include <sanguis/collision/speed_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
-using
-optional_speed
-=
-fcppt::optional::object<
-	sanguis::collision::speed
->;
+using optional_speed = fcppt::optional::object<sanguis::collision::speed>;
 
 }
 

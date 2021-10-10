@@ -24,126 +24,52 @@
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-template<
-	typename Tile
->
-sanguis::tiles::impl::optional_content_path
-images_base(
-	fcppt::log::object &_log, // NOLINT(google-runtime-references)
-	sanguis::tiles::collection_ref const _collection,
-	sanguis::tiles::error const _error_code,
-	sanguis::tiles::pair<
-		Tile
-	> const _pair,
-	sanguis::tiles::orientation const _orientation,
-	sanguis::tiles::impl::error_message_function const &_error_message
-)
+template <typename Tile>
+sanguis::tiles::impl::optional_content_path images_base(
+    fcppt::log::object &_log, // NOLINT(google-runtime-references)
+    sanguis::tiles::collection_ref const _collection,
+    sanguis::tiles::error const _error_code,
+    sanguis::tiles::pair<Tile> const _pair,
+    sanguis::tiles::orientation const _orientation,
+    sanguis::tiles::impl::error_message_function const &_error_message)
 {
-	sanguis::tiles::set<
-		Tile
-	> const &cur_set(
-		_collection.get().set(
-			_pair
-		)
-	);
+  sanguis::tiles::set<Tile> const &cur_set(_collection.get().set(_pair));
 
-	return
-		fcppt::optional::maybe(
-			fcppt::container::find_opt_mapped(
-				cur_set.orientations(),
-				_orientation
-			),
-			[
-				&cur_set,
-				&_log,
-				&_error_message,
-				_error_code,
-				_orientation
-			]{
+  return fcppt::optional::maybe(
+      fcppt::container::find_opt_mapped(cur_set.orientations(), _orientation),
+      [&cur_set, &_log, &_error_message, _error_code, _orientation]
+      {
+        FCPPT_LOG_DEBUG(
+            _log,
+            fcppt::log::out << FCPPT_TEXT("Orientation ")
+                            << sanguis::tiles::impl::orientation_to_string(_orientation)
+                            << FCPPT_TEXT(" not found in ")
+                            << fcppt::filesystem::path_to_string(cur_set.path())
+                            << FCPPT_TEXT(" from ") << _error_message())
 
-				FCPPT_LOG_DEBUG(
-					_log,
-					fcppt::log::out
-						<<
-						FCPPT_TEXT("Orientation ")
-						<<
-						sanguis::tiles::impl::orientation_to_string(
-							_orientation
-						)
-						<<
-						FCPPT_TEXT(" not found in ")
-						<<
-						fcppt::filesystem::path_to_string(
-							cur_set.path()
-						)
-						<<
-						FCPPT_TEXT(" from ")
-						<<
-						_error_message()
-				)
+        return sanguis::tiles::impl::optional_content_path(sanguis::tiles::impl::content_path(
+            sanguis::tiles::content(_error_code), fcppt::make_cref(cur_set.path())));
+      },
+      [&_log, &cur_set, &_error_message](
+          fcppt::reference<sanguis::tiles::area_container const> const _images)
+      {
+        if (_images.get().empty())
+        {
+          FCPPT_LOG_ERROR(
+              _log,
+              fcppt::log::out << FCPPT_TEXT("Zero textures in ")
+                              << fcppt::filesystem::path_to_string(cur_set.path())
+                              << FCPPT_TEXT(" from ") << _error_message())
 
-				return
-					sanguis::tiles::impl::optional_content_path(
-						sanguis::tiles::impl::content_path(
-							sanguis::tiles::content(
-								_error_code
-							),
-							fcppt::make_cref(
-								cur_set.path()
-							)
-						)
-					);
-			},
-			[
-				&_log,
-				&cur_set,
-				&_error_message
-			](
-				fcppt::reference<
-					sanguis::tiles::area_container const
-				> const _images
-			)
-			{
-				if(
-					_images.get().empty()
-				)
-				{
-					FCPPT_LOG_ERROR(
-						_log,
-						fcppt::log::out
-							<<
-							FCPPT_TEXT("Zero textures in ")
-							<<
-							fcppt::filesystem::path_to_string(
-								cur_set.path()
-							)
-							<<
-							FCPPT_TEXT(" from ")
-							<<
-							_error_message()
-					)
+          return sanguis::tiles::impl::optional_content_path();
+        }
 
-					return
-						sanguis::tiles::impl::optional_content_path();
-				}
-
-				return
-					sanguis::tiles::impl::optional_content_path(
-						sanguis::tiles::impl::content_path(
-							sanguis::tiles::content(
-								_images
-							),
-							fcppt::make_cref(
-								cur_set.path()
-							)
-						)
-					);
-			}
-		);
+        return sanguis::tiles::impl::optional_content_path(sanguis::tiles::impl::content_path(
+            sanguis::tiles::content(_images), fcppt::make_cref(cur_set.path())));
+      });
 }
 
 }

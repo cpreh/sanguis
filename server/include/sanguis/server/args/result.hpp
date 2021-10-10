@@ -6,5 +6,4 @@
 #include <sanguis/server/args/elements/port.hpp>
 #include <fcppt/record/object_impl.hpp>
 
-
 #endif

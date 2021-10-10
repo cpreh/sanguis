@@ -4,5 +4,4 @@
 #include <sanguis/messages/adapted_types/weapon_attribute_value_fwd.hpp>
 #include <alda/bindings/float.hpp>
 
-
 #endif

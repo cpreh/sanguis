@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis
 {
 
-using
-aura_type_vector
-=
-std::vector<
-	sanguis::aura_type
->;
+using aura_type_vector = std::vector<sanguis::aura_type>;
 
 }
 

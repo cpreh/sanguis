@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
-using
-z_ordering_vector
-=
-std::vector<
-	sanguis::client::draw2d::z_ordering
->;
+using z_ordering_vector = std::vector<sanguis::client::draw2d::z_ordering>;
 
 }
 

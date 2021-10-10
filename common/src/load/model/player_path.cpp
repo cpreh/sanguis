@@ -5,14 +5,7 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::load::model::path
-sanguis::load::model::player_path()
+sanguis::load::model::path sanguis::load::model::player_path()
 {
-	return
-		sanguis::load::model::path{
-			std::filesystem::path{
-				FCPPT_TEXT("player")
-			}
-		};
+  return sanguis::load::model::path{std::filesystem::path{FCPPT_TEXT("player")}};
 }

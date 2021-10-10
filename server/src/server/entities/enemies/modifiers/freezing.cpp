@@ -10,31 +10,19 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 
-
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::freezing(
-	fcppt::reference<
-		sanguis::server::entities::enemies::parameters
-	> const _parameters,
-	sanguis::server::entities::enemies::modifiers::parameters const &
-)
+    fcppt::reference<sanguis::server::entities::enemies::parameters> const _parameters,
+    sanguis::server::entities::enemies::modifiers::parameters const &)
 {
-	_parameters->add_aura(
-		sanguis::server::auras::slow_create<
-			sanguis::server::buffs::slow
-		>(
-			sanguis::server::radius(
-				200.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			),
-			sanguis::server::team::monsters,
-			sanguis::server::buffs::slow_factor(
-				0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			)
-		)
-	);
+  _parameters->add_aura(sanguis::server::auras::slow_create<sanguis::server::buffs::slow>(
+      sanguis::server::radius(
+          200.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          ),
+      sanguis::server::team::monsters,
+      sanguis::server::buffs::slow_factor(
+          0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          )));
 
-	return
-		sanguis::server::entities::enemies::attribute(
-			FCPPT_TEXT("freezing")
-		);
+  return sanguis::server::entities::enemies::attribute(FCPPT_TEXT("freezing"));
 }

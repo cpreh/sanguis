@@ -3,14 +3,10 @@
 
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	float,
-	slowdown
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(float, slowdown);
 
 }
 

@@ -7,40 +7,31 @@
 #include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/factory/parameters_fwd.hpp>
 
-
 namespace sanguis::server::weapons::factory
 {
 
 class parameters
 {
 public:
-	parameters(
-		sanguis::server::weapons::common_parameters const &,
-		sanguis::weapon_type,
-		sanguis::server::entities::enemies::difficulty
-	);
+  parameters(
+      sanguis::server::weapons::common_parameters const &,
+      sanguis::weapon_type,
+      sanguis::server::entities::enemies::difficulty);
 
-	[[nodiscard]]
-	sanguis::server::weapons::common_parameters const &
-	common_parameters() const;
+  [[nodiscard]] sanguis::server::weapons::common_parameters const &common_parameters() const;
 
-	[[nodiscard]]
-	sanguis::random_generator &
-	random_generator() const;
+  [[nodiscard]] sanguis::random_generator &random_generator() const;
 
-	[[nodiscard]]
-	sanguis::weapon_type
-	weapon_type() const;
+  [[nodiscard]] sanguis::weapon_type weapon_type() const;
 
-	[[nodiscard]]
-	sanguis::server::entities::enemies::difficulty
-	difficulty() const;
+  [[nodiscard]] sanguis::server::entities::enemies::difficulty difficulty() const;
+
 private:
-	sanguis::server::weapons::common_parameters common_parameters_;
+  sanguis::server::weapons::common_parameters common_parameters_;
 
-	sanguis::weapon_type weapon_type_;
+  sanguis::weapon_type weapon_type_;
 
-	sanguis::server::entities::enemies::difficulty difficulty_;
+  sanguis::server::entities::enemies::difficulty difficulty_;
 };
 
 }

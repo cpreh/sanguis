@@ -7,17 +7,11 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::model
 {
 
-using
-weapon_category_map
-=
-std::unordered_map<
-	sanguis::model::weapon_category_name,
-	sanguis::model::weapon_category
->;
+using weapon_category_map =
+    std::unordered_map<sanguis::model::weapon_category_name, sanguis::model::weapon_category>;
 
 }
 

@@ -5,17 +5,11 @@
 #include <sanguis/server/args/elements/port_fwd.hpp>
 #include <fcppt/record/object_fwd.hpp>
 
-
 namespace sanguis::server::args
 {
 
-using
-result
-=
-fcppt::record::object<
-	sanguis::server::args::elements::port,
-	sanguis::server::args::elements::log_level
->;
+using result = fcppt::record::
+    object<sanguis::server::args::elements::port, sanguis::server::args::elements::log_level>;
 
 }
 

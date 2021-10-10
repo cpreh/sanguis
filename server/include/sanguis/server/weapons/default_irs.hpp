@@ -3,12 +3,10 @@
 
 #include <sanguis/server/weapons/irs.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-sanguis::server::weapons::irs
-default_irs();
+sanguis::server::weapons::irs default_irs();
 
 }
 

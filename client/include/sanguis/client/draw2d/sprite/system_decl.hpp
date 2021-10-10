@@ -10,79 +10,46 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::draw2d::sprite
 {
 
-template<
-	typename Choices,
-	typename Category
->
+template <typename Choices, typename Category>
 class system
 {
-	FCPPT_NONMOVABLE(
-		system
-	);
+  FCPPT_NONMOVABLE(system);
 
-	using
-	collection
-	=
-	sge::sprite::intrusive::ordered::collection<
-		Choices,
-		Category
-	>;
+  using collection = sge::sprite::intrusive::ordered::collection<Choices, Category>;
 
-	using
-	connection_ref
-	=
-	typename
-	collection::connection_ref;
+  using connection_ref = typename collection::connection_ref;
+
 public:
-	using
-	state_ref
-	=
-	fcppt::reference<
-		sanguis::client::draw2d::sprite::state
-	>;
+  using state_ref = fcppt::reference<sanguis::client::draw2d::sprite::state>;
 
-	system(
-		sge::renderer::device::core_ref,
-		// TODO(philipp): Make it possible to omit the states if they do nothing
-		state_ref
-	);
+  system(
+      sge::renderer::device::core_ref,
+      // TODO(philipp): Make it possible to omit the states if they do nothing
+      state_ref);
 
-	~system();
+  ~system();
 
-	[[nodiscard]]
-	connection_ref
-	connection(
-		Category
-	);
+  [[nodiscard]] connection_ref connection(Category);
 
-	void
-	render(
-		sge::renderer::context::core &, // NOLINT(google-runtime-references)
-		Category
-	);
+  void render(
+      sge::renderer::context::core &, // NOLINT(google-runtime-references)
+      Category);
 
-	[[nodiscard]]
-	sge::renderer::device::core &
-	renderer() const;
+  [[nodiscard]] sge::renderer::device::core &renderer() const;
+
 private:
-	using
-	sge_buffers
-	=
-	sanguis::client::draw2d::sprite::buffers<
-		Choices
-	>;
+  using sge_buffers = sanguis::client::draw2d::sprite::buffers<Choices>;
 
-	sge::renderer::device::core_ref const renderer_;
+  sge::renderer::device::core_ref const renderer_;
 
-	state_ref const state_;
+  state_ref const state_;
 
-	sge_buffers buffers_;
+  sge_buffers buffers_;
 
-	collection collection_;
+  collection collection_;
 };
 
 }

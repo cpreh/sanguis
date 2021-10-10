@@ -5,5 +5,4 @@
 #include <sanguis/messages/adapted_types/string.hpp>
 #include <sanguis/messages/adapted_types/string_vector_fwd.hpp>
 
-
 #endif

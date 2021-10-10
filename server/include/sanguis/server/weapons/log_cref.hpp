@@ -4,16 +4,10 @@
 #include <sanguis/server/weapons/log_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-using
-log_cref
-=
-fcppt::reference<
-	sanguis::server::weapons::log const
->;
+using log_cref = fcppt::reference<sanguis::server::weapons::log const>;
 
 }
 

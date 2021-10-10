@@ -6,16 +6,10 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-difference_type
-=
-std::make_signed_t<
-	sanguis::creator::size_type
->;
+using difference_type = std::make_signed_t<sanguis::creator::size_type>;
 
 }
 

@@ -13,48 +13,38 @@
 #include <thread>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client
 {
 
 class server
 {
-	FCPPT_NONMOVABLE(
-		server
-	);
+  FCPPT_NONMOVABLE(server);
+
 public:
-	server(
-		fcppt::log::context_reference,
-		alda::net::port
-	);
+  server(fcppt::log::context_reference, alda::net::port);
 
-	void
-	quit();
+  void quit();
 
-	awl::main::exit_code
-	run();
+  awl::main::exit_code run();
 
-	[[nodiscard]]
-	bool
-	running() const;
+  [[nodiscard]] bool running() const;
 
-	~server();
+  ~server();
+
 private:
-	void
-	mainloop();
+  void mainloop();
 
-	void
-	reset_running();
+  void reset_running();
 
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 
-	bool running_;
+  bool running_;
 
-	sanguis::server::object impl_;
+  sanguis::server::object impl_;
 
-	mutable std::mutex mutex_;
+  mutable std::mutex mutex_;
 
-	std::thread server_thread_;
+  std::thread server_thread_;
 };
 
 }

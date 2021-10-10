@@ -31,108 +31,44 @@
 #include <boost/units/systems/si/length.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::collision::impl::optional_speed
-sanguis::collision::impl::test_tile(
-	sanguis::collision::center const &_center,
-	sanguis::collision::radius const &_radius,
-	sanguis::collision::duration const _time,
-	sanguis::collision::speed const &_speed,
-	sanguis::creator::pos const &_pos,
-	sanguis::creator::tile const _tile
-)
+sanguis::collision::impl::optional_speed sanguis::collision::impl::test_tile(
+    sanguis::collision::center const &_center,
+    sanguis::collision::radius const &_radius,
+    sanguis::collision::duration const _time,
+    sanguis::collision::speed const &_speed,
+    sanguis::creator::pos const &_pos,
+    sanguis::creator::tile const _tile)
 {
-	if(
-		!sanguis::creator::tile_is_solid(
-			_tile
-		)
-	)
-	{
-		return
-			sanguis::collision::impl::optional_speed();
-	}
+  if (!sanguis::creator::tile_is_solid(_tile))
+  {
+    return sanguis::collision::impl::optional_speed();
+  }
 
-	sanguis::collision::center const new_center(
-		sanguis::collision::impl::move(
-			_center,
-			_speed,
-			_time
-		)
-	);
+  sanguis::collision::center const new_center(
+      sanguis::collision::impl::move(_center, _speed, _time));
 
-	sanguis::collision::impl::rect const rect(
-		fcppt::math::box::stretch_absolute(
-			sanguis::collision::impl::rect(
-				new_center.get(),
-				fcppt::math::dim::fill<
-					sanguis::collision::impl::rect::dim
-				>(
-					fcppt::literal<
-						sanguis::collision::unit
-					>(
-						0
-					)
-					*
-					boost::units::si::meter
-				)
-			),
-			fcppt::math::vector::fill<
-				sanguis::collision::impl::rect::vector
-			>(
-				_radius.get()
-			)
-		)
-	);
+  sanguis::collision::impl::rect const rect(fcppt::math::box::stretch_absolute(
+      sanguis::collision::impl::rect(
+          new_center.get(),
+          fcppt::math::dim::fill<sanguis::collision::impl::rect::dim>(
+              fcppt::literal<sanguis::collision::unit>(0) * boost::units::si::meter)),
+      fcppt::math::vector::fill<sanguis::collision::impl::rect::vector>(_radius.get())));
 
-	sanguis::creator::rect const tile_rect(
-		sanguis::creator::tile_rect(
-			_tile
-		)
-	);
+  sanguis::creator::rect const tile_rect(sanguis::creator::tile_rect(_tile));
 
-	sanguis::collision::impl::rect const entry_rect(
-		fcppt::math::vector::map(
-			tile_rect.pos(),
-			&sanguis::collision::impl::grid_to_meter
-		)
-		+
-		fcppt::math::vector::map(
-			_pos
-			*
-			sanguis::creator::tile_size::value
-			,
-			&sanguis::collision::impl::grid_to_meter
-		),
-		fcppt::math::dim::map(
-			tile_rect.size(),
-			&sanguis::collision::impl::grid_to_meter
-		)
-	);
+  sanguis::collision::impl::rect const entry_rect(
+      fcppt::math::vector::map(tile_rect.pos(), &sanguis::collision::impl::grid_to_meter) +
+          fcppt::math::vector::map(
+              _pos * sanguis::creator::tile_size::value, &sanguis::collision::impl::grid_to_meter),
+      fcppt::math::dim::map(tile_rect.size(), &sanguis::collision::impl::grid_to_meter));
 
-	return
-		fcppt::math::box::intersects(
-			rect,
-			entry_rect
-		)
-		?
-			sanguis::collision::impl::optional_speed(
-				sanguis::collision::impl::adjust_speed(
-					sanguis::collision::impl::line_segment(
-						sanguis::collision::impl::pos(
-							_center.get()
-						),
-						sanguis::collision::impl::dir(
-							new_center.get()
-							-
-							_center.get()
-						)
-					),
-					_radius,
-					entry_rect,
-					_speed
-				)
-			)
-		:
-			sanguis::collision::impl::optional_speed()
-		;
+  return fcppt::math::box::intersects(rect, entry_rect)
+             ? sanguis::collision::impl::optional_speed(sanguis::collision::impl::adjust_speed(
+                   sanguis::collision::impl::line_segment(
+                       sanguis::collision::impl::pos(_center.get()),
+                       sanguis::collision::impl::dir(new_center.get() - _center.get())),
+                   _radius,
+                   entry_rect,
+                   _speed))
+             : sanguis::collision::impl::optional_speed();
 }

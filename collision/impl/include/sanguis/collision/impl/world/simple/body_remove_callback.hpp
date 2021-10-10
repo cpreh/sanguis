@@ -4,18 +4,10 @@
 #include <sanguis/collision/impl/world/simple/body_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::collision::impl::world::simple
 {
 
-using
-body_remove_callback
-=
-fcppt::function<
-	void (
-		sanguis::collision::impl::world::simple::body &
-	)
->;
+using body_remove_callback = fcppt::function<void(sanguis::collision::impl::world::simple::body &)>;
 
 }
 

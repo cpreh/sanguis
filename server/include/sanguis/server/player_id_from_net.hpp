@@ -4,14 +4,10 @@
 #include <sanguis/server/player_id.hpp>
 #include <alda/net/id.hpp>
 
-
 namespace sanguis::server
 {
 
-sanguis::server::player_id
-player_id_from_net(
-	alda::net::id
-);
+sanguis::server::player_id player_id_from_net(alda::net::id);
 
 }
 

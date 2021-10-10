@@ -4,16 +4,12 @@
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/server/ai/context_fwd.hpp>
 
-
 namespace sanguis::server::ai
 {
 
-[[nodiscard]]
-bool
-make_path(
-	sanguis::server::ai::context &, // NOLINT(google-runtime-references)
-	sanguis::creator::pos const &
-);
+[[nodiscard]] bool make_path(
+    sanguis::server::ai::context &, // NOLINT(google-runtime-references)
+    sanguis::creator::pos const &);
 
 }
 

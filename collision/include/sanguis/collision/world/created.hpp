@@ -4,5 +4,4 @@
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

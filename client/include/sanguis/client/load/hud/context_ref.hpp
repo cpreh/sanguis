@@ -4,16 +4,10 @@
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::load::hud
 {
 
-using
-context_ref
-=
-fcppt::reference<
-	sanguis::client::load::hud::context
->;
+using context_ref = fcppt::reference<sanguis::client::load::hud::context>;
 
 }
 

@@ -40,102 +40,30 @@
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/record/get.hpp>
 
-
-sanguis::client::systems_unique_ptr
-sanguis::client::create_systems(
-	fcppt::log::context_reference const _log_context,
-	sanguis::client::args::result const &_args
-)
+sanguis::client::systems_unique_ptr sanguis::client::create_systems(
+    fcppt::log::context_reference const _log_context, sanguis::client::args::result const &_args)
 {
-	return
-		fcppt::make_unique_ptr<
-			sanguis::client::systems
-		>(
-			sge::systems::make_list
-			(
-				sge::systems::config()
-				.log_settings(
-					sge::systems::log_settings(
-						sge::log::option_container{
-							sge::log::option{
-								sge::log::location(),
-								fcppt::record::get<
-									sanguis::client::args::labels::sge_log_level
-								>(
-									_args
-								)
-							}
-						}
-					)
-					.log_context(
-						_log_context
-					)
-				)
-			)
-			(
-				sge::systems::window(
-					sge::systems::window_source(
-						sge::systems::original_window(
-							sge::window::title(
-								sanguis::app_name()
-							)
-						)
-						.hide_cursor()
-					)
-				)
-			)
-			(
-				sge::systems::renderer(
-					sge::renderer::pixel_format::object(
-						sge::renderer::pixel_format::color::depth32,
-						sge::renderer::pixel_format::depth_stencil::d24s8,
-						fcppt::record::get<
-							sanguis::client::args::labels::multi_samples
-						>(
-							_args
-						),
-						sge::renderer::pixel_format::srgb::no
-					),
-					sge::renderer::display_mode::parameters(
-						sge::renderer::display_mode::vsync::on,
-						sanguis::client::args::display_mode(
-							_args
-						)
-					),
-					sge::viewport::optional_resize_callback{
-						sge::viewport::fill_on_resize()
-					}
-				)
-			)
-			(
-				sge::systems::input(
-					sge::systems::cursor_option_field::null()
-				)
-			)
-			(
-				sge::systems::image2d(
-					sge::media::optional_extension_set(
-						sge::media::extension_set{
-							sge::media::extension(
-								FCPPT_TEXT("png")
-							)
-						}
-					)
-				)
-			)
-			(
-				sge::systems::audio_loader(
-					sge::media::optional_extension_set(
-						sge::media::extension_set{
-							sge::media::extension(
-								FCPPT_TEXT("ogg")
-							)
-						}
-					)
-				)
-			)
-			(
-				sge::systems::audio_player_default()
-			)
-		);
+  return fcppt::make_unique_ptr<
+      sanguis::client::systems>(sge::systems::make_list(sge::systems::config().log_settings(
+      sge::systems::log_settings(
+          sge::log::option_container{sge::log::option{
+              sge::log::location(),
+              fcppt::record::get<sanguis::client::args::labels::sge_log_level>(_args)}})
+          .log_context(_log_context)))(
+      sge::systems::window(sge::systems::window_source(
+          sge::systems::original_window(sge::window::title(sanguis::app_name())).hide_cursor())))(
+      sge::systems::renderer(
+          sge::renderer::pixel_format::object(
+              sge::renderer::pixel_format::color::depth32,
+              sge::renderer::pixel_format::depth_stencil::d24s8,
+              fcppt::record::get<sanguis::client::args::labels::multi_samples>(_args),
+              sge::renderer::pixel_format::srgb::no),
+          sge::renderer::display_mode::parameters(
+              sge::renderer::display_mode::vsync::on, sanguis::client::args::display_mode(_args)),
+          sge::viewport::optional_resize_callback{sge::viewport::fill_on_resize()}))(
+      sge::systems::input(sge::systems::cursor_option_field::null()))(
+      sge::systems::image2d(sge::media::optional_extension_set(
+          sge::media::extension_set{sge::media::extension(FCPPT_TEXT("png"))})))(
+      sge::systems::audio_loader(sge::media::optional_extension_set(sge::media::extension_set{
+          sge::media::extension(FCPPT_TEXT("ogg"))})))(sge::systems::audio_player_default()));
 }

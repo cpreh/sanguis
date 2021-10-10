@@ -8,18 +8,15 @@
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::factory
 {
 
-sanguis::client::draw2d::entities::unique_ptr
-projectile(
-	sanguis::client::draw2d::entities::load_parameters const &,
-	sanguis::projectile_type,
-	sanguis::client::draw2d::speed const &,
-	sanguis::client::draw2d::sprite::center const &,
-	sanguis::client::draw2d::sprite::rotation
-);
+sanguis::client::draw2d::entities::unique_ptr projectile(
+    sanguis::client::draw2d::entities::load_parameters const &,
+    sanguis::projectile_type,
+    sanguis::client::draw2d::speed const &,
+    sanguis::client::draw2d::sprite::center const &,
+    sanguis::client::draw2d::sprite::rotation);
 
 }
 

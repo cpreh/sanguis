@@ -6,18 +6,11 @@
 #include <sanguis/server/net/basic_value_fwd.hpp>
 #include <sanguis/server/net/slowdown_policy_fwd.hpp>
 
-
 namespace sanguis::server::net
 {
 
-using
-slowdown
-=
-sanguis::server::net::basic_value<
-	sanguis::slowdown,
-	sanguis::server::net::slowdown_policy,
-	sanguis::clock
->;
+using slowdown = sanguis::server::net::
+    basic_value<sanguis::slowdown, sanguis::server::net::slowdown_policy, sanguis::clock>;
 
 }
 

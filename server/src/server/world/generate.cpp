@@ -13,28 +13,17 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::server::world::object_unique_ptr
-sanguis::server::world::generate(
-	sanguis::server::world::parameters const &_parameters,
-	sanguis::world_id const _world_id,
-	sanguis::world_name &&_world_name,
-	sanguis::server::world::difficulty const _difficulty,
-	sanguis::creator::top_parameters const &_top_parameters
-)
+sanguis::server::world::object_unique_ptr sanguis::server::world::generate(
+    sanguis::server::world::parameters const &_parameters,
+    sanguis::world_id const _world_id,
+    sanguis::world_name &&_world_name,
+    sanguis::server::world::difficulty const _difficulty,
+    sanguis::creator::top_parameters const &_top_parameters)
 {
-	return
-		fcppt::make_unique_ptr<
-			sanguis::server::world::object
-		>(
-			_parameters,
-			_world_id,
-			sanguis::creator::generate(
-				_top_parameters
-			),
-			_difficulty,
-			std::move(
-				_world_name
-			)
-		);
+  return fcppt::make_unique_ptr<sanguis::server::world::object>(
+      _parameters,
+      _world_id,
+      sanguis::creator::generate(_top_parameters),
+      _difficulty,
+      std::move(_world_name));
 }

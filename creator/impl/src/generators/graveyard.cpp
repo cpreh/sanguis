@@ -32,205 +32,87 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::creator::impl::result
-sanguis::creator::impl::generators::graveyard(
-	sanguis::creator::impl::parameters const &_parameters
-)
+sanguis::creator::impl::generators::graveyard(sanguis::creator::impl::parameters const &_parameters)
 {
-	constexpr sanguis::creator::size_type const side_length{9U};
+  constexpr sanguis::creator::size_type const side_length{9U};
 
-	sanguis::creator::impl::reachable_grid
-	initial_maze{
-		sanguis::creator::grid::dim{
-			side_length,
-			side_length
-		},
-		sanguis::creator::impl::reachable(false)
-	};
+  sanguis::creator::impl::reachable_grid initial_maze{
+      sanguis::creator::grid::dim{side_length, side_length},
+      sanguis::creator::impl::reachable(false)};
 
-	sanguis::creator::impl::generate_maze(
-		fcppt::make_ref(
-			initial_maze
-		),
-		_parameters.randgen()
-	);
+  sanguis::creator::impl::generate_maze(fcppt::make_ref(initial_maze), _parameters.randgen());
 
-	sanguis::creator::grid grid{
-		sanguis::creator::impl::maze_to_tile_grid(
-			initial_maze,
-			1U,
-			5U, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			sanguis::creator::tile::nothing,
-			sanguis::creator::tile::hedge
-		)
-	};
+  sanguis::creator::grid grid{sanguis::creator::impl::maze_to_tile_grid(
+      initial_maze,
+      1U,
+      5U, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+      sanguis::creator::tile::nothing,
+      sanguis::creator::tile::hedge)};
 
-	sanguis::creator::opening_container_array openings(
-		sanguis::creator::impl::place_openings(
-			fcppt::make_ref(
-				grid
-			),
-			_parameters.randgen(),
-			_parameters.opening_count_array()
-		)
-	);
+  sanguis::creator::opening_container_array openings(sanguis::creator::impl::place_openings(
+      fcppt::make_ref(grid), _parameters.randgen(), _parameters.opening_count_array()));
 
-	using
-	uniform_int2
-	=
-	fcppt::random::distribution::basic<
-		sanguis::creator::impl::random::uniform_int<
-			unsigned
-		>
-	>;
+  using uniform_int2 =
+      fcppt::random::distribution::basic<sanguis::creator::impl::random::uniform_int<unsigned>>;
 
-	auto fill_tile_random(
-		fcppt::random::make_variate(
-			fcppt::make_ref(
-				_parameters.randgen()
-			),
-			uniform_int2{
-				uniform_int2::param_type::min{
-					0U
-				},
-				uniform_int2::param_type::max{
-					10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-				}
-			}
-		)
-	);
+  auto fill_tile_random(fcppt::random::make_variate(
+      fcppt::make_ref(_parameters.randgen()),
+      uniform_int2{
+          uniform_int2::param_type::min{0U},
+          uniform_int2::param_type::max{
+              10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          }}));
 
-	using
-	uniform_tile_enum
-	=
-	fcppt::random::distribution::basic<
-		sanguis::creator::impl::random::uniform_int<
-			sanguis::creator::tile
-		>
-	>;
+  using uniform_tile_enum = fcppt::random::distribution::basic<
+      sanguis::creator::impl::random::uniform_int<sanguis::creator::tile>>;
 
-	sanguis::creator::background_grid grid_bg{
-		grid.size(),
-		sanguis::creator::background_tile::grass
-	};
+  sanguis::creator::background_grid grid_bg{grid.size(), sanguis::creator::background_tile::grass};
 
-	auto random_dirt_grass(
-		fcppt::random::make_variate(
-			fcppt::make_ref(
-				_parameters.randgen()
-			),
-			uniform_int2{
-				uniform_int2::param_type::min{
-					0U
-				},
-				uniform_int2::param_type::max{
-					1U
-				}
-			}
-		)
-	);
+  auto random_dirt_grass(fcppt::random::make_variate(
+      fcppt::make_ref(_parameters.randgen()),
+      uniform_int2{uniform_int2::param_type::min{0U}, uniform_int2::param_type::max{1U}}));
 
-	for(
-		auto const pos
-		:
-		sanguis::creator::impl::interior_range(
-			fcppt::make_ref(
-				grid_bg
-			)
-		)
-	)
-	{
-		pos.value() =
-			random_dirt_grass()
-			!= 0U
-			?
-			sanguis::creator::background_tile::dirt
-			:
-			sanguis::creator::background_tile::grass;
-	}
+  for (auto const pos : sanguis::creator::impl::interior_range(fcppt::make_ref(grid_bg)))
+  {
+    pos.value() = random_dirt_grass() != 0U ? sanguis::creator::background_tile::dirt
+                                            : sanguis::creator::background_tile::grass;
+  }
 
-	auto random_grave(
-		fcppt::random::make_variate(
-			fcppt::make_ref(
-				_parameters.randgen()
-			),
-			uniform_tile_enum(
-				uniform_tile_enum::param_type::min(
-					sanguis::creator::tile::grave2
-				),
-				uniform_tile_enum::param_type::max(
-					sanguis::creator::tile::grave5
-				)
-			)
-		)
-	);
+  auto random_grave(fcppt::random::make_variate(
+      fcppt::make_ref(_parameters.randgen()),
+      uniform_tile_enum(
+          uniform_tile_enum::param_type::min(sanguis::creator::tile::grave2),
+          uniform_tile_enum::param_type::max(sanguis::creator::tile::grave5))));
 
-	for(
-		auto const cell
-		:
-		fcppt::container::grid::make_pos_ref_range(
-			grid
-		)
-	)
-	{
-		if(
-			cell.value()
-			==
-			sanguis::creator::tile::nothing
-			&&
-			fill_tile_random()
-			== 0
-			&&
-			FCPPT_ASSERT_OPTIONAL_ERROR(
-				fcppt::container::grid::at_optional(
-					grid_bg,
-					cell.pos()
-				)
-			).get()
-			==
-			sanguis::creator::background_tile::grass
-		)
-		{
-			cell.value() =
-				random_grave();
-		}
-	}
+  for (auto const cell : fcppt::container::grid::make_pos_ref_range(grid))
+  {
+    if (cell.value() == sanguis::creator::tile::nothing && fill_tile_random() == 0 &&
+        FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(grid_bg, cell.pos()))
+                .get() == sanguis::creator::background_tile::grass)
+    {
+      cell.value() = random_grave();
+    }
+  }
 
-	sanguis::creator::spawn_container spawners{
-		sanguis::creator::impl::place_spawners(
-			_parameters.log(),
-			fcppt::make_ref(
-				grid
-			),
-			openings,
-			10U, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			_parameters.randgen(),
-			sanguis::creator::impl::enemy_type_container{
-				sanguis::creator::enemy_type::zombie00,
-				sanguis::creator::enemy_type::zombie01,
-				sanguis::creator::enemy_type::skeleton,
-				sanguis::creator::enemy_type::ghost
-			},
-			_parameters.spawn_boss(),
-			sanguis::creator::tile::grave1
-		)
-	};
+  sanguis::creator::spawn_container spawners{sanguis::creator::impl::place_spawners(
+      _parameters.log(),
+      fcppt::make_ref(grid),
+      openings,
+      10U, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+      _parameters.randgen(),
+      sanguis::creator::impl::enemy_type_container{
+          sanguis::creator::enemy_type::zombie00,
+          sanguis::creator::enemy_type::zombie01,
+          sanguis::creator::enemy_type::skeleton,
+          sanguis::creator::enemy_type::ghost},
+      _parameters.spawn_boss(),
+      sanguis::creator::tile::grave1)};
 
-	return
-		sanguis::creator::impl::result(
-			std::move(
-				grid
-			),
-			std::move(
-				grid_bg
-			),
-			std::move(
-				openings
-			),
-			std::move(
-				spawners
-			),
-			sanguis::creator::destructible_container()
-		);
+  return sanguis::creator::impl::result(
+      std::move(grid),
+      std::move(grid_bg),
+      std::move(openings),
+      std::move(spawners),
+      sanguis::creator::destructible_container());
 }

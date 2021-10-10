@@ -18,66 +18,35 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::states
 {
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
-class console
-:
-	public boost::statechart::state<
-		sanguis::client::states::console,
-		sanguis::client::states::has_player
-	>
+class console : public boost::statechart::
+                    state<sanguis::client::states::console, sanguis::client::states::has_player>
 {
-	FCPPT_NONMOVABLE(
-		console
-	);
+  FCPPT_NONMOVABLE(console);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list3<
-		boost::statechart::custom_reaction<
-			sanguis::client::events::action
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::overlay
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::input
-		>
-	>;
+  using reactions = boost::mpl::list3<
+      boost::statechart::custom_reaction<sanguis::client::events::action>,
+      boost::statechart::custom_reaction<sanguis::client::events::overlay>,
+      boost::statechart::custom_reaction<sanguis::client::events::input>>;
 
-	explicit
-	console(
-		my_context
-	);
+  explicit console(my_context);
 
-	~console()
-	SANGUIS_STATE_OVERRIDE;
+  ~console() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::action const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::action const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::overlay const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::overlay const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::input const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::input const &);
+
 private:
-	sanguis::client::scoped_pause const pause_;
+  sanguis::client::scoped_pause const pause_;
 };
 
 FCPPT_PP_POP_WARNING

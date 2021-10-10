@@ -5,17 +5,12 @@
 #include <sanguis/messages/server/adapted_types/perk_tree_node_fwd.hpp>
 #include <sanguis/messages/server/types/perk_tree_node_vector.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-perk_tree
-=
-sanguis::messages::adapted_types::dynamic_len<
-	sanguis::messages::server::types::perk_tree_node_vector,
-	sanguis::messages::server::adapted_types::perk_tree_node
->;
+using perk_tree = sanguis::messages::adapted_types::dynamic_len<
+    sanguis::messages::server::types::perk_tree_node_vector,
+    sanguis::messages::server::adapted_types::perk_tree_node>;
 
 }
 

@@ -14,40 +14,23 @@
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/math/dim/fill.hpp>
 
-
 sanguis::client::draw2d::entities::explosion::explosion(
-	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
-	sanguis::client::draw2d::sprite::center const &_center,
-	sanguis::client::draw2d::aoe const _aoe
-)
-:
-	sanguis::client::draw2d::entities::particle{
-		_load_parameters,
-		sanguis::client::draw2d::entities::particle_name{
-			FCPPT_TEXT("flare")
-		},
-		sanguis::client::draw2d::z_ordering::flare,
-		_center,
-		sanguis::client::draw2d::sprite::optional_dim{
-			fcppt::math::dim::fill<
-				sanguis::client::draw2d::sprite::dim
-			>(
-				fcppt::cast::float_to_int<
-					sanguis::client::draw2d::sprite::unit
-				>(
-					_aoe.get()
-					*
-					fcppt::literal<
-						sanguis::client::draw2d::funit
-					>(
-						1.5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-					)
-				)
-			)
-		}
-	}
+    sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
+    sanguis::client::draw2d::sprite::center const &_center,
+    sanguis::client::draw2d::aoe const _aoe)
+    : sanguis::client::draw2d::entities::particle{
+          _load_parameters,
+          sanguis::client::draw2d::entities::particle_name{FCPPT_TEXT("flare")},
+          sanguis::client::draw2d::z_ordering::flare,
+          _center,
+          sanguis::client::draw2d::sprite::optional_dim{fcppt::math::dim::fill<
+              sanguis::client::draw2d::sprite::dim>(
+              fcppt::cast::float_to_int<sanguis::client::draw2d::sprite::unit>(
+                  _aoe.get() *
+                  fcppt::literal<sanguis::client::draw2d::funit>(
+                      1.5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                      )))}}
 {
 }
 
-sanguis::client::draw2d::entities::explosion::~explosion()
-= default;
+sanguis::client::draw2d::entities::explosion::~explosion() = default;

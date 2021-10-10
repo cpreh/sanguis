@@ -8,18 +8,15 @@
 #include <sanguis/tools/animations/const_optional_image_file_ref.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
-sanguis::tools::animations::const_optional_image_file_ref
-find_image_file(
-	sanguis::tools::animations::image_file_map const &,
-	sanguis::model::object const &,
-	sanguis::model::part_name const &,
-	sanguis::model::weapon_category_name const &,
-	sanguis::model::animation_name const &
-);
+sanguis::tools::animations::const_optional_image_file_ref find_image_file(
+    sanguis::tools::animations::image_file_map const &,
+    sanguis::model::object const &,
+    sanguis::model::part_name const &,
+    sanguis::model::weapon_category_name const &,
+    sanguis::model::animation_name const &);
 
 }
 

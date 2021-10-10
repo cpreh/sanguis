@@ -5,56 +5,22 @@
 #include <sanguis/server/perks/level_diff.hpp>
 #include <sanguis/server/perks/perk.hpp>
 
-
-void
-sanguis::server::perks::perk::update(
-	sanguis::server::entities::with_perks &,
-	sanguis::server::environment::object &
-)
+void sanguis::server::perks::perk::update(
+    sanguis::server::entities::with_perks &, sanguis::server::environment::object &)
 {
 }
 
-void
-sanguis::server::perks::perk::raise_level(
-	sanguis::server::entities::with_perks &_owner
-)
+void sanguis::server::perks::perk::raise_level(sanguis::server::entities::with_perks &_owner)
 {
-	this->change(
-		_owner,
-		sanguis::server::perks::level_diff(
-			1
-		)
-	);
+  this->change(_owner, sanguis::server::perks::level_diff(1));
 
-	++level_;
+  ++level_;
 }
 
-sanguis::perk_type
-sanguis::server::perks::perk::type() const
-{
-	return
-		type_;
-}
+sanguis::perk_type sanguis::server::perks::perk::type() const { return type_; }
 
-sanguis::server::perks::perk::~perk()
-= default;
+sanguis::server::perks::perk::~perk() = default;
 
-sanguis::server::perks::perk::perk(
-	sanguis::perk_type const _type
-)
-:
-	type_(
-		_type
-	),
-	level_(
-		0U
-	)
-{
-}
+sanguis::server::perks::perk::perk(sanguis::perk_type const _type) : type_(_type), level_(0U) {}
 
-sanguis::server::level
-sanguis::server::perks::perk::level() const
-{
-	return
-		level_;
-}
+sanguis::server::level sanguis::server::perks::perk::level() const { return level_; }

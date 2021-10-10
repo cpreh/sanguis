@@ -5,17 +5,11 @@
 #include <fcppt/log/level_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::client::args::elements
 {
 
-using
-sge_log_level
-=
-fcppt::record::element<
-	sanguis::client::args::labels::sge_log_level,
-	fcppt::log::level
->;
+using sge_log_level =
+    fcppt::record::element<sanguis::client::args::labels::sge_log_level, fcppt::log::level>;
 
 }
 

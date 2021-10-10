@@ -6,49 +6,24 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::client::events::message::message(
-	sanguis::messages::server::unique_ptr &&_value
-)
-:
-	value_(
-		std::move(
-			_value
-		)
-	)
+sanguis::client::events::message::message(sanguis::messages::server::unique_ptr &&_value)
+    : value_(std::move(_value))
 {
 }
 
-sanguis::client::events::message::message(
-	message &&
-)
-noexcept
-= default;
+sanguis::client::events::message::message(message &&) noexcept = default;
 
-sanguis::client::events::message::message(
-	message const &
-)
-= default;
+sanguis::client::events::message::message(message const &) = default;
 
 sanguis::client::events::message &
-sanguis::client::events::message::operator=(
-	message &&
-)
-noexcept
-= default;
+sanguis::client::events::message::operator=(message &&) noexcept = default;
 
 sanguis::client::events::message &
-sanguis::client::events::message::operator=(
-	message const &
-)
-= default;
+sanguis::client::events::message::operator=(message const &) = default;
 
-sanguis::client::events::message::~message()
-= default;
+sanguis::client::events::message::~message() = default;
 
-sanguis::messages::server::shared_ptr
-sanguis::client::events::message::get() const
+sanguis::messages::server::shared_ptr sanguis::client::events::message::get() const
 {
-	return
-		value_;
+  return value_;
 }

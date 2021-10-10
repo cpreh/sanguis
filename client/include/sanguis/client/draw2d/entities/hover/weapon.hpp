@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/entities/hover/weapon_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

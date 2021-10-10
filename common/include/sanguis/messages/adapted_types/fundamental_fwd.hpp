@@ -3,20 +3,12 @@
 
 #include <alda/bindings/fundamental_decl.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-template<
-	typename Type
->
+template <typename Type>
 // TODO(philipp): Check if Type has one byte
-using
-fundamental
-=
-alda::bindings::fundamental<
-	Type
->;
+using fundamental = alda::bindings::fundamental<Type>;
 
 }
 

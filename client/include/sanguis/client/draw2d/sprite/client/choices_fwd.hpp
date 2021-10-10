@@ -14,32 +14,19 @@
 #include <sge/sprite/config/with_texture_fwd.hpp>
 #include <fcppt/mpl/list/object.hpp>
 
-
 namespace sanguis::client::draw2d::sprite::client
 {
 
-using
-choices
-=
-sge::sprite::config::choices<
-	sanguis::client::draw2d::sprite::type_choices,
-	sge::sprite::config::pos<
-		sge::sprite::config::pos_option::pos
-	>,
-	sge::sprite::config::normal_size<
-		sge::sprite::config::texture_size_option::never
-	>,
-	fcppt::mpl::list::object<
-		sge::sprite::config::with_texture<
-			sge::sprite::config::texture_level_count<
-				1U
-			>,
-			sge::sprite::config::texture_coordinates::custom,
-			sge::sprite::config::texture_ownership::reference
-		>,
-		sge::sprite::config::intrusive
-	>
->;
+using choices = sge::sprite::config::choices<
+    sanguis::client::draw2d::sprite::type_choices,
+    sge::sprite::config::pos<sge::sprite::config::pos_option::pos>,
+    sge::sprite::config::normal_size<sge::sprite::config::texture_size_option::never>,
+    fcppt::mpl::list::object<
+        sge::sprite::config::with_texture<
+            sge::sprite::config::texture_level_count<1U>,
+            sge::sprite::config::texture_coordinates::custom,
+            sge::sprite::config::texture_ownership::reference>,
+        sge::sprite::config::intrusive>>;
 
 }
 

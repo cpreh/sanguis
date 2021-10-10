@@ -3,12 +3,10 @@
 
 #include <fcppt/log/name.hpp>
 
-
 namespace sanguis::client::draw2d::scene
 {
 
-fcppt::log::name
-log_name();
+fcppt::log::name log_name();
 
 }
 

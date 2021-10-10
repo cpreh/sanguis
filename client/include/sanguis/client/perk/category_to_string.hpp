@@ -4,14 +4,10 @@
 #include <sanguis/client/perk/category_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-fcppt::string
-category_to_string(
-	sanguis::client::perk::category
-);
+fcppt::string category_to_string(sanguis::client::perk::category);
 
 }
 

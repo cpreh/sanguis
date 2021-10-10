@@ -16,66 +16,49 @@
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::spawns
 {
 
-class limited
-:
-	public sanguis::server::entities::spawns::spawn
+class limited : public sanguis::server::entities::spawns::spawn
 {
-	FCPPT_NONMOVABLE(
-		limited
-	);
+  FCPPT_NONMOVABLE(limited);
+
 public:
-	limited(
-		sanguis::random_generator_ref,
-		sanguis::server::weapons::common_parameters const &,
-		sanguis::creator::enemy_type,
-		sanguis::creator::enemy_kind,
-		sanguis::server::world::difficulty,
-		sanguis::server::entities::spawns::count_per_wave,
-		sanguis::server::entities::spawns::interval,
-		sanguis::server::entities::spawns::limit,
-		sanguis::server::entities::spawns::total_count
-	);
+  limited(
+      sanguis::random_generator_ref,
+      sanguis::server::weapons::common_parameters const &,
+      sanguis::creator::enemy_type,
+      sanguis::creator::enemy_kind,
+      sanguis::server::world::difficulty,
+      sanguis::server::entities::spawns::count_per_wave,
+      sanguis::server::entities::spawns::interval,
+      sanguis::server::entities::spawns::limit,
+      sanguis::server::entities::spawns::total_count);
 
-	~limited()
-	override;
+  ~limited() override;
+
 private:
-	[[nodiscard]]
-	bool
-	dead() const
-	override;
+  [[nodiscard]] bool dead() const override;
 
-	void
-	unregister(
-		sanguis::server::entities::base & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void unregister(sanguis::server::entities::base & // NOLINT(google-runtime-references)
+                  ) // NOLINT(google-runtime-references)
+      override;
 
-	[[nodiscard]]
-	sanguis::server::entities::spawns::size_type
-	may_spawn()
-	override;
+  [[nodiscard]] sanguis::server::entities::spawns::size_type may_spawn() override;
 
-	void
-	add_count(
-		sanguis::server::entities::spawns::size_type
-	)
-	override;
+  void add_count(sanguis::server::entities::spawns::size_type) override;
 
-	sanguis::server::entities::spawns::count_per_wave const count_per_wave_;
+  sanguis::server::entities::spawns::count_per_wave const count_per_wave_;
 
-	sanguis::diff_timer delay_timer_;
+  sanguis::diff_timer delay_timer_;
 
-	sanguis::server::entities::spawns::size_type alive_;
+  sanguis::server::entities::spawns::size_type alive_;
 
-	sanguis::server::entities::spawns::size_type spawned_;
+  sanguis::server::entities::spawns::size_type spawned_;
 
-	sanguis::server::entities::spawns::limit const limit_;
+  sanguis::server::entities::spawns::limit const limit_;
 
-	sanguis::server::entities::spawns::total_count const total_count_;
+  sanguis::server::entities::spawns::total_count const total_count_;
 };
 
 }

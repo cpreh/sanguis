@@ -6,41 +6,23 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::events
 {
 
-class stop
-:
-	public boost::statechart::event<
-		sanguis::server::weapons::events::stop
-	>
+class stop : public boost::statechart::event<sanguis::server::weapons::events::stop>
 {
 public:
-	stop();
+  stop();
 
-	stop(
-		stop &&
-	)
-	noexcept;
+  stop(stop &&) noexcept;
 
-	stop(
-		stop const &
-	);
+  stop(stop const &);
 
-	stop &
-	operator=(
-		stop &&
-	)
-	noexcept;
+  stop &operator=(stop &&) noexcept;
 
-	stop &
-	operator=(
-		stop const &
-	);
+  stop &operator=(stop const &);
 
-	~stop()
-	override;
+  ~stop() override;
 };
 
 }

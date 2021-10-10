@@ -4,16 +4,10 @@
 #include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <sanguis/messages/types/size.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-size
-=
-sanguis::messages::adapted_types::unsigned_<
-	sanguis::messages::types::size
->;
+using size = sanguis::messages::adapted_types::unsigned_<sanguis::messages::types::size>;
 
 }
 

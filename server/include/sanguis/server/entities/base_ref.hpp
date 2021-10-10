@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-using
-base_ref
-=
-fcppt::reference<
-	sanguis::server::entities::base
->;
+using base_ref = fcppt::reference<sanguis::server::entities::base>;
 
 }
 

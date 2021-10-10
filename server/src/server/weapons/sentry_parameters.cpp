@@ -5,63 +5,39 @@
 #include <sanguis/server/weapons/sentry_parameters.hpp>
 #include <sanguis/server/weapons/attributes/health.hpp>
 
-
 sanguis::server::weapons::sentry_parameters::sentry_parameters(
-	sanguis::server::health const _health,
-	sanguis::server::weapons::backswing_time const _backswing_time,
-	sanguis::server::weapons::cast_point const _cast_point,
-	sanguis::server::weapons::range const _range
-)
-:
-	health_(
-		_health
-	),
-	backswing_time_(
-		_backswing_time
-	),
-	cast_point_(
-		_cast_point
-	),
-	range_(
-		_range
-	)
+    sanguis::server::health const _health,
+    sanguis::server::weapons::backswing_time const _backswing_time,
+    sanguis::server::weapons::cast_point const _cast_point,
+    sanguis::server::weapons::range const _range)
+    : health_(_health), backswing_time_(_backswing_time), cast_point_(_cast_point), range_(_range)
 {
 }
 
 sanguis::server::weapons::attributes::health
 sanguis::server::weapons::sentry_parameters::health() const
 {
-	return
-		health_;
+  return health_;
 }
 
 sanguis::server::weapons::backswing_time
 sanguis::server::weapons::sentry_parameters::backswing_time() const
 {
-	return
-		backswing_time_;
+  return backswing_time_;
 }
 
-sanguis::server::weapons::cast_point
-sanguis::server::weapons::sentry_parameters::cast_point() const
+sanguis::server::weapons::cast_point sanguis::server::weapons::sentry_parameters::cast_point() const
 {
-	return
-		cast_point_;
+  return cast_point_;
 }
 
-sanguis::server::weapons::range
-sanguis::server::weapons::sentry_parameters::range() const
+sanguis::server::weapons::range sanguis::server::weapons::sentry_parameters::range() const
 {
-	return
-		range_;
+  return range_;
 }
 
-void
-sanguis::server::weapons::sentry_parameters::extra_health(
-	sanguis::server::health const _health
-)
+void sanguis::server::weapons::sentry_parameters::extra_health(
+    sanguis::server::health const _health)
 {
-	health_.extra(
-		_health
-	);
+  health_.extra(_health);
 }

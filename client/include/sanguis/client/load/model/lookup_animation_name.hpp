@@ -4,14 +4,10 @@
 #include <sanguis/client/load/animation_type_fwd.hpp>
 #include <sanguis/model/animation_name_fwd.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
-sanguis::client::load::animation_type
-lookup_animation_name(
-	sanguis::model::animation_name const &
-);
+sanguis::client::load::animation_type lookup_animation_name(sanguis::model::animation_name const &);
 
 }
 

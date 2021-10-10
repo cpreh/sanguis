@@ -7,21 +7,13 @@
 #include <sanguis/messages/client/types/message.hpp>
 #include <alda/message/object_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-choose_perk
-=
-alda::message::object<
-	sanguis::messages::client::types::make_message_id<
-		sanguis::messages::client::types::message::choose_perk
-	>,
-	sanguis::messages::adapted_types::enum_<
-		sanguis::perk_type
-	>
->;
+using choose_perk = alda::message::object<
+    sanguis::messages::client::types::make_message_id<
+        sanguis::messages::client::types::message::choose_perk>,
+    sanguis::messages::adapted_types::enum_<sanguis::perk_type>>;
 
 }
 

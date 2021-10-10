@@ -4,16 +4,10 @@
 #include <sanguis/server/damage/armor_unit_fwd.hpp>
 #include <sanguis/server/damage/basic_meta_fwd.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-using
-armor_meta
-=
-sanguis::server::damage::basic_meta<
-	sanguis::server::damage::armor_unit
->;
+using armor_meta = sanguis::server::damage::basic_meta<sanguis::server::damage::armor_unit>;
 
 }
 

@@ -5,15 +5,12 @@
 #include <sanguis/common/symbol.hpp>
 #include <sanguis/messages/server/types/weapon_attribute_vector.hpp>
 
-
 namespace sanguis::messages::convert
 {
 
 SANGUIS_COMMON_SYMBOL
 sanguis::weapon_attribute_vector
-from_weapon_attribute_vector(
-	sanguis::messages::server::types::weapon_attribute_vector const &
-);
+from_weapon_attribute_vector(sanguis::messages::server::types::weapon_attribute_vector const &);
 
 }
 

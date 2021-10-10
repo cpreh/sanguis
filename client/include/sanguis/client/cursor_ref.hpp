@@ -4,16 +4,10 @@
 #include <sanguis/client/cursor_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client
 {
 
-using
-cursor_ref
-=
-fcppt::reference<
-	sanguis::client::cursor
->;
+using cursor_ref = fcppt::reference<sanguis::client::cursor>;
 
 }
 

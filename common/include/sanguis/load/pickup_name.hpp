@@ -5,15 +5,11 @@
 #include <sanguis/common/symbol.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::load
 {
 
 SANGUIS_COMMON_SYMBOL
-fcppt::string
-pickup_name(
-	sanguis::pickup_type
-);
+fcppt::string pickup_name(sanguis::pickup_type);
 
 }
 

@@ -13,99 +13,29 @@
 #include <boost/tuple/tuple.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
-template<
-	typename Tile
->
-sanguis::creator::enable_if_tile<
-	Tile,
-	void
->
-sanguis::creator::impl::blit(
-	fcppt::container::grid::pos_ref_range<
-		sanguis::creator::tile_grid<
-			Tile
-		>
-	> const _dest,
-	fcppt::container::grid::pos_ref_range<
-		sanguis::creator::tile_grid<
-			Tile
-		> const
-	> const _source
-)
+template <typename Tile>
+sanguis::creator::enable_if_tile<Tile, void> sanguis::creator::impl::blit(
+    fcppt::container::grid::pos_ref_range<sanguis::creator::tile_grid<Tile>> const _dest,
+    fcppt::container::grid::pos_ref_range<sanguis::creator::tile_grid<Tile> const> const _source)
 {
-	if(
-		fcppt::container::grid::range_dim(
-			_dest.min(),
-			_dest.sup()
-		)
-		!=
-		fcppt::container::grid::range_dim(
-			_source.min(),
-			_source.sup()
-		)
-	)
-	{
-		throw
-			sanguis::creator::exception{
-				FCPPT_TEXT("blit: dest and source have different sizes")
-			};
-	}
+  if (fcppt::container::grid::range_dim(_dest.min(), _dest.sup()) !=
+      fcppt::container::grid::range_dim(_source.min(), _source.sup()))
+  {
+    throw sanguis::creator::exception{FCPPT_TEXT("blit: dest and source have different sizes")};
+  }
 
-	for(
-		boost::tuple<
-			fcppt::container::grid::pos_reference<
-				sanguis::creator::tile_grid<
-					Tile
-				>
-			>,
-			fcppt::container::grid::pos_reference<
-				sanguis::creator::tile_grid<
-					Tile
-				> const
-			>
-		> const &element
-		:
-		boost::range::combine(
-			_dest,
-			_source
-		)
-	)
-	{
-		boost::get<
-			0
-		>(
-			element
-		).value() =
-			boost::get<
-				1
-			>(
-				element
-			).value();
-	}
+  for (boost::tuple<
+           fcppt::container::grid::pos_reference<sanguis::creator::tile_grid<Tile>>,
+           fcppt::container::grid::pos_reference<sanguis::creator::tile_grid<Tile> const>> const
+           &element : boost::range::combine(_dest, _source))
+  {
+    boost::get<0>(element).value() = boost::get<1>(element).value();
+  }
 }
 
-#define SANGUIS_CREATOR_INSTANTIATE_BLIT(\
-	tile_type\
-)\
-template \
-sanguis::creator::enable_if_tile<\
-	tile_type, \
-	void \
-> \
-sanguis::creator::impl::blit( \
-	fcppt::container::grid::pos_ref_range< \
-		sanguis::creator::tile_grid< \
-			tile_type \
-		> \
-	>, \
-	fcppt::container::grid::pos_ref_range< \
-		sanguis::creator::tile_grid< \
-			tile_type \
-		> const \
-	> \
-)
+#define SANGUIS_CREATOR_INSTANTIATE_BLIT(tile_type) \
+  template sanguis::creator::enable_if_tile<tile_type, void> sanguis::creator::impl::blit( \
+      fcppt::container::grid::pos_ref_range<sanguis::creator::tile_grid<tile_type>>, \
+      fcppt::container::grid::pos_ref_range<sanguis::creator::tile_grid<tile_type> const>)
 
-SANGUIS_CREATOR_INSTANTIATE_TILE(
-	SANGUIS_CREATOR_INSTANTIATE_BLIT
-);
+SANGUIS_CREATOR_INSTANTIATE_TILE(SANGUIS_CREATOR_INSTANTIATE_BLIT);

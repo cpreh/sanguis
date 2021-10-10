@@ -4,16 +4,10 @@
 #include <sanguis/client/load/model/part_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
-using
-part_cref
-=
-fcppt::reference<
-	sanguis::client::load::model::part const
->;
+using part_cref = fcppt::reference<sanguis::client::load::model::part const>;
 
 }
 

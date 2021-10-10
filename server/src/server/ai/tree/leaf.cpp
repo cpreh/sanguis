@@ -11,78 +11,44 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::server::ai::tree::leaf::leaf(
-	sanguis::server::ai::behavior::base_unique_ptr &&_behavior
-)
-:
-	sanguis::server::ai::tree::base(),
-	behavior_{
-		std::move(
-			_behavior
-		)
-	},
-	started_{
-		false
-	}
+sanguis::server::ai::tree::leaf::leaf(sanguis::server::ai::behavior::base_unique_ptr &&_behavior)
+    : sanguis::server::ai::tree::base(), behavior_{std::move(_behavior)}, started_{false}
 {
 }
 
-sanguis::server::ai::tree::leaf::~leaf()
-= default;
+sanguis::server::ai::tree::leaf::~leaf() = default;
 
-sanguis::server::entities::transfer_result
-sanguis::server::ai::tree::leaf::transfer()
+sanguis::server::entities::transfer_result sanguis::server::ai::tree::leaf::transfer()
 {
-	return
-		behavior_->transfer();
+  return behavior_->transfer();
 }
 
-sanguis::server::ai::status
-sanguis::server::ai::tree::leaf::run(
-	sanguis::duration const _duration
-)
+sanguis::server::ai::status sanguis::server::ai::tree::leaf::run(sanguis::duration const _duration)
 {
-	if(
-		!started_
-	)
-	{
-		started_ =
-			behavior_->start();
-	}
+  if (!started_)
+  {
+    started_ = behavior_->start();
+  }
 
-	if(
-		!started_
-	)
-	{
-		return
-			sanguis::server::ai::status::failure;
-	}
+  if (!started_)
+  {
+    return sanguis::server::ai::status::failure;
+  }
 
-	sanguis::server::ai::status const result{
-		behavior_->update(
-			_duration
-		)
-	};
+  sanguis::server::ai::status const result{behavior_->update(_duration)};
 
-	switch(
-		result
-	)
-	{
-	case sanguis::server::ai::status::running:
-		break;
-	case sanguis::server::ai::status::success:
-	case sanguis::server::ai::status::failure:
-		started_ =
-			false;
+  switch (result)
+  {
+  case sanguis::server::ai::status::running:
+    break;
+  case sanguis::server::ai::status::success:
+  case sanguis::server::ai::status::failure:
+    started_ = false;
 
-		sanguis::server::ai::idle(
-			behavior_->me()
-		);
+    sanguis::server::ai::idle(behavior_->me());
 
-		behavior_->context().clear_path();
-	}
+    behavior_->context().clear_path();
+  }
 
-	return
-		result;
+  return result;
 }

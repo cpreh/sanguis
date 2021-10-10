@@ -4,16 +4,10 @@
 #include <sanguis/model/animation_sound_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::model
 {
 
-using
-optional_animation_sound
-=
-fcppt::optional::object<
-	sanguis::model::animation_sound
->;
+using optional_animation_sound = fcppt::optional::object<sanguis::model::animation_sound>;
 
 }
 

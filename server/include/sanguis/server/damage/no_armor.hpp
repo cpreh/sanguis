@@ -3,12 +3,10 @@
 
 #include <sanguis/server/damage/armor_array.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-sanguis::server::damage::armor_array
-no_armor();
+sanguis::server::damage::armor_array no_armor();
 
 }
 

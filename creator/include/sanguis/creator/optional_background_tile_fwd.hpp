@@ -4,16 +4,10 @@
 #include <sanguis/creator/background_tile_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-optional_background_tile
-=
-fcppt::optional::object<
-	sanguis::creator::background_tile
->;
+using optional_background_tile = fcppt::optional::object<sanguis::creator::background_tile>;
 
 }
 

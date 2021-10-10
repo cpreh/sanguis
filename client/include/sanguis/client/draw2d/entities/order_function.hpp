@@ -5,18 +5,11 @@
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-using
-order_function
-=
-fcppt::function<
-	sanguis::client::draw2d::z_ordering (
-		sanguis::client::draw2d::sprite::index
-	)
->;
+using order_function =
+    fcppt::function<sanguis::client::draw2d::z_ordering(sanguis::client::draw2d::sprite::index)>;
 
 }
 

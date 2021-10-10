@@ -4,13 +4,11 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/common/symbol.hpp>
 
-
 namespace sanguis
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::random_generator::seed
-random_seed();
+sanguis::random_generator::seed random_seed();
 
 }
 

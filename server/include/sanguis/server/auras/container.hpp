@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::auras
 {
 
-using
-container
-=
-std::vector<
-	sanguis::server::auras::unique_ptr
->;
+using container = std::vector<sanguis::server::auras::unique_ptr>;
 
 }
 

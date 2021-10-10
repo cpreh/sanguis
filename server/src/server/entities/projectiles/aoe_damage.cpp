@@ -14,44 +14,25 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/container/make.hpp>
 
-
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
-	sanguis::server::team const _team,
-	sanguis::server::aoe const _aoe,
-	sanguis::server::damage::unit const _damage,
-	sanguis::server::damage::modified_array const &_damage_values
-)
-:
-	sanguis::server::entities::with_auras(
-		fcppt::container::make<
-			sanguis::server::auras::container
-		>(
-			fcppt::unique_ptr_to_base<
-				sanguis::server::auras::aura
-			>(
-				fcppt::make_unique_ptr<
-					sanguis::server::auras::aoe_damage
-				>(
-					_team,
-					_aoe,
-					sanguis::server::auras::influence::debuff,
-					_damage,
-					_damage_values
-				)
-			)
-		)
-	),
-	sanguis::server::entities::simple(),
-	sanguis::server::entities::center_ghost()
+    sanguis::server::team const _team,
+    sanguis::server::aoe const _aoe,
+    sanguis::server::damage::unit const _damage,
+    sanguis::server::damage::modified_array const &_damage_values)
+    : sanguis::server::entities::with_auras(
+          fcppt::container::make<sanguis::server::auras::container>(
+              fcppt::unique_ptr_to_base<sanguis::server::auras::aura>(
+                  fcppt::make_unique_ptr<sanguis::server::auras::aoe_damage>(
+                      _team,
+                      _aoe,
+                      sanguis::server::auras::influence::debuff,
+                      _damage,
+                      _damage_values)))),
+      sanguis::server::entities::simple(),
+      sanguis::server::entities::center_ghost()
 {
 }
 
-sanguis::server::entities::projectiles::aoe_damage::~aoe_damage()
-= default;
+sanguis::server::entities::projectiles::aoe_damage::~aoe_damage() = default;
 
-bool
-sanguis::server::entities::projectiles::aoe_damage::dead() const
-{
-	return
-		true;
-}
+bool sanguis::server::entities::projectiles::aoe_damage::dead() const { return true; }

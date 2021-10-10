@@ -7,16 +7,13 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::resource
 {
 
-sanguis::client::load::resource::texture_name_map
-parse_texture_file(
-	fcppt::log::object &, // NOLINT(google-runtime-references)
-	std::filesystem::path const &,
-	sanguis::client::load::resource::texture_name_map &&
-);
+sanguis::client::load::resource::texture_name_map parse_texture_file(
+    fcppt::log::object &, // NOLINT(google-runtime-references)
+    std::filesystem::path const &,
+    sanguis::client::load::resource::texture_name_map &&);
 
 }
 

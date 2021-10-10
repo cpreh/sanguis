@@ -6,16 +6,12 @@
 #include <sanguis/client/args/result_fwd.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
-
 namespace sanguis::client
 {
 
 SANGUIS_CLIENT_SYMBOL
 sanguis::client::object_base_unique_ptr
-create(
-	fcppt::log::context_reference,
-	sanguis::client::args::result const &
-);
+create(fcppt::log::context_reference, sanguis::client::args::result const &);
 
 }
 

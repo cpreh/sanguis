@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/property/change_function.hpp>
 #include <fcppt/signal/object_fwd.hpp>
 
-
 namespace sanguis::server::entities::property
 {
 
-using
-change_signal
-=
-fcppt::signal::object<
-	sanguis::server::entities::property::change_function
->;
+using change_signal = fcppt::signal::object<sanguis::server::entities::property::change_function>;
 
 }
 

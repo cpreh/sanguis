@@ -4,16 +4,10 @@
 #include <sanguis/client/gui/perk/tab_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::client::gui::perk
 {
 
-using
-tab_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::client::gui::perk::tab
->;
+using tab_unique_ptr = fcppt::unique_ptr<sanguis::client::gui::perk::tab>;
 
 }
 

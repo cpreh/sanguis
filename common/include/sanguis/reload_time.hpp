@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::duration,
-	reload_time
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::duration, reload_time);
 
 }
 

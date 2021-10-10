@@ -4,15 +4,12 @@
 #include <sanguis/server/entities/property/base_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
-
 namespace sanguis::server::entities::property
 {
 
-void
-constant_change(
-	sanguis::server::entities::property::base &, // NOLINT(google-runtime-references)
-	sanguis::server::entities::property::value const &
-);
+void constant_change(
+    sanguis::server::entities::property::base &, // NOLINT(google-runtime-references)
+    sanguis::server::entities::property::value const &);
 
 }
 

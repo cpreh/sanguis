@@ -6,16 +6,10 @@
 #include <unordered_set>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::world
 {
 
-using
-sight_range_entry_set
-=
-std::unordered_set<
-	sanguis::entity_id
->;
+using sight_range_entry_set = std::unordered_set<sanguis::entity_id>;
 
 }
 

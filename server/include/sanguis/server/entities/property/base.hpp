@@ -8,78 +8,47 @@
 #include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace sanguis::server::entities::property
 {
 
 class base
 {
-	FCPPT_NONCOPYABLE(
-		base
-	);
+  FCPPT_NONCOPYABLE(base);
+
 public:
-	[[nodiscard]]
-	sanguis::server::entities::property::constant
-	constant() const;
+  [[nodiscard]] sanguis::server::entities::property::constant constant() const;
 
-	[[nodiscard]]
-	sanguis::server::entities::property::linear
-	linear() const;
+  [[nodiscard]] sanguis::server::entities::property::linear linear() const;
 
-	[[nodiscard]]
-	sanguis::server::entities::property::linear_decrease
-	linear_decrease() const;
+  [[nodiscard]] sanguis::server::entities::property::linear_decrease linear_decrease() const;
 
-	void
-	constant(
-		sanguis::server::entities::property::constant const &
-	);
+  void constant(sanguis::server::entities::property::constant const &);
 
-	void
-	linear(
-		sanguis::server::entities::property::linear const &
-	);
+  void linear(sanguis::server::entities::property::linear const &);
 
-	void
-	linear_decrease(
-		sanguis::server::entities::property::linear_decrease const &
-	);
+  void linear_decrease(sanguis::server::entities::property::linear_decrease const &);
+
 protected:
-	explicit
-	base(
-		sanguis::server::entities::property::value
-	);
+  explicit base(sanguis::server::entities::property::value);
 
-	base(
-		base &&
-	)
-	noexcept;
+  base(base &&) noexcept;
 
-	base &
-	operator=(
-		base &&
-	)
-	noexcept;
+  base &operator=(base &&) noexcept;
 
-	virtual
-	~base();
+  virtual ~base();
+
 private:
-	void
-	recalc_max();
+  void recalc_max();
 
-	virtual
-	void
-	on_recalc_max(
-		sanguis::server::entities::property::value
-	) = 0;
+  virtual void on_recalc_max(sanguis::server::entities::property::value) = 0;
 
-	sanguis::server::entities::property::value base_;
+  sanguis::server::entities::property::value base_;
 
-	sanguis::server::entities::property::constant constant_;
+  sanguis::server::entities::property::constant constant_;
 
-	sanguis::server::entities::property::linear linear_;
+  sanguis::server::entities::property::linear linear_;
 
-	sanguis::server::entities::property::linear_decrease linear_decrease_;
+  sanguis::server::entities::property::linear_decrease linear_decrease_;
 };
 
 }

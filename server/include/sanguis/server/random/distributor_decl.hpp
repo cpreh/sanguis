@@ -13,73 +13,37 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::random
 {
 
-template<
-	typename Value,
-	typename State
->
+template <typename Value, typename State>
 class distributor
 {
-	FCPPT_NONMOVABLE(
-		distributor
-	);
+  FCPPT_NONMOVABLE(distributor);
+
 public:
-	using
-	value_state_pair
-	=
-	std::pair<
-		Value,
-		State
-	>;
+  using value_state_pair = std::pair<Value, State>;
 
-	using
-	vector
-	=
-	std::vector<
-		value_state_pair
-	>;
+  using vector = std::vector<value_state_pair>;
 
-	explicit
-	distributor(
-		vector const &
-	);
+  explicit distributor(vector const &);
 
-	~distributor();
+  ~distributor();
 
-	[[nodiscard]]
-	State const &
-	execute(
-		sanguis::random_generator & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  [[nodiscard]] State const &
+  execute(sanguis::random_generator & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 private:
-	using
-	distribution_parameters
-	=
-	std::conditional_t<
-		std::is_floating_point_v<
-			typename Value::value_type
-		>,
-		fcppt::random::distribution::parameters::uniform_real<
-			Value
-		>,
-		fcppt::random::distribution::parameters::uniform_int<
-			Value
-		>
-	>;
+  using distribution_parameters = std::conditional_t<
+      std::is_floating_point_v<typename Value::value_type>,
+      fcppt::random::distribution::parameters::uniform_real<Value>,
+      fcppt::random::distribution::parameters::uniform_int<Value>>;
 
-	using
-	distribution
-	=
-	fcppt::random::distribution::basic<
-		distribution_parameters
-	>;
+  using distribution = fcppt::random::distribution::basic<distribution_parameters>;
 
-	vector const values_;
+  vector const values_;
 
-	distribution distribution_;
+  distribution distribution_;
 };
 
 }

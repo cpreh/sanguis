@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::model
 {
 
-using
-cell_area_container
-=
-std::vector<
-	sanguis::model::cell_area
->;
+using cell_area_container = std::vector<sanguis::model::cell_area>;
 
 }
 

@@ -4,5 +4,4 @@
 #include <sanguis/server/perks/tree/object_fwd.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 
-
 #endif

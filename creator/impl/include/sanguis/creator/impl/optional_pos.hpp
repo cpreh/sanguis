@@ -5,5 +5,4 @@
 #include <sanguis/creator/impl/optional_pos_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

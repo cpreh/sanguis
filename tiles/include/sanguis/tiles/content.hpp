@@ -6,5 +6,4 @@
 #include <sanguis/tiles/error.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
-
 #endif

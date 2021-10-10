@@ -6,41 +6,23 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::events
 {
 
-class shoot
-:
-	public boost::statechart::event<
-		sanguis::server::weapons::events::shoot
-	>
+class shoot : public boost::statechart::event<sanguis::server::weapons::events::shoot>
 {
 public:
-	shoot();
+  shoot();
 
-	shoot(
-		shoot &&
-	)
-	noexcept;
+  shoot(shoot &&) noexcept;
 
-	shoot(
-		shoot const &
-	);
+  shoot(shoot const &);
 
-	shoot &
-	operator=(
-		shoot &&
-	)
-	noexcept;
+  shoot &operator=(shoot &&) noexcept;
 
-	shoot &
-	operator=(
-		shoot const &
-	);
+  shoot &operator=(shoot const &);
 
-	~shoot()
-	override;
+  ~shoot() override;
 };
 
 }

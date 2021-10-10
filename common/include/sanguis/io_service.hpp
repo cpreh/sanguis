@@ -9,49 +9,35 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis
 {
 
 class io_service
 {
-	FCPPT_NONMOVABLE(
-		io_service
-	);
+  FCPPT_NONMOVABLE(io_service);
+
 public:
-	SANGUIS_COMMON_SYMBOL
-	io_service();
+  SANGUIS_COMMON_SYMBOL
+  io_service();
 
-	SANGUIS_COMMON_SYMBOL
-	~io_service();
+  SANGUIS_COMMON_SYMBOL
+  ~io_service();
 
-	SANGUIS_COMMON_SYMBOL
-	void
-	post(
-		sanguis::io_service_callback const &
-	);
+  SANGUIS_COMMON_SYMBOL
+  void post(sanguis::io_service_callback const &);
 
-	SANGUIS_COMMON_SYMBOL
-	void
-	run();
+  SANGUIS_COMMON_SYMBOL
+  void run();
 
-	SANGUIS_COMMON_SYMBOL
-	void
-	stop();
+  SANGUIS_COMMON_SYMBOL
+  void stop();
 
-	[[nodiscard]]
-	SANGUIS_COMMON_SYMBOL
-	alda::net::io_service_wrapper const &
-	impl() const;
+  [[nodiscard]] SANGUIS_COMMON_SYMBOL alda::net::io_service_wrapper const &impl() const;
+
 private:
-	using
-	impl_unique_ptr
-	=
-	fcppt::unique_ptr<
-		sanguis::io_service_impl
-	>;
+  using impl_unique_ptr = fcppt::unique_ptr<sanguis::io_service_impl>;
 
-	impl_unique_ptr const impl_;
+  impl_unique_ptr const impl_;
 };
 
 }

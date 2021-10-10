@@ -5,5 +5,4 @@
 #include <sanguis/model/dim.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

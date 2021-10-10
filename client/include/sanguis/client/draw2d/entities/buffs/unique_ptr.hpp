@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/entities/buffs/base_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::client::draw2d::entities::buffs
 {
 
-using
-unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::client::draw2d::entities::buffs::base
->;
+using unique_ptr = fcppt::unique_ptr<sanguis::client::draw2d::entities::buffs::base>;
 
 }
 

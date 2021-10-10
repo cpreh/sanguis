@@ -9,13 +9,10 @@
 namespace sanguis::client::gui::style
 {
 
-using
-inner_border
-=
-std::integral_constant<
-	sge::rucksack::scalar,
-	12 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
->;
+using inner_border = std::integral_constant<
+    sge::rucksack::scalar,
+    12 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+    >;
 
 }
 

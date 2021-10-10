@@ -9,17 +9,14 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
-sanguis::tools::libmergeimage::image
-make_image(
-	sge::image2d::system &, // NOLINT(google-runtime-references)
-	std::filesystem::path const &,
-	sanguis::tools::libmergeimage::impl::cell_size const &,
-	sanguis::tools::libmergeimage::impl::path_vector
-);
+sanguis::tools::libmergeimage::image make_image(
+    sge::image2d::system &, // NOLINT(google-runtime-references)
+    std::filesystem::path const &,
+    sanguis::tools::libmergeimage::impl::cell_size const &,
+    sanguis::tools::libmergeimage::impl::path_vector);
 
 }
 

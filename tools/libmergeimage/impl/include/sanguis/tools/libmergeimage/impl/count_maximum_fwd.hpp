@@ -4,14 +4,10 @@
 #include <sanguis/tools/libmergeimage/count_type.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::tools::libmergeimage::count_type,
-	count_maximum
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::tools::libmergeimage::count_type, count_maximum);
 
 }
 

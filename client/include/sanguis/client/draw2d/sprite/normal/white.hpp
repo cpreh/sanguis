@@ -3,12 +3,10 @@
 
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
 
-
 namespace sanguis::client::draw2d::sprite::normal
 {
 
-sanguis::client::draw2d::sprite::normal::color
-white();
+sanguis::client::draw2d::sprite::normal::color white();
 
 }
 

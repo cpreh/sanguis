@@ -7,17 +7,11 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::resource
 {
 
-using
-texture_name_map
-=
-std::unordered_map<
-	sanguis::client::load::resource::texture_identifier,
-	std::filesystem::path
->;
+using texture_name_map =
+    std::unordered_map<sanguis::client::load::resource::texture_identifier, std::filesystem::path>;
 
 }
 

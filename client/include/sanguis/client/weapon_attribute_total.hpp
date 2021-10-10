@@ -5,15 +5,11 @@
 #include <sanguis/weapon_attribute_extra.hpp>
 #include <sanguis/weapon_attribute_value.hpp>
 
-
 namespace sanguis::client
 {
 
 sanguis::weapon_attribute_value
-weapon_attribute_total(
-	sanguis::weapon_attribute_base,
-	sanguis::weapon_attribute_extra
-);
+    weapon_attribute_total(sanguis::weapon_attribute_base, sanguis::weapon_attribute_extra);
 
 }
 

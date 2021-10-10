@@ -13,100 +13,35 @@
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 
-
-sanguis::creator::optional_pos
-sanguis::server::random::grid_pos(
-	sanguis::random_generator &_random_generator,
-	sanguis::creator::min const &_min,
-	sanguis::creator::sup const &_sup
-)
+sanguis::creator::optional_pos sanguis::server::random::grid_pos(
+    sanguis::random_generator &_random_generator,
+    sanguis::creator::min const &_min,
+    sanguis::creator::sup const &_sup)
 {
-	if(
-		!fcppt::container::grid::min_less_sup(
-			_min,
-			_sup
-		)
-	)
-	{
-		return
-			sanguis::creator::optional_pos();
-	}
+  if (!fcppt::container::grid::min_less_sup(_min, _sup))
+  {
+    return sanguis::creator::optional_pos();
+  }
 
-	using
-	random_parameters
-	=
-	fcppt::random::distribution::parameters::uniform_int<
-		sanguis::creator::size_type
-	>;
+  using random_parameters =
+      fcppt::random::distribution::parameters::uniform_int<sanguis::creator::size_type>;
 
-	auto const make_distribution(
-		[
-			_min,
-			_sup
-		](
-			auto const _index
-		)
-		{
-			FCPPT_USE(
-				_index
-			);
+  auto const make_distribution(
+      [_min, _sup](auto const _index)
+      {
+        FCPPT_USE(_index);
 
-			using
-			index
-			=
-			decltype(
-				_index
-			);
+        using index = decltype(_index);
 
-			return
-				fcppt::random::distribution::make_basic(
-					random_parameters(
-						random_parameters::min(
-							fcppt::math::vector::at<
-								index::value
-							>(
-								_min.get()
-							)
-						),
-						random_parameters::max(
-							fcppt::math::vector::at<
-								index::value
-							>(
-								_sup.get()
-							)
-							-
-							1U
-						)
-					)
-				);
-		}
-	);
+        return fcppt::random::distribution::make_basic(random_parameters(
+            random_parameters::min(fcppt::math::vector::at<index::value>(_min.get())),
+            random_parameters::max(fcppt::math::vector::at<index::value>(_sup.get()) - 1U)));
+      });
 
-	auto random_x(
-		make_distribution(
-			fcppt::math::static_size<
-				0
-			>{}
-		)
-	);
+  auto random_x(make_distribution(fcppt::math::static_size<0>{}));
 
-	auto random_y(
-		make_distribution(
-			fcppt::math::static_size<
-				1
-			>{}
-		)
-	);
+  auto random_y(make_distribution(fcppt::math::static_size<1>{}));
 
-	return
-		sanguis::creator::optional_pos{
-			sanguis::creator::pos{
-				random_x(
-					_random_generator
-				),
-				random_y(
-					_random_generator
-				)
-			}
-		};
+  return sanguis::creator::optional_pos{
+      sanguis::creator::pos{random_x(_random_generator), random_y(_random_generator)}};
 }

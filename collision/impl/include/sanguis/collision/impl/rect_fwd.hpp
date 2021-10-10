@@ -4,16 +4,10 @@
 #include <sanguis/collision/length.hpp>
 #include <fcppt/math/box/rect_fwd.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
-using
-rect
-=
-fcppt::math::box::rect<
-	sanguis::collision::length
->;
+using rect = fcppt::math::box::rect<sanguis::collision::length>;
 
 }
 

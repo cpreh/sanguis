@@ -5,22 +5,14 @@
 #include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/net/health_policy_fwd.hpp>
 
-
 namespace sanguis::server::net
 {
 
 struct health_policy
 {
-	static
-	sanguis::duration
-	start_duration();
+  static sanguis::duration start_duration();
 
-	static
-	sanguis::duration
-	difference(
-		sanguis::server::health,
-		sanguis::server::health
-	);
+  static sanguis::duration difference(sanguis::server::health, sanguis::server::health);
 };
 
 }

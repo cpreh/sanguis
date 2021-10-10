@@ -5,25 +5,13 @@
 #include <sanguis/messages/server/types/alda_type.hpp>
 #include <alda/message/make_concrete_ptr.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-template<
-	typename T
->
-inline
-sanguis::messages::server::unique_ptr
-create_ptr(
-	T const &_value
-)
+template <typename T>
+inline sanguis::messages::server::unique_ptr create_ptr(T const &_value)
 {
-	return
-		alda::message::make_concrete_ptr<
-			sanguis::messages::server::types::alda_type
-		>(
-			_value
-		);
+  return alda::message::make_concrete_ptr<sanguis::messages::server::types::alda_type>(_value);
 }
 
 }

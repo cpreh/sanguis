@@ -5,12 +5,6 @@
 #include <sanguis/server/world/insert_pair_decl.hpp>
 #include <sanguis/server/world/insert_simple_pair_fwd.hpp>
 
-
-extern
-template
-class
-sanguis::server::world::insert_pair<
-	sanguis::server::entities::simple
->;
+extern template class sanguis::server::world::insert_pair<sanguis::server::entities::simple>;
 
 #endif

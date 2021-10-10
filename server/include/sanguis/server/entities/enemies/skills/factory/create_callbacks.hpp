@@ -3,12 +3,10 @@
 
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 
-
 namespace sanguis::server::entities::enemies::skills::factory
 {
 
-sanguis::server::entities::enemies::skills::factory::container const &
-create_callbacks();
+sanguis::server::entities::enemies::skills::factory::container const &create_callbacks();
 
 }
 

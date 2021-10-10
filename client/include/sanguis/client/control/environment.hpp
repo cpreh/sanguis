@@ -6,27 +6,21 @@
 #include <sanguis/client/control/optional_attack_dest_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::control
 {
 
 class environment
 {
-	FCPPT_NONMOVABLE(
-		environment
-	);
-protected:
-	environment();
-public:
-	[[nodiscard]]
-	virtual
-	sanguis::client::control::optional_attack_dest
-	translate_attack_dest(
-		sanguis::client::control::cursor_position const &
-	) const = 0;
+  FCPPT_NONMOVABLE(environment);
 
-	virtual
-	~environment();
+protected:
+  environment();
+
+public:
+  [[nodiscard]] virtual sanguis::client::control::optional_attack_dest
+  translate_attack_dest(sanguis::client::control::cursor_position const &) const = 0;
+
+  virtual ~environment();
 };
 
 }

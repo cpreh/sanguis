@@ -5,15 +5,11 @@
 #include <sanguis/server/vector_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 
-
 namespace sanguis::server::collision
 {
 
 sanguis::server::space_unit
-distance_entity_pos(
-	sanguis::server::entities::base const &,
-	sanguis::server::vector const &
-);
+distance_entity_pos(sanguis::server::entities::base const &, sanguis::server::vector const &);
 
 }
 

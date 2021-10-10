@@ -11,48 +11,26 @@
 #include <streambuf>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::net
 {
 
-class data_streambuf
-:
-	public std::streambuf
+class data_streambuf : public std::streambuf
 {
-	FCPPT_NONMOVABLE(
-		data_streambuf
-	);
+  FCPPT_NONMOVABLE(data_streambuf);
+
 public:
-	SANGUIS_COMMON_SYMBOL
-	explicit
-	data_streambuf(
-		fcppt::reference<
-			sanguis::net::data_buffer
-		>
-	);
+  SANGUIS_COMMON_SYMBOL
+  explicit data_streambuf(fcppt::reference<sanguis::net::data_buffer>);
 
-	SANGUIS_COMMON_SYMBOL
-	~data_streambuf()
-	override;
+  SANGUIS_COMMON_SYMBOL
+  ~data_streambuf() override;
+
 private:
-	[[nodiscard]]
-	std::streamsize
-	xsputn(
-		char_type const *,
-		std::streamsize
-	)
-	override;
+  [[nodiscard]] std::streamsize xsputn(char_type const *, std::streamsize) override;
 
-	[[nodiscard]]
-	int_type
-	overflow(
-		int_type
-	)
-	override;
+  [[nodiscard]] int_type overflow(int_type) override;
 
-	fcppt::reference<
-		sanguis::net::data_buffer
-	> const buffer_;
+  fcppt::reference<sanguis::net::data_buffer> const buffer_;
 };
 
 }

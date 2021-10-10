@@ -4,14 +4,10 @@
 #include <sge/image2d/dim_fwd.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sge::image2d::dim,
-	cell_size
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sge::image2d::dim, cell_size);
 
 }
 

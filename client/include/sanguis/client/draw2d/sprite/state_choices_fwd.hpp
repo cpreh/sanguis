@@ -6,19 +6,11 @@
 #include <sge/sprite/state/with_rasterizer_fwd.hpp>
 #include <fcppt/mpl/list/object.hpp>
 
-
 namespace sanguis::client::draw2d::sprite
 {
 
-using
-state_choices
-=
-sge::sprite::state::choices<
-	fcppt::mpl::list::object<
-		sge::sprite::state::with_blend,
-		sge::sprite::state::with_rasterizer
-	>
->;
+using state_choices = sge::sprite::state::choices<
+    fcppt::mpl::list::object<sge::sprite::state::with_blend, sge::sprite::state::with_rasterizer>>;
 
 }
 

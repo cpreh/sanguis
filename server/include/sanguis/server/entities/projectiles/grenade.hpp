@@ -15,59 +15,42 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::projectiles
 {
 
-class grenade
-:
-	public sanguis::server::entities::projectiles::aoe_projectile
+class grenade : public sanguis::server::entities::projectiles::aoe_projectile
 {
-	FCPPT_NONMOVABLE(
-		grenade
-	);
+  FCPPT_NONMOVABLE(grenade);
+
 public:
-	grenade(
-		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-		sanguis::server::team,
-		sanguis::server::damage::unit,
-		sanguis::server::damage::modified_array const &,
-		sanguis::server::aoe,
-		sanguis::server::vector dest,
-		sanguis::server::direction
-	);
+  grenade(
+      sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+      sanguis::server::team,
+      sanguis::server::damage::unit,
+      sanguis::server::damage::modified_array const &,
+      sanguis::server::aoe,
+      sanguis::server::vector dest,
+      sanguis::server::direction);
 
-	~grenade()
-	override;
+  ~grenade() override;
+
 private:
-	[[nodiscard]]
-	sanguis::server::entities::optional_transfer_result
-	on_transfer(
-		sanguis::server::entities::transfer_parameters const &
-	)
-	override;
+  [[nodiscard]] sanguis::server::entities::optional_transfer_result
+  on_transfer(sanguis::server::entities::transfer_parameters const &) override;
 
-	void
-	do_damage(
-		sanguis::server::entities::with_health &
-	)
-	override;
+  void do_damage(sanguis::server::entities::with_health &) override;
 
-	void
-	update()
-	override;
+  void update() override;
 
-	void
-	remove_from_game()
-	override;
+  void remove_from_game() override;
 
-	sanguis::diff_timer slowdown_timer_;
+  sanguis::diff_timer slowdown_timer_;
 
-	sanguis::server::damage::unit const damage_;
+  sanguis::server::damage::unit const damage_;
 
-	sanguis::server::damage::modified_array const damage_modifiers_;
+  sanguis::server::damage::modified_array const damage_modifiers_;
 
-	sanguis::server::vector const dest_;
+  sanguis::server::vector const dest_;
 };
 
 }

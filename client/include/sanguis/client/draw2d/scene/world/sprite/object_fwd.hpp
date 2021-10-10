@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/scene/world/sprite/choices_fwd.hpp>
 #include <sge/sprite/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world::sprite
 {
 
-using
-object
-=
-sge::sprite::object<
-	sanguis::client::draw2d::scene::world::sprite::choices
->;
+using object = sge::sprite::object<sanguis::client::draw2d::scene::world::sprite::choices>;
 
 }
 

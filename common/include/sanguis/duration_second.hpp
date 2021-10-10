@@ -5,15 +5,11 @@
 #include <sanguis/time_unit.hpp>
 #include <sanguis/common/symbol.hpp>
 
-
 namespace sanguis
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::duration
-duration_second(
-	sanguis::time_unit
-);
+sanguis::duration duration_second(sanguis::time_unit);
 
 }
 

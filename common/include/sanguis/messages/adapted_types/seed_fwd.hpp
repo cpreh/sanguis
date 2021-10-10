@@ -6,19 +6,12 @@
 #include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <alda/bindings/strong_typedef_decl.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-seed
-=
-alda::bindings::strong_typedef<
-	sanguis::creator::seed,
-	sanguis::messages::adapted_types::unsigned_<
-		sanguis::creator::seed_type
-	>
->;
+using seed = alda::bindings::strong_typedef<
+    sanguis::creator::seed,
+    sanguis::messages::adapted_types::unsigned_<sanguis::creator::seed_type>>;
 
 }
 

@@ -13,40 +13,33 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::gui::perk
 {
 
 class tab
 {
-	FCPPT_NONMOVABLE(
-		tab
-	);
+  FCPPT_NONMOVABLE(tab);
+
 public:
-	tab(
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sge::gui::context_ref,
-		sge::gui::style::const_reference,
-		sanguis::client::perk::state_ref,
-		sanguis::client::perk::const_tree_range const &
-	);
+  tab(sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sge::gui::context_ref,
+      sge::gui::style::const_reference,
+      sanguis::client::perk::state_ref,
+      sanguis::client::perk::const_tree_range const &);
 
-	~tab();
+  ~tab();
 
-	[[nodiscard]]
-	sge::gui::widget::tree &
-	widget();
+  [[nodiscard]] sge::gui::widget::tree &widget();
 
-	[[nodiscard]]
-	sge::font::string const &
-	name() const;
+  [[nodiscard]] sge::font::string const &name() const;
+
 private:
-	sanguis::client::gui::perk::line_unique_ptr_tree_vector tree_widgets_;
+  sanguis::client::gui::perk::line_unique_ptr_tree_vector tree_widgets_;
 
-	sge::gui::widget::tree tree_;
+  sge::gui::widget::tree tree_;
 
-	sge::font::string const name_;
+  sge::font::string const name_;
 };
 
 }

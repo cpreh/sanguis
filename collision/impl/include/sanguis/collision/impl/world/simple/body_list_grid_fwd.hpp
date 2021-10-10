@@ -4,17 +4,11 @@
 #include <sanguis/collision/impl/world/simple/body_list.hpp>
 #include <fcppt/container/grid/object_fwd.hpp>
 
-
 namespace sanguis::collision::impl::world::simple
 {
 
-using
-body_list_grid
-=
-fcppt::container::grid::object<
-	sanguis::collision::impl::world::simple::body_list,
-	2
->;
+using body_list_grid =
+    fcppt::container::grid::object<sanguis::collision::impl::world::simple::body_list, 2>;
 
 }
 

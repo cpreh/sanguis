@@ -13,43 +13,38 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
-
 namespace sanguis::client::gui::menu
 {
 
 class resolution_chooser
 {
-	FCPPT_NONMOVABLE(
-		resolution_chooser
-	);
+  FCPPT_NONMOVABLE(resolution_chooser);
+
 public:
-	resolution_chooser(
-		sge::gui::context_ref,
-		sge::gui::style::const_reference,
-		sge::font::object_ref,
-		sge::renderer::device::ffp_ref
-	);
+  resolution_chooser(
+      sge::gui::context_ref,
+      sge::gui::style::const_reference,
+      sge::font::object_ref,
+      sge::renderer::device::ffp_ref);
 
-	~resolution_chooser();
+  ~resolution_chooser();
 
-	[[nodiscard]]
-	sge::gui::widget::base &
-	widget();
+  [[nodiscard]] sge::gui::widget::base &widget();
+
 private:
-	void
-	on_apply();
+  void on_apply();
 
-	sge::renderer::display_mode::container const display_modes_;
+  sge::renderer::display_mode::container const display_modes_;
 
-	sge::renderer::device::ffp_ref const renderer_;
+  sge::renderer::device::ffp_ref const renderer_;
 
-		sge::gui::widget::choices choices_;
+  sge::gui::widget::choices choices_;
 
-		sge::gui::widget::button apply_button_;
+  sge::gui::widget::button apply_button_;
 
-	sge::gui::widget::box_container widget_;
+  sge::gui::widget::box_container widget_;
 
-	fcppt::signal::auto_connection const apply_connection_;
+  fcppt::signal::auto_connection const apply_connection_;
 };
 
 }

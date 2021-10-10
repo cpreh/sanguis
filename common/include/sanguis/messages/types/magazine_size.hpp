@@ -5,14 +5,10 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::messages::types
 {
 
-using
-magazine_size
-=
-std::uint16_t;
+using magazine_size = std::uint16_t;
 
 }
 

@@ -4,14 +4,10 @@
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/damage/meta_list.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-sanguis::server::damage::array
-make_array(
-	sanguis::server::damage::meta_list const &
-);
+sanguis::server::damage::array make_array(sanguis::server::damage::meta_list const &);
 
 }
 

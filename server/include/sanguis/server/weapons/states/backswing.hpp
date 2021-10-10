@@ -20,7 +20,6 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::states
 {
 
@@ -28,60 +27,31 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
 class backswing
-:
-	public boost::statechart::state<
-		sanguis::server::weapons::states::backswing,
-		sanguis::server::weapons::weapon
-	>
+    : public boost::statechart::
+          state<sanguis::server::weapons::states::backswing, sanguis::server::weapons::weapon>
 {
-	FCPPT_NONMOVABLE(
-		backswing
-	);
+  FCPPT_NONMOVABLE(backswing);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list3<
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::poll
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::reload
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::stop
-		>
-	>;
+  using reactions = boost::mpl::list3<
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::poll>,
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::reload>,
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::stop>>;
 
-	explicit
-	backswing(
-		my_context
-	);
+  explicit backswing(my_context);
 
-	~backswing()
-	SANGUIS_STATE_OVERRIDE;
+  ~backswing() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::poll const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::poll const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::reload const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::reload const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::stop const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::stop const &);
+
 private:
-	bool cancelled_;
+  bool cancelled_;
 
-	sanguis::diff_timer cooldown_;
+  sanguis::diff_timer cooldown_;
 };
 
 FCPPT_PP_POP_WARNING

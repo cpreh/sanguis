@@ -3,15 +3,14 @@
 
 #include <sanguis/creator/spawn_type_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
 enum class spawn_type
 {
-	single,
-	spawner,
-	fcppt_maximum = spawner
+  single,
+  spawner,
+  fcppt_maximum = spawner
 };
 
 }

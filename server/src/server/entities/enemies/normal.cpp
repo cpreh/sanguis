@@ -13,44 +13,27 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::enemies::normal::normal(
-	sanguis::server::entities::enemies::parameters &&_parameters
-)
-:
-	sanguis::server::entities::enemies::enemy(
-		std::move(
-			_parameters
-		)
-	),
-	name_{
-		sge::charconv::fcppt_string_to_utf8(
-			sanguis::server::entities::enemies::pretty_name(
-				this->enemy_type()
-			)
-		)
-	}
+    sanguis::server::entities::enemies::parameters &&_parameters)
+    : sanguis::server::entities::enemies::enemy(std::move(_parameters)),
+      name_{sge::charconv::fcppt_string_to_utf8(
+          sanguis::server::entities::enemies::pretty_name(this->enemy_type()))}
 {
 }
 
 FCPPT_PP_POP_WARNING
 
-sanguis::server::entities::enemies::normal::~normal()
-= default;
+sanguis::server::entities::enemies::normal::~normal() = default;
 
-sanguis::messages::types::string const &
-sanguis::server::entities::enemies::normal::name() const
+sanguis::messages::types::string const &sanguis::server::entities::enemies::normal::name() const
 {
-	return
-		name_;
+  return name_;
 }
 
-sanguis::enemy_kind
-sanguis::server::entities::enemies::normal::enemy_kind() const
+sanguis::enemy_kind sanguis::server::entities::enemies::normal::enemy_kind() const
 {
-	return
-		sanguis::enemy_kind::normal;
+  return sanguis::enemy_kind::normal;
 }

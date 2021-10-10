@@ -16,100 +16,47 @@
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::server::weapons::states::idle::idle(
-	my_context _ctx
-)
-:
-	my_base(
-		_ctx
-	)
+sanguis::server::weapons::states::idle::idle(my_context _ctx) : my_base(_ctx)
 {
-	this->context<
-		sanguis::server::weapons::weapon
-	>().weapon_status(
-		sanguis::weapon_status::nothing
-	);
+  this->context<sanguis::server::weapons::weapon>().weapon_status(sanguis::weapon_status::nothing);
 
-	FCPPT_LOG_VERBOSE(
-		this->context<
-			sanguis::server::weapons::weapon
-		>().log().main_log(),
-		fcppt::log::out
-			<< FCPPT_TEXT("idle: ")
-			<< this
-	)
+  FCPPT_LOG_VERBOSE(
+      this->context<sanguis::server::weapons::weapon>().log().main_log(),
+      fcppt::log::out << FCPPT_TEXT("idle: ") << this)
 }
 
-sanguis::server::weapons::states::idle::~idle()
-= default;
+sanguis::server::weapons::states::idle::~idle() = default;
 
 boost::statechart::result
-sanguis::server::weapons::states::idle::react(
-	sanguis::server::weapons::events::shoot const &
-)
+sanguis::server::weapons::states::idle::react(sanguis::server::weapons::events::shoot const &)
 {
-	if(
-		this->context<
-			sanguis::server::weapons::weapon
-		>().magazine_empty()
-	)
-	{
-		this->post_event(
-			sanguis::server::weapons::events::reload()
-		);
+  if (this->context<sanguis::server::weapons::weapon>().magazine_empty())
+  {
+    this->post_event(sanguis::server::weapons::events::reload());
 
-		return
-			this->discard_event();
-	}
+    return this->discard_event();
+  }
 
-	return
-		this->context<
-			sanguis::server::weapons::weapon
-		>().owner_target_in_range()
-		?
-			this->transit<
-				sanguis::server::weapons::states::castpoint
-			>()
-		:
-			this->discard_event()
-		;
+  return this->context<sanguis::server::weapons::weapon>().owner_target_in_range()
+             ? this->transit<sanguis::server::weapons::states::castpoint>()
+             : this->discard_event();
 }
 
 boost::statechart::result
-sanguis::server::weapons::states::idle::react(
-	sanguis::server::weapons::events::reload const &
-)
+sanguis::server::weapons::states::idle::react(sanguis::server::weapons::events::reload const &)
 {
-	return
-		this->context<
-			sanguis::server::weapons::weapon
-		>().reload_time().has_value()
-		?
-			this->transit<
-				sanguis::server::weapons::states::reloading
-			>()
-		:
-			this->discard_event()
-		;
+  return this->context<sanguis::server::weapons::weapon>().reload_time().has_value()
+             ? this->transit<sanguis::server::weapons::states::reloading>()
+             : this->discard_event();
 }
 
 boost::statechart::result
-sanguis::server::weapons::states::idle::react(
-	sanguis::server::weapons::events::poll const &
-)
+sanguis::server::weapons::states::idle::react(sanguis::server::weapons::events::poll const &)
 {
-	if(
-		this->context<
-			sanguis::server::weapons::weapon
-		>().magazine_empty()
-	)
-	{
-		this->post_event(
-			sanguis::server::weapons::events::reload()
-		);
-	}
+  if (this->context<sanguis::server::weapons::weapon>().magazine_empty())
+  {
+    this->post_event(sanguis::server::weapons::events::reload());
+  }
 
-	return
-		this->discard_event();
+  return this->discard_event();
 }

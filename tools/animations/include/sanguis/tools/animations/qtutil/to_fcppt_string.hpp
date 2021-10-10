@@ -6,14 +6,10 @@
 #include <QString>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations::qtutil
 {
 
-fcppt::string
-to_fcppt_string(
-	QString const &
-);
+fcppt::string to_fcppt_string(QString const &);
 
 }
 

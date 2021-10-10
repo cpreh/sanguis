@@ -7,47 +7,28 @@
 #include <sanguis/server/entities/with_velocity_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::buffs
 {
 
-class slow
-:
-	public sanguis::server::buffs::buff
+class slow : public sanguis::server::buffs::buff
 {
-	FCPPT_NONMOVABLE(
-		slow
-	);
+  FCPPT_NONMOVABLE(slow);
+
 public:
-	slow(
-		sanguis::server::entities::with_velocity_ref,
-		sanguis::server::buffs::slow_factor
-	);
+  slow(sanguis::server::entities::with_velocity_ref, sanguis::server::buffs::slow_factor);
 
-	~slow()
-	override;
+  ~slow() override;
+
 private:
-	[[nodiscard]]
-	sanguis::buff_type
-	type() const
-	override;
+  [[nodiscard]] sanguis::buff_type type() const override;
 
-	void
-	apply(
-		sanguis::server::buffs::buff::added
-	)
-	override;
+  void apply(sanguis::server::buffs::buff::added) override;
 
-	[[nodiscard]]
-	bool
-	greater(
-		sanguis::server::buffs::buff const &
-	) const
-	override;
+  [[nodiscard]] bool greater(sanguis::server::buffs::buff const &) const override;
 
-	sanguis::server::entities::with_velocity_ref const entity_;
+  sanguis::server::entities::with_velocity_ref const entity_;
 
-	sanguis::server::buffs::slow_factor const factor_;
+  sanguis::server::buffs::slow_factor const factor_;
 };
 
 }

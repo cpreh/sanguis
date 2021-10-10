@@ -5,16 +5,11 @@
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/perks/tree/container.hpp>
 
-
 namespace sanguis::server::perks::tree
 {
 
-bool
-choosable(
-	sanguis::server::perks::tree::container const &,
-	sanguis::perk_type,
-	sanguis::server::level
-);
+bool choosable(
+    sanguis::server::perks::tree::container const &, sanguis::perk_type, sanguis::server::level);
 
 }
 

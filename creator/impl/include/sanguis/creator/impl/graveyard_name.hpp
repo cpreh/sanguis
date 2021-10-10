@@ -3,12 +3,10 @@
 
 #include <sanguis/creator/name.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
-sanguis::creator::name
-graveyard_name();
+sanguis::creator::name graveyard_name();
 
 }
 

@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::server::perks
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::server::entities::property::value,
-	change_factor
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::server::entities::property::value, change_factor);
 
 }
 

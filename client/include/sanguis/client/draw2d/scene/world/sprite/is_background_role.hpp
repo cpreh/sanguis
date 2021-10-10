@@ -3,13 +3,10 @@
 
 #include <fcppt/record/make_label.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world::sprite
 {
 
-FCPPT_RECORD_MAKE_LABEL(
-	is_background_role
-);
+FCPPT_RECORD_MAKE_LABEL(is_background_role);
 
 }
 

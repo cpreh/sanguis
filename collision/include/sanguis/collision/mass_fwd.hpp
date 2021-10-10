@@ -7,17 +7,10 @@
 #include <boost/units/systems/si/mass.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::collision
 {
 
-using
-mass
-=
-boost::units::quantity<
-	boost::units::si::mass,
-	sanguis::collision::unit
->;
+using mass = boost::units::quantity<boost::units::si::mass, sanguis::collision::unit>;
 
 }
 

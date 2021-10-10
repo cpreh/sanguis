@@ -8,50 +8,39 @@
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/impl/result_fwd.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
 class result
 {
 public:
-	result(
-		sanguis::creator::grid &&,
-		sanguis::creator::background_grid &&,
-		sanguis::creator::opening_container_array &&,
-		sanguis::creator::spawn_container &&,
-		sanguis::creator::destructible_container &&
-	);
+  result(
+      sanguis::creator::grid &&,
+      sanguis::creator::background_grid &&,
+      sanguis::creator::opening_container_array &&,
+      sanguis::creator::spawn_container &&,
+      sanguis::creator::destructible_container &&);
 
-	[[nodiscard]]
-	sanguis::creator::grid &
-	grid();
+  [[nodiscard]] sanguis::creator::grid &grid();
 
-	[[nodiscard]]
-	sanguis::creator::background_grid &
-	background_grid();
+  [[nodiscard]] sanguis::creator::background_grid &background_grid();
 
-	[[nodiscard]]
-	sanguis::creator::opening_container_array &
-	openings();
+  [[nodiscard]] sanguis::creator::opening_container_array &openings();
 
-	[[nodiscard]]
-	sanguis::creator::spawn_container &
-	spawns();
+  [[nodiscard]] sanguis::creator::spawn_container &spawns();
 
-	[[nodiscard]]
-	sanguis::creator::destructible_container &
-	destructibles();
+  [[nodiscard]] sanguis::creator::destructible_container &destructibles();
+
 private:
-	sanguis::creator::grid grid_;
+  sanguis::creator::grid grid_;
 
-	sanguis::creator::background_grid background_grid_;
+  sanguis::creator::background_grid background_grid_;
 
-	sanguis::creator::opening_container_array openings_;
+  sanguis::creator::opening_container_array openings_;
 
-	sanguis::creator::spawn_container spawns_;
+  sanguis::creator::spawn_container spawns_;
 
-	sanguis::creator::destructible_container destructibles_;
+  sanguis::creator::destructible_container destructibles_;
 };
 
 }

@@ -6,17 +6,10 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
-using
-tree_depth
-=
-std::integral_constant<
-	sanguis::tools::libmergeimage::count_type,
-	3
->;
+using tree_depth = std::integral_constant<sanguis::tools::libmergeimage::count_type, 3>;
 
 }
 

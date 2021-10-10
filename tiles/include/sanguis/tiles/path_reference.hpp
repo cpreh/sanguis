@@ -4,5 +4,4 @@
 #include <sanguis/tiles/path_reference_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 #endif

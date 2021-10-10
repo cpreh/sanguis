@@ -4,5 +4,4 @@
 #include <sanguis/creator/tile_grid_fwd.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 
-
 #endif

@@ -11,7 +11,6 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 namespace
 {
 
@@ -21,14 +20,13 @@ FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
 // NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
 sanguis::server::entities::enemies::modifiers::container const callbacks{
-	&sanguis::server::entities::enemies::modifiers::agile,
-	&sanguis::server::entities::enemies::modifiers::armored,
-	&sanguis::server::entities::enemies::modifiers::burning,
-	&sanguis::server::entities::enemies::modifiers::fast,
-	&sanguis::server::entities::enemies::modifiers::freezing,
-	&sanguis::server::entities::enemies::modifiers::health,
-	&sanguis::server::entities::enemies::modifiers::regenerating
-};
+    &sanguis::server::entities::enemies::modifiers::agile,
+    &sanguis::server::entities::enemies::modifiers::armored,
+    &sanguis::server::entities::enemies::modifiers::burning,
+    &sanguis::server::entities::enemies::modifiers::fast,
+    &sanguis::server::entities::enemies::modifiers::freezing,
+    &sanguis::server::entities::enemies::modifiers::health,
+    &sanguis::server::entities::enemies::modifiers::regenerating};
 
 FCPPT_PP_POP_WARNING
 
@@ -37,6 +35,5 @@ FCPPT_PP_POP_WARNING
 sanguis::server::entities::enemies::modifiers::container const &
 sanguis::server::entities::enemies::modifiers::create_callbacks()
 {
-	return
-		callbacks;
+  return callbacks;
 }

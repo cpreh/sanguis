@@ -8,13 +8,10 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wweak-template-vtables)
 
-ALDA_MESSAGE_DECLARE_BASE(
-	sanguis::messages::server::types::alda_type
-);
+ALDA_MESSAGE_DECLARE_BASE(sanguis::messages::server::types::alda_type);
 
 FCPPT_PP_POP_WARNING
 

@@ -5,15 +5,11 @@
 #include <sanguis/common/symbol.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::load
 {
 
 SANGUIS_COMMON_SYMBOL
-fcppt::string
-friend_name(
-	sanguis::friend_type
-);
+fcppt::string friend_name(sanguis::friend_type);
 
 }
 

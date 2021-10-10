@@ -10,47 +10,29 @@
 #include <sge/audio/sound/repeat.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
-
 sanguis::client::draw2d::entities::model::optional_sound
 sanguis::client::draw2d::entities::model::make_sound(
-	sge::audio::buffer_ref const _buffer,
-	sanguis::client::sound_manager &_sound_manager,
-	sanguis::client::draw2d::sprite::animation::loop_method const _loop_method
-)
+    sge::audio::buffer_ref const _buffer,
+    sanguis::client::sound_manager &_sound_manager,
+    sanguis::client::draw2d::sprite::animation::loop_method const _loop_method)
 {
-	switch(
-		_loop_method
-	)
-	{
-	case sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end:
-		_sound_manager.add(
-			_buffer->create_nonpositional(
-				sge::audio::sound::nonpositional_parameters()
-			)
-		);
+  switch (_loop_method)
+  {
+  case sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end:
+    _sound_manager.add(
+        _buffer->create_nonpositional(sge::audio::sound::nonpositional_parameters()));
 
-		return
-			sanguis::client::draw2d::entities::model::optional_sound();
-	case sanguis::client::draw2d::sprite::animation::loop_method::repeat:
-		{
-			sge::audio::sound::base_unique_ptr new_sound(
-				_buffer->create_nonpositional(
-					sge::audio::sound::nonpositional_parameters()
-				)
-			);
+    return sanguis::client::draw2d::entities::model::optional_sound();
+  case sanguis::client::draw2d::sprite::animation::loop_method::repeat:
+  {
+    sge::audio::sound::base_unique_ptr new_sound(
+        _buffer->create_nonpositional(sge::audio::sound::nonpositional_parameters()));
 
-			new_sound->play(
-				sge::audio::sound::repeat::loop
-			);
+    new_sound->play(sge::audio::sound::repeat::loop);
 
-			return
-				sanguis::client::draw2d::entities::model::optional_sound{
-					std::move(
-						new_sound
-					)
-				};
-		}
-	}
+    return sanguis::client::draw2d::entities::model::optional_sound{std::move(new_sound)};
+  }
+  }
 
-	FCPPT_ASSERT_UNREACHABLE;
+  FCPPT_ASSERT_UNREACHABLE;
 }

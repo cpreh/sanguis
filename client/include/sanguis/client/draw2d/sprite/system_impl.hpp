@@ -17,113 +17,50 @@
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters.hpp>
 
-
-template<
-	typename Choices,
-	typename Category
->
-sanguis::client::draw2d::sprite::system<
-	Choices,
-	Category
->::system(
-	sge::renderer::device::core_ref const _renderer,
-	state_ref const _state
-)
-:
-	renderer_{
-		_renderer
-	},
-	state_(
-		_state
-	),
-	buffers_(
-		_renderer,
-		sge::sprite::buffers::option::dynamic
-	),
-	collection_()
+template <typename Choices, typename Category>
+sanguis::client::draw2d::sprite::system<Choices, Category>::system(
+    sge::renderer::device::core_ref const _renderer, state_ref const _state)
+    : renderer_{_renderer},
+      state_(_state),
+      buffers_(_renderer, sge::sprite::buffers::option::dynamic),
+      collection_()
 {
 }
 
 namespace sanguis::client::draw2d::sprite
 {
-template<
-	typename Choices,
-	typename Category
->
-system<
-	Choices,
-	Category
->::~system()
-= default;
+template <typename Choices, typename Category>
+system<Choices, Category>::~system() = default;
 }
 
-template<
-	typename Choices,
-	typename Category
->
-typename
-sanguis::client::draw2d::sprite::system<
-	Choices,
-	Category
->::connection_ref
-sanguis::client::draw2d::sprite::system<
-	Choices,
-	Category
->::connection(
-	Category const _category
-)
+template <typename Choices, typename Category>
+typename sanguis::client::draw2d::sprite::system<Choices, Category>::connection_ref
+sanguis::client::draw2d::sprite::system<Choices, Category>::connection(Category const _category)
 {
-	return
-		collection_.connection(
-			_category
-		);
+  return collection_.connection(_category);
 }
 
-template<
-	typename Choices,
-	typename Category
->
-void
-sanguis::client::draw2d::sprite::system<
-	Choices,
-	Category
->::render(
-	sge::renderer::context::core &_render_context,
-	Category const _category
-)
+template <typename Choices, typename Category>
+void sanguis::client::draw2d::sprite::system<Choices, Category>::render(
+    sge::renderer::context::core &_render_context, Category const _category)
 {
-	sge::sprite::process::with_options<
-		sge::sprite::process::options<
-			sge::sprite::process::geometry_options::update
-		>
-	>(
-		_render_context,
-		collection_.get(
-			_category
-		).range(),
-		buffers_,
-		sge::sprite::compare::default_(),
-		state_.get(),
-		sge::sprite::state::default_options<
-			sanguis::client::draw2d::sprite::state_choices
-		>()
-		.no_blend_state()
-		.no_rasterizer_state()
-	);
+  sge::sprite::process::with_options<
+      sge::sprite::process::options<sge::sprite::process::geometry_options::update>>(
+      _render_context,
+      collection_.get(_category).range(),
+      buffers_,
+      sge::sprite::compare::default_(),
+      state_.get(),
+      sge::sprite::state::default_options<sanguis::client::draw2d::sprite::state_choices>()
+          .no_blend_state()
+          .no_rasterizer_state());
 }
 
-template<
-	typename Choices,
-	typename Category
->
+template <typename Choices, typename Category>
 sge::renderer::device::core &
-sanguis::client::draw2d::sprite::system<
-	Choices,
-	Category
->::renderer() const
+sanguis::client::draw2d::sprite::system<Choices, Category>::renderer() const
 {
-	return
-		renderer_.get();
+  return renderer_.get();
 }
 
 #endif

@@ -4,16 +4,10 @@
 #include <sanguis/server/timer_function.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-timer_callback
-=
-fcppt::function<
-	sanguis::server::timer_function
->;
+using timer_callback = fcppt::function<sanguis::server::timer_function>;
 
 }
 

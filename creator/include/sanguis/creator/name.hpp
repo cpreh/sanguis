@@ -4,5 +4,4 @@
 #include <sanguis/creator/name_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

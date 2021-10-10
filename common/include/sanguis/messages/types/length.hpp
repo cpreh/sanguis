@@ -5,14 +5,10 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::messages::types
 {
 
-using
-length
-=
-std::uint16_t;
+using length = std::uint16_t;
 
 }
 

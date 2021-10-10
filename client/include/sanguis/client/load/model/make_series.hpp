@@ -6,16 +6,13 @@
 #include <sanguis/model/animation_fwd.hpp>
 #include <sge/texture/part_fwd.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
-sanguis::client::load::resource::animation::series
-make_series(
-	sanguis::model::animation const &,
-	sanguis::client::load::model::global_parameters const &,
-	sge::texture::part const &
-);
+sanguis::client::load::resource::animation::series make_series(
+    sanguis::model::animation const &,
+    sanguis::client::load::model::global_parameters const &,
+    sge::texture::part const &);
 
 }
 

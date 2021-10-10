@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::messages::server::types
 {
 
-using
-weapon_attribute_vector
-=
-std::vector<
-	sanguis::messages::server::types::weapon_attribute
->;
+using weapon_attribute_vector = std::vector<sanguis::messages::server::types::weapon_attribute>;
 
 }
 

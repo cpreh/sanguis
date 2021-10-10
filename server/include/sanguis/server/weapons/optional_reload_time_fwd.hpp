@@ -4,16 +4,10 @@
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-using
-optional_reload_time
-=
-fcppt::optional::object<
-	sanguis::server::weapons::reload_time
->;
+using optional_reload_time = fcppt::optional::object<sanguis::server::weapons::reload_time>;
 
 }
 

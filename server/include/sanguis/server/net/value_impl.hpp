@@ -4,5 +4,4 @@
 #include <sanguis/server/net/basic_value_impl.hpp>
 #include <sanguis/server/net/value_decl.hpp>
 
-
 #endif

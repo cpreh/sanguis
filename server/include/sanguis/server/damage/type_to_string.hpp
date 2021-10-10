@@ -4,14 +4,10 @@
 #include <sanguis/server/damage/type_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-fcppt::string
-type_to_string(
-	sanguis::server::damage::type
-);
+fcppt::string type_to_string(sanguis::server::damage::type);
 
 }
 

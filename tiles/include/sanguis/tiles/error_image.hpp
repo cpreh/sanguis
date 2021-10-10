@@ -5,15 +5,11 @@
 #include <sanguis/tiles/symbol.hpp>
 #include <sge/image2d/store/object.hpp>
 
-
 namespace sanguis::tiles
 {
 
 SANGUIS_TILES_SYMBOL
-sge::image2d::store::object
-error_image(
-	sanguis::tiles::error
-);
+sge::image2d::store::object error_image(sanguis::tiles::error);
 
 }
 

@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_diff_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

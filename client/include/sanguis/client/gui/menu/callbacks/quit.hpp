@@ -3,16 +3,10 @@
 
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client::gui::menu::callbacks
 {
 
-using
-quit
-=
-fcppt::function<
-	void ()
->;
+using quit = fcppt::function<void()>;
 
 }
 

@@ -10,25 +10,17 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-add_aura
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::add_aura
-	>,
-	alda::bindings::record_variadic<
-		sanguis::messages::server::parts::entity_id,
-		fcppt::record::element<
-			sanguis::messages::roles::aura_type,
-			sanguis::messages::adapted_types::aura_type
-		>
-	>
->;
+using add_aura = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::add_aura>,
+    alda::bindings::record_variadic<
+        sanguis::messages::server::parts::entity_id,
+        fcppt::record::element<
+            sanguis::messages::roles::aura_type,
+            sanguis::messages::adapted_types::aura_type>>>;
 
 }
 

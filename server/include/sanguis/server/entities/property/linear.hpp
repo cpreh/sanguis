@@ -4,25 +4,20 @@
 #include <sanguis/server/entities/property/linear_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
-
 namespace sanguis::server::entities::property
 {
 
 class linear
 {
 public:
-	linear();
+  linear();
 
-	void
-	change(
-		sanguis::server::entities::property::value
-	);
+  void change(sanguis::server::entities::property::value);
 
-	[[nodiscard]]
-	sanguis::server::entities::property::value
-	value() const;
+  [[nodiscard]] sanguis::server::entities::property::value value() const;
+
 private:
-	sanguis::server::entities::property::value value_;
+  sanguis::server::entities::property::value value_;
 };
 
 }

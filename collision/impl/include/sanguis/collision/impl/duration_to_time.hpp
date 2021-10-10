@@ -7,20 +7,12 @@
 #include <boost/units/systems/si/time.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::collision::impl
 {
 
-inline
-sanguis::collision::impl::time
-duration_to_time(
-	sanguis::collision::duration const _duration
-)
+inline sanguis::collision::impl::time duration_to_time(sanguis::collision::duration const _duration)
 {
-	return
-		_duration.count()
-		*
-		boost::units::si::second;
+  return _duration.count() * boost::units::si::second;
 }
 
 }

@@ -15,52 +15,26 @@
 #include <QApplication>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::main::exit_code
-sanguis::tools::animations::main(
-	awl::main::function_context const &_function_context
-)
+sanguis::tools::animations::main(awl::main::function_context const &_function_context)
 try
 {
-	int argc(
-		_function_context.argc()
-	);
+  int argc(_function_context.argc());
 
-	QApplication app(
-		argc,
-		_function_context.argv()
-	);
+  QApplication app(argc, _function_context.argv());
 
-	sanguis::tools::animations::sge_systems const sge_systems{
-		sge::systems::make_list
-		(
-			sge::systems::image2d(
-				sge::media::optional_extension_set()
-			)
-		)
-	};
+  sanguis::tools::animations::sge_systems const sge_systems{
+      sge::systems::make_list(sge::systems::image2d(sge::media::optional_extension_set()))};
 
-	sanguis::tools::animations::main_window window(
-		fcppt::make_cref(
-			sge_systems
-		)
-	);
+  sanguis::tools::animations::main_window window(fcppt::make_cref(sge_systems));
 
-	window.show();
+  window.show();
 
-	return
-		awl::main::exit_code(
-			QApplication::exec()
-		);
+  return awl::main::exit_code(QApplication::exec());
 }
-catch(
-	fcppt::exception const &_error
-)
+catch (fcppt::exception const &_error)
 {
-	fcppt::io::cerr()
-		<< _error.string()
-		<< FCPPT_TEXT('\n');
+  fcppt::io::cerr() << _error.string() << FCPPT_TEXT('\n');
 
-	return
-		awl::main::exit_failure();
+  return awl::main::exit_failure();
 }

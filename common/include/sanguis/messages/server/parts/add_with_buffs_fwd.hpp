@@ -5,17 +5,12 @@
 #include <sanguis/messages/roles/buff_type_container.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server::parts
 {
 
-using
-add_with_buffs
-=
-fcppt::record::element<
-	sanguis::messages::roles::buff_type_container,
-	sanguis::messages::adapted_types::buff_type_vector
->;
+using add_with_buffs = fcppt::record::element<
+    sanguis::messages::roles::buff_type_container,
+    sanguis::messages::adapted_types::buff_type_vector>;
 
 }
 

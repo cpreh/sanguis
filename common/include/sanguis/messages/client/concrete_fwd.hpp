@@ -4,20 +4,11 @@
 #include <sanguis/messages/client/types/alda_type_fwd.hpp>
 #include <alda/message/concrete_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-template<
-	typename T
->
-using
-concrete
-=
-alda::message::concrete<
-	sanguis::messages::client::types::alda_type,
-	T
->;
+template <typename T>
+using concrete = alda::message::concrete<sanguis::messages::client::types::alda_type, T>;
 
 }
 

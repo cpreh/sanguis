@@ -5,5 +5,4 @@
 #include <sanguis/collision/impl/dir_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

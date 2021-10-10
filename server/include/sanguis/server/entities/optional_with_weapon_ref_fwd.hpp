@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-using
-optional_with_weapon_ref
-=
-fcppt::optional::reference<
-	sanguis::server::entities::with_weapon
->;
+using optional_with_weapon_ref = fcppt::optional::reference<sanguis::server::entities::with_weapon>;
 
 }
 

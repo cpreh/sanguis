@@ -4,14 +4,10 @@
 #include <sanguis/collision/mass.hpp>
 #include <sanguis/server/mass_fwd.hpp>
 
-
 namespace sanguis::server::collision
 {
 
-sanguis::collision::mass
-to_mass(
-	sanguis::server::mass const &
-);
+sanguis::collision::mass to_mass(sanguis::server::mass const &);
 
 }
 

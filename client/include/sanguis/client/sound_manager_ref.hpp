@@ -4,16 +4,10 @@
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client
 {
 
-using
-sound_manager_ref
-=
-fcppt::reference<
-	sanguis::client::sound_manager
->;
+using sound_manager_ref = fcppt::reference<sanguis::client::sound_manager>;
 
 }
 

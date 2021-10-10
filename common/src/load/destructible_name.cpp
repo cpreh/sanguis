@@ -4,20 +4,13 @@
 #include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
-
-fcppt::string
-sanguis::load::destructible_name(
-	sanguis::creator::destructible_type const _type
-)
+fcppt::string sanguis::load::destructible_name(sanguis::creator::destructible_type const _type)
 {
-	switch(
-		_type
-	)
-	{
-	case sanguis::creator::destructible_type::barrel:
-		return
-			FCPPT_TEXT("barrel");
-	}
+  switch (_type)
+  {
+  case sanguis::creator::destructible_type::barrel:
+    return FCPPT_TEXT("barrel");
+  }
 
-	FCPPT_ASSERT_UNREACHABLE;
+  FCPPT_ASSERT_UNREACHABLE;
 }

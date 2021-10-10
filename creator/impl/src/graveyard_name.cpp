@@ -2,12 +2,7 @@
 #include <sanguis/creator/impl/graveyard_name.hpp>
 #include <fcppt/text.hpp>
 
-
-sanguis::creator::name
-sanguis::creator::impl::graveyard_name()
+sanguis::creator::name sanguis::creator::impl::graveyard_name()
 {
-	return
-		sanguis::creator::name(
-			FCPPT_TEXT("graveyard")
-		);
+  return sanguis::creator::name(FCPPT_TEXT("graveyard"));
 }

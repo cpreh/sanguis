@@ -6,45 +6,18 @@
 #include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 
-
 sge::font::string
-sanguis::client::gui::perk::make_description(
-	sanguis::client::perk::info const &_info
-)
+sanguis::client::gui::perk::make_description(sanguis::client::perk::info const &_info)
 {
-	return
-		SGE_FONT_LIT('(')
-		+
-		sge::font::from_fcppt_string(
-			fcppt::output_to_fcppt_string(
-				_info.level()
-			)
-		)
-		+
-		SGE_FONT_LIT('/')
-		+
-		sge::font::from_fcppt_string(
-			fcppt::output_to_fcppt_string(
-				_info.max_level()
-			)
-		)
-		+
-		SGE_FONT_LIT(") (requires player level ")
-		+
-		sge::font::from_fcppt_string(
-			fcppt::output_to_fcppt_string(
-				_info.required_player_level()
-			)
-		)
-		+
-		SGE_FONT_LIT(", parent level ")
-		+
-		sge::font::from_fcppt_string(
-			fcppt::output_to_fcppt_string(
-				_info.required_parent_level()
-			)
-		)
-		+
-		SGE_FONT_LIT(')')
-		;
+  return SGE_FONT_LIT('(') +
+         sge::font::from_fcppt_string(fcppt::output_to_fcppt_string(_info.level())) +
+         SGE_FONT_LIT('/') +
+         sge::font::from_fcppt_string(fcppt::output_to_fcppt_string(_info.max_level())) +
+         SGE_FONT_LIT(") (requires player level ") +
+         sge::font::from_fcppt_string(
+             fcppt::output_to_fcppt_string(_info.required_player_level())) +
+         SGE_FONT_LIT(", parent level ") +
+         sge::font::from_fcppt_string(
+             fcppt::output_to_fcppt_string(_info.required_parent_level())) +
+         SGE_FONT_LIT(')');
 }

@@ -4,21 +4,11 @@
 #include <fcppt/function_impl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::server::world
 {
 
-template<
-	typename Type
->
-using
-place_callback
-=
-fcppt::function<
-	fcppt::unique_ptr<
-		Type
-	> ()
->;
+template <typename Type>
+using place_callback = fcppt::function<fcppt::unique_ptr<Type>()>;
 
 }
 

@@ -4,14 +4,10 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/level.hpp>
 
-
 namespace sanguis::server
 {
 
-sanguis::server::exp
-exp_for_level(
-	sanguis::server::level
-);
+sanguis::server::exp exp_for_level(sanguis::server::level);
 
 }
 

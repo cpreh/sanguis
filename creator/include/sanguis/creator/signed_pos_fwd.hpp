@@ -4,17 +4,10 @@
 #include <sanguis/creator/difference_type.hpp>
 #include <fcppt/container/grid/pos_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-signed_pos
-=
-fcppt::container::grid::pos<
-	sanguis::creator::difference_type,
-	2
->;
+using signed_pos = fcppt::container::grid::pos<sanguis::creator::difference_type, 2>;
 
 }
 

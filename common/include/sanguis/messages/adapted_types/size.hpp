@@ -4,5 +4,4 @@
 #include <sanguis/messages/adapted_types/size_fwd.hpp>
 #include <sanguis/messages/adapted_types/unsigned.hpp>
 
-
 #endif

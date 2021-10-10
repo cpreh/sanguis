@@ -29,133 +29,77 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server
 {
 
-struct machine
-:
-	public boost::statechart::state_machine<
-		sanguis::server::machine,
-		sanguis::server::states::running
-	>
+struct machine : public boost::statechart::
+                     state_machine<sanguis::server::machine, sanguis::server::states::running>
 {
-	FCPPT_NONMOVABLE(
-		machine
-	);
+  FCPPT_NONMOVABLE(machine);
+
 public:
-	machine(
-		fcppt::log::context_reference,
-		alda::net::port,
-		sanguis::io_service_ref
-	);
+  machine(fcppt::log::context_reference, alda::net::port, sanguis::io_service_ref);
 
-	~machine()
-	override;
+  ~machine() override;
 
-	void
-	listen();
+  void listen();
 
-	void
-	send_to_all(
-		sanguis::messages::server::base const &
-	);
+  void send_to_all(sanguis::messages::server::base const &);
 
-	void
-	send_unicast(
-		sanguis::server::player_id,
-		sanguis::messages::server::base const &
-	);
+  void send_unicast(sanguis::server::player_id, sanguis::messages::server::base const &);
 
-	[[nodiscard]]
-	bool
-	process_overflow();
+  [[nodiscard]] bool process_overflow();
 
-	[[nodiscard]]
-	sanguis::server::load const &
-	resources() const;
+  [[nodiscard]] sanguis::server::load const &resources() const;
 
-	[[nodiscard]]
-	fcppt::log::context_reference
-	log_context() const;
+  [[nodiscard]] fcppt::log::context_reference log_context() const;
+
 private:
-	void
-	process_message(
-		alda::net::id,
-		sanguis::messages::client::unique_ptr &&
-	);
+  void process_message(alda::net::id, sanguis::messages::client::unique_ptr &&);
 
-	void
-	add_overflow_message(
-		alda::net::id,
-		sanguis::messages::server::base const &
-	);
+  void add_overflow_message(alda::net::id, sanguis::messages::server::base const &);
 
-	void
-	disconnect_callback(
-		alda::net::id,
-		fcppt::string const &
-	);
+  void disconnect_callback(alda::net::id, fcppt::string const &);
 
-	void
-	data_callback(
-		alda::net::id,
-		alda::net::buffer::circular_receive::streambuf & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void data_callback(
+      alda::net::id,
+      alda::net::buffer::circular_receive::streambuf & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	void
-	disconnect_player(
-		alda::net::id
-	);
+  void disconnect_player(alda::net::id);
 
-	void
-	data_error(
-		alda::net::id,
-		fcppt::string const &
-	);
+  void data_error(alda::net::id, fcppt::string const &);
 
-	void
-	timer_callback();
+  void timer_callback();
 
-	fcppt::log::context_reference const log_context_;
+  fcppt::log::context_reference const log_context_;
 
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 
-	sanguis::server::load resources_;
+  sanguis::server::load resources_;
 
-	alda::net::port const port_;
+  alda::net::port const port_;
 
-	sanguis::io_service_ref const io_service_;
+  sanguis::io_service_ref const io_service_;
 
-	alda::net::server::object net_;
+  alda::net::server::object net_;
 
-	sanguis::server::timer_duration const desired_frame_time_;
+  sanguis::server::timer_duration const desired_frame_time_;
 
-	sanguis::timer frame_timer_;
+  sanguis::timer frame_timer_;
 
-	sanguis::net::data_buffer temp_buffer_;
+  sanguis::net::data_buffer temp_buffer_;
 
-	using
-	overflow_message_queue
-	=
-	std::queue<
-		sanguis::messages::server::unique_ptr
-	>;
+  using overflow_message_queue = std::queue<sanguis::messages::server::unique_ptr>;
 
-	using
-	overflow_message_map
-	=
-	std::unordered_map<
-		alda::net::id,
-		overflow_message_queue
-	>;
+  using overflow_message_map = std::unordered_map<alda::net::id, overflow_message_queue>;
 
-	overflow_message_map overflow_messages_;
+  overflow_message_map overflow_messages_;
 
-	sanguis::server::timer timer_;
+  sanguis::server::timer timer_;
 
-	fcppt::signal::auto_connection const disconnect_connection_;
-	fcppt::signal::auto_connection const data_connection_;
+  fcppt::signal::auto_connection const disconnect_connection_;
+  fcppt::signal::auto_connection const data_connection_;
 };
 
 }

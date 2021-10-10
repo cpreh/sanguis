@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/property/change_function.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server::entities::property
 {
 
-using
-change_callback
-=
-fcppt::function<
-	sanguis::server::entities::property::change_function
->;
+using change_callback = fcppt::function<sanguis::server::entities::property::change_function>;
 
 }
 

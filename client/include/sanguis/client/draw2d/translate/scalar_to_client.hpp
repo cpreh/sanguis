@@ -4,14 +4,10 @@
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/messages/types/space_unit.hpp>
 
-
 namespace sanguis::client::draw2d::translate
 {
 
-sanguis::client::draw2d::funit
-scalar_to_client(
-	sanguis::messages::types::space_unit
-);
+sanguis::client::draw2d::funit scalar_to_client(sanguis::messages::types::space_unit);
 
 }
 

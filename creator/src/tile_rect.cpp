@@ -5,21 +5,10 @@
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/null.hpp>
 
-
-sanguis::creator::rect
-sanguis::creator::tile_rect(
-	sanguis::creator::tile const  /*_tile*/
+sanguis::creator::rect sanguis::creator::tile_rect(sanguis::creator::tile const /*_tile*/
 )
 {
-	return
-		sanguis::creator::rect(
-			fcppt::math::vector::null<
-				sanguis::creator::rect::vector
-			>(),
-			fcppt::math::dim::fill<
-				sanguis::creator::rect::dim
-			>(
-				sanguis::creator::tile_size::value
-			)
-		);
+  return sanguis::creator::rect(
+      fcppt::math::vector::null<sanguis::creator::rect::vector>(),
+      fcppt::math::dim::fill<sanguis::creator::rect::dim>(sanguis::creator::tile_size::value));
 }

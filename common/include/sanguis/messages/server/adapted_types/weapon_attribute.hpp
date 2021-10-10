@@ -8,5 +8,4 @@
 #include <alda/bindings/record_variadic.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

@@ -4,5 +4,4 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

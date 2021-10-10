@@ -4,5 +4,4 @@
 #include <sanguis/creator/sup_fwd.hpp>
 #include <fcppt/container/grid/sup_from_pos.hpp>
 
-
 #endif

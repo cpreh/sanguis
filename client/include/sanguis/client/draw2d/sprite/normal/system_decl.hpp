@@ -6,13 +6,7 @@
 #include <sanguis/client/draw2d/sprite/normal/choices.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 
-
-extern
-template
-class
-sanguis::client::draw2d::sprite::system<
-	sanguis::client::draw2d::sprite::normal::choices,
-	sanguis::client::draw2d::z_ordering
->;
+extern template class sanguis::client::draw2d::sprite::
+    system<sanguis::client::draw2d::sprite::normal::choices, sanguis::client::draw2d::z_ordering>;
 
 #endif

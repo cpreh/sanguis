@@ -8,54 +8,39 @@
 #include <sanguis/server/perks/level_diff.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::perks
 {
 
 class perk
 {
-	FCPPT_NONMOVABLE(
-		perk
-	);
+  FCPPT_NONMOVABLE(perk);
+
 public:
-	virtual
-	void
-	update(
-		sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
-		sanguis::server::environment::object & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  virtual void update(
+      sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
+      sanguis::server::environment::object & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	void
-	raise_level(
-		sanguis::server::entities::with_perks & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void raise_level(sanguis::server::entities::with_perks & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	[[nodiscard]]
-	sanguis::perk_type
-	type() const;
+  [[nodiscard]] sanguis::perk_type type() const;
 
-	virtual
-	~perk();
+  virtual ~perk();
+
 protected:
-	explicit
-	perk(
-		sanguis::perk_type
-	);
+  explicit perk(sanguis::perk_type);
 
-	[[nodiscard]]
-	sanguis::server::level
-	level() const;
+  [[nodiscard]] sanguis::server::level level() const;
+
 private:
-	virtual
-	void
-	change(
-		sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
-		sanguis::server::perks::level_diff
-	) = 0;
+  virtual void change(
+      sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
+      sanguis::server::perks::level_diff) = 0;
 
-	sanguis::perk_type const type_;
+  sanguis::perk_type const type_;
 
-	sanguis::server::level level_;
+  sanguis::server::level level_;
 };
 
 }

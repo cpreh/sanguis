@@ -47,342 +47,145 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
-int
-main()
+int main()
 {
-	sanguis::creator::grid const grid(
-		fcppt::math::dim::fill<
-			sanguis::creator::dim
-		>(
-			100U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-		),
-		sanguis::creator::tile::nothing
-	);
+  sanguis::creator::grid const grid(
+      fcppt::math::dim::fill<sanguis::creator::dim>(
+          100U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          ),
+      sanguis::creator::tile::nothing);
 
-	sanguis::collision::world::object_unique_ptr const world{
-		sanguis::collision::world::create(
-			sanguis::collision::world::parameters{
-				fcppt::make_cref(
-					grid
-				)
-			}
-		)
-	};
+  sanguis::collision::world::object_unique_ptr const world{sanguis::collision::world::create(
+      sanguis::collision::world::parameters{fcppt::make_cref(grid)})};
 
-	using
-	body_container
-	=
-	std::vector<
-		sanguis::collision::world::body_unique_ptr
-	>;
+  using body_container = std::vector<sanguis::collision::world::body_unique_ptr>;
 
-	using
-	ghost_container
-	=
-	std::vector<
-		sanguis::collision::world::ghost_unique_ptr
-	>;
+  using ghost_container = std::vector<sanguis::collision::world::ghost_unique_ptr>;
 
-	class body_base
-	:
-		public sanguis::collision::world::body_base
-	{
-		FCPPT_NONMOVABLE(
-			body_base
-		);
-	public:
-		body_base()
-		= default;
+  class body_base : public sanguis::collision::world::body_base
+  {
+    FCPPT_NONMOVABLE(body_base);
 
-		~body_base()
-		override
-		= default;
-	private:
-		[[nodiscard]]
-		boost::logic::tribool
-		can_collide_with(
-			sanguis::collision::world::body_base const &
-		) const
-		override
-		{
-			return
-				boost::logic::indeterminate;
-		}
+  public:
+    body_base() = default;
 
-		void
-		collision(
-			sanguis::collision::world::body_base &
-		)
-		override
-		{
-		}
+    ~body_base() override = default;
 
-		void
-		center_changed(
-			sanguis::collision::center
-		)
-		override
-		{
-		}
+  private:
+    [[nodiscard]] boost::logic::tribool
+    can_collide_with(sanguis::collision::world::body_base const &) const override
+    {
+      return boost::logic::indeterminate;
+    }
 
-		void
-		speed_changed(
-			sanguis::collision::speed const &
-		)
-		override
-		{
-		}
+    void collision(sanguis::collision::world::body_base &) override {}
 
-		void
-		world_collision()
-		override
-		{
-		}
-	};
+    void center_changed(sanguis::collision::center) override {}
 
-	fcppt::log::context log_context{
-		fcppt::log::optional_level{
-			fcppt::log::level::error
-		},
-		sanguis::log_level_streams()
-	};
+    void speed_changed(sanguis::collision::speed const &) override {}
 
-	sanguis::collision::log const log{
-		fcppt::make_ref(
-			log_context
-		)
-	};
+    void world_collision() override {}
+  };
 
-	body_base fake_body_base;
+  fcppt::log::context log_context{
+      fcppt::log::optional_level{fcppt::log::level::error}, sanguis::log_level_streams()};
 
-	auto const make_bodies(
-		[
-			&log,
-			&world,
-			&fake_body_base
-		](
-			unsigned const _count,
-			sanguis::collision::world::body_group const _group
-		)
-		{
-			return
-				fcppt::algorithm::map<
-					body_container
-				>(
-					fcppt::make_int_range_count(
-						_count
-					),
-					[
-						&log,
-						&world,
-						&fake_body_base,
-						_group
-					](
-						unsigned
-					)
-					{
-						return
-							world->create_body(
-								sanguis::collision::world::body_parameters{
-									log,
-									sanguis::collision::center{
-										fcppt::math::vector::fill<
-											sanguis::collision::length2
-										>(
-											fcppt::literal<
-												sanguis::collision::unit
-											>(
-												10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-											)
-											*
-											boost::units::si::meter
-										)
-									},
-									fcppt::math::vector::fill<
-										sanguis::collision::speed
-									>(
-										fcppt::literal<
-											sanguis::collision::unit
-										>(
-											0
-										)
-										*
-										boost::units::si::meter_per_second
-									),
-									sanguis::collision::radius{
-										fcppt::literal<
-											sanguis::collision::unit
-										>(
-											50 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-										)
-										*
-										boost::units::si::meter
-									},
-									sanguis::collision::optional_mass(),
-									_group,
-									fcppt::reference_to_base<
-										sanguis::collision::world::body_base
-									>(
-										fcppt::make_ref(
-											fake_body_base
-										)
-									)
-								}
-							);
-					}
-				);
-		}
-	);
+  sanguis::collision::log const log{fcppt::make_ref(log_context)};
 
-	auto const activate_bodies(
-		[
-			&world
-		](
-			body_container const &_bodies
-		)
-		{
-			for(
-				sanguis::collision::world::body_unique_ptr const &body
-				:
-				_bodies
-			)
-			{
-				fcppt::cast::to_void(
-					world->activate_body(
-						fcppt::make_ref(
-							*body
-						),
-						sanguis::collision::world::created{
-							true
-						}
-					)
-				);
-			}
-		}
-	);
+  body_base fake_body_base;
 
-	body_container const enemies(
-		make_bodies(
-			1000,
-			sanguis::collision::world::body_group::enemy
-		)
-	);
+  auto const make_bodies(
+      [&log, &world, &fake_body_base](
+          unsigned const _count, sanguis::collision::world::body_group const _group)
+      {
+        return fcppt::algorithm::map<body_container>(
+            fcppt::make_int_range_count(_count),
+            [&log, &world, &fake_body_base, _group](unsigned)
+            {
+              return world->create_body(sanguis::collision::world::body_parameters{
+                  log,
+                  sanguis::collision::center{fcppt::math::vector::fill<sanguis::collision::length2>(
+                      fcppt::literal<sanguis::collision::unit>(
+                          10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                          ) *
+                      boost::units::si::meter)},
+                  fcppt::math::vector::fill<sanguis::collision::speed>(
+                      fcppt::literal<sanguis::collision::unit>(0) *
+                      boost::units::si::meter_per_second),
+                  sanguis::collision::radius{
+                      fcppt::literal<sanguis::collision::unit>(
+                          50 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                          ) *
+                      boost::units::si::meter},
+                  sanguis::collision::optional_mass(),
+                  _group,
+                  fcppt::reference_to_base<sanguis::collision::world::body_base>(
+                      fcppt::make_ref(fake_body_base))});
+            });
+      });
 
-	body_container const players(
-		make_bodies(
-			10,
-			sanguis::collision::world::body_group::player
-		)
-	);
+  auto const activate_bodies(
+      [&world](body_container const &_bodies)
+      {
+        for (sanguis::collision::world::body_unique_ptr const &body : _bodies)
+        {
+          fcppt::cast::to_void(world->activate_body(
+              fcppt::make_ref(*body), sanguis::collision::world::created{true}));
+        }
+      });
 
-	class ghost_base
-	:
-		public sanguis::collision::world::ghost_base
-	{
-		FCPPT_NONMOVABLE(
-			ghost_base
-		);
-	public:
-		ghost_base()
-		= default;
+  body_container const enemies(make_bodies(1000, sanguis::collision::world::body_group::enemy));
 
-		~ghost_base()
-		override
-		= default;
-	};
+  body_container const players(make_bodies(10, sanguis::collision::world::body_group::player));
 
-	ghost_base fake_ghost_base{};
+  class ghost_base : public sanguis::collision::world::ghost_base
+  {
+    FCPPT_NONMOVABLE(ghost_base);
 
-	auto const ghosts(
-		fcppt::algorithm::map<
-			ghost_container
-		>(
-			fcppt::make_int_range_count(
-				1000
-			),
-			[
-				&world,
-				&fake_ghost_base
-			](
-				int
-			)
-			{
-				return
-					world->create_ghost(
-						sanguis::collision::world::ghost_parameters(
-							sanguis::collision::center{
-								fcppt::math::vector::fill<
-									sanguis::collision::length2
-								>(
-									fcppt::literal<
-										sanguis::collision::unit
-									>(
-										10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-									)
-									*
-									boost::units::si::meter
-								)
-							},
-							sanguis::collision::radius{
-								fcppt::literal<
-									sanguis::collision::unit
-								>(
-									2000 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-								)
-								*
-								boost::units::si::meter
-							},
-							sanguis::collision::world::ghost_group::player_sight,
-							fcppt::reference_to_base<
-								sanguis::collision::world::ghost_base
-							>(
-								fcppt::make_ref(
-									fake_ghost_base
-								)
-							)
-						)
-					);
-			}
-		)
-	);
+  public:
+    ghost_base() = default;
 
-	activate_bodies(
-		enemies
-	);
+    ~ghost_base() override = default;
+  };
 
-	activate_bodies(
-		players
-	);
+  ghost_base fake_ghost_base{};
 
-	for(
-		auto const &ghost
-		:
-		ghosts
-	)
-	{
-		fcppt::cast::to_void(
-			world->activate_ghost(
-				fcppt::make_ref(
-					*ghost
-				)
-			)
-		);
-	}
+  auto const ghosts(fcppt::algorithm::map<ghost_container>(
+      fcppt::make_int_range_count(1000),
+      [&world, &fake_ghost_base](int)
+      {
+        return world->create_ghost(sanguis::collision::world::ghost_parameters(
+            sanguis::collision::center{fcppt::math::vector::fill<sanguis::collision::length2>(
+                fcppt::literal<sanguis::collision::unit>(
+                    10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                    ) *
+                boost::units::si::meter)},
+            sanguis::collision::radius{
+                fcppt::literal<sanguis::collision::unit>(
+                    2000 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                    ) *
+                boost::units::si::meter},
+            sanguis::collision::world::ghost_group::player_sight,
+            fcppt::reference_to_base<sanguis::collision::world::ghost_base>(
+                fcppt::make_ref(fake_ghost_base))));
+      }));
 
-	fcppt::algorithm::repeat(
-		100, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-		[
-			&world
-		]
-		{
-			sanguis::collision::world::update_result const result(
-				world->update(
-					sanguis::collision::duration(
-						0.06F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-number // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)s)
-					)
-				)
-			);
-		}
-	);
+  activate_bodies(enemies);
+
+  activate_bodies(players);
+
+  for (auto const &ghost : ghosts)
+  {
+    fcppt::cast::to_void(world->activate_ghost(fcppt::make_ref(*ghost)));
+  }
+
+  fcppt::algorithm::repeat(
+      100, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+      [&world]
+      {
+        sanguis::collision::world::update_result const result(
+            world->update(sanguis::collision::duration(
+                0.06F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-number // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)s)
+                )));
+      });
 }

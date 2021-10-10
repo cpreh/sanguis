@@ -4,16 +4,10 @@
 #include <sge/audio/sound/base_unique_ptr.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::entities::model
 {
 
-using
-optional_sound
-=
-fcppt::optional::object<
-	sge::audio::sound::base_unique_ptr
->;
+using optional_sound = fcppt::optional::object<sge::audio::sound::base_unique_ptr>;
 
 }
 

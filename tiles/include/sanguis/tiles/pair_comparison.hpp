@@ -4,25 +4,12 @@
 #include <sanguis/creator/enable_if_tile.hpp>
 #include <sanguis/tiles/pair_fwd.hpp>
 
-
 namespace sanguis::tiles
 {
 
-template<
-	typename Tile
->
-sanguis::creator::enable_if_tile<
-	Tile,
-	bool
->
-operator==(
-	sanguis::tiles::pair<
-		Tile
-	>,
-	sanguis::tiles::pair<
-		Tile
-	>
-);
+template <typename Tile>
+sanguis::creator::enable_if_tile<Tile, bool>
+operator==(sanguis::tiles::pair<Tile>, sanguis::tiles::pair<Tile>);
 
 }
 

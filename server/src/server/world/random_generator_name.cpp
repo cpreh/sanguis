@@ -6,20 +6,9 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/random/wrapper/make_uniform_container.hpp>
 
-
 sanguis::creator::name
-sanguis::server::world::random_generator_name(
-	sanguis::random_generator &_generator
-)
+sanguis::server::world::random_generator_name(sanguis::random_generator &_generator)
 {
-	return
-		FCPPT_ASSERT_OPTIONAL_ERROR(
-			fcppt::random::wrapper::make_uniform_container(
-				fcppt::make_cref(
-					sanguis::creator::generators()
-				)
-			)
-		)(
-			_generator
-		);
+  return FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::random::wrapper::make_uniform_container(
+      fcppt::make_cref(sanguis::creator::generators())))(_generator);
 }

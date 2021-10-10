@@ -4,16 +4,10 @@
 #include <sanguis/collision/result_pair_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::collision
 {
 
-using
-optional_result_pair
-=
-fcppt::optional::object<
-	sanguis::collision::result_pair
->;
+using optional_result_pair = fcppt::optional::object<sanguis::collision::result_pair>;
 
 }
 

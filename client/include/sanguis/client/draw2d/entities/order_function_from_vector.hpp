@@ -4,14 +4,11 @@
 #include <sanguis/client/draw2d/z_ordering_vector.hpp>
 #include <sanguis/client/draw2d/entities/order_function.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
 sanguis::client::draw2d::entities::order_function
-order_function_from_vector(
-	sanguis::client::draw2d::z_ordering_vector &&
-);
+order_function_from_vector(sanguis::client::draw2d::z_ordering_vector &&);
 
 }
 

@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::tiles
 {
 
-using
-texture_container
-=
-std::vector<
-	sge::texture::const_part_unique_ptr
->;
+using texture_container = std::vector<sge::texture::const_part_unique_ptr>;
 
 }
 

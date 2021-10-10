@@ -24,207 +24,107 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::client::perk::state::state(
-	sanguis::client::perk::send_callback &&_send_callback
-)
-:
-	send_callback_(
-		std::move(
-			_send_callback
-		)
-	),
-	perks_(),
-	current_level_(
-		sanguis::client::level(
-			0U
-		)
-	),
-	remaining_levels_(
-		sanguis::client::level(
-			0U
-		)
-	),
-	level_signal_(),
-	change_signal_()
+sanguis::client::perk::state::state(sanguis::client::perk::send_callback &&_send_callback)
+    : send_callback_(std::move(_send_callback)),
+      perks_(),
+      current_level_(sanguis::client::level(0U)),
+      remaining_levels_(sanguis::client::level(0U)),
+      level_signal_(),
+      change_signal_()
 {
 }
 
-sanguis::client::perk::state::~state()
-= default;
+sanguis::client::perk::state::~state() = default;
 
-void
-sanguis::client::perk::state::perks(
-	sanguis::client::perk::tree_unique_ptr &&_perks,
-	sanguis::client::perk::remaining_levels const _remaining_levels
-)
+void sanguis::client::perk::state::perks(
+    sanguis::client::perk::tree_unique_ptr &&_perks,
+    sanguis::client::perk::remaining_levels const _remaining_levels)
 {
-	perks_ =
-		optional_tree_unique_ptr(
-			std::move(
-				_perks
-			)
-		);
+  perks_ = optional_tree_unique_ptr(std::move(_perks));
 
-	remaining_levels_ =
-		_remaining_levels;
+  remaining_levels_ = _remaining_levels;
 
-	change_signal_();
+  change_signal_();
 }
 
-void
-sanguis::client::perk::state::player_level(
-	sanguis::client::player_level const _level
-)
+void sanguis::client::perk::state::player_level(sanguis::client::player_level const _level)
 {
-	remaining_levels_
-		+=
-		sanguis::client::perk::remaining_levels(
-			_level.get()
-			-
-			current_level_.get()
-		);
+  remaining_levels_ += sanguis::client::perk::remaining_levels(_level.get() - current_level_.get());
 
-	current_level_ =
-		_level;
+  current_level_ = _level;
 
-	level_signal_();
+  level_signal_();
 }
 
-bool
-sanguis::client::perk::state::choose_perk(
-	sanguis::perk_type const _type
-)
+bool sanguis::client::perk::state::choose_perk(sanguis::perk_type const _type)
 {
-	if(
-		this->choosable(
-			_type
-		)
-		!=
-		sanguis::client::perk::choosable_state::ok
-	)
-	{
-		return
-			false;
-	}
+  if (this->choosable(_type) != sanguis::client::perk::choosable_state::ok)
+  {
+    return false;
+  }
 
-	if(
-		remaining_levels_.get()
-		==
-		sanguis::client::level(
-			0U
-		)
-	)
-	{
-		return
-			false;
-	}
+  if (remaining_levels_.get() == sanguis::client::level(0U))
+  {
+    return false;
+  }
 
-	--remaining_levels_;
+  --remaining_levels_;
 
-	FCPPT_ASSERT_OPTIONAL_ERROR(
-		sanguis::client::perk::find_info(
-			_type,
-			fcppt::make_ref(
-				this->perks_impl()
-			)
-		).value()
-	).increment_level();
+  FCPPT_ASSERT_OPTIONAL_ERROR(
+      sanguis::client::perk::find_info(_type, fcppt::make_ref(this->perks_impl())).value())
+      .increment_level();
 
-	send_callback_(
-		_type
-	);
+  send_callback_(_type);
 
-	level_signal_();
+  level_signal_();
 
-	return
-		true;
+  return true;
 }
 
-sanguis::client::perk::tree const &
-sanguis::client::perk::state::perks() const
+sanguis::client::perk::tree const &sanguis::client::perk::state::perks() const
 {
-	return
-		*FCPPT_ASSERT_OPTIONAL_ERROR(
-			perks_
-		);
+  return *FCPPT_ASSERT_OPTIONAL_ERROR(perks_);
 }
 
-sanguis::client::player_level
-sanguis::client::perk::state::player_level() const
+sanguis::client::player_level sanguis::client::perk::state::player_level() const
 {
-	return
-		current_level_;
+  return current_level_;
 }
 
-sanguis::client::perk::remaining_levels
-sanguis::client::perk::state::remaining_levels() const
+sanguis::client::perk::remaining_levels sanguis::client::perk::state::remaining_levels() const
 {
-	return
-		remaining_levels_;
+  return remaining_levels_;
 }
 
 sanguis::client::perk::level
-sanguis::client::perk::state::perk_level(
-	sanguis::perk_type const _perk_type
-) const
+sanguis::client::perk::state::perk_level(sanguis::perk_type const _perk_type) const
 {
-	return
-		FCPPT_ASSERT_OPTIONAL_ERROR(
-			sanguis::client::perk::find_info_const(
-				_perk_type,
-				fcppt::make_cref(
-					this->perks()
-				)
-			).value()
-		).level();
+  return FCPPT_ASSERT_OPTIONAL_ERROR(
+             sanguis::client::perk::find_info_const(_perk_type, fcppt::make_cref(this->perks()))
+                 .value())
+      .level();
 }
 
 sanguis::client::perk::choosable_state
-sanguis::client::perk::state::choosable(
-	sanguis::perk_type const _perk_type
-) const
+sanguis::client::perk::state::choosable(sanguis::perk_type const _perk_type) const
 {
-	return
-		sanguis::client::perk::choosable(
-			_perk_type,
-			this->perks(),
-			current_level_,
-			remaining_levels_
-		);
+  return sanguis::client::perk::choosable(
+      _perk_type, this->perks(), current_level_, remaining_levels_);
 }
 
-fcppt::signal::auto_connection
-sanguis::client::perk::state::register_level_change(
-	sanguis::client::perk::level_callback &&_callback
-)
+fcppt::signal::auto_connection sanguis::client::perk::state::register_level_change(
+    sanguis::client::perk::level_callback &&_callback)
 {
-	return
-		level_signal_.connect(
-			std::move(
-				_callback
-			)
-		);
+  return level_signal_.connect(std::move(_callback));
 }
 
-fcppt::signal::auto_connection
-sanguis::client::perk::state::register_perks_change(
-	sanguis::client::perk::change_callback &&_callback
-)
+fcppt::signal::auto_connection sanguis::client::perk::state::register_perks_change(
+    sanguis::client::perk::change_callback &&_callback)
 {
-	return
-		change_signal_.connect(
-			std::move(
-				_callback
-			)
-		);
+  return change_signal_.connect(std::move(_callback));
 }
 
-sanguis::client::perk::tree &
-sanguis::client::perk::state::perks_impl()
+sanguis::client::perk::tree &sanguis::client::perk::state::perks_impl()
 {
-	return
-		*FCPPT_ASSERT_OPTIONAL_ERROR(
-			perks_
-		);
+  return *FCPPT_ASSERT_OPTIONAL_ERROR(perks_);
 }

@@ -8,25 +8,13 @@
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::random
 {
 
-template<
-	typename Result,
-	typename Arg
->
-using
-create_function
-=
-fcppt::strong_typedef<
-	fcppt::function<
-		Result (
-			Arg const &
-		)
-	>,
-	sanguis::server::random::create_function_tag
->;
+template <typename Result, typename Arg>
+using create_function = fcppt::strong_typedef<
+    fcppt::function<Result(Arg const &)>,
+    sanguis::server::random::create_function_tag>;
 
 }
 

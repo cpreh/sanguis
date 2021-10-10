@@ -4,31 +4,22 @@
 #include <sanguis/client/draw2d/speed_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities::ifaces
 {
 
 class with_speed
 {
-	FCPPT_NONMOVABLE(
-		with_speed
-	);
+  FCPPT_NONMOVABLE(with_speed);
+
 protected:
-	with_speed();
+  with_speed();
 
-	virtual
-	~with_speed();
+  virtual ~with_speed();
+
 public:
-	virtual
-	void
-	speed(
-		sanguis::client::draw2d::speed const &
-	) = 0;
+  virtual void speed(sanguis::client::draw2d::speed const &) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::client::draw2d::speed
-	speed() const = 0;
+  [[nodiscard]] virtual sanguis::client::draw2d::speed speed() const = 0;
 };
 
 }

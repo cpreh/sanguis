@@ -4,16 +4,10 @@
 #include <sanguis/server/weapons/aoe.hpp>
 #include <sanguis/server/weapons/attributes/basic_fwd.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-using
-aoe
-=
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::weapons::aoe
->;
+using aoe = sanguis::server::weapons::attributes::basic<sanguis::server::weapons::aoe>;
 
 }
 

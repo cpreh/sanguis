@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
-using
-enemy_type_container
-=
-std::vector<
-	sanguis::creator::enemy_type
->;
+using enemy_type_container = std::vector<sanguis::creator::enemy_type>;
 
 }
 

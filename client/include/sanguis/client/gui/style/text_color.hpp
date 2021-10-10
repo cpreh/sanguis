@@ -6,8 +6,7 @@
 namespace sanguis::client::gui::style
 {
 
-sge::image::color::any::object
-text_color();
+sge::image::color::any::object text_color();
 
 }
 

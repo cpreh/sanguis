@@ -5,17 +5,11 @@
 #include <sanguis/server/net/center_policy_fwd.hpp>
 #include <sanguis/server/net/value_fwd.hpp>
 
-
 namespace sanguis::server::net
 {
 
-using
-center
-=
-sanguis::server::net::value<
-	sanguis::server::center,
-	sanguis::server::net::center_policy
->;
+using center =
+    sanguis::server::net::value<sanguis::server::center, sanguis::server::net::center_policy>;
 
 }
 

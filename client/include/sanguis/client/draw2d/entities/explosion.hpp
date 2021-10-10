@@ -7,26 +7,20 @@
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class explosion
-:
-	public sanguis::client::draw2d::entities::particle
+class explosion : public sanguis::client::draw2d::entities::particle
 {
-	FCPPT_NONMOVABLE(
-		explosion
-	);
-public:
-	explosion(
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::aoe
-	);
+  FCPPT_NONMOVABLE(explosion);
 
-	~explosion()
-	override;
+public:
+  explosion(
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::aoe);
+
+  ~explosion() override;
 };
 
 }

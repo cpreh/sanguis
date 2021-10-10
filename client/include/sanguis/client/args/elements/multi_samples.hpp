@@ -5,5 +5,4 @@
 #include <sge/renderer/pixel_format/optional_multi_samples.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

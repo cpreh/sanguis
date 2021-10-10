@@ -4,5 +4,4 @@
 #include <sanguis/server/weapons/optional_reload_time_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

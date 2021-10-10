@@ -3,12 +3,10 @@
 
 #include <sanguis/server/damage/array.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-sanguis::server::damage::array
-explosive();
+sanguis::server::damage::array explosive();
 
 }
 

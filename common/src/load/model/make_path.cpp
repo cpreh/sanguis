@@ -8,38 +8,16 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
-std::filesystem::path
-sanguis::load::model::make_path(
-	sanguis::load::model::path const &_path
-)
+std::filesystem::path sanguis::load::model::make_path(sanguis::load::model::path const &_path)
 {
-	std::filesystem::path path(
-		sanguis::media_path()
-		/
-		FCPPT_TEXT("models")
-		/
-		_path.get()
-	);
+  std::filesystem::path path(sanguis::media_path() / FCPPT_TEXT("models") / _path.get());
 
-	if(
-		!std::filesystem::exists(
-			path
-		)
-	)
-	{
-		throw
-			sanguis::exception{
-				FCPPT_TEXT("Model ")
-				+
-				fcppt::filesystem::path_to_string(
-					_path.get()
-				)
-				+
-				FCPPT_TEXT(" not found!")
-			};
-	}
+  if (!std::filesystem::exists(path))
+  {
+    throw sanguis::exception{
+        FCPPT_TEXT("Model ") + fcppt::filesystem::path_to_string(_path.get()) +
+        FCPPT_TEXT(" not found!")};
+  }
 
-	return
-		path;
+  return path;
 }

@@ -4,16 +4,11 @@
 #include <sanguis/client/draw2d/scene/world/sprite/type_choices.hpp>
 #include <sge/sprite/types/vector_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world::sprite
 {
 
-using
-vector
-=
-sge::sprite::types::vector<
-	sanguis::client::draw2d::scene::world::sprite::type_choices
->;
+using vector =
+    sge::sprite::types::vector<sanguis::client::draw2d::scene::world::sprite::type_choices>;
 
 }
 

@@ -6,17 +6,13 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
-using
-max_exponent
-=
-std::integral_constant<
-	sge::image::size_type,
-	10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
->;
+using max_exponent = std::integral_constant<
+    sge::image::size_type,
+    10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+    >;
 
 }
 

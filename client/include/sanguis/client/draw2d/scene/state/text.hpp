@@ -8,34 +8,23 @@
 #include <sge/renderer/state/ffp/sampler/optional_object_unique_ptr.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::scene::state
 {
 
-class text
-:
-	public sanguis::client::draw2d::scene::state::base
+class text : public sanguis::client::draw2d::scene::state::base
 {
-	FCPPT_NONMOVABLE(
-		text
-	);
+  FCPPT_NONMOVABLE(text);
+
 public:
-	explicit
-	text(
-		sge::renderer::device::ffp_ref
-	);
+  explicit text(sge::renderer::device::ffp_ref);
 
-	~text()
-	override;
+  ~text() override;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr
-	create_scoped(
-		sge::renderer::context::ffp_ref
-	) const
-	override;
+  [[nodiscard]] sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr
+      create_scoped(sge::renderer::context::ffp_ref) const override;
+
 private:
-	sge::renderer::state::ffp::sampler::optional_object_unique_ptr const sampler_;
+  sge::renderer::state::ffp::sampler::optional_object_unique_ptr const sampler_;
 };
 
 }

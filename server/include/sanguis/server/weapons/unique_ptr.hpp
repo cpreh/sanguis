@@ -4,16 +4,10 @@
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-using
-unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::server::weapons::weapon
->;
+using unique_ptr = fcppt::unique_ptr<sanguis::server::weapons::weapon>;
 
 }
 

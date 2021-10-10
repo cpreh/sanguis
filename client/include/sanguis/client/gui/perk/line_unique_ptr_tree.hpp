@@ -4,5 +4,4 @@
 #include <sanguis/client/gui/perk/line_unique_ptr_tree_fwd.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 
-
 #endif

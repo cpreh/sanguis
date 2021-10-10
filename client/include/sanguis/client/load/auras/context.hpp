@@ -11,40 +11,25 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::auras
 {
 
 class context
 {
-	FCPPT_NONMOVABLE(
-		context
-	);
+  FCPPT_NONMOVABLE(context);
+
 public:
-	explicit
-	context(
-		sanguis::client::load::resource::textures_cref
-	);
+  explicit context(sanguis::client::load::resource::textures_cref);
 
-	~context();
+  ~context();
 
-	[[nodiscard]]
-	sge::texture::part const &
-	texture(
-		sanguis::aura_type
-	);
+  [[nodiscard]] sge::texture::part const &texture(sanguis::aura_type);
+
 private:
-	using
-	texture_map
-	=
-	std::unordered_map<
-		sanguis::aura_type,
-		fcppt::reference<
-			sge::texture::part const
-		>
-	>;
+  using texture_map =
+      std::unordered_map<sanguis::aura_type, fcppt::reference<sge::texture::part const>>;
 
-	texture_map const textures_;
+  texture_map const textures_;
 };
 
 }

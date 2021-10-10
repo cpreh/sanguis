@@ -5,17 +5,11 @@
 #include <sanguis/creator/opening_type_fwd.hpp>
 #include <fcppt/enum/array_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-opening_count_array
-=
-fcppt::enum_::array<
-	sanguis::creator::opening_type,
-	sanguis::creator::opening_count
->;
+using opening_count_array =
+    fcppt::enum_::array<sanguis::creator::opening_type, sanguis::creator::opening_count>;
 
 }
 

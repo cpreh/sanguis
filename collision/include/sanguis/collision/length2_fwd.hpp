@@ -4,17 +4,10 @@
 #include <sanguis/collision/length_fwd.hpp>
 #include <fcppt/math/vector/static_fwd.hpp>
 
-
 namespace sanguis::collision
 {
 
-using
-length2
-=
-fcppt::math::vector::static_<
-	sanguis::collision::length,
-	2
->;
+using length2 = fcppt::math::vector::static_<sanguis::collision::length, 2>;
 
 }
 

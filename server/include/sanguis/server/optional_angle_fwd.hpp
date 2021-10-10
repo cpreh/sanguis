@@ -4,16 +4,10 @@
 #include <sanguis/server/angle_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-optional_angle
-=
-fcppt::optional::object<
-	sanguis::server::angle
->;
+using optional_angle = fcppt::optional::object<sanguis::server::angle>;
 
 }
 

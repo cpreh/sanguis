@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/player_center_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
-using
-optional_player_center
-=
-fcppt::optional::object<
-	sanguis::client::draw2d::player_center
->;
+using optional_player_center = fcppt::optional::object<sanguis::client::draw2d::player_center>;
 
 }
 

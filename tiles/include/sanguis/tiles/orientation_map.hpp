@@ -9,17 +9,11 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tiles
 {
 
-using
-orientation_map
-=
-std::unordered_map<
-	sanguis::tiles::orientation,
-	sanguis::tiles::area_container
->;
+using orientation_map =
+    std::unordered_map<sanguis::tiles::orientation, sanguis::tiles::area_container>;
 
 }
 

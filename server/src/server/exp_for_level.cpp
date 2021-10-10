@@ -4,27 +4,10 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 
-
-sanguis::server::exp
-sanguis::server::exp_for_level(
-	sanguis::server::level const _level
-)
+sanguis::server::exp sanguis::server::exp_for_level(sanguis::server::level const _level)
 {
-	// This function reverses level_from_exp
-	return
-		sanguis::server::exp(
-			fcppt::cast::int_to_float<
-				sanguis::server::exp::value_type
-			>(
-				_level.get()
-				*
-				_level.get()
-			)
-			/
-			fcppt::literal<
-				sanguis::server::exp::value_type
-			>(
-				0.09
-			)
-		);
+  // This function reverses level_from_exp
+  return sanguis::server::exp(
+      fcppt::cast::int_to_float<sanguis::server::exp::value_type>(_level.get() * _level.get()) /
+      fcppt::literal<sanguis::server::exp::value_type>(0.09));
 }

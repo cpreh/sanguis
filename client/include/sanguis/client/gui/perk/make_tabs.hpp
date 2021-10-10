@@ -8,18 +8,15 @@
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
 
-
 namespace sanguis::client::gui::perk
 {
 
-sanguis::client::gui::perk::tab_unique_ptr_vector
-make_tabs(
-	sge::renderer::device::ffp_ref,
-	sge::font::object_ref,
-	sge::gui::context_ref,
-	sge::gui::style::const_reference,
-	sanguis::client::perk::state_ref
-);
+sanguis::client::gui::perk::tab_unique_ptr_vector make_tabs(
+    sge::renderer::device::ffp_ref,
+    sge::font::object_ref,
+    sge::gui::context_ref,
+    sge::gui::style::const_reference,
+    sanguis::client::perk::state_ref);
 
 }
 

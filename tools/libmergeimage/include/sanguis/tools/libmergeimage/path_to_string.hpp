@@ -5,15 +5,11 @@
 #include <sanguis/tools/libmergeimage/symbol.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::tools::libmergeimage
 {
 
 SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
-fcppt::string
-path_to_string(
-	sanguis::tools::libmergeimage::path const &
-);
+fcppt::string path_to_string(sanguis::tools::libmergeimage::path const &);
 
 }
 

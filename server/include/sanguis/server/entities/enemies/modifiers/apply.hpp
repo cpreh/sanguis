@@ -7,18 +7,13 @@
 #include <sanguis/server/entities/enemies/modifiers/container.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::server::entities::enemies::modifiers
 {
 
-sanguis::server::entities::enemies::attribute_container
-apply(
-	sanguis::random_generator &, // NOLINT(google-runtime-references)
-	fcppt::reference<
-		sanguis::server::entities::enemies::parameters
-	>,
-	sanguis::server::entities::enemies::modifiers::container const &
-);
+sanguis::server::entities::enemies::attribute_container apply(
+    sanguis::random_generator &, // NOLINT(google-runtime-references)
+    fcppt::reference<sanguis::server::entities::enemies::parameters>,
+    sanguis::server::entities::enemies::modifiers::container const &);
 
 }
 

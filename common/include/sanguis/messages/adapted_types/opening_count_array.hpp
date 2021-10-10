@@ -6,5 +6,4 @@
 #include <sanguis/messages/types/opening_count_array.hpp>
 #include <alda/bindings/enum_array.hpp>
 
-
 #endif

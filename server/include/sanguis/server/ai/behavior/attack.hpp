@@ -17,74 +17,43 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
-
 namespace sanguis::server::ai::behavior
 {
 
-class attack
-:
-	public sanguis::server::ai::behavior::base
+class attack : public sanguis::server::ai::behavior::base
 {
-	FCPPT_NONMOVABLE(
-		attack
-	);
+  FCPPT_NONMOVABLE(attack);
+
 public:
-	attack(
-		sanguis::server::ai::context_ref,
-		sanguis::server::ai::sight_range
-	);
+  attack(sanguis::server::ai::context_ref, sanguis::server::ai::sight_range);
 
-	~attack()
-	override;
+  ~attack() override;
 
-	[[nodiscard]]
-	sanguis::server::entities::transfer_result
-	transfer()
-	override;
+  [[nodiscard]] sanguis::server::entities::transfer_result transfer() override;
 
-	[[nodiscard]]
-	bool
-	start()
-	override;
+  [[nodiscard]] bool start() override;
 
-	[[nodiscard]]
-	sanguis::server::ai::status
-	update(
-		sanguis::duration
-	)
-	override;
+  [[nodiscard]] sanguis::server::ai::status update(sanguis::duration) override;
+
 private:
-	void
-	target_enters(
-		sanguis::server::entities::with_body_ref
-	);
+  void target_enters(sanguis::server::entities::with_body_ref);
 
-	void
-	target_leaves(
-		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void target_leaves(sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	void
-	health_changed(
-		sanguis::server::entities::property::change_event const &
-	);
+  void health_changed(sanguis::server::entities::property::change_event const &);
 
-	[[nodiscard]]
-	sanguis::server::entities::optional_with_body_ref
-	closest_visible_target() const;
+  [[nodiscard]] sanguis::server::entities::optional_with_body_ref closest_visible_target() const;
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::ai::speed_factor
-	speed_factor() const;
+  [[nodiscard]] virtual sanguis::server::ai::speed_factor speed_factor() const;
 
-	sanguis::server::ai::sight_range const sight_range_;
+  sanguis::server::ai::sight_range const sight_range_;
 
-	sanguis::server::ai::entity_set potential_targets_;
+  sanguis::server::ai::entity_set potential_targets_;
 
-	sanguis::server::entities::auto_weak_link target_;
+  sanguis::server::entities::auto_weak_link target_;
 
-	fcppt::signal::auto_connection const health_connection_;
+  fcppt::signal::auto_connection const health_connection_;
 };
 
 }

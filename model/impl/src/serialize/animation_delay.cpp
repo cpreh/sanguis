@@ -6,30 +6,16 @@
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
-fcppt::optional::object<
-	sge::parse::json::member
->
-sanguis::model::impl::serialize::animation_delay(
-	sanguis::model::optional_animation_delay const &_opt_delay
-)
+fcppt::optional::object<sge::parse::json::member> sanguis::model::impl::serialize::animation_delay(
+    sanguis::model::optional_animation_delay const &_opt_delay)
 {
-	return
-		fcppt::optional::map(
-			_opt_delay,
-			[](
-				sanguis::model::animation_delay const &_delay
-			)
-			{
-				return
-					sge::parse::json::member{
-						"delay",
-						sge::parse::json::make_value(
-							sge::parse::json::convert::from_int(
-								_delay.get().count()
-							)
-						)
-					};
-			}
-		);
+  return fcppt::optional::map(
+      _opt_delay,
+      [](sanguis::model::animation_delay const &_delay)
+      {
+        return sge::parse::json::member{
+            "delay",
+            sge::parse::json::make_value(
+                sge::parse::json::convert::from_int(_delay.get().count()))};
+      });
 }

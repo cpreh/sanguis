@@ -4,16 +4,10 @@
 #include <sanguis/creator/size_type.hpp>
 #include <fcppt/math/box/rect_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-rect
-=
-fcppt::math::box::rect<
-	sanguis::creator::size_type
->;
+using rect = fcppt::math::box::rect<sanguis::creator::size_type>;
 
 }
 

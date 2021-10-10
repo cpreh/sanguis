@@ -4,5 +4,4 @@
 #include <sanguis/client/draw2d/scene/world/sprite/vector_fwd.hpp>
 #include <sge/sprite/types/vector.hpp>
 
-
 #endif

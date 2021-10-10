@@ -5,15 +5,11 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/sight_range_fwd.hpp>
 
-
 namespace sanguis::server::ai
 {
 
 sanguis::server::ai::create_function
-create_attack_health(
-	sanguis::random_generator_ref,
-	sanguis::server::ai::sight_range
-);
+    create_attack_health(sanguis::random_generator_ref, sanguis::server::ai::sight_range);
 
 }
 

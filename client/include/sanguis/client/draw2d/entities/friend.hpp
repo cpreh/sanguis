@@ -17,40 +17,32 @@
 #include <sanguis/client/load/auras/context_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class friend_
-:
-	public sanguis::client::draw2d::entities::with_buffs_auras_model
+class friend_ : public sanguis::client::draw2d::entities::with_buffs_auras_model
 {
-	FCPPT_NONMOVABLE(
-		friend_
-	);
-public:
-	friend_(
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::load::auras::context_ref,
-		sanguis::friend_type,
-		sanguis::optional_primary_weapon_type,
-		sanguis::weapon_status,
-		sanguis::client::draw2d::speed const &,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::rotation,
-		sanguis::aura_type_vector &&,
-		sanguis::buff_type_vector &&,
-		sanguis::client::draw2d::entities::order_function &&,
-		sanguis::client::health_pair
-	);
+  FCPPT_NONMOVABLE(friend_);
 
-	~friend_()
-	override;
+public:
+  friend_(
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::client::load::auras::context_ref,
+      sanguis::friend_type,
+      sanguis::optional_primary_weapon_type,
+      sanguis::weapon_status,
+      sanguis::client::draw2d::speed const &,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::rotation,
+      sanguis::aura_type_vector &&,
+      sanguis::buff_type_vector &&,
+      sanguis::client::draw2d::entities::order_function &&,
+      sanguis::client::health_pair);
+
+  ~friend_() override;
+
 private:
-	[[nodiscard]]
-	sanguis::client::draw2d::entities::hover::optional_info
-	hover() const
-	override;
+  [[nodiscard]] sanguis::client::draw2d::entities::hover::optional_info hover() const override;
 };
 
 }

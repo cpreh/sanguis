@@ -14,41 +14,32 @@
 #include <sanguis/client/load/auras/context_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class sentry
-:
-	public sanguis::client::draw2d::entities::friend_
+class sentry : public sanguis::client::draw2d::entities::friend_
 {
-	FCPPT_NONMOVABLE(
-		sentry
-	);
+  FCPPT_NONMOVABLE(sentry);
+
 public:
-	sentry(
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::load::auras::context_ref,
-		sanguis::optional_primary_weapon_type,
-		sanguis::weapon_status,
-		sanguis::client::draw2d::speed const &,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::rotation,
-		sanguis::aura_type_vector &&,
-		sanguis::buff_type_vector &&,
-		sanguis::client::health_pair
-	);
+  sentry(
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::client::load::auras::context_ref,
+      sanguis::optional_primary_weapon_type,
+      sanguis::weapon_status,
+      sanguis::client::draw2d::speed const &,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::rotation,
+      sanguis::aura_type_vector &&,
+      sanguis::buff_type_vector &&,
+      sanguis::client::health_pair);
 
-	~sentry()
-	override;
+  ~sentry() override;
 
-	void
-	orientation(
-		sanguis::client::draw2d::sprite::rotation
-	)
-	override;
+  void orientation(sanguis::client::draw2d::sprite::rotation) override;
+
 private:
-	using sanguis::client::draw2d::entities::container::orientation;
+  using sanguis::client::draw2d::entities::container::orientation;
 };
 
 }

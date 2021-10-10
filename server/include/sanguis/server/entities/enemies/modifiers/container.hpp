@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::entities::enemies::modifiers
 {
 
-using
-container
-=
-std::vector<
-	sanguis::server::entities::enemies::modifiers::callback
->;
+using container = std::vector<sanguis::server::entities::enemies::modifiers::callback>;
 
 }
 

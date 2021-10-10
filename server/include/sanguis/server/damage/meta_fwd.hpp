@@ -4,16 +4,10 @@
 #include <sanguis/server/damage/basic_meta_fwd.hpp>
 #include <sanguis/server/damage/unit_fwd.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-using
-meta
-=
-sanguis::server::damage::basic_meta<
-	sanguis::server::damage::unit
->;
+using meta = sanguis::server::damage::basic_meta<sanguis::server::damage::unit>;
 
 }
 

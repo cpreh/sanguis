@@ -5,5 +5,4 @@
 #include <sanguis/collision/length2_fwd.hpp>
 #include <fcppt/math/vector/static.hpp>
 
-
 #endif

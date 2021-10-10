@@ -4,10 +4,4 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
-std::filesystem::path
-sanguis::media_path()
-{
-	return
-		sanguis::build_media_path();
-}
+std::filesystem::path sanguis::media_path() { return sanguis::build_media_path(); }

@@ -8,61 +8,35 @@
 #include <fcppt/reference_fwd.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
-
 namespace sanguis::server::net
 {
 
-template<
-	typename Type,
-	typename Policy,
-	typename Clock
->
+template <typename Type, typename Policy, typename Clock>
 class basic_value
 {
-	FCPPT_NONMOVABLE(
-		basic_value
-	);
+  FCPPT_NONMOVABLE(basic_value);
+
 public:
-	explicit
-	basic_value(
-		sge::timer::clocks::parameter<
-			Clock
-		>
-	);
+  explicit basic_value(sge::timer::clocks::parameter<Clock>);
 
-	~basic_value();
+  ~basic_value();
 
-	bool
-	update();
+  bool update();
 
-	void
-	set(
-		Type
-	);
+  void set(Type);
 
-	void
-	reset();
+  void reset();
+
 private:
-	void
-	restart_timer();
+  void restart_timer();
 
-	using
-	timer
-	=
-	sge::timer::basic<
-		Clock
-	>;
+  using timer = sge::timer::basic<Clock>;
 
-	timer timer_;
+  timer timer_;
 
-	using
-	optional_type
-	=
-	fcppt::optional::object<
-		Type
-	>;
+  using optional_type = fcppt::optional::object<Type>;
 
-	optional_type old_;
+  optional_type old_;
 };
 
 }

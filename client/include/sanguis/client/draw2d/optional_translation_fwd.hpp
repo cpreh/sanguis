@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/translation_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
-using
-optional_translation
-=
-fcppt::optional::object<
-	sanguis::client::draw2d::translation
->;
+using optional_translation = fcppt::optional::object<sanguis::client::draw2d::translation>;
 
 }
 

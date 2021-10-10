@@ -41,198 +41,111 @@
 #include <set>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class player
-:
-	public virtual sanguis::server::entities::ifaces::with_team,
-	public sanguis::server::entities::with_velocity,
-	public sanguis::server::entities::with_auras_id,
-	public sanguis::server::entities::with_buffs,
-	public sanguis::server::entities::with_id,
-	public sanguis::server::entities::with_health,
-	public sanguis::server::entities::with_links,
-	public sanguis::server::entities::with_perks,
-	public sanguis::server::entities::with_weapon
+class player : public virtual sanguis::server::entities::ifaces::with_team,
+               public sanguis::server::entities::with_velocity,
+               public sanguis::server::entities::with_auras_id,
+               public sanguis::server::entities::with_buffs,
+               public sanguis::server::entities::with_id,
+               public sanguis::server::entities::with_health,
+               public sanguis::server::entities::with_links,
+               public sanguis::server::entities::with_perks,
+               public sanguis::server::entities::with_weapon
 {
-	FCPPT_NONMOVABLE(
-		player
-	);
+  FCPPT_NONMOVABLE(player);
+
 public:
-	player(
-		sanguis::random_generator_ref,
-		sanguis::server::weapons::common_parameters const &,
-		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-		sanguis::server::health,
-		sanguis::server::damage::armor_array const &,
-		sanguis::server::entities::movement_speed,
-		sanguis::player_name &&,
-		sanguis::server::player_id
-	);
+  player(
+      sanguis::random_generator_ref,
+      sanguis::server::weapons::common_parameters const &,
+      sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+      sanguis::server::health,
+      sanguis::server::damage::armor_array const &,
+      sanguis::server::entities::movement_speed,
+      sanguis::player_name &&,
+      sanguis::server::player_id);
 
-	~player()
-	override;
+  ~player() override;
 
-	// own functions
-	[[nodiscard]]
-	sanguis::player_name const &
-	name() const;
+  // own functions
+  [[nodiscard]] sanguis::player_name const &name() const;
 
-	void
-	add_exp(
-		sanguis::server::exp
-	);
+  void add_exp(sanguis::server::exp);
 
-	[[nodiscard]]
-	bool
-	perk_choosable(
-		sanguis::perk_type
-	) const;
+  [[nodiscard]] bool perk_choosable(sanguis::perk_type) const;
 
-	void
-	add_perk(
-		sanguis::perk_type
-	);
+  void add_perk(sanguis::perk_type);
 
-	void
-	change_speed(
-		sanguis::server::speed const &
-	);
+  void change_speed(sanguis::server::speed const &);
 
-	void
-	drop_or_pickup_weapon(
-		sanguis::is_primary_weapon
-	);
+  void drop_or_pickup_weapon(sanguis::is_primary_weapon);
 
-	[[nodiscard]]
-	sanguis::server::perks::tree::container const &
-	perk_tree() const;
+  [[nodiscard]] sanguis::server::perks::tree::container const &perk_tree() const;
 
-	[[nodiscard]]
-	sanguis::server::skill_points
-	skill_points() const;
+  [[nodiscard]] sanguis::server::skill_points skill_points() const;
 
-	[[nodiscard]]
-	sanguis::server::player_id
-	player_id() const;
+  [[nodiscard]] sanguis::server::player_id player_id() const;
 
-	[[nodiscard]]
-	sanguis::server::level
-	level() const;
+  [[nodiscard]] sanguis::server::level level() const;
 
-	[[nodiscard]]
-	sanguis::server::team
-	team() const
-	override;
+  [[nodiscard]] sanguis::server::team team() const override;
+
 private:
-	void
-	transfer_to_world()
-	override;
+  void transfer_to_world() override;
 
-	void
-	remove_from_game()
-	override;
+  void remove_from_game() override;
 
-	void
-	update_speed();
+  void update_speed();
 
-	void
-	add_sight_range(
-		sanguis::server::entities::with_id const &,
-		sanguis::collision::world::created
-	);
+  void
+  add_sight_range(sanguis::server::entities::with_id const &, sanguis::collision::world::created);
 
-	void
-	remove_sight_range(
-		sanguis::server::entities::with_id const &
-	);
+  void remove_sight_range(sanguis::server::entities::with_id const &);
 
-	void
-	weapon_pickup_add_candidate(
-		sanguis::server::entities::pickups::weapon_ref
-	);
+  void weapon_pickup_add_candidate(sanguis::server::entities::pickups::weapon_ref);
 
-	void
-	weapon_pickup_remove_candidate(
-		sanguis::server::entities::pickups::weapon & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void weapon_pickup_remove_candidate(
+      sanguis::server::entities::pickups::weapon & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	void
-	update()
-	override;
+  void update() override;
 
-	[[nodiscard]]
-	sanguis::messages::server::unique_ptr
-	add_message(
-		sanguis::server::player_id,
-		sanguis::collision::world::created
-	) const
-	override;
+  [[nodiscard]] sanguis::messages::server::unique_ptr
+      add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
 
-	template<
-		typename Message
-	>
-	[[nodiscard]]
-	sanguis::messages::server::unique_ptr
-	add_message_impl(
-		sanguis::collision::world::created
-	) const;
+  template <typename Message>
+  [[nodiscard]] sanguis::messages::server::unique_ptr
+      add_message_impl(sanguis::collision::world::created) const;
 
-	void
-	on_new_weapon(
-		sanguis::server::weapons::weapon const &
-	)
-	override;
+  void on_new_weapon(sanguis::server::weapons::weapon const &) override;
 
-	void
-	on_drop_weapon(
-		sanguis::is_primary_weapon
-	)
-	override;
+  void on_drop_weapon(sanguis::is_primary_weapon) override;
 
-	void
-	on_magazine_remaining(
-		sanguis::is_primary_weapon,
-		sanguis::magazine_remaining
-	)
-	override;
+  void on_magazine_remaining(sanguis::is_primary_weapon, sanguis::magazine_remaining) override;
 
-	void
-	on_reload_time(
-		sanguis::is_primary_weapon,
-		sanguis::duration
-	)
-	override;
+  void on_reload_time(sanguis::is_primary_weapon, sanguis::duration) override;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_group
-	collision_group() const
-	override;
+  [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
 
-	using
-	weapon_pickup_set
-	=
-	std::set<
-		sanguis::server::entities::pickups::weapon_ref
-	>;
+  using weapon_pickup_set = std::set<sanguis::server::entities::pickups::weapon_ref>;
 
-	sanguis::player_name const name_;
+  sanguis::player_name const name_;
 
-	sanguis::server::player_id const player_id_;
+  sanguis::server::player_id const player_id_;
 
-	sanguis::server::exp exp_;
+  sanguis::server::exp exp_;
 
-	sanguis::server::level level_;
+  sanguis::server::level level_;
 
-	sanguis::server::skill_points skill_points_;
+  sanguis::server::skill_points skill_points_;
 
-	sanguis::server::perks::tree::container perk_tree_;
+  sanguis::server::perks::tree::container perk_tree_;
 
-	sanguis::server::speed desired_speed_;
+  sanguis::server::speed desired_speed_;
 
-	weapon_pickup_set weapon_pickups_;
+  weapon_pickup_set weapon_pickups_;
 };
 
 }

@@ -4,5 +4,4 @@
 #include <sanguis/creator/spawn_boss_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

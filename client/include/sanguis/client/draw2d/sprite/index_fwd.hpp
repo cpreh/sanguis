@@ -3,14 +3,10 @@
 
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::client::draw2d::sprite
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	unsigned,
-	index
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(unsigned, index);
 
 }
 

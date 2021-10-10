@@ -7,31 +7,20 @@
 #include <sanguis/server/perks/level_diff.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 
-
 namespace sanguis::server::perks
 {
 
-template<
-	typename ChangeFunction
->
-void
-change_simple(
-	ChangeFunction const &_change_function,
-	sanguis::server::entities::property::base &_property, // NOLINT(google-runtime-references)
-	sanguis::server::perks::change_factor const _factor,
-	sanguis::server::perks::level_diff const _diff
-)
+template <typename ChangeFunction>
+void change_simple(
+    ChangeFunction const &_change_function,
+    sanguis::server::entities::property::base &_property, // NOLINT(google-runtime-references)
+    sanguis::server::perks::change_factor const _factor,
+    sanguis::server::perks::level_diff const _diff)
 {
-	_change_function(
-		_property,
-		_factor.get()
-		*
-		fcppt::cast::int_to_float<
-			sanguis::server::entities::property::value
-		>(
-			_diff.get()
-		)
-	);
+  _change_function(
+      _property,
+      _factor.get() *
+          fcppt::cast::int_to_float<sanguis::server::entities::property::value>(_diff.get()));
 }
 
 }

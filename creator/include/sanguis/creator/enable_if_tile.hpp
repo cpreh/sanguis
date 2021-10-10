@@ -6,23 +6,11 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::creator
 {
 
-template<
-	typename Tile,
-	typename Result
->
-using
-enable_if_tile
-=
-std::enable_if_t<
-	sanguis::creator::is_tile<
-		Tile
-	>::value,
-	Result
->;
+template <typename Tile, typename Result>
+using enable_if_tile = std::enable_if_t<sanguis::creator::is_tile<Tile>::value, Result>;
 
 }
 

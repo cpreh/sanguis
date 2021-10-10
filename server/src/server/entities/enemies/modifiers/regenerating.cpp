@@ -9,25 +9,13 @@
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::regenerating(
-	fcppt::reference<
-		sanguis::server::entities::enemies::parameters
-	> const _parameters,
-	sanguis::server::entities::enemies::modifiers::parameters const &
-)
+    fcppt::reference<sanguis::server::entities::enemies::parameters> const _parameters,
+    sanguis::server::entities::enemies::modifiers::parameters const &)
 {
-	_parameters->regeneration(
-		sanguis::server::regeneration(
-			std::sqrt(
-				_parameters->difficulty().get()
-			)
-		)
-	);
+  _parameters->regeneration(
+      sanguis::server::regeneration(std::sqrt(_parameters->difficulty().get())));
 
-	return
-		sanguis::server::entities::enemies::attribute(
-			FCPPT_TEXT("regenerating")
-		);
+  return sanguis::server::entities::enemies::attribute(FCPPT_TEXT("regenerating"));
 }

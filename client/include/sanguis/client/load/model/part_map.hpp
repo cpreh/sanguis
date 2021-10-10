@@ -7,17 +7,10 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
-using
-part_map
-=
-std::map<
-	fcppt::string,
-	sanguis::client::load::model::part_unique_ptr
->;
+using part_map = std::map<fcppt::string, sanguis::client::load::model::part_unique_ptr>;
 
 }
 

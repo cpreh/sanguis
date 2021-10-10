@@ -9,54 +9,19 @@
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::collision::radius
-sanguis::load::model::radius(
-	sanguis::model::cell_size const &_cell_size
-)
+sanguis::collision::radius sanguis::load::model::radius(sanguis::model::cell_size const &_cell_size)
 {
-	auto const quad_half(
-		[](
-			sanguis::model::cell_size_unit const _val
-		)
-		->
-		sanguis::collision::unit
-		{
-			return
-				fcppt::cast::int_to_float<
-					sanguis::collision::unit
-				>(
-					_val
-					*
-					_val
-				)
-				/
-				fcppt::literal<
-					sanguis::collision::unit
-				>(
-					4
-				);
-		}
-	);
+  auto const quad_half(
+      [](sanguis::model::cell_size_unit const _val) -> sanguis::collision::unit
+      {
+        return fcppt::cast::int_to_float<sanguis::collision::unit>(_val * _val) /
+               fcppt::literal<sanguis::collision::unit>(4);
+      });
 
-	return
-		sanguis::collision::radius(
-			std::sqrt(
-				quad_half(
-					_cell_size.get().w()
-				)
-				+
-				quad_half(
-					_cell_size.get().h()
-				)
-			)
-			*
-			fcppt::literal<
-				sanguis::collision::unit
-			>(
-				0.4F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-			)
-			*
-			boost::units::si::meter
-		);
+  return sanguis::collision::radius(
+      std::sqrt(quad_half(_cell_size.get().w()) + quad_half(_cell_size.get().h())) *
+      fcppt::literal<sanguis::collision::unit>(
+          0.4F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+          ) *
+      boost::units::si::meter);
 }

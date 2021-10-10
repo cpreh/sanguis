@@ -5,52 +5,37 @@
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities::buffs
 {
 
 class base
 {
-	FCPPT_NONMOVABLE(
-		base
-	);
+  FCPPT_NONMOVABLE(base);
+
 protected:
-	base();
+  base();
+
 public:
-	virtual
-	~base() = 0;
+  virtual ~base() = 0;
 
-	virtual
-	void
-	apply(
-		sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  virtual void
+  apply(sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	virtual
-	void
-	remove(
-		sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  virtual void
+  remove(sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	virtual
-	void
-	update(
-		sanguis::client::draw2d::entities::model::object const &
-	);
+  virtual void update(sanguis::client::draw2d::entities::model::object const &);
 
-	void
-	increment();
+  void increment();
 
-	[[nodiscard]]
-	bool
-	decrement();
+  [[nodiscard]] bool decrement();
+
 private:
-	using
-	counter
-	=
-	unsigned;
+  using counter = unsigned;
 
-	counter counter_;
+  counter counter_;
 };
 
 }

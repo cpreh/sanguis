@@ -22,58 +22,47 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::draw2d::scene::hover
 {
 
-class weapon
-:
-	public sanguis::client::draw2d::scene::hover::base
+class weapon : public sanguis::client::draw2d::scene::hover::base
 {
-	FCPPT_NONMOVABLE(
-		weapon
-	);
+  FCPPT_NONMOVABLE(weapon);
+
 public:
-	weapon(
-		sge::gui::style::const_reference,
-		sge::gui::renderer::base_ref,
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::load::hud::context_ref,
-		sanguis::client::weapon_pair const &,
-		sanguis::client::draw2d::entities::hover::weapon const &
-	);
+  weapon(
+      sge::gui::style::const_reference,
+      sge::gui::renderer::base_ref,
+      sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::load::hud::context_ref,
+      sanguis::client::weapon_pair const &,
+      sanguis::client::draw2d::entities::hover::weapon const &);
 
-	~weapon()
-	override;
+  ~weapon() override;
+
 private:
-	void
-	draw(
-		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void draw(sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+            ) // NOLINT(google-runtime-references)
+      override;
 
-	sge::gui::renderer::base_ref const gui_renderer_;
+  sge::gui::renderer::base_ref const gui_renderer_;
 
-	sge::gui::context gui_context_;
+  sge::gui::context gui_context_;
 
-	sge::gui::widget::image image_;
+  sge::gui::widget::image image_;
 
-	using
-	weapon_attribute_vector
-	=
-	std::vector<
-		sanguis::client::draw2d::scene::hover::weapon_attribute_unique_ptr
-	>;
+  using weapon_attribute_vector =
+      std::vector<sanguis::client::draw2d::scene::hover::weapon_attribute_unique_ptr>;
 
-	weapon_attribute_vector weapon_attributes_;
+  weapon_attribute_vector weapon_attributes_;
 
-	sge::gui::widget::box_container container_;
+  sge::gui::widget::box_container container_;
 
-	sge::gui::main_area::fixed_position gui_area_;
+  sge::gui::main_area::fixed_position gui_area_;
 
-	sge::gui::background::colored gui_background_;
+  sge::gui::background::colored gui_background_;
 };
 
 }

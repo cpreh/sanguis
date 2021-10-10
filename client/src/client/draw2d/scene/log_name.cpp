@@ -2,12 +2,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/name.hpp>
 
-
-fcppt::log::name
-sanguis::client::draw2d::scene::log_name()
+fcppt::log::name sanguis::client::draw2d::scene::log_name()
 {
-	return
-		fcppt::log::name{
-			FCPPT_TEXT("scene")
-		};
+  return fcppt::log::name{FCPPT_TEXT("scene")};
 }

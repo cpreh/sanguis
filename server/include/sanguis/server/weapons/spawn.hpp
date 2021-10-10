@@ -17,77 +17,50 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-class spawn
-:
-	public sanguis::server::weapons::weapon
+class spawn : public sanguis::server::weapons::weapon
 {
-	FCPPT_NONMOVABLE(
-		spawn
-	);
+  FCPPT_NONMOVABLE(spawn);
+
 public:
-	spawn(
-		sanguis::server::weapons::common_parameters const &,
-		sanguis::weapon_type,
-		sanguis::server::weapons::spawn_weapon &&,
-		sanguis::server::weapons::range,
-		sanguis::server::weapons::backswing_time,
-		sanguis::server::weapons::cast_point,
-		sanguis::server::weapons::reload_time
-	);
+  spawn(
+      sanguis::server::weapons::common_parameters const &,
+      sanguis::weapon_type,
+      sanguis::server::weapons::spawn_weapon &&,
+      sanguis::server::weapons::range,
+      sanguis::server::weapons::backswing_time,
+      sanguis::server::weapons::cast_point,
+      sanguis::server::weapons::reload_time);
 
-	~spawn()
-	override;
+  ~spawn() override;
+
 protected:
-	explicit
-	spawn(
-		sanguis::server::weapons::spawn_parameters const &
-	);
+  explicit spawn(sanguis::server::weapons::spawn_parameters const &);
 
-	[[nodiscard]]
-	sanguis::server::weapons::spawn_parameters
-	spawn_parameters() const;
+  [[nodiscard]] sanguis::server::weapons::spawn_parameters spawn_parameters() const;
+
 private:
-	[[nodiscard]]
-	sanguis::server::weapons::attack_result
-	do_attack(
-		sanguis::server::weapons::attack const &
-	)
-	override;
+  [[nodiscard]] sanguis::server::weapons::attack_result
+  do_attack(sanguis::server::weapons::attack const &) override;
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::entities::optional_base_ref
-	do_spawn(
-		sanguis::server::weapons::attack const &,
-		sanguis::server::weapons::spawn_weapon const &
-	) = 0;
+  [[nodiscard]] virtual sanguis::server::entities::optional_base_ref do_spawn(
+      sanguis::server::weapons::attack const &, sanguis::server::weapons::spawn_weapon const &) = 0;
 
-	[[nodiscard]]
-	sanguis::weapon_attribute_vector
-	attributes() const
-	override;
+  [[nodiscard]] sanguis::weapon_attribute_vector attributes() const override;
 
-	void
-	owner_lost()
-	override;
+  void owner_lost() override;
 
-	void
-	kill_spawned();
+  void kill_spawned();
 
-	[[nodiscard]]
-	virtual
-	sanguis::weapon_attribute_vector
-	extra_attributes() const = 0;
+  [[nodiscard]] virtual sanguis::weapon_attribute_vector extra_attributes() const = 0;
 
-	sanguis::server::weapons::spawn_weapon const spawn_weapon_;
+  sanguis::server::weapons::spawn_weapon const spawn_weapon_;
 
-	sanguis::weapon_attribute_vector const attributes_;
+  sanguis::weapon_attribute_vector const attributes_;
 
-	sanguis::server::entities::auto_weak_link spawned_;
+  sanguis::server::entities::auto_weak_link spawned_;
 };
 
 }

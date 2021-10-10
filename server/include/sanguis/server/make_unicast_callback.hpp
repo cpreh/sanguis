@@ -5,16 +5,10 @@
 #include <sanguis/server/unicast_callback.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
-sanguis::server::unicast_callback
-make_unicast_callback(
-	fcppt::reference<
-		sanguis::server::machine
-	>
-);
+sanguis::server::unicast_callback make_unicast_callback(fcppt::reference<sanguis::server::machine>);
 
 }
 

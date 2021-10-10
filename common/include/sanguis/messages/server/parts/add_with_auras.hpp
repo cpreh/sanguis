@@ -5,5 +5,4 @@
 #include <sanguis/messages/server/parts/add_with_auras_fwd.hpp>
 #include <fcppt/record/element.hpp>
 
-
 #endif

@@ -4,14 +4,10 @@
 #include <sanguis/client/draw2d/scene/state/array.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
 
-
 namespace sanguis::client::draw2d::scene::state
 {
 
-sanguis::client::draw2d::scene::state::array
-create(
-	sge::renderer::device::ffp_ref
-);
+sanguis::client::draw2d::scene::state::array create(sge::renderer::device::ffp_ref);
 
 }
 

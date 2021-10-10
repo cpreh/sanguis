@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tiles
 {
 
-using
-cell_container
-=
-std::vector<
-	sanguis::tiles::cell
->;
+using cell_container = std::vector<sanguis::tiles::cell>;
 
 }
 

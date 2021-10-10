@@ -7,21 +7,12 @@
 #include <sge/sprite/config/type_choices_fwd.hpp>
 #include <sge/sprite/config/unit_type_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::sprite
 {
 
-using
-type_choices
-=
-sge::sprite::config::type_choices<
-	sge::sprite::config::unit_type<
-		sanguis::client::draw2d::sprite::unit
-	>,
-	sge::sprite::config::float_type<
-		sanguis::client::draw2d::sprite::float_unit
-	>
->;
+using type_choices = sge::sprite::config::type_choices<
+    sge::sprite::config::unit_type<sanguis::client::draw2d::sprite::unit>,
+    sge::sprite::config::float_type<sanguis::client::draw2d::sprite::float_unit>>;
 
 }
 

@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::client
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::client::health_value,
-	health
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::client::health_value, health);
 
 }
 

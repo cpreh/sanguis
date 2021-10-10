@@ -5,17 +5,12 @@
 #include <sanguis/client/args/labels/display_height.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::client::args::elements
 {
 
-using
-display_height
-=
-fcppt::record::element<
-	sanguis::client::args::labels::display_height,
-	sanguis::client::args::optional_screen_unit
->;
+using display_height = fcppt::record::element<
+    sanguis::client::args::labels::display_height,
+    sanguis::client::args::optional_screen_unit>;
 
 }
 

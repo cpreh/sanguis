@@ -6,19 +6,13 @@
 #include <alda/bindings/unit_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-change_world
-=
-alda::message::object<
-	sanguis::messages::client::types::make_message_id<
-		sanguis::messages::client::types::message::change_world
-	>,
-	alda::bindings::unit
->;
+using change_world = alda::message::object<
+    sanguis::messages::client::types::make_message_id<
+        sanguis::messages::client::types::message::change_world>,
+    alda::bindings::unit>;
 
 }
 

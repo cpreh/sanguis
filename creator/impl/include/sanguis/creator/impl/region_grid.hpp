@@ -7,14 +7,8 @@
 namespace sanguis::creator::impl
 {
 
-using
-region_grid
-=
-sanguis::creator::tile_grid<
-	sanguis::creator::impl::region_id
->;
+using region_grid = sanguis::creator::tile_grid<sanguis::creator::impl::region_id>;
 
 }
 
 #endif
-

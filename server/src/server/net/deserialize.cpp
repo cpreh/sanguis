@@ -7,15 +7,9 @@
 #include <sanguis/server/net/deserialize.hpp>
 #include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>
 
-
 sanguis::messages::client::optional_unique_ptr
-sanguis::server::net::deserialize(
-	alda::net::buffer::circular_receive::streambuf &_buffer
-)
+sanguis::server::net::deserialize(alda::net::buffer::circular_receive::streambuf &_buffer)
 {
-	return
-		sanguis::net::deserialize(
-			sanguis::messages::client::serialization::global_context(),
-			_buffer
-		);
+  return sanguis::net::deserialize(
+      sanguis::messages::client::serialization::global_context(), _buffer);
 }

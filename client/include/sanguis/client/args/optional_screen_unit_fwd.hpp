@@ -4,16 +4,10 @@
 #include <sge/renderer/screen_unit.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::args
 {
 
-using
-optional_screen_unit
-=
-fcppt::optional::object<
-	sge::renderer::screen_unit
->;
+using optional_screen_unit = fcppt::optional::object<sge::renderer::screen_unit>;
 
 }
 

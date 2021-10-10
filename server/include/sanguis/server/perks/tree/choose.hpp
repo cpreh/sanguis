@@ -4,15 +4,12 @@
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/server/perks/tree/container.hpp>
 
-
 namespace sanguis::server::perks::tree
 {
 
-void
-choose(
-	sanguis::server::perks::tree::container &, // NOLINT(google-runtime-references)
-	sanguis::perk_type
-);
+void choose(
+    sanguis::server::perks::tree::container &, // NOLINT(google-runtime-references)
+    sanguis::perk_type);
 
 }
 

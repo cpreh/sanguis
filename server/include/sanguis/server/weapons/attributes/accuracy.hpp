@@ -5,12 +5,7 @@
 #include <sanguis/server/weapons/attributes/accuracy_fwd.hpp>
 #include <sanguis/server/weapons/attributes/basic_decl.hpp>
 
-
-extern
-template
-class
-sanguis::server::weapons::attributes::basic<
-	sanguis::server::weapons::accuracy
->;
+extern template class sanguis::server::weapons::attributes::basic<
+    sanguis::server::weapons::accuracy>;
 
 #endif

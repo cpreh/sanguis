@@ -3,15 +3,14 @@
 
 #include <sanguis/server/ai/status_fwd.hpp>
 
-
 namespace sanguis::server::ai
 {
 
 enum class status
 {
-	running,
-	failure,
-	success
+  running,
+  failure,
+  success
 };
 
 }

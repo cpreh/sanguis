@@ -48,131 +48,61 @@
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::draw2d::scene::light::light(
-	sanguis::client::load::context_cref const _load_context,
-	sanguis::client::draw2d::sprite::client::system_ref const _client_system,
-	sge::viewport::manager_ref const _viewport_manager
-)
-:
-	client_system_(
-		_client_system
-	),
-	texture_(
-		_load_context->resources().textures().load(
-			sanguis::client::load::resource::texture_identifier(
-				FCPPT_TEXT("light")
-			)
-		)
-	),
-	sprite_(
-		sge::sprite::roles::connection{} =
-			client_system_->connection(
-				sanguis::client::draw2d::sprite::client::category::light
-			),
-		sge::sprite::roles::pos{} =
-			fcppt::math::vector::null<
-				sanguis::client::draw2d::sprite::point
-			>(),
-		sge::sprite::roles::size{} =
-			fcppt::math::dim::structure_cast<
-				sanguis::client::draw2d::sprite::dim,
-				fcppt::cast::size_fun
-			>(
-				fcppt::math::dim::to_signed(
-					sanguis::client::draw2d::scene::background_dim(
-						client_system_->renderer()
-					)
-				)
-			),
-		sge::sprite::roles::texture0{} =
-			sanguis::client::draw2d::sprite::client::object::texture_type{
-				texture_
-			},
-		sge::sprite::roles::texture_coordinates0{} =
-			sanguis::client::draw2d::scene::light_texture_coordinates(
-				client_system_->renderer(),
-				texture_
-			)
-	),
-	sampler_state_{
-		_client_system->renderer().create_sampler_state(
-			sge::renderer::state::core::sampler::parameters{
-				sge::renderer::state::core::sampler::address::mode_all(
-					sge::renderer::state::core::sampler::address::mode::clamp
-				),
-				sge::renderer::state::core::sampler::filter::point()
-			}
-		)
-	},
-	viewport_connection_(
-		_viewport_manager->manage_callback(
-			sge::viewport::manage_callback{
-				[
-					this
-				](
-					sge::renderer::target::viewport const &
-				)
-				{
-					this->reset_viewport();
-				}
-			}
-		)
-	)
+    sanguis::client::load::context_cref const _load_context,
+    sanguis::client::draw2d::sprite::client::system_ref const _client_system,
+    sge::viewport::manager_ref const _viewport_manager)
+    : client_system_(_client_system),
+      texture_(_load_context->resources().textures().load(
+          sanguis::client::load::resource::texture_identifier(FCPPT_TEXT("light")))),
+      sprite_(
+          sge::sprite::roles::connection{} =
+              client_system_->connection(sanguis::client::draw2d::sprite::client::category::light),
+          sge::sprite::roles::pos{} =
+              fcppt::math::vector::null<sanguis::client::draw2d::sprite::point>(),
+          sge::sprite::roles::size{} = fcppt::math::dim::
+              structure_cast<sanguis::client::draw2d::sprite::dim, fcppt::cast::size_fun>(
+                  fcppt::math::dim::to_signed(
+                      sanguis::client::draw2d::scene::background_dim(client_system_->renderer()))),
+          sge::sprite::roles::texture0{} =
+              sanguis::client::draw2d::sprite::client::object::texture_type{texture_},
+          sge::sprite::roles::texture_coordinates0{} =
+              sanguis::client::draw2d::scene::light_texture_coordinates(
+                  client_system_->renderer(), texture_)),
+      sampler_state_{_client_system->renderer().create_sampler_state(
+          sge::renderer::state::core::sampler::parameters{
+              sge::renderer::state::core::sampler::address::mode_all(
+                  sge::renderer::state::core::sampler::address::mode::clamp),
+              sge::renderer::state::core::sampler::filter::point()})},
+      viewport_connection_(_viewport_manager->manage_callback(sge::viewport::manage_callback{
+          [this](sge::renderer::target::viewport const &) { this->reset_viewport(); }}))
 {
 }
 
 FCPPT_PP_POP_WARNING
 
-sanguis::client::draw2d::scene::light::~light()
-= default;
+sanguis::client::draw2d::scene::light::~light() = default;
 
-void
-sanguis::client::draw2d::scene::light::draw(
-	sge::renderer::context::core &_render_context
-)
+void sanguis::client::draw2d::scene::light::draw(sge::renderer::context::core &_render_context)
 {
-	sge::renderer::state::core::sampler::scoped_single const sampler_state{
-		fcppt::make_ref(
-			_render_context
-		),
-		sge::renderer::texture::stage{
-			0U
-		},
-		fcppt::make_cref(
-			*sampler_state_
-		)
-	};
+  sge::renderer::state::core::sampler::scoped_single const sampler_state{
+      fcppt::make_ref(_render_context),
+      sge::renderer::texture::stage{0U},
+      fcppt::make_cref(*sampler_state_)};
 
-	client_system_->render(
-		_render_context,
-		sanguis::client::draw2d::sprite::client::category::light
-	);
+  client_system_->render(_render_context, sanguis::client::draw2d::sprite::client::category::light);
 }
 
-void
-sanguis::client::draw2d::scene::light::reset_viewport()
+void sanguis::client::draw2d::scene::light::reset_viewport()
 {
-	sprite_.texture_coordinates(
-		sanguis::client::draw2d::scene::light_texture_coordinates(
-			client_system_->renderer(),
-			texture_
-		)
-	);
+  sprite_.texture_coordinates(sanguis::client::draw2d::scene::light_texture_coordinates(
+      client_system_->renderer(), texture_));
 
-	sprite_.size(
-		fcppt::math::dim::structure_cast<
-			sanguis::client::draw2d::sprite::dim,
-			fcppt::cast::size_fun
-		>(
-			fcppt::math::dim::to_signed(
-				sanguis::client::draw2d::scene::background_dim(
-					client_system_->renderer()
-				)
-			)
-		)
-	);
+  sprite_.size(
+      fcppt::math::dim::structure_cast<sanguis::client::draw2d::sprite::dim, fcppt::cast::size_fun>(
+          fcppt::math::dim::to_signed(
+              sanguis::client::draw2d::scene::background_dim(client_system_->renderer()))));
 }

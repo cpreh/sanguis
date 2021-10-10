@@ -4,17 +4,10 @@
 #include <sanguis/creator/size_type.hpp>
 #include <fcppt/container/grid/dim_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-dim
-=
-fcppt::container::grid::dim<
-	sanguis::creator::size_type,
-	2U
->;
+using dim = fcppt::container::grid::dim<sanguis::creator::size_type, 2U>;
 
 }
 

@@ -7,12 +7,8 @@
 namespace sanguis::creator::impl::generators
 {
 
-sanguis::creator::impl::result
-rooms(
-	sanguis::creator::impl::parameters const &
-);
+sanguis::creator::impl::result rooms(sanguis::creator::impl::parameters const &);
 
 }
 
 #endif
-

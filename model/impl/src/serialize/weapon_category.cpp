@@ -10,34 +10,12 @@
 #include <fcppt/optional/cat.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
-sge::parse::json::object
-sanguis::model::impl::serialize::weapon_category(
-	sanguis::model::weapon_category const &_weapon_category
-)
+sge::parse::json::object sanguis::model::impl::serialize::weapon_category(
+    sanguis::model::weapon_category const &_weapon_category)
 {
-	return
-		sge::parse::json::object(
-			fcppt::optional::cat<
-				sge::parse::json::member_map
-			>(
-				fcppt::array::object<
-					fcppt::optional::object<
-						sge::parse::json::member
-					>,
-					2
-				>{
-					fcppt::optional::object<
-						sge::parse::json::member
-					>{
-						sanguis::model::impl::serialize::animation_map(
-							_weapon_category.animations()
-						)
-					},
-					sanguis::model::impl::serialize::image_name(
-						_weapon_category.image_name()
-					)
-				}
-			)
-		);
+  return sge::parse::json::object(fcppt::optional::cat<sge::parse::json::member_map>(
+      fcppt::array::object<fcppt::optional::object<sge::parse::json::member>, 2>{
+          fcppt::optional::object<sge::parse::json::member>{
+              sanguis::model::impl::serialize::animation_map(_weapon_category.animations())},
+          sanguis::model::impl::serialize::image_name(_weapon_category.image_name())}));
 }

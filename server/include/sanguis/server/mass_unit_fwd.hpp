@@ -7,17 +7,10 @@
 #include <boost/units/systems/si/mass.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-mass_unit
-=
-boost::units::quantity<
-	boost::units::si::mass,
-	sanguis::server::space_unit
->;
+using mass_unit = boost::units::quantity<boost::units::si::mass, sanguis::server::space_unit>;
 
 }
 

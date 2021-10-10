@@ -3,14 +3,10 @@
 
 #include <sanguis/server/damage/unit.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
-using
-damage
-=
-sanguis::server::damage::unit;
+using damage = sanguis::server::damage::unit;
 
 }
 

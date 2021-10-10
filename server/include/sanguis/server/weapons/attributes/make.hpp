@@ -8,40 +8,19 @@
 #include <sanguis/server/weapons/attributes/basic_impl.hpp>
 #include <fcppt/optional/map.hpp>
 
-
 namespace sanguis::server::weapons::attributes
 {
 
-template<
-	typename Attribute
->
-sanguis::weapon_attribute
-make(
-	sanguis::weapon_attribute_type const _type,
-	sanguis::server::weapons::attributes::basic<
-		Attribute
-	> const &_attribute
-)
+template <typename Attribute>
+sanguis::weapon_attribute make(
+    sanguis::weapon_attribute_type const _type,
+    sanguis::server::weapons::attributes::basic<Attribute> const &_attribute)
 {
-	return
-		sanguis::weapon_attribute(
-			_type,
-			sanguis::weapon_attribute_base(
-				_attribute.base().get()
-			),
-			sanguis::weapon_attribute_extra(
-				fcppt::optional::map(
-					_attribute.extra(),
-					[](
-						Attribute const _extra
-					)
-					{
-						return
-							_extra.get();
-					}
-				)
-			)
-		);
+  return sanguis::weapon_attribute(
+      _type,
+      sanguis::weapon_attribute_base(_attribute.base().get()),
+      sanguis::weapon_attribute_extra(fcppt::optional::map(
+          _attribute.extra(), [](Attribute const _extra) { return _extra.get(); })));
 }
 
 }

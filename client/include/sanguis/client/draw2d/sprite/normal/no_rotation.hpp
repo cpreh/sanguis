@@ -3,12 +3,10 @@
 
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 
-
 namespace sanguis::client::draw2d::sprite::normal
 {
 
-sanguis::client::draw2d::sprite::rotation
-no_rotation();
+sanguis::client::draw2d::sprite::rotation no_rotation();
 
 }
 

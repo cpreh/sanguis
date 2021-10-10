@@ -4,14 +4,10 @@
 #include <sanguis/optional_weapon_attribute_value_fwd.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::client::draw2d::scene::hover
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::optional_weapon_attribute_value,
-	weapon_attribute_diff
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::optional_weapon_attribute_value, weapon_attribute_diff);
 
 }
 

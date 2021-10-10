@@ -4,42 +4,22 @@
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/target.hpp>
 
-
 sanguis::server::weapons::attack::attack(
-	sanguis::server::angle const _angle,
-	sanguis::server::environment::object_ref const _environment,
-	sanguis::server::weapons::target const _target
-)
-:
-	angle_(
-		_angle
-	),
-	environment_(
-		_environment
-	),
-	target_(
-		_target
-	)
+    sanguis::server::angle const _angle,
+    sanguis::server::environment::object_ref const _environment,
+    sanguis::server::weapons::target const _target)
+    : angle_(_angle), environment_(_environment), target_(_target)
 {
 }
 
-sanguis::server::angle
-sanguis::server::weapons::attack::angle() const
+sanguis::server::angle sanguis::server::weapons::attack::angle() const { return angle_; }
+
+sanguis::server::environment::object &sanguis::server::weapons::attack::environment() const
 {
-	return
-		angle_;
+  return environment_.get();
 }
 
-sanguis::server::environment::object &
-sanguis::server::weapons::attack::environment() const
+sanguis::server::weapons::target const &sanguis::server::weapons::attack::target() const
 {
-	return
-		environment_.get();
-}
-
-sanguis::server::weapons::target const &
-sanguis::server::weapons::attack::target() const
-{
-	return
-		target_;
+  return target_;
 }

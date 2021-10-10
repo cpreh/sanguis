@@ -5,5 +5,4 @@
 #include <sge/sprite/buffers/single_decl.hpp>
 #include <sge/sprite/buffers/with_declaration_decl.hpp>
 
-
 #endif

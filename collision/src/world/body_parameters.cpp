@@ -12,94 +12,53 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::collision::world::body_parameters::body_parameters(
-	sanguis::collision::log const &_log,
-	sanguis::collision::center _center,
-	sanguis::collision::speed _speed,
-	sanguis::collision::radius _radius,
-	sanguis::collision::optional_mass _mass,
-	sanguis::collision::world::body_group const _collision_group,
-	sanguis::collision::world::body_base_ref const _body_base
-)
-:
-	log_{
-		_log.body_log()
-	},
-	center_(
-		std::move(
-			_center
-		)
-	),
-	speed_(
-		std::move(
-			_speed
-		)
-	),
-	radius_(
-		std::move(
-			_radius
-		)
-	),
-	mass_(
-		std::move(
-			_mass
-		)
-	),
-	collision_group_(
-		_collision_group
-	),
-	body_base_(
-		_body_base
-	)
+    sanguis::collision::log const &_log,
+    sanguis::collision::center _center,
+    sanguis::collision::speed _speed,
+    sanguis::collision::radius _radius,
+    sanguis::collision::optional_mass _mass,
+    sanguis::collision::world::body_group const _collision_group,
+    sanguis::collision::world::body_base_ref const _body_base)
+    : log_{_log.body_log()},
+      center_(std::move(_center)),
+      speed_(std::move(_speed)),
+      radius_(std::move(_radius)),
+      mass_(std::move(_mass)),
+      collision_group_(_collision_group),
+      body_base_(_body_base)
 {
 }
 
-fcppt::log::object &
-sanguis::collision::world::body_parameters::log() const
+fcppt::log::object &sanguis::collision::world::body_parameters::log() const { return log_.get(); }
+
+sanguis::collision::center sanguis::collision::world::body_parameters::center() const
 {
-	return
-		log_.get();
+  return center_;
 }
 
-sanguis::collision::center
-sanguis::collision::world::body_parameters::center() const
+sanguis::collision::speed sanguis::collision::world::body_parameters::speed() const
 {
-	return
-		center_;
+  return speed_;
 }
 
-sanguis::collision::speed
-sanguis::collision::world::body_parameters::speed() const
+sanguis::collision::radius sanguis::collision::world::body_parameters::radius() const
 {
-	return
-		speed_;
+  return radius_;
 }
 
-sanguis::collision::radius
-sanguis::collision::world::body_parameters::radius() const
+sanguis::collision::optional_mass sanguis::collision::world::body_parameters::mass() const
 {
-	return
-		radius_;
-}
-
-sanguis::collision::optional_mass
-sanguis::collision::world::body_parameters::mass() const
-{
-	return
-		mass_;
+  return mass_;
 }
 
 sanguis::collision::world::body_group
 sanguis::collision::world::body_parameters::collision_group() const
 {
-	return
-		collision_group_;
+  return collision_group_;
 }
 
-sanguis::collision::world::body_base &
-sanguis::collision::world::body_parameters::body_base() const
+sanguis::collision::world::body_base &sanguis::collision::world::body_parameters::body_base() const
 {
-	return
-		body_base_.get();
+  return body_base_.get();
 }

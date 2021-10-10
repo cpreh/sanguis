@@ -6,5 +6,4 @@
 #include <sanguis/messages/adapted_types/primary_weapon_type.hpp>
 #include <alda/bindings/optional.hpp>
 
-
 #endif

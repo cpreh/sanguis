@@ -5,16 +5,13 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/common/symbol.hpp>
 
-
 namespace sanguis
 {
 
 SANGUIS_COMMON_SYMBOL
-void
-update_diff_clock(
-	sanguis::diff_clock &, // NOLINT(google-runtime-references)
-	sanguis::duration const &
-);
+void update_diff_clock(
+    sanguis::diff_clock &, // NOLINT(google-runtime-references)
+    sanguis::duration const &);
 
 }
 

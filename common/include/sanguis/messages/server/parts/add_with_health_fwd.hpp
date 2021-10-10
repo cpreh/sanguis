@@ -7,23 +7,15 @@
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server::parts
 {
 
-using
-add_with_health
-=
-fcppt::mpl::list::object<
-	fcppt::record::element<
-		sanguis::messages::roles::health,
-		sanguis::messages::adapted_types::space_unit
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::max_health,
-		sanguis::messages::adapted_types::space_unit
-	>
->;
+using add_with_health = fcppt::mpl::list::object<
+    fcppt::record::
+        element<sanguis::messages::roles::health, sanguis::messages::adapted_types::space_unit>,
+    fcppt::record::element<
+        sanguis::messages::roles::max_health,
+        sanguis::messages::adapted_types::space_unit>>;
 
 }
 

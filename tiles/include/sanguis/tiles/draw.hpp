@@ -10,20 +10,17 @@
 #include <sanguis/tiles/log_fwd.hpp>
 #include <sanguis/tiles/symbol.hpp>
 
-
 namespace sanguis::tiles
 {
 
 SANGUIS_TILES_SYMBOL
-sanguis::tiles::cell_container
-draw(
-	sanguis::tiles::log const &,
-	sanguis::creator::grid const &,
-	sanguis::creator::background_grid const &,
-	sanguis::tiles::collection_ref,
-	sanguis::creator::min const &,
-	sanguis::creator::sup const &
-);
+sanguis::tiles::cell_container draw(
+    sanguis::tiles::log const &,
+    sanguis::creator::grid const &,
+    sanguis::creator::background_grid const &,
+    sanguis::tiles::collection_ref,
+    sanguis::creator::min const &,
+    sanguis::creator::sup const &);
 
 }
 

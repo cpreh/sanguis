@@ -15,59 +15,28 @@
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
 struct spread_radius
 {
-	template<
-		typename Parameters
-	>
-	static
-	void
-	make(
-		sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
-		sanguis::server::entities::enemies::difficulty const _difficulty,
-		fcppt::reference<
-			Parameters
-		> const _parameters
-	)
-	{
-		_parameters.get().extra_spread_radius(
-			-
-			std::max(
-				fcppt::optional::maybe(
-					fcppt::math::div(
-						_parameters.get().spread_radius().base().get(),
-						std::sqrt(
-							sanguis::server::weapons::modifiers::random_increase(
-								_random_generator,
-								_difficulty
-							)
-						)
-					),
-					fcppt::const_(
-						sanguis::server::weapons::spread_radius(
-							0.F
-						)
-					),
-					[](
-						sanguis::server::space_unit const _div
-					)
-					{
-						return
-							sanguis::server::weapons::spread_radius{
-								_div
-							};
-					}
-				),
-				sanguis::server::weapons::spread_radius(
-					0.F
-				)
-			)
-		);
-	}
+  template <typename Parameters>
+  static void make(
+      sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
+      sanguis::server::entities::enemies::difficulty const _difficulty,
+      fcppt::reference<Parameters> const _parameters)
+  {
+    _parameters.get().extra_spread_radius(-std::max(
+        fcppt::optional::maybe(
+            fcppt::math::div(
+                _parameters.get().spread_radius().base().get(),
+                std::sqrt(sanguis::server::weapons::modifiers::random_increase(
+                    _random_generator, _difficulty))),
+            fcppt::const_(sanguis::server::weapons::spread_radius(0.F)),
+            [](sanguis::server::space_unit const _div)
+            { return sanguis::server::weapons::spread_radius{_div}; }),
+        sanguis::server::weapons::spread_radius(0.F)));
+  }
 };
 
 }

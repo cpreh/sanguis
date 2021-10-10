@@ -5,17 +5,11 @@
 #include <sanguis/messages/adapted_types/primary_weapon_type_fwd.hpp>
 #include <alda/bindings/optional_decl.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-optional_primary_weapon_type
-=
-alda::bindings::optional<
-	sanguis::primary_weapon_type,
-	sanguis::messages::adapted_types::primary_weapon_type
->;
+using optional_primary_weapon_type = alda::bindings::
+    optional<sanguis::primary_weapon_type, sanguis::messages::adapted_types::primary_weapon_type>;
 
 }
 

@@ -5,15 +5,12 @@
 #include <sanguis/tools/libmergeimage/impl/cell_size.hpp>
 #include <sge/image/size_type.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
-sge::image::size_type
-best_size(
-	sanguis::tools::libmergeimage::count_type,
-	sanguis::tools::libmergeimage::impl::cell_size const &
-);
+sge::image::size_type best_size(
+    sanguis::tools::libmergeimage::count_type,
+    sanguis::tools::libmergeimage::impl::cell_size const &);
 
 }
 

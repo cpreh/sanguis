@@ -12,61 +12,24 @@
 #include <fcppt/math/div.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
 sanguis::server::ai::behavior::attack_health::attack_health(
-	sanguis::server::ai::context_ref const _context,
-	sanguis::server::ai::sight_range const _sight_range,
-	sanguis::server::ai::speed_factor const _speed_factor
-)
-:
-	sanguis::server::ai::behavior::attack{
-		_context,
-		_sight_range
-	},
-	speed_factor_{
-		_speed_factor
-	}
+    sanguis::server::ai::context_ref const _context,
+    sanguis::server::ai::sight_range const _sight_range,
+    sanguis::server::ai::speed_factor const _speed_factor)
+    : sanguis::server::ai::behavior::attack{_context, _sight_range}, speed_factor_{_speed_factor}
 {
 }
 
-sanguis::server::ai::behavior::attack_health::~attack_health()
-= default;
+sanguis::server::ai::behavior::attack_health::~attack_health() = default;
 
-sanguis::server::ai::speed_factor
-sanguis::server::ai::behavior::attack_health::speed_factor() const
+sanguis::server::ai::speed_factor sanguis::server::ai::behavior::attack_health::speed_factor() const
 {
-	return
-		speed_factor_
-		+
-		fcppt::strong_typedef_construct_cast<
-			sanguis::server::ai::speed_factor,
-			fcppt::cast::size_fun
-		>(
-			fcppt::optional::maybe(
-				fcppt::math::div(
-					this->me().current_health().get(),
-					this->me().max_health().get()
-				),
-				fcppt::const_(
-					fcppt::literal<
-						sanguis::server::space_unit
-					>(
-						1.0F
-					)
-				),
-				[](
-					sanguis::server::space_unit const _ratio
-				)
-				{
-					return
-						fcppt::literal<
-							sanguis::server::space_unit
-						>(
-							1.0F
-						)
-						-
-						_ratio;
-				}
-			)
-		);
+  return speed_factor_ +
+         fcppt::strong_typedef_construct_cast<
+             sanguis::server::ai::speed_factor,
+             fcppt::cast::size_fun>(fcppt::optional::maybe(
+             fcppt::math::div(this->me().current_health().get(), this->me().max_health().get()),
+             fcppt::const_(fcppt::literal<sanguis::server::space_unit>(1.0F)),
+             [](sanguis::server::space_unit const _ratio)
+             { return fcppt::literal<sanguis::server::space_unit>(1.0F) - _ratio; }));
 }

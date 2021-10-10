@@ -4,16 +4,10 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::collision::world
 {
 
-using
-body_base_ref
-=
-fcppt::reference<
-	sanguis::collision::world::body_base
->;
+using body_base_ref = fcppt::reference<sanguis::collision::world::body_base>;
 
 }
 

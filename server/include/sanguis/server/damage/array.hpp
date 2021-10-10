@@ -5,5 +5,4 @@
 #include <sanguis/server/damage/basic_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 
-
 #endif

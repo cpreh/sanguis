@@ -5,17 +5,12 @@
 #include <sanguis/messages/types/opening_count_array_fwd.hpp>
 #include <alda/bindings/enum_array_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-opening_count_array
-=
-alda::bindings::enum_array<
-	sanguis::messages::types::opening_count_array,
-	sanguis::messages::adapted_types::size
->;
+using opening_count_array = alda::bindings::enum_array<
+    sanguis::messages::types::opening_count_array,
+    sanguis::messages::adapted_types::size>;
 
 }
 

@@ -16,85 +16,39 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::collision::world
 {
 
 class object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 protected:
-	object();
+  object();
+
 public:
-	virtual
-	~object();
+  virtual ~object();
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::world::body_unique_ptr
-	create_body(
-		sanguis::collision::world::body_parameters const &
-	)
-	= 0;
+  [[nodiscard]] virtual sanguis::collision::world::body_unique_ptr
+  create_body(sanguis::collision::world::body_parameters const &) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::world::body_enter_container
-	activate_body(
-		fcppt::reference<
-			sanguis::collision::world::body
-		>,
-		sanguis::collision::world::created
-	)
-	= 0;
+  [[nodiscard]] virtual sanguis::collision::world::body_enter_container activate_body(
+      fcppt::reference<sanguis::collision::world::body>, sanguis::collision::world::created) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::world::body_exit_container
-	deactivate_body(
-		fcppt::reference<
-			sanguis::collision::world::body
-		>
-	)
-	= 0;
+  [[nodiscard]] virtual sanguis::collision::world::body_exit_container
+      deactivate_body(fcppt::reference<sanguis::collision::world::body>) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::world::ghost_unique_ptr
-	create_ghost(
-		sanguis::collision::world::ghost_parameters const &
-	)
-	= 0;
+  [[nodiscard]] virtual sanguis::collision::world::ghost_unique_ptr
+  create_ghost(sanguis::collision::world::ghost_parameters const &) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::world::body_enter_container
-	activate_ghost(
-		fcppt::reference<
-			sanguis::collision::world::ghost
-		>
-	)
-	= 0;
+  [[nodiscard]] virtual sanguis::collision::world::body_enter_container
+      activate_ghost(fcppt::reference<sanguis::collision::world::ghost>) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::world::body_exit_container
-	deactivate_ghost(
-		fcppt::reference<
-			sanguis::collision::world::ghost
-		>
-	)
-	= 0;
+  [[nodiscard]] virtual sanguis::collision::world::body_exit_container
+      deactivate_ghost(fcppt::reference<sanguis::collision::world::ghost>) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::world::update_result
-	update(
-		sanguis::collision::duration
-	)
-	= 0;
+  [[nodiscard]] virtual sanguis::collision::world::update_result
+      update(sanguis::collision::duration) = 0;
 };
 
 }

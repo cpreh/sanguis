@@ -6,5 +6,4 @@
 #include <sanguis/messages/adapted_types/unsigned.hpp>
 #include <alda/bindings/strong_typedef.hpp>
 
-
 #endif

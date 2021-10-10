@@ -13,63 +13,47 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
 class global_parameters
 {
 public:
-	global_parameters(
-		std::filesystem::path &&,
-		sanguis::client::load::resource::textures_cref,
-		sanguis::client::load::resource::sounds_cref,
-		sanguis::model::cell_size,
-		sanguis::model::optional_animation_delay,
-		sanguis::model::optional_image_name &&
-	);
+  global_parameters(
+      std::filesystem::path &&,
+      sanguis::client::load::resource::textures_cref,
+      sanguis::client::load::resource::sounds_cref,
+      sanguis::model::cell_size,
+      sanguis::model::optional_animation_delay,
+      sanguis::model::optional_image_name &&);
 
-	[[nodiscard]]
-	std::filesystem::path const &
-	path() const;
+  [[nodiscard]] std::filesystem::path const &path() const;
 
-	[[nodiscard]]
-	sanguis::client::load::resource::textures const &
-	textures() const;
+  [[nodiscard]] sanguis::client::load::resource::textures const &textures() const;
 
-	[[nodiscard]]
-	sanguis::client::load::resource::sounds const &
-	sounds() const;
+  [[nodiscard]] sanguis::client::load::resource::sounds const &sounds() const;
 
-	[[nodiscard]]
-	sanguis::model::cell_size const &
-	cell_size() const;
+  [[nodiscard]] sanguis::model::cell_size const &cell_size() const;
 
-	[[nodiscard]]
-	sanguis::model::optional_animation_delay const &
-	delay() const;
+  [[nodiscard]] sanguis::model::optional_animation_delay const &delay() const;
 
-	[[nodiscard]]
-	sanguis::model::optional_image_name const &
-	image() const;
+  [[nodiscard]] sanguis::model::optional_image_name const &image() const;
 
-	[[nodiscard]]
-	sanguis::client::load::model::global_parameters
-	new_image(
-		sanguis::model::optional_image_name &&
-	) const;
+  [[nodiscard]] sanguis::client::load::model::global_parameters
+  new_image(sanguis::model::optional_image_name &&) const;
+
 private:
-	std::filesystem::path path_;
+  std::filesystem::path path_;
 
-	sanguis::client::load::resource::textures_cref textures_;
+  sanguis::client::load::resource::textures_cref textures_;
 
-	sanguis::client::load::resource::sounds_cref sounds_;
+  sanguis::client::load::resource::sounds_cref sounds_;
 
-	sanguis::model::cell_size cell_size_;
+  sanguis::model::cell_size cell_size_;
 
-	sanguis::model::optional_animation_delay delay_;
+  sanguis::model::optional_animation_delay delay_;
 
-	sanguis::model::optional_image_name image_;
+  sanguis::model::optional_image_name image_;
 };
 
 }

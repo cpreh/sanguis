@@ -8,18 +8,15 @@
 #include <sanguis/server/world/object_unique_ptr.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
 
-
 namespace sanguis::server::world
 {
 
-sanguis::server::world::object_unique_ptr
-generate(
-	sanguis::server::world::parameters const &,
-	sanguis::world_id,
-	sanguis::world_name &&,
-	sanguis::server::world::difficulty,
-	sanguis::creator::top_parameters const &
-);
+sanguis::server::world::object_unique_ptr generate(
+    sanguis::server::world::parameters const &,
+    sanguis::world_id,
+    sanguis::world_name &&,
+    sanguis::server::world::difficulty,
+    sanguis::creator::top_parameters const &);
 
 }
 

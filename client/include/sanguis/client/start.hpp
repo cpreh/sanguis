@@ -5,15 +5,11 @@
 #include <sanguis/client/args/result_fwd.hpp>
 #include <awl/main/exit_code.hpp>
 
-
 namespace sanguis::client
 {
 
 SANGUIS_CLIENT_SYMBOL
-awl::main::exit_code
-start(
-	sanguis::client::args::result const &
-);
+awl::main::exit_code start(sanguis::client::args::result const &);
 
 }
 

@@ -3,14 +3,10 @@
 
 #include <sge/image2d/store/rgba8_fwd.hpp>
 
-
 namespace sanguis::tools::libmergeimage
 {
 
-using
-image_store
-=
-sge::image2d::store::rgba8;
+using image_store = sge::image2d::store::rgba8;
 
 }
 

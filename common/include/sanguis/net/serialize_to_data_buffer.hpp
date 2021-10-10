@@ -8,37 +8,20 @@
 #include <alda/serialization/length/serialize.hpp>
 #include <fcppt/make_ref.hpp>
 
-
 namespace sanguis::net
 {
 
-template<
-	typename AldaType
->
-void
-serialize_to_data_buffer(
-	alda::message::base<
-		AldaType
-	> const &_message,
-	sanguis::net::data_buffer &_buffer // NOLINT(google-runtime-references)
-) // NOLINT(google-runtime-references)
+template <typename AldaType>
+void serialize_to_data_buffer(
+    alda::message::base<AldaType> const &_message,
+    sanguis::net::data_buffer &_buffer // NOLINT(google-runtime-references)
+    ) // NOLINT(google-runtime-references)
 {
-	sanguis::net::data_streambuf stream_buf(
-		fcppt::make_ref(
-			_buffer
-		)
-	);
+  sanguis::net::data_streambuf stream_buf(fcppt::make_ref(_buffer));
 
-	alda::serialization::ostream stream(
-		&stream_buf
-	);
+  alda::serialization::ostream stream(&stream_buf);
 
-	alda::serialization::length::serialize<
-		sanguis::net::message_header
-	>(
-		stream,
-		_message
-	);
+  alda::serialization::length::serialize<sanguis::net::message_header>(stream, _message);
 }
 
 }

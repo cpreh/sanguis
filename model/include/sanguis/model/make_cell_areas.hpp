@@ -7,17 +7,14 @@
 #include <sanguis/model/image_size_fwd.hpp>
 #include <sanguis/model/symbol.hpp>
 
-
 namespace sanguis::model
 {
 
 SANGUIS_MODEL_SYMBOL
-sanguis::model::cell_area_container
-make_cell_areas(
-	sanguis::model::image_size const &,
-	sanguis::model::cell_size const &,
-	sanguis::model::animation_range
-);
+sanguis::model::cell_area_container make_cell_areas(
+    sanguis::model::image_size const &,
+    sanguis::model::cell_size const &,
+    sanguis::model::animation_range);
 
 }
 

@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-using
-optional_base_ref
-=
-fcppt::optional::reference<
-	sanguis::server::entities::base
->;
+using optional_base_ref = fcppt::optional::reference<sanguis::server::entities::base>;
 
 }
 

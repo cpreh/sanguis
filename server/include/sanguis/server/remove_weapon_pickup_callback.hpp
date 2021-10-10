@@ -4,18 +4,11 @@
 #include <sanguis/server/entities/pickups/weapon_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-remove_weapon_pickup_callback
-=
-fcppt::function<
-	void (
-		sanguis::server::entities::pickups::weapon &
-	)
->;
+using remove_weapon_pickup_callback =
+    fcppt::function<void(sanguis::server::entities::pickups::weapon &)>;
 
 }
 

@@ -11,28 +11,19 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-available_perks
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::available_perks
-	>,
-	alda::bindings::record_variadic<
-		fcppt::record::element<
-			sanguis::messages::roles::perk_tree,
-			sanguis::messages::adapted_types::perk_tree
-		>,
-		fcppt::record::element<
-			sanguis::messages::roles::remaining_perk_levels,
-			sanguis::messages::adapted_types::level
-		>
-	>
->;
+using available_perks = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::available_perks>,
+    alda::bindings::record_variadic<
+        fcppt::record::element<
+            sanguis::messages::roles::perk_tree,
+            sanguis::messages::adapted_types::perk_tree>,
+        fcppt::record::element<
+            sanguis::messages::roles::remaining_perk_levels,
+            sanguis::messages::adapted_types::level>>>;
 
 }
 

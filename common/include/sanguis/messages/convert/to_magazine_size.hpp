@@ -5,15 +5,11 @@
 #include <sanguis/common/symbol.hpp>
 #include <sanguis/messages/types/magazine_size.hpp>
 
-
 namespace sanguis::messages::convert
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::messages::types::magazine_size
-to_magazine_size(
-	sanguis::magazine_type
-);
+sanguis::messages::types::magazine_size to_magazine_size(sanguis::magazine_type);
 
 }
 

@@ -4,14 +4,11 @@
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
-
 namespace sanguis::server::entities::property
 {
 
 sanguis::server::entities::property::initial
-initial_zero(
-	sanguis::server::entities::property::value
-);
+    initial_zero(sanguis::server::entities::property::value);
 
 }
 

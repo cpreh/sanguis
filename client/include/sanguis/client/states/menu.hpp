@@ -25,7 +25,6 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::states
 {
 
@@ -33,91 +32,43 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
 class menu
-:
-	public boost::statechart::state<
-		sanguis::client::states::menu,
-		sanguis::client::machine
-	>
+    : public boost::statechart::state<sanguis::client::states::menu, sanguis::client::machine>
 {
-	FCPPT_NONMOVABLE(
-		menu
-	);
+  FCPPT_NONMOVABLE(menu);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list6<
-		boost::statechart::custom_reaction<
-			sanguis::client::events::tick
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::render
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::message
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::connected
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::net_error
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::input
-		>
-	>;
+  using reactions = boost::mpl::list6<
+      boost::statechart::custom_reaction<sanguis::client::events::tick>,
+      boost::statechart::custom_reaction<sanguis::client::events::render>,
+      boost::statechart::custom_reaction<sanguis::client::events::message>,
+      boost::statechart::custom_reaction<sanguis::client::events::connected>,
+      boost::statechart::custom_reaction<sanguis::client::events::net_error>,
+      boost::statechart::custom_reaction<sanguis::client::events::input>>;
 
-	explicit
-	menu(
-		my_context
-	);
+  explicit menu(my_context);
 
-	~menu()
-	SANGUIS_STATE_OVERRIDE;
+  ~menu() SANGUIS_STATE_OVERRIDE;
 
-	using
-	result_type
-	=
-	sanguis::messages::call::result;
+  using result_type = sanguis::messages::call::result;
 
-	boost::statechart::result
-	react(
-		sanguis::client::events::tick const &
-	);
+  boost::statechart::result react(sanguis::client::events::tick const &);
 
-	boost::statechart::result
-	react(
-		sanguis::client::events::render const &
-	);
+  boost::statechart::result react(sanguis::client::events::render const &);
 
-	boost::statechart::result
-	react(
-		sanguis::client::events::message const &
-	);
+  boost::statechart::result react(sanguis::client::events::message const &);
 
-	boost::statechart::result
-	react(
-		sanguis::client::events::connected const &
-	);
+  boost::statechart::result react(sanguis::client::events::connected const &);
 
-	boost::statechart::result
-	react(
-		sanguis::client::events::net_error const &
-	);
+  boost::statechart::result react(sanguis::client::events::net_error const &);
 
-	boost::statechart::result
-	react(
-		sanguis::client::events::input const &
-	);
+  boost::statechart::result react(sanguis::client::events::input const &);
 
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::connected const &
-	);
+  sanguis::messages::call::result operator()(sanguis::messages::server::connected const &);
+
 private:
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 
-	sanguis::client::gui::menu::object menu_;
+  sanguis::client::gui::menu::object menu_;
 };
 
 FCPPT_PP_POP_WARNING

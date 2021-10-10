@@ -33,226 +33,93 @@
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::environment
 {
 
 class object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 protected:
-	object();
+  object();
+
 public:
-	[[nodiscard]]
-	virtual
-	sanguis::server::entities::optional_base_ref
-	insert(
-		sanguis::server::entities::with_id_unique_ptr &&,
-		sanguis::server::entities::insert_parameters const &
-	)
-	= 0;
+  [[nodiscard]] virtual sanguis::server::entities::optional_base_ref insert(
+      sanguis::server::entities::with_id_unique_ptr &&,
+      sanguis::server::entities::insert_parameters const &) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::entities::optional_base_ref
-	insert(
-		sanguis::server::entities::simple_unique_ptr &&,
-		sanguis::server::entities::insert_parameters const &
-	)
-	= 0;
+  [[nodiscard]] virtual sanguis::server::entities::optional_base_ref insert(
+      sanguis::server::entities::simple_unique_ptr &&,
+      sanguis::server::entities::insert_parameters const &) = 0;
 
-	virtual
-	void
-	add_aura(
-		sanguis::entity_id,
-		sanguis::aura_type
-	) = 0;
+  virtual void add_aura(sanguis::entity_id, sanguis::aura_type) = 0;
 
-	virtual
-	void
-	add_buff(
-		sanguis::entity_id,
-		sanguis::buff_type
-	) = 0;
+  virtual void add_buff(sanguis::entity_id, sanguis::buff_type) = 0;
 
-	virtual
-	void
-	remove_buff(
-		sanguis::entity_id,
-		sanguis::buff_type
-	) = 0;
+  virtual void remove_buff(sanguis::entity_id, sanguis::buff_type) = 0;
 
-	virtual
-	void
-	weapon_changed(
-		sanguis::entity_id,
-		sanguis::optional_primary_weapon_type
-	) = 0;
+  virtual void weapon_changed(sanguis::entity_id, sanguis::optional_primary_weapon_type) = 0;
 
-	virtual
-	void
-	got_weapon(
-		sanguis::server::player_id,
-		sanguis::weapon_description const &
-	) = 0;
+  virtual void got_weapon(sanguis::server::player_id, sanguis::weapon_description const &) = 0;
 
-	virtual
-	void
-	remove_weapon(
-		sanguis::server::player_id,
-		sanguis::is_primary_weapon
-	) = 0;
+  virtual void remove_weapon(sanguis::server::player_id, sanguis::is_primary_weapon) = 0;
 
-	virtual
-	void
-	magazine_remaining(
-		sanguis::server::player_id,
-		sanguis::is_primary_weapon,
-		sanguis::magazine_remaining
-	) = 0;
+  virtual void magazine_remaining(
+      sanguis::server::player_id, sanguis::is_primary_weapon, sanguis::magazine_remaining) = 0;
 
-	virtual
-	void
-	reload_time(
-		sanguis::server::player_id,
-		sanguis::is_primary_weapon,
-		sanguis::duration
-	) = 0;
+  virtual void
+      reload_time(sanguis::server::player_id, sanguis::is_primary_weapon, sanguis::duration) = 0;
 
-	virtual
-	void
-	angle_changed(
-		sanguis::entity_id,
-		sanguis::server::angle
-	) = 0;
+  virtual void angle_changed(sanguis::entity_id, sanguis::server::angle) = 0;
 
-	virtual
-	void
-	center_changed(
-		sanguis::entity_id,
-		sanguis::server::center
-	) = 0;
+  virtual void center_changed(sanguis::entity_id, sanguis::server::center) = 0;
 
-	virtual
-	void
-	speed_changed(
-		sanguis::entity_id,
-		sanguis::server::speed
-	) = 0;
+  virtual void speed_changed(sanguis::entity_id, sanguis::server::speed) = 0;
 
-	virtual
-	void
-	weapon_status_changed(
-		sanguis::entity_id,
-		sanguis::weapon_status
-	) = 0;
+  virtual void weapon_status_changed(sanguis::entity_id, sanguis::weapon_status) = 0;
 
-	virtual
-	void
-	health_changed(
-		sanguis::entity_id,
-		sanguis::server::health
-	) = 0;
+  virtual void health_changed(sanguis::entity_id, sanguis::server::health) = 0;
 
-	virtual
-	void
-	max_health_changed(
-		sanguis::entity_id,
-		sanguis::server::health
-	) = 0;
+  virtual void max_health_changed(sanguis::entity_id, sanguis::server::health) = 0;
 
-	virtual
-	void
-	exp_changed(
-		sanguis::server::player_id,
-		sanguis::server::exp
-	) = 0;
+  virtual void exp_changed(sanguis::server::player_id, sanguis::server::exp) = 0;
 
-	virtual
-	void
-	level_changed(
-		sanguis::server::player_id,
-		sanguis::server::level
-	) = 0;
+  virtual void level_changed(sanguis::server::player_id, sanguis::server::level) = 0;
 
-	virtual
-	void
-	pickup_chance(
-		sanguis::server::pickup_probability,
-		sanguis::server::entities::enemies::difficulty,
-		sanguis::server::center
-	) = 0;
+  virtual void pickup_chance(
+      sanguis::server::pickup_probability,
+      sanguis::server::entities::enemies::difficulty,
+      sanguis::server::center) = 0;
 
-	virtual
-	void
-	add_sight_range(
-		sanguis::server::player_id,
-		sanguis::server::entities::with_id const &,
-		sanguis::collision::world::created
-	) = 0;
+  virtual void add_sight_range(
+      sanguis::server::player_id,
+      sanguis::server::entities::with_id const &,
+      sanguis::collision::world::created) = 0;
 
-	virtual
-	void
-	remove_sight_range(
-		sanguis::server::player_id,
-		sanguis::server::entities::with_id const &
-	) = 0;
+  virtual void
+  remove_sight_range(sanguis::server::player_id, sanguis::server::entities::with_id const &) = 0;
 
-	virtual
-	void
-	remove_player(
-		sanguis::server::player_id
-	) = 0;
+  virtual void remove_player(sanguis::server::player_id) = 0;
 
-	virtual
-	void
-	request_transfer(
-		sanguis::entity_id
-	) = 0;
+  virtual void request_transfer(sanguis::entity_id) = 0;
 
-	virtual
-	void
-	add_portal_blocker() = 0;
+  virtual void add_portal_blocker() = 0;
 
-	virtual
-	void
-	remove_portal_blocker() = 0;
+  virtual void remove_portal_blocker() = 0;
 
-	virtual
-	void
-	player_insertion(
-		sanguis::server::player_id
-	) = 0;
+  virtual void player_insertion(sanguis::server::player_id) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::world::difficulty
-	difficulty() const = 0;
+  [[nodiscard]] virtual sanguis::server::world::difficulty difficulty() const = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::log const &
-	collision_log() const = 0;
+  [[nodiscard]] virtual sanguis::collision::log const &collision_log() const = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::world::object &
-	collision_world() const = 0;
+  [[nodiscard]] virtual sanguis::collision::world::object &collision_world() const = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::creator::grid const &
-	grid() const = 0;
+  [[nodiscard]] virtual sanguis::creator::grid const &grid() const = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::environment::load_context &
-	load_context() const = 0;
+  [[nodiscard]] virtual sanguis::server::environment::load_context &load_context() const = 0;
 
-	virtual
-	~object();
+  virtual ~object();
 };
 
 }

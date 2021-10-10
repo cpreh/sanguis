@@ -6,16 +6,11 @@
 #include <sanguis/client/weapon_pair_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_diff.hpp>
 
-
 namespace sanguis::client::draw2d::scene::hover
 {
 
-sanguis::client::draw2d::scene::hover::weapon_attribute_diff
-compare_weapons(
-	sanguis::weapon_type,
-	sanguis::weapon_attribute const &,
-	sanguis::client::weapon_pair const &
-);
+sanguis::client::draw2d::scene::hover::weapon_attribute_diff compare_weapons(
+    sanguis::weapon_type, sanguis::weapon_attribute const &, sanguis::client::weapon_pair const &);
 
 }
 

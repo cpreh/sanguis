@@ -4,16 +4,10 @@
 #include <sanguis/duration.hpp>
 #include <sge/timer/clocks/delta_fwd.hpp>
 
-
 namespace sanguis
 {
 
-using
-diff_clock
-=
-sge::timer::clocks::delta<
-	sanguis::duration
->;
+using diff_clock = sge::timer::clocks::delta<sanguis::duration>;
 
 }
 

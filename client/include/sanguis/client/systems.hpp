@@ -11,5 +11,4 @@
 #include <sge/systems/with_renderer.hpp>
 #include <sge/systems/with_window.hpp>
 
-
 #endif

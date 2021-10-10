@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis
 {
 
-using
-string_vector
-=
-std::vector<
-	fcppt::string
->;
+using string_vector = std::vector<fcppt::string>;
 
 }
 

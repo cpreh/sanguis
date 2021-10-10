@@ -5,17 +5,12 @@
 #include <sanguis/messages/roles/aura_type_container.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server::parts
 {
 
-using
-add_with_auras
-=
-fcppt::record::element<
-	sanguis::messages::roles::aura_type_container,
-	sanguis::messages::adapted_types::aura_type_vector
->;
+using add_with_auras = fcppt::record::element<
+    sanguis::messages::roles::aura_type_container,
+    sanguis::messages::adapted_types::aura_type_vector>;
 
 }
 

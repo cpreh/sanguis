@@ -10,37 +10,31 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
 class animation
 {
-	FCPPT_NONMOVABLE(
-		animation
-	);
+  FCPPT_NONMOVABLE(animation);
+
 public:
-	animation(
-		fcppt::log::object &, // NOLINT(google-runtime-references)
-		sanguis::model::animation const &,
-		sanguis::client::load::model::global_parameters const &
-	);
+  animation(
+      fcppt::log::object &, // NOLINT(google-runtime-references)
+      sanguis::model::animation const &,
+      sanguis::client::load::model::global_parameters const &);
 
-	~animation();
+  ~animation();
 
-	[[nodiscard]]
-	sanguis::client::load::resource::animation::series const &
-	series() const;
+  [[nodiscard]] sanguis::client::load::resource::animation::series const &series() const;
 
-	[[nodiscard]]
-	sanguis::client::load::resource::optional_sound const &
-	sound() const;
+  [[nodiscard]] sanguis::client::load::resource::optional_sound const &sound() const;
+
 private:
-	sge::texture::part const &texture_;
+  sge::texture::part const &texture_;
 
-	sanguis::client::load::resource::animation::series const series_;
+  sanguis::client::load::resource::animation::series const series_;
 
-	sanguis::client::load::resource::optional_sound const sound_;
+  sanguis::client::load::resource::optional_sound const sound_;
 };
 
 }

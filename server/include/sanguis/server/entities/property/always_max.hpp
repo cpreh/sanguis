@@ -10,56 +10,33 @@
 #include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
 
-
 namespace sanguis::server::entities::property
 {
 
-class always_max
-:
-	public sanguis::server::entities::property::base
+class always_max : public sanguis::server::entities::property::base
 {
-	FCPPT_NONCOPYABLE(
-		always_max
-	);
+  FCPPT_NONCOPYABLE(always_max);
+
 public:
-	explicit
-	always_max(
-		sanguis::server::entities::property::value
-	);
+  explicit always_max(sanguis::server::entities::property::value);
 
-	always_max(
-		always_max &&
-	)
-	noexcept;
+  always_max(always_max &&) noexcept;
 
-	always_max &
-	operator=(
-		always_max &&
-	)
-	noexcept;
+  always_max &operator=(always_max &&) noexcept;
 
-	~always_max()
-	override;
+  ~always_max() override;
 
-	[[nodiscard]]
-	sanguis::server::entities::property::value
-	current() const;
+  [[nodiscard]] sanguis::server::entities::property::value current() const;
 
-	[[nodiscard]]
-	fcppt::signal::auto_connection
-	register_change_callback(
-		sanguis::server::entities::property::change_callback &&
-	);
+  [[nodiscard]] fcppt::signal::auto_connection
+  register_change_callback(sanguis::server::entities::property::change_callback &&);
+
 private:
-	void
-	on_recalc_max(
-		sanguis::server::entities::property::value
-	)
-	override;
+  void on_recalc_max(sanguis::server::entities::property::value) override;
 
-	sanguis::server::entities::property::value current_;
+  sanguis::server::entities::property::value current_;
 
-	sanguis::server::entities::property::change_signal change_signal_;
+  sanguis::server::entities::property::change_signal change_signal_;
 };
 
 }

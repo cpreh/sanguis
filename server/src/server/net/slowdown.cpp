@@ -4,11 +4,5 @@
 #include <sanguis/server/net/slowdown.hpp>
 #include <sanguis/server/net/slowdown_policy.hpp>
 
-
-template
-class
-sanguis::server::net::basic_value<
-	sanguis::slowdown,
-	sanguis::server::net::slowdown_policy,
-	sanguis::clock
->;
+template class sanguis::server::net::
+    basic_value<sanguis::slowdown, sanguis::server::net::slowdown_policy, sanguis::clock>;

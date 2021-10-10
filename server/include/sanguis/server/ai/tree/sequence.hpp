@@ -7,34 +7,22 @@
 #include <sanguis/server/ai/tree/container.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::ai::tree
 {
 
-class sequence
-:
-	public sanguis::server::ai::tree::basic_sequence
+class sequence : public sanguis::server::ai::tree::basic_sequence
 {
-	FCPPT_NONMOVABLE(
-		sequence
-	);
+  FCPPT_NONMOVABLE(sequence);
+
 public:
-	explicit
-	sequence(
-		sanguis::server::ai::tree::container &&
-	);
+  explicit sequence(sanguis::server::ai::tree::container &&);
 
-	~sequence()
-	override;
+  ~sequence() override;
+
 private:
-	[[nodiscard]]
-	sanguis::server::ai::status
-	run(
-		sanguis::duration
-	)
-	override;
+  [[nodiscard]] sanguis::server::ai::status run(sanguis::duration) override;
 
-	sanguis::server::ai::tree::container::iterator current_;
+  sanguis::server::ai::tree::container::iterator current_;
 };
 
 }

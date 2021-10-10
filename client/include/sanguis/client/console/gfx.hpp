@@ -11,38 +11,30 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
-
 namespace sanguis::client::console
 {
 
 class gfx
 {
-	FCPPT_NONMOVABLE(
-		gfx
-	);
+  FCPPT_NONMOVABLE(gfx);
+
 public:
-	gfx(
-		sge::console::object_ref,
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sge::viewport::manager_ref,
-		sge::console::gfx::output_line_limit
-	);
+  gfx(sge::console::object_ref,
+      sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sge::viewport::manager_ref,
+      sge::console::gfx::output_line_limit);
 
-	~gfx();
+  ~gfx();
 
-	[[nodiscard]]
-	sge::console::gfx::object &
-	get();
+  [[nodiscard]] sge::console::gfx::object &get();
+
 private:
-	void
-	on_resize(
-		sge::renderer::target::viewport const &
-	);
+  void on_resize(sge::renderer::target::viewport const &);
 
-	sge::console::gfx::object impl_;
+  sge::console::gfx::object impl_;
 
-	fcppt::signal::auto_connection const resize_connection_;
+  fcppt::signal::auto_connection const resize_connection_;
 };
 
 }

@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

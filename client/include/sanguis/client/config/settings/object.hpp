@@ -10,43 +10,32 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::config::settings
 {
 
 class object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 public:
-	object(
-		fcppt::log::context_reference,
-		std::filesystem::path &&
-	);
+  object(fcppt::log::context_reference, std::filesystem::path &&);
 
-	~object();
+  ~object();
 
-	[[nodiscard]]
-	sge::parse::ini::start &
-	sections();
+  [[nodiscard]] sge::parse::ini::start &sections();
 
-	[[nodiscard]]
-	sge::parse::ini::start const &
-	sections() const;
+  [[nodiscard]] sge::parse::ini::start const &sections() const;
 
-	void
-	save() const;
+  void save() const;
 
-	[[nodiscard]]
-	fcppt::log::object &
-	log() const;
+  [[nodiscard]] fcppt::log::object &log() const;
+
 private:
-	mutable fcppt::log::object log_;
+  mutable fcppt::log::object log_;
 
-	std::filesystem::path const path_;
+  std::filesystem::path const path_;
 
-	sge::parse::ini::start start_;
+  sge::parse::ini::start start_;
 };
 
 }

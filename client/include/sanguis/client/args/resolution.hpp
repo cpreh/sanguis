@@ -4,14 +4,10 @@
 #include <sanguis/client/args/optional_resolution.hpp>
 #include <sanguis/client/args/result_fwd.hpp>
 
-
 namespace sanguis::client::args
 {
 
-sanguis::client::args::optional_resolution
-resolution(
-	sanguis::client::args::result const &
-);
+sanguis::client::args::optional_resolution resolution(sanguis::client::args::result const &);
 
 }
 

@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::client::perk::level,
-	required_parent_level
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::client::perk::level, required_parent_level);
 
 }
 

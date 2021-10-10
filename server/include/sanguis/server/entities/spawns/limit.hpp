@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::server::entities::spawns
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::server::entities::spawns::size_type,
-	limit
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::server::entities::spawns::size_type, limit);
 
 }
 

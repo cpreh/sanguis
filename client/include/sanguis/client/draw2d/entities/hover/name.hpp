@@ -5,29 +5,22 @@
 #include <sge/image/color/any/object.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::client::draw2d::entities::hover
 {
 
 class name
 {
 public:
-	name(
-		fcppt::string &&,
-		sge::image::color::any::object
-	);
+  name(fcppt::string &&, sge::image::color::any::object);
 
-	[[nodiscard]]
-	fcppt::string const &
-	text() const;
+  [[nodiscard]] fcppt::string const &text() const;
 
-	[[nodiscard]]
-	sge::image::color::any::object const &
-	color() const;
+  [[nodiscard]] sge::image::color::any::object const &color() const;
+
 private:
-	fcppt::string text_;
+  fcppt::string text_;
 
-	sge::image::color::any::object color_;
+  sge::image::color::any::object color_;
 };
 
 }

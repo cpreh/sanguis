@@ -4,16 +4,10 @@
 #include <sanguis/server/mass_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-optional_mass
-=
-fcppt::optional::object<
-	sanguis::server::mass
->;
+using optional_mass = fcppt::optional::object<sanguis::server::mass>;
 
 }
 

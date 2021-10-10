@@ -10,28 +10,13 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::model::cell_size
-sanguis::model::cell_size_from_file(
-	std::filesystem::path const &_path
-)
+sanguis::model::cell_size sanguis::model::cell_size_from_file(std::filesystem::path const &_path)
 try
 {
-	return
-		sanguis::model::impl::deserialize::cell_size(
-			sge::parse::json::parse_file_exn(
-				_path
-			).object()
-		);
+  return sanguis::model::impl::deserialize::cell_size(
+      sge::parse::json::parse_file_exn(_path).object());
 }
-catch(
-	fcppt::exception const &_error
-)
+catch (fcppt::exception const &_error)
 {
-	throw
-		sanguis::model::exception{
-			fcppt::string{
-				_error.string()
-			}
-		};
+  throw sanguis::model::exception{fcppt::string{_error.string()}};
 }

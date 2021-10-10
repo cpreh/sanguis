@@ -5,17 +5,11 @@
 #include <sanguis/messages/adapted_types/aura_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/dynamic_len_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-aura_type_vector
-=
-sanguis::messages::adapted_types::dynamic_len<
-	sanguis::aura_type_vector,
-	sanguis::messages::adapted_types::aura_type
->;
+using aura_type_vector = sanguis::messages::adapted_types::
+    dynamic_len<sanguis::aura_type_vector, sanguis::messages::adapted_types::aura_type>;
 
 }
 

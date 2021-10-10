@@ -8,16 +8,13 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
-sanguis::tools::libmergeimage::impl::cell_size
-calc_cell_size(
-	sge::image2d::system &, // NOLINT(google-runtime-references)
-	std::filesystem::path const &,
-	sanguis::tools::libmergeimage::impl::path_vector_vector const &
-);
+sanguis::tools::libmergeimage::impl::cell_size calc_cell_size(
+    sge::image2d::system &, // NOLINT(google-runtime-references)
+    std::filesystem::path const &,
+    sanguis::tools::libmergeimage::impl::path_vector_vector const &);
 
 }
 

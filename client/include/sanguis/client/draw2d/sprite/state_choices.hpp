@@ -6,5 +6,4 @@
 #include <sge/sprite/state/with_blend.hpp>
 #include <sge/sprite/state/with_rasterizer.hpp>
 
-
 #endif

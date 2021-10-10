@@ -10,73 +10,38 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::server::entities::property::always_max::always_max(
-	sanguis::server::entities::property::value const _base
-)
-:
-	sanguis::server::entities::property::base(
-		_base
-	),
-	current_(
-		_base
-	),
-	change_signal_()
+    sanguis::server::entities::property::value const _base)
+    : sanguis::server::entities::property::base(_base), current_(_base), change_signal_()
 {
 }
 
-sanguis::server::entities::property::always_max::always_max(
-	always_max &&
-)
-noexcept
-= default;
+sanguis::server::entities::property::always_max::always_max(always_max &&) noexcept = default;
 
 sanguis::server::entities::property::always_max &
-sanguis::server::entities::property::always_max::operator=(
-	always_max &&
-)
-noexcept
-= default;
+sanguis::server::entities::property::always_max::operator=(always_max &&) noexcept = default;
 
-sanguis::server::entities::property::always_max::~always_max()
-= default;
+sanguis::server::entities::property::always_max::~always_max() = default;
 
 sanguis::server::entities::property::value
 sanguis::server::entities::property::always_max::current() const
 {
-	return
-		current_;
+  return current_;
 }
 
 fcppt::signal::auto_connection
 sanguis::server::entities::property::always_max::register_change_callback(
-	sanguis::server::entities::property::change_callback &&_callback
-)
+    sanguis::server::entities::property::change_callback &&_callback)
 {
-	return
-		change_signal_.connect(
-			std::move(
-				_callback
-			)
-		);
+  return change_signal_.connect(std::move(_callback));
 }
 
-void
-sanguis::server::entities::property::always_max::on_recalc_max(
-	sanguis::server::entities::property::value const _max
-)
+void sanguis::server::entities::property::always_max::on_recalc_max(
+    sanguis::server::entities::property::value const _max)
 {
-	sanguis::server::entities::property::diff const diff(
-		_max
-		-
-		current_
-	);
+  sanguis::server::entities::property::diff const diff(_max - current_);
 
-	current_ = _max;
+  current_ = _max;
 
-	change_signal_(
-		sanguis::server::entities::property::change_event(
-			diff
-		)
-	);
+  change_signal_(sanguis::server::entities::property::change_event(diff));
 }

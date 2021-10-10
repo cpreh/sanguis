@@ -7,37 +7,24 @@
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::enemies
 {
 
-class normal
-:
-	public sanguis::server::entities::enemies::enemy
+class normal : public sanguis::server::entities::enemies::enemy
 {
-	FCPPT_NONMOVABLE(
-		normal
-	);
+  FCPPT_NONMOVABLE(normal);
+
 public:
-	explicit
-	normal(
-		sanguis::server::entities::enemies::parameters &&
-	);
+  explicit normal(sanguis::server::entities::enemies::parameters &&);
 
-	~normal()
-	override;
+  ~normal() override;
+
 private:
-	[[nodiscard]]
-	sanguis::messages::types::string const &
-	name() const
-	override;
+  [[nodiscard]] sanguis::messages::types::string const &name() const override;
 
-	[[nodiscard]]
-	sanguis::enemy_kind
-	enemy_kind() const
-	override;
+  [[nodiscard]] sanguis::enemy_kind enemy_kind() const override;
 
-	sanguis::messages::types::string const name_;
+  sanguis::messages::types::string const name_;
 };
 
 }

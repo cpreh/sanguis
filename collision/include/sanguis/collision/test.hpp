@@ -6,17 +6,14 @@
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 
-
 namespace sanguis::collision
 {
 
 SANGUIS_COLLISION_SYMBOL
-bool
-test(
-	sanguis::collision::center const &,
-	sanguis::collision::radius const &,
-	sanguis::creator::grid const &
-);
+bool test(
+    sanguis::collision::center const &,
+    sanguis::collision::radius const &,
+    sanguis::creator::grid const &);
 
 }
 

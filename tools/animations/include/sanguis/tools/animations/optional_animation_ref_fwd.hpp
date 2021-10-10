@@ -4,16 +4,10 @@
 #include <sanguis/model/animation_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
-using
-optional_animation_ref
-=
-fcppt::optional::reference<
-	sanguis::model::animation
->;
+using optional_animation_ref = fcppt::optional::reference<sanguis::model::animation>;
 
 }
 

@@ -4,16 +4,10 @@
 #include <sanguis/aura_type_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis
 {
 
-using
-optional_aura_type
-=
-fcppt::optional::object<
-	sanguis::aura_type
->;
+using optional_aura_type = fcppt::optional::object<sanguis::aura_type>;
 
 }
 

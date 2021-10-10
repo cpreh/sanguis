@@ -7,15 +7,11 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
 sanguis::tools::animations::image_file_map
-load_image_files(
-	std::filesystem::path const &,
-	sanguis::model::object const &
-);
+load_image_files(std::filesystem::path const &, sanguis::model::object const &);
 
 }
 

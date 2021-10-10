@@ -47,227 +47,115 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::states
 {
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
-class running
-:
-	public boost::statechart::state<
-		sanguis::client::states::running,
-		sanguis::client::machine,
-		sanguis::client::states::ingame
-	>
+class running : public boost::statechart::state<
+                    sanguis::client::states::running,
+                    sanguis::client::machine,
+                    sanguis::client::states::ingame>
 {
-	FCPPT_NONMOVABLE(
-		running
-	);
+  FCPPT_NONMOVABLE(running);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list6<
-		boost::statechart::custom_reaction<
-			sanguis::client::events::tick
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::render
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::overlay
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::message
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::net_error
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::client::events::input
-		>
-	>;
+  using reactions = boost::mpl::list6<
+      boost::statechart::custom_reaction<sanguis::client::events::tick>,
+      boost::statechart::custom_reaction<sanguis::client::events::render>,
+      boost::statechart::custom_reaction<sanguis::client::events::overlay>,
+      boost::statechart::custom_reaction<sanguis::client::events::message>,
+      boost::statechart::custom_reaction<sanguis::client::events::net_error>,
+      boost::statechart::custom_reaction<sanguis::client::events::input>>;
 
-	explicit
-	running(
-		my_context
-	);
+  explicit running(my_context);
 
-	~running()
-	SANGUIS_STATE_OVERRIDE;
+  ~running() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::tick const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::tick const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::render const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::render const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::overlay const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::overlay const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::message const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::message const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::net_error const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::net_error const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::client::events::input const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::client::events::input const &);
 
-	using
-	result_type
-	=
-	sanguis::messages::call::result;
+  using result_type = sanguis::messages::call::result;
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::add_console_command const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::add_console_command const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::add_own_player const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::add_own_player const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::change_world const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::change_world const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::console_print const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::console_print const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::experience const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::experience const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::give_weapon const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::give_weapon const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::level_up const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::level_up const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::magazine_remaining const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::magazine_remaining const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::pause const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::pause const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::reload const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::reload const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::remove_weapon const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::remove_weapon const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::slowdown const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::slowdown const &);
 
-	[[nodiscard]]
-	sanguis::messages::call::result
-	operator()(
-		sanguis::messages::server::unpause const &
-	);
+  [[nodiscard]] sanguis::messages::call::result
+  operator()(sanguis::messages::server::unpause const &);
 
-	[[nodiscard]]
-	sanguis::client::console::object &
-	console();
+  [[nodiscard]] sanguis::client::console::object &console();
 
-	[[nodiscard]]
-	sanguis::client::gui::hud::object &
-	hud_gui();
+  [[nodiscard]] sanguis::client::gui::hud::object &hud_gui();
 
-	[[nodiscard]]
-	sanguis::client::control::environment const &
-	control_environment() const;
+  [[nodiscard]] sanguis::client::control::environment const &control_environment() const;
 
-	void
-	update(
-		sanguis::client::events::tick const &,
-		sanguis::client::control::optional_cursor_position const &
-	);
+  void update(
+      sanguis::client::events::tick const &,
+      sanguis::client::control::optional_cursor_position const &);
+
 private:
-	void
-	handle_player_action(
-		sanguis::client::control::actions::any const &
-	);
+  void handle_player_action(sanguis::client::control::actions::any const &);
 
-	void
-	do_pause(
-		bool
-	);
+  void do_pause(bool);
 
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 
-	sanguis::client::load::hud::context hud_resources_;
+  sanguis::client::load::hud::context hud_resources_;
 
-	fcppt::unique_ptr<
-		sanguis::client::console::object
-	> const console_;
+  fcppt::unique_ptr<sanguis::client::console::object> const console_;
 
-	fcppt::unique_ptr<
-		sanguis::client::sound_manager
-	> const sound_manager_;
+  fcppt::unique_ptr<sanguis::client::sound_manager> const sound_manager_;
 
-	fcppt::unique_ptr<
-		sanguis::client::gui::hud::object
-	> const hud_;
+  fcppt::unique_ptr<sanguis::client::gui::hud::object> const hud_;
 
-	sanguis::client::draw::base_unique_ptr const drawer_;
+  sanguis::client::draw::base_unique_ptr const drawer_;
 
-	fcppt::unique_ptr<
-		sanguis::client::control::input_translator
-	> const input_translator_;
+  fcppt::unique_ptr<sanguis::client::control::input_translator> const input_translator_;
 
-	sanguis::slowdown slowdown_;
+  sanguis::slowdown slowdown_;
 };
 
 FCPPT_PP_POP_WARNING

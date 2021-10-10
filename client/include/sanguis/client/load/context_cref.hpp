@@ -4,16 +4,10 @@
 #include <sanguis/client/load/context_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::load
 {
 
-using
-context_cref
-=
-fcppt::reference<
-	sanguis::client::load::context const
->;
+using context_cref = fcppt::reference<sanguis::client::load::context const>;
 
 }
 

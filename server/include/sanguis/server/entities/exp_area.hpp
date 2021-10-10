@@ -20,71 +20,41 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class exp_area
-:
-	public virtual sanguis::server::entities::with_ghosts,
-	public sanguis::server::entities::simple,
-	private sanguis::server::collision::ghost_base,
-	private sanguis::server::entities::center_ghost
+class exp_area : public virtual sanguis::server::entities::with_ghosts,
+                 public sanguis::server::entities::simple,
+                 private sanguis::server::collision::ghost_base,
+                 private sanguis::server::entities::center_ghost
 {
-	FCPPT_NONMOVABLE(
-		exp_area
-	);
+  FCPPT_NONMOVABLE(exp_area);
+
 public:
-	explicit
-	exp_area(
-		sanguis::server::exp
-	);
+  explicit exp_area(sanguis::server::exp);
 
-	~exp_area()
-	override;
+  ~exp_area() override;
+
 private:
-	void
-	remove_from_game()
-	override;
+  void remove_from_game() override;
 
-	[[nodiscard]]
-	bool
-	dead() const
-	override;
+  [[nodiscard]] bool dead() const override;
 
-	[[nodiscard]]
-	boost::logic::tribool
-	can_collide_with(
-		sanguis::collision::world::body_base const &
-	) const
-	override;
+  [[nodiscard]] boost::logic::tribool
+  can_collide_with(sanguis::collision::world::body_base const &) const override;
 
-	void
-	on_body_enter(
-		sanguis::collision::world::body_base_ref,
-		sanguis::collision::world::created
-	)
-	override;
+  void on_body_enter(
+      sanguis::collision::world::body_base_ref, sanguis::collision::world::created) override;
 
-	void
-	on_body_exit(
-		sanguis::collision::world::body_base &
-	)
-	override;
+  void on_body_exit(sanguis::collision::world::body_base &) override;
 
-	sanguis::server::exp const exp_;
+  sanguis::server::exp const exp_;
 
-	using
-	weak_link_map
-	=
-	std::unordered_map<
-		fcppt::reference<
-			sanguis::server::entities::player
-		>,
-		sanguis::server::entities::auto_weak_link
-	>;
+  using weak_link_map = std::unordered_map<
+      fcppt::reference<sanguis::server::entities::player>,
+      sanguis::server::entities::auto_weak_link>;
 
-	weak_link_map player_links_;
+  weak_link_map player_links_;
 };
 
 }

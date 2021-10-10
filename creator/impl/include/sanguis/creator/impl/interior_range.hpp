@@ -12,44 +12,17 @@
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/fill.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
-template<
-	typename Grid
->
-fcppt::container::grid::pos_ref_range<
-	Grid
->
-interior_range(
-	fcppt::reference<
-		Grid
-	> const _grid
-)
+template <typename Grid>
+fcppt::container::grid::pos_ref_range<Grid> interior_range(fcppt::reference<Grid> const _grid)
 {
-	return
-		fcppt::container::grid::make_pos_ref_range_start_end(
-			_grid.get(),
-			sanguis::creator::min{
-				fcppt::math::vector::fill<
-					sanguis::creator::pos
-				>(
-					1
-				)
-			},
-			sanguis::creator::sup{
-				fcppt::math::dim::to_vector(
-					_grid.get().size()
-					-
-					fcppt::math::dim::fill<
-						sanguis::creator::dim
-					>(
-						1U
-					)
-				)
-			}
-		);
+  return fcppt::container::grid::make_pos_ref_range_start_end(
+      _grid.get(),
+      sanguis::creator::min{fcppt::math::vector::fill<sanguis::creator::pos>(1)},
+      sanguis::creator::sup{fcppt::math::dim::to_vector(
+          _grid.get().size() - fcppt::math::dim::fill<sanguis::creator::dim>(1U))});
 }
 
 }

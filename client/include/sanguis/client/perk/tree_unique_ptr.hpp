@@ -4,16 +4,10 @@
 #include <sanguis/client/perk/tree_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-using
-tree_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::client::perk::tree
->;
+using tree_unique_ptr = fcppt::unique_ptr<sanguis::client::perk::tree>;
 
 }
 

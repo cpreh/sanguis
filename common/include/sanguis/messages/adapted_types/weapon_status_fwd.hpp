@@ -4,16 +4,10 @@
 #include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-weapon_status
-=
-sanguis::messages::adapted_types::enum_<
-	sanguis::weapon_status
->;
+using weapon_status = sanguis::messages::adapted_types::enum_<sanguis::weapon_status>;
 
 }
 

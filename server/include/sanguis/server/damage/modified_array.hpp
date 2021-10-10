@@ -5,5 +5,4 @@
 #include <sanguis/server/damage/modified_array_fwd.hpp>
 #include <sanguis/server/damage/modified_unit.hpp>
 
-
 #endif

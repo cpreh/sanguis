@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-using
-with_health_ref
-=
-fcppt::reference<
-	sanguis::server::entities::with_health
->;
+using with_health_ref = fcppt::reference<sanguis::server::entities::with_health>;
 
 }
 

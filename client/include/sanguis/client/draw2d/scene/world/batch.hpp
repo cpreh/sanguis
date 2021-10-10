@@ -8,42 +8,29 @@
 #include <sge/renderer/vertex/declaration_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
 class batch
 {
-	FCPPT_NONCOPYABLE(
-		batch
-	);
+  FCPPT_NONCOPYABLE(batch);
+
 public:
-	explicit
-	batch(
-		sanguis::client::draw2d::scene::world::sprite::range &&
-	);
+  explicit batch(sanguis::client::draw2d::scene::world::sprite::range &&);
 
-	batch(
-		batch &&
-	)
-	noexcept;
+  batch(batch &&) noexcept;
 
-	batch &
-	operator=(
-		batch &&
-	)
-	noexcept;
+  batch &operator=(batch &&) noexcept;
 
-	~batch();
+  ~batch();
 
-	void
-	draw(
-		sge::renderer::context::core &, // NOLINT(google-runtime-references)
-		sge::renderer::vertex::declaration const &,
-		sanguis::client::draw2d::scene::world::sprite::state & // NOLINT(google-runtime-references)
-	) const; // NOLINT(google-runtime-references)
+  void draw(
+      sge::renderer::context::core &, // NOLINT(google-runtime-references)
+      sge::renderer::vertex::declaration const &,
+      sanguis::client::draw2d::scene::world::sprite::state & // NOLINT(google-runtime-references)
+  ) const; // NOLINT(google-runtime-references)
 private:
-	sanguis::client::draw2d::scene::world::sprite::range range_;
+  sanguis::client::draw2d::scene::world::sprite::range range_;
 };
 
 }

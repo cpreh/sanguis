@@ -12,5 +12,4 @@
 #include <sge/sprite/config/with_rotation.hpp>
 #include <sge/sprite/config/with_texture.hpp>
 
-
 #endif

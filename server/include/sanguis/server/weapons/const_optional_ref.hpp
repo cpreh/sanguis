@@ -4,5 +4,4 @@
 #include <sanguis/server/weapons/const_optional_ref_fwd.hpp>
 #include <fcppt/optional/reference.hpp>
 
-
 #endif

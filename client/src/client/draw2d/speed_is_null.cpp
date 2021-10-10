@@ -4,20 +4,10 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/math/vector/length.hpp>
 
-
-bool
-sanguis::client::draw2d::speed_is_null(
-	sanguis::client::draw2d::speed const &_speed
-)
+bool sanguis::client::draw2d::speed_is_null(sanguis::client::draw2d::speed const &_speed)
 {
-	return
-		fcppt::math::vector::length(
-			_speed.get()
-		)
-		<
-		fcppt::literal<
-			sanguis::client::draw2d::funit
-		>(
-			0.0001 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-		);
+  return fcppt::math::vector::length(_speed.get()) <
+         fcppt::literal<sanguis::client::draw2d::funit>(
+             0.0001 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+         );
 }

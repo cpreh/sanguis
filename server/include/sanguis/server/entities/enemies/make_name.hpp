@@ -6,16 +6,13 @@
 #include <sanguis/server/entities/enemies/skills/container.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::server::entities::enemies
 {
 
-fcppt::string
-make_name(
-	sanguis::server::entities::enemies::attribute_container const &,
-	sanguis::server::entities::enemies::skills::container const &,
-	sanguis::creator::enemy_type
-);
+fcppt::string make_name(
+    sanguis::server::entities::enemies::attribute_container const &,
+    sanguis::server::entities::enemies::skills::container const &,
+    sanguis::creator::enemy_type);
 
 }
 

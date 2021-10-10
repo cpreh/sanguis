@@ -7,20 +7,9 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::load::model::path
-sanguis::load::model::destructible_path(
-	sanguis::creator::destructible_type const _type
-)
+sanguis::load::model::destructible_path(sanguis::creator::destructible_type const _type)
 {
-	return
-		sanguis::load::model::path{
-			std::filesystem::path{
-				FCPPT_TEXT("destructibles")
-			}
-			/
-			sanguis::load::destructible_name(
-				_type
-			)
-		};
+  return sanguis::load::model::path{
+      std::filesystem::path{FCPPT_TEXT("destructibles")} / sanguis::load::destructible_name(_type)};
 }

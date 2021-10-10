@@ -10,31 +10,26 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
-
 namespace sanguis::client::load::model
 {
 
 class part
 {
-	FCPPT_NONMOVABLE(
-		part
-	);
+  FCPPT_NONMOVABLE(part);
+
 public:
-	part(
-		fcppt::log::object &, // NOLINT(google-runtime-references)
-		sanguis::model::part const &,
-		sanguis::client::load::model::global_parameters const &
-	);
+  part(
+      fcppt::log::object &, // NOLINT(google-runtime-references)
+      sanguis::model::part const &,
+      sanguis::client::load::model::global_parameters const &);
 
-	~part();
+  ~part();
 
-	[[nodiscard]]
-	sanguis::client::load::model::weapon_category const &
-	operator[](
-		sanguis::optional_primary_weapon_type
-	) const;
+  [[nodiscard]] sanguis::client::load::model::weapon_category const &
+  operator[](sanguis::optional_primary_weapon_type) const;
+
 private:
-	sanguis::client::load::model::weapon_category_map const categories_;
+  sanguis::client::load::model::weapon_category_map const categories_;
 };
 
 }

@@ -5,12 +5,6 @@
 #include <sanguis/server/damage/meta_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 
-
-extern
-template
-class
-sanguis::server::damage::basic_meta<
-	sanguis::server::damage::unit
->;
+extern template class sanguis::server::damage::basic_meta<sanguis::server::damage::unit>;
 
 #endif

@@ -5,5 +5,4 @@
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 
-
 #endif

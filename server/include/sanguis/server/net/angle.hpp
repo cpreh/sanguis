@@ -6,10 +6,6 @@
 #include <sanguis/server/net/angle_policy.hpp>
 #include <sanguis/server/net/declare_value.hpp>
 
-
-SANGUIS_SERVER_NET_DECLARE_VALUE(
-	sanguis::server::angle,
-	sanguis::server::net::angle_policy
-);
+SANGUIS_SERVER_NET_DECLARE_VALUE(sanguis::server::angle, sanguis::server::net::angle_policy);
 
 #endif

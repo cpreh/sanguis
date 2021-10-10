@@ -11,50 +11,34 @@
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
-
 namespace sanguis::server
 {
 
-class object
-:
-	public
-		sanguis::server::object_base
+class object : public sanguis::server::object_base
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 public:
-	SANGUIS_SERVER_SYMBOL
-	object(
-		fcppt::log::context_reference,
-		alda::net::port
-	);
+  SANGUIS_SERVER_SYMBOL
+  object(fcppt::log::context_reference, alda::net::port);
 
-	SANGUIS_SERVER_SYMBOL
-	~object()
-	override;
+  SANGUIS_SERVER_SYMBOL
+  ~object() override;
 
-	SANGUIS_SERVER_SYMBOL
-	void
-	run()
-	override;
+  SANGUIS_SERVER_SYMBOL
+  void run() override;
 
-	SANGUIS_SERVER_SYMBOL
-	void
-	stop();
+  SANGUIS_SERVER_SYMBOL
+  void stop();
+
 private:
-	sanguis::io_service io_service_;
+  sanguis::io_service io_service_;
 
-	sanguis::server::machine machine_;
+  sanguis::server::machine machine_;
 
-	using
-	scoped_machine
-	=
-	fcppt::scoped_state_machine<
-		sanguis::server::machine
-	>;
+  using scoped_machine = fcppt::scoped_state_machine<sanguis::server::machine>;
 
-	scoped_machine scoped_machine_;
+  scoped_machine scoped_machine_;
 };
 
 }

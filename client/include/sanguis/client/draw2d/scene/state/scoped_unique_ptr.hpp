@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/scene/state/scoped_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::client::draw2d::scene::state
 {
 
-using
-scoped_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::client::draw2d::scene::state::scoped
->;
+using scoped_unique_ptr = fcppt::unique_ptr<sanguis::client::draw2d::scene::state::scoped>;
 
 }
 

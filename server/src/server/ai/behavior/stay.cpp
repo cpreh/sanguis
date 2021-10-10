@@ -13,58 +13,24 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 
-
-sanguis::server::ai::behavior::stay::stay(
-	sanguis::server::ai::context_ref const _context
-)
-:
-	sanguis::server::ai::behavior::base(
-		_context
-	),
-	start_pos_{
-		_context->me().center()
-	}
+sanguis::server::ai::behavior::stay::stay(sanguis::server::ai::context_ref const _context)
+    : sanguis::server::ai::behavior::base(_context), start_pos_{_context->me().center()}
 {
 }
 
-sanguis::server::ai::behavior::stay::~stay()
-= default;
+sanguis::server::ai::behavior::stay::~stay() = default;
 
-bool
-sanguis::server::ai::behavior::stay::start()
+bool sanguis::server::ai::behavior::stay::start()
 {
-	return
-		sanguis::server::collision::distance_pos_pos(
-			start_pos_.get(),
-			this->me().center().get()
-		)
-		>=
-		fcppt::literal<
-			sanguis::server::space_unit
-		>(
-			500.F
-		)
-		&&
-		sanguis::server::ai::make_path(
-			this->context(),
-			sanguis::server::world::center_to_grid_pos(
-				start_pos_
-			)
-		);
+  return sanguis::server::collision::distance_pos_pos(
+             start_pos_.get(), this->me().center().get()) >=
+             fcppt::literal<sanguis::server::space_unit>(500.F) &&
+         sanguis::server::ai::make_path(
+             this->context(), sanguis::server::world::center_to_grid_pos(start_pos_));
 }
 
-sanguis::server::ai::status
-sanguis::server::ai::behavior::stay::update(
-	sanguis::duration
-)
+sanguis::server::ai::status sanguis::server::ai::behavior::stay::update(sanguis::duration)
 {
-	return
-		sanguis::server::ai::go_to_grid_pos(
-			this->context(),
-			fcppt::literal<
-				sanguis::server::ai::speed_factor
-			>(
-				1
-			)
-		);
+  return sanguis::server::ai::go_to_grid_pos(
+      this->context(), fcppt::literal<sanguis::server::ai::speed_factor>(1));
 }

@@ -3,16 +3,15 @@
 
 #include <sanguis/tiles/error_fwd.hpp>
 
-
 namespace sanguis::tiles
 {
 
 enum class error
 {
-	missing_foreground,
-	missing_background,
-	missing_object,
-	fcppt_maximum = missing_object
+  missing_foreground,
+  missing_background,
+  missing_object,
+  fcppt_maximum = missing_object
 };
 
 }

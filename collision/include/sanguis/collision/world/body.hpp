@@ -8,52 +8,30 @@
 #include <sanguis/collision/world/body_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::collision::world
 {
 
 class body
 {
-	FCPPT_NONMOVABLE(
-		body
-	);
+  FCPPT_NONMOVABLE(body);
+
 protected:
-	body();
+  body();
+
 public:
-	virtual
-	~body();
+  virtual ~body();
 
-	virtual
-	void
-	center(
-		sanguis::collision::center
-	) = 0;
+  virtual void center(sanguis::collision::center) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::center
-	center() const = 0;
+  [[nodiscard]] virtual sanguis::collision::center center() const = 0;
 
-	virtual
-	void
-	speed(
-		sanguis::collision::speed
-	) = 0;
+  virtual void speed(sanguis::collision::speed) = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::speed
-	speed() const = 0;
+  [[nodiscard]] virtual sanguis::collision::speed speed() const = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::radius
-	radius() const = 0;
+  [[nodiscard]] virtual sanguis::collision::radius radius() const = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::collision::optional_mass
-	mass() const = 0;
+  [[nodiscard]] virtual sanguis::collision::optional_mass mass() const = 0;
 };
 
 }

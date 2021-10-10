@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world::sprite
 {
 
-using
-container
-=
-std::vector<
-	sanguis::client::draw2d::scene::world::sprite::object
->;
+using container = std::vector<sanguis::client::draw2d::scene::world::sprite::object>;
 
 }
 

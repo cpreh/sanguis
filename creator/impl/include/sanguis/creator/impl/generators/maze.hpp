@@ -4,14 +4,10 @@
 #include <sanguis/creator/impl/parameters_fwd.hpp>
 #include <sanguis/creator/impl/result_fwd.hpp>
 
-
 namespace sanguis::creator::impl::generators
 {
 
-sanguis::creator::impl::result
-maze(
-	sanguis::creator::impl::parameters const &
-);
+sanguis::creator::impl::result maze(sanguis::creator::impl::parameters const &);
 
 }
 

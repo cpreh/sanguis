@@ -7,32 +7,22 @@
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::ai::tree
 {
 
 class base
 {
-	FCPPT_NONMOVABLE(
-		base
-	);
+  FCPPT_NONMOVABLE(base);
+
 protected:
-	base();
+  base();
+
 public:
-	virtual
-	~base();
+  virtual ~base();
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::entities::transfer_result
-	transfer() = 0;
+  [[nodiscard]] virtual sanguis::server::entities::transfer_result transfer() = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::ai::status
-	run(
-		sanguis::duration
-	) = 0;
+  [[nodiscard]] virtual sanguis::server::ai::status run(sanguis::duration) = 0;
 };
 
 }

@@ -4,16 +4,10 @@
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::config::settings
 {
 
-using
-object_ref
-=
-fcppt::reference<
-	sanguis::client::config::settings::object
->;
+using object_ref = fcppt::reference<sanguis::client::config::settings::object>;
 
 }
 

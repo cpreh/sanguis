@@ -4,16 +4,10 @@
 #include <sanguis/creator/pos_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-optional_pos
-=
-fcppt::optional::object<
-	sanguis::creator::pos
->;
+using optional_pos = fcppt::optional::object<sanguis::creator::pos>;
 
 }
 

@@ -13,55 +13,32 @@
 #include <QWidget>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
 class frame
 {
-	FCPPT_NONCOPYABLE(
-		frame
-	);
+  FCPPT_NONCOPYABLE(frame);
+
 public:
-	frame(
-		fcppt::reference<
-			QWidget
-		>,
-		QImage const &,
-		sanguis::model::cell_area const &
-	);
+  frame(fcppt::reference<QWidget>, QImage const &, sanguis::model::cell_area const &);
 
-	frame(
-		frame &&
-	)
-	noexcept;
+  frame(frame &&) noexcept;
 
-	frame &
-	operator=(
-		frame &&
-	)
-	noexcept;
+  frame &operator=(frame &&) noexcept;
 
-	~frame();
+  ~frame();
 
-	[[nodiscard]]
-	QLabel &
-	label();
+  [[nodiscard]] QLabel &label();
 
-	[[nodiscard]]
-	QPixmap const &
-	pixmap() const;
+  [[nodiscard]] QPixmap const &pixmap() const;
+
 private:
-	using
-	label_unique_ptr
-	=
-	fcppt::unique_ptr<
-		QLabel
-	>;
+  using label_unique_ptr = fcppt::unique_ptr<QLabel>;
 
-	QPixmap pixmap_;
+  QPixmap pixmap_;
 
-	label_unique_ptr label_;
+  label_unique_ptr label_;
 };
 
 }

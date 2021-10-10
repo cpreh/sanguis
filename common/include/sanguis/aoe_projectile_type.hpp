@@ -3,15 +3,14 @@
 
 #include <sanguis/aoe_projectile_type_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class aoe_projectile_type
 {
-	rocket,
-	grenade,
-	fcppt_maximum = grenade
+  rocket,
+  grenade,
+  fcppt_maximum = grenade
 };
 
 }

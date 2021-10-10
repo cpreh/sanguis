@@ -13,38 +13,13 @@
 #include <fcppt/optional/object_impl.hpp>
 
 sge::parse::json::object
-sanguis::model::impl::serialize::animation(
-	sanguis::model::animation const &_animation
-)
+sanguis::model::impl::serialize::animation(sanguis::model::animation const &_animation)
 {
-	return
-		sge::parse::json::object(
-			fcppt::optional::cat<
-				sge::parse::json::member_map
-			>(
-				fcppt::array::object<
-					fcppt::optional::object<
-						sge::parse::json::member
-					>,
-					4
-				>{
-					fcppt::optional::object<
-						sge::parse::json::member
-					>{
-						sanguis::model::impl::serialize::animation_range(
-							_animation.animation_range()
-						)
-					},
-					sanguis::model::impl::serialize::animation_delay(
-						_animation.animation_delay()
-					),
-					sanguis::model::impl::serialize::animation_sound(
-						_animation.animation_sound()
-					),
-					sanguis::model::impl::serialize::image_name(
-						_animation.image_name()
-					)
-				}
-			)
-		);
+  return sge::parse::json::object(fcppt::optional::cat<sge::parse::json::member_map>(
+      fcppt::array::object<fcppt::optional::object<sge::parse::json::member>, 4>{
+          fcppt::optional::object<sge::parse::json::member>{
+              sanguis::model::impl::serialize::animation_range(_animation.animation_range())},
+          sanguis::model::impl::serialize::animation_delay(_animation.animation_delay()),
+          sanguis::model::impl::serialize::animation_sound(_animation.animation_sound()),
+          sanguis::model::impl::serialize::image_name(_animation.image_name())}));
 }

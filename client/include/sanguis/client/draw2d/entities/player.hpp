@@ -15,57 +15,40 @@
 #include <sanguis/client/load/auras/context_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class player
-:
-	public sanguis::client::draw2d::entities::with_buffs_auras_model
+class player : public sanguis::client::draw2d::entities::with_buffs_auras_model
 {
-	FCPPT_NONMOVABLE(
-		player
-	);
+  FCPPT_NONMOVABLE(player);
+
 public:
-	player(
-		sanguis::client::load::auras::context_ref,
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::optional_primary_weapon_type,
-		sanguis::weapon_status,
-		sanguis::client::draw2d::speed const &,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::rotation,
-		sanguis::aura_type_vector &&,
-		sanguis::buff_type_vector &&,
-		sanguis::client::health_pair
-	);
+  player(
+      sanguis::client::load::auras::context_ref,
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::optional_primary_weapon_type,
+      sanguis::weapon_status,
+      sanguis::client::draw2d::speed const &,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::rotation,
+      sanguis::aura_type_vector &&,
+      sanguis::buff_type_vector &&,
+      sanguis::client::health_pair);
 
-	~player()
-	override;
+  ~player() override;
 
-	void
-	orientation(
-		sanguis::client::draw2d::sprite::rotation
-	)
-	override;
+  void orientation(sanguis::client::draw2d::sprite::rotation) override;
 
-	void
-	speed(
-		sanguis::client::draw2d::speed const &
-	)
-	override;
+  void speed(sanguis::client::draw2d::speed const &) override;
+
 protected:
-	void
-	update()
-	override;
+  void update() override;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::sprite::dim
-	bounding_dim() const;
+  [[nodiscard]] sanguis::client::draw2d::sprite::dim bounding_dim() const;
 
-	using sanguis::client::draw2d::entities::container::orientation;
+  using sanguis::client::draw2d::entities::container::orientation;
 
-	using sanguis::client::draw2d::entities::container::speed;
+  using sanguis::client::draw2d::entities::container::speed;
 };
 
 }

@@ -7,26 +7,20 @@
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::projectiles
 {
 
-class melee
-:
-	public sanguis::server::entities::projectiles::aoe_damage
+class melee : public sanguis::server::entities::projectiles::aoe_damage
 {
-	FCPPT_NONMOVABLE(
-		melee
-	);
-public:
-	melee(
-		sanguis::server::team,
-		sanguis::server::damage::unit,
-		sanguis::server::damage::modified_array const &
-	);
+  FCPPT_NONMOVABLE(melee);
 
-	~melee()
-	override;
+public:
+  melee(
+      sanguis::server::team,
+      sanguis::server::damage::unit,
+      sanguis::server::damage::modified_array const &);
+
+  ~melee() override;
 };
 
 }

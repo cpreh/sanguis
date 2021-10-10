@@ -4,16 +4,10 @@
 #include <sanguis/tiles/direction.hpp>
 #include <fcppt/container/bitfield/object_fwd.hpp>
 
-
 namespace sanguis::tiles
 {
 
-using
-orientation
-=
-fcppt::container::bitfield::object<
-	sanguis::tiles::direction
->;
+using orientation = fcppt::container::bitfield::object<sanguis::tiles::direction>;
 
 }
 

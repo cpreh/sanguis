@@ -4,14 +4,10 @@
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/client/perk/category_fwd.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-sanguis::client::perk::category
-to_category(
-	sanguis::perk_type
-);
+sanguis::client::perk::category to_category(sanguis::perk_type);
 
 }
 

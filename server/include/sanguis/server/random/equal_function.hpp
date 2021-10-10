@@ -5,25 +5,13 @@
 #include <fcppt/function_impl.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
 
-
 namespace sanguis::server::random
 {
 
-template<
-	typename Arg
->
-using
-equal_function
-=
-fcppt::strong_typedef<
-	fcppt::function<
-		bool (
-			Arg const &,
-			Arg const &
-		)
-	>,
-	sanguis::server::random::equal_function_tag
->;
+template <typename Arg>
+using equal_function = fcppt::strong_typedef<
+    fcppt::function<bool(Arg const &, Arg const &)>,
+    sanguis::server::random::equal_function_tag>;
 
 }
 

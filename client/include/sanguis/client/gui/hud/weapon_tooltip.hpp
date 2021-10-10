@@ -16,49 +16,35 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::gui::hud
 {
 
 class weapon_tooltip
 {
-	FCPPT_NONMOVABLE(
-		weapon_tooltip
-	);
+  FCPPT_NONMOVABLE(weapon_tooltip);
+
 public:
-	weapon_tooltip(
-		sge::gui::context_ref,
-		sge::gui::style::const_reference,
-		sge::renderer::device::ffp_ref,
-		sge::font::object_ref,
-		sanguis::weapon_description const &
-	);
+  weapon_tooltip(
+      sge::gui::context_ref,
+      sge::gui::style::const_reference,
+      sge::renderer::device::ffp_ref,
+      sge::font::object_ref,
+      sanguis::weapon_description const &);
 
-	~weapon_tooltip();
+  ~weapon_tooltip();
 
-	[[nodiscard]]
-	sge::gui::widget::base &
-	widget();
+  [[nodiscard]] sge::gui::widget::base &widget();
+
 private:
-	sge::gui::widget::static_text name_text_;
+  sge::gui::widget::static_text name_text_;
 
-	using
-	text_unique_ptr
-	=
-	fcppt::unique_ptr<
-		sge::gui::widget::static_text
-	>;
+  using text_unique_ptr = fcppt::unique_ptr<sge::gui::widget::static_text>;
 
-	using
-	text_unique_ptr_vector
-	=
-	std::vector<
-		text_unique_ptr
-	>;
+  using text_unique_ptr_vector = std::vector<text_unique_ptr>;
 
-	text_unique_ptr_vector attribute_texts_;
+  text_unique_ptr_vector attribute_texts_;
 
-	sge::gui::widget::box_container container_;
+  sge::gui::widget::box_container container_;
 };
 
 }

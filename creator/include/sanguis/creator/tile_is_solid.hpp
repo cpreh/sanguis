@@ -4,15 +4,11 @@
 #include <sanguis/creator/symbol.hpp>
 #include <sanguis/creator/tile_fwd.hpp>
 
-
 namespace sanguis::creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-bool
-tile_is_solid(
-	sanguis::creator::tile
-);
+bool tile_is_solid(sanguis::creator::tile);
 
 }
 

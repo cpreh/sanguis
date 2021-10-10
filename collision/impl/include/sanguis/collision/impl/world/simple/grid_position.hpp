@@ -4,14 +4,10 @@
 #include <sanguis/collision/center_fwd.hpp>
 #include <sanguis/creator/pos_fwd.hpp>
 
-
 namespace sanguis::collision::impl::world::simple
 {
 
-sanguis::creator::pos
-grid_position(
-	sanguis::collision::center const &
-);
+sanguis::creator::pos grid_position(sanguis::collision::center const &);
 
 }
 

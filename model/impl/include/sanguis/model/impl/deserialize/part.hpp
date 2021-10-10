@@ -4,14 +4,10 @@
 #include <sanguis/model/part.hpp>
 #include <sge/parse/json/object_fwd.hpp>
 
-
 namespace sanguis::model::impl::deserialize
 {
 
-sanguis::model::part
-part(
-	sge::parse::json::object const &
-);
+sanguis::model::part part(sge::parse::json::object const &);
 
 }
 

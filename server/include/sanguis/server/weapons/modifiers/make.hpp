@@ -6,59 +6,24 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
-template<
-	typename Parameters
->
-sanguis::server::weapons::modifiers::container<
-	Parameters
->
-make()
+template <typename Parameters>
+sanguis::server::weapons::modifiers::container<Parameters> make()
 {
-	return
-		sanguis::server::weapons::modifiers::container<
-			Parameters
-		>{};
+  return sanguis::server::weapons::modifiers::container<Parameters>{};
 }
 
-template<
-	typename Parameters,
-	typename Arg,
-	typename... Args
->
-sanguis::server::weapons::modifiers::container<
-	Parameters
->
-make(
-	Arg const &,
-	Args && ..._args
-)
+template <typename Parameters, typename Arg, typename... Args>
+sanguis::server::weapons::modifiers::container<Parameters> make(Arg const &, Args &&..._args)
 {
-	sanguis::server::weapons::modifiers::container<
-		Parameters
-	> res{
-		sanguis::server::weapons::modifiers::make<
-			Parameters
-		>(
-			std::forward<
-				Args
-			>(
-				_args
-			)...
-		)
-	};
+  sanguis::server::weapons::modifiers::container<Parameters> res{
+      sanguis::server::weapons::modifiers::make<Parameters>(std::forward<Args>(_args)...)};
 
-	res.push_back(
-		&Arg:: template make<
-			Parameters
-		>
-	);
+  res.push_back(&Arg::template make<Parameters>);
 
-	return
-		res;
+  return res;
 }
 
 }

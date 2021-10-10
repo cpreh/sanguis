@@ -6,19 +6,13 @@
 #include <alda/bindings/unit_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-using
-unpause
-=
-alda::message::object<
-	sanguis::messages::client::types::make_message_id<
-		sanguis::messages::client::types::message::unpause
-	>,
-	alda::bindings::unit
->;
+using unpause = alda::message::object<
+    sanguis::messages::client::types::make_message_id<
+        sanguis::messages::client::types::message::unpause>,
+    alda::bindings::unit>;
 
 }
 

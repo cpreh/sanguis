@@ -6,57 +6,23 @@
 #include <sanguis/server/damage/basic_meta_list.hpp>
 #include <fcppt/enum/array_init.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-template<
-	typename Unit
->
-sanguis::server::damage::basic_array<
-	Unit
->
-basic_make_array(
-	sanguis::server::damage::basic_meta_list<
-		Unit
-	> const &_inits
-)
+template <typename Unit>
+sanguis::server::damage::basic_array<Unit>
+basic_make_array(sanguis::server::damage::basic_meta_list<Unit> const &_inits)
 {
-	using
-	result_type
-	=
-	sanguis::server::damage::basic_array<
-		Unit
-	>;
+  using result_type = sanguis::server::damage::basic_array<Unit>;
 
-	result_type result{
-		fcppt::enum_::array_init<
-			result_type
-		>(
-			[](auto)
-			{
-				return
-					Unit(
-						0.F
-					);
-			}
-		)
-	};
+  result_type result{fcppt::enum_::array_init<result_type>([](auto) { return Unit(0.F); })};
 
-	for(
-		auto const &element
-		:
-		_inits
-	)
-	{
-		result[
-			element.type()
-		] =
-			element.value();
-	}
+  for (auto const &element : _inits)
+  {
+    result[element.type()] = element.value();
+  }
 
-	return
-		result;
+  return result;
 }
 
 }

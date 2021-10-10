@@ -5,47 +5,25 @@
 #include <fcppt/string.hpp>
 #include <fcppt/assert/information_fwd.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
-class exception
-:
-	public fcppt::exception
+class exception : public fcppt::exception
 {
 public:
-	explicit
-	exception(
-		fcppt::string &&
-	);
+  explicit exception(fcppt::string &&);
 
-	explicit
-	exception(
-		fcppt::assert_::information const &
-	);
+  explicit exception(fcppt::assert_::information const &);
 
-	exception(
-		exception &&
-	)
-	noexcept;
+  exception(exception &&) noexcept;
 
-	exception(
-		exception const &
-	);
+  exception(exception const &);
 
-	exception &
-	operator=(
-		exception &&
-	)
-	noexcept;
+  exception &operator=(exception &&) noexcept;
 
-	exception &
-	operator=(
-		exception const &
-	);
+  exception &operator=(exception const &);
 
-	~exception() noexcept
-	override;
+  ~exception() noexcept override;
 };
 
 }

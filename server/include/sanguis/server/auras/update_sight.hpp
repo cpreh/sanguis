@@ -11,48 +11,33 @@
 #include <sanguis/server/entities/with_body_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::auras
 {
 
-class update_sight
-:
-	public sanguis::server::auras::aura
+class update_sight : public sanguis::server::auras::aura
 {
-	FCPPT_NONMOVABLE(
-		update_sight
-	);
+  FCPPT_NONMOVABLE(update_sight);
+
 public:
-	update_sight(
-		sanguis::server::radius,
-		sanguis::server::add_sight_callback &&,
-		sanguis::server::remove_sight_callback &&
-	);
+  update_sight(
+      sanguis::server::radius,
+      sanguis::server::add_sight_callback &&,
+      sanguis::server::remove_sight_callback &&);
 
-	~update_sight()
-	override;
+  ~update_sight() override;
+
 private:
-	[[nodiscard]]
-	sanguis::optional_aura_type
-	type() const
-	override;
+  [[nodiscard]] sanguis::optional_aura_type type() const override;
 
-	void
-	enter(
-		sanguis::server::entities::with_body_ref,
-		sanguis::collision::world::created
-	)
-	override;
+  void enter(sanguis::server::entities::with_body_ref, sanguis::collision::world::created) override;
 
-	void
-	leave(
-		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
-	) // NOLINT(google-runtime-references)
-	override;
+  void leave(sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
+             ) // NOLINT(google-runtime-references)
+      override;
 
-	sanguis::server::add_sight_callback const add_;
+  sanguis::server::add_sight_callback const add_;
 
-	sanguis::server::remove_sight_callback const remove_;
+  sanguis::server::remove_sight_callback const remove_;
 };
 
 }

@@ -4,16 +4,10 @@
 #include <sanguis/server/entities/simple_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-using
-simple_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::server::entities::simple
->;
+using simple_unique_ptr = fcppt::unique_ptr<sanguis::server::entities::simple>;
 
 }
 

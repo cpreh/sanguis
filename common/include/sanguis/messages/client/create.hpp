@@ -3,27 +3,13 @@
 
 #include <sanguis/messages/client/concrete.hpp>
 
-
 namespace sanguis::messages::client
 {
 
-template<
-	typename T
->
-inline
-sanguis::messages::client::concrete<
-	T
->
-create(
-	T const &_value
-)
+template <typename T>
+inline sanguis::messages::client::concrete<T> create(T const &_value)
 {
-	return
-		sanguis::messages::client::concrete<
-			T
-		>(
-			_value
-		);
+  return sanguis::messages::client::concrete<T>(_value);
 }
 
 }

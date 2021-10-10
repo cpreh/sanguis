@@ -5,14 +5,10 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-timer_duration
-=
-std::chrono::milliseconds;
+using timer_duration = std::chrono::milliseconds;
 
 }
 

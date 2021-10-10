@@ -3,14 +3,13 @@
 
 #include <sanguis/client/control/actions/scale_type_fwd.hpp>
 
-
 namespace sanguis::client::control::actions
 {
 
 enum class scale_type
 {
-	horizontal_move,
-	vertical_move
+  horizontal_move,
+  vertical_move
 };
 
 }

@@ -5,19 +5,11 @@
 #include <sanguis/messages/client/types/message_fwd.hpp>
 #include <alda/message/make_id.hpp>
 
-
 namespace sanguis::messages::client::types
 {
 
-template<
-	sanguis::messages::client::types::message Msg
->
-using make_message_id
-=
-alda::message::make_id<
-	sanguis::messages::client::types::alda_type,
-	Msg
->;
+template <sanguis::messages::client::types::message Msg>
+using make_message_id = alda::message::make_id<sanguis::messages::client::types::alda_type, Msg>;
 
 }
 

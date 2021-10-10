@@ -4,5 +4,4 @@
 #include <sanguis/creator/opening_count_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-destructible_container
-=
-std::vector<
-	sanguis::creator::destructible
->;
+using destructible_container = std::vector<sanguis::creator::destructible>;
 
 }
 

@@ -5,5 +5,4 @@
 #include <sanguis/collision/world/optional_body_enter_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

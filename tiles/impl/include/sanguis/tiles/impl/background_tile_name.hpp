@@ -4,14 +4,10 @@
 #include <sanguis/creator/background_tile_fwd.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace sanguis::tiles::impl
 {
 
-fcppt::string
-background_tile_name(
-	sanguis::creator::background_tile
-);
+fcppt::string background_tile_name(sanguis::creator::background_tile);
 
 }
 

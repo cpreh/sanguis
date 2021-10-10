@@ -4,5 +4,4 @@
 #include <sanguis/tools/libmergeimage/impl/count_maximum_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

@@ -4,16 +4,10 @@
 #include <sanguis/server/world/object_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::server::world
 {
 
-using
-object_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::server::world::object
->;
+using object_unique_ptr = fcppt::unique_ptr<sanguis::server::world::object>;
 
 }
 

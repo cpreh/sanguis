@@ -18,7 +18,6 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::states
 {
 
@@ -26,51 +25,28 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4265)
 
 class castpoint
-:
-	public boost::statechart::state<
-		sanguis::server::weapons::states::castpoint,
-		sanguis::server::weapons::weapon
-	>
+    : public boost::statechart::
+          state<sanguis::server::weapons::states::castpoint, sanguis::server::weapons::weapon>
 {
-	FCPPT_NONMOVABLE(
-		castpoint
-	);
+  FCPPT_NONMOVABLE(castpoint);
+
 public:
-	using
-	reactions
-	=
-	boost::mpl::list2<
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::poll
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::stop
-		>
-	>;
+  using reactions = boost::mpl::list2<
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::poll>,
+      boost::statechart::custom_reaction<sanguis::server::weapons::events::stop>>;
 
-	explicit
-	castpoint(
-		my_context
-	);
+  explicit castpoint(my_context);
 
-	~castpoint()
-	SANGUIS_STATE_OVERRIDE;
+  ~castpoint() SANGUIS_STATE_OVERRIDE;
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::poll const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::poll const &);
 
-	[[nodiscard]]
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::stop const &
-	);
+  [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::stop const &);
+
 private:
-	sanguis::diff_timer attack_time_;
+  sanguis::diff_timer attack_time_;
 
-	bool cancelled_;
+  bool cancelled_;
 };
 
 FCPPT_PP_POP_WARNING

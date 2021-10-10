@@ -5,15 +5,11 @@
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/auras/influence_fwd.hpp>
 
-
 namespace sanguis::server::auras
 {
 
 sanguis::collision::world::ghost_group
-collision_group(
-	sanguis::server::team,
-	sanguis::server::auras::influence
-);
+    collision_group(sanguis::server::team, sanguis::server::auras::influence);
 
 }
 

@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::sprite
 {
 
-using
-optional_dim
-=
-fcppt::optional::object<
-	sanguis::client::draw2d::sprite::dim
->;
+using optional_dim = fcppt::optional::object<sanguis::client::draw2d::sprite::dim>;
 
 }
 

@@ -6,20 +6,12 @@
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 #include <fcppt/reference_fwd.hpp>
 
-
 namespace sanguis::server::entities::enemies::modifiers
 {
 
-using
-callback
-=
-sanguis::server::entities::enemies::attribute
-(*)(
-	fcppt::reference<
-		sanguis::server::entities::enemies::parameters
-	>,
-	sanguis::server::entities::enemies::modifiers::parameters const &
-);
+using callback = sanguis::server::entities::enemies::attribute (*)(
+    fcppt::reference<sanguis::server::entities::enemies::parameters>,
+    sanguis::server::entities::enemies::modifiers::parameters const &);
 
 }
 

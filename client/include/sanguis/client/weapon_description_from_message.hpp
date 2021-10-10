@@ -16,65 +16,26 @@
 #include <alda/message/object.hpp>
 #include <fcppt/record/get.hpp>
 
-
 namespace sanguis::client
 {
 
-template<
-	typename Id,
-	typename Type
->
+template <typename Id, typename Type>
 sanguis::weapon_description
-weapon_description_from_message(
-	alda::message::object<
-		Id,
-		Type
-	> const &_message
-)
+weapon_description_from_message(alda::message::object<Id, Type> const &_message)
 {
-	return
-		sanguis::weapon_description(
-			fcppt::record::get<
-				sanguis::messages::roles::weapon_type
-			>(
-				_message.get()
-			),
-			sanguis::magazine_size(
-				fcppt::record::get<
-					sanguis::messages::roles::magazine_base_size
-				>(
-					_message.get()
-				)
-			),
-			sanguis::magazine_extra(
-				fcppt::record::get<
-					sanguis::messages::roles::magazine_extra_size
-				>(
-					_message.get()
-				)
-			),
-			sanguis::magazine_remaining(
-				fcppt::record::get<
-					sanguis::messages::roles::magazine_remaining
-				>(
-					_message.get()
-				)
-			),
-			sanguis::reload_time(
-				fcppt::record::get<
-					sanguis::messages::roles::reload_time
-				>(
-					_message.get()
-				)
-			),
-			sanguis::messages::convert::from_weapon_attribute_vector(
-				fcppt::record::get<
-					sanguis::messages::roles::weapon_attribute_container
-				>(
-					_message.get()
-				)
-			)
-		);
+  return sanguis::weapon_description(
+      fcppt::record::get<sanguis::messages::roles::weapon_type>(_message.get()),
+      sanguis::magazine_size(
+          fcppt::record::get<sanguis::messages::roles::magazine_base_size>(_message.get())),
+      sanguis::magazine_extra(
+          fcppt::record::get<sanguis::messages::roles::magazine_extra_size>(_message.get())),
+      sanguis::magazine_remaining(
+          fcppt::record::get<sanguis::messages::roles::magazine_remaining>(_message.get())),
+      sanguis::reload_time(
+          fcppt::record::get<sanguis::messages::roles::reload_time>(_message.get())),
+      sanguis::messages::convert::from_weapon_attribute_vector(
+          fcppt::record::get<sanguis::messages::roles::weapon_attribute_container>(
+              _message.get())));
 }
 
 }

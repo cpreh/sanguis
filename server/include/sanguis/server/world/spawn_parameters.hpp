@@ -4,14 +4,10 @@
 #include <sanguis/creator/spawn_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 
-
 namespace sanguis::server::world
 {
 
-sanguis::server::entities::insert_parameters
-spawn_parameters(
-	sanguis::creator::spawn const &
-);
+sanguis::server::entities::insert_parameters spawn_parameters(sanguis::creator::spawn const &);
 
 }
 

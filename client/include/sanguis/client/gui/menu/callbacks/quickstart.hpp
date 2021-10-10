@@ -4,18 +4,10 @@
 #include <alda/net/port.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::client::gui::menu::callbacks
 {
 
-using
-quickstart
-=
-fcppt::function<
-	void(
-		alda::net::port
-	)
->;
+using quickstart = fcppt::function<void(alda::net::port)>;
 
 }
 

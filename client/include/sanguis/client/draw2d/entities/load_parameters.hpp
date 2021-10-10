@@ -11,50 +11,39 @@
 #include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
 #include <sanguis/client/load/model/collection_cref.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
 class load_parameters
 {
 public:
-	load_parameters(
-		sanguis::diff_clock_cref,
-		sanguis::random_generator_ref,
-		sanguis::client::sound_manager_ref,
-		sanguis::client::draw2d::sprite::normal::system_ref,
-		sanguis::client::load::model::collection_cref
-	);
+  load_parameters(
+      sanguis::diff_clock_cref,
+      sanguis::random_generator_ref,
+      sanguis::client::sound_manager_ref,
+      sanguis::client::draw2d::sprite::normal::system_ref,
+      sanguis::client::load::model::collection_cref);
 
-	[[nodiscard]]
-	sanguis::diff_clock const &
-	diff_clock() const;
+  [[nodiscard]] sanguis::diff_clock const &diff_clock() const;
 
-	[[nodiscard]]
-	sanguis::client::sound_manager &
-	sound_manager() const;
+  [[nodiscard]] sanguis::client::sound_manager &sound_manager() const;
 
-	[[nodiscard]]
-	sanguis::random_generator &
-	random_generator() const;
+  [[nodiscard]] sanguis::random_generator &random_generator() const;
 
-	[[nodiscard]]
-	sanguis::client::draw2d::sprite::normal::system &
-	normal_system() const;
+  [[nodiscard]] sanguis::client::draw2d::sprite::normal::system &normal_system() const;
 
-	[[nodiscard]]
-	sanguis::client::load::model::collection const &
-	collection() const;
+  [[nodiscard]] sanguis::client::load::model::collection const &collection() const;
+
 private:
-	sanguis::diff_clock_cref diff_clock_;
+  sanguis::diff_clock_cref diff_clock_;
 
-	sanguis::random_generator_ref random_generator_;
+  sanguis::random_generator_ref random_generator_;
 
-	sanguis::client::sound_manager_ref sound_manager_;
+  sanguis::client::sound_manager_ref sound_manager_;
 
-	sanguis::client::draw2d::sprite::normal::system_ref normal_system_;
+  sanguis::client::draw2d::sprite::normal::system_ref normal_system_;
 
-	sanguis::client::load::model::collection_cref collection_;
+  sanguis::client::load::model::collection_cref collection_;
 };
 
 }

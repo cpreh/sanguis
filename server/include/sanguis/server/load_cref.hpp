@@ -4,16 +4,10 @@
 #include <sanguis/server/load_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::server
 {
 
-using
-load_cref
-=
-fcppt::reference<
-	sanguis::server::load const
->;
+using load_cref = fcppt::reference<sanguis::server::load const>;
 
 }
 

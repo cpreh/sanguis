@@ -2,12 +2,7 @@
 #include <sanguis/config_app_name.hpp>
 #include <sge/config/app_name.hpp>
 
-
-sge::config::app_name
-sanguis::config_app_name()
+sge::config::app_name sanguis::config_app_name()
 {
-	return
-		sge::config::app_name(
-			sanguis::app_name()
-		);
+  return sge::config::app_name(sanguis::app_name());
 }

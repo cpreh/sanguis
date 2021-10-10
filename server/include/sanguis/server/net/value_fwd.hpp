@@ -4,22 +4,11 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/server/net/basic_value_fwd.hpp>
 
-
 namespace sanguis::server::net
 {
 
-template<
-	typename Type,
-	typename Policy
->
-using
-value
-=
-sanguis::server::net::basic_value<
-	Type,
-	Policy,
-	sanguis::diff_clock
->;
+template <typename Type, typename Policy>
+using value = sanguis::server::net::basic_value<Type, Policy, sanguis::diff_clock>;
 
 }
 

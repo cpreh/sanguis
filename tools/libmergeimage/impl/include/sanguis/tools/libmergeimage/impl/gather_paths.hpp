@@ -6,14 +6,10 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::libmergeimage::impl
 {
 
-sanguis::tools::libmergeimage::impl::path_vector_vector
-gather_paths(
-	std::filesystem::path const &
-);
+sanguis::tools::libmergeimage::impl::path_vector_vector gather_paths(std::filesystem::path const &);
 
 }
 

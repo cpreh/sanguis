@@ -5,5 +5,4 @@
 #include <sanguis/server/ai/pathing/target_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

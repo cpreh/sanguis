@@ -5,26 +5,21 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::scene::hover
 {
 
 class base
 {
-	FCPPT_NONMOVABLE(
-		base
-	);
-protected:
-	base();
-public:
-	virtual
-	~base();
+  FCPPT_NONMOVABLE(base);
 
-	virtual
-	void
-	draw(
-		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
-	) = 0; // NOLINT(google-runtime-references)
+protected:
+  base();
+
+public:
+  virtual ~base();
+
+  virtual void draw(sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+                    ) = 0; // NOLINT(google-runtime-references)
 };
 
 }

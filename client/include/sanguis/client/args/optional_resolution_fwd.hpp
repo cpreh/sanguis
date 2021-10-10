@@ -4,16 +4,10 @@
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace sanguis::client::args
 {
 
-using
-optional_resolution
-=
-fcppt::optional::object<
-	sge::renderer::screen_size
->;
+using optional_resolution = fcppt::optional::object<sge::renderer::screen_size>;
 
 }
 

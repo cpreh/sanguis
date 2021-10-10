@@ -5,17 +5,11 @@
 #include <sanguis/messages/adapted_types/dynamic_len_fwd.hpp>
 #include <sanguis/messages/types/string.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-string
-=
-sanguis::messages::adapted_types::dynamic_len<
-	sanguis::messages::types::string,
-	sanguis::messages::adapted_types::char_type
->;
+using string = sanguis::messages::adapted_types::
+    dynamic_len<sanguis::messages::types::string, sanguis::messages::adapted_types::char_type>;
 
 }
 

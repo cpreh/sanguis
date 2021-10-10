@@ -10,33 +10,13 @@
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
-
 sanguis::server::center
-sanguis::server::world::grid_pos_to_center(
-	sanguis::creator::pos const &_pos
-)
+sanguis::server::world::grid_pos_to_center(sanguis::creator::pos const &_pos)
 {
-	return
-		sanguis::server::center(
-			fcppt::math::vector::structure_cast<
-				sanguis::server::vector,
-				fcppt::cast::int_to_float_fun
-			>(
-				_pos
-				*
-				sanguis::creator::tile_size::value
-				+
-				fcppt::math::vector::fill<
-					sanguis::creator::pos
-				>(
-					sanguis::creator::tile_size::value
-					/
-					fcppt::literal<
-						sanguis::creator::size_type
-					>(
-						2U
-					)
-				)
-			)
-		);
+  return sanguis::server::center(
+      fcppt::math::vector::structure_cast<sanguis::server::vector, fcppt::cast::int_to_float_fun>(
+          _pos * sanguis::creator::tile_size::value +
+          fcppt::math::vector::fill<sanguis::creator::pos>(
+              sanguis::creator::tile_size::value /
+              fcppt::literal<sanguis::creator::size_type>(2U))));
 }

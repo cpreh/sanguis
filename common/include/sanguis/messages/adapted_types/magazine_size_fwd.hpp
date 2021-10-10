@@ -4,16 +4,11 @@
 #include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <sanguis/messages/types/magazine_size.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-magazine_size
-=
-sanguis::messages::adapted_types::unsigned_<
-	sanguis::messages::types::magazine_size
->;
+using magazine_size =
+    sanguis::messages::adapted_types::unsigned_<sanguis::messages::types::magazine_size>;
 
 }
 

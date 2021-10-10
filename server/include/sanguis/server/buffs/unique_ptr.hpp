@@ -4,16 +4,10 @@
 #include <sanguis/server/buffs/buff_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::server::buffs
 {
 
-using
-unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::server::buffs::buff
->;
+using unique_ptr = fcppt::unique_ptr<sanguis::server::buffs::buff>;
 
 }
 

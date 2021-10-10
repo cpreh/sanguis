@@ -4,5 +4,4 @@
 #include <sanguis/client/control/cursor_position_fwd.hpp>
 #include <fcppt/math/vector/static.hpp>
 
-
 #endif

@@ -5,18 +5,11 @@
 #include <sge/sprite/buffers/multi_fwd.hpp>
 #include <sge/sprite/buffers/with_declaration_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world::sprite
 {
 
-using
-buffers
-=
-sge::sprite::buffers::with_declaration<
-	sge::sprite::buffers::multi<
-		sanguis::client::draw2d::scene::world::sprite::choices
-	>
->;
+using buffers = sge::sprite::buffers::with_declaration<
+    sge::sprite::buffers::multi<sanguis::client::draw2d::scene::world::sprite::choices>>;
 
 }
 

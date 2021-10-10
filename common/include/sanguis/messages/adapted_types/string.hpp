@@ -5,5 +5,4 @@
 #include <sanguis/messages/adapted_types/dynamic_len.hpp>
 #include <sanguis/messages/adapted_types/string_fwd.hpp>
 
-
 #endif

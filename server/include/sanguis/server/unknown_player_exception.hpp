@@ -3,41 +3,23 @@
 
 #include <sanguis/exception.hpp>
 
-
 namespace sanguis::server
 {
 
-class unknown_player_exception
-:
-	public sanguis::exception
+class unknown_player_exception : public sanguis::exception
 {
 public:
-	unknown_player_exception();
+  unknown_player_exception();
 
-	unknown_player_exception(
-		unknown_player_exception &&
-	)
-	noexcept;
+  unknown_player_exception(unknown_player_exception &&) noexcept;
 
-	unknown_player_exception(
-		unknown_player_exception const &
-	);
+  unknown_player_exception(unknown_player_exception const &);
 
-	unknown_player_exception &
-	operator=(
-		unknown_player_exception &&
-	)
-	noexcept;
+  unknown_player_exception &operator=(unknown_player_exception &&) noexcept;
 
-	unknown_player_exception &
-	operator=(
-		unknown_player_exception const &
-	);
+  unknown_player_exception &operator=(unknown_player_exception const &);
 
-	~unknown_player_exception()
-	noexcept
-	override;
-
+  ~unknown_player_exception() noexcept override;
 };
 
 }

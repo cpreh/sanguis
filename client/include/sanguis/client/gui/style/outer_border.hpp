@@ -9,13 +9,7 @@
 namespace sanguis::client::gui::style
 {
 
-using
-outer_border
-=
-std::integral_constant<
-	sge::rucksack::scalar,
-	0
->;
+using outer_border = std::integral_constant<sge::rucksack::scalar, 0>;
 
 }
 

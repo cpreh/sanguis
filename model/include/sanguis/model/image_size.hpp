@@ -5,5 +5,4 @@
 #include <sanguis/model/image_size_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

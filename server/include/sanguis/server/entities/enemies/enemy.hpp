@@ -24,94 +24,59 @@
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::enemies
 {
 
-class enemy
-:
-	public sanguis::server::entities::with_ai,
-	public sanguis::server::entities::with_buffs,
-	public sanguis::server::entities::with_id,
-	public sanguis::server::entities::with_health,
-	public sanguis::server::entities::with_links,
-	public sanguis::server::entities::with_velocity
+class enemy : public sanguis::server::entities::with_ai,
+              public sanguis::server::entities::with_buffs,
+              public sanguis::server::entities::with_id,
+              public sanguis::server::entities::with_health,
+              public sanguis::server::entities::with_links,
+              public sanguis::server::entities::with_velocity
 {
-	FCPPT_NONMOVABLE(
-		enemy
-	);
+  FCPPT_NONMOVABLE(enemy);
+
 public:
-	explicit
-	enemy(
-		sanguis::server::entities::enemies::parameters &&
-	);
+  explicit enemy(sanguis::server::entities::enemies::parameters &&);
 
-	~enemy()
-	override;
+  ~enemy() override;
 
-	[[nodiscard]]
-	sanguis::server::team
-	team() const
-	override;
+  [[nodiscard]] sanguis::server::team team() const override;
 
-	[[nodiscard]]
-	sanguis::creator::enemy_type
-	enemy_type() const;
+  [[nodiscard]] sanguis::creator::enemy_type enemy_type() const;
 
-	[[nodiscard]]
-	sanguis::server::exp
-	exp() const;
+  [[nodiscard]] sanguis::server::exp exp() const;
 
-	[[nodiscard]]
-	sanguis::server::mass
-	mass() const;
+  [[nodiscard]] sanguis::server::mass mass() const;
 
-	[[nodiscard]]
-	sanguis::server::entities::enemies::difficulty
-	difficulty() const;
+  [[nodiscard]] sanguis::server::entities::enemies::difficulty difficulty() const;
+
 protected:
-	void
-	update()
-	override;
+  void update() override;
 
-	void
-	remove_from_game()
-	override;
+  void remove_from_game() override;
+
 private:
-	[[nodiscard]]
-	sanguis::messages::server::unique_ptr
-	add_message(
-		sanguis::server::player_id,
-		sanguis::collision::world::created
-	) const
-	override;
+  [[nodiscard]] sanguis::messages::server::unique_ptr
+      add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_group
-	collision_group() const
-	override;
+  [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
 
-	[[nodiscard]]
-	virtual
-	sanguis::messages::types::string const &
-	name() const = 0;
+  [[nodiscard]] virtual sanguis::messages::types::string const &name() const = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::enemy_kind
-	enemy_kind() const = 0;
+  [[nodiscard]] virtual sanguis::enemy_kind enemy_kind() const = 0;
 
-	sanguis::creator::enemy_type const enemy_type_;
+  sanguis::creator::enemy_type const enemy_type_;
 
-	sanguis::server::pickup_probability const pickup_probability_;
+  sanguis::server::pickup_probability const pickup_probability_;
 
-	sanguis::server::exp const exp_;
+  sanguis::server::exp const exp_;
 
-	sanguis::server::mass const mass_;
+  sanguis::server::mass const mass_;
 
-	sanguis::server::entities::enemies::difficulty const difficulty_;
+  sanguis::server::entities::enemies::difficulty const difficulty_;
 
-	sanguis::server::entities::spawn_owner const spawn_owner_;
+  sanguis::server::entities::spawn_owner const spawn_owner_;
 };
 
 }

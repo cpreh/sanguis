@@ -4,5 +4,4 @@
 #include <sanguis/server/ai/pathing/optional_trail_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

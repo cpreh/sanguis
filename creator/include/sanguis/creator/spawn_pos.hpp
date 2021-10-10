@@ -5,5 +5,4 @@
 #include <sanguis/creator/spawn_pos_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

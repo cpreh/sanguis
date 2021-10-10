@@ -14,56 +14,38 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-class doodad
-:
-	public sanguis::server::entities::with_body,
-	public sanguis::server::entities::with_id,
-	public sanguis::server::entities::with_links
+class doodad : public sanguis::server::entities::with_body,
+               public sanguis::server::entities::with_id,
+               public sanguis::server::entities::with_links
 {
-	FCPPT_NONMOVABLE(
-		doodad
-	);
+  FCPPT_NONMOVABLE(doodad);
+
 protected:
-	doodad(
-		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
-		sanguis::doodad_type
-	);
+  doodad(
+      sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
+      sanguis::doodad_type);
+
 public:
-	~doodad()
-	override = 0;
+  ~doodad() override = 0;
 
-	void
-	kill();
+  void kill();
 
-	[[nodiscard]]
-	bool
-	dead() const
-	override;
+  [[nodiscard]] bool dead() const override;
 
-	void
-	update()
-	override;
+  void update() override;
+
 private:
-	[[nodiscard]]
-	sanguis::collision::world::body_group
-	collision_group() const
-	override;
+  [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
 
-	[[nodiscard]]
-	sanguis::messages::server::unique_ptr
-	add_message(
-		sanguis::server::player_id,
-		sanguis::collision::world::created
-	) const
-	override;
+  [[nodiscard]] sanguis::messages::server::unique_ptr
+      add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
 
-	sanguis::doodad_type const doodad_type_;
+  sanguis::doodad_type const doodad_type_;
 
-	bool dead_;
+  bool dead_;
 };
 
 }

@@ -4,16 +4,10 @@
 #include <sanguis/messages/server/types/alda_type.hpp>
 #include <alda/message/base_unique_ptr.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-unique_ptr
-=
-alda::message::base_unique_ptr<
-	sanguis::messages::server::types::alda_type
->;
+using unique_ptr = alda::message::base_unique_ptr<sanguis::messages::server::types::alda_type>;
 
 }
 

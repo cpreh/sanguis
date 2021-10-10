@@ -8,16 +8,10 @@
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::perks
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	std::make_signed_t<
-		sanguis::server::level::value_type
-	>,
-	level_diff
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(std::make_signed_t<sanguis::server::level::value_type>, level_diff);
 
 }
 

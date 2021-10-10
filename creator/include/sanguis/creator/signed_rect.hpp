@@ -4,6 +4,4 @@
 #include <sanguis/creator/signed_rect_fwd.hpp>
 #include <fcppt/math/box/rect.hpp>
 
-
 #endif
-

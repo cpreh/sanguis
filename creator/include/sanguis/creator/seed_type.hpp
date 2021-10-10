@@ -5,14 +5,10 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::creator
 {
 
-using
-seed_type
-=
-std::uint32_t;
+using seed_type = std::uint32_t;
 
 }
 

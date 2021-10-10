@@ -4,17 +4,10 @@
 #include <sanguis/client/draw2d/funit.hpp>
 #include <fcppt/math/dim/static_fwd.hpp>
 
-
 namespace sanguis::client::draw2d
 {
 
-using
-dim2
-=
-fcppt::math::dim::static_<
-	sanguis::client::draw2d::funit,
-	2
->;
+using dim2 = fcppt::math::dim::static_<sanguis::client::draw2d::funit, 2>;
 
 }
 

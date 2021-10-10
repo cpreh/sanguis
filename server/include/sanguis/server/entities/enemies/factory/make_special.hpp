@@ -6,16 +6,13 @@
 #include <sanguis/server/entities/enemies/is_unique.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 
-
 namespace sanguis::server::entities::enemies::factory
 {
 
-sanguis::server::entities::with_id_unique_ptr
-make_special(
-	sanguis::random_generator_ref,
-	sanguis::server::entities::enemies::parameters &&,
-	sanguis::server::entities::enemies::is_unique
-);
+sanguis::server::entities::with_id_unique_ptr make_special(
+    sanguis::random_generator_ref,
+    sanguis::server::entities::enemies::parameters &&,
+    sanguis::server::entities::enemies::is_unique);
 
 }
 

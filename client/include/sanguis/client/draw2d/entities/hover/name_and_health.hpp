@@ -5,29 +5,24 @@
 #include <sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_name.hpp>
 
-
 namespace sanguis::client::draw2d::entities::hover
 {
 
 class name_and_health
 {
 public:
-	name_and_health(
-		sanguis::client::draw2d::entities::hover::optional_name &&,
-		sanguis::client::optional_health_pair
-	);
+  name_and_health(
+      sanguis::client::draw2d::entities::hover::optional_name &&,
+      sanguis::client::optional_health_pair);
 
-	[[nodiscard]]
-	sanguis::client::draw2d::entities::hover::optional_name const &
-	name() const;
+  [[nodiscard]] sanguis::client::draw2d::entities::hover::optional_name const &name() const;
 
-	[[nodiscard]]
-	sanguis::client::optional_health_pair
-	health() const;
+  [[nodiscard]] sanguis::client::optional_health_pair health() const;
+
 private:
-	sanguis::client::draw2d::entities::hover::optional_name name_;
+  sanguis::client::draw2d::entities::hover::optional_name name_;
 
-	sanguis::client::optional_health_pair health_;
+  sanguis::client::optional_health_pair health_;
 };
 
 }

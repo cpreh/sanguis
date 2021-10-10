@@ -29,136 +29,60 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::creator::top_result
-sanguis::creator::generate(
-	sanguis::creator::top_parameters const &_parameters
-)
+sanguis::creator::generate(sanguis::creator::top_parameters const &_parameters)
 {
-	fcppt::log::object log{
-		_parameters.log_context(),
-		sanguis::log_location(),
-		fcppt::log::parameters_no_function(
-			sanguis::creator::impl::log_name()
-		)
-	};
+  fcppt::log::object log{
+      _parameters.log_context(),
+      sanguis::log_location(),
+      fcppt::log::parameters_no_function(sanguis::creator::impl::log_name())};
 
-	FCPPT_LOG_DEBUG(
-		log,
-		fcppt::log::out
-			<<
-			FCPPT_TEXT("Generating world \"")
-			<<
-			_parameters.name()
-			<<
-			FCPPT_TEXT("\" with seed ")
-			<<
-			_parameters.seed()
-	)
+  FCPPT_LOG_DEBUG(
+      log,
+      fcppt::log::out << FCPPT_TEXT("Generating world \"") << _parameters.name()
+                      << FCPPT_TEXT("\" with seed ") << _parameters.seed())
 
-	sanguis::creator::impl::random::generator gen(
-		_parameters.seed()
-	);
+  sanguis::creator::impl::random::generator gen(_parameters.seed());
 
-	sanguis::creator::impl::result result(
-		fcppt::optional::to_exception(
-			fcppt::container::find_opt_mapped(
-				sanguis::creator::impl::generator_map(),
-				_parameters.name()
-			),
-			[
-				&_parameters
-			]
-			{
-				return
-					sanguis::creator::exception(
-						FCPPT_TEXT("Generator ")
-						+
-						_parameters.name().get()
-						+
-						FCPPT_TEXT(" not found!")
-					);
-			}
-		).get()(
-			sanguis::creator::impl::parameters(
-				fcppt::make_ref(
-					log
-				),
-				fcppt::make_ref(
-					gen
-				),
-				_parameters.spawn_boss(),
-				_parameters.opening_count_array()
-			)
-		)
-	);
+  sanguis::creator::impl::result result(
+      fcppt::optional::to_exception(
+          fcppt::container::find_opt_mapped(
+              sanguis::creator::impl::generator_map(), _parameters.name()),
+          [&_parameters]
+          {
+            return sanguis::creator::exception(
+                FCPPT_TEXT("Generator ") + _parameters.name().get() + FCPPT_TEXT(" not found!"));
+          })
+          .get()(sanguis::creator::impl::parameters(
+              fcppt::make_ref(log),
+              fcppt::make_ref(gen),
+              _parameters.spawn_boss(),
+              _parameters.opening_count_array())));
 
-	for(
-		auto const opening_type
-		:
-		fcppt::enum_::make_range<
-			sanguis::creator::opening_type
-		>()
-	)
-	{
-		FCPPT_ASSERT_ERROR(
-			result.openings()[
-				opening_type
-			].size()
-			==
-			_parameters.opening_count_array()[
-				opening_type
-			].get()
-		);
-	}
+  for (auto const opening_type : fcppt::enum_::make_range<sanguis::creator::opening_type>())
+  {
+    FCPPT_ASSERT_ERROR(
+        result.openings()[opening_type].size() ==
+        _parameters.opening_count_array()[opening_type].get());
+  }
 
-	FCPPT_ASSERT_ERROR(
-		result.grid().size()
-		==
-		result.background_grid().size()
-	);
+  FCPPT_ASSERT_ERROR(result.grid().size() == result.background_grid().size());
 
-	if(
-		_parameters.spawn_boss().get()
-	)
-	{
-		FCPPT_ASSERT_ERROR(
-			fcppt::algorithm::contains_if(
-				result.spawns(),
-				[](
-					sanguis::creator::spawn const &_spawn
-				)
-				{
-					return
-						_spawn.enemy_kind()
-						==
-						sanguis::creator::enemy_kind::boss;
-				}
-			)
-		);
-	}
+  if (_parameters.spawn_boss().get())
+  {
+    FCPPT_ASSERT_ERROR(fcppt::algorithm::contains_if(
+        result.spawns(),
+        [](sanguis::creator::spawn const &_spawn)
+        { return _spawn.enemy_kind() == sanguis::creator::enemy_kind::boss; }));
+  }
 
-	return
-		sanguis::creator::top_result(
-			_parameters.seed(),
-			fcppt::copy(
-				_parameters.name()
-			),
-			_parameters.spawn_boss(),
-			std::move(
-				result.grid()
-			),
-			std::move(
-				result.background_grid()
-			),
-			std::move(
-				result.openings()
-			),
-			std::move(
-				result.spawns()
-			),
-			std::move(
-				result.destructibles()
-			)
-		);
+  return sanguis::creator::top_result(
+      _parameters.seed(),
+      fcppt::copy(_parameters.name()),
+      _parameters.spawn_boss(),
+      std::move(result.grid()),
+      std::move(result.background_grid()),
+      std::move(result.openings()),
+      std::move(result.spawns()),
+      std::move(result.destructibles()));
 }

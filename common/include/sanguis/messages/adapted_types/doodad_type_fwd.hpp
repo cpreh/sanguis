@@ -4,16 +4,10 @@
 #include <sanguis/doodad_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-doodad_type
-=
-sanguis::messages::adapted_types::enum_<
-	sanguis::doodad_type
->;
+using doodad_type = sanguis::messages::adapted_types::enum_<sanguis::doodad_type>;
 
 }
 

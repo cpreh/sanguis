@@ -5,18 +5,11 @@
 #include <sanguis/server/entities/base_ref.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace sanguis::server::buffs
 {
 
-using
-create_callback
-=
-fcppt::function<
-	sanguis::server::buffs::optional_unique_ptr (
-		sanguis::server::entities::base_ref
-	)
->;
+using create_callback = fcppt::function<sanguis::server::buffs::optional_unique_ptr(
+    sanguis::server::entities::base_ref)>;
 
 }
 

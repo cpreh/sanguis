@@ -3,14 +3,10 @@
 
 #include <alda/bindings/float_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-weapon_attribute_value
-=
-alda::bindings::float_;
+using weapon_attribute_value = alda::bindings::float_;
 
 }
 

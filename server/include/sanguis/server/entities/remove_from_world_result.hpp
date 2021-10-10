@@ -4,29 +4,22 @@
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
 
-
 namespace sanguis::server::entities
 {
 
 class remove_from_world_result
 {
 public:
-	remove_from_world_result();
+  remove_from_world_result();
 
-	explicit
-	remove_from_world_result(
-		sanguis::collision::world::body_exit_container &&
-	);
+  explicit remove_from_world_result(sanguis::collision::world::body_exit_container &&);
 
-	[[nodiscard]]
-	sanguis::collision::world::body_exit_container const &
-	body_exit() const;
+  [[nodiscard]] sanguis::collision::world::body_exit_container const &body_exit() const;
 
-	[[nodiscard]]
-	sanguis::collision::world::body_exit_container &&
-	release_body_exit();
+  [[nodiscard]] sanguis::collision::world::body_exit_container &&release_body_exit();
+
 private:
-	sanguis::collision::world::body_exit_container body_exit_;
+  sanguis::collision::world::body_exit_container body_exit_;
 };
 
 }

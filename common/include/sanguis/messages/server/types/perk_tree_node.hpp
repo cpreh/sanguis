@@ -4,5 +4,4 @@
 #include <sanguis/messages/server/adapted_types/perk_tree_node.hpp>
 #include <sanguis/messages/server/types/perk_tree_node_fwd.hpp>
 
-
 #endif

@@ -3,12 +3,10 @@
 
 #include <sanguis/creator/name.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
-sanguis::creator::name
-maze_name();
+sanguis::creator::name maze_name();
 
 }
 

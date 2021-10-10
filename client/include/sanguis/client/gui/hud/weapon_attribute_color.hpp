@@ -3,12 +3,10 @@
 
 #include <sge/gui/text_color.hpp>
 
-
 namespace sanguis::client::gui::hud
 {
 
-sge::gui::text_color
-weapon_attribute_color();
+sge::gui::text_color weapon_attribute_color();
 
 }
 

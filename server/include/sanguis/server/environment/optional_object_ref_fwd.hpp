@@ -4,16 +4,10 @@
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace sanguis::server::environment
 {
 
-using
-optional_object_ref
-=
-fcppt::optional::reference<
-	sanguis::server::environment::object
->;
+using optional_object_ref = fcppt::optional::reference<sanguis::server::environment::object>;
 
 }
 

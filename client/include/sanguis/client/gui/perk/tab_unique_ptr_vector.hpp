@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::gui::perk
 {
 
-using
-tab_unique_ptr_vector
-=
-std::vector<
-	sanguis::client::gui::perk::tab_unique_ptr
->;
+using tab_unique_ptr_vector = std::vector<sanguis::client::gui::perk::tab_unique_ptr>;
 
 }
 

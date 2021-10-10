@@ -4,20 +4,18 @@
 #include <sanguis/client/draw2d/scene/state/scoped_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::scene::state
 {
 
 class scoped
 {
-	FCPPT_NONMOVABLE(
-		scoped
-	);
+  FCPPT_NONMOVABLE(scoped);
+
 protected:
-	scoped();
+  scoped();
+
 public:
-	virtual
-	~scoped();
+  virtual ~scoped();
 };
 
 }

@@ -17,7 +17,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #include <sanguis/exception.hpp>
 #include <sanguis/client/load/resource/animation/entity_vector.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
@@ -26,61 +25,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 sanguis::client::load::resource::animation::series::series(
-	sanguis::client::load::resource::animation::entity_vector &&_entities
-)
-:
-	entities_(
-		std::move(
-			_entities
-		)
-	)
+    sanguis::client::load::resource::animation::entity_vector &&_entities)
+    : entities_(std::move(_entities))
 {
-	if(
-		entities_.empty()
-	)
-	{
-		throw
-			sanguis::exception{
-				FCPPT_TEXT("animation::texture series is empty!")
-			};
-	}
+  if (entities_.empty())
+  {
+    throw sanguis::exception{FCPPT_TEXT("animation::texture series is empty!")};
+  }
 }
 
-sanguis::client::load::resource::animation::series::series(
-	series &&
-)
-noexcept
-= default;
+sanguis::client::load::resource::animation::series::series(series &&) noexcept = default;
 
 sanguis::client::load::resource::animation::series &
-sanguis::client::load::resource::animation::series::operator=(
-	series &&
-)
-noexcept
-= default;
+sanguis::client::load::resource::animation::series::operator=(series &&) noexcept = default;
 
-sanguis::client::load::resource::animation::series::~series()
-= default;
+sanguis::client::load::resource::animation::series::~series() = default;
 
 sanguis::client::load::resource::animation::entity_vector const &
 sanguis::client::load::resource::animation::series::entities() const
 {
-	return
-		entities_;
+  return entities_;
 }
 
 sanguis::client::load::resource::animation::series::const_iterator
 sanguis::client::load::resource::animation::series::begin() const
 {
-	return
-		entities_.begin();
+  return entities_.begin();
 }
 
 sanguis::client::load::resource::animation::series::const_iterator
 sanguis::client::load::resource::animation::series::end() const
 {
-	return
-		entities_.end();
+  return entities_.end();
 }

@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::collision
 {
 
-using
-ghost_container
-=
-std::vector<
-	sanguis::server::collision::ghost
->;
+using ghost_container = std::vector<sanguis::server::collision::ghost>;
 
 }
 

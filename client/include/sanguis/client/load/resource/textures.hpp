@@ -20,97 +20,59 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::load::resource
 {
 
 class textures
 {
-	FCPPT_NONMOVABLE(
-		textures
-	);
+  FCPPT_NONMOVABLE(textures);
+
 public:
-	[[nodiscard]]
-	sge::texture::part const &
-	load(
-		sanguis::client::load::resource::texture_identifier const &
-	) const;
+  [[nodiscard]] sge::texture::part const &
+  load(sanguis::client::load::resource::texture_identifier const &) const;
 
-	[[nodiscard]]
-	sge::texture::part const &
-	load(
-		std::filesystem::path const &
-	) const;
+  [[nodiscard]] sge::texture::part const &load(std::filesystem::path const &) const;
 
-	[[nodiscard]]
-	sge::texture::const_optional_part_ref
-	load_opt(
-		std::filesystem::path const &
-	) const;
+  [[nodiscard]] sge::texture::const_optional_part_ref load_opt(std::filesystem::path const &) const;
 
-	[[nodiscard]]
-	sge::texture::part const &
-	missing_texture() const;
+  [[nodiscard]] sge::texture::part const &missing_texture() const;
 
-	// TODO(philipp): Remove this
-	[[nodiscard]]
-	sge::image2d::system &
-	image_system() const;
+  // TODO(philipp): Remove this
+  [[nodiscard]] sge::image2d::system &image_system() const;
 
-	// TODO(philipp): Remove this
-	[[nodiscard]]
-	sge::renderer::device::core &
-	renderer() const;
+  // TODO(philipp): Remove this
+  [[nodiscard]] sge::renderer::device::core &renderer() const;
 
-	textures(
-		fcppt::log::context_reference,
-		sge::renderer::device::core_ref,
-		sge::image2d::system_ref
-	);
+  textures(
+      fcppt::log::context_reference, sge::renderer::device::core_ref, sge::image2d::system_ref);
 
-	~textures();
+  ~textures();
+
 private:
-	[[nodiscard]]
-	sge::texture::const_part_unique_ptr
-	do_load(
-		sanguis::client::load::resource::texture_identifier const &
-	) const;
+  [[nodiscard]] sge::texture::const_part_unique_ptr
+  do_load(sanguis::client::load::resource::texture_identifier const &) const;
 
-	[[nodiscard]]
-	sge::texture::const_part_unique_ptr
-	do_load_inner(
-		std::filesystem::path const &
-	) const;
+  [[nodiscard]] sge::texture::const_part_unique_ptr
+  do_load_inner(std::filesystem::path const &) const;
 
-	using
-	texture_map
-	=
-	std::map<
-		sanguis::client::load::resource::texture_identifier,
-		sge::texture::const_part_unique_ptr
-	>;
+  using texture_map = std::
+      map<sanguis::client::load::resource::texture_identifier, sge::texture::const_part_unique_ptr>;
 
-	using
-	unnamed_texture_map
-	=
-	std::map<
-		std::filesystem::path,
-		sge::texture::const_part_unique_ptr
-	>;
+  using unnamed_texture_map = std::map<std::filesystem::path, sge::texture::const_part_unique_ptr>;
 
-	mutable fcppt::log::object log_;
+  mutable fcppt::log::object log_;
 
-	sge::renderer::device::core_ref const renderer_;
+  sge::renderer::device::core_ref const renderer_;
 
-	sge::image2d::system_ref const image_loader_;
+  sge::image2d::system_ref const image_loader_;
 
-	mutable sanguis::client::load::resource::texture_name_map texture_names_;
+  mutable sanguis::client::load::resource::texture_name_map texture_names_;
 
-	mutable texture_map textures_;
+  mutable texture_map textures_;
 
-	mutable unnamed_texture_map unnamed_textures_;
+  mutable unnamed_texture_map unnamed_textures_;
 
-	sge::texture::const_part_unique_ptr const missing_texture_;
+  sge::texture::const_part_unique_ptr const missing_texture_;
 };
 
 }

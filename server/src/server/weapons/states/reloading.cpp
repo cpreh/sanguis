@@ -22,116 +22,60 @@
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
-sanguis::server::weapons::states::reloading::reloading(
-	my_context _ctx
-)
-:
-	my_base(
-		_ctx
-	),
-	reload_time_(
-		sanguis::diff_timer::parameters(
-			fcppt::make_cref(
-				this->context<
-					sanguis::server::weapons::weapon
-				>().diff_clock()
-			),
-			FCPPT_ASSERT_OPTIONAL_ERROR(
-				this->context<
-					sanguis::server::weapons::weapon
-				>().reload_time()
-			).get()
-			/
-			this->context<
-				sanguis::server::weapons::weapon
-			>().owner().irs().get()
-		)
-	),
-	cancelled_(
-		true
-	)
+sanguis::server::weapons::states::reloading::reloading(my_context _ctx)
+    : my_base(_ctx),
+      reload_time_(sanguis::diff_timer::parameters(
+          fcppt::make_cref(this->context<sanguis::server::weapons::weapon>().diff_clock()),
+          FCPPT_ASSERT_OPTIONAL_ERROR(
+              this->context<sanguis::server::weapons::weapon>().reload_time())
+                  .get() /
+              this->context<sanguis::server::weapons::weapon>().owner().irs().get())),
+      cancelled_(true)
 {
-	this->context<
-		sanguis::server::weapons::weapon
-	>().weapon_status(
-		sanguis::weapon_status::reloading
-	);
+  this->context<sanguis::server::weapons::weapon>().weapon_status(
+      sanguis::weapon_status::reloading);
 
-	this->context<
-		sanguis::server::weapons::weapon
-	>().reload_time(
-		sge::timer::remaining(
-			reload_time_
-		)
-	);
+  this->context<sanguis::server::weapons::weapon>().reload_time(
+      sge::timer::remaining(reload_time_));
 
-	FCPPT_LOG_VERBOSE(
-		this->context<
-			sanguis::server::weapons::weapon
-		>().log().main_log(),
-		fcppt::log::out
-			<< FCPPT_TEXT("reloading: ")
-			<< this
-	)
+  FCPPT_LOG_VERBOSE(
+      this->context<sanguis::server::weapons::weapon>().log().main_log(),
+      fcppt::log::out << FCPPT_TEXT("reloading: ") << this)
 }
 
 FCPPT_PP_POP_WARNING
 
-sanguis::server::weapons::states::reloading::~reloading()
-= default;
+sanguis::server::weapons::states::reloading::~reloading() = default;
 
 boost::statechart::result
-sanguis::server::weapons::states::reloading::react(
-	sanguis::server::weapons::events::poll const &
-)
+sanguis::server::weapons::states::reloading::react(sanguis::server::weapons::events::poll const &)
 {
-	if(
-		!reload_time_.expired()
-	)
-	{
-		return
-			this->discard_event();
-	}
+  if (!reload_time_.expired())
+  {
+    return this->discard_event();
+  }
 
-	this->context<
-		sanguis::server::weapons::weapon
-	>().reset_magazine();
+  this->context<sanguis::server::weapons::weapon>().reset_magazine();
 
-	return
-		cancelled_
-		?
-			this->transit<
-				sanguis::server::weapons::states::idle
-			>()
-		:
-			this->transit<
-				sanguis::server::weapons::states::castpoint
-			>()
-		;
+  return cancelled_ ? this->transit<sanguis::server::weapons::states::idle>()
+                    : this->transit<sanguis::server::weapons::states::castpoint>();
 }
 
 boost::statechart::result
-sanguis::server::weapons::states::reloading::react(
-	sanguis::server::weapons::events::shoot const &
-)
+sanguis::server::weapons::states::reloading::react(sanguis::server::weapons::events::shoot const &)
 {
-	cancelled_ = false;
+  cancelled_ = false;
 
-	return
-		this->discard_event();
+  return this->discard_event();
 }
 
 boost::statechart::result
-sanguis::server::weapons::states::reloading::react(
-	sanguis::server::weapons::events::stop const &
-)
+sanguis::server::weapons::states::reloading::react(sanguis::server::weapons::events::stop const &)
 {
-	cancelled_ = true;
+  cancelled_ = true;
 
-	return
-		this->discard_event();
+  return this->discard_event();
 }

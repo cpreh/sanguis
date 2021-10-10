@@ -3,14 +3,13 @@
 
 #include <sanguis/client/control/actions/binary_type_fwd.hpp>
 
-
 namespace sanguis::client::control::actions
 {
 
 enum class binary_type
 {
-	shoot_primary,
-	shoot_secondary
+  shoot_primary,
+  shoot_secondary
 };
 
 }

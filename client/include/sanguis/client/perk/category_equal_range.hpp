@@ -4,15 +4,11 @@
 #include <sanguis/client/perk/const_tree_range.hpp>
 #include <sanguis/client/perk/tree.hpp>
 
-
 namespace sanguis::client::perk
 {
 
-sanguis::client::perk::const_tree_range
-category_equal_range(
-	sanguis::client::perk::tree::const_iterator,
-	sanguis::client::perk::tree::const_iterator
-);
+sanguis::client::perk::const_tree_range category_equal_range(
+    sanguis::client::perk::tree::const_iterator, sanguis::client::perk::tree::const_iterator);
 
 }
 

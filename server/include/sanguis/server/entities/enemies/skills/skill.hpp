@@ -6,37 +6,26 @@
 #include <sanguis/server/entities/enemies/skills/skill_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::enemies::skills
 {
 
 class skill
 {
-	FCPPT_NONMOVABLE(
-		skill
-	);
+  FCPPT_NONMOVABLE(skill);
+
 protected:
-	skill();
+  skill();
+
 public:
-	virtual
-	~skill() = 0;
+  virtual ~skill() = 0;
 
-	virtual
-	void
-	update(
-		sanguis::server::entities::enemies::enemy & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  virtual void
+  update(sanguis::server::entities::enemies::enemy & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 
-	virtual
-	void
-	on_die(
-		sanguis::server::entities::enemies::enemy const &
-	);
+  virtual void on_die(sanguis::server::entities::enemies::enemy const &);
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::entities::enemies::attribute
-	attribute() const = 0;
+  [[nodiscard]] virtual sanguis::server::entities::enemies::attribute attribute() const = 0;
 };
 
 }

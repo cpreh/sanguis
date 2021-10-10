@@ -5,5 +5,4 @@
 #include <sanguis/client/draw2d/sprite/optional_dim_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

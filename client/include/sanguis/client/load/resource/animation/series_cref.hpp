@@ -4,16 +4,10 @@
 #include <sanguis/client/load/resource/animation/series_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::load::resource::animation
 {
 
-using
-series_cref
-=
-fcppt::reference<
-	sanguis::client::load::resource::animation::series const
->;
+using series_cref = fcppt::reference<sanguis::client::load::resource::animation::series const>;
 
 }
 

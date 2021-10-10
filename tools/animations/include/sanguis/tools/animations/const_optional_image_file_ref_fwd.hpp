@@ -6,16 +6,10 @@
 #include <QImage>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tools::animations
 {
 
-using
-const_optional_image_file_ref
-=
-fcppt::optional::reference<
-	QImage const
->;
+using const_optional_image_file_ref = fcppt::optional::reference<QImage const>;
 
 }
 

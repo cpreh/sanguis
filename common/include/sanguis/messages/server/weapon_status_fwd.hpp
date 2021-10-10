@@ -10,25 +10,17 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-weapon_status
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::weapon_status
-	>,
-	alda::bindings::record_variadic<
-		sanguis::messages::server::parts::entity_id,
-		fcppt::record::element<
-			sanguis::messages::roles::weapon_status,
-			sanguis::messages::adapted_types::weapon_status
-		>
-	>
->;
+using weapon_status = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::weapon_status>,
+    alda::bindings::record_variadic<
+        sanguis::messages::server::parts::entity_id,
+        fcppt::record::element<
+            sanguis::messages::roles::weapon_status,
+            sanguis::messages::adapted_types::weapon_status>>>;
 
 }
 

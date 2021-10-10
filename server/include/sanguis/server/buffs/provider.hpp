@@ -12,47 +12,28 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::buffs
 {
 
 class provider
 {
-	FCPPT_NONMOVABLE(
-		provider
-	);
+  FCPPT_NONMOVABLE(provider);
+
 public:
-	provider();
+  provider();
 
-	~provider();
+  ~provider();
 
-	void
-	add(
-		sanguis::server::entities::with_buffs_ref,
-		sanguis::server::buffs::unique_ptr &&
-	);
+  void add(sanguis::server::entities::with_buffs_ref, sanguis::server::buffs::unique_ptr &&);
 
-	void
-	remove(
-		sanguis::server::entities::with_buffs & // NOLINT(google-runtime-references)
-	); // NOLINT(google-runtime-references)
+  void remove(sanguis::server::entities::with_buffs & // NOLINT(google-runtime-references)
+  ); // NOLINT(google-runtime-references)
 private:
-	using
-	buff_reference
-	=
-	fcppt::reference<
-		sanguis::server::buffs::buff
-	>;
+  using buff_reference = fcppt::reference<sanguis::server::buffs::buff>;
 
-	using
-	buff_map
-	=
-	std::unordered_map<
-		sanguis::server::entities::with_buffs_ref,
-		buff_reference
-	>;
+  using buff_map = std::unordered_map<sanguis::server::entities::with_buffs_ref, buff_reference>;
 
-	buff_map buffs_;
+  buff_map buffs_;
 };
 
 }

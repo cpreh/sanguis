@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/scene/hover/base_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace sanguis::client::draw2d::scene::hover
 {
 
-using
-base_unique_ptr
-=
-fcppt::unique_ptr<
-	sanguis::client::draw2d::scene::hover::base
->;
+using base_unique_ptr = fcppt::unique_ptr<sanguis::client::draw2d::scene::hover::base>;
 
 }
 

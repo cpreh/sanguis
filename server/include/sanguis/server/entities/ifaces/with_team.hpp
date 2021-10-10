@@ -4,25 +4,20 @@
 #include <sanguis/server/team_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::server::entities::ifaces
 {
 
 class with_team
 {
-	FCPPT_NONMOVABLE(
-		with_team
-	);
-protected:
-	with_team();
-public:
-	[[nodiscard]]
-	virtual
-	sanguis::server::team
-	team() const = 0;
+  FCPPT_NONMOVABLE(with_team);
 
-	virtual
-	~with_team();
+protected:
+  with_team();
+
+public:
+  [[nodiscard]] virtual sanguis::server::team team() const = 0;
+
+  virtual ~with_team();
 };
 
 }

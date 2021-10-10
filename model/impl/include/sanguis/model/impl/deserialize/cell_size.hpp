@@ -4,14 +4,10 @@
 #include <sanguis/model/cell_size.hpp>
 #include <sge/parse/json/object_fwd.hpp>
 
-
 namespace sanguis::model::impl::deserialize
 {
 
-sanguis::model::cell_size
-cell_size(
-	sge::parse::json::object const &
-);
+sanguis::model::cell_size cell_size(sge::parse::json::object const &);
 
 }
 

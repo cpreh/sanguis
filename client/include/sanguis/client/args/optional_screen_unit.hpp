@@ -4,5 +4,4 @@
 #include <sanguis/client/args/optional_screen_unit_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

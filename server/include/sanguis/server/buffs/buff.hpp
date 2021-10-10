@@ -6,56 +6,36 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace sanguis::server::buffs
 {
 
 class buff
 {
-	FCPPT_NONMOVABLE(
-		buff
-	);
+  FCPPT_NONMOVABLE(buff);
+
 public:
-	[[nodiscard]]
-	virtual
-	sanguis::buff_type
-	type() const = 0;
+  [[nodiscard]] virtual sanguis::buff_type type() const = 0;
 
-	virtual
-	void
-	add();
+  virtual void add();
 
-	virtual
-	void
-	remove();
+  virtual void remove();
 
-	virtual
-	void
-	update();
+  virtual void update();
 
-	virtual
-	~buff() = 0;
+  virtual ~buff() = 0;
 
-	[[nodiscard]]
-	// Only compares other buffs with the same typeid
-	virtual
-	bool
-	greater(
-		sanguis::server::buffs::buff const &
-	) const = 0;
+  [[nodiscard]]
+  // Only compares other buffs with the same typeid
+  virtual bool
+  greater(sanguis::server::buffs::buff const &) const = 0;
+
 protected:
-	buff();
+  buff();
 
-	FCPPT_DECLARE_STRONG_TYPEDEF(
-		bool,
-		added
-	);
+  FCPPT_DECLARE_STRONG_TYPEDEF(bool, added);
+
 private:
-	virtual
-	void
-	apply(
-		sanguis::server::buffs::buff::added
-	);
+  virtual void apply(sanguis::server::buffs::buff::added);
 };
 
 }

@@ -3,16 +3,15 @@
 
 #include <sanguis/secondary_weapon_type_fwd.hpp>
 
-
 namespace sanguis
 {
 
 enum class secondary_weapon_type
 {
-	grenade,
-	sentry,
-	spider,
-	fcppt_maximum = spider
+  grenade,
+  sentry,
+  spider,
+  fcppt_maximum = spider
 };
 
 }

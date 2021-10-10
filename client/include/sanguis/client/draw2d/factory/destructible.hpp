@@ -7,17 +7,14 @@
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <sanguis/creator/destructible_type_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::factory
 {
 
-sanguis::client::draw2d::entities::unique_ptr
-destructible(
-	sanguis::client::draw2d::entities::load_parameters const &,
-	sanguis::client::draw2d::sprite::center const &,
-	sanguis::client::draw2d::sprite::rotation,
-	sanguis::creator::destructible_type
-);
+sanguis::client::draw2d::entities::unique_ptr destructible(
+    sanguis::client::draw2d::entities::load_parameters const &,
+    sanguis::client::draw2d::sprite::center const &,
+    sanguis::client::draw2d::sprite::rotation,
+    sanguis::creator::destructible_type);
 
 }
 

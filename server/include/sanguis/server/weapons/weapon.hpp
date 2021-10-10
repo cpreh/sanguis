@@ -38,193 +38,116 @@
 #include <boost/statechart/state_machine.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons
 {
 
 class weapon
-:
-	public
-		boost::statechart::state_machine<
-			sanguis::server::weapons::weapon,
-			sanguis::server::weapons::states::idle
-		>
+    : public boost::statechart::
+          state_machine<sanguis::server::weapons::weapon, sanguis::server::weapons::states::idle>
 {
-	FCPPT_NONMOVABLE(
-		weapon
-	);
+  FCPPT_NONMOVABLE(weapon);
+
 protected:
-	explicit
-	weapon(
-		sanguis::server::weapons::parameters const &
-	);
+  explicit weapon(sanguis::server::weapons::parameters const &);
+
 public:
-	~weapon()
-	override = 0;
+  ~weapon() override = 0;
 
-	void
-	owner(
-		sanguis::server::entities::optional_with_weapon_ref const &
-	);
+  void owner(sanguis::server::entities::optional_with_weapon_ref const &);
 
-	void
-	attack();
+  void attack();
 
-	void
-	reload();
+  void reload();
 
-	void
-	stop();
+  void stop();
 
-	void
-	update();
+  void update();
 
-	void
-	tick(
-		sanguis::duration const &
-	);
+  void tick(sanguis::duration const &);
 
-	[[nodiscard]]
-	sanguis::weapon_type
-	type() const;
+  [[nodiscard]] sanguis::weapon_type type() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::attributes::magazine_size
-	magazine_size() const;
+  [[nodiscard]] sanguis::server::weapons::attributes::magazine_size magazine_size() const;
 
-	[[nodiscard]]
-	bool
-	in_range(
-		sanguis::server::weapons::target const &
-	) const;
+  [[nodiscard]] bool in_range(sanguis::server::weapons::target const &) const;
 
-	[[nodiscard]]
-	bool
-	owner_target_in_range() const;
+  [[nodiscard]] bool owner_target_in_range() const;
 
-	[[nodiscard]]
-	sanguis::weapon_description
-	description() const;
+  [[nodiscard]] sanguis::weapon_description description() const;
 
-	[[nodiscard]]
-	virtual
-	sanguis::weapon_attribute_vector
-	attributes() const = 0;
+  [[nodiscard]] virtual sanguis::weapon_attribute_vector attributes() const = 0;
 
-	[[nodiscard]]
-	virtual
-	sanguis::server::weapons::unique_ptr
-	clone() const = 0;
+  [[nodiscard]] virtual sanguis::server::weapons::unique_ptr clone() const = 0;
+
 protected:
-	[[nodiscard]]
-	virtual
-	sanguis::server::weapons::attack_result
-	do_attack(
-		sanguis::server::weapons::attack const &
-	) = 0;
+  [[nodiscard]] virtual sanguis::server::weapons::attack_result
+  do_attack(sanguis::server::weapons::attack const &) = 0;
 
-	virtual
-	void
-	owner_lost();
+  virtual void owner_lost();
 
-	[[nodiscard]]
-	sanguis::diff_clock const &
-	diff_clock() const;
+  [[nodiscard]] sanguis::diff_clock const &diff_clock() const;
 
-	[[nodiscard]]
-	sanguis::random_generator &
-	random_generator() const;
+  [[nodiscard]] sanguis::random_generator &random_generator() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::log const &
-	log() const;
+  [[nodiscard]] sanguis::server::weapons::log const &log() const;
 
-	[[nodiscard]]
-	sanguis::server::entities::with_weapon &
-	owner() const;
+  [[nodiscard]] sanguis::server::entities::with_weapon &owner() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::parameters
-	parameters() const;
+  [[nodiscard]] sanguis::server::weapons::parameters parameters() const;
+
 private:
-	friend class sanguis::server::weapons::states::idle;
-	friend class sanguis::server::weapons::states::reloading;
-	friend class sanguis::server::weapons::states::backswing;
-	friend class sanguis::server::weapons::states::castpoint;
+  friend class sanguis::server::weapons::states::idle;
+  friend class sanguis::server::weapons::states::reloading;
+  friend class sanguis::server::weapons::states::backswing;
+  friend class sanguis::server::weapons::states::castpoint;
 
-	void
-	weapon_status(
-		sanguis::weapon_status
-	);
+  void weapon_status(sanguis::weapon_status);
 
-	void
-	reload_time(
-		sanguis::duration
-	);
+  void reload_time(sanguis::duration);
 
-	void
-	reset_magazine();
+  void reset_magazine();
 
-	void
-	use_magazine_item();
+  void use_magazine_item();
 
-	[[nodiscard]]
-	bool
-	magazine_empty() const;
+  [[nodiscard]] bool magazine_empty() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::attributes::optional_accuracy
-	accuracy() const;
+  [[nodiscard]] sanguis::server::weapons::attributes::optional_accuracy accuracy() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::cast_point
-	cast_point() const;
+  [[nodiscard]] sanguis::server::weapons::cast_point cast_point() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::backswing_time
-	backswing_time() const;
+  [[nodiscard]] sanguis::server::weapons::backswing_time backswing_time() const;
 
-	[[nodiscard]]
-	sanguis::server::weapons::optional_reload_time
-	reload_time() const;
+  [[nodiscard]] sanguis::server::weapons::optional_reload_time reload_time() const;
 
-	[[nodiscard]]
-	sanguis::magazine_remaining
-	magazine_remaining() const;
+  [[nodiscard]] sanguis::magazine_remaining magazine_remaining() const;
 
-	void
-	update_magazine_remaining();
+  void update_magazine_remaining();
 
-	sanguis::diff_clock diff_clock_;
+  sanguis::diff_clock diff_clock_;
 
-	sanguis::random_generator_ref const random_generator_;
+  sanguis::random_generator_ref const random_generator_;
 
-	sanguis::server::weapons::log_cref const log_;
+  sanguis::server::weapons::log_cref const log_;
 
-	sanguis::weapon_type const type_;
+  sanguis::weapon_type const type_;
 
-	sanguis::server::weapons::attributes::optional_accuracy const accuracy_;
+  sanguis::server::weapons::attributes::optional_accuracy const accuracy_;
 
-	sanguis::server::weapons::range const range_;
+  sanguis::server::weapons::range const range_;
 
-	using
-	optional_magazine_used
-	=
-	fcppt::optional::object<
-		sanguis::magazine_type
-	>;
+  using optional_magazine_used = fcppt::optional::object<sanguis::magazine_type>;
 
-	optional_magazine_used magazine_used_;
+  optional_magazine_used magazine_used_;
 
-	sanguis::server::weapons::attributes::optional_magazine_size const magazine_size_;
+  sanguis::server::weapons::attributes::optional_magazine_size const magazine_size_;
 
-	sanguis::server::weapons::cast_point const cast_point_;
+  sanguis::server::weapons::cast_point const cast_point_;
 
-	sanguis::server::weapons::backswing_time const backswing_time_;
+  sanguis::server::weapons::backswing_time const backswing_time_;
 
-	sanguis::server::weapons::optional_reload_time const reload_time_;
+  sanguis::server::weapons::optional_reload_time const reload_time_;
 
-	sanguis::server::entities::optional_with_weapon_ref owner_;
+  sanguis::server::entities::optional_with_weapon_ref owner_;
 };
 
 }

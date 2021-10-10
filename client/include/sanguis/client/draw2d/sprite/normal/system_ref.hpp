@@ -4,16 +4,10 @@
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace sanguis::client::draw2d::sprite::normal
 {
 
-using
-system_ref
-=
-fcppt::reference<
-	sanguis::client::draw2d::sprite::normal::system
->;
+using system_ref = fcppt::reference<sanguis::client::draw2d::sprite::normal::system>;
 
 }
 

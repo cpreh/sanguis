@@ -3,13 +3,10 @@
 
 #include <fcppt/record/make_label.hpp>
 
-
 namespace sanguis::messages::roles
 {
 
-FCPPT_RECORD_MAKE_LABEL(
-	weapon_attribute_type
-);
+FCPPT_RECORD_MAKE_LABEL(weapon_attribute_type);
 
 }
 

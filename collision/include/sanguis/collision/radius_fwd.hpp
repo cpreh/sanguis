@@ -4,14 +4,10 @@
 #include <sanguis/collision/length_fwd.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::collision
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	sanguis::collision::length,
-	radius
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(sanguis::collision::length, radius);
 
 }
 

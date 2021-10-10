@@ -5,5 +5,4 @@
 #include <sanguis/server/weapons/target.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

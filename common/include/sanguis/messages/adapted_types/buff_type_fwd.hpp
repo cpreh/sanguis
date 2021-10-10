@@ -4,16 +4,10 @@
 #include <sanguis/buff_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 
-
 namespace sanguis::messages::adapted_types
 {
 
-using
-buff_type
-=
-sanguis::messages::adapted_types::enum_<
-	sanguis::buff_type
->;
+using buff_type = sanguis::messages::adapted_types::enum_<sanguis::buff_type>;
 
 }
 

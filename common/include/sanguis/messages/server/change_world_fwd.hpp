@@ -18,44 +18,28 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server
 {
 
-using
-change_world
-=
-alda::message::object<
-	sanguis::messages::server::types::make_message_id<
-		sanguis::messages::server::types::message::change_world
-	>,
-	alda::bindings::record_variadic<
-		fcppt::record::element<
-			sanguis::messages::roles::world_id,
-			sanguis::messages::adapted_types::world_id
-		>,
-		fcppt::record::element<
-			sanguis::messages::roles::seed,
-			sanguis::messages::adapted_types::seed
-		>,
-		fcppt::record::element<
-			sanguis::messages::roles::generator_name,
-			sanguis::messages::adapted_types::string
-		>,
-		fcppt::record::element<
-			sanguis::messages::roles::opening_count,
-			sanguis::messages::adapted_types::opening_count_array
-		>,
-		fcppt::record::element<
-			sanguis::messages::roles::world_name,
-			sanguis::messages::adapted_types::string
-		>,
-		fcppt::record::element<
-			sanguis::messages::roles::spawn_boss,
-			sanguis::messages::adapted_types::bool_
-		>
-	>
->;
+using change_world = alda::message::object<
+    sanguis::messages::server::types::make_message_id<
+        sanguis::messages::server::types::message::change_world>,
+    alda::bindings::record_variadic<
+        fcppt::record::
+            element<sanguis::messages::roles::world_id, sanguis::messages::adapted_types::world_id>,
+        fcppt::record::
+            element<sanguis::messages::roles::seed, sanguis::messages::adapted_types::seed>,
+        fcppt::record::element<
+            sanguis::messages::roles::generator_name,
+            sanguis::messages::adapted_types::string>,
+        fcppt::record::element<
+            sanguis::messages::roles::opening_count,
+            sanguis::messages::adapted_types::opening_count_array>,
+        fcppt::record::
+            element<sanguis::messages::roles::world_name, sanguis::messages::adapted_types::string>,
+        fcppt::record::element<
+            sanguis::messages::roles::spawn_boss,
+            sanguis::messages::adapted_types::bool_>>>;
 
 }
 

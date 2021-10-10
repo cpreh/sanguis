@@ -3,14 +3,10 @@
 
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace sanguis::server::world
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	unsigned,
-	difficulty
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(unsigned, difficulty);
 
 }
 

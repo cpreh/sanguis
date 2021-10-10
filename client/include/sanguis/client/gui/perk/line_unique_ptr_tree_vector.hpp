@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::gui::perk
 {
 
-using
-line_unique_ptr_tree_vector
-=
-std::vector<
-	sanguis::client::gui::perk::line_unique_ptr_tree
->;
+using line_unique_ptr_tree_vector = std::vector<sanguis::client::gui::perk::line_unique_ptr_tree>;
 
 }
 

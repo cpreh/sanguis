@@ -9,13 +9,10 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wweak-template-vtables)
 
-SANGUIS_MESSAGES_CLIENT_DECLARE_MESSAGE(
-	sanguis::messages::client::change_world
-);
+SANGUIS_MESSAGES_CLIENT_DECLARE_MESSAGE(sanguis::messages::client::change_world);
 
 FCPPT_PP_POP_WARNING
 

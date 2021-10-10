@@ -11,47 +11,28 @@
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::weapons::modifiers
 {
 
 struct aoe
 {
-	template<
-		typename Parameters
-	>
-	static
-	void
-	make(
-		sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
-		sanguis::server::entities::enemies::difficulty const _difficulty,
-		fcppt::reference<
-			Parameters
-		> const _parameters
-	)
-	{
-		_parameters.get().extra_aoe(
-			_parameters.get().aoe().base()
-			*
-			sanguis::server::weapons::aoe(
-				std::min(
-					sanguis::server::weapons::modifiers::random_increase(
-						_random_generator,
-						_difficulty
-					),
-					_parameters.get().aoe().base().get()
-					*
-					5.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-				)
-				-
-				fcppt::literal<
-					sanguis::server::weapons::aoe::value_type
-				>(
-					1
-				)
-			)
-		);
-	}
+  template <typename Parameters>
+  static void make(
+      sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
+      sanguis::server::entities::enemies::difficulty const _difficulty,
+      fcppt::reference<Parameters> const _parameters)
+  {
+    _parameters.get().extra_aoe(
+        _parameters.get().aoe().base() *
+        sanguis::server::weapons::aoe(
+            std::min(
+                sanguis::server::weapons::modifiers::random_increase(
+                    _random_generator, _difficulty),
+                _parameters.get().aoe().base().get() *
+                    5.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                ) -
+            fcppt::literal<sanguis::server::weapons::aoe::value_type>(1)));
+  }
 };
 
 }

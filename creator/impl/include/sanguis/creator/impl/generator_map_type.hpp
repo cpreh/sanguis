@@ -7,17 +7,11 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::creator::impl
 {
 
-using
-generator_map_type
-=
-std::unordered_map<
-	sanguis::creator::name,
-	sanguis::creator::impl::generator_function
->;
+using generator_map_type =
+    std::unordered_map<sanguis::creator::name, sanguis::creator::impl::generator_function>;
 
 }
 

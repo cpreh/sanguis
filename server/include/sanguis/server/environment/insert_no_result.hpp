@@ -6,23 +6,18 @@
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 
-
 namespace sanguis::server::environment
 {
 
-void
-insert_no_result(
-	sanguis::server::environment::object &, // NOLINT(google-runtime-references)
-	sanguis::server::entities::with_id_unique_ptr &&,
-	sanguis::server::entities::insert_parameters const &
-);
+void insert_no_result(
+    sanguis::server::environment::object &, // NOLINT(google-runtime-references)
+    sanguis::server::entities::with_id_unique_ptr &&,
+    sanguis::server::entities::insert_parameters const &);
 
-void
-insert_no_result(
-	sanguis::server::environment::object &, // NOLINT(google-runtime-references)
-	sanguis::server::entities::simple_unique_ptr &&,
-	sanguis::server::entities::insert_parameters const &
-);
+void insert_no_result(
+    sanguis::server::environment::object &, // NOLINT(google-runtime-references)
+    sanguis::server::entities::simple_unique_ptr &&,
+    sanguis::server::entities::insert_parameters const &);
 
 }
 

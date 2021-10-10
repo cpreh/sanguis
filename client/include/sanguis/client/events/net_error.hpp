@@ -8,56 +8,32 @@
 #include <boost/system/error_code.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::client::events
 {
 
-class net_error
-:
-	public boost::statechart::event<
-		sanguis::client::events::net_error
-	>
+class net_error : public boost::statechart::event<sanguis::client::events::net_error>
 {
 public:
-	net_error(
-		fcppt::string &&,
-		boost::system::error_code const &
-	);
+  net_error(fcppt::string &&, boost::system::error_code const &);
 
-	net_error(
-		net_error &&
-	)
-	noexcept;
+  net_error(net_error &&) noexcept;
 
-	net_error(
-		net_error const &
-	);
+  net_error(net_error const &);
 
-	net_error &
-	operator=(
-		net_error &&
-	)
-	noexcept;
+  net_error &operator=(net_error &&) noexcept;
 
-	net_error &
-	operator=(
-		net_error const &
-	);
+  net_error &operator=(net_error const &);
 
-	~net_error()
-	override;
+  ~net_error() override;
 
-	[[nodiscard]]
-	fcppt::string const &
-	message() const;
+  [[nodiscard]] fcppt::string const &message() const;
 
-	[[nodiscard]]
-	boost::system::error_code const &
-	code() const;
+  [[nodiscard]] boost::system::error_code const &code() const;
+
 private:
-	fcppt::string message_;
+  fcppt::string message_;
 
-	boost::system::error_code code_;
+  boost::system::error_code code_;
 };
 
 }

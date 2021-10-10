@@ -7,17 +7,10 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::world
 {
 
-using
-sight_range_map
-=
-std::map<
-	sanguis::server::player_id,
-	sanguis::server::world::sight_range
->;
+using sight_range_map = std::map<sanguis::server::player_id, sanguis::server::world::sight_range>;
 
 }
 

@@ -8,23 +8,16 @@
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
-
 namespace sanguis::messages::server::parts
 {
 
-using
-add_with_weapon
-=
-fcppt::mpl::list::object<
-	fcppt::record::element<
-		sanguis::messages::roles::primary_weapon,
-		sanguis::messages::adapted_types::optional_primary_weapon_type
-	>,
-	fcppt::record::element<
-		sanguis::messages::roles::weapon_status,
-		sanguis::messages::adapted_types::weapon_status
-	>
->;
+using add_with_weapon = fcppt::mpl::list::object<
+    fcppt::record::element<
+        sanguis::messages::roles::primary_weapon,
+        sanguis::messages::adapted_types::optional_primary_weapon_type>,
+    fcppt::record::element<
+        sanguis::messages::roles::weapon_status,
+        sanguis::messages::adapted_types::weapon_status>>;
 
 }
 

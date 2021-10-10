@@ -6,21 +6,11 @@
 #include <initializer_list>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::damage
 {
 
-template<
-	typename Unit
->
-using
-basic_meta_list
-=
-std::initializer_list<
-	sanguis::server::damage::basic_meta<
-		Unit
-	>
->;
+template <typename Unit>
+using basic_meta_list = std::initializer_list<sanguis::server::damage::basic_meta<Unit>>;
 
 }
 

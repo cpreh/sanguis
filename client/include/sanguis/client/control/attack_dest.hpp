@@ -4,5 +4,4 @@
 #include <sanguis/client/control/attack_dest_fwd.hpp>
 #include <fcppt/math/vector/static.hpp>
 
-
 #endif

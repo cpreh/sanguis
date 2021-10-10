@@ -3,14 +3,7 @@
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/name.hpp>
 
-
-fcppt::log::location
-sanguis::log_location()
+fcppt::log::location sanguis::log_location()
 {
-	return
-		fcppt::log::location(
-			fcppt::log::name{
-				sanguis::app_name()
-			}
-		);
+  return fcppt::log::location(fcppt::log::name{sanguis::app_name()});
 }

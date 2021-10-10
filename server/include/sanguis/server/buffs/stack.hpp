@@ -10,62 +10,36 @@
 #include <set>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::buffs
 {
 
 class stack
 {
-	FCPPT_NONCOPYABLE(
-		stack
-	);
+  FCPPT_NONCOPYABLE(stack);
+
 public:
-	stack();
+  stack();
 
-	stack(
-		stack &&
-	)
-	noexcept;
+  stack(stack &&) noexcept;
 
-	stack &
-	operator=(
-		stack &&
-	)
-	noexcept;
+  stack &operator=(stack &&) noexcept;
 
-	~stack();
+  ~stack();
 
-	void
-	insert(
-		sanguis::server::buffs::unique_ptr &&
-	);
+  void insert(sanguis::server::buffs::unique_ptr &&);
 
-	void
-	erase(
-		sanguis::server::buffs::buff const &
-	);
+  void erase(sanguis::server::buffs::buff const &);
 
-	[[nodiscard]]
-	bool
-	empty() const;
+  [[nodiscard]] bool empty() const;
 
-	[[nodiscard]]
-	sanguis::server::buffs::buff &
-	highest_buff();
+  [[nodiscard]] sanguis::server::buffs::buff &highest_buff();
 
-	[[nodiscard]]
-	sanguis::server::buffs::buff const &
-	highest_buff() const;
+  [[nodiscard]] sanguis::server::buffs::buff const &highest_buff() const;
+
 private:
-	using
-	set
-	=
-	std::multiset<
-		sanguis::server::buffs::unique_ptr,
-		sanguis::server::buffs::comparator
-	>;
+  using set = std::multiset<sanguis::server::buffs::unique_ptr, sanguis::server::buffs::comparator>;
 
-	set impl_;
+  set impl_;
 };
 
 }

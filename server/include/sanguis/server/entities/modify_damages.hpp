@@ -5,15 +5,11 @@
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/entities/ifaces/with_weapon_fwd.hpp>
 
-
 namespace sanguis::server::entities
 {
 
-sanguis::server::damage::modified_array
-modify_damages(
-	sanguis::server::entities::ifaces::with_weapon const &,
-	sanguis::server::damage::array const &
-);
+sanguis::server::damage::modified_array modify_damages(
+    sanguis::server::entities::ifaces::with_weapon const &, sanguis::server::damage::array const &);
 
 }
 

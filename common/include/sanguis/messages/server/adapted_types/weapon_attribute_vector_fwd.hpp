@@ -5,17 +5,12 @@
 #include <sanguis/messages/server/adapted_types/weapon_attribute_fwd.hpp>
 #include <sanguis/messages/server/types/weapon_attribute_vector.hpp>
 
-
 namespace sanguis::messages::server::adapted_types
 {
 
-using
-weapon_attribute_vector
-=
-sanguis::messages::adapted_types::dynamic_len<
-	sanguis::messages::server::types::weapon_attribute_vector,
-	sanguis::messages::server::adapted_types::weapon_attribute
->;
+using weapon_attribute_vector = sanguis::messages::adapted_types::dynamic_len<
+    sanguis::messages::server::types::weapon_attribute_vector,
+    sanguis::messages::server::adapted_types::weapon_attribute>;
 
 }
 

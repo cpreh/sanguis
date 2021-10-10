@@ -9,56 +9,32 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::server::events
 {
 
-class message
-:
-	public boost::statechart::event<
-		message
-	>
+class message : public boost::statechart::event<message>
 {
 public:
-	message(
-		sanguis::messages::client::unique_ptr &&,
-		sanguis::server::player_id
-	);
+  message(sanguis::messages::client::unique_ptr &&, sanguis::server::player_id);
 
-	message(
-		message &&
-	)
-	noexcept;
+  message(message &&) noexcept;
 
-	message(
-		message const &
-	);
+  message(message const &);
 
-	message &
-	operator=(
-		message &&
-	)
-	noexcept;
+  message &operator=(message &&) noexcept;
 
-	message &
-	operator=(
-		message const &
-	);
+  message &operator=(message const &);
 
-	~message()
-	override;
+  ~message() override;
 
-	[[nodiscard]]
-	sanguis::messages::client::shared_ptr
-	get() const;
+  [[nodiscard]] sanguis::messages::client::shared_ptr get() const;
 
-	[[nodiscard]]
-	sanguis::server::player_id
-	id() const;
+  [[nodiscard]] sanguis::server::player_id id() const;
+
 private:
-	sanguis::messages::client::shared_ptr message_;
+  sanguis::messages::client::shared_ptr message_;
 
-	sanguis::server::player_id id_;
+  sanguis::server::player_id id_;
 };
 
 }

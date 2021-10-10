@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace sanguis::tiles
 {
 
-using
-area_container
-=
-std::vector<
-	sge::image2d::rect
->;
+using area_container = std::vector<sge::image2d::rect>;
 
 }
 

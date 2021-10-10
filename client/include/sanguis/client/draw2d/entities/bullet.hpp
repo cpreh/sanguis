@@ -9,34 +9,27 @@
 #include <sanguis/load/model/path_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace sanguis::client::draw2d::entities
 {
 
-class bullet
-:
-	public sanguis::client::draw2d::entities::model::object
+class bullet : public sanguis::client::draw2d::entities::model::object
 {
-	FCPPT_NONMOVABLE(
-		bullet
-	);
+  FCPPT_NONMOVABLE(bullet);
+
 public:
-	bullet(
-		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::speed const &,
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::rotation,
-		sanguis::load::model::path &&
-	);
+  bullet(
+      sanguis::client::draw2d::entities::load_parameters const &,
+      sanguis::client::draw2d::speed const &,
+      sanguis::client::draw2d::sprite::center const &,
+      sanguis::client::draw2d::sprite::rotation,
+      sanguis::load::model::path &&);
 
-	~bullet()
-	override;
+  ~bullet() override;
+
 private:
-	void
-	update()
-	override;
+  void update() override;
 
-	sanguis::client::draw2d::sprite::center const origin_;
+  sanguis::client::draw2d::sprite::center const origin_;
 };
 
 }

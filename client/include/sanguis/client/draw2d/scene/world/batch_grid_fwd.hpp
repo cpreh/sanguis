@@ -4,17 +4,10 @@
 #include <sanguis/client/draw2d/scene/world/batch_fwd.hpp>
 #include <fcppt/container/grid/object_fwd.hpp>
 
-
 namespace sanguis::client::draw2d::scene::world
 {
 
-using
-batch_grid
-=
-fcppt::container::grid::object<
-	sanguis::client::draw2d::scene::world::batch,
-	2
->;
+using batch_grid = fcppt::container::grid::object<sanguis::client::draw2d::scene::world::batch, 2>;
 
 }
 
