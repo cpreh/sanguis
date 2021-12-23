@@ -11,7 +11,6 @@
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/filesystem/stem.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/warning.hpp>
@@ -38,7 +37,7 @@ sanguis::client::load::hud::weapon_icon_map sanguis::client::load::hud::make_wea
             fcppt::optional::object<sanguis::client::load::hud::weapon_icon_map::value_type>;
 
         return fcppt::optional::maybe(
-            sanguis::client::load::hud::weapon_type(fcppt::filesystem::stem(_path)),
+            sanguis::client::load::hud::weapon_type(fcppt::filesystem::path_to_string(_path.stem())),
             [&_log, &_path]
             {
               FCPPT_LOG_WARNING(

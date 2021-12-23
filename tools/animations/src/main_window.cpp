@@ -40,7 +40,6 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/truncation_check.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/filesystem/stem.hpp>
 #include <fcppt/optional/apply.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -121,8 +120,7 @@ try
                   sanguis::tools::libmergeimage::merge_images(
                       sge_systems_->image_system(), _resource_directory));
 
-              std::filesystem::path const json_file(
-                  _save_path / (fcppt::filesystem::stem(_save_path) + FCPPT_TEXT(".json")));
+              std::filesystem::path const json_file{fcppt::copy(_save_path).replace_extension("json")};
 
               sanguis::tools::libmergeimage::saved_image_vector const saved_images(
                   sanguis::tools::libmergeimage::save_images(

@@ -11,13 +11,13 @@
 #include <sge/systems/with_image2d.hpp>
 #include <fcppt/args_char.hpp>
 #include <fcppt/args_from_second.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/main.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/either/match.hpp>
-#include <fcppt/filesystem/stem.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/io/cout.hpp>
 #include <fcppt/options/apply.hpp>
@@ -77,7 +77,7 @@ void execute_main(argument_record const &_args)
       sanguis::tools::libmergeimage::save_images(sys.image_system(), output_path, result.images()));
 
   sanguis::model::serialize(
-      output_path / (fcppt::filesystem::stem(output_path) + FCPPT_TEXT(".json")),
+      fcppt::copy(output_path).replace_extension("json"),
       sanguis::tools::libmergeimage::to_model(result.cell_size(), saved_images));
 }
 

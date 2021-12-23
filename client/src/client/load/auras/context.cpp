@@ -9,7 +9,7 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/filesystem/stem.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/iterator/make_range.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
@@ -25,7 +25,8 @@ sanguis::client::load::auras::context::context(
           [&_resources](std::filesystem::path const &_path)
           {
             return std::make_pair(
-                sanguis::client::load::auras::lookup_name(fcppt::filesystem::stem(_path)),
+                sanguis::client::load::auras::lookup_name(
+                    fcppt::filesystem::path_to_string(_path.stem())),
                 fcppt::make_cref(_resources->load(_path)));
           }))
 {
