@@ -17,7 +17,6 @@
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/either/match.hpp>
-#include <fcppt/filesystem/normalize.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/io/cout.hpp>
@@ -68,10 +67,10 @@ void execute_main(argument_record const &_args)
   sanguis::tools::libmergeimage::merge_result const result(
       sanguis::tools::libmergeimage::merge_images(
           sys.image_system(),
-          fcppt::filesystem::normalize(
+          std::filesystem::canonical(
               std::filesystem::path(fcppt::record::get<input_path_label>(_args)))));
 
-  std::filesystem::path const output_path(fcppt::filesystem::normalize(
+  std::filesystem::path const output_path(std::filesystem::canonical(
       std::filesystem::path(fcppt::record::get<output_file_label>(_args))));
 
   sanguis::tools::libmergeimage::saved_image_vector const saved_images(
