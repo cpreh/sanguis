@@ -3,7 +3,6 @@
 #include <sanguis/tools/libmergeimage/impl/path_vector_vector.hpp>
 #include <sanguis/tools/libmergeimage/impl/tree_depth.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
-#include <fcppt/filesystem/strip_prefix.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/range/iterator_range.hpp>
 #include <filesystem>
@@ -29,7 +28,7 @@ sanguis::tools::libmergeimage::impl::gather_paths(std::filesystem::path const &_
       for (std::filesystem::path const &path : boost::make_iterator_range(
                std::filesystem::directory_iterator(*it), std::filesystem::directory_iterator()))
       {
-        temp.push_back(fcppt::filesystem::strip_prefix(_base_path, path));
+        temp.push_back(std::filesystem::relative(path, _base_path));
       }
 
       result.push_back(temp);
