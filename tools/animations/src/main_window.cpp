@@ -120,7 +120,8 @@ try
                   sanguis::tools::libmergeimage::merge_images(
                       sge_systems_->image_system(), _resource_directory));
 
-              std::filesystem::path const json_file{fcppt::copy(_save_path).replace_extension("json")};
+              std::filesystem::path const json_file{
+                  (_save_path / _save_path.stem()).replace_extension("json")};
 
               sanguis::tools::libmergeimage::saved_image_vector const saved_images(
                   sanguis::tools::libmergeimage::save_images(
