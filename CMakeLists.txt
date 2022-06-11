@@ -52,6 +52,16 @@ set(
 	"-fuchsia-virtual-inheritance"
 )
 
+set(
+	FCPPT_UTILS_CLANG_TIDY_WHITELIST
+	"fcppt"
+	"awl"
+	"mizuiro"
+	"sge"
+	"alda"
+	"sanguis"
+)
+
 include(
 	FcpptCMakeUtils
 )
