@@ -33,7 +33,7 @@ try : path_(std::move(_path)),
     part_result_(sanguis::client::load::model::make_parts(_log, path_, _context)), random_part_()
 {
   FCPPT_LOG_DEBUG(
-      _log, fcppt::log::out << FCPPT_TEXT("Entering ") << fcppt::filesystem::path_to_string(_path))
+      _log, fcppt::log::out << FCPPT_TEXT("Entering ") << fcppt::filesystem::path_to_string(this->path_))
 }
 catch (sge::core::exception const &_error)
 {
