@@ -19,6 +19,7 @@
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/math/vector/output.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -35,37 +36,46 @@ sanguis::tiles::impl::optional_content_path connecting_images(
     sanguis::creator::tile_grid<Tile> const &_grid,
     sanguis::creator::pos const _pos)
 {
-  sanguis::tiles::impl::neighbors<Tile> const neighbors(
-      sanguis::tiles::impl::make_neighbors(_grid, _pos));
-
   return fcppt::optional::maybe(
-      sanguis::tiles::impl::make_pair(neighbors),
-      [&_log, &neighbors]
+      sanguis::tiles::impl::make_neighbors(_grid, _pos),
+      [_pos, &_log]
       {
         FCPPT_LOG_ERROR(
-            _log,
-            fcppt::log::out << FCPPT_TEXT("Tile combination ")
-                            << sanguis::tiles::impl::neighbors_to_string(neighbors)
-                            << FCPPT_TEXT(" consists of too many tiles."))
+            _log, fcppt::log::out << FCPPT_TEXT("Tile out of range: ") << _pos << FCPPT_TEXT("."))
 
         return sanguis::tiles::impl::optional_content_path();
       },
-      [_error_code, &_log, &_collection, &neighbors](sanguis::tiles::pair<Tile> const _pair)
+      [_error_code, &_log, _collection](sanguis::tiles::impl::neighbors<Tile> const &_neighbors)
       {
-        FCPPT_PP_PUSH_WARNING
-        FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
-        return sanguis::tiles::impl::filter_connecting(_pair)
-                   ? sanguis::tiles::impl::optional_content_path{}
-                   : sanguis::tiles::impl::images_base(
-                         _log,
-                         _collection,
-                         _error_code,
-                         _pair,
-                         sanguis::tiles::impl::make_orientation(_pair, neighbors),
-                         sanguis::tiles::impl::error_message_function{[&neighbors] {
-                           return sanguis::tiles::impl::neighbors_to_string(neighbors);
-                         }});
-        FCPPT_PP_POP_WARNING
+        return fcppt::optional::maybe(
+            sanguis::tiles::impl::make_pair(_neighbors),
+            [&_log, &_neighbors]
+            {
+              FCPPT_LOG_ERROR(
+                  _log,
+                  fcppt::log::out << FCPPT_TEXT("Tile combination ")
+                                  << sanguis::tiles::impl::neighbors_to_string(_neighbors)
+                                  << FCPPT_TEXT(" consists of too many tiles."))
+
+              return sanguis::tiles::impl::optional_content_path();
+            },
+            [_error_code, &_log, &_collection, &_neighbors](sanguis::tiles::pair<Tile> const _pair)
+            {
+              FCPPT_PP_PUSH_WARNING
+              FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
+              return sanguis::tiles::impl::filter_connecting(_pair)
+                         ? sanguis::tiles::impl::optional_content_path{}
+                         : sanguis::tiles::impl::images_base(
+                               _log,
+                               _collection,
+                               _error_code,
+                               _pair,
+                               sanguis::tiles::impl::make_orientation(_pair, _neighbors),
+                               sanguis::tiles::impl::error_message_function{[&_neighbors] {
+                                 return sanguis::tiles::impl::neighbors_to_string(_neighbors);
+                               }});
+              FCPPT_PP_POP_WARNING
+            });
       });
 }
 
