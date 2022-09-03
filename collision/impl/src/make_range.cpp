@@ -10,7 +10,6 @@
 #include <sanguis/creator/sup.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/boost_units_value.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/clamped_min.hpp>
@@ -42,18 +41,19 @@ sanguis::creator::grid_crange sanguis::collision::impl::make_range(
           fcppt::boost_units_value{})) /
       tile_size};
 
-  sanguis::creator::min const lower(
-      fcppt::container::grid::clamped_min(FCPPT_ASSERT_OPTIONAL_ERROR(optional_pos)));
+  sanguis::creator::min const lower{
+      fcppt::container::grid::clamped_min(optional_pos.get_unsafe())};
 
-  sanguis::creator::sup const upper(fcppt::container::grid::clamped_sup_signed(
-      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::math::vector::ceil_div_signed(
+  sanguis::creator::sup const upper{fcppt::container::grid::clamped_sup_signed(
+      fcppt::math::vector::ceil_div_signed(
           fcppt::math::vector::structure_cast<
               sanguis::creator::signed_pos,
               fcppt::cast::float_to_int_fun>(fcppt::math::vector::map(
               _center.get() + fcppt::math::vector::fill<sanguis::collision::length2>(_radius.get()),
               fcppt::boost_units_value{})),
-          tile_size)),
-      _grid.size()));
+          tile_size)
+          .get_unsafe(),
+      _grid.size())};
 
   return fcppt::container::grid::make_pos_ref_crange_start_end(_grid, lower, upper);
 }
