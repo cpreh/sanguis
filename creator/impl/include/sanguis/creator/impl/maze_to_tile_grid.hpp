@@ -1,18 +1,22 @@
 #ifndef SANGUIS_CREATOR_IMPL_MAZE_TO_TILE_GRID_HPP_INCLUDED
 #define SANGUIS_CREATOR_IMPL_MAZE_TO_TILE_GRID_HPP_INCLUDED
 
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/output_to_fcppt_string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/vector/output.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 namespace sanguis::creator::impl
 {
@@ -80,8 +84,16 @@ sanguis::creator::tile_grid<Tile> maze_to_tile_grid(
     {
       for (dim_type::value_type x = 0U; x < cell_size.w(); ++x)
       {
-        FCPPT_ASSERT_OPTIONAL_ERROR(
-            fcppt::container::grid::at_optional(result, start + dim_type(x, y)))
+        typename grid_type::pos const pos{start + dim_type(x, y)};
+
+        fcppt::optional::to_exception(
+            fcppt::container::grid::at_optional(result, pos),
+            [pos]
+            {
+              return sanguis::creator::exception{
+                  FCPPT_TEXT("Position ") + fcppt::output_to_fcppt_string(pos) +
+                  FCPPT_TEXT(" out of range!")};
+            })
             .get() = cell.value() == sanguis::creator::impl::reachable(true) ? _empty : _wall;
       }
     }

@@ -67,11 +67,9 @@ sanguis::creator::impl::maze_result sanguis::creator::impl::generate_maze(
         tmp_pos,
         // potential spaces lie on every other row and column and aren't
         // carved out yet
-        [&_maze](pos const &_a)
-        {
-          return FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(_maze.get(), _a))
-                         .get() == sanguis::creator::impl::reachable(false) &&
-                 _a.x() % 2 == 1 && _a.y() % 2 == 1;
+        [](pos const &_a, sanguis::creator::impl::reachable const &_r) {
+          return _r == sanguis::creator::impl::reachable(false) && _a.x() % 2 == 1 &&
+                 _a.y() % 2 == 1;
         },
         fcppt::optional::object<sanguis::creator::pos::value_type>{});
 

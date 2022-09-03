@@ -98,7 +98,7 @@ sanguis::creator::impl::optional_pos find_closest(
       continue;
     }
 
-    if (_attribute(pos))
+    if (_attribute(pos, _grid.get_unsafe(_pos))) // TODO(philipp)
     {
       return sanguis::creator::impl::optional_pos(pos);
     }

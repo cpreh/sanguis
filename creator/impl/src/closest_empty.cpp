@@ -4,8 +4,6 @@
 #include <sanguis/creator/impl/closest_empty.hpp>
 #include <sanguis/creator/impl/find_closest.hpp>
 #include <sanguis/creator/impl/optional_pos.hpp>
-#include <fcppt/assert/optional_error.hpp>
-#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/optional/object.hpp>
 
 sanguis::creator::impl::optional_pos sanguis::creator::impl::closest_empty(
@@ -14,10 +12,9 @@ sanguis::creator::impl::optional_pos sanguis::creator::impl::closest_empty(
   return sanguis::creator::impl::find_closest(
       _grid,
       _pos,
-      [&_grid](sanguis::creator::pos const &_p)
+      [](sanguis::creator::pos const &, sanguis::creator::tile const _tile)
       {
-        return FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(_grid, _p)).get() ==
-               sanguis::creator::tile::nothing;
+        return _tile == sanguis::creator::tile::nothing;
       },
       fcppt::optional::object<sanguis::creator::pos::value_type>{});
 }
