@@ -7,7 +7,7 @@
 #include <sge/image/color/convert.hpp>
 #include <sge/image/color/predef.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
 sanguis::client::draw2d::entities::buffs::slow::slow()
@@ -34,7 +34,10 @@ void sanguis::client::draw2d::entities::buffs::slow::apply(
 void sanguis::client::draw2d::entities::buffs::slow::remove(
     sanguis::client::draw2d::entities::model::object &_model)
 {
-  _model.color(FCPPT_ASSERT_OPTIONAL_ERROR(previous_color_));
+  fcppt::optional::maybe_void(
+      this->previous_color_,
+      [&_model](sanguis::client::draw2d::sprite::normal::color const &_previous_color)
+      { _model.color(_previous_color); });
 
-  previous_color_ = optional_color();
+  this->previous_color_ = optional_color();
 }

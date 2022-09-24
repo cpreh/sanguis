@@ -17,8 +17,8 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/log/context_reference.hpp>
+#include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -105,12 +105,17 @@ sanguis::creator::optional_background_tile
 sanguis::client::draw2d::scene::world::object::background_tile(
     sanguis::creator::pos const &_pos) const
 {
-  return FCPPT_ASSERT_OPTIONAL_ERROR(state_)->background_tile(_pos);
+  return fcppt::optional::bind(
+      this->state_,
+      [&_pos](state_unique_ptr const &_state) { return _state->background_tile(_pos); });
 }
 
 sanguis::client::draw2d::optional_speed
 sanguis::client::draw2d::scene::world::object::test_collision(
     sanguis::client::draw2d::collide_parameters const &_parameters) const
 {
-  return FCPPT_ASSERT_OPTIONAL_ERROR(state_)->test_collision(_parameters);
+  return fcppt::optional::bind(
+      this->state_,
+      [&_parameters](state_unique_ptr const &_state)
+      { return _state->test_collision(_parameters); });
 }

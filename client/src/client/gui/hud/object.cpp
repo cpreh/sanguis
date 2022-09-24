@@ -1,4 +1,5 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_weapon_description.hpp>
@@ -52,7 +53,7 @@
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/strong_typedef_output.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/div.hpp>
@@ -63,6 +64,7 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <utility>
@@ -367,7 +369,9 @@ sanguis::client::gui::hud::object::weapon_widget(sanguis::is_primary_weapon cons
 sanguis::client::gui::hud::weapon_widget &sanguis::client::gui::hud::object::weapon_widget_checked(
     sanguis::is_primary_weapon const _is_primary)
 {
-  return *FCPPT_ASSERT_OPTIONAL_ERROR(this->weapon_widget(_is_primary));
+  return *fcppt::optional::to_exception(
+      this->weapon_widget(_is_primary),
+      [] { return sanguis::exception{FCPPT_TEXT("Weapon widget not set!")}; });
 }
 
 template <typename Function>

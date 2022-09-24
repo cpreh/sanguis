@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/slowed_duration.hpp>
 #include <sanguis/client/world_parameters.hpp>
@@ -49,7 +50,6 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
@@ -72,6 +72,7 @@
 #include <fcppt/math/vector/to_signed.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/si/velocity.hpp>
@@ -133,13 +134,16 @@ void sanguis::client::draw2d::scene::world::state::draw(
 
   fcppt::container::grid::sup_from_pos<sanguis::client::draw2d::scene::world::batch_grid::pos> const
       upper(fcppt::container::grid::clamped_sup_signed(
-          FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::math::vector::ceil_div_signed(
-              int_translation +
-                  fcppt::math::vector::
-                      structure_cast<sanguis::creator::signed_pos, fcppt::cast::size_fun>(
+          fcppt::optional::to_exception(
+              fcppt::math::vector::ceil_div_signed(
+                  int_translation +
+                      fcppt::math::vector::structure_cast<
+                          sanguis::creator::signed_pos,
+                          fcppt::cast::size_fun>(
                           fcppt::math::vector::to_signed(fcppt::math::dim::to_vector(
                               sanguis::client::draw2d::scene::background_dim(renderer_.get())))),
-              batch_size_trans)),
+                  batch_size_trans),
+              [] { return sanguis::exception{FCPPT_TEXT("Zero batch size!")}; }),
           batches_.size()));
 
   sge::renderer::vertex::scoped_declaration const scoped_decl(

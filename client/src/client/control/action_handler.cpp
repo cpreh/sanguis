@@ -44,8 +44,6 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unit.hpp>
-#include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/container/make.hpp>
 #include <fcppt/math/clamp.hpp>
@@ -169,8 +167,6 @@ void sanguis::client::control::action_handler::handle_binary_action(
     this->handle_shooting(_action.value(), sanguis::is_primary_weapon(false));
     return;
   }
-
-  FCPPT_ASSERT_UNREACHABLE;
 }
 
 void sanguis::client::control::action_handler::handle_cursor_action(
@@ -245,8 +241,6 @@ void sanguis::client::control::action_handler::handle_scale_action(
 
     return;
   }
-
-  FCPPT_ASSERT_UNREACHABLE;
 }
 
 sanguis::client::control::optional_cursor_position const &
@@ -259,16 +253,20 @@ void sanguis::client::control::action_handler::update_direction(
     fcppt::reference<sanguis::client::control::scalar> const _result,
     sanguis::client::control::key_scale const _scale)
 {
-  _result.get() = FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::math::clamp(
-      _result.get() + _scale,
-      sanguis::client::control::axis_direction_min(),
-      sanguis::client::control::axis_direction_max()));
-
-  send_(sanguis::messages::client::create(
-      alda::message::init_record<sanguis::messages::client::direction>(
-          sanguis::messages::roles::direction{} = fcppt::math::vector::
-              structure_cast<sanguis::messages::types::vector2, fcppt::cast::size_fun>(
-                  direction_))));
+  fcppt::optional::maybe_void(
+      fcppt::math::clamp(
+          _result.get() + _scale,
+          sanguis::client::control::axis_direction_min(),
+          sanguis::client::control::axis_direction_max()),
+      [_result,this](sanguis::client::control::key_scale const _clamped)
+      {
+        _result.get() = _clamped;
+        this->send_(sanguis::messages::client::create(
+            alda::message::init_record<sanguis::messages::client::direction>(
+                sanguis::messages::roles::direction{} = fcppt::math::vector::
+                    structure_cast<sanguis::messages::types::vector2, fcppt::cast::size_fun>(
+                        this->direction_))));
+      });
 }
 
 void sanguis::client::control::action_handler::handle_shooting(

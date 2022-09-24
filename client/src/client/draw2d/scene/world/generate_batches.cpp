@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
@@ -22,8 +23,8 @@
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/sort_and_update.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/math/ceil_div.hpp>
@@ -31,6 +32,7 @@
 #include <fcppt/math/dim/map.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 sanguis::client::draw2d::scene::world::batch_grid
 sanguis::client::draw2d::scene::world::generate_batches(
@@ -52,10 +54,12 @@ sanguis::client::draw2d::scene::world::generate_batches(
           _grid.size(),
           [](sanguis::creator::grid::dim::value_type const _value)
           {
-            return FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::math::ceil_div(
-                _value,
-                fcppt::cast::size<sanguis::creator::grid::dim::value_type>(
-                    sanguis::client::draw2d::scene::world::batch_size::value)));
+            return fcppt::optional::to_exception(
+                fcppt::math::ceil_div(
+                    _value,
+                    fcppt::cast::size<sanguis::creator::grid::dim::value_type>(
+                        sanguis::client::draw2d::scene::world::batch_size::value)),
+                [] { return sanguis::exception{FCPPT_TEXT("Zero batch size!")}; });
           }),
       [&_random_generator,
        _debug,
