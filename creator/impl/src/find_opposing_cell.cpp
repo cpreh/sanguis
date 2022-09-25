@@ -1,15 +1,16 @@
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/find_opposing_cell.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/contains.hpp>
-#include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 // Finds an empty neighboring cell in the grid that isn't
 // already part of the maze. There should at most be one
@@ -24,21 +25,25 @@ fcppt::optional::object<sanguis::creator::pos> sanguis::creator::impl::find_oppo
     return fcppt::optional::object<sanguis::creator::pos>();
   }
 
-  for (auto const &n : fcppt::container::grid::neumann_neighbors(cell)
-
-  )
+  for (auto const &n : fcppt::container::grid::neumann_neighbors(cell))
   {
-    sanguis::creator::pos const opposite(cell - (n - cell));
+    sanguis::creator::pos const opposite{cell - (n - cell)};
 
-    if (FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(grid, n)).get() ==
-        sanguis::creator::impl::reachable(true))
+    if (fcppt::optional::to_exception(
+            fcppt::container::grid::at_optional(grid, n),
+            [] { return sanguis::creator::exception{FCPPT_TEXT("Grid out of range!")}; })
+            .get() == sanguis::creator::impl::reachable(true))
     {
-      return FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(grid, opposite))
-                         .get() == sanguis::creator::impl::reachable(true)
+      return fcppt::optional::to_exception(
+                 fcppt::container::grid::at_optional(grid, opposite),
+                 [] {
+                   return sanguis::creator::exception{
+                       FCPPT_TEXT("Opposite position out of range!")};
+                 }).get() == sanguis::creator::impl::reachable(true)
                  ? fcppt::optional::object<sanguis::creator::pos>()
                  : fcppt::optional::object<sanguis::creator::pos>(opposite);
     }
   }
 
-  FCPPT_ASSERT_UNREACHABLE;
+  return fcppt::optional::object<sanguis::creator::pos>{};
 }

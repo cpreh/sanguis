@@ -24,8 +24,6 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
-#include <fcppt/assert/error_message.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
@@ -46,9 +44,10 @@ sanguis::creator::spawn_container sanguis::creator::impl::place_spawners(
   sanguis::creator::impl::random::uniform_pos random_pos{
       fcppt::make_ref(_generator), _grid->size()};
 
-  auto random_monster(FCPPT_ASSERT_OPTIONAL_ERROR(
+  auto random_monster{fcppt::optional::to_exception(
       fcppt::random::wrapper::make_uniform_container_advanced<
-          sanguis::creator::impl::random::uniform_int_wrapper>(fcppt::make_cref(_enemy_types))));
+          sanguis::creator::impl::random::uniform_int_wrapper>(fcppt::make_cref(_enemy_types)),
+      [] { return sanguis::creator::exception{FCPPT_TEXT("Monster range empty!")}; })};
 
   sanguis::creator::spawn_container spawners{};
 
@@ -79,7 +78,9 @@ sanguis::creator::spawn_container sanguis::creator::impl::place_spawners(
                      sanguis::creator::tile_is_visible(_grid.get(), candidate, _cur.get());
             }))
     {
-      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(_grid.get(), candidate))
+      fcppt::optional::to_exception(
+          fcppt::container::grid::at_optional(_grid.get(), candidate),
+          [] { return sanguis::creator::exception{FCPPT_TEXT("Spawner tile out of range!")}; })
           .get() = _spawner_tile;
 
       spawners.push_back(sanguis::creator::spawn{

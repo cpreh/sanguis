@@ -1,5 +1,6 @@
 #include <sanguis/creator/destructible.hpp>
 #include <sanguis/creator/destructible_container.hpp>
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
@@ -9,11 +10,12 @@
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/clamp.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 
@@ -41,7 +43,9 @@ sanguis::creator::destructible_container sanguis::creator::impl::place_destructi
 
         for (auto &n : neighbors)
         {
-          if (FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(_grid.get(), n))
+          if (fcppt::optional::to_exception(
+                  fcppt::container::grid::at_optional(_grid.get(), n),
+                  [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
                   .get() == sanguis::creator::tile::concrete_wall)
           {
             res++;

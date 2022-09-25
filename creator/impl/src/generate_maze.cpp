@@ -1,4 +1,5 @@
 #include <sanguis/creator/dim.hpp>
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/pos_fwd.hpp>
@@ -18,8 +19,8 @@
 #include <sanguis/creator/impl/random/uniform_size_variate.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/remove.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
@@ -28,6 +29,7 @@
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
 #include <utility>
@@ -78,13 +80,19 @@ sanguis::creator::impl::maze_result sanguis::creator::impl::generate_maze(
       break;
     }
 
-    sanguis::creator::pos const starting_pos = FCPPT_ASSERT_OPTIONAL_ERROR(maybe_starting_pos);
+    sanguis::creator::pos const starting_pos{fcppt::optional::to_exception(
+        maybe_starting_pos,
+        [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })};
 
-    FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(_maze.get(), starting_pos))
+    fcppt::optional::to_exception(
+        fcppt::container::grid::at_optional(_maze.get(), starting_pos),
+        [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
         .get() = sanguis::creator::impl::reachable(true);
 
-    FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(res_grid, starting_pos)).get() =
-        cur_region;
+    fcppt::optional::to_exception(
+        fcppt::container::grid::at_optional(res_grid, starting_pos),
+        [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
+        .get() = cur_region;
 
     // wall tiles that are to be processed next
     std::vector<sanguis::creator::pos> walls;
@@ -106,19 +114,24 @@ sanguis::creator::impl::maze_result sanguis::creator::impl::generate_maze(
           opposing_cell,
           [&](pos const &_opposing_cell)
           {
-            FCPPT_ASSERT_OPTIONAL_ERROR(
-                fcppt::container::grid::at_optional(_maze.get(), random_wall))
+            fcppt::optional::to_exception(
+                fcppt::container::grid::at_optional(_maze.get(), random_wall),
+                [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
                 .get() = sanguis::creator::impl::reachable(true);
 
-            FCPPT_ASSERT_OPTIONAL_ERROR(
-                fcppt::container::grid::at_optional(_maze.get(), _opposing_cell))
+            fcppt::optional::to_exception(
+                fcppt::container::grid::at_optional(_maze.get(), _opposing_cell),
+                [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
                 .get() = sanguis::creator::impl::reachable(true);
 
-            FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(res_grid, random_wall))
+            fcppt::optional::to_exception(
+                fcppt::container::grid::at_optional(res_grid, random_wall),
+                [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
                 .get() = cur_region;
 
-            FCPPT_ASSERT_OPTIONAL_ERROR(
-                fcppt::container::grid::at_optional(res_grid, _opposing_cell))
+            fcppt::optional::to_exception(
+                fcppt::container::grid::at_optional(res_grid, _opposing_cell),
+                [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
                 .get() = cur_region;
 
             // this actually appends some cells that aren't walls,
@@ -129,10 +142,10 @@ sanguis::creator::impl::maze_result sanguis::creator::impl::generate_maze(
           });
 
       fcppt::algorithm::remove(walls, random_wall);
-    }
+      }
 
-    cur_region++;
-  }
+      cur_region++;
+    }
 
   return maze_result{res_grid, cur_region};
 }
