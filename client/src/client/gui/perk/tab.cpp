@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/client/gui/perk/line.hpp>
 #include <sanguis/client/gui/perk/line_unique_ptr.hpp>
 #include <sanguis/client/gui/perk/line_unique_ptr_tree.hpp>
@@ -18,9 +19,10 @@
 #include <sge/gui/widget/reference_tree_vector.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/tree/map.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 sanguis::client::gui::perk::tab::tab(
     sge::renderer::device::ffp_ref const _renderer,
@@ -45,7 +47,9 @@ sanguis::client::gui::perk::tab::tab(
                       _context,
                       _style,
                       _state,
-                      FCPPT_ASSERT_OPTIONAL_ERROR(_info));
+                      fcppt::optional::to_exception(
+                          _info,
+                          [] { return sanguis::exception{FCPPT_TEXT("Perk info not found!")}; }));
                 });
           })),
       tree_(
@@ -61,8 +65,11 @@ sanguis::client::gui::perk::tab::tab(
               })),
       name_(sge::font::from_fcppt_string(
           sanguis::client::perk::category_to_string(sanguis::client::perk::to_category(
-              // TODO(philipp): This is unsafe!
-              FCPPT_ASSERT_OPTIONAL_ERROR(_range.begin()->value()).perk_type()))))
+              fcppt::optional::to_exception(
+                  // TODO(philipp): This is unsafe!
+                  _range.begin()->value(),
+                  [] { return sanguis::exception{FCPPT_TEXT("Perk info not found!")}; })
+                  .perk_type()))))
 {
 }
 

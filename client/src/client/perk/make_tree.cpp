@@ -23,7 +23,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/find_if_opt.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
@@ -67,8 +66,14 @@ sanguis::client::perk::tree_unique_ptr sanguis::client::perk::make_tree(
       [](sanguis::client::perk::optional_info const &_left,
          sanguis::client::perk::optional_info const &_right)
       {
-        return sanguis::client::perk::to_category(FCPPT_ASSERT_OPTIONAL_ERROR(_left).perk_type()) <
-               sanguis::client::perk::to_category(FCPPT_ASSERT_OPTIONAL_ERROR(_right).perk_type());
+        return sanguis::client::perk::to_category(
+                   fcppt::optional::to_exception(
+                       _left, [] { return sanguis::exception{FCPPT_TEXT("Perk type not set!")}; })
+                       .perk_type()) <
+               sanguis::client::perk::to_category(
+                   fcppt::optional::to_exception(
+                       _right, [] { return sanguis::exception{FCPPT_TEXT("Perk type not set!")}; })
+                       .perk_type());
       });
 
   return ret;

@@ -26,7 +26,7 @@
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -79,11 +79,14 @@ sge::gui::widget::box_container &sanguis::client::gui::perk::line::widget() { re
 
 void sanguis::client::gui::perk::line::on_click()
 {
-  if (state_->choose_perk(perk_type_))
+  if (state_->choose_perk(this->perk_type_))
   {
-    text_.value(sanguis::client::gui::perk::make_description(FCPPT_ASSERT_OPTIONAL_ERROR(
-        sanguis::client::perk::find_info_const(perk_type_, fcppt::make_cref(state_->perks()))
-            .value())));
+    fcppt::optional::maybe_void(
+        sanguis::client::perk::find_info_const(
+            this->perk_type_, fcppt::make_cref(this->state_->perks()))
+            .value(),
+        [this](sanguis::client::perk::info const &_info)
+        { this->text_.value(sanguis::client::gui::perk::make_description(_info)); });
   }
 }
 

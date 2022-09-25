@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/choosable.hpp>
@@ -8,8 +9,9 @@
 #include <sanguis/client/perk/tree.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 sanguis::client::perk::choosable_state sanguis::client::perk::choosable(
     sanguis::perk_type const _type,
@@ -20,9 +22,13 @@ sanguis::client::perk::choosable_state sanguis::client::perk::choosable(
   sanguis::client::perk::tree const &node(
       sanguis::client::perk::find_info_const(_type, fcppt::make_cref(_tree)));
 
-  sanguis::client::perk::info const &info(FCPPT_ASSERT_OPTIONAL_ERROR(node.value()));
+  sanguis::client::perk::info const &info{fcppt::optional::to_exception(
+      node.value(), [] { return sanguis::exception{FCPPT_TEXT("Perk node not set!")}; })};
 
-  sanguis::client::perk::tree const &parent_node(FCPPT_ASSERT_OPTIONAL_ERROR(node.parent()).get());
+  sanguis::client::perk::tree const &parent_node{
+      fcppt::optional::to_exception(
+          node.parent(), [] { return sanguis::exception{FCPPT_TEXT("Perk has no parent node!")}; })
+          .get()};
 
   if (info.max_level().get() == info.level())
   {

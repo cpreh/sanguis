@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/player_level.hpp>
@@ -16,8 +17,9 @@
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -70,8 +72,9 @@ bool sanguis::client::perk::state::choose_perk(sanguis::perk_type const _type)
 
   --remaining_levels_;
 
-  FCPPT_ASSERT_OPTIONAL_ERROR(
-      sanguis::client::perk::find_info(_type, fcppt::make_ref(this->perks_impl())).value())
+  fcppt::optional::to_exception(
+      sanguis::client::perk::find_info(_type, fcppt::make_ref(this->perks_impl())).value(),
+      [] { return sanguis::exception{FCPPT_TEXT("Cannot find perk type!")}; })
       .increment_level();
 
   send_callback_(_type);
@@ -83,7 +86,8 @@ bool sanguis::client::perk::state::choose_perk(sanguis::perk_type const _type)
 
 sanguis::client::perk::tree const &sanguis::client::perk::state::perks() const
 {
-  return *FCPPT_ASSERT_OPTIONAL_ERROR(perks_);
+  return *fcppt::optional::to_exception(
+      this->perks_, [] { return sanguis::exception{FCPPT_TEXT("Perks not set!")}; });
 }
 
 sanguis::client::player_level sanguis::client::perk::state::player_level() const
@@ -99,9 +103,10 @@ sanguis::client::perk::remaining_levels sanguis::client::perk::state::remaining_
 sanguis::client::perk::level
 sanguis::client::perk::state::perk_level(sanguis::perk_type const _perk_type) const
 {
-  return FCPPT_ASSERT_OPTIONAL_ERROR(
+  return fcppt::optional::to_exception(
              sanguis::client::perk::find_info_const(_perk_type, fcppt::make_cref(this->perks()))
-                 .value())
+                 .value(),
+             [] { return sanguis::exception{FCPPT_TEXT("Cannot find perk type!")}; })
       .level();
 }
 
@@ -126,5 +131,6 @@ fcppt::signal::auto_connection sanguis::client::perk::state::register_perks_chan
 
 sanguis::client::perk::tree &sanguis::client::perk::state::perks_impl()
 {
-  return *FCPPT_ASSERT_OPTIONAL_ERROR(perks_);
+  return *fcppt::optional::to_exception(
+      this->perks_, [] { return sanguis::exception{FCPPT_TEXT("Perks not set!")}; });
 }
