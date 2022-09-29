@@ -25,11 +25,11 @@
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -77,8 +77,10 @@ sanguis::creator::impl::generators::start(sanguis::creator::impl::parameters con
                                             : sanguis::creator::background_tile::grass;
   }
 
-  FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(grid, exit_portal.get())).get() =
-      sanguis::creator::tile::stairs;
+  fcppt::optional::to_exception(
+      fcppt::container::grid::at_optional(grid, exit_portal.get()),
+      [] { return sanguis::creator::exception{FCPPT_TEXT("Exit portal out of range!")}; })
+      .get() = sanguis::creator::tile::stairs;
 
   return sanguis::creator::impl::result{
       std::move(grid),

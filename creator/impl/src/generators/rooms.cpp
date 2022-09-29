@@ -4,6 +4,7 @@
 #include <sanguis/creator/dim.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
@@ -44,10 +45,10 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
@@ -78,6 +79,7 @@
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_gnu_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -257,8 +259,10 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
         fcppt::math::box::structure_cast<sanguis::creator::rect, fcppt::cast::size_fun>(rect),
         [&raw_grid](sanguis::creator::pos const &_pos)
         {
-          FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(raw_grid, _pos)).get() =
-              sanguis::creator::impl::reachable{true};
+          fcppt::optional::to_exception(
+              fcppt::container::grid::at_optional(raw_grid, _pos),
+              [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
+              .get() = sanguis::creator::impl::reachable{true};
         });
   }
 
@@ -291,8 +295,10 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
             room),
         [&region_grid, cur_region](sanguis::creator::pos const &p)
         {
-          FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(region_grid, p)).get() =
-              cur_region;
+          fcppt::optional::to_exception(
+              fcppt::container::grid::at_optional(region_grid, p),
+              [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
+              .get() = cur_region;
         });
 
     ++cur_region;
@@ -372,14 +378,17 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
   {
     auto const positions = connectors[edge];
 
-    auto random_connector(FCPPT_ASSERT_OPTIONAL_ERROR(
+    auto random_connector{fcppt::optional::to_exception(
         fcppt::random::wrapper::make_uniform_container_advanced<
-            sanguis::creator::impl::random::uniform_int_wrapper>(fcppt::make_cref(positions))));
+            sanguis::creator::impl::random::uniform_int_wrapper>(fcppt::make_cref(positions)),
+        [] { return sanguis::creator::exception{FCPPT_TEXT("Positions is empty!")}; })};
 
     auto const passage = random_connector(_parameters.randgen());
 
-    FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(raw_grid, passage)).get() =
-        sanguis::creator::impl::reachable{true};
+    fcppt::optional::to_exception(
+        fcppt::container::grid::at_optional(raw_grid, passage),
+        [] { return sanguis::creator::exception{FCPPT_TEXT("Passage out of range!")}; })
+        .get() = sanguis::creator::impl::reachable{true};
   }
 
   output_grid();
@@ -400,11 +409,16 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
                 fcppt::container::grid::at_optional(region_grid, n),
                 [&raw_grid, p, n](fcppt::reference<sanguis::creator::impl::region_id> const _ref)
                 {
-                  if (FCPPT_ASSERT_OPTIONAL_ERROR(
-                          fcppt::container::grid::at_optional(raw_grid, p.pos()))
-                              .get() == sanguis::creator::impl::reachable{true} &&
-                      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(raw_grid, n))
-                              .get() == sanguis::creator::impl::reachable{true})
+                  if (fcppt::optional::to_exception(
+                          fcppt::container::grid::at_optional(raw_grid, p.pos()),
+                          [] {
+                            return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")};
+                          }).get() == sanguis::creator::impl::reachable{true} &&
+                      fcppt::optional::to_exception(
+                          fcppt::container::grid::at_optional(raw_grid, n),
+                          [] {
+                            return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")};
+                          }).get() == sanguis::creator::impl::reachable{true})
                   {
                     ++_ref.get();
                   }
@@ -414,7 +428,9 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
 
         for (auto const p : fcppt::container::grid::make_pos_ref_range(raw_grid))
         {
-          if (FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(region_grid, p.pos()))
+          if (fcppt::optional::to_exception(
+                  fcppt::container::grid::at_optional(region_grid, p.pos()),
+                  [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
                   .get() == region_id{1})
           {
             p.value() = sanguis::creator::impl::reachable{false};
@@ -446,8 +462,10 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
               grid.size() - fcppt::math::dim::fill<sanguis::creator::rect::dim>(2U)}},
       [&bg_grid](sanguis::creator::pos const &_pos)
       {
-        FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(bg_grid, _pos)).get() =
-            sanguis::creator::background_tile::asphalt;
+        fcppt::optional::to_exception(
+            fcppt::container::grid::at_optional(bg_grid, _pos),
+            [] { return sanguis::creator::exception{FCPPT_TEXT("Pos out of range!")}; })
+            .get() = sanguis::creator::background_tile::asphalt;
       });
 
   auto const rect_center_pos(
@@ -519,9 +537,10 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
       sanguis::creator::enemy_type::zombie01,
       sanguis::creator::enemy_type::maggot};
 
-  auto random_monster(FCPPT_ASSERT_OPTIONAL_ERROR(
+  auto random_monster{fcppt::optional::to_exception(
       fcppt::random::wrapper::make_uniform_container_advanced<
-          sanguis::creator::impl::random::uniform_int_wrapper>(fcppt::make_cref(enemy_types))));
+          sanguis::creator::impl::random::uniform_int_wrapper>(fcppt::make_cref(enemy_types)),
+      [] { return sanguis::creator::exception{FCPPT_TEXT("Enemy types is empty!")}; })};
 
   {
     auto start = rects.begin();

@@ -2,6 +2,7 @@
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/enemy_type.hpp>
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/pos.hpp>
@@ -22,9 +23,10 @@
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_range.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/type_iso/enum.hpp>
@@ -88,8 +90,11 @@ sanguis::creator::impl::generators::graveyard(sanguis::creator::impl::parameters
   for (auto const cell : fcppt::container::grid::make_pos_ref_range(grid))
   {
     if (cell.value() == sanguis::creator::tile::nothing && fill_tile_random() == 0 &&
-        FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(grid_bg, cell.pos()))
-                .get() == sanguis::creator::background_tile::grass)
+        fcppt::optional::to_exception(
+            fcppt::container::grid::at_optional(grid_bg, cell.pos()),
+            [] {
+              return sanguis::creator::exception{FCPPT_TEXT("Background out of range!")};
+            }).get() == sanguis::creator::background_tile::grass)
     {
       cell.value() = random_grave();
     }

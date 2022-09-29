@@ -2,6 +2,7 @@
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/enemy_type.hpp>
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/pos.hpp>
@@ -22,8 +23,9 @@
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/generators/maze.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -46,8 +48,10 @@ sanguis::creator::impl::generators::maze(sanguis::creator::impl::parameters cons
           }},
       [&initial_maze](sanguis::creator::pos const &_p)
       {
-        FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::grid::at_optional(initial_maze, _p)).get() =
-            sanguis::creator::impl::reachable(true);
+        fcppt::optional::to_exception(
+            fcppt::container::grid::at_optional(initial_maze, _p),
+            [] { return sanguis::creator::exception{FCPPT_TEXT("Initial maze out of range!")}; })
+            .get() = sanguis::creator::impl::reachable(true);
       });
 
   sanguis::creator::impl::generate_maze(fcppt::make_ref(initial_maze), _parameters.randgen());
