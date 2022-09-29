@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
@@ -8,7 +9,7 @@
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/reference.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/find_opt.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
@@ -16,6 +17,7 @@
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/std_hash.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <queue>
 #include <unordered_map>
@@ -50,9 +52,10 @@ sanguis::server::ai::pathing::optional_trail sanguis::server::ai::pathing::find_
       for (sanguis::creator::pos trail_pos(cur); trail_pos != _start.get();
            trail_pos = result.back())
       {
-        result.push_back(
-            FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::find_opt_mapped(predecessors, trail_pos))
-                .get());
+        result.push_back(fcppt::optional::to_exception(
+                             fcppt::container::find_opt_mapped(predecessors, trail_pos),
+                             [] { return sanguis::exception{FCPPT_TEXT("Trail pos not found!")}; })
+                             .get());
       }
 
       return sanguis::server::ai::pathing::optional_trail{std::move(result)};

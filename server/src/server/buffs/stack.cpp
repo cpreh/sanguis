@@ -3,8 +3,8 @@
 #include <sanguis/server/buffs/stack.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -25,7 +25,9 @@ void sanguis::server::buffs::stack::insert(sanguis::server::buffs::unique_ptr &&
 
 void sanguis::server::buffs::stack::erase(sanguis::server::buffs::buff const &_buff)
 {
-  impl_.erase(FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::find_opt_iterator(impl_, _buff)));
+  impl_.erase(fcppt::optional::to_exception(
+      fcppt::container::find_opt_iterator(impl_, _buff),
+      [] { return sanguis::exception{FCPPT_TEXT("Buff not found!")}; }));
 }
 
 bool sanguis::server::buffs::stack::empty() const { return impl_.empty(); }

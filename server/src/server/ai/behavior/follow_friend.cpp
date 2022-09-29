@@ -29,7 +29,6 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
@@ -95,7 +94,10 @@ void sanguis::server::ai::behavior::follow_friend::target_enters(
 {
   FCPPT_ASSERT_ERROR(potential_targets_.insert(_with_body).second);
 
-  target_ = FCPPT_ASSERT_OPTIONAL_ERROR(this->first_target()).get().link();
+  fcppt::optional::maybe_void(
+      this->first_target(),
+      [this](fcppt::reference<sanguis::server::entities::with_body> const _target)
+      { this->target_ = _target->link(); });
 }
 
 void sanguis::server::ai::behavior::follow_friend::target_leaves(

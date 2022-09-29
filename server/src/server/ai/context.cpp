@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/creator/optional_pos.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/server/ai/context.hpp>
@@ -14,11 +15,12 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/maybe_front.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 sanguis::server::ai::context::context(sanguis::server::entities::with_ai_ref const _me)
     : me_(_me), trail_()
@@ -67,7 +69,11 @@ sanguis::server::ai::pathing::optional_target sanguis::server::ai::context::cont
 
 sanguis::creator::grid const &sanguis::server::ai::context::grid() const
 {
-  return FCPPT_ASSERT_OPTIONAL_ERROR(this->me().environment()).get().grid();
+  return fcppt::optional::to_exception(
+             this->me().environment(),
+             [] { return sanguis::exception{FCPPT_TEXT("Grid not set!")}; })
+      .get()
+      .grid();
 }
 
 sanguis::server::entities::with_ai &sanguis::server::ai::context::me() { return me_.get(); }
