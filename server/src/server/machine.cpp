@@ -41,7 +41,6 @@
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
