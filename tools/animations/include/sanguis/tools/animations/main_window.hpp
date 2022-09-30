@@ -106,6 +106,8 @@ private:
 
   [[nodiscard]] optional_path resource_path();
 
+  [[nodiscard]] std::filesystem::path resource_path_exn();
+
   void update_frame_timer();
 
   [[nodiscard]] sanguis::model::optional_animation_delay current_animation_delay();

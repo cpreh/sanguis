@@ -56,7 +56,6 @@
 #include <fcppt/strong_typedef_input.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/container/maybe_front.hpp>
@@ -72,6 +71,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>
 #include <fcppt/optional/from.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/options/apply.hpp>
 #include <fcppt/options/argument.hpp>
 #include <fcppt/options/default_help_switch.hpp>
@@ -182,11 +182,20 @@ void execute_main(argument_record const &_args)
                   cell.path().get(),
                   [&sys](std::filesystem::path const &_path)
                   {
-                    return FCPPT_ASSERT_OPTIONAL_ERROR(
-                        sge::image2d::load(fcppt::make_ref(sys.image_system()), _path));
+                    return fcppt::optional::to_exception(
+                        sge::image2d::load(fcppt::make_ref(sys.image_system()), _path),
+                        [] {
+                          return fcppt::exception{
+                              FCPPT_TEXT("Cannot load path!")};
+                        });
                   })
                   ->view(),
-              FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::maybe_front(_container.get())).get()));
+              fcppt::optional::to_exception(
+                  fcppt::container::maybe_front(_container.get()),
+                  [] {
+                    return fcppt::exception{FCPPT_TEXT("Container is empty!")};
+                  })
+                  .get()));
 
           sge::image2d::algorithm::copy_and_convert(
               source_view,

@@ -36,7 +36,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/truncation_check.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -279,16 +278,42 @@ void sanguis::tools::animations::main_window::selectedAnimationChanged()
         fcppt::optional::maybe_void(
             sanguis::tools::animations::find_image_file(
                 image_files_,
-                FCPPT_ASSERT_OPTIONAL_ERROR(loaded_model_).model(),
-                FCPPT_ASSERT_OPTIONAL_ERROR(this->selected_part()),
-                FCPPT_ASSERT_OPTIONAL_ERROR(this->selected_weapon_category()),
-                FCPPT_ASSERT_OPTIONAL_ERROR(this->selected_animation())),
+                fcppt::optional::to_exception(
+                    loaded_model_,
+                    [] {
+                      return sanguis::tools::animations::exception{FCPPT_TEXT("Model not loaded!")};
+                    })
+                    .model(),
+                fcppt::optional::to_exception(
+                    this->selected_part(),
+                    [] {
+                      return sanguis::tools::animations::exception{
+                          FCPPT_TEXT("Part not selected!")};
+                    }),
+                fcppt::optional::to_exception(
+                    this->selected_weapon_category(),
+                    [] {
+                      return sanguis::tools::animations::exception{
+                          FCPPT_TEXT("Weapon category not selected!")};
+                    }),
+                fcppt::optional::to_exception(
+                    this->selected_animation(),
+                    [] {
+                      return sanguis::tools::animations::exception{
+                          FCPPT_TEXT("Animation not selected!")};
+                    })),
             [_animation, animation_was_playing, this](fcppt::reference<QImage const> const _file)
             {
               frames_ = sanguis::tools::animations::make_frames(
                   _file.get(),
                   fcppt::make_ref(*ui_->scrollAreaWidgetContents),
-                  FCPPT_ASSERT_OPTIONAL_ERROR(loaded_model_).model(),
+                  fcppt::optional::to_exception(
+                      loaded_model_,
+                      [] {
+                        return sanguis::tools::animations::exception{
+                            FCPPT_TEXT("Model not loaded!")};
+                      })
+                      .model(),
                   _animation.get());
 
               if (animation_was_playing)
@@ -429,7 +454,7 @@ void sanguis::tools::animations::main_window::open_json(std::filesystem::path co
   }
 
   ui_->resourcePathEdit->setText(sanguis::tools::animations::qtutil::from_fcppt_string(
-      fcppt::filesystem::path_to_string(FCPPT_ASSERT_OPTIONAL_ERROR(this->resource_path()))));
+      fcppt::filesystem::path_to_string(this->resource_path_exn())));
 
   // TODO(philipp): Do this differently!
   sanguis::tools::animations::path_model_pair &loaded_model(loaded_model_.get_unsafe());
@@ -437,7 +462,7 @@ void sanguis::tools::animations::main_window::open_json(std::filesystem::path co
   try
   {
     image_files_ = sanguis::tools::animations::load_image_files(
-        FCPPT_ASSERT_OPTIONAL_ERROR(this->resource_path()), loaded_model.model());
+        this->resource_path_exn(), loaded_model.model());
   }
   catch (sanguis::model::exception const &_error)
   {
@@ -496,6 +521,14 @@ sanguis::tools::animations::main_window::resource_path()
       { return std::filesystem::path(_model.path()).remove_filename(); });
 }
 
+std::filesystem::path
+sanguis::tools::animations::main_window::resource_path_exn()
+{
+  return fcppt::optional::to_exception(
+      this->resource_path(),
+      [] { return sanguis::tools::animations::exception{FCPPT_TEXT("Resource path not set!")}; });
+}
+
 void sanguis::tools::animations::main_window::update_frame_timer()
 {
   fcppt::optional::maybe(
@@ -514,7 +547,14 @@ sanguis::tools::animations::main_window::current_animation_delay()
       {
         return _animation.get().animation_delay().has_value()
                    ? _animation.get().animation_delay()
-                   : FCPPT_ASSERT_OPTIONAL_ERROR(loaded_model_).model().animation_delay();
+                   : fcppt::optional::to_exception(
+                         this->loaded_model_,
+                         [] {
+                           return sanguis::tools::animations::exception{
+                               FCPPT_TEXT("Model not loaded!")};
+                         })
+                         .model()
+                         .animation_delay();
       });
 }
 
