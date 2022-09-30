@@ -5,11 +5,12 @@
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <typeindex>
@@ -40,35 +41,44 @@ void sanguis::server::entities::with_buffs::add_buff(sanguis::server::buffs::uni
 
   if (result.inserted())
   {
-    FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get().add_buff(this->id(), cur_buff.type());
+    fcppt::optional::maybe_void(
+        this->environment(),
+        [this, &cur_buff](fcppt::reference<sanguis::server::environment::object> const _environment)
+        { _environment->add_buff(this->id(), cur_buff.type()); });
   }
 }
 
 void sanguis::server::entities::with_buffs::remove_buff(sanguis::server::buffs::buff &_buff)
 {
-  sanguis::buff_type const buff_type(_buff.type());
+  sanguis::buff_type const buff_type{_buff.type()};
 
-  std::type_index const index(typeid(_buff));
+  std::type_index const index{typeid(_buff)};
 
-  buff_map::iterator const it(
-      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::find_opt_iterator(buffs_, index)));
+  fcppt::optional::maybe_void(
+      fcppt::container::find_opt_iterator(buffs_, index),
+      [this, buff_type, &_buff](buff_map::iterator const _it)
+      {
+        sanguis::server::buffs::stack &set{_it->second};
 
-  sanguis::server::buffs::stack &set(it->second);
+        set.highest_buff().remove();
 
-  set.highest_buff().remove();
+        set.erase(_buff);
 
-  set.erase(_buff);
+        if (set.empty())
+        {
+          fcppt::optional::maybe_void(
+              this->environment(),
+              [this,
+               buff_type](fcppt::reference<sanguis::server::environment::object> const _environment)
+              { _environment->remove_buff(this->id(), buff_type); });
 
-  if (set.empty())
-  {
-    FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get().remove_buff(this->id(), buff_type);
-
-    buffs_.erase(it);
-  }
-  else
-  {
-    set.highest_buff().add();
-  }
+          this->buffs_.erase(_it);
+        }
+        else
+        {
+          set.highest_buff().add();
+        }
+      });
 }
 
 sanguis::server::entities::with_buffs::with_buffs() : buffs_() {}

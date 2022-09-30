@@ -20,13 +20,15 @@
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/environment/object_fwd.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -111,10 +113,15 @@ void sanguis::server::entities::projectiles::grenade::update()
 
 void sanguis::server::entities::projectiles::grenade::remove_from_game()
 {
-  sanguis::server::environment::insert_no_result(
-      FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get(),
-      fcppt::unique_ptr_to_base<sanguis::server::entities::simple>(
-          fcppt::make_unique_ptr<sanguis::server::entities::projectiles::aoe_damage>(
-              this->team(), this->aoe(), damage_, damage_modifiers_)),
-      sanguis::server::entities::insert_parameters_center(this->center()));
+  fcppt::optional::maybe_void(
+      this->environment(),
+      [this](fcppt::reference<sanguis::server::environment::object> const _environment)
+      {
+        sanguis::server::environment::insert_no_result(
+            _environment.get(),
+            fcppt::unique_ptr_to_base<sanguis::server::entities::simple>(
+                fcppt::make_unique_ptr<sanguis::server::entities::projectiles::aoe_damage>(
+                    this->team(), this->aoe(), this->damage_, this->damage_modifiers_)),
+            sanguis::server::entities::insert_parameters_center(this->center()));
+      });
 }

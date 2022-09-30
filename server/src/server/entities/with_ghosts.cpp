@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/server/center.hpp>
@@ -11,7 +12,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_concat.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -32,7 +33,14 @@ sanguis::server::entities::with_ghosts::add_ghost(sanguis::server::collision::gh
   ghosts_.push_back(std::move(_ghost));
 
   return ghosts_.back().transfer(
-      FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get().collision_world(), this->center());
+      fcppt::optional::to_exception(
+          this->environment(),
+          [] {
+            return sanguis::exception{FCPPT_TEXT("Environment not set in entities::with_ghosts!")};
+          })
+          .get()
+          .collision_world(),
+      this->center());
 }
 
 void sanguis::server::entities::with_ghosts::init_ghosts(
@@ -56,8 +64,13 @@ sanguis::server::entities::with_ghosts::on_transfer(
 sanguis::server::entities::remove_from_world_result
 sanguis::server::entities::with_ghosts::remove_from_world()
 {
-  sanguis::server::environment::object &cur_environment(
-      FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get());
+  sanguis::server::environment::object &cur_environment{
+      fcppt::optional::to_exception(
+          this->environment(),
+          [] {
+            return sanguis::exception{FCPPT_TEXT("Environment not set in entities::with_ghosts!")};
+          })
+          .get()};
 
   return sanguis::server::entities::remove_from_world_result(
       fcppt::algorithm::map_concat<sanguis::collision::world::body_exit_container>(

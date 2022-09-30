@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/world/body_base.hpp>
@@ -21,12 +22,13 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -87,8 +89,15 @@ sanguis::server::entities::with_body::remove_from_world()
 
   return sanguis::server::entities::combine_remove_from_world(
       sanguis::server::entities::with_ghosts::remove_from_world(),
-      sanguis::server::entities::remove_from_world_result(collision_body_.remove(
-          FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get().collision_world())));
+      sanguis::server::entities::remove_from_world_result(
+          collision_body_.remove(fcppt::optional::to_exception(
+                                     this->environment(),
+                                     [] {
+                                       return sanguis::exception{FCPPT_TEXT(
+                                           "Environment not set in entities::with_body!")};
+                                     })
+                                     .get()
+                                     .collision_world())));
 }
 
 sanguis::server::entities::optional_transfer_result
@@ -119,18 +128,20 @@ sanguis::server::entities::with_body::on_transfer(
 
 void sanguis::server::entities::with_body::update()
 {
-  sanguis::server::environment::object &cur_environment(
-      FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get());
+  fcppt::optional::maybe_void(
+      this->environment(),
+      [this](fcppt::reference<sanguis::server::environment::object> const _environment)
+      {
+        if (this->net_angle_.update())
+        {
+          _environment->angle_changed(this->id(), this->angle());
+        }
 
-  if (net_angle_.update())
-  {
-    cur_environment.angle_changed(this->id(), this->angle());
-  }
-
-  if (net_center_.update())
-  {
-    cur_environment.center_changed(this->id(), this->center());
-  }
+        if (this->net_center_.update())
+        {
+          _environment->center_changed(this->id(), this->center());
+        }
+      });
 }
 
 void sanguis::server::entities::with_body::body_speed(sanguis::server::speed const &_speed)

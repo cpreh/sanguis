@@ -28,8 +28,8 @@
 #include <fcppt/move_clear.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/enum/array_init.hpp>
+#include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/deref.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -80,13 +80,12 @@ void sanguis::server::entities::with_weapon::tick(sanguis::duration const &_dura
 sanguis::optional_primary_weapon_type
 sanguis::server::entities::with_weapon::primary_weapon_type() const
 {
-  return fcppt::optional::map(
+  return fcppt::optional::bind(
       this->primary_weapon(),
       [](fcppt::reference<sanguis::server::weapons::weapon const> const _primary_weapon)
       {
-        return FCPPT_ASSERT_OPTIONAL_ERROR(
-            fcppt::variant::to_optional<sanguis::primary_weapon_type>(
-                _primary_weapon.get().type()));
+        return fcppt::variant::to_optional<sanguis::primary_weapon_type>(
+            _primary_weapon.get().type());
       });
 }
 
@@ -238,9 +237,11 @@ void sanguis::server::entities::with_weapon::weapon_status(
 
   weapon_status_ = _weapon_status;
 
-  FCPPT_ASSERT_OPTIONAL_ERROR(this->environment())
-      .get()
-      .weapon_status_changed(this->id(), _weapon_status);
+  fcppt::optional::maybe_void(
+      this->environment(),
+      [this,
+       &_weapon_status](fcppt::reference<sanguis::server::environment::object> const _environment)
+      { _environment->weapon_status_changed(this->id(), _weapon_status); });
 }
 
 void sanguis::server::entities::with_weapon::reload_time(

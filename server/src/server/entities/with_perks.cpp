@@ -8,9 +8,10 @@
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/optional/from.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -43,11 +44,13 @@ sanguis::server::entities::with_perks::~with_perks() = default;
 
 void sanguis::server::entities::with_perks::update()
 {
-  sanguis::server::environment::object &cur_environment(
-      FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get());
-
-  for (auto const &perk : perks_)
-  {
-    perk.second->update(*this, cur_environment);
-  }
+  fcppt::optional::maybe_void(
+      this->environment(),
+      [this](fcppt::reference<sanguis::server::environment::object> const _environment)
+      {
+        for (auto const &perk : this->perks_)
+        {
+          perk.second->update(*this, _environment.get());
+        }
+      });
 }

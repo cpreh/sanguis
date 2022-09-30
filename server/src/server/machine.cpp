@@ -1,4 +1,5 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/io_service.hpp>
 #include <sanguis/io_service_ref.hpp>
 #include <sanguis/slowdown.hpp>
@@ -51,6 +52,7 @@
 #include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -115,7 +117,11 @@ void sanguis::server::machine::send_to_all(sanguis::messages::server::base const
   for (auto const &id : connections)
   {
     if (!sanguis::net::append_to_circular_buffer(
-            FCPPT_ASSERT_OPTIONAL_ERROR(net_.send_buffer(id)).get(), temp_buffer_))
+            fcppt::optional::to_exception(
+                net_.send_buffer(id),
+                [] { return sanguis::exception{FCPPT_TEXT("Send buffer not found!")}; })
+                .get(),
+            temp_buffer_))
     {
       this->add_overflow_message(id, _message);
 
@@ -141,7 +147,11 @@ bool sanguis::server::machine::process_overflow()
       alda::net::id const net_id(queue_pair.first);
 
       if (sanguis::server::net::serialize_to_circular_buffer(
-              *message, FCPPT_ASSERT_OPTIONAL_ERROR(net_.send_buffer(net_id)).get()))
+              *message,
+              fcppt::optional::to_exception(
+                  net_.send_buffer(net_id),
+                  [] { return sanguis::exception{FCPPT_TEXT("Send buffer not found!")}; })
+                  .get()))
       {
         queue.pop();
       }

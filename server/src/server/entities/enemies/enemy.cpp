@@ -55,7 +55,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -135,16 +134,19 @@ void sanguis::server::entities::enemies::enemy::remove_from_game()
             .unregister(*this);
       });
 
-  sanguis::server::environment::object &cur_environment(
-      FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get());
+  fcppt::optional::maybe_void(
+      this->environment(),
+      [this](fcppt::reference<sanguis::server::environment::object> const _cur_environment)
+      {
+        sanguis::server::environment::insert_no_result(
+            _cur_environment.get(),
+            fcppt::unique_ptr_to_base<sanguis::server::entities::simple>(
+                fcppt::make_unique_ptr<sanguis::server::entities::exp_area>(this->exp_)),
+            sanguis::server::entities::insert_parameters_center(this->center()));
 
-  sanguis::server::environment::insert_no_result(
-      cur_environment,
-      fcppt::unique_ptr_to_base<sanguis::server::entities::simple>(
-          fcppt::make_unique_ptr<sanguis::server::entities::exp_area>(exp_)),
-      sanguis::server::entities::insert_parameters_center(this->center()));
-
-  cur_environment.pickup_chance(pickup_probability_, difficulty_, this->center());
+        _cur_environment->pickup_chance(
+            this->pickup_probability_, this->difficulty_, this->center());
+      });
 }
 
 sanguis::messages::server::unique_ptr sanguis::server::entities::enemies::enemy::add_message(

@@ -14,7 +14,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -53,10 +53,15 @@ void sanguis::server::entities::with_ai::update()
 {
   sanguis::server::entities::with_weapon::update();
 
-  if (update_timer_.expired())
+  if (this->update_timer_.expired())
   {
-    // TODO(philipp): Make this easier in sge
-    FCPPT_ASSERT_OPTIONAL_ERROR(ai_)->run(update_timer_.now() - update_timer_.last_time());
+    fcppt::optional::maybe_void(
+        this->ai_,
+        [this](sanguis::server::ai::tree::base_unique_ptr const &_ai)
+        {
+          // TODO(philipp): Make this easier in sge
+          _ai->run(update_timer_.now() - update_timer_.last_time());
+        });
 
     update_timer_.reset();
   }

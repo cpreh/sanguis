@@ -7,8 +7,9 @@
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <fcppt/reference.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -24,7 +25,10 @@ sanguis::server::entities::enemies::boss::~boss() = default;
 
 sanguis::server::entities::transfer_result sanguis::server::entities::enemies::boss::on_create()
 {
-  FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get().add_portal_blocker();
+  fcppt::optional::maybe_void(
+      this->environment(),
+      [](fcppt::reference<sanguis::server::environment::object> const _env)
+      { _env->add_portal_blocker(); });
 
   return sanguis::server::entities::with_ai::on_create();
 }
@@ -33,7 +37,10 @@ void sanguis::server::entities::enemies::boss::remove_from_game()
 {
   sanguis::server::entities::enemies::enemy::remove_from_game();
 
-  FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get().remove_portal_blocker();
+  fcppt::optional::maybe_void(
+      this->environment(),
+      [](fcppt::reference<sanguis::server::environment::object> const _env)
+      { _env->remove_portal_blocker(); });
 }
 
 sanguis::messages::types::string const &sanguis::server::entities::enemies::boss::name() const

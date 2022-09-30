@@ -17,7 +17,8 @@
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -47,12 +48,12 @@ void sanguis::server::entities::with_velocity::update()
 {
   sanguis::server::entities::with_body::update();
 
-  sanguis::server::environment::object &cur_environment(
-      FCPPT_ASSERT_OPTIONAL_ERROR(this->environment()).get());
-
   if (net_speed_.update())
   {
-    cur_environment.speed_changed(this->id(), this->speed());
+    fcppt::optional::maybe_void(
+        this->environment(),
+        [this](fcppt::reference<sanguis::server::environment::object> const _environment)
+        { _environment->speed_changed(this->id(), this->speed()); });
   }
 }
 

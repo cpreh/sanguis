@@ -7,10 +7,9 @@
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/environment/optional_object_ref.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
-#include <fcppt/assert/optional_error.hpp>
-#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/maybe_void_multi.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -18,14 +17,13 @@
 sanguis::collision::world::body_enter_container
 sanguis::server::entities::with_auras_id::add_aura(sanguis::server::auras::unique_ptr &&_aura)
 {
-  fcppt::optional::maybe_void(
+  fcppt::optional::maybe_void_multi(
+      [this](
+          sanguis::aura_type const _aura_type,
+          fcppt::reference<sanguis::server::environment::object> const _environment)
+      { _environment->add_aura(this->id(), _aura_type); },
       _aura->type(),
-      [this](sanguis::aura_type const _aura_type)
-      {
-        sanguis::server::environment::optional_object_ref const opt_env{this->environment()};
-
-        FCPPT_ASSERT_OPTIONAL_ERROR(opt_env).get().add_aura(this->id(), _aura_type);
-      });
+      this->environment());
 
   return sanguis::server::entities::with_auras::add_aura(std::move(_aura));
 }

@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/random_generator_ref.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
@@ -21,8 +22,11 @@
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/repeat.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 void sanguis::server::entities::spawns::spawn::unregister(sanguis::server::entities::base &) {}
 
@@ -48,12 +52,14 @@ sanguis::server::entities::spawns::spawn::spawn(
 
 sanguis::server::center sanguis::server::entities::spawns::spawn::center() const
 {
-  return FCPPT_ASSERT_OPTIONAL_ERROR(center_);
+  return fcppt::optional::to_exception(
+      this->center_, [] { return sanguis::exception{FCPPT_TEXT("Spawn center not set!")}; });
 }
 
 sanguis::server::angle sanguis::server::entities::spawns::spawn::angle() const
 {
-  return FCPPT_ASSERT_OPTIONAL_ERROR(angle_);
+  return fcppt::optional::to_exception(
+      this->angle_, [] { return sanguis::exception{FCPPT_TEXT("Spawn angle not set!")}; });
 }
 
 void sanguis::server::entities::spawns::spawn::angle(sanguis::server::angle const _angle)
@@ -75,33 +81,34 @@ sanguis::server::entities::spawns::spawn::on_transfer(
 
 void sanguis::server::entities::spawns::spawn::update()
 {
-  if (sanguis::server::entities::spawns::size_type const cur_count = this->may_spawn())
-  {
-    fcppt::algorithm::repeat(
-        cur_count,
-        [this]()
+  fcppt::optional::maybe_void(
+      this->environment(),
+      [this](fcppt::reference<sanguis::server::environment::object> const _environment)
+      {
+        sanguis::server::entities::spawns::size_type const cur_count{this->may_spawn()};
+        fcppt::algorithm::repeat(
+            cur_count,
+            [this, _environment]()
+            {
+              sanguis::server::environment::insert_no_result(
+                  _environment.get(),
+                  sanguis::server::entities::enemies::create(
+                      this->random_generator_,
+                      this->weapons_parameters_,
+                      this->enemy_type_,
+                      this->enemy_kind_,
+                      this->difficulty_,
+                      _environment->load_context(),
+                      sanguis::server::entities::spawn_owner(this->link()),
+                      sanguis::server::entities::enemies::special_chance(
+                          0.05F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                          )),
+                  sanguis::server::entities::insert_parameters(this->center(), this->angle()));
+            });
+
+        if (cur_count != 0U)
         {
-          sanguis::server::environment::optional_object_ref const opt_env{this->environment()};
-
-          sanguis::server::environment::object &cur_environment(
-              FCPPT_ASSERT_OPTIONAL_ERROR(opt_env).get());
-
-          sanguis::server::environment::insert_no_result(
-              cur_environment,
-              sanguis::server::entities::enemies::create(
-                  random_generator_,
-                  weapons_parameters_,
-                  enemy_type_,
-                  enemy_kind_,
-                  difficulty_,
-                  cur_environment.load_context(),
-                  sanguis::server::entities::spawn_owner(this->link()),
-                  sanguis::server::entities::enemies::special_chance(
-                      0.05F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-                      )),
-              sanguis::server::entities::insert_parameters(this->center(), this->angle()));
-        });
-
-    this->add_count(cur_count);
-  }
+          this->add_count(cur_count);
+        }
+      });
 }

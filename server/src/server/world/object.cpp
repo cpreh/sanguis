@@ -3,6 +3,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
@@ -137,7 +138,6 @@
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
@@ -152,6 +152,7 @@
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/reference.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_gnu_gcc_warning.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -560,8 +561,9 @@ void sanguis::server::world::object::pickup_chance(
 
 void sanguis::server::world::object::request_transfer(sanguis::entity_id const _entity_id)
 {
-  entity_map::iterator const it(
-      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::find_opt_iterator(entities_, _entity_id)));
+  entity_map::iterator const it{fcppt::optional::to_exception(
+      fcppt::container::find_opt_iterator(entities_, _entity_id),
+      [] { return sanguis::exception{FCPPT_TEXT("Entity not found in request_transfer!")}; })};
 
   sanguis::server::entities::base &cur_entity(*it->second);
 
@@ -665,8 +667,9 @@ void sanguis::server::world::object::remove_sight_range(
     sanguis::server::player_id const _player_id, sanguis::server::entities::with_id const &_target)
 {
   {
-    sanguis::server::world::sight_range_map::iterator const sight_it(FCPPT_ASSERT_OPTIONAL_ERROR(
-        fcppt::container::find_opt_iterator(sight_ranges_, _player_id)));
+    sanguis::server::world::sight_range_map::iterator const sight_it{fcppt::optional::to_exception(
+        fcppt::container::find_opt_iterator(sight_ranges_, _player_id),
+        [] { return sanguis::exception{FCPPT_TEXT("Sight range not found!")}; })};
 
     sight_it->second.remove(_target.id());
 

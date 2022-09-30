@@ -41,12 +41,12 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -194,7 +194,9 @@ sanguis::server::weapons::log const &sanguis::server::weapons::weapon::log() con
 
 sanguis::server::entities::with_weapon &sanguis::server::weapons::weapon::owner() const
 {
-  return FCPPT_ASSERT_OPTIONAL_ERROR(owner_).get();
+  return fcppt::optional::to_exception(
+             this->owner_, [] { return sanguis::exception{FCPPT_TEXT("Weapon owner not set!")}; })
+      .get();
 }
 
 sanguis::server::weapons::parameters sanguis::server::weapons::weapon::parameters() const

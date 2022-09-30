@@ -32,7 +32,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/enum/make_range.hpp>
@@ -104,21 +103,27 @@ void sanguis::server::cheat::process(
         case sanguis::cheat_type::grenade:
         case sanguis::cheat_type::shotgun:
         case sanguis::cheat_type::rocket_launcher:
-          sanguis::server::environment::insert_no_result(
-              _environment.get(),
-              fcppt::unique_ptr_to_base<
-                  sanguis::server::entities::with_id>(fcppt::make_unique_ptr<
-                                                      sanguis::server::entities::pickups::weapon>(
-                  _environment.get().load_context(),
-                  sanguis::server::team::players,
-                  sanguis::server::weapons::create(
-                      _weapon_parameters,
-                      FCPPT_ASSERT_OPTIONAL_ERROR(sanguis::server::cheat::weapon_type(_cheat_type)),
-                      sanguis::server::entities::enemies::difficulty(
-                          100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-                          )))),
-              sanguis::server::entities::insert_parameters_center(_player.center()));
-
+          fcppt::optional::maybe_void(
+              sanguis::server::cheat::weapon_type(_cheat_type),
+              [&_environment, &_player, &_weapon_parameters](
+                  sanguis::weapon_type const &_weapon_type)
+              {
+                sanguis::server::environment::insert_no_result(
+                    _environment.get(),
+                    fcppt::unique_ptr_to_base<
+                        sanguis::server::entities::
+                            with_id>(fcppt::make_unique_ptr<
+                                     sanguis::server::entities::pickups::weapon>(
+                        _environment.get().load_context(),
+                        sanguis::server::team::players,
+                        sanguis::server::weapons::create(
+                            _weapon_parameters,
+                            _weapon_type,
+                            sanguis::server::entities::enemies::difficulty(
+                                100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                                )))),
+                    sanguis::server::entities::insert_parameters_center(_player.center()));
+              });
           return;
         case sanguis::cheat_type::perks:
           for (auto perk : fcppt::enum_::make_range<sanguis::perk_type>())

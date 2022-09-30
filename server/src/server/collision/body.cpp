@@ -23,10 +23,10 @@
 #include <sanguis/server/collision/to_speed.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/assign.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -43,22 +43,22 @@ sanguis::server::collision::body::~body() = default;
 
 void sanguis::server::collision::body::center(sanguis::server::center const &_center)
 {
-  FCPPT_ASSERT_OPTIONAL_ERROR(body_)->center(sanguis::server::collision::to_center(_center));
+  this->body_exn().center(sanguis::server::collision::to_center(_center));
 }
 
 sanguis::server::center sanguis::server::collision::body::center() const
 {
-  return sanguis::server::collision::from_center(FCPPT_ASSERT_OPTIONAL_ERROR(body_)->center());
+  return sanguis::server::collision::from_center(this->body_exn().center());
 }
 
 void sanguis::server::collision::body::speed(sanguis::server::speed const &_speed)
 {
-  FCPPT_ASSERT_OPTIONAL_ERROR(body_)->speed(sanguis::server::collision::to_speed(_speed));
+  this->body_exn().speed(sanguis::server::collision::to_speed(_speed));
 }
 
 sanguis::server::speed sanguis::server::collision::body::speed() const
 {
-  return sanguis::server::collision::from_speed(FCPPT_ASSERT_OPTIONAL_ERROR(body_)->speed());
+  return sanguis::server::collision::from_speed(this->body_exn().speed());
 }
 
 sanguis::server::radius sanguis::server::collision::body::radius() const { return radius_; }
@@ -97,10 +97,16 @@ sanguis::collision::world::body_enter_container sanguis::server::collision::body
 sanguis::collision::world::body_exit_container
 sanguis::server::collision::body::remove(sanguis::collision::world::object &_world)
 {
-  sanguis::collision::world::body_exit_container result(
-      _world.deactivate_body(fcppt::make_ref(*FCPPT_ASSERT_OPTIONAL_ERROR(body_))));
+  sanguis::collision::world::body_exit_container result{
+      _world.deactivate_body(fcppt::make_ref(this->body_exn()))};
 
-  body_ = optional_body_unique_ptr();
+  this->body_ = optional_body_unique_ptr();
 
   return result;
+}
+
+sanguis::collision::world::body& sanguis::server::collision::body::body_exn() const
+{
+  return *fcppt::optional::to_exception(
+      this->body_, [] { return sanguis::exception{FCPPT_TEXT("Body not set!")}; });
 }

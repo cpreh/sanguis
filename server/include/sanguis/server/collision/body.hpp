@@ -5,6 +5,7 @@
 #include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
+#include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
@@ -54,6 +55,8 @@ public:
   remove(sanguis::collision::world::object & // NOLINT(google-runtime-references)
   ); // NOLINT(google-runtime-references)
 private:
+  [[nodiscard]] sanguis::collision::world::body& body_exn() const;
+
   sanguis::server::radius const radius_;
 
   sanguis::server::optional_mass const mass_;

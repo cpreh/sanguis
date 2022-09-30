@@ -16,13 +16,15 @@
 #include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/update_action.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/container/make.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <utility>
@@ -58,11 +60,15 @@ void sanguis::server::entities::exp_area::remove_from_game()
 
   for (auto &player_link : player_links_)
   {
-    fcppt::cast::static_downcast<sanguis::server::entities::player &>(
-        FCPPT_ASSERT_OPTIONAL_ERROR(player_link.second.get()).get())
-        .add_exp(sanguis::server::exp(
-            exp_.get() /
-            fcppt::cast::int_to_float<sanguis::server::exp::value_type>(player_links_.size())));
+    fcppt::optional::maybe_void(
+        player_link.second.get(),
+        [this](fcppt::reference<sanguis::server::entities::with_links> const _link)
+        {
+          fcppt::cast::static_downcast<sanguis::server::entities::player &>(_link.get())
+              .add_exp(sanguis::server::exp(
+                  this->exp_.get() / fcppt::cast::int_to_float<sanguis::server::exp::value_type>(
+                                         this->player_links_.size())));
+        });
   }
 }
 

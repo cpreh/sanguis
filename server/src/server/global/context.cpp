@@ -1,6 +1,7 @@
 #include <sanguis/cheat_type.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/player_name.hpp>
@@ -66,7 +67,6 @@
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/unit.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/at_optional.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/log/context_reference.hpp>
@@ -334,7 +334,9 @@ void sanguis::server::global::context::transfer_entity(
     sanguis::server::entities::with_id_unique_ptr &&_entity)
 {
   sanguis::server::global::dest_world_pair const dest(
-      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::find_opt_mapped(worlds_.connections(), _source))
+      fcppt::optional::to_exception(
+          fcppt::container::find_opt_mapped(this->worlds_.connections(), _source),
+          [] { return sanguis::exception{FCPPT_TEXT("Source world not found!")}; })
           .get());
 
   this->world(dest.first.get())
@@ -356,8 +358,9 @@ sanguis::server::weapons::common_parameters sanguis::server::global::context::we
 sanguis::server::world::object &
 sanguis::server::global::context::world(sanguis::world_id const _world_id)
 {
-  return *FCPPT_ASSERT_OPTIONAL_ERROR(
-              fcppt::container::find_opt_mapped(worlds_.worlds(), _world_id))
+  return *fcppt::optional::to_exception(
+              fcppt::container::find_opt_mapped(worlds_.worlds(), _world_id),
+              [] { return sanguis::exception{FCPPT_TEXT("World id not found!")}; })
               .get();
 }
 

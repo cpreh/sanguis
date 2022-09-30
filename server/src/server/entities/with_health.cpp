@@ -18,8 +18,9 @@
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/enum/make_range.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -105,9 +106,10 @@ void sanguis::server::entities::with_health::update()
 
   if (net_health_.update())
   {
-    FCPPT_ASSERT_OPTIONAL_ERROR(this->environment())
-        .get()
-        .health_changed(this->id(), this->current_health());
+    fcppt::optional::maybe_void(
+        this->environment(),
+        [this](fcppt::reference<sanguis::server::environment::object> const _environment)
+        { _environment->health_changed(this->id(), this->current_health()); });
   }
 }
 
@@ -120,7 +122,8 @@ void sanguis::server::entities::with_health::health_change()
 
 void sanguis::server::entities::with_health::max_health_change()
 {
-  FCPPT_ASSERT_OPTIONAL_ERROR(this->environment())
-      .get()
-      .max_health_changed(this->id(), this->max_health());
+  fcppt::optional::maybe_void(
+      this->environment(),
+      [this](fcppt::reference<sanguis::server::environment::object> const _environment)
+      { _environment->max_health_changed(this->id(), this->max_health()); });
 }

@@ -4,6 +4,7 @@
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/ghost_base_ref.hpp>
+#include <sanguis/collision/world/ghost_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
@@ -43,6 +44,8 @@ public:
   void center(sanguis::server::center const &);
 
 private:
+  [[nodiscard]] sanguis::collision::world::ghost &ghost_exn() const;
+
   sanguis::collision::world::ghost_base_ref ghost_base_;
 
   sanguis::collision::world::ghost_group collision_group_;

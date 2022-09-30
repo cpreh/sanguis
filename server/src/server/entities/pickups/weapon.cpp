@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/collision/world/body_group.hpp>
@@ -32,7 +33,8 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <alda/message/init_record.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -57,7 +59,8 @@ sanguis::server::entities::pickups::weapon::~weapon() = default;
 sanguis::server::weapons::unique_ptr sanguis::server::entities::pickups::weapon::obtain()
 {
   // TODO(philipp): Return an optional_unique_ptr here?
-  sanguis::server::weapons::unique_ptr result(std::move(FCPPT_ASSERT_OPTIONAL_ERROR(weapon_)));
+  sanguis::server::weapons::unique_ptr result{std::move(fcppt::optional::to_exception(
+      this->weapon_, [] { return sanguis::exception{FCPPT_TEXT("Weapon not set!")}; }))};
 
   weapon_ = sanguis::server::weapons::optional_unique_ptr();
 
@@ -107,5 +110,6 @@ sanguis::messages::server::unique_ptr sanguis::server::entities::pickups::weapon
 
 sanguis::server::weapons::weapon &sanguis::server::entities::pickups::weapon::get() const
 {
-  return *FCPPT_ASSERT_OPTIONAL_ERROR(weapon_);
+  return *fcppt::optional::to_exception(
+      this->weapon_, [] { return sanguis::exception{FCPPT_TEXT("Weapon not set!")}; });
 }

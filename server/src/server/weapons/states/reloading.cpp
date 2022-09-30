@@ -1,4 +1,5 @@
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/log.hpp>
@@ -12,9 +13,10 @@
 #include <sanguis/server/weapons/states/reloading.hpp>
 #include <sge/timer/remaining.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/verbose.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -29,9 +31,11 @@ sanguis::server::weapons::states::reloading::reloading(my_context _ctx)
     : my_base(_ctx),
       reload_time_(sanguis::diff_timer::parameters(
           fcppt::make_cref(this->context<sanguis::server::weapons::weapon>().diff_clock()),
-          FCPPT_ASSERT_OPTIONAL_ERROR(
-              this->context<sanguis::server::weapons::weapon>().reload_time())
-                  .get() /
+          fcppt::optional::to_exception(
+              this->context<sanguis::server::weapons::weapon>().reload_time(),
+              [] {
+                return sanguis::exception{FCPPT_TEXT("Reload time not set!")};
+              }).get() /
               this->context<sanguis::server::weapons::weapon>().owner().irs().get())),
       cancelled_(true)
 {

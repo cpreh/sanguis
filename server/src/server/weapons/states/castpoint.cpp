@@ -1,4 +1,5 @@
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
@@ -13,10 +14,11 @@
 #include <sanguis/server/weapons/states/backswing.hpp>
 #include <sanguis/server/weapons/states/castpoint.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -80,7 +82,11 @@ sanguis::server::weapons::states::castpoint::react(sanguis::server::weapons::eve
                           _accuracy.value(),
                           owner.angle());
                     }),
-                FCPPT_ASSERT_OPTIONAL_ERROR(owner.environment()),
+                fcppt::optional::to_exception(
+                    owner.environment(),
+                    [] {
+                      return sanguis::exception{FCPPT_TEXT("Environment not set in castpoint!")};
+                    }),
                 _target)))
         {
         case sanguis::server::weapons::attack_result::success:

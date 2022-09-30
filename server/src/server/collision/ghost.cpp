@@ -14,9 +14,9 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/assign.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 sanguis::server::collision::ghost::ghost(
     sanguis::collision::world::ghost_base_ref const _ghost_base,
@@ -56,8 +56,8 @@ sanguis::collision::world::body_enter_container sanguis::server::collision::ghos
 sanguis::collision::world::body_exit_container
 sanguis::server::collision::ghost::destroy(sanguis::collision::world::object &_world)
 {
-  sanguis::collision::world::body_exit_container result(
-      _world.deactivate_ghost(fcppt::make_ref(*FCPPT_ASSERT_OPTIONAL_ERROR(impl_))));
+  sanguis::collision::world::body_exit_container result{
+      _world.deactivate_ghost(fcppt::make_ref(this->ghost_exn()))};
 
   impl_ = optional_ghost_unique_ptr();
 
@@ -66,5 +66,11 @@ sanguis::server::collision::ghost::destroy(sanguis::collision::world::object &_w
 
 void sanguis::server::collision::ghost::center(sanguis::server::center const &_center)
 {
-  FCPPT_ASSERT_OPTIONAL_ERROR(impl_)->center(sanguis::server::collision::to_center(_center));
+  this->ghost_exn().center(sanguis::server::collision::to_center(_center));
+}
+
+sanguis::collision::world::ghost& sanguis::server::collision::ghost::ghost_exn() const
+{
+  return *fcppt::optional::to_exception(
+      this->impl_, [] { return sanguis::exception{FCPPT_TEXT("Ghost not set!")}; });
 }

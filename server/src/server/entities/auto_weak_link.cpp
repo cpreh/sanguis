@@ -1,12 +1,14 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/server/entities/auto_weak_hook.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/comparison.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 sanguis::server::entities::auto_weak_link::auto_weak_link() : ref_() {}
 
@@ -72,7 +74,9 @@ bool sanguis::server::entities::auto_weak_link::operator==(
 sanguis::server::entities::with_links &
 sanguis::server::entities::auto_weak_link::checked_ref() const
 {
-  return FCPPT_ASSERT_OPTIONAL_ERROR(this->get()).get();
+  return fcppt::optional::to_exception(
+             this->get(), [] { return sanguis::exception{FCPPT_TEXT("Auto weak link not set!")}; })
+      .get();
 }
 
 void sanguis::server::entities::auto_weak_link::add_me()
