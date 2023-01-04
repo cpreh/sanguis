@@ -3,7 +3,6 @@
 
 #include <fcppt/exception.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/assert/information_fwd.hpp>
 
 namespace sanguis::tools::animations
 {
@@ -12,8 +11,6 @@ class exception : public fcppt::exception
 {
 public:
   explicit exception(fcppt::string &&);
-
-  explicit exception(fcppt::assert_::information const &);
 
   exception(exception &&) noexcept;
 
