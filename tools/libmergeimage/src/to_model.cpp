@@ -10,13 +10,14 @@
 #include <sanguis/model/part_map.hpp>
 #include <sanguis/model/part_name.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
+#include <sanguis/tools/libmergeimage/exception.hpp>
 #include <sanguis/tools/libmergeimage/path.hpp>
 #include <sanguis/tools/libmergeimage/path_count_pair.hpp>
 #include <sanguis/tools/libmergeimage/saved_image.hpp>
 #include <sanguis/tools/libmergeimage/saved_image_vector.hpp>
 #include <sanguis/tools/libmergeimage/to_model.hpp>
 #include <sanguis/tools/libmergeimage/impl/tree_depth.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
 
 sanguis::model::object sanguis::tools::libmergeimage::to_model(
@@ -37,7 +38,10 @@ sanguis::model::object sanguis::tools::libmergeimage::to_model(
     {
       sanguis::tools::libmergeimage::path const &path(element.path());
 
-      FCPPT_ASSERT_ERROR(path.size() == sanguis::tools::libmergeimage::impl::tree_depth::value);
+      if(path.size() != sanguis::tools::libmergeimage::impl::tree_depth::value)
+      {
+        throw sanguis::tools::libmergeimage::exception{FCPPT_TEXT("Invalid path size!")};
+      }
 
       auto const range(fcppt::cast::size<sanguis::model::animation_index>(element.count()));
 
