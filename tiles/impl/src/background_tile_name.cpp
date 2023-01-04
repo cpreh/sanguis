@@ -1,6 +1,7 @@
 #include <sanguis/tiles/impl/background_tile_name.hpp>
 #include <sanguis/creator/background_tile.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 fcppt::string

@@ -1,7 +1,6 @@
 #include <sanguis/tools/libmergeimage/exception.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/assert/make_message.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

@@ -9,7 +9,6 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/out.hpp>

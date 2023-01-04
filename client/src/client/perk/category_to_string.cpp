@@ -1,6 +1,7 @@
 #include <sanguis/client/perk/category.hpp>
 #include <sanguis/client/perk/category_to_string.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 fcppt::string
