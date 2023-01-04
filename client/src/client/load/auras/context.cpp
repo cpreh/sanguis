@@ -1,4 +1,5 @@
 #include <sanguis/aura_type.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/load/auras/context.hpp>
 #include <sanguis/client/load/auras/lookup_name.hpp>
@@ -7,10 +8,12 @@
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/iterator/make_range.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
 #include <utility>
@@ -37,10 +40,12 @@ sanguis::client::load::auras::context::~context() = default;
 sge::texture::part const &
 sanguis::client::load::auras::context::texture(sanguis::aura_type const _aura_type)
 {
-  auto const it(textures_.find(_aura_type));
-
-  // TODO(philipp): Better error
-  FCPPT_ASSERT_ERROR(it != textures_.end());
-
-  return it->second.get();
+  return fcppt::optional::to_exception(
+             fcppt::container::find_opt_mapped(this->textures_, _aura_type),
+             []
+             {
+               // TODO(philipp): Better error
+               return sanguis::exception{FCPPT_TEXT("Invalid aura type!")};
+             })
+      ->get();
 }

@@ -1,10 +1,12 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/entities/model/clamp_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/desired_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/orientation.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/not.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <cmath>
@@ -54,7 +56,10 @@ sanguis::client::draw2d::sprite::rotation impl(
   sanguis::client::draw2d::funit const minus_one(
       fcppt::literal<sanguis::client::draw2d::funit>(-1));
 
-  FCPPT_ASSERT_ERROR(abs_dist >= null && swap_dist >= null && min_dist >= null);
+  if(fcppt::not_(abs_dist >= null && swap_dist >= null && min_dist >= null))
+  {
+    throw sanguis::exception{FCPPT_TEXT("Orientation values are broken!")};
+  }
 
   // We go left or right, depending on:
   //

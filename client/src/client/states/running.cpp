@@ -76,8 +76,8 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
@@ -343,7 +343,10 @@ sanguis::client::states::running::operator()(sanguis::messages::server::slowdown
   slowdown_ =
       sanguis::slowdown{fcppt::record::get<sanguis::messages::roles::slowdown>(_message.get())};
 
-  FCPPT_ASSERT_ERROR(slowdown_ > sanguis::slowdown{0.F});
+  if(fcppt::not_(slowdown_ > sanguis::slowdown{0.F}))
+  {
+    throw sanguis::exception{FCPPT_TEXT("Slowdown < 0!")};
+  }
 
   return sanguis::messages::call::result(this->discard_event());
 }
