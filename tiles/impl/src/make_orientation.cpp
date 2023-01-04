@@ -1,10 +1,12 @@
 #include <sanguis/creator/enable_if_tile.hpp>
 #include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/direction.hpp>
+#include <sanguis/tiles/exception.hpp>
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/impl/make_orientation.hpp>
 #include <sanguis/tiles/impl/neighbors.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/not.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/enum/make_range.hpp>
 
 template <typename Tile>
@@ -19,9 +21,12 @@ sanguis::tiles::impl::make_orientation(
   for (sanguis::tiles::direction const value :
        fcppt::enum_::make_range<sanguis::tiles::direction>())
   {
-    Tile const tile(_neighbors[value]);
+    Tile const tile{_neighbors[value]};
 
-    FCPPT_ASSERT_ERROR(tile == _pair.first() || tile == _pair.second());
+    if (fcppt::not_(tile == _pair.first() || tile == _pair.second()))
+    {
+      throw sanguis::tiles::exception{FCPPT_TEXT("Invalid tile neighbor!")};
+    }
 
     orientation[value] = tile == _pair.first();
   }
