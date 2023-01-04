@@ -4,8 +4,8 @@
 #include <sanguis/model/exception.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/weapon_category.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -52,7 +52,10 @@ sanguis::model::weapon_category::animation(sanguis::model::animation_name const 
 void sanguis::model::weapon_category::insert(
     sanguis::model::animation_name const &_name, sanguis::model::animation &&_animation)
 {
-  FCPPT_ASSERT_ERROR(animations_.insert(std::make_pair(_name, std::move(_animation))).second);
+  if (fcppt::not_(this->animations_.insert(std::make_pair(_name, std::move(_animation))).second))
+  {
+    throw sanguis::model::exception{FCPPT_TEXT("Double insert in model!")};
+  }
 }
 
 sanguis::model::animation_map &sanguis::model::weapon_category::animations() { return animations_; }
