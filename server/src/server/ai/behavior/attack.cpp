@@ -1,4 +1,5 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
@@ -42,9 +43,10 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -145,13 +147,19 @@ sanguis::server::ai::status sanguis::server::ai::behavior::attack::update(sangui
 void sanguis::server::ai::behavior::attack::target_enters(
     sanguis::server::entities::with_body_ref const _with_body)
 {
-  FCPPT_ASSERT_ERROR(potential_targets_.insert(_with_body).second);
+  if (fcppt::not_(this->potential_targets_.insert(_with_body).second))
+  {
+    throw sanguis::exception{FCPPT_TEXT("Double insert in potential targets!")};
+  }
 }
 
 void sanguis::server::ai::behavior::attack::target_leaves(
     sanguis::server::entities::with_body &_with_body)
 {
-  FCPPT_ASSERT_ERROR(potential_targets_.erase(fcppt::make_ref(_with_body)) == 1U);
+  if (this->potential_targets_.erase(fcppt::make_ref(_with_body)) != 1U)
+  {
+    throw sanguis::exception{FCPPT_TEXT("Failed to erase potential target!")};
+  }
 
   fcppt::optional::maybe_void(
       target_.get(),

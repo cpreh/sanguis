@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
@@ -34,8 +35,8 @@
 #include <sanguis/server/world/random_seed.hpp>
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -54,9 +55,12 @@ sanguis::server::global::generate_worlds(sanguis::server::world::parameters cons
   auto const insert_world(
       [&worlds](sanguis::server::world::object_unique_ptr &&_world)
       {
-        sanguis::world_id const id(_world->world_id());
+        sanguis::world_id const id{_world->world_id()};
 
-        FCPPT_ASSERT_ERROR(worlds.insert(std::make_pair(id, std::move(_world))).second);
+        if(fcppt::not_(worlds.insert(std::make_pair(id, std::move(_world))).second))
+        {
+          throw sanguis::exception{FCPPT_TEXT("Double insert of worlds!")};
+        }
       });
 
   insert_world(sanguis::server::world::generate(
@@ -130,23 +134,27 @@ sanguis::server::global::generate_worlds(sanguis::server::world::parameters cons
   {
     sanguis::server::world::object &last_world(*worlds.at(num_worlds));
 
-    FCPPT_ASSERT_ERROR(
-        last_world
-            .insert(
-                sanguis::server::entities::enemies::create(
-                    fcppt::make_ref(_parameters.random_generator()),
-                    _parameters.weapon_parameters(),
-                    sanguis::creator::enemy_type::reaper,
-                    sanguis::creator::enemy_kind::unique,
-                    last_world.difficulty(),
-                    last_world.environment().load_context(),
-                    sanguis::server::entities::spawn_owner(
-                        sanguis::server::entities::auto_weak_link()),
-                    sanguis::server::entities::enemies::special_chance(0.F)),
-                sanguis::server::entities::insert_parameters_center(
-                    sanguis::server::world::grid_pos_to_center(
-                        last_world.openings()[sanguis::creator::opening_type::exit].at(0).get())))
-            .has_value());
+    if (fcppt::not_(last_world
+                        .insert(
+                            sanguis::server::entities::enemies::create(
+                                fcppt::make_ref(_parameters.random_generator()),
+                                _parameters.weapon_parameters(),
+                                sanguis::creator::enemy_type::reaper,
+                                sanguis::creator::enemy_kind::unique,
+                                last_world.difficulty(),
+                                last_world.environment().load_context(),
+                                sanguis::server::entities::spawn_owner(
+                                    sanguis::server::entities::auto_weak_link()),
+                                sanguis::server::entities::enemies::special_chance(0.F)),
+                            sanguis::server::entities::insert_parameters_center(
+                                sanguis::server::world::grid_pos_to_center(
+                                    last_world.openings()[sanguis::creator::opening_type::exit]
+                                        .at(0)
+                                        .get())))
+                        .has_value()))
+    {
+      throw sanguis::exception{FCPPT_TEXT("Failed to insert reaper!")};
+    }
   }
 
   return sanguis::server::global::world_map(std::move(worlds), std::move(connections));

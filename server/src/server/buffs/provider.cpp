@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/provider.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
@@ -6,7 +7,7 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -23,9 +24,12 @@ void sanguis::server::buffs::provider::add(
 {
   using ret_type = std::pair<sanguis::server::buffs::provider::buff_map::iterator, bool>;
 
-  ret_type const ret(buffs_.insert(std::make_pair(_entity, fcppt::make_ref(*_buff))));
+  ret_type const ret{this->buffs_.insert(std::make_pair(_entity, fcppt::make_ref(*_buff)))};
 
-  FCPPT_ASSERT_ERROR(ret.second);
+  if(!ret.second)
+  {
+    throw sanguis::exception{FCPPT_TEXT("Buff double insert!")};
+  }
 
   _entity->add_buff(std::move(_buff));
 }

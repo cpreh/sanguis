@@ -40,7 +40,6 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -245,7 +244,10 @@ void sanguis::server::weapons::weapon::use_magazine_item()
 
         this->update_magazine_remaining();
 
-        FCPPT_ASSERT_ERROR(_magazine_used <= this->magazine_size().value().get());
+        if (_magazine_used > this->magazine_size().value().get())
+        {
+          throw sanguis::exception{FCPPT_TEXT("Magazine overflow!")};
+        }
       });
 }
 

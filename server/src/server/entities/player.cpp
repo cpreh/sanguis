@@ -1,4 +1,5 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/player_name.hpp>
@@ -87,9 +88,10 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/container/make.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
@@ -334,13 +336,19 @@ void sanguis::server::entities::player::remove_sight_range(
 void sanguis::server::entities::player::weapon_pickup_add_candidate(
     sanguis::server::entities::pickups::weapon_ref const _entity)
 {
-  FCPPT_ASSERT_ERROR(weapon_pickups_.insert(_entity).second);
+  if(fcppt::not_(this->weapon_pickups_.insert(_entity).second))
+  {
+    throw sanguis::exception{FCPPT_TEXT("Weapon pickups double insert!")};
+  }
 }
 
 void sanguis::server::entities::player::weapon_pickup_remove_candidate(
     sanguis::server::entities::pickups::weapon &_entity)
 {
-  FCPPT_ASSERT_ERROR(weapon_pickups_.erase(fcppt::make_ref(_entity)) == 1U);
+  if(this->weapon_pickups_.erase(fcppt::make_ref(_entity)) != 1U)
+  {
+    throw sanguis::exception{FCPPT_TEXT("Failed to erase weapon pickup!")};
+  }
 }
 
 void sanguis::server::entities::player::update()

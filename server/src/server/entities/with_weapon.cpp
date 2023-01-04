@@ -1,4 +1,5 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
@@ -27,7 +28,7 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/move_clear.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/deref.hpp>
@@ -92,9 +93,12 @@ sanguis::server::entities::with_weapon::primary_weapon_type() const
 void sanguis::server::entities::with_weapon::pickup_weapon(
     sanguis::server::weapons::unique_ptr &&_ptr)
 {
-  sanguis::is_primary_weapon const is_primary(sanguis::weapon_type_to_is_primary(_ptr->type()));
+  sanguis::is_primary_weapon const is_primary{sanguis::weapon_type_to_is_primary(_ptr->type())};
 
-  FCPPT_ASSERT_ERROR(!this->get_weapon(is_primary).has_value());
+  if(this->get_weapon(is_primary).has_value())
+  {
+    throw sanguis::exception{FCPPT_TEXT("Already holding a weapon of that type!")};
+  }
 
   sanguis::server::weapons::weapon &ref(this->set_weapon(is_primary, std::move(_ptr)));
 

@@ -137,7 +137,6 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
@@ -271,13 +270,16 @@ sanguis::server::entities::optional_base_ref sanguis::server::world::object::ins
       },
       [this, &_entity](sanguis::server::entities::transfer_result const &_transfer_result)
       {
-        sanguis::entity_id const id(_entity->id());
+        sanguis::entity_id const id{_entity->id()};
 
         using return_type = std::pair<entity_map::iterator, bool>;
 
-        return_type const ret(entities_.insert(std::make_pair(id, std::move(_entity))));
+        return_type const ret{this->entities_.insert(std::make_pair(id, std::move(_entity)))};
 
-        FCPPT_ASSERT_ERROR(ret.second);
+        if(!ret.second)
+        {
+          throw sanguis::exception{FCPPT_TEXT("Double insert of entity!")};
+        }
 
         sanguis::server::entities::with_id &result(*ret.first->second);
 
@@ -618,7 +620,10 @@ void sanguis::server::world::object::add_portal_blocker()
 
 void sanguis::server::world::object::remove_portal_blocker()
 {
-  FCPPT_ASSERT_ERROR(portal_block_count_ > 0U);
+  if(this->portal_block_count_ <= 0U)
+  {
+    throw sanguis::exception{FCPPT_TEXT("No portal blocker to remove!")};
+  }
 
   --portal_block_count_;
 
