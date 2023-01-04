@@ -1,4 +1,5 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/exception.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/impl/collides.hpp>
 #include <sanguis/collision/impl/world/make_circle.hpp>
@@ -16,11 +17,12 @@
 #include <sanguis/collision/world/optional_body_exit.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
 #include <fcppt/algorithm/update_action.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/optional/map.hpp>
@@ -136,8 +138,11 @@ sanguis::collision::impl::world::simple::ghost::new_body(
     return sanguis::collision::world::optional_body_enter();
   }
 
-  FCPPT_ASSERT_ERROR(
-      bodies_.insert(std::make_pair(fcppt::make_cref(_body), body_status::normal)).second);
+  if (fcppt::not_(this->bodies_.insert(std::make_pair(fcppt::make_cref(_body), body_status::normal))
+                      .second))
+  {
+    throw sanguis::collision::exception{FCPPT_TEXT("Body double insert!")};
+  }
 
   return sanguis::collision::world::optional_body_enter(sanguis::collision::world::body_enter{
       fcppt::make_ref(_body.body_base()), fcppt::make_ref(ghost_base_), _created});

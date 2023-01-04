@@ -1,4 +1,5 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/exception.hpp>
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/result_pair.hpp>
 #include <sanguis/collision/test_move.hpp>
@@ -43,12 +44,13 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/map_concat.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
@@ -112,7 +114,10 @@ sanguis::collision::impl::world::simple::object::activate_body(
   sanguis::collision::impl::world::simple::body &body(
       fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::body &>(_body.get()));
 
-  FCPPT_ASSERT_ERROR(body_sets_[body.collision_group()].insert(fcppt::make_ref(body)).second);
+  if (fcppt::not_(this->body_sets_[body.collision_group()].insert(fcppt::make_ref(body)).second))
+  {
+    throw sanguis::collision::exception{FCPPT_TEXT("Body set double insert!")};
+  }
 
   this->move_body(fcppt::make_ref(body));
 
@@ -134,7 +139,10 @@ sanguis::collision::impl::world::simple::object::deactivate_body(
   sanguis::collision::impl::world::simple::body &body(
       fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::body &>(_body.get()));
 
-  FCPPT_ASSERT_ERROR(body_sets_[body.collision_group()].erase(fcppt::make_ref(body)) == 1U);
+  if (this->body_sets_[body.collision_group()].erase(fcppt::make_ref(body)) != 1U)
+  {
+    throw sanguis::collision::exception{FCPPT_TEXT("Failed to erase body!")};
+  }
 
   return fcppt::algorithm::map_concat<sanguis::collision::world::body_exit_container>(
       sanguis::collision::impl::world::ghost_groups_for_body_group(body.collision_group()),
@@ -165,7 +173,10 @@ sanguis::collision::impl::world::simple::object::activate_ghost(
   sanguis::collision::impl::world::simple::ghost &ghost(
       fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::ghost &>(_ghost.get()));
 
-  FCPPT_ASSERT_ERROR(ghost_sets_[ghost.collision_group()].insert(fcppt::make_ref(ghost)).second);
+  if(fcppt::not_(this->ghost_sets_[ghost.collision_group()].insert(fcppt::make_ref(ghost)).second))
+  {
+    throw sanguis::collision::exception{FCPPT_TEXT("Ghost set double insert!")};
+  }
 
   return fcppt::algorithm::map_concat<sanguis::collision::world::body_enter_container>(
       sanguis::collision::impl::world::body_groups_for_ghost_group(ghost.collision_group()),
@@ -185,7 +196,10 @@ sanguis::collision::impl::world::simple::object::deactivate_ghost(
   sanguis::collision::impl::world::simple::ghost &ghost(
       fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::ghost &>(_ghost.get()));
 
-  FCPPT_ASSERT_ERROR(ghost_sets_[ghost.collision_group()].erase(fcppt::make_ref(ghost)) == 1U);
+  if (this->ghost_sets_[ghost.collision_group()].erase(fcppt::make_ref(ghost)) != 1U)
+  {
+    throw sanguis::collision::exception{FCPPT_TEXT("Failed to erase ghost!")};
+  }
 
   return fcppt::algorithm::map_concat<sanguis::collision::world::body_exit_container>(
       sanguis::collision::impl::world::body_groups_for_ghost_group(ghost.collision_group()),

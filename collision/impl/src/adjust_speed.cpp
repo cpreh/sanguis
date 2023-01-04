@@ -1,3 +1,4 @@
+#include <sanguis/collision/exception.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/unit.hpp>
@@ -11,7 +12,7 @@
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_boost_units.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/math/box/stretch_absolute.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
@@ -41,7 +42,11 @@ sanguis::collision::speed sanguis::collision::impl::adjust_speed(
         bool const horizontal(
             sanguis::collision::impl::is_null(_intersection.dir().get().y().value()));
 
-        FCPPT_ASSERT_ERROR(vertical != horizontal);
+        if (vertical == horizontal)
+        {
+          throw sanguis::collision::exception{
+              FCPPT_TEXT("adjust_speed: vertical and horizontal set!")};
+        }
 
         sanguis::collision::velocity const zero{
             fcppt::literal<sanguis::collision::unit>(0) * boost::units::si::meter_per_second};
