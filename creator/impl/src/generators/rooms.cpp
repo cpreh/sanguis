@@ -48,7 +48,6 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
@@ -494,13 +493,17 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
       _parameters.log(),
       fcppt::log::out << entrance_room << FCPPT_TEXT(" : ") << exit_room << FCPPT_TEXT("\n"))
 
-  FCPPT_ASSERT_ERROR(
-      _parameters.opening_count_array()[sanguis::creator::opening_type::entry] <=
-      sanguis::creator::opening_count{1U});
+  if (_parameters.opening_count_array()[sanguis::creator::opening_type::entry] >
+      sanguis::creator::opening_count{1U})
+  {
+    throw sanguis::creator::exception{FCPPT_TEXT("Too many entries in rooms generator!")};
+  }
 
-  FCPPT_ASSERT_ERROR(
-      _parameters.opening_count_array()[sanguis::creator::opening_type::exit] <=
-      sanguis::creator::opening_count{1U});
+  if (_parameters.opening_count_array()[sanguis::creator::opening_type::exit] >
+      sanguis::creator::opening_count{1U})
+  {
+    throw sanguis::creator::exception{FCPPT_TEXT("Too many exits in rooms generator!")};
+  }
 
   auto const rooms =
       fcppt::enum_::array<sanguis::creator::opening_type, ::signed_rect>{entrance_room, exit_room};

@@ -1,18 +1,24 @@
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/impl/perimeter_to_coords.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/not.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::creator::grid::pos sanguis::creator::impl::perimeter_to_coords(
     sanguis::creator::grid::dim const &_dim, unsigned const &_t)
 {
-  auto const w2 = static_cast<unsigned>(_dim.w() - 2);
-  auto const h2 = static_cast<unsigned>(_dim.h() - 2);
+  if (_dim.w() <= 2U || _dim.h() <= 2U)
+  {
+    throw sanguis::creator::exception{FCPPT_TEXT("perimeter_to_coords: dim too small!")};
+  }
 
-  FCPPT_ASSERT_ERROR(w2 > 0);
+  auto const w2{_dim.w() - 2U};
+  auto const h2{_dim.h() - 2U};
 
-  FCPPT_ASSERT_ERROR(h2 > 0);
-
-  FCPPT_ASSERT_ERROR(_t < 2 * w2 + 2 * h2);
+  if (fcppt::not_(_t < 2 * w2 + 2 * h2))
+  {
+    throw sanguis::creator::exception{FCPPT_TEXT("permieter_to_coords: _t too small!")};
+  }
 
   if (_t < w2)
   {

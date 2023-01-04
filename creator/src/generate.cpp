@@ -13,10 +13,10 @@
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <fcppt/copy.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/contains_if.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/log/debug.hpp>
@@ -61,19 +61,27 @@ sanguis::creator::generate(sanguis::creator::top_parameters const &_parameters)
 
   for (auto const opening_type : fcppt::enum_::make_range<sanguis::creator::opening_type>())
   {
-    FCPPT_ASSERT_ERROR(
-        result.openings()[opening_type].size() ==
-        _parameters.opening_count_array()[opening_type].get());
+    if (result.openings()[opening_type].size() !=
+        _parameters.opening_count_array()[opening_type].get())
+    {
+      throw sanguis::creator::exception{FCPPT_TEXT("Inconsistent opening counts!")};
+    }
   }
 
-  FCPPT_ASSERT_ERROR(result.grid().size() == result.background_grid().size());
+  if (result.grid().size() != result.background_grid().size())
+  {
+    throw sanguis::creator::exception{FCPPT_TEXT("Grid sizes do not match!")};
+  }
 
   if (_parameters.spawn_boss().get())
   {
-    FCPPT_ASSERT_ERROR(fcppt::algorithm::contains_if(
-        result.spawns(),
-        [](sanguis::creator::spawn const &_spawn)
-        { return _spawn.enemy_kind() == sanguis::creator::enemy_kind::boss; }));
+    if (fcppt::not_(fcppt::algorithm::contains_if(
+            result.spawns(),
+            [](sanguis::creator::spawn const &_spawn)
+            { return _spawn.enemy_kind() == sanguis::creator::enemy_kind::boss; })))
+    {
+      throw sanguis::creator::exception{FCPPT_TEXT("Not boss spawned!")};
+    }
   }
 
   return sanguis::creator::top_result(
