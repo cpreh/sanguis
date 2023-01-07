@@ -17,12 +17,12 @@
 #include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
-#include <fcppt/parse/error.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
+#include <string>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -42,16 +42,17 @@ sanguis::client::config::settings::object::object(
 
                return fcppt::either::match(
                    sge::parse::ini::parse_file(this->path_),
-                   [this](fcppt::optional::object<fcppt::parse::error<char>> const &_error)
+                   [this](fcppt::optional::object<std::string> const &_error)
                    {
                      fcppt::optional::maybe_void(
                          _error,
-                         [this](fcppt::parse::error<char> const &_parse_error)
+                         [this](std::string const &_parse_error)
                          {
                            FCPPT_LOG_INFO(
                                this->log_,
-                               fcppt::log::out << FCPPT_TEXT("Loading the settings failed!")
-                                               << fcppt::from_std_string(_parse_error.get()))
+                               fcppt::log::out
+                                   << FCPPT_TEXT("Loading the settings failed!")
+                                   << fcppt::from_std_string(_parse_error))
                          });
 
                      return sge::parse::ini::start{sge::parse::ini::section_vector{}};
