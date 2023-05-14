@@ -125,7 +125,7 @@ sanguis::client::object::object(
           fcppt::make_ref(cursor_)),
       frame_timer_(),
       server_(),
-      scoped_machine_(machine_)
+      scoped_machine_(fcppt::make_ref(machine_))
 {
 }
 

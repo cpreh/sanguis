@@ -14,7 +14,7 @@ sanguis::server::object::object(
     : sanguis::server::object_base(),
       io_service_(),
       machine_(_log_context, _port, fcppt::make_ref(io_service_)),
-      scoped_machine_(machine_)
+      scoped_machine_(fcppt::make_ref(machine_))
 {
 }
 
