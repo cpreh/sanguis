@@ -46,6 +46,7 @@ find_package(
 
 set(
 	FCPPT_UTILS_CLANG_TIDY_ADDITIONAL_CHECKS
+	"-cppcoreguidelines-avoid-const-or-ref-data-members"
 	"-fuchsia-default-arguments-calls"
 	"-fuchsia-default-arguments-declarations"
 	"-fuchsia-multiple-inheritance"
