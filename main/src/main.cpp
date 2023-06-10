@@ -19,9 +19,10 @@
 #include <fcppt/options/default_help_switch.hpp>
 #include <fcppt/options/error.hpp>
 #include <fcppt/options/error_output.hpp>
-#include <fcppt/options/help_text.hpp>
 #include <fcppt/options/parse_help.hpp>
 #include <fcppt/options/result.hpp>
+#include <fcppt/options/usage.hpp>
+#include <fcppt/options/usage_output.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/variant/output.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -50,9 +51,9 @@ try
             [](sanguis::client::args::result const &_args)
             { return sanguis::client::start(_args); });
       },
-      [](fcppt::options::help_text const &_help_text)
+      [](fcppt::options::usage const &_usage)
       {
-        awl::show_message(_help_text.get());
+        awl::show_message(fcppt::output_to_fcppt_string(_usage));
 
         return awl::main::exit_success();
       });
