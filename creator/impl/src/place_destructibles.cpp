@@ -60,6 +60,7 @@ sanguis::creator::destructible_container sanguis::creator::impl::place_destructi
     if (!sanguis::creator::tile_is_solid(entry.value()) &&
         place_stuff_random(number_of_wall_neighbors(entry.pos())))
     {
+      // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
       result.push_back(sanguis::creator::destructible(
           sanguis::creator::destructible_pos(entry.pos()),
           sanguis::creator::destructible_type::barrel));

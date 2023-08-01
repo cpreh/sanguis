@@ -14,8 +14,8 @@ void rect(sanguis::creator::rect const &_rect, Callback const &_callback)
 
   int_type x0 = _rect.left();
   int_type y0 = _rect.top();
-  int_type x1 = _rect.right();
-  int_type y1 = _rect.bottom();
+  int_type const x1 = _rect.right();
+  int_type const y1 = _rect.bottom();
 
   for (int_type y = y0; y < y1; ++y)
   {

@@ -12,7 +12,7 @@
 
 template <typename IntType>
 sanguis::creator::impl::random::uniform_int_distribution<IntType>::param_type::param_type(
-    IntType const _min, IntType const _max)
+    IntType const _min, IntType const _max) // NOLINT(bugprone-easily-swappable-parameters)
     : min_(_min), max_(_max)
 {
   if (min_ > max_)

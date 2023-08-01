@@ -2,6 +2,7 @@
 #include <sanguis/model/animation_range.hpp>
 
 sanguis::model::animation_range::animation_range(
+    // NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
     sanguis::model::animation_index const _begin, sanguis::model::animation_index const _end)
     : begin_(_begin), end_(_end)
 {

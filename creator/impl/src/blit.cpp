@@ -26,8 +26,8 @@ sanguis::creator::enable_if_tile<Tile, void> sanguis::creator::impl::blit(
 
   for (boost::tuple<
            fcppt::container::grid::pos_reference<sanguis::creator::tile_grid<Tile>>,
-           fcppt::container::grid::pos_reference<sanguis::creator::tile_grid<Tile> const>> const
-           &element : boost::range::combine(_dest, _source))
+           fcppt::container::grid::pos_reference<sanguis::creator::tile_grid<Tile> const>>
+           element : boost::range::combine(_dest, _source))
   {
     boost::get<0>(element).value() = boost::get<1>(element).value();
   }

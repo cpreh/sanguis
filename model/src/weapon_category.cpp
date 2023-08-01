@@ -18,7 +18,7 @@ sanguis::model::weapon_category::weapon_category(
     sanguis::model::animation_map &&_animations, sanguis::model::optional_image_name &&_image_name)
     : animations_(std::move(_animations)), image_name_(std::move(_image_name))
 {
-  if (animations_.count(sanguis::model::animation_name(FCPPT_TEXT("none"))) == 0U)
+  if (fcppt::not_(animations_.contains(sanguis::model::animation_name(FCPPT_TEXT("none")))))
   {
     throw sanguis::model::exception(FCPPT_TEXT("None animation not available!"));
   }

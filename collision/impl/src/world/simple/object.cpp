@@ -306,6 +306,7 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
                               sanguis::collision::impl::world::make_circle(body1.get()),
                               sanguis::collision::impl::world::make_circle(body2)))
                       {
+                        // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
                         result.push_back(sanguis::collision::world::body_collision{
                             fcppt::make_ref(body1.get().body_base()),
                             fcppt::make_ref(body2.body_base())});

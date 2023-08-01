@@ -86,6 +86,7 @@ sanguis::collision::impl::world::simple::ghost::post_update_bodies()
       {
         if (_element.second == body_status::marked_for_deletion)
         {
+          // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
           result.push_back(sanguis::collision::world::body_exit(
               fcppt::make_ref(_element.first.get().body_base()), fcppt::make_ref(ghost_base_)));
 

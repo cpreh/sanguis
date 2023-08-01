@@ -61,7 +61,7 @@ sanguis::creator::impl::maze_result sanguis::creator::impl::generate_maze(
 
   while (true)
   {
-    sanguis::creator::pos tmp_pos{
+    sanguis::creator::pos const tmp_pos{
         sanguis::creator::impl::random::uniform_pos{fcppt::make_ref(_randgen), size}()};
 
     auto maybe_starting_pos = sanguis::creator::impl::find_closest(
