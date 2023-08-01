@@ -14,9 +14,9 @@ class with_center
 protected:
   with_center();
 
+public:
   virtual ~with_center();
 
-public:
   virtual void center(sanguis::client::draw2d::sprite::center const &) = 0;
 };
 

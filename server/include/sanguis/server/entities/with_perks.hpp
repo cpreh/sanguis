@@ -29,10 +29,10 @@ class with_perks : public virtual sanguis::server::entities::base,
 public:
   void add_perk(sanguis::perk_type);
 
+  ~with_perks() override;
+
 protected:
   explicit with_perks(sanguis::random_generator_ref);
-
-  ~with_perks() override;
 
   void update() override;
 

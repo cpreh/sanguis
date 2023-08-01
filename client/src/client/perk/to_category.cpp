@@ -8,19 +8,14 @@ sanguis::client::perk::category sanguis::client::perk::to_category(sanguis::perk
   switch (_type)
   {
   case sanguis::perk_type::choleric:
-    return sanguis::client::perk::category::attack;
-  case sanguis::perk_type::health:
-    return sanguis::client::perk::category::survival;
   case sanguis::perk_type::fire_damage:
-    return sanguis::client::perk::category::attack;
   case sanguis::perk_type::piercing_damage:
-    return sanguis::client::perk::category::attack;
   case sanguis::perk_type::ias:
-    return sanguis::client::perk::category::attack;
-  case sanguis::perk_type::ims:
-    return sanguis::client::perk::category::survival;
   case sanguis::perk_type::irs:
     return sanguis::client::perk::category::attack;
+  case sanguis::perk_type::ims:
+  case sanguis::perk_type::health:
+    return sanguis::client::perk::category::survival;
   }
 
   FCPPT_ASSERT_UNREACHABLE;

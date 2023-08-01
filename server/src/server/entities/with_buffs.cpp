@@ -81,9 +81,9 @@ void sanguis::server::entities::with_buffs::remove_buff(sanguis::server::buffs::
       });
 }
 
-sanguis::server::entities::with_buffs::with_buffs() : buffs_() {}
-
 sanguis::server::entities::with_buffs::~with_buffs() = default;
+
+sanguis::server::entities::with_buffs::with_buffs() : buffs_() {}
 
 sanguis::buff_type_vector sanguis::server::entities::with_buffs::buff_types() const
 {

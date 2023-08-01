@@ -25,7 +25,7 @@ find_node(Container &_container, sanguis::perk_type const _perk_type)
   {
     using traversal = fcppt::container::tree::pre_order<tree_type>;
 
-    traversal trav(element);
+    traversal const trav{element};
 
     // TODO(philipp): find_by?
     typename traversal::iterator const it(std::find_if(

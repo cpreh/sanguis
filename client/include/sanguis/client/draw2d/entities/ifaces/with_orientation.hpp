@@ -14,9 +14,9 @@ class with_orientation
 protected:
   with_orientation();
 
+public:
   virtual ~with_orientation();
 
-public:
   virtual void orientation(sanguis::client::draw2d::sprite::rotation) = 0;
 
   [[nodiscard]] virtual sanguis::client::draw2d::sprite::rotation orientation() const = 0;

@@ -85,9 +85,10 @@ sanguis::client::object::object(
       renderer_(sys_->renderer_device_core()),
       added_font_(sys_->font_system().add_font(
           sanguis::media_path() / FCPPT_TEXT("font") / FCPPT_TEXT("Electrolize-Regular.ttf"))),
-      font_object_(sys_->font_system().create_font(sge::font::parameters()
-                                                       .family(FCPPT_TEXT("Electrolize"))
-                                                       .ttf_size(sge::font::ttf_size(20U)))),
+      font_object_(
+          sys_->font_system().create_font(sge::font::parameters()
+                                              .family(FCPPT_TEXT("Electrolize"))
+                                              .ttf_size(fcppt::literal<sge::font::ttf_size>(20U)))),
       resources_(
           _log_context,
           fcppt::make_ref(sys_->image_system()),

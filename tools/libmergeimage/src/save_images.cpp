@@ -35,6 +35,7 @@ sanguis::tools::libmergeimage::saved_image_vector sanguis::tools::libmergeimage:
         sge::image2d::view::const_object(image.store().const_wrapped_view()),
         _directory / file_name);
 
+    // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
     result.push_back(sanguis::tools::libmergeimage::saved_image(
         fcppt::copy(image.paths()), sanguis::model::image_name(file_name)));
   }

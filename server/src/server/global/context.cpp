@@ -326,7 +326,7 @@ void sanguis::server::global::context::remove_player(sanguis::server::player_id 
 bool sanguis::server::global::context::request_transfer(
     sanguis::server::global::source_world_pair const _source) const
 {
-  return worlds_.connections().count(_source) != 0U;
+  return this->worlds_.connections().contains(_source);
 }
 
 void sanguis::server::global::context::transfer_entity(

@@ -27,10 +27,11 @@ public:
 
   void remove_buff(sanguis::server::buffs::buff & // NOLINT(google-runtime-references)
   ); // NOLINT(google-runtime-references)
-protected:
-  with_buffs();
 
   ~with_buffs() override;
+
+protected:
+  with_buffs();
 
   void update() override;
 

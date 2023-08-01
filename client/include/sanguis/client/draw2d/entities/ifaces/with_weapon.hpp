@@ -15,9 +15,9 @@ class with_weapon
 protected:
   with_weapon();
 
+public:
   virtual ~with_weapon();
 
-public:
   virtual void weapon(sanguis::optional_primary_weapon_type) = 0;
 
   virtual void weapon_status(sanguis::weapon_status) = 0;

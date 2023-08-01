@@ -47,8 +47,6 @@ sanguis::server::entities::with_ai::with_ai(
 
 FCPPT_PP_POP_WARNING
 
-sanguis::server::entities::with_ai::~with_ai() = default;
-
 void sanguis::server::entities::with_ai::update()
 {
   sanguis::server::entities::with_weapon::update();
@@ -78,6 +76,8 @@ sanguis::server::entities::transfer_result sanguis::server::entities::with_ai::o
 
   return ai_ref.transfer();
 }
+
+sanguis::server::entities::with_ai::~with_ai() = default;
 
 sanguis::server::ai::create_function const &sanguis::server::entities::with_ai::create_ai() const
 {

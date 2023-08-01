@@ -19,6 +19,8 @@ namespace sanguis::server::entities::projectiles
 class projectile : public sanguis::server::entities::projectiles::base
 {
   FCPPT_NONMOVABLE(projectile);
+public:
+  ~projectile() override;
 
 protected:
   projectile(
@@ -28,8 +30,6 @@ protected:
       sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
       sanguis::server::entities::projectiles::life_time,
       sanguis::server::direction);
-
-  ~projectile() override;
 
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;

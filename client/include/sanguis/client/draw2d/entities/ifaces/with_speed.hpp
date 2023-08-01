@@ -14,9 +14,9 @@ class with_speed
 protected:
   with_speed();
 
+public:
   virtual ~with_speed();
 
-public:
   virtual void speed(sanguis::client::draw2d::speed const &) = 0;
 
   [[nodiscard]] virtual sanguis::client::draw2d::speed speed() const = 0;

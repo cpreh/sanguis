@@ -50,6 +50,8 @@ void sanguis::server::entities::property::base::linear_decrease(
   this->recalc_max();
 }
 
+sanguis::server::entities::property::base::~base() = default;
+
 sanguis::server::entities::property::base::base(
     sanguis::server::entities::property::value const _base)
     : base_(_base), constant_(), linear_(), linear_decrease_()
@@ -60,8 +62,6 @@ sanguis::server::entities::property::base::base(base &&) noexcept = default;
 
 sanguis::server::entities::property::base &
 sanguis::server::entities::property::base::operator=(base &&) noexcept = default;
-
-sanguis::server::entities::property::base::~base() = default;
 
 void sanguis::server::entities::property::base::recalc_max()
 {

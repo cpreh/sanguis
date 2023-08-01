@@ -319,7 +319,7 @@ void sanguis::client::draw2d::scene::object::process_message(
   FCPPT_PP_PUSH_WARNING
   FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
-  static dispatcher_type dispatcher{};
+  static dispatcher_type const dispatcher{};
 
   FCPPT_PP_POP_WARNING
 

@@ -60,8 +60,6 @@ sanguis::server::entities::with_weapon::with_weapon(
       { this->pickup_weapon(std::move(_start_weapon)); });
 }
 
-sanguis::server::entities::with_weapon::~with_weapon() = default;
-
 void sanguis::server::entities::with_weapon::update()
 {
   with_weapon::update_weapon(this->primary_weapon_ref());
@@ -89,6 +87,8 @@ sanguis::server::entities::with_weapon::primary_weapon_type() const
             _primary_weapon.get().type());
       });
 }
+
+sanguis::server::entities::with_weapon::~with_weapon() = default;
 
 void sanguis::server::entities::with_weapon::pickup_weapon(
     sanguis::server::weapons::unique_ptr &&_ptr)

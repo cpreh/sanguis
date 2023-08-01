@@ -43,8 +43,6 @@ protected:
       sanguis::server::weapons::ias,
       sanguis::server::weapons::irs);
 
-  ~with_weapon() override;
-
   void update() override;
 
   void tick(sanguis::duration const &) override;
@@ -52,6 +50,8 @@ protected:
   [[nodiscard]] sanguis::optional_primary_weapon_type primary_weapon_type() const;
 
 public:
+  ~with_weapon() override;
+
   void pickup_weapon(sanguis::server::weapons::unique_ptr &&);
 
   [[nodiscard]] sanguis::server::weapons::optional_unique_ptr

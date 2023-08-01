@@ -29,6 +29,9 @@ class base : public virtual sanguis::server::entities::ifaces::with_team,
 {
   FCPPT_NONMOVABLE(base);
 
+public:
+  ~base() override;
+
 protected:
   base(
       sanguis::server::team,
@@ -37,8 +40,6 @@ protected:
       sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
       sanguis::server::entities::projectiles::life_time,
       sanguis::server::direction);
-
-  ~base() override;
 
   void expire();
 

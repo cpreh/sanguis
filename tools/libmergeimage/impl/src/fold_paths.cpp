@@ -41,6 +41,7 @@ sanguis::tools::libmergeimage::impl::fold_paths(
   for (auto cur(_paths.begin()), next(mismatch(cur, _paths.end())); cur != _paths.end();
        cur = next, next = mismatch(cur, _paths.end()))
   {
+    // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
     result.push_back(sanguis::tools::libmergeimage::path_count_pair(
         sanguis::tools::libmergeimage::impl::convert_path(*cur),
         fcppt::cast::to_unsigned(std::distance(cur, next))));

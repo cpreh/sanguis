@@ -13,9 +13,9 @@ class with_visibility
 protected:
   with_visibility();
 
+public:
   virtual ~with_visibility();
 
-public:
   virtual void visible(bool) = 0;
 };
 

@@ -34,13 +34,13 @@ void sanguis::server::entities::with_perks::add_perk(sanguis::perk_type const _t
       ->raise_level(*this);
 }
 
+sanguis::server::entities::with_perks::~with_perks() = default;
+
 sanguis::server::entities::with_perks::with_perks(
     sanguis::random_generator_ref const _random_generator)
     : random_generator_(_random_generator), perks_()
 {
 }
-
-sanguis::server::entities::with_perks::~with_perks() = default;
 
 void sanguis::server::entities::with_perks::update()
 {

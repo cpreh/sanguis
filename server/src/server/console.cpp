@@ -52,6 +52,7 @@ fcppt::signal::auto_connection sanguis::server::console::insert(
               sge::charconv::fcppt_string_to_utf8(_description))));
 
   // TODO(philipp): we have to know when a command doesn't exist anymore!
+  // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
   known_commands_.push_back(sanguis::server::console_command_pair(_command, _description));
 
   return object_.insert(sge::console::callback::parameters(

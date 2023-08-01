@@ -13,7 +13,7 @@ template <typename Tile>
 std::size_t
 std::hash<sanguis::tiles::pair<Tile>>::operator()(sanguis::tiles::pair<Tile> const _pair) const
 {
-  std::hash<std::underlying_type_t<Tile>> hash_element{};
+  std::hash<std::underlying_type_t<Tile>> const hash_element{};
 
   return fcppt::hash_combine(
       hash_element(fcppt::cast::enum_to_underlying(_pair.first())),

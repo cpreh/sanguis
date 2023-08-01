@@ -103,8 +103,8 @@ try
         {
           this->message_box(
               QMessageBox::Icon::Warning,
-              QString(tr("No output path")),
-              QString(tr("You don't have an output path yet. Please choose one.")));
+              tr("No output path"),
+              tr("You don't have an output path yet. Please choose one."));
         }
 
         fcppt::optional::maybe_void(
@@ -115,9 +115,9 @@ try
                           this, tr("Select a directory to save the merged images to"))),
             [&_resource_directory, this](std::filesystem::path const &_save_path)
             {
-              sanguis::tools::libmergeimage::merge_result merged_result(
+              sanguis::tools::libmergeimage::merge_result const merged_result{
                   sanguis::tools::libmergeimage::merge_images(
-                      sge_systems_->image_system(), _resource_directory));
+                      sge_systems_->image_system(), _resource_directory)};
 
               std::filesystem::path const json_file{
                   (_save_path / _save_path.stem()).replace_extension("json")};
@@ -149,14 +149,14 @@ catch (fcppt::exception const &_error)
 {
   this->message_box(
       QMessageBox::Icon::Critical,
-      QString(tr("Error loading resource directory")),
+      tr("Error loading resource directory"),
       sanguis::tools::animations::qtutil::from_fcppt_string(_error.string()));
 }
 catch (std::exception const &_error)
 {
   this->message_box(
       QMessageBox::Icon::Critical,
-      QString(tr("Error loading resource directory")),
+      tr("Error loading resource directory"),
       QString::fromStdString(_error.what()));
 }
 
@@ -174,7 +174,7 @@ void sanguis::tools::animations::main_window::actionSave()
         {
           this->message_box(
               QMessageBox::Icon::Critical,
-              QString(tr("Error saving JSON")),
+              tr("Error saving JSON"),
               sanguis::tools::animations::qtutil::from_fcppt_string(_error.string()));
         }
       });
@@ -388,8 +388,8 @@ void sanguis::tools::animations::main_window::playFrames()
       {
         this->message_box(
             QMessageBox::Icon::Critical,
-            QString(tr("No animation delay")),
-            QString(tr("No animation delay specified. Can't play the animation.")));
+            tr("No animation delay"),
+            tr("No animation delay specified. Can't play the animation."));
       },
       [this](sanguis::model::animation_delay const _delay)
       {
@@ -447,7 +447,7 @@ void sanguis::tools::animations::main_window::open_json(std::filesystem::path co
   {
     this->message_box(
         QMessageBox::Icon::Critical,
-        QString(tr("Error loading JSON")),
+        tr("Error loading JSON"),
         sanguis::tools::animations::qtutil::from_fcppt_string(_error.string()));
 
     return;
@@ -468,7 +468,7 @@ void sanguis::tools::animations::main_window::open_json(std::filesystem::path co
   {
     this->message_box(
         QMessageBox::Icon::Critical,
-        QString(tr("Error loading image files")),
+        tr("Error loading image files"),
         sanguis::tools::animations::qtutil::from_fcppt_string(_error.string()));
   }
 

@@ -15,9 +15,9 @@ class with_health
 protected:
   with_health();
 
+public:
   virtual ~with_health();
 
-public:
   virtual void health(sanguis::client::health) = 0;
 
   virtual void max_health(sanguis::client::max_health) = 0;

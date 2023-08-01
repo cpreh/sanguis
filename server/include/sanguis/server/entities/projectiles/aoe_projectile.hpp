@@ -20,6 +20,8 @@ namespace sanguis::server::entities::projectiles
 class aoe_projectile : public sanguis::server::entities::projectiles::base
 {
   FCPPT_NONMOVABLE(aoe_projectile);
+public:
+  ~aoe_projectile() override;
 
 protected:
   aoe_projectile(
@@ -30,8 +32,6 @@ protected:
       sanguis::server::entities::projectiles::life_time,
       sanguis::server::aoe,
       sanguis::server::direction);
-
-  ~aoe_projectile() override;
 
   [[nodiscard]] sanguis::server::aoe aoe() const;
 

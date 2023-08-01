@@ -24,6 +24,8 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <alda/message/init_record.hpp>
 
+sanguis::server::entities::projectiles::aoe_projectile::~aoe_projectile() = default;
+
 sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
     sanguis::aoe_projectile_type const _type,
     sanguis::server::team const _team,
@@ -43,8 +45,6 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
       aoe_(_aoe)
 {
 }
-
-sanguis::server::entities::projectiles::aoe_projectile::~aoe_projectile() = default;
 
 sanguis::server::aoe sanguis::server::entities::projectiles::aoe_projectile::aoe() const
 {

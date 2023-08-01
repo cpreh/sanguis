@@ -19,6 +19,8 @@ sanguis::server::entities::with_auras::add_aura(sanguis::server::auras::unique_p
   return this->sanguis::server::entities::with_ghosts::add_ghost(auras_.back()->create_ghost());
 }
 
+sanguis::server::entities::with_auras::~with_auras() = default;
+
 sanguis::server::entities::with_auras::with_auras(sanguis::server::auras::container &&_auras)
     : auras_(std::move(_auras))
 {
@@ -27,8 +29,6 @@ sanguis::server::entities::with_auras::with_auras(sanguis::server::auras::contai
       auras_,
       [](sanguis::server::auras::unique_ptr const &_aura) { return _aura->create_ghost(); }));
 }
-
-sanguis::server::entities::with_auras::~with_auras() = default;
 
 sanguis::server::auras::container const &sanguis::server::entities::with_auras::auras() const
 {

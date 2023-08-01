@@ -28,12 +28,12 @@ sanguis::server::entities::with_auras_id::add_aura(sanguis::server::auras::uniqu
   return sanguis::server::entities::with_auras::add_aura(std::move(_aura));
 }
 
+sanguis::server::entities::with_auras_id::~with_auras_id() = default;
+
 sanguis::server::entities::with_auras_id::with_auras_id(sanguis::server::auras::container &&_auras)
     : sanguis::server::entities::with_auras(std::move(_auras))
 {
 }
-
-sanguis::server::entities::with_auras_id::~with_auras_id() = default;
 
 sanguis::aura_type_vector sanguis::server::entities::with_auras_id::aura_types() const
 {

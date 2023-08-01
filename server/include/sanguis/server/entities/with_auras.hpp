@@ -19,10 +19,10 @@ public:
   [[nodiscard]] virtual sanguis::collision::world::body_enter_container
   add_aura(sanguis::server::auras::unique_ptr &&);
 
+  ~with_auras() override;
+
 protected:
   explicit with_auras(sanguis::server::auras::container &&);
-
-  ~with_auras() override;
 
   [[nodiscard]] sanguis::server::auras::container const &auras() const;
 

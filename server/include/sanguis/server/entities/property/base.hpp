@@ -28,14 +28,13 @@ public:
 
   void linear_decrease(sanguis::server::entities::property::linear_decrease const &);
 
+  virtual ~base();
 protected:
   explicit base(sanguis::server::entities::property::value);
 
   base(base &&) noexcept;
 
   base &operator=(base &&) noexcept;
-
-  virtual ~base();
 
 private:
   void recalc_max();

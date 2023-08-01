@@ -21,10 +21,10 @@ public:
   [[nodiscard]] sanguis::collision::world::body_enter_container
   add_aura(sanguis::server::auras::unique_ptr &&) override;
 
+  ~with_auras_id() override;
+
 protected:
   explicit with_auras_id(sanguis::server::auras::container &&);
-
-  ~with_auras_id() override;
 
   [[nodiscard]] sanguis::aura_type_vector aura_types() const;
 };

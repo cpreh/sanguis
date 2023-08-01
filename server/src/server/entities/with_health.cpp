@@ -69,6 +69,8 @@ sanguis::server::damage::armor_array const &sanguis::server::entities::with_heal
   return armor_;
 }
 
+sanguis::server::entities::with_health::~with_health() = default;
+
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
@@ -94,8 +96,6 @@ sanguis::server::entities::with_health::with_health(
 }
 
 FCPPT_PP_POP_WARNING
-
-sanguis::server::entities::with_health::~with_health() = default;
 
 void sanguis::server::entities::with_health::update()
 {

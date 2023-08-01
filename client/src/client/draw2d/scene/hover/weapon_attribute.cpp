@@ -42,9 +42,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 		)
 		+
 		SGE_FONT_LIT(": "),
-		sge::gui::text_color(
-			sanguis::client::gui::hud::weapon_attribute_color()
-		)
+		sanguis::client::gui::hud::weapon_attribute_color()
 	},
 	expander1_{
 		sge::rucksack::axis::x

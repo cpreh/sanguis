@@ -20,9 +20,9 @@ class ghost_base : public sanguis::collision::world::ghost_base
 protected:
   ghost_base();
 
+public:
   ~ghost_base() override;
 
-public:
   void body_enter(sanguis::collision::world::body_base_ref, sanguis::collision::world::created);
 
   void body_exit(sanguis::collision::world::body_base & // NOLINT)google-runtime-references)

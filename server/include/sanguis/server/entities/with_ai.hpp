@@ -44,13 +44,13 @@ protected:
       sanguis::server::weapons::ias,
       sanguis::server::weapons::irs);
 
-  ~with_ai() override;
-
   void update() override;
 
   [[nodiscard]] sanguis::server::entities::transfer_result on_create() override;
 
 public:
+  ~with_ai() override;
+
   [[nodiscard]] sanguis::server::ai::create_function const &create_ai() const;
 
 private:

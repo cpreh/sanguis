@@ -26,6 +26,8 @@
 #include <boost/logic/tribool.hpp>
 #include <fcppt/config/external_end.hpp>
 
+sanguis::server::entities::projectiles::base::~base() = default;
+
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
@@ -51,8 +53,6 @@ sanguis::server::entities::projectiles::base::base(
 }
 
 FCPPT_PP_POP_WARNING
-
-sanguis::server::entities::projectiles::base::~base() = default;
 
 void sanguis::server::entities::projectiles::base::expire() { life_timer_.expired(true); }
 

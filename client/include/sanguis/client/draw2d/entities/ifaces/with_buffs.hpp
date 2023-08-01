@@ -14,9 +14,9 @@ class with_buffs
 protected:
   with_buffs();
 
+public:
   virtual ~with_buffs();
 
-public:
   virtual void add_buff(sanguis::buff_type) = 0;
 
   virtual void remove_buff(sanguis::buff_type) = 0;

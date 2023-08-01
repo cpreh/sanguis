@@ -21,6 +21,8 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <alda/message/init_record.hpp>
 
+sanguis::server::entities::projectiles::projectile::~projectile() = default;
+
 sanguis::server::entities::projectiles::projectile::projectile(
     sanguis::projectile_type const _projectile_type,
     sanguis::server::team const _team,
@@ -38,8 +40,6 @@ sanguis::server::entities::projectiles::projectile::projectile(
       projectile_type_{_projectile_type}
 {
 }
-
-sanguis::server::entities::projectiles::projectile::~projectile() = default;
 
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::projectiles::projectile::add_message(

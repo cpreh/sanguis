@@ -14,9 +14,9 @@ class with_auras
 protected:
   with_auras();
 
+public:
   virtual ~with_auras();
 
-public:
   virtual void add_aura(sanguis::aura_type) = 0;
 };
 

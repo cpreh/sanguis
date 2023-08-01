@@ -43,13 +43,13 @@ public:
 
   [[nodiscard]] sanguis::server::damage::armor_array const &armor() const;
 
+  ~with_health() override;
+
 protected:
   with_health(
       sanguis::server::health,
       sanguis::server::regeneration,
       sanguis::server::damage::armor_array const &);
-
-  ~with_health() override;
 
   void update() override;
 
