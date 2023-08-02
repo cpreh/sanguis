@@ -3,6 +3,9 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/iterator/make_range.hpp>
+#include <fcppt/preprocessor/ignore_unsafe_buffer_usage.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <ios>
 #include <streambuf>
@@ -16,6 +19,9 @@ sanguis::net::data_streambuf::data_streambuf(
 
 sanguis::net::data_streambuf::~data_streambuf() = default;
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_IGNORE_UNSAFE_BUFFER_USAGE
+
 std::streamsize
 sanguis::net::data_streambuf::xsputn(char_type const *const _dest, std::streamsize const _size)
 {
@@ -28,6 +34,8 @@ sanguis::net::data_streambuf::xsputn(char_type const *const _dest, std::streamsi
 
   return _size;
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::net::data_streambuf::int_type sanguis::net::data_streambuf::overflow(int_type const _value)
 {
