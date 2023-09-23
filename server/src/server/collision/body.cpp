@@ -27,6 +27,9 @@
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/preprocessor/ignore_dangling_reference.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -77,7 +80,9 @@ sanguis::collision::world::body_enter_container sanguis::server::collision::body
         FCPPT_TEXT("server::collision::body::transfer called, but body_ is already set")};
   }
 
-  sanguis::collision::world::body_unique_ptr const &new_body(fcppt::optional::assign(
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_IGNORE_DANGLING_REFERENCE
+  sanguis::collision::world::body_unique_ptr const &new_body{fcppt::optional::assign(
       body_,
       _world.create_body(sanguis::collision::world::body_parameters(
           _log,
@@ -89,7 +94,8 @@ sanguis::collision::world::body_enter_container sanguis::server::collision::body
               [](sanguis::server::mass const &_mass)
               { return sanguis::server::collision::to_mass(_mass); }),
           _collision_group,
-          body_base_))));
+          body_base_)))};
+  FCPPT_PP_POP_WARNING
 
   return _world.activate_body(fcppt::make_ref(*new_body), _created);
 }

@@ -12,6 +12,9 @@
 #include <fcppt/text.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/preprocessor/ignore_dangling_reference.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sanguis::client::perk::choosable_state sanguis::client::perk::choosable(
     sanguis::perk_type const _type,
@@ -25,10 +28,13 @@ sanguis::client::perk::choosable_state sanguis::client::perk::choosable(
   sanguis::client::perk::info const &info{fcppt::optional::to_exception(
       node.value(), [] { return sanguis::exception{FCPPT_TEXT("Perk node not set!")}; })};
 
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_IGNORE_DANGLING_REFERENCE
   sanguis::client::perk::tree const &parent_node{
       fcppt::optional::to_exception(
           node.parent(), [] { return sanguis::exception{FCPPT_TEXT("Perk has no parent node!")}; })
           .get()};
+  FCPPT_PP_POP_WARNING
 
   if (info.max_level().get() == info.level())
   {

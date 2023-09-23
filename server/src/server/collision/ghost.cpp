@@ -17,6 +17,9 @@
 #include <fcppt/optional/assign.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/preprocessor/ignore_dangling_reference.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sanguis::server::collision::ghost::ghost(
     sanguis::collision::world::ghost_base_ref const _ghost_base,
@@ -42,13 +45,16 @@ sanguis::collision::world::body_enter_container sanguis::server::collision::ghos
         FCPPT_TEXT("server::collision::ghost::transfer called, but impl_ is already set")};
   }
 
-  sanguis::collision::world::ghost_unique_ptr const &new_ghost(fcppt::optional::assign(
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_IGNORE_DANGLING_REFERENCE
+  sanguis::collision::world::ghost_unique_ptr const &new_ghost{fcppt::optional::assign(
       impl_,
       _world.create_ghost(sanguis::collision::world::ghost_parameters(
           sanguis::server::collision::to_center(_center),
           sanguis::server::collision::to_radius(radius_),
           collision_group_,
-          ghost_base_))));
+          ghost_base_)))};
+  FCPPT_PP_POP_WARNING
 
   return _world.activate_ghost(fcppt::make_ref(*new_ghost));
 }
