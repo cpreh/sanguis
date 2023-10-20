@@ -7,7 +7,7 @@
 #include <sanguis/server/auras/buff.hpp>
 #include <sanguis/server/auras/collision_group.hpp>
 #include <sanguis/server/auras/influence.hpp>
-#include <sanguis/server/buffs/buff.hpp>
+#include <sanguis/server/buffs/buff.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/buffs/create_callback.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>

@@ -1,12 +1,11 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/center_simple.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/to_exception.hpp>
 
 sanguis::server::entities::center_simple::center_simple() : center_() {}

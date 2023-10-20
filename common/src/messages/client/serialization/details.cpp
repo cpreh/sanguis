@@ -1,4 +1,4 @@
-#include <sanguis/messages/client/serialization/details.hpp>
+#include <sanguis/messages/client/serialization/details.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/messages/client/types/alda_type.hpp>
 #include <alda/serialization/instantiate_details.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>

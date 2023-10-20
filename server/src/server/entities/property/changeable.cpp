@@ -7,7 +7,7 @@
 #include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/signal/object_impl.hpp>
+#include <fcppt/signal/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <cmath>

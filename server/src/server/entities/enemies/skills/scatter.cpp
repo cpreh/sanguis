@@ -2,10 +2,12 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/angle.hpp>
-#include <sanguis/server/center.hpp>
+#include <sanguis/server/aoe.hpp>
+#include <sanguis/server/center.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/explosive.hpp>
+#include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/modify_damages.hpp>

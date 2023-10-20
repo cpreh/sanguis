@@ -1,3 +1,4 @@
+#include <sanguis/model/image_name.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/impl/serialize/image_name.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>

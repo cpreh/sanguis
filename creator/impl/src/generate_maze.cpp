@@ -1,9 +1,5 @@
-#include <sanguis/creator/dim.hpp>
 #include <sanguis/creator/exception.hpp>
-#include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/grid_fwd.hpp>
-#include <sanguis/creator/pos_fwd.hpp>
-#include <sanguis/creator/tile_fwd.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/impl/find_closest.hpp>
 #include <sanguis/creator/impl/find_opposing_cell.hpp>
 #include <sanguis/creator/impl/generate_maze.hpp>
@@ -24,9 +20,6 @@
 #include <fcppt/container/join.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/dim.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object.hpp>
 #include <fcppt/optional/to_exception.hpp>

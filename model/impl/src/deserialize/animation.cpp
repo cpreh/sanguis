@@ -4,7 +4,6 @@
 #include <sanguis/model/impl/deserialize/animation_range.hpp>
 #include <sanguis/model/impl/deserialize/animation_sound.hpp>
 #include <sanguis/model/impl/deserialize/image_name.hpp>
-#include <sanguis/model/impl/deserialize/weapon_category_map.hpp>
 #include <sge/parse/json/object_fwd.hpp>
 
 sanguis::model::animation

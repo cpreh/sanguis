@@ -15,6 +15,7 @@
 sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::factory::make_boss(
     sanguis::random_generator_ref const _random_generator,
+    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
     sanguis::server::entities::enemies::parameters &&_parameters)
 {
   return fcppt::unique_ptr_to_base<sanguis::server::entities::with_id>(

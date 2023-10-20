@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_TARGET_HPP_INCLUDED
 
 #include <sanguis/server/vector.hpp>
-#include <sanguis/server/weapons/target_fwd.hpp>
+#include <sanguis/server/weapons/target_fwd.hpp> // IWYU pragma: export
 #include <fcppt/strong_typedef.hpp>
 
 #endif

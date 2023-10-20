@@ -1,6 +1,6 @@
 #include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/pair.hpp>
-#include <sanguis/tiles/pair_std_hash.hpp>
+#include <sanguis/tiles/pair_std_hash.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/hash_combine.hpp>
 #include <fcppt/cast/enum_to_underlying.hpp>
 #include <fcppt/config/external_begin.hpp>

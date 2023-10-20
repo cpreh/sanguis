@@ -1,7 +1,7 @@
 #ifndef SANGUIS_PLAYER_NAME_HPP_INCLUDED
 #define SANGUIS_PLAYER_NAME_HPP_INCLUDED
 
-#include <sanguis/player_name_fwd.hpp>
+#include <sanguis/player_name_fwd.hpp> // IWYU pragma: export
 #include <fcppt/strong_typedef.hpp>
 
 #endif

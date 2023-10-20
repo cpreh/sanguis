@@ -1,4 +1,5 @@
 #include <sanguis/creator/tile_size.hpp>
+#include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/error_image.hpp>
 #include <sanguis/tiles/impl/error_image_color_pair.hpp>
 #include <sanguis/tiles/impl/error_image_colors.hpp>

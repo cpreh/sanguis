@@ -3,12 +3,13 @@
 #include <sanguis/server/add_target_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_target_callback.hpp>
-#include <sanguis/server/ai/context.hpp>
+#include <sanguis/server/ai/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/go_close_to_target.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/status.hpp>
+#include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/follow_friend.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -24,7 +25,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/not.hpp>

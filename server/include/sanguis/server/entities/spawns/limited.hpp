@@ -40,9 +40,7 @@ public:
 private:
   [[nodiscard]] bool dead() const override;
 
-  void unregister(sanguis::server::entities::base & // NOLINT(google-runtime-references)
-                  ) // NOLINT(google-runtime-references)
-      override;
+  void unregister(sanguis::server::entities::base &) override; // NOLINT(google-runtime-references)
 
   [[nodiscard]] sanguis::server::entities::spawns::size_type may_spawn() override;
 
@@ -52,9 +50,9 @@ private:
 
   sanguis::diff_timer delay_timer_;
 
-  sanguis::server::entities::spawns::size_type alive_;
+  sanguis::server::entities::spawns::size_type alive_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 
-  sanguis::server::entities::spawns::size_type spawned_;
+  sanguis::server::entities::spawns::size_type spawned_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 
   sanguis::server::entities::spawns::limit const limit_;
 

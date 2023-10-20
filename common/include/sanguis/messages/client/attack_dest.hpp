@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_CLIENT_ATTACK_DEST_HPP_INCLUDED
 
 #include <sanguis/messages/adapted_types/vector2.hpp>
-#include <sanguis/messages/client/attack_dest_fwd.hpp>
+#include <sanguis/messages/client/attack_dest_fwd.hpp> // IWYU pragma: export
 #include <sanguis/messages/client/declare_message.hpp>
 #include <alda/bindings/record_variadic.hpp>
 #include <alda/message/object.hpp>

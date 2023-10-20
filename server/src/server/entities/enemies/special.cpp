@@ -8,7 +8,8 @@
 #include <sanguis/server/entities/enemies/make_name.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/special.hpp>
-#include <sanguis/server/entities/enemies/skills/skill.hpp>
+#include <sanguis/server/entities/enemies/skills/container.hpp>
+#include <sanguis/server/entities/enemies/skills/skill.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/enemies/skills/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/callback.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
@@ -29,7 +30,7 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::enemies::special::special(
     sanguis::random_generator_ref const _random_generator,
-    sanguis::server::entities::enemies::parameters &&_parameters,
+    sanguis::server::entities::enemies::parameters &&_parameters, // NOLINT(cppcoreguidelines-rvalue-reference-param-not-moved)
     sanguis::server::entities::enemies::attribute_container const &_attributes,
     sanguis::server::entities::enemies::skills::factory::container const &_skills,
     sanguis::server::entities::enemies::is_unique const _is_unique)

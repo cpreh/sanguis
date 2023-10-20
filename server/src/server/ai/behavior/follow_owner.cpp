@@ -1,6 +1,5 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/server/space_unit.hpp>
-#include <sanguis/server/ai/context.hpp>
+#include <sanguis/server/ai/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/go_close_to_target.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
@@ -11,7 +10,7 @@
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>

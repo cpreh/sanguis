@@ -1,4 +1,5 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/exception.hpp>
 #include <sanguis/collision/mass.hpp>
 #include <sanguis/collision/optional_mass.hpp>
@@ -10,6 +11,7 @@
 #include <sanguis/collision/impl/is_null.hpp>
 #include <sanguis/collision/impl/move.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
+#include <sanguis/collision/impl/world/simple/body_move_callback.hpp>
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base.hpp>
@@ -19,14 +21,13 @@
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/warning.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/units/io.hpp>
+#include <boost/units/io.hpp> // NOLINT(misc-include-cleaner)
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 

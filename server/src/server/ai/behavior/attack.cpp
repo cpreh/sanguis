@@ -1,8 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/is_primary_weapon.hpp>
-#include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/tile_is_visible.hpp>
 #include <sanguis/server/add_target_callback.hpp>
 #include <sanguis/server/closest_entity.hpp>
@@ -37,10 +35,9 @@
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
-#include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/not.hpp>
@@ -52,7 +49,6 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/signal/auto_connection.hpp>
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)

@@ -1,10 +1,11 @@
-#include <sanguis/random_generator.hpp>
+#include <sanguis/random_generator.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/aura.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/damage/armor_array_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -18,7 +19,7 @@
 #include <sanguis/server/entities/enemies/factory/make_special.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/weapon.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>

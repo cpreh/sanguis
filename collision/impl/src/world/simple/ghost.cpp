@@ -18,7 +18,7 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/not.hpp>
-#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_comparison.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
@@ -34,7 +34,8 @@
 sanguis::collision::impl::world::simple::ghost::ghost(
     sanguis::collision::world::ghost_parameters const &_parameters,
     sanguis::collision::impl::world::simple::ghost_remove_callback &&_ghost_remove_callback)
-    : ghost_remove_callback_(std::move(_ghost_remove_callback)),
+    : sanguis::collision::world::ghost{},
+      ghost_remove_callback_(std::move(_ghost_remove_callback)),
       radius_(_parameters.radius()),
       collision_group_(_parameters.collision_group()),
       center_(_parameters.center()),

@@ -10,7 +10,6 @@
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/math/dim/contents.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/to_dim.hpp>
 #include <fcppt/math/vector/to_signed.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>

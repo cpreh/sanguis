@@ -6,7 +6,7 @@
 #include <sge/image2d/system_ref.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/fusion/include/at_key.hpp>
+#include <boost/fusion/include/at_key.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/config/external_end.hpp>
 
 sanguis::tiles::collection::collection(sge::image2d::system_ref const _image_system)

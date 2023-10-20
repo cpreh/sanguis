@@ -3,6 +3,6 @@
 
 #include <sanguis/messages/adapted_types/char_type.hpp>
 #include <sanguis/messages/adapted_types/dynamic_len.hpp>
-#include <sanguis/messages/adapted_types/string_fwd.hpp>
+#include <sanguis/messages/adapted_types/string_fwd.hpp> // IWYU pragma: export
 
 #endif

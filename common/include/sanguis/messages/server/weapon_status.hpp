@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/adapted_types/weapon_status.hpp>
 #include <sanguis/messages/server/declare_message.hpp>
-#include <sanguis/messages/server/weapon_status_fwd.hpp>
+#include <sanguis/messages/server/weapon_status_fwd.hpp> // IWYU pragma: export
 #include <sanguis/messages/server/parts/entity_id.hpp>
 #include <alda/bindings/record_variadic.hpp>
 #include <alda/message/object.hpp>

@@ -1,5 +1,6 @@
 #include <sanguis/collision/impl/world/simple/object.hpp>
 #include <sanguis/collision/world/create.hpp>
+#include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>

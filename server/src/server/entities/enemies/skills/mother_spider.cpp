@@ -1,7 +1,7 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
-#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/aura.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
@@ -12,7 +12,6 @@
 #include <sanguis/server/entities/enemies/normal.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/skills/mother_spider.hpp>
-#include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/weapon.hpp>

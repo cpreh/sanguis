@@ -11,9 +11,9 @@
 #include <sanguis/collision/impl/optional_speed.hpp>
 #include <sanguis/collision/impl/test_tile.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
-#include <sanguis/creator/grid_spiral_range.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
+#include <sanguis/creator/tile.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>

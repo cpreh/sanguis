@@ -5,6 +5,7 @@
 #include <sanguis/server/entities/enemies/modifiers/container.hpp>
 #include <sanguis/server/entities/enemies/modifiers/parameters.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/reference_impl.hpp>
 
 sanguis::server::entities::enemies::attribute_container
 sanguis::server::entities::enemies::modifiers::apply(

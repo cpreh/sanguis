@@ -1,5 +1,6 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/vector.hpp>
 #include <sanguis/server/collision/distance_entity_pos.hpp>
 #include <sanguis/server/collision/distance_pos_pos.hpp>
 #include <sanguis/server/entities/base.hpp>

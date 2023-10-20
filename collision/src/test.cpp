@@ -2,7 +2,6 @@
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/test.hpp>
 #include <sanguis/collision/impl/make_range.hpp>
-#include <sanguis/creator/grid_crange.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <fcppt/algorithm/contains_if.hpp>

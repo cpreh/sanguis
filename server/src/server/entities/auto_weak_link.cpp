@@ -4,7 +4,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_comparison.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/optional/comparison.hpp>
 #include <fcppt/optional/maybe_void.hpp>

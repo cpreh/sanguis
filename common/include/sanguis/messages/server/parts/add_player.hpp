@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/adapted_types/string.hpp>
 #include <sanguis/messages/server/parts/add_actor.hpp>
-#include <sanguis/messages/server/parts/add_player_fwd.hpp>
+#include <sanguis/messages/server/parts/add_player_fwd.hpp> // IWYU pragma: export
 #include <fcppt/record/element.hpp>
 
 #endif

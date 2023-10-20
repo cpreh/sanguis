@@ -2,6 +2,7 @@
 #include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/direction.hpp>
 #include <sanguis/tiles/exception.hpp>
+#include <sanguis/tiles/orientation.hpp>
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/impl/make_orientation.hpp>
 #include <sanguis/tiles/impl/neighbors.hpp>

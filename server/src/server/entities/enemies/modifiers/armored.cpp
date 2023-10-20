@@ -1,4 +1,4 @@
-#include <sanguis/random_generator.hpp>
+#include <sanguis/random_generator.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/type_to_string.hpp>

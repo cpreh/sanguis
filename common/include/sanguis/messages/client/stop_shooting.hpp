@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/client/declare_message.hpp>
-#include <sanguis/messages/client/stop_shooting_fwd.hpp>
+#include <sanguis/messages/client/stop_shooting_fwd.hpp> // IWYU pragma: export
 #include <alda/message/object.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

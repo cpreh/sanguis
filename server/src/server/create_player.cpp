@@ -6,9 +6,11 @@
 #include <sanguis/messages/server/create.hpp>
 #include <sanguis/server/console_command_vector.hpp>
 #include <sanguis/server/create_player.hpp>
+#include <sanguis/server/health.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/player_unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>

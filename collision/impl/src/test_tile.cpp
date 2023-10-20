@@ -2,6 +2,7 @@
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
+#include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/impl/adjust_speed.hpp>
 #include <sanguis/collision/impl/dir.hpp>
 #include <sanguis/collision/impl/grid_to_meter.hpp>
@@ -18,10 +19,9 @@
 #include <sanguis/creator/tile_rect.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_literal_boost_units.hpp>
+#include <fcppt/make_literal_boost_units.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/box/stretch_absolute.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/map.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>

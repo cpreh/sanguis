@@ -3,6 +3,6 @@
 
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
-#include <sanguis/messages/adapted_types/primary_weapon_type_fwd.hpp>
+#include <sanguis/messages/adapted_types/primary_weapon_type_fwd.hpp> // IWYU pragma: export
 
 #endif

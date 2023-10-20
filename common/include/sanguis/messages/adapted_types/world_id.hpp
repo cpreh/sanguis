@@ -3,7 +3,7 @@
 
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/adapted_types/unsigned.hpp>
-#include <sanguis/messages/adapted_types/world_id_fwd.hpp>
+#include <sanguis/messages/adapted_types/world_id_fwd.hpp> // IWYU pragma: export
 #include <alda/bindings/strong_typedef.hpp>
 
 #endif

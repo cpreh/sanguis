@@ -22,8 +22,7 @@
 #include <sge/font/string.hpp>
 #include <fcppt/output_to_string.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/strong_typedef_output.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>

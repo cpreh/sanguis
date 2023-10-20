@@ -1,10 +1,11 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/player_name.hpp>
 #include <sanguis/random_generator_ref.hpp>
-#include <sanguis/weapon_description.hpp>
+#include <sanguis/weapon_description.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/created.hpp>
@@ -23,7 +24,7 @@
 #include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
 #include <sanguis/messages/server/add_player.hpp>
-#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/add_sight_callback.hpp>
@@ -69,13 +70,12 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/environment/optional_object_ref.hpp>
-#include <sanguis/server/perks/perk.hpp>
+#include <sanguis/server/perks/perk.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/perks/tree/choosable.hpp>
 #include <sanguis/server/perks/tree/choose.hpp>
 #include <sanguis/server/perks/tree/container.hpp>
 #include <sanguis/server/perks/tree/create.hpp>
-#include <sanguis/server/perks/tree/status.hpp>
+#include <sanguis/server/perks/tree/status.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/default_ias.hpp>
 #include <sanguis/server/weapons/default_irs.hpp>
@@ -93,7 +93,6 @@
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/container/make.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/optional/maybe.hpp>

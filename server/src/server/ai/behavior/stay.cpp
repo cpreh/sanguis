@@ -1,5 +1,6 @@
+#include <sanguis/duration.hpp>
 #include <sanguis/server/space_unit.hpp>
-#include <sanguis/server/ai/context.hpp>
+#include <sanguis/server/ai/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/go_to_grid_pos.hpp>
 #include <sanguis/server/ai/make_path.hpp>
@@ -11,7 +12,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 
 sanguis::server::ai::behavior::stay::stay(sanguis::server::ai::context_ref const _context)
     : sanguis::server::ai::behavior::base(_context), start_pos_{_context->me().center()}

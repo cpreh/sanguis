@@ -9,7 +9,7 @@
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
-#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/aoe.hpp>

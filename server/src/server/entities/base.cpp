@@ -9,7 +9,7 @@
 #include <sanguis/server/entities/remove_from_world_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
-#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/environment/object_ref.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <fcppt/make_cref.hpp>

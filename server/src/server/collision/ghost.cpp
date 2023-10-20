@@ -7,15 +7,15 @@
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object.hpp>
+#include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/to_center.hpp>
 #include <sanguis/server/collision/to_radius.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/assign.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/ignore_dangling_reference.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

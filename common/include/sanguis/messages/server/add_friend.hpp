@@ -3,7 +3,7 @@
 
 #include <sanguis/friend_type.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
-#include <sanguis/messages/server/add_friend_fwd.hpp>
+#include <sanguis/messages/server/add_friend_fwd.hpp> // IWYU pragma: export
 #include <sanguis/messages/server/declare_message.hpp>
 #include <sanguis/messages/server/parts/add_actor.hpp>
 #include <sanguis/messages/server/parts/entity_id.hpp>

@@ -3,6 +3,6 @@
 
 #include <sanguis/messages/adapted_types/dynamic_len.hpp>
 #include <sanguis/messages/server/adapted_types/weapon_attribute.hpp>
-#include <sanguis/messages/server/adapted_types/weapon_attribute_vector_fwd.hpp>
+#include <sanguis/messages/server/adapted_types/weapon_attribute_vector_fwd.hpp> // IWYU pragma: export
 
 #endif

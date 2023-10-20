@@ -1,6 +1,7 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
 #include <sanguis/server/ai/pathing/optional_trail.hpp>
@@ -15,7 +16,7 @@
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/vector/comparison.hpp>
-#include <fcppt/math/vector/std_hash.hpp>
+#include <fcppt/math/vector/std_hash.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>

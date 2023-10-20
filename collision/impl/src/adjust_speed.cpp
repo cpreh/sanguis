@@ -11,10 +11,9 @@
 #include <sanguis/collision/impl/rect_line_intersection.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_literal_boost_units.hpp>
+#include <fcppt/make_literal_boost_units.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/math/box/stretch_absolute.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>

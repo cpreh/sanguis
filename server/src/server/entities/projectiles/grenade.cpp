@@ -9,9 +9,11 @@
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>

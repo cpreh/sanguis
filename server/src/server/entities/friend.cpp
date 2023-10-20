@@ -15,17 +15,17 @@
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/server/add_friend.hpp>
-#include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
+#include <sanguis/server/direction.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/radius.hpp>
+#include <sanguis/server/radius.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/aura.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
@@ -42,16 +42,14 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
-#include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/entities/property/initial_zero.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/weapons/default_ias.hpp>
 #include <sanguis/server/weapons/default_irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/weapon.hpp> // NOLINT(misc-include-cleaner)
 #include <alda/message/init_record.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/logic/tribool.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 

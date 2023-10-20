@@ -27,7 +27,7 @@ private:
 
   sanguis::server::ai::behavior::base_unique_ptr const behavior_;
 
-  bool started_;
+  bool started_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 };
 
 }

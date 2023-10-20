@@ -16,7 +16,7 @@
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/maybe.hpp>
 
 sanguis::server::ai::behavior::patrol::patrol(

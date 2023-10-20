@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_SERVER_CONSOLE_PRINT_HPP_INCLUDED
 
 #include <sanguis/messages/adapted_types/string.hpp>
-#include <sanguis/messages/server/console_print_fwd.hpp>
+#include <sanguis/messages/server/console_print_fwd.hpp> // IWYU pragma: export
 #include <sanguis/messages/server/declare_message.hpp>
 #include <alda/bindings/record_variadic.hpp>
 #include <alda/message/object.hpp>

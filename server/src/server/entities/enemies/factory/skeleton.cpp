@@ -3,6 +3,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
@@ -17,7 +18,7 @@
 #include <sanguis/server/damage/normal.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
-#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/factory/make.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
@@ -27,6 +28,7 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>

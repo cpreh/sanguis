@@ -2,8 +2,9 @@
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/slow.hpp>
 #include <sanguis/server/buffs/slow_factor.hpp>
-#include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/server/entities/with_velocity.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/with_velocity_ref.hpp>
+#include <sanguis/server/entities/property/apply.hpp>
 #include <sanguis/server/entities/property/linear_decrease_op.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 

@@ -1,14 +1,12 @@
 #include <sanguis/creator/exception.hpp>
-#include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/find_opposing_cell.hpp>
+#include <sanguis/creator/impl/reachable.hpp>
+#include <sanguis/creator/impl/reachable_grid.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/contains.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/to_exception.hpp>
 

@@ -4,7 +4,7 @@
 #include <sanguis/weapon_types.hpp>
 #include <sanguis/messages/adapted_types/primary_weapon_type.hpp>
 #include <sanguis/messages/adapted_types/secondary_weapon_type.hpp>
-#include <sanguis/messages/adapted_types/weapon_type_fwd.hpp>
+#include <sanguis/messages/adapted_types/weapon_type_fwd.hpp> // IWYU pragma: export
 #include <alda/bindings/variant.hpp>
 
 #endif

@@ -45,7 +45,7 @@ private:
 
   sanguis::doodad_type const doodad_type_;
 
-  bool dead_;
+  bool dead_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 };
 
 }

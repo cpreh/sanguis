@@ -6,11 +6,12 @@
 #include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/behavior/attack_health.hpp>
 #include <sanguis/server/ai/behavior/wander.hpp>
+#include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/ai/tree/container.hpp>
 #include <sanguis/server/ai/tree/make_leaf.hpp>
 #include <sanguis/server/ai/tree/priority_sequence.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/container/make.hpp>

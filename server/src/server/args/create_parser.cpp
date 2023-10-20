@@ -4,13 +4,14 @@
 #include <sanguis/server/args/labels/log_level.hpp>
 #include <sanguis/server/args/labels/port.hpp>
 #include <alda/net/port.hpp>
-#include <fcppt/strong_typedef_input.hpp>
-#include <fcppt/strong_typedef_output.hpp>
-#include <fcppt/enum/names_array.hpp>
+#include <fcppt/strong_typedef_input.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/text.hpp>
+#include <fcppt/enum/names_array.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/log/level.hpp>
-#include <fcppt/log/level_input.hpp>
-#include <fcppt/log/level_output.hpp>
-#include <fcppt/log/level_to_string_impl.hpp>
+#include <fcppt/log/level_input.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/log/level_output.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/log/level_to_string_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/make.hpp>
 #include <fcppt/options/apply.hpp>
 #include <fcppt/options/help_text.hpp>
@@ -20,7 +21,7 @@
 #include <fcppt/options/option.hpp>
 #include <fcppt/options/optional_help_text.hpp>
 #include <fcppt/options/optional_short_name.hpp>
-#include <fcppt/options/pretty_type_enum.hpp>
+#include <fcppt/options/pretty_type_enum.hpp> // NOLINT(misc-include-cleaner)
 
 sanguis::server::args::parser_unique_ptr sanguis::server::args::create_parser()
 {

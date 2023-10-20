@@ -3,6 +3,6 @@
 
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
-#include <sanguis/messages/adapted_types/weapon_status_fwd.hpp>
+#include <sanguis/messages/adapted_types/weapon_status_fwd.hpp> // IWYU pragma: export
 
 #endif

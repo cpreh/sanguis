@@ -25,7 +25,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/optional/assign.hpp>
 #include <fcppt/optional/map.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/ignore_dangling_reference.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

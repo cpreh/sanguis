@@ -1,7 +1,7 @@
 #include <sanguis/creator/generator_vector.hpp>
 #include <sanguis/creator/generators.hpp>
 #include <sanguis/creator/impl/graveyard_name.hpp>
-#include <sanguis/creator/impl/maze_name.hpp>
+//#include <sanguis/creator/impl/maze_name.hpp>
 #include <sanguis/creator/impl/rooms_name.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

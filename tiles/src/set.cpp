@@ -7,9 +7,10 @@
 #include <sanguis/tiles/impl/load_file.hpp>
 #include <sanguis/tiles/impl/make_orientation_map.hpp>
 #include <sanguis/tiles/impl/to_string.hpp>
-#include <sge/image2d/file.hpp>
+#include <sge/image2d/file.hpp> // NOLINT(misc-include-cleaner)
+#include <sge/image2d/file_unique_ptr.hpp>
 #include <sge/image2d/system_fwd.hpp>
-#include <sge/image2d/view/const_object.hpp>
+#include <sge/image2d/view/const_object.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/image2d/view/size.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -59,6 +60,7 @@ sanguis::tiles::set<Tile>::set(
       orientations_(fcppt::optional::maybe(
           sanguis::tiles::impl::load_file(fcppt::make_ref(_image_system), path_),
           [] { return sanguis::tiles::orientation_map(); },
+          // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
           [&_path](sge::image2d::file_unique_ptr &&_file)
           {
             return sanguis::tiles::impl::make_orientation_map(

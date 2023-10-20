@@ -12,7 +12,7 @@
 #include <sanguis/server/entities/enemies/modifiers/amount.hpp>
 #include <sanguis/server/entities/enemies/modifiers/apply.hpp>
 #include <sanguis/server/entities/enemies/skills/amount.hpp>
-#include <sanguis/server/entities/enemies/skills/skill.hpp>
+#include <sanguis/server/entities/enemies/skills/skill.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/random/amount.hpp>
 #include <sanguis/server/random/max.hpp>
 #include <sanguis/server/random/min.hpp>

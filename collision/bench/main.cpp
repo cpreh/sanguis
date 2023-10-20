@@ -7,19 +7,19 @@
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/unit.hpp>
-#include <sanguis/collision/world/body.hpp>
+#include <sanguis/collision/world/body.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/created.hpp>
-#include <sanguis/collision/world/ghost.hpp>
+#include <sanguis/collision/world/ghost.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/collision/world/ghost_base.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
-#include <sanguis/collision/world/object.hpp>
+#include <sanguis/collision/world/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/collision/world/parameters.hpp>
 #include <sanguis/collision/world/update_result.hpp>

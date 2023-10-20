@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/adapted_types/optional_primary_weapon_type.hpp>
 #include <sanguis/messages/adapted_types/weapon_status.hpp>
-#include <sanguis/messages/server/parts/add_with_weapon_fwd.hpp>
+#include <sanguis/messages/server/parts/add_with_weapon_fwd.hpp> // IWYU pragma: export
 #include <fcppt/record/element.hpp>
 
 #endif

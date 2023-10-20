@@ -5,7 +5,7 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/aura.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
@@ -21,7 +21,7 @@
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/weapon.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/literal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>

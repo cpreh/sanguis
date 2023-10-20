@@ -7,9 +7,9 @@
 #include <fcppt/container/grid/pos_ref_range.hpp>
 #include <fcppt/container/grid/pos_reference.hpp>
 #include <fcppt/container/grid/range_dim.hpp>
-#include <fcppt/math/dim/comparison.hpp>
+#include <fcppt/math/dim/comparison.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/config/external_begin.hpp>
-#include <boost/range/combine.hpp>
+#include <boost/range/combine.hpp> // NOLINT(misc-include-cleaner)
 #include <boost/tuple/tuple.hpp>
 #include <fcppt/config/external_end.hpp>
 

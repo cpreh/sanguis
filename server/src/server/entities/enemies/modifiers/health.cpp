@@ -5,9 +5,6 @@
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <cmath>
-#include <fcppt/config/external_end.hpp>
 
 sanguis::server::entities::enemies::attribute sanguis::server::entities::enemies::modifiers::health(
     fcppt::reference<sanguis::server::entities::enemies::parameters> const _parameters,

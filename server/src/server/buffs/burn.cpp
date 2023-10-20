@@ -5,7 +5,7 @@
 #include <sanguis/server/buffs/burn_interval.hpp>
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_health.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/with_health_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_cref.hpp>

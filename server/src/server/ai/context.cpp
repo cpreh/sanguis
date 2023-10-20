@@ -1,4 +1,5 @@
 #include <sanguis/exception.hpp>
+#include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/optional_pos.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/server/ai/context.hpp>
@@ -12,7 +13,7 @@
 #include <sanguis/server/ai/pathing/update_trail.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_ai_ref.hpp>
-#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>

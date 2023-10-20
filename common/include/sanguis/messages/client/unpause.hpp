@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_CLIENT_UNPAUSE_HPP_INCLUDED
 
 #include <sanguis/messages/client/declare_message.hpp>
-#include <sanguis/messages/client/unpause_fwd.hpp>
+#include <sanguis/messages/client/unpause_fwd.hpp> // IWYU pragma: export
 #include <alda/bindings/unit.hpp>
 #include <alda/message/object.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>

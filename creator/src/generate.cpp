@@ -3,6 +3,7 @@
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/opening_count.hpp>
+#include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>

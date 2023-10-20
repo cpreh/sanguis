@@ -15,11 +15,8 @@
 #include <fcppt/container/grid/clamped_min.hpp>
 #include <fcppt/container/grid/clamped_sup_signed.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange_start_end.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
-#include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>

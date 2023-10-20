@@ -9,6 +9,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <ios>
 #include <streambuf>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 sanguis::net::data_streambuf::data_streambuf(

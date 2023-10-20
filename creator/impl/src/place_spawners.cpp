@@ -4,8 +4,9 @@
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
+#include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/size_type.hpp>
+#include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/spawn_pos.hpp>
@@ -83,6 +84,7 @@ sanguis::creator::spawn_container sanguis::creator::impl::place_spawners(
           [] { return sanguis::creator::exception{FCPPT_TEXT("Spawner tile out of range!")}; })
           .get() = _spawner_tile;
 
+      // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
       spawners.push_back(sanguis::creator::spawn{
           sanguis::creator::spawn_pos{candidate},
           random_monster(_generator),

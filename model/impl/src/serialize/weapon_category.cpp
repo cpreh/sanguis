@@ -5,7 +5,7 @@
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
-#include <sge/parse/json/value.hpp>
+#include <sge/parse/json/value.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/array/object_impl.hpp>
 #include <fcppt/optional/cat.hpp>
 #include <fcppt/optional/object_impl.hpp>

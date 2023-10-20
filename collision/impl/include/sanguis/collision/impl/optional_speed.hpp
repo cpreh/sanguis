@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_IMPL_OPTIONAL_SPEED_HPP_INCLUDED
 
 #include <sanguis/collision/speed.hpp>
-#include <sanguis/collision/impl/optional_speed_fwd.hpp>
+#include <sanguis/collision/impl/optional_speed_fwd.hpp> // IWYU pragma: export
 #include <fcppt/optional/object_impl.hpp>
 
 #endif

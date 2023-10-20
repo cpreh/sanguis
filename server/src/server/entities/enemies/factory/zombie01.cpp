@@ -5,14 +5,14 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_attack_health.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
-#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/aura.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/make_array.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/normal.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
-#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/factory/make.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>

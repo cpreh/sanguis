@@ -3,7 +3,7 @@
 
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/messages/adapted_types/bool.hpp>
-#include <sanguis/messages/adapted_types/is_primary_weapon_fwd.hpp>
+#include <sanguis/messages/adapted_types/is_primary_weapon_fwd.hpp> // IWYU pragma: export
 #include <alda/bindings/strong_typedef.hpp>
 
 #endif

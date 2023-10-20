@@ -1,12 +1,13 @@
 #include <sanguis/collision/world/body_base.hpp>
+#include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/created.hpp>
+#include <sanguis/collision/world/ghost_base.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/entities/with_body.hpp>
-#include <sanguis/server/entities/with_body_ref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>

@@ -19,6 +19,7 @@
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 
 sanguis::tiles::area_container sanguis::tiles::impl::make_areas(
     sge::image2d::dim const &_size, sge::parse::json::value const &_value)

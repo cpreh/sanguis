@@ -1,3 +1,4 @@
+#include <sanguis/model/animation_sound.hpp>
 #include <sanguis/model/optional_animation_sound.hpp>
 #include <sanguis/model/impl/serialize/animation_sound.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>

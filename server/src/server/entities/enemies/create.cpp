@@ -2,7 +2,7 @@
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/spawn_owner_fwd.hpp>
-#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/base_difficulty.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>

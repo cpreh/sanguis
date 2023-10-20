@@ -9,13 +9,12 @@
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/pickup_type.hpp>
 #include <sanguis/messages/server/add_pickup.hpp>
-#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_body.hpp>

@@ -1,6 +1,7 @@
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening.hpp>
+#include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/opening_count_array.hpp>
@@ -8,16 +9,17 @@
 #include <sanguis/creator/impl/closest_empty.hpp>
 #include <sanguis/creator/impl/place_openings.hpp>
 #include <sanguis/creator/impl/set_opening_tiles.hpp>
+#include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <fcppt/make_int_range_count.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/optional/to_exception.hpp>
-#include <fcppt/type_iso/strong_typedef.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 
 sanguis::creator::opening_container_array sanguis::creator::impl::place_openings(
     fcppt::reference<sanguis::creator::grid> const _grid,

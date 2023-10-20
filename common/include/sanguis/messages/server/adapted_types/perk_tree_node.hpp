@@ -4,7 +4,7 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
 #include <sanguis/messages/adapted_types/level.hpp>
-#include <sanguis/messages/server/types/perk_tree_node_fwd.hpp>
+#include <sanguis/messages/server/types/perk_tree_node_fwd.hpp> // IWYU pragma: export
 #include <alda/bindings/optional.hpp>
 #include <alda/bindings/record_variadic.hpp>
 #include <fcppt/record/element.hpp>

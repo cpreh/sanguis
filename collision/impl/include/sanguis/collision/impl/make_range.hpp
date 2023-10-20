@@ -3,7 +3,7 @@
 
 #include <sanguis/collision/center_fwd.hpp>
 #include <sanguis/collision/radius_fwd.hpp>
-#include <sanguis/creator/grid_crange_fwd.hpp>
+#include <sanguis/creator/grid_crange.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 
 namespace sanguis::collision::impl

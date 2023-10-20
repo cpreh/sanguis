@@ -1,4 +1,3 @@
-#include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>

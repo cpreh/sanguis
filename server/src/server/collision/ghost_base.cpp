@@ -4,7 +4,7 @@
 #include <sanguis/collision/world/ghost_base.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/logic/tribool.hpp>
+#include <boost/logic/tribool.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/config/external_end.hpp>
 
 sanguis::server::collision::ghost_base::ghost_base() : sanguis::collision::world::ghost_base() {}

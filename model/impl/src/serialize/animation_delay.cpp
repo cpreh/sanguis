@@ -1,3 +1,4 @@
+#include <sanguis/model/animation_delay.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/impl/serialize/animation_delay.hpp>
 #include <sge/parse/json/make_value.hpp>

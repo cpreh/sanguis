@@ -3,7 +3,7 @@
 #include <sanguis/collision/world/body_collision_container.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/logic/tribool.hpp>
+#include <boost/logic/tribool.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/config/external_end.hpp>
 
 void sanguis::server::collision::body_collision(

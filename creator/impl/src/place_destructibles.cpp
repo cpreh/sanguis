@@ -1,5 +1,7 @@
 #include <sanguis/creator/destructible.hpp>
 #include <sanguis/creator/destructible_container.hpp>
+#include <sanguis/creator/destructible_pos.hpp>
+#include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
@@ -14,7 +16,6 @@
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
-#include <fcppt/math/clamp.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>

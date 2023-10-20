@@ -4,6 +4,7 @@
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/object_reference.hpp>
 
 sanguis::creator::impl::parameters::parameters(
     fcppt::log::object_reference const _log,

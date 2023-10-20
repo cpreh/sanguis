@@ -3,7 +3,7 @@
 
 #include <sanguis/perk_type.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
-#include <sanguis/messages/client/choose_perk_fwd.hpp>
+#include <sanguis/messages/client/choose_perk_fwd.hpp> // IWYU pragma: export
 #include <sanguis/messages/client/declare_message.hpp>
 #include <alda/message/object.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>

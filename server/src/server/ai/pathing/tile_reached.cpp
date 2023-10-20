@@ -1,3 +1,4 @@
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/ai/pathing/tile_reached.hpp>

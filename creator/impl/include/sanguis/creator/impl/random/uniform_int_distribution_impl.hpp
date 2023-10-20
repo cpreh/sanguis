@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
-#include <sanguis/creator/impl/random/uniform_int_distribution_decl.hpp>
+#include <sanguis/creator/impl/random/uniform_int_distribution_decl.hpp> // IWYU pragma: export
 #include <sanguis/creator/impl/random/value.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>

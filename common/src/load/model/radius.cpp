@@ -2,6 +2,7 @@
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/load/model/radius.hpp>
 #include <sanguis/model/cell_size.hpp>
+#include <sanguis/model/cell_size_unit.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/config/external_begin.hpp>

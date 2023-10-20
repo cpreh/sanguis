@@ -1,5 +1,6 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/random_generator_ref.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>

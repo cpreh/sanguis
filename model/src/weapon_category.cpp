@@ -24,10 +24,8 @@ sanguis::model::weapon_category::weapon_category(
   }
 }
 
-SANGUIS_MODEL_SYMBOL
 sanguis::model::weapon_category::weapon_category(weapon_category &&) noexcept = default;
 
-SANGUIS_MODEL_SYMBOL
 sanguis::model::weapon_category &
 sanguis::model::weapon_category::operator=(weapon_category &&) noexcept = default;
 

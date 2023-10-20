@@ -4,7 +4,7 @@
 #include <sanguis/aoe_projectile_type.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
 #include <sanguis/messages/adapted_types/space_unit.hpp>
-#include <sanguis/messages/server/add_aoe_projectile_fwd.hpp>
+#include <sanguis/messages/server/add_aoe_projectile_fwd.hpp> // IWYU pragma: export
 #include <sanguis/messages/server/declare_message.hpp>
 #include <sanguis/messages/server/parts/add_elements_base.hpp>
 #include <sanguis/messages/server/parts/entity_id.hpp>

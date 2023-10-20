@@ -2,7 +2,7 @@
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/status.hpp>
-#include <sanguis/server/ai/behavior/base.hpp>
+#include <sanguis/server/ai/behavior/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/ai/behavior/base_unique_ptr.hpp>
 #include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/ai/tree/leaf.hpp>

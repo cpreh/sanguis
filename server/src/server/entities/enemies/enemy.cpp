@@ -17,7 +17,7 @@
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/server/add_enemy.hpp>
-#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/direction.hpp>
@@ -28,7 +28,6 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -48,8 +47,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/weapons/unique_ptr.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/weapon.hpp> // NOLINT(misc-include-cleaner)
 #include <alda/message/init_record.hpp>
 #include <fcppt/copy.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -62,6 +60,7 @@
 #include <fcppt/config/external_end.hpp>
 
 sanguis::server::entities::enemies::enemy::enemy(
+    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
     sanguis::server::entities::enemies::parameters &&_parameters)
     : sanguis::server::entities::with_ai(
           fcppt::copy(_parameters.ai_create_function()),

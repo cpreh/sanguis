@@ -2,7 +2,7 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/random_generator_ref.hpp>
-#include <sanguis/random_variate_impl.hpp>
+#include <sanguis/random_variate_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
@@ -15,11 +15,11 @@
 #include <sanguis/server/entities/projectiles/scatter_create.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/environment/optional_object_ref.hpp>
+#include <sanguis/server/environment/object_fwd.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/optional/maybe_void.hpp>

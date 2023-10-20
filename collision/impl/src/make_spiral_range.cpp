@@ -9,9 +9,9 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/make_spiral_range.hpp>
 #include <fcppt/math/ceil_div_signed.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>

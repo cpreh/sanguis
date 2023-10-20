@@ -5,7 +5,6 @@
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
-#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
@@ -20,7 +19,7 @@
 #include <sanguis/creator/impl/reachable_grid.hpp>
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/generators/graveyard.hpp>
-#include <sanguis/creator/impl/random/generator.hpp>
+#include <sanguis/creator/impl/random/generator.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
@@ -29,7 +28,7 @@
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
-#include <fcppt/type_iso/enum.hpp>
+#include <fcppt/type_iso/enum.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

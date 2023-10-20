@@ -1,5 +1,5 @@
 #include <sanguis/tiles/impl/load_file.hpp>
-#include <sge/image2d/file.hpp>
+#include <sge/image2d/file.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/image2d/load.hpp>
 #include <sge/image2d/optional_file_unique_ptr.hpp>
 #include <sge/image2d/system_ref.hpp>

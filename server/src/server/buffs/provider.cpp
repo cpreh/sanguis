@@ -1,11 +1,11 @@
 #include <sanguis/exception.hpp>
-#include <sanguis/server/buffs/buff.hpp>
+#include <sanguis/server/buffs/buff.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/buffs/provider.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_buffs_ref.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_comparison.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>

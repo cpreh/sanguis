@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_DAMAGE_BASIC_META_IMPL_HPP_INCLUDED
 #define SANGUIS_SERVER_DAMAGE_BASIC_META_IMPL_HPP_INCLUDED
 
-#include <sanguis/server/damage/basic_meta_decl.hpp>
+#include <sanguis/server/damage/basic_meta_decl.hpp> // IWYU pragma: export
 #include <sanguis/server/damage/type.hpp>
 
 template <typename Unit>

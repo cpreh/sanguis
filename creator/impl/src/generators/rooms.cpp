@@ -21,8 +21,6 @@
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/tile.hpp>
-#include <sanguis/creator/tile_grid.hpp>
-#include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
 #include <sanguis/creator/impl/filled_rect.hpp>
 #include <sanguis/creator/impl/generate_maze.hpp>
@@ -30,7 +28,6 @@
 #include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/place_boss.hpp>
-#include <sanguis/creator/impl/place_openings.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
 #include <sanguis/creator/impl/rect.hpp>
@@ -39,15 +36,15 @@
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/set_opening_tiles.hpp>
 #include <sanguis/creator/impl/generators/rooms.hpp>
-#include <sanguis/creator/impl/random/generator.hpp>
+#include <sanguis/creator/impl/random/generator.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/creator/impl/random/uniform_int.hpp>
+#include <sanguis/creator/impl/random/uniform_int_wrapper_impl.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
-#include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
@@ -57,7 +54,7 @@
 #include <fcppt/container/grid/make_pos_ref_range.hpp>
 #include <fcppt/container/grid/map.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
-#include <fcppt/container/grid/output.hpp>
+#include <fcppt/container/grid/output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/enum/array.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/log/debug.hpp>
@@ -68,8 +65,7 @@
 #include <fcppt/math/box/distance.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/box/object.hpp>
-#include <fcppt/math/box/output.hpp>
-#include <fcppt/math/box/rect.hpp>
+#include <fcppt/math/box/output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/math/box/structure_cast.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -87,7 +83,8 @@
 #include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
-#include <functional>
+#include <iterator>
+#include <limits>
 #include <map>
 #include <set>
 #include <utility>
@@ -550,6 +547,7 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
     ++start;
     for (auto room = start, end = rects.end(); room != end; ++room)
     {
+      // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
       spawners.push_back(sanguis::creator::spawn{
           sanguis::creator::spawn_pos{rect_center_pos(*room)},
           random_monster(_parameters.randgen()),

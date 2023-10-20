@@ -9,12 +9,12 @@
 #include <sanguis/model/make_cell_areas.hpp>
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/math/box/contains.hpp>
-#include <fcppt/math/box/output.hpp>
-#include <fcppt/math/dim/output.hpp>
+#include <fcppt/math/box/output.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/math/dim/output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/math/vector/null.hpp>
 
 sanguis::model::cell_area_container sanguis::model::make_cell_areas(

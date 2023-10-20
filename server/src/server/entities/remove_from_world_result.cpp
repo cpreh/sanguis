@@ -11,7 +11,7 @@ sanguis::server::entities::remove_from_world_result::remove_from_world_result()
 
 sanguis::server::entities::remove_from_world_result::remove_from_world_result(
     sanguis::collision::world::body_exit_container &&_body_exit)
-    : body_exit_(_body_exit)
+    : body_exit_(std::move(_body_exit))
 {
 }
 

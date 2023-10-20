@@ -1,5 +1,4 @@
 #include <sanguis/enemy_kind.hpp>
-#include <sanguis/load/enemy_name.hpp>
 #include <sanguis/messages/types/string.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/normal.hpp>

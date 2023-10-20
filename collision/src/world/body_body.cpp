@@ -1,10 +1,10 @@
 #include <sanguis/collision/duration.hpp>
-#include <sanguis/collision/length2.hpp>
 #include <sanguis/collision/mass.hpp>
 #include <sanguis/collision/optional_result_pair.hpp>
 #include <sanguis/collision/result.hpp>
-#include <sanguis/collision/speed.hpp>
+#include <sanguis/collision/speed.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/collision/unit.hpp>
+#include <sanguis/collision/impl/circle.hpp>
 #include <sanguis/collision/impl/collides.hpp>
 #include <sanguis/collision/impl/move_circle.hpp>
 #include <sanguis/collision/impl/normalize_opt.hpp>

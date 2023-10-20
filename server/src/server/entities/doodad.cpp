@@ -8,12 +8,10 @@
 #include <sanguis/messages/roles/doodad_type.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/server/add_doodad.hpp>
-#include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/entities/doodad.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>

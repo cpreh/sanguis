@@ -13,7 +13,6 @@
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/interior_range.hpp>
@@ -21,7 +20,7 @@
 #include <sanguis/creator/impl/parameters_fwd.hpp>
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/generators/start.hpp>
-#include <sanguis/creator/impl/random/generator.hpp>
+#include <sanguis/creator/impl/random/generator.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>

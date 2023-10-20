@@ -2,7 +2,7 @@
 #define SANGUIS_TILES_CONTENT_HPP_INCLUDED
 
 #include <sanguis/tiles/area_container_ref.hpp>
-#include <sanguis/tiles/content_fwd.hpp>
+#include <sanguis/tiles/content_fwd.hpp> // IWYU pragma: export
 #include <sanguis/tiles/error.hpp>
 #include <fcppt/variant/object_impl.hpp>
 

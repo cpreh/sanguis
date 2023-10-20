@@ -19,7 +19,7 @@ public:
   [[nodiscard]] sanguis::server::entities::property::value value() const;
 
 private:
-  sanguis::server::entities::property::value value_;
+  sanguis::server::entities::property::value value_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 };
 
 }

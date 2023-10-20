@@ -2,6 +2,7 @@
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_health.hpp>
