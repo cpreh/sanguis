@@ -1,8 +1,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/destructible.hpp>
 #include <sanguis/load/model/destructible_path.hpp>
-#include <sanguis/server/radius.hpp>
-#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate_destructibles.hpp>

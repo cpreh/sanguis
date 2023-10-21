@@ -5,7 +5,7 @@
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/player_start_weapon.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/weapon.hpp> // NOLINT(misc-include-cleaner)
 
 sanguis::server::weapons::unique_ptr sanguis::server::weapons::player_start_weapon(
     sanguis::server::weapons::common_parameters const &_common_parameters)

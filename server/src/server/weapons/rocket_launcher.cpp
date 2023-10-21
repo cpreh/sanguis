@@ -16,6 +16,7 @@
 #include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/rocket_launcher.hpp>
 #include <sanguis/server/weapons/rocket_launcher_parameters.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/accuracy.hpp>
 #include <sanguis/server/weapons/attributes/aoe.hpp>

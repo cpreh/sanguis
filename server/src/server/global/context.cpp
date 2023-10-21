@@ -6,8 +6,9 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/player_name.hpp>
 #include <sanguis/random_seed.hpp>
-#include <sanguis/weapon_description.hpp>
+#include <sanguis/weapon_description.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/world_id.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/messages/roles/angle.hpp>
@@ -20,17 +21,15 @@
 #include <sanguis/messages/server/rotate.hpp>
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/server/angle.hpp>
-#include <sanguis/server/console.hpp>
+#include <sanguis/server/console.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/console_ref.hpp>
 #include <sanguis/server/create_player.hpp>
-#include <sanguis/server/direction.hpp>
 #include <sanguis/server/load_cref.hpp>
 #include <sanguis/server/log_location.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_available_perks.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
-#include <sanguis/server/team.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/unknown_player_exception.hpp>
 #include <sanguis/server/vector.hpp>
@@ -39,6 +38,7 @@
 #include <sanguis/server/entities/insert_with_result.hpp>
 #include <sanguis/server/entities/optional_player_ref.hpp>
 #include <sanguis/server/entities/player.hpp>
+#include <sanguis/server/entities/player_unique_ptr.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/environment/load_context.hpp>
@@ -54,7 +54,6 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
-#include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <alda/message/init_record.hpp>
@@ -63,7 +62,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/unit.hpp>
@@ -77,8 +76,6 @@
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/copy_value.hpp>

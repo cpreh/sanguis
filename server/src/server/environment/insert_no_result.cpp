@@ -1,8 +1,8 @@
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
-#include <sanguis/server/entities/optional_base_ref.hpp>
-#include <sanguis/server/entities/simple.hpp>
+#include <sanguis/server/entities/optional_base_ref.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/server/entities/simple.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/simple_unique_ptr.hpp>
-#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>

@@ -7,7 +7,6 @@
 #include <sanguis/server/random/grid_pos.hpp>
 #include <fcppt/use.hpp>
 #include <fcppt/container/grid/min_less_sup.hpp>
-#include <fcppt/container/grid/size_type.hpp>
 #include <fcppt/math/static_size.hpp>
 #include <fcppt/math/vector/at.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>

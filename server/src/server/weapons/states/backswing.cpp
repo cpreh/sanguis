@@ -1,5 +1,4 @@
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/log.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -19,6 +18,7 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/statechart/result.hpp>
 #include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 

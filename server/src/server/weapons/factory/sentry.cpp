@@ -2,6 +2,7 @@
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/server/health.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
@@ -13,6 +14,7 @@
 #include <sanguis/server/weapons/pistol.hpp>
 #include <sanguis/server/weapons/pistol_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/sentry.hpp>
 #include <sanguis/server/weapons/sentry_parameters.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>

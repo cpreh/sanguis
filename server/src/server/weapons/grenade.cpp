@@ -4,7 +4,6 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/damage/explosive.hpp>
-#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/modify_damages.hpp>
 #include <sanguis/server/entities/with_id.hpp>

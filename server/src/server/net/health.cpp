@@ -1,5 +1,5 @@
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/net/health.hpp>
+#include <sanguis/server/net/health.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/net/health_policy.hpp>
 #include <sanguis/server/net/instantiate_value.hpp>
 

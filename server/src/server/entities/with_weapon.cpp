@@ -4,10 +4,7 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/primary_weapon_type.hpp>
-#include <sanguis/time_unit.hpp>
-#include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_status.hpp>
-#include <sanguis/weapon_type.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/unit.hpp>
@@ -35,7 +32,7 @@
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
-#include <fcppt/optional/reference.hpp>
+#include <fcppt/optional/reference.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>

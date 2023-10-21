@@ -1,11 +1,12 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
-#include <sanguis/server/entities/property/changeable.hpp>
+#include <sanguis/server/entities/property/changeable.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/property/constant_change.hpp>
 #include <sanguis/server/perks/change_factor.hpp>
 #include <sanguis/server/perks/change_simple.hpp>
 #include <sanguis/server/perks/health.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
+#include <sanguis/server/perks/perk.hpp>
 
 sanguis::server::perks::health::health() : sanguis::server::perks::perk(sanguis::perk_type::health)
 {

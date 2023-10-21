@@ -49,7 +49,7 @@ public:
   [[nodiscard]] boost::statechart::result react(sanguis::server::weapons::events::stop const &);
 
 private:
-  bool cancelled_;
+  bool cancelled_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 
   sanguis::diff_timer cooldown_;
 };

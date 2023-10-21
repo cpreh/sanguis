@@ -3,7 +3,7 @@
 
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/weapons/attributes/basic_decl.hpp>
-#include <sanguis/server/weapons/attributes/health_fwd.hpp>
+#include <sanguis/server/weapons/attributes/health_fwd.hpp> // IWYU pragma: export
 
 extern template class sanguis::server::weapons::attributes::basic<sanguis::server::health>;
 

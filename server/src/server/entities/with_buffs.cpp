@@ -12,7 +12,6 @@
 #include <fcppt/container/get_or_insert_with_result.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <algorithm>
 #include <typeindex>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

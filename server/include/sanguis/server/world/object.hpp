@@ -222,7 +222,7 @@ private:
 
   doodad_container portal_blockers_;
 
-  unsigned portal_block_count_;
+  unsigned portal_block_count_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 
   sanguis::server::world::pickup_spawner pickup_spawner_;
 };

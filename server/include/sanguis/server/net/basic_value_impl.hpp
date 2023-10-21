@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_NET_BASIC_VALUE_IMPL_HPP_INCLUDED
 #define SANGUIS_SERVER_NET_BASIC_VALUE_IMPL_HPP_INCLUDED
 
-#include <sanguis/server/net/value_decl.hpp>
+#include <sanguis/server/net/basic_value_decl.hpp> // IWYU pragma: export
 #include <sge/timer/basic_impl.hpp>
 #include <sge/timer/clocks/parameter.hpp>
 #include <fcppt/optional/maybe.hpp>

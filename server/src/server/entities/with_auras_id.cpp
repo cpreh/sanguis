@@ -1,7 +1,7 @@
 #include <sanguis/aura_type.hpp>
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
-#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/aura.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_auras.hpp>

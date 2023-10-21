@@ -2,11 +2,12 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/angle.hpp>
+#include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
-#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/world/insert_with_id_pair.hpp>
 #include <sanguis/server/world/insert_with_id_pair_container.hpp>
@@ -14,17 +15,17 @@
 #include <sanguis/server/world/place_with_id_callback.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_int_range_count.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/make_ref.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/arithmetic.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
-#include <fcppt/type_iso/strong_typedef.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/config/external_begin.hpp>
 #include <numbers>
 #include <fcppt/config/external_end.hpp>

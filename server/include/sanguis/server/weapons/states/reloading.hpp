@@ -50,7 +50,7 @@ public:
 private:
   sanguis::diff_timer reload_time_;
 
-  bool cancelled_;
+  bool cancelled_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 };
 
 FCPPT_PP_POP_WARNING

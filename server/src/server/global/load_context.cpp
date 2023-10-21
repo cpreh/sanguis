@@ -1,14 +1,11 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
-#include <sanguis/model/cell_size.hpp>
-#include <sanguis/server/load.hpp>
+#include <sanguis/server/load.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/load_cref.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
-#include <fcppt/cast/int_to_float_fun.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

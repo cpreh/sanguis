@@ -1,5 +1,6 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
@@ -9,7 +10,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/accuracy.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
-#include <sanguis/server/weapons/events/reload.hpp>
+#include <sanguis/server/weapons/events/reload.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/backswing.hpp>
 #include <sanguis/server/weapons/states/castpoint.hpp>

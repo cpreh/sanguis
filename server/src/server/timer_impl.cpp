@@ -1,4 +1,4 @@
-#include <sanguis/io_service.hpp>
+#include <sanguis/io_service.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/io_service_ref.hpp>
 #include <sanguis/server/timer_callback.hpp>
 #include <sanguis/server/timer_duration.hpp>

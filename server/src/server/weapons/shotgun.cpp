@@ -1,4 +1,4 @@
-#include <sanguis/random_generator.hpp>
+#include <sanguis/random_generator.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/random_variate.hpp>
 #include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
@@ -34,8 +34,6 @@
 #include <sanguis/server/weapons/attributes/spread_radius.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/output_to_fcppt_string.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/random/distribution/basic.hpp>

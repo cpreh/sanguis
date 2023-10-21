@@ -1,7 +1,8 @@
 #include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/weapon.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/weapons/factory/grenade.hpp>
+#include <sanguis/server/weapons/factory/parameters_fwd.hpp>
 #include <sanguis/server/weapons/factory/secondary.hpp>
 #include <sanguis/server/weapons/factory/sentry.hpp>
 #include <sanguis/server/weapons/factory/spider.hpp>

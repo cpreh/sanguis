@@ -1,11 +1,10 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/server/health.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/make_array.hpp>
-#include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/normal.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
-#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/common_parameters.hpp>

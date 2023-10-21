@@ -1,7 +1,7 @@
 #include <sanguis/server/global/world_connection_map.hpp>
 #include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/world/map.hpp>
-#include <sanguis/server/world/object.hpp>
+#include <sanguis/server/world/object.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

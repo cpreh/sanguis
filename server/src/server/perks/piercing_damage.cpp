@@ -5,6 +5,7 @@
 #include <sanguis/server/perks/constant_damage_change.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
 #include <sanguis/server/perks/piercing_damage.hpp>
+#include <sanguis/server/perks/perk.hpp>
 
 sanguis::server::perks::piercing_damage::piercing_damage()
     : sanguis::server::perks::perk(sanguis::perk_type::piercing_damage)

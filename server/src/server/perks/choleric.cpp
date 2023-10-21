@@ -1,10 +1,13 @@
 #include <sanguis/diff_clock_cref.hpp>
+#include <sanguis/diff_timer.hpp>
 #include <sanguis/perk_type.hpp>
-#include <sanguis/random_generator.hpp>
+#include <sanguis/random_generator.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/random_generator_ref.hpp>
-#include <sanguis/random_variate_impl.hpp>
+#include <sanguis/random_variate_impl.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/server/angle.hpp>
 #include <sanguis/server/aoe.hpp>
 #include <sanguis/server/direction.hpp>
+#include <sanguis/server/level.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/damage/explosive.hpp>
 #include <sanguis/server/damage/full.hpp>

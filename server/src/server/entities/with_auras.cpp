@@ -1,8 +1,8 @@
 #include <sanguis/collision/world/body_enter_container.hpp>
-#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/aura.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
-#include <sanguis/server/collision/ghost.hpp>
+#include <sanguis/server/collision/ghost.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/collision/ghost_container.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>

@@ -29,7 +29,7 @@ struct magazine_size
   {
     _parameters.get().extra_magazine_size(sanguis::server::weapons::magazine_size(std::min(
         fcppt::cast::to_unsigned(
-            fcppt::cast::float_to_int<std::make_signed<sanguis::magazine_type>::type>(
+            fcppt::cast::float_to_int<std::make_signed_t<sanguis::magazine_type>>(
                 std::sqrt(std::sqrt(sanguis::server::weapons::modifiers::random_increase(
                     _random_generator, _difficulty))))),
         _parameters.get().magazine_size().value().get() *

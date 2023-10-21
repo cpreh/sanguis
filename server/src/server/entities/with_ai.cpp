@@ -2,6 +2,7 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/update_interval.hpp>
 #include <sanguis/server/ai/tree/base.hpp>
+#include <sanguis/server/ai/tree/base_unique_ptr.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
@@ -11,11 +12,11 @@
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/weapon.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/optional/maybe_void.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>

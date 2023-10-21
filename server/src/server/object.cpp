@@ -1,10 +1,10 @@
 #include <sanguis/server/object.hpp>
 #include <sanguis/server/object_base.hpp>
-#include <sanguis/server/events/disconnect.hpp>
-#include <sanguis/server/events/message.hpp>
-#include <sanguis/server/events/tick.hpp>
-#include <sanguis/server/states/running.hpp>
-#include <sanguis/server/states/unpaused.hpp>
+#include <sanguis/server/events/disconnect.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/server/events/message.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/server/events/tick.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/server/states/running.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/server/states/unpaused.hpp> // NOLINT(misc-include-cleaner)
 #include <alda/net/port.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/log/context_reference.hpp>

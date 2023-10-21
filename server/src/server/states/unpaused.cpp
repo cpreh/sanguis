@@ -1,5 +1,4 @@
 #include <sanguis/clock.hpp>
-#include <sanguis/weapon_type.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/attack_dest.hpp>
 #include <sanguis/messages/client/base.hpp>
@@ -22,7 +21,7 @@
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/speed.hpp>
-#include <sanguis/server/events/disconnect.hpp>
+#include <sanguis/server/events/disconnect.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/events/message.hpp>
 #include <sanguis/server/events/tick.hpp>
 #include <sanguis/server/global/context.hpp>

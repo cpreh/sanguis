@@ -1,14 +1,13 @@
 #include <sanguis/aura_type.hpp>
 #include <sanguis/buff_type.hpp>
-#include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/random_generator_ref.hpp>
-#include <sanguis/timer.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/world_id.hpp>
@@ -21,6 +20,7 @@
 #include <sanguis/collision/world/update_result.hpp>
 #include <sanguis/creator/destructible.hpp>
 #include <sanguis/creator/destructible_container.hpp>
+#include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/opening_type.hpp>
@@ -94,14 +94,14 @@
 #include <sanguis/server/collision/body_enter.hpp>
 #include <sanguis/server/collision/body_exit.hpp>
 #include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/entities/doodad.hpp>
+#include <sanguis/server/entities/doodad.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
-#include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/remove_from_world_result.hpp>
 #include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/simple_unique_ptr.hpp>
+#include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -140,14 +140,12 @@
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
-#include <fcppt/container/make.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/reference.hpp>
@@ -293,12 +291,14 @@ sanguis::server::entities::optional_base_ref sanguis::server::world::object::ins
 }
 
 sanguis::server::entities::optional_base_ref
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 sanguis::server::world::object::insert(sanguis::server::world::insert_with_id_pair &&_pair)
 {
   return this->insert(std::move(_pair.entity()), _pair.insert_parameters());
 }
 
 void sanguis::server::world::object::insert(
+    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
     sanguis::server::world::insert_with_id_pair_container &&_pairs)
 {
   for (sanguis::server::world::insert_with_id_pair &element : _pairs)
@@ -308,6 +308,7 @@ void sanguis::server::world::object::insert(
 }
 
 sanguis::server::entities::optional_base_ref
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 sanguis::server::world::object::insert(sanguis::server::world::insert_simple_pair &&_pair)
 {
   return this->insert(std::move(_pair.entity()), _pair.insert_parameters());

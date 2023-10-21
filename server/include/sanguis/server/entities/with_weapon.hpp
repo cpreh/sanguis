@@ -133,7 +133,7 @@ private:
 
   sanguis::server::weapons::optional_target target_;
 
-  sanguis::weapon_status weapon_status_;
+  sanguis::weapon_status weapon_status_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 
   sanguis::server::entities::property::always_max attack_speed_;
 

@@ -10,7 +10,6 @@
 #include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/container/grid/clamped_min.hpp>
 #include <fcppt/container/grid/clamped_sup_signed.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>

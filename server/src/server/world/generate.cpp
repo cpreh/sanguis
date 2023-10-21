@@ -2,7 +2,7 @@
 #include <sanguis/world_name.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/top_parameters_fwd.hpp>
-#include <sanguis/creator/top_result.hpp>
+#include <sanguis/creator/top_result.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate.hpp>
 #include <sanguis/server/world/object.hpp>

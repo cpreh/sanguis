@@ -1,11 +1,11 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/server/collision/body_exit.hpp>
-#include <sanguis/server/entities/doodad.hpp>
+#include <sanguis/server/entities/doodad.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/doodad_unique_ptr.hpp>
-#include <sanguis/server/entities/remove_from_world_result.hpp>
-#include <sanguis/server/entities/simple.hpp>
+#include <sanguis/server/entities/remove_from_world_result.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/server/entities/simple.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/simple_unique_ptr.hpp>
-#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/world/update_entity.hpp>
 #include <fcppt/algorithm/update_action.hpp>

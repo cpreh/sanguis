@@ -1,9 +1,10 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/exception.hpp>
-#include <sanguis/io_service.hpp>
+#include <sanguis/io_service.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/io_service_ref.hpp>
 #include <sanguis/slowdown.hpp>
-#include <sanguis/messages/client/base.hpp>
+#include <sanguis/timer.hpp>
+#include <sanguis/messages/client/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/messages/client/unique_ptr.hpp>
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -39,7 +40,7 @@
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/debug.hpp>
@@ -55,7 +56,6 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <exception>

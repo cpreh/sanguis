@@ -10,5 +10,5 @@
 sanguis::messages::types::exp sanguis::server::exp_to_net(sanguis::server::exp const _exp)
 {
   return fcppt::cast::to_unsigned(
-      fcppt::cast::float_to_int<std::make_signed<sanguis::messages::types::exp>::type>(_exp.get()));
+      fcppt::cast::float_to_int<std::make_signed_t<sanguis::messages::types::exp>>(_exp.get()));
 }

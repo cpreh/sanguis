@@ -1,6 +1,7 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/random_angle.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>

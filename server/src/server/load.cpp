@@ -2,7 +2,6 @@
 #include <sanguis/load/model/path.hpp>
 #include <sanguis/load/model/path_to_json_file.hpp>
 #include <sanguis/load/model/radius.hpp>
-#include <sanguis/model/cell_size.hpp>
 #include <sanguis/model/cell_size_from_file.hpp>
 #include <sanguis/server/load.hpp>
 #include <sanguis/server/radius.hpp>

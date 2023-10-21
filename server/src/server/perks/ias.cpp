@@ -1,11 +1,12 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
-#include <sanguis/server/entities/property/always_max.hpp>
+#include <sanguis/server/entities/property/always_max.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/property/linear_change.hpp>
 #include <sanguis/server/perks/change_factor.hpp>
 #include <sanguis/server/perks/change_simple.hpp>
 #include <sanguis/server/perks/ias.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
+#include <sanguis/server/perks/perk.hpp>
 
 sanguis::server::perks::ias::ias() : sanguis::server::perks::perk(sanguis::perk_type::ias) {}
 

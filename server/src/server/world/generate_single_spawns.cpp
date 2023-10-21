@@ -2,19 +2,17 @@
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/spawn_pos.hpp>
-#include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/load/model/enemy_path.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
-#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate_single_spawns.hpp>
-#include <sanguis/server/world/insert_pair_container.hpp>
+#include <sanguis/server/world/insert_with_id_pair_container.hpp>
 #include <sanguis/server/world/place_multiple.hpp>
 #include <sanguis/server/world/place_with_id_callback.hpp>
 

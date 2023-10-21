@@ -1,12 +1,12 @@
 #include <sanguis/primary_weapon_type.hpp>
-#include <sanguis/random_generator.hpp>
+#include <sanguis/random_generator.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/random_generator_ref.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
@@ -14,16 +14,16 @@
 #include <sanguis/server/entities/pickups/health.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
-#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/environment/object_ref.hpp>
-#include <sanguis/server/random/distributor_impl.hpp>
+#include <sanguis/server/random/distributor_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/create.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/weapon.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/world/pickup_spawner.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/strong_typedef_assignment.hpp>
+#include <fcppt/strong_typedef_assignment.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

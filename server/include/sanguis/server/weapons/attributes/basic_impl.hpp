@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_WEAPONS_ATTRIBUTES_BASIC_IMPL_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_ATTRIBUTES_BASIC_IMPL_HPP_INCLUDED
 
-#include <sanguis/server/weapons/attributes/basic_decl.hpp>
+#include <sanguis/server/weapons/attributes/basic_decl.hpp> // IWYU pragma: export
 #include <fcppt/optional/maybe.hpp>
 
 template <typename Wrapped>

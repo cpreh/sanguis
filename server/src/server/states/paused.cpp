@@ -9,13 +9,13 @@
 #include <sanguis/server/dispatch_default_function.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/events/disconnect.hpp>
+#include <sanguis/server/events/disconnect.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/events/message.hpp>
-#include <sanguis/server/events/tick.hpp>
-#include <sanguis/server/global/context.hpp>
+#include <sanguis/server/events/tick.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/server/global/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/states/log_location.hpp>
 #include <sanguis/server/states/paused.hpp>
-#include <sanguis/server/states/running.hpp>
+#include <sanguis/server/states/running.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/states/unpaused.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unit.hpp>

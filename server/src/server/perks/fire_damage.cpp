@@ -5,6 +5,7 @@
 #include <sanguis/server/perks/constant_damage_change.hpp>
 #include <sanguis/server/perks/fire_damage.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
+#include <sanguis/server/perks/perk.hpp>
 
 sanguis::server::perks::fire_damage::fire_damage()
     : sanguis::server::perks::perk(sanguis::perk_type::fire_damage)

@@ -1,4 +1,4 @@
-#include <sanguis/messages/client/base.hpp>
+#include <sanguis/messages/client/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/messages/client/shared_ptr.hpp>
 #include <sanguis/messages/client/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>

@@ -3,7 +3,6 @@
 #include <sanguis/server/perks/tree/choose.hpp>
 #include <sanguis/server/perks/tree/container.hpp>
 #include <sanguis/server/perks/tree/find_node.hpp>
-#include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/to_exception.hpp>

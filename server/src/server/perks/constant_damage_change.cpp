@@ -1,6 +1,6 @@
 #include <sanguis/server/damage/type_fwd.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
-#include <sanguis/server/entities/property/always_max.hpp>
+#include <sanguis/server/entities/property/always_max.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/entities/property/constant_change.hpp>
 #include <sanguis/server/perks/change_factor.hpp>
 #include <sanguis/server/perks/change_simple.hpp>

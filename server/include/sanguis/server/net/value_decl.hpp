@@ -3,6 +3,6 @@
 
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/server/net/basic_value_decl.hpp>
-#include <sanguis/server/net/value_fwd.hpp>
+#include <sanguis/server/net/value_fwd.hpp> // IWYU pragma: export
 
 #endif

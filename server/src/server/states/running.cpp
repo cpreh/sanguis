@@ -21,12 +21,12 @@
 #include <sanguis/server/to_console_arg_list.hpp>
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
-#include <sanguis/server/events/tick.hpp>
+#include <sanguis/server/events/tick.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/global/context.hpp>
 #include <sanguis/server/states/log_location.hpp>
-#include <sanguis/server/states/paused.hpp>
+#include <sanguis/server/states/paused.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/states/running.hpp>
-#include <sanguis/server/states/unpaused.hpp>
+#include <sanguis/server/states/unpaused.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_cref.hpp>
@@ -34,7 +34,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/container/maybe_front.hpp>
 #include <fcppt/log/debug.hpp>
