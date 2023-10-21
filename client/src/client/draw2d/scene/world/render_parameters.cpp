@@ -1,5 +1,4 @@
 #include <sanguis/client/draw2d/translation.hpp>
-#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/world/render_parameters.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/context/core_ref.hpp>

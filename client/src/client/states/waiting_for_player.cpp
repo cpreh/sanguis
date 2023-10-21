@@ -4,14 +4,14 @@
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/events/action.hpp>
-#include <sanguis/client/events/input.hpp>
+#include <sanguis/client/events/input.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/events/message.hpp>
-#include <sanguis/client/events/net_error.hpp>
-#include <sanguis/client/events/overlay.hpp>
-#include <sanguis/client/events/render.hpp>
-#include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/events/net_error.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/overlay.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/render.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/tick.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/states/has_player.hpp>
-#include <sanguis/client/states/ingame.hpp>
+#include <sanguis/client/states/ingame.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/states/log_location.hpp>
 #include <sanguis/client/states/waiting_for_player.hpp>
 #include <sanguis/messages/call/result.hpp>

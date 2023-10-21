@@ -38,7 +38,7 @@ private:
 
   fcppt::log::object log_;
 
-  bool running_;
+  bool running_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 
   sanguis::server::object impl_;
 

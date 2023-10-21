@@ -6,11 +6,11 @@
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/make_sprite.hpp>
-#include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/scene/world/sprite/buffers_ref.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/compare.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/container.hpp>
-#include <sanguis/client/load/tiles/context.hpp>
+#include <sanguis/client/load/tiles/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/tiles/context_ref.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/grid.hpp>
@@ -28,7 +28,7 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/math/ceil_div.hpp>
-#include <fcppt/math/dim/comparison.hpp>
+#include <fcppt/math/dim/comparison.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/math/dim/map.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>

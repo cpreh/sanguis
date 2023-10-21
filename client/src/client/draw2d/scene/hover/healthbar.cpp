@@ -1,6 +1,9 @@
+#include <sanguis/client/health.hpp>
 #include <sanguis/client/health_pair.hpp>
+#include <sanguis/client/health_value.hpp>
+#include <sanguis/client/draw2d/radius.hpp>
 #include <sanguis/client/draw2d/scene/hover/healthbar.hpp>
-#include <sanguis/client/draw2d/sprite/buffers_impl.hpp>
+#include <sanguis/client/draw2d/sprite/buffers_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
@@ -10,30 +13,28 @@
 #include <sanguis/client/draw2d/sprite/colored/object.hpp>
 #include <sge/image/color/convert.hpp>
 #include <sge/image/color/predef.hpp>
-#include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init/alpha.hpp>
 #include <sge/image/color/init/blue.hpp>
 #include <sge/image/color/init/green.hpp>
 #include <sge/image/color/init/red.hpp>
 #include <sge/renderer/context/ffp.hpp>
-#include <sge/renderer/device/core.hpp>
+#include <sge/renderer/device/core.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/renderer/device/core_ref.hpp>
 #include <sge/sprite/buffers/option.hpp>
 #include <sge/sprite/compare/nothing.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/update.hpp>
-#include <sge/sprite/render/range_impl.hpp>
+#include <sge/sprite/render/range_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/sprite/render/range_with_options.hpp>
 #include <sge/sprite/roles/color.hpp>
 #include <sge/sprite/roles/pos.hpp>
 #include <sge/sprite/roles/size.hpp>
 #include <sge/sprite/state/default_options.hpp>
-#include <sge/sprite/state/object_impl.hpp>
+#include <sge/sprite/state/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/sprite/state/parameters_impl.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>

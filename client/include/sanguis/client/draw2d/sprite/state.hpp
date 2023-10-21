@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_STATE_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/sprite/state_decl.hpp>
+#include <sanguis/client/draw2d/sprite/state_fwd.hpp> // IWYU pragma: export
 #include <sge/sprite/state/object_impl.hpp>
 
 #endif

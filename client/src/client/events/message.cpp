@@ -1,5 +1,5 @@
 #include <sanguis/client/events/message.hpp>
-#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/messages/server/shared_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>

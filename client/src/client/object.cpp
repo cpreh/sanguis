@@ -8,32 +8,29 @@
 #include <sanguis/client/object_base.hpp>
 #include <sanguis/client/server.hpp>
 #include <sanguis/client/server_callback.hpp>
-#include <sanguis/client/systems.hpp>
+#include <sanguis/client/systems.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/args/result.hpp>
 #include <sanguis/client/args/labels/history_size.hpp>
 #include <sanguis/client/config/settings/file.hpp>
-#include <sanguis/client/events/connected.hpp>
-#include <sanguis/client/events/input.hpp>
-#include <sanguis/client/events/message.hpp>
-#include <sanguis/client/events/net_error.hpp>
-#include <sanguis/client/events/overlay.hpp>
-#include <sanguis/client/events/render.hpp>
-#include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/events/connected.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/input.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/message.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/net_error.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/overlay.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/render.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/tick.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/gui/style/simple.hpp>
-#include <sanguis/client/states/menu.hpp>
+#include <sanguis/client/states/menu.hpp> // NOLINT(misc-include-cleaner)
 #include <alda/net/port.hpp>
-#include <sge/audio/player.hpp>
-#include <sge/config/media_path.hpp>
 #include <sge/console/prefix.hpp>
-#include <sge/font/added.hpp>
+#include <sge/font/added.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/font/lit.hpp>
-#include <sge/font/object.hpp>
+#include <sge/font/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
+#include <sge/font/ttf_size.hpp>
 #include <sge/gui/style/base.hpp>
-#include <sge/renderer/device/core.hpp>
-#include <sge/renderer/display_mode/optional_object.hpp>
-#include <sge/timer/absolute_impl.hpp>
+#include <sge/timer/absolute_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/timer/difference_and_reset.hpp>
 #include <sge/window/system.hpp>
 #include <awl/main/exit_code.hpp>
@@ -56,7 +53,7 @@
 #include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -64,7 +61,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <exception>
-#include <ostream>
 #include <fcppt/config/external_end.hpp>
 
 FCPPT_PP_PUSH_WARNING
@@ -82,7 +78,6 @@ sanguis::client::object::object(
       saver_(fcppt::make_cref(settings_)),
       io_service_(),
       sys_(sanguis::client::create_systems(_log_context, _args)),
-      renderer_(sys_->renderer_device_core()),
       added_font_(sys_->font_system().add_font(
           sanguis::media_path() / FCPPT_TEXT("font") / FCPPT_TEXT("Electrolize-Regular.ttf"))),
       font_object_(

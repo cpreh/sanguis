@@ -17,6 +17,7 @@
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
@@ -24,7 +25,7 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
-#include <sanguis/client/draw2d/sprite/normal/object.hpp>
+#include <sanguis/client/draw2d/sprite/normal/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/client/load/auras/context_ref.hpp>
 #include <sanguis/load/model/player_path.hpp>

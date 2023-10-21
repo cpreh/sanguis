@@ -3,7 +3,6 @@
 #include <sanguis/client/control/cursor_position.hpp>
 #include <sanguis/client/control/input_translator.hpp>
 #include <sanguis/client/control/key_scale.hpp>
-#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/actions/any.hpp>
 #include <sanguis/client/control/actions/binary.hpp>
 #include <sanguis/client/control/actions/binary_type.hpp>
@@ -15,6 +14,7 @@
 #include <sanguis/client/control/actions/scale_type.hpp>
 #include <sanguis/client/control/actions/variant.hpp>
 #include <sge/input/event_base.hpp>
+#include <sge/input/cursor/button_code.hpp>
 #include <sge/input/cursor/position.hpp>
 #include <sge/input/cursor/event/button.hpp>
 #include <sge/input/cursor/event/move.hpp>

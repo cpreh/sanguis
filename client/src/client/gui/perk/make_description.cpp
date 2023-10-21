@@ -4,7 +4,7 @@
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 
 sge::font::string
 sanguis::client::gui::perk::make_description(sanguis::client::perk::info const &_info)

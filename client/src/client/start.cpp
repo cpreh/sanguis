@@ -2,7 +2,7 @@
 #include <sanguis/company_name.hpp>
 #include <sanguis/log_level_streams.hpp>
 #include <sanguis/client/create.hpp>
-#include <sanguis/client/object_base.hpp>
+#include <sanguis/client/object_base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/object_base_unique_ptr.hpp>
 #include <sanguis/client/start.hpp>
 #include <sanguis/client/args/result.hpp>

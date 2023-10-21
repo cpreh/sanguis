@@ -109,7 +109,7 @@ private:
 
   sge::gui::background::colored gui_background_;
 
-  bool connect_running_;
+  bool connect_running_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 
   fcppt::signal::auto_connection const quickstart_connection_;
   fcppt::signal::auto_connection const connect_connection_;

@@ -1,5 +1,4 @@
 #include <sanguis/client/slowed_duration.hpp>
-#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/world/base.hpp>
 #include <sanguis/client/draw2d/scene/world/graveyard.hpp>
 #include <sanguis/client/draw2d/scene/world/render_parameters.hpp>

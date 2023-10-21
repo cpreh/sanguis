@@ -8,16 +8,19 @@
 #include <sanguis/client/control/axis_direction_min.hpp>
 #include <sanguis/client/control/cursor_position.hpp>
 #include <sanguis/client/control/direction_vector.hpp>
-#include <sanguis/client/control/environment.hpp>
+#include <sanguis/client/control/environment.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/control/environment_cref.hpp>
 #include <sanguis/client/control/key_scale.hpp>
 #include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/scalar.hpp>
 #include <sanguis/client/control/actions/any.hpp>
 #include <sanguis/client/control/actions/binary.hpp>
+#include <sanguis/client/control/actions/binary_type.hpp>
 #include <sanguis/client/control/actions/cursor.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
+#include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/control/actions/scale.hpp>
+#include <sanguis/client/control/actions/scale_type.hpp>
 #include <sanguis/messages/client/attack_dest.hpp>
 #include <sanguis/messages/client/change_world.hpp>
 #include <sanguis/messages/client/cheat.hpp>
@@ -29,16 +32,16 @@
 #include <sanguis/messages/client/stop_shooting.hpp>
 #include <sanguis/messages/roles/attack_dest.hpp>
 #include <sanguis/messages/roles/direction.hpp>
+#include <sanguis/messages/types/vector2.hpp>
 #include <alda/message/init_record.hpp>
 #include <sge/console/arg_list.hpp>
-#include <sge/console/object.hpp>
+#include <sge/console/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/console/object_ref.hpp>
 #include <sge/console/callback/function.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
 #include <sge/console/callback/short_description.hpp>
 #include <sge/font/lit.hpp>
-#include <sge/font/string.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/copy.hpp>
 #include <fcppt/make_ref.hpp>

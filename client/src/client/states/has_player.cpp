@@ -8,18 +8,18 @@
 #include <sanguis/client/console/object.hpp>
 #include <sanguis/client/control/action_handler.hpp>
 #include <sanguis/client/events/action.hpp>
-#include <sanguis/client/events/input.hpp>
-#include <sanguis/client/events/menu.hpp>
+#include <sanguis/client/events/input.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/menu.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/events/message.hpp>
-#include <sanguis/client/events/net_error.hpp>
-#include <sanguis/client/events/overlay.hpp>
-#include <sanguis/client/events/render.hpp>
+#include <sanguis/client/events/net_error.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/overlay.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/events/render.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/perk/make_tree.hpp>
 #include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/send_callback.hpp>
 #include <sanguis/client/perk/state.hpp>
-#include <sanguis/client/perk/tree.hpp>
+#include <sanguis/client/perk/tree.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/log_location.hpp>
 #include <sanguis/client/states/running.hpp>
@@ -27,17 +27,16 @@
 #include <sanguis/messages/client/choose_perk.hpp>
 #include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/roles/level.hpp>
-#include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/perk_tree.hpp>
 #include <sanguis/messages/roles/remaining_perk_levels.hpp>
 #include <sanguis/messages/server/available_perks.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/messages/server/level_up.hpp>
 #include <sanguis/messages/server/remove_id.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>

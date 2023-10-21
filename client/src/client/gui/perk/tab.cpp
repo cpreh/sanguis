@@ -16,7 +16,9 @@
 #include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_tree.hpp>
 #include <sge/gui/widget/reference_tree_vector.hpp>
+#include <sge/gui/widget/tree_fwd.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>

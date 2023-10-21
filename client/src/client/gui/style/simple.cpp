@@ -1,12 +1,11 @@
 #include <sanguis/client/gui/style/background_color.hpp>
 #include <sanguis/client/gui/style/border_color.hpp>
-#include <sanguis/client/gui/style/inner_border.hpp>
 #include <sanguis/client/gui/style/outer_border.hpp>
 #include <sanguis/client/gui/style/simple.hpp>
 #include <sanguis/client/gui/style/spacing.hpp>
 #include <sanguis/client/gui/style/text_color.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
-#include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/gui/fill_color.hpp>
 #include <sge/gui/fill_level.hpp>
@@ -31,6 +30,9 @@
 #include <fcppt/math/dim/null.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::gui::style::simple::simple(
     sanguis::client::load::resource::textures_cref const _textures)

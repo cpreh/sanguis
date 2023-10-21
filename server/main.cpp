@@ -1,6 +1,6 @@
 #include <sanguis/log_level_streams.hpp>
 #include <sanguis/server/create.hpp>
-#include <sanguis/server/object_base.hpp>
+#include <sanguis/server/object_base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/object_base_unique_ptr.hpp>
 #include <sanguis/server/args/create_parser.hpp>
 #include <sanguis/server/args/result.hpp>
@@ -11,14 +11,14 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/main.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/either/match.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/io/cout.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/optional_level.hpp>
-#include <fcppt/options/base.hpp>
+#include <fcppt/options/base.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/options/default_help_switch.hpp>
 #include <fcppt/options/error.hpp>
 #include <fcppt/options/error_output.hpp>
@@ -31,7 +31,7 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/variant/match.hpp>
-#include <fcppt/variant/output.hpp>
+#include <fcppt/variant/output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <exception>

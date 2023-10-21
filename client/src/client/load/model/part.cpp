@@ -4,7 +4,6 @@
 #include <sanguis/client/load/model/make_weapon_categories.hpp>
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
-#include <sanguis/client/load/model/weapon_category_map.hpp>
 #include <sanguis/client/load/model/weapon_category_unique_ptr.hpp>
 #include <sanguis/model/part_fwd.hpp>
 #include <fcppt/make_cref.hpp>

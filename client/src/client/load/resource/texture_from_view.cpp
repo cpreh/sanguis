@@ -4,7 +4,7 @@
 #include <sge/renderer/device/core_ref.hpp>
 #include <sge/renderer/texture/create_planar_from_view.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
-#include <sge/renderer/texture/planar.hpp>
+#include <sge/renderer/texture/planar.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part.hpp>

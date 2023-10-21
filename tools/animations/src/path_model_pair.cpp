@@ -1,6 +1,5 @@
 #include <sanguis/model/object.hpp>
 #include <sanguis/tools/animations/path_model_pair.hpp>
-#include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
 #include <utility>

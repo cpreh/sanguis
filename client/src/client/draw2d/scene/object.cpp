@@ -4,7 +4,7 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
-#include <sanguis/client/cursor.hpp>
+#include <sanguis/client/cursor.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/cursor_ref.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
@@ -20,12 +20,11 @@
 #include <sanguis/client/draw/base.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
-#include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/log_location.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
-#include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/player_center.hpp>
+#include <sanguis/client/draw2d/translation.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/create_parameters.hpp>
@@ -58,14 +57,14 @@
 #include <sanguis/client/draw2d/scene/log_name.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/translation_matrix.hpp>
-#include <sanguis/client/draw2d/scene/hover/base.hpp>
+#include <sanguis/client/draw2d/scene/hover/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/hover/create.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
-#include <sanguis/client/draw2d/scene/state/base.hpp>
+#include <sanguis/client/draw2d/scene/state/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/scene/state/create.hpp>
 #include <sanguis/client/draw2d/scene/state/optional_scoped_unique_ptr.hpp>
-#include <sanguis/client/draw2d/scene/state/scoped.hpp>
+#include <sanguis/client/draw2d/scene/state/scoped.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/scene/world/center_to_grid_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
@@ -81,8 +80,7 @@
 #include <sanguis/client/draw2d/translate/rotation.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <sanguis/client/draw2d/translate/speed.hpp>
-#include <sanguis/client/draw2d/translate/vector_from_client.hpp>
-#include <sanguis/client/load/context.hpp>
+#include <sanguis/client/load/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/context_cref.hpp>
 #include <sanguis/client/load/hud/context_ref.hpp>
 #include <sanguis/client/load/model/context.hpp>
@@ -106,6 +104,7 @@
 #include <sanguis/messages/roles/enemy_type.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/friend_type.hpp>
+#include <sanguis/messages/roles/generator_name.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
@@ -150,7 +149,7 @@
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_ref.hpp>
-#include <sge/gui/renderer/base.hpp>
+#include <sge/gui/renderer/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/gui/renderer/create_stateless.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/image/color/predef.hpp>
@@ -159,18 +158,19 @@
 #include <sge/renderer/context/core.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/core.hpp>
-#include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/renderer/state/ffp/transform/mode.hpp>
-#include <sge/renderer/state/ffp/transform/object.hpp>
+#include <sge/renderer/state/ffp/transform/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/renderer/state/ffp/transform/object_unique_ptr.hpp>
 #include <sge/renderer/state/ffp/transform/parameters.hpp>
 #include <sge/renderer/state/ffp/transform/scoped.hpp>
 #include <sge/renderer/target/onscreen.hpp>
-#include <sge/renderer/target/viewport.hpp>
+#include <sge/renderer/target/viewport.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/sprite/matrix.hpp>
 #include <sge/sprite/projection_matrix.hpp>
 #include <sge/sprite/state/default_options.hpp>
+#include <sge/sprite/state/parameters.hpp>
 #include <sge/sprite/state/scoped.hpp>
 #include <sge/viewport/manager_ref.hpp>
 #include <fcppt/copy.hpp>
@@ -182,7 +182,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
@@ -206,15 +206,14 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_multi.hpp>
 #include <fcppt/optional/maybe_void.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/record/get.hpp>
-#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <typeinfo>
+#include <typeinfo> // NOLINT(misc-include-cleaner)
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 

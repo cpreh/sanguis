@@ -2,7 +2,9 @@
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/weapon_status.hpp>
+#include <sanguis/client/health.hpp>
 #include <sanguis/client/health_pair.hpp>
+#include <sanguis/client/max_health.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>

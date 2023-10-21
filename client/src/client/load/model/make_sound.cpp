@@ -1,10 +1,10 @@
 #include <sanguis/client/load/model/make_sound.hpp>
 #include <sanguis/client/load/resource/optional_sound.hpp>
-#include <sanguis/client/load/resource/sounds.hpp>
+#include <sanguis/client/load/resource/sounds.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/resource/sounds_cref.hpp>
 #include <sanguis/model/animation_sound.hpp>
 #include <sanguis/model/optional_animation_sound.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>

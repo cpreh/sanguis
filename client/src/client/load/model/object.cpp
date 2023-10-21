@@ -3,6 +3,7 @@
 #include <sanguis/client/load/model/make_parts.hpp>
 #include <sanguis/client/load/model/object.hpp>
 #include <sanguis/client/load/model/part.hpp>
+#include <sanguis/client/load/model/part_map.hpp>
 #include <sanguis/client/load/resource/context_cref.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sge/core/exception.hpp>
@@ -15,7 +16,7 @@
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>

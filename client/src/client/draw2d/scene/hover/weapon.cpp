@@ -7,7 +7,7 @@
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
-#include <sanguis/client/load/hud/context.hpp>
+#include <sanguis/client/load/hud/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/hud/context_ref.hpp>
 #include <sge/font/object_ref.hpp>
 #include <sge/gui/draw.hpp>
@@ -44,7 +44,8 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
     sanguis::client::load::hud::context_ref const _hud_resources,
     sanguis::client::weapon_pair const &_player_weapons,
     sanguis::client::draw2d::entities::hover::weapon const &_info)
-    : gui_renderer_(_gui_renderer),
+    : sanguis::client::draw2d::scene::hover::base{},
+      gui_renderer_(_gui_renderer),
       gui_context_(),
       image_(_gui_style, fcppt::make_cref(_hud_resources->weapon_icon(_info.get().weapon_type()))),
       weapon_attributes_(fcppt::algorithm::map<

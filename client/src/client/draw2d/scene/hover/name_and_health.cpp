@@ -10,13 +10,13 @@
 #include <sge/font/object_ref.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/core.hpp>
-#include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 
 sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
     sge::renderer::device::ffp_ref const _renderer,
@@ -24,7 +24,8 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
     sanguis::client::draw2d::sprite::center const &_center,
     sanguis::client::draw2d::radius const _radius,
     sanguis::client::draw2d::entities::hover::name_and_health const &_name_and_health)
-    : healthbar_(fcppt::optional::map(
+    : sanguis::client::draw2d::scene::hover::base{},
+      healthbar_(fcppt::optional::map(
           _name_and_health.health(),
           [&_renderer, _center, _radius](sanguis::client::health_pair const _health)
           {

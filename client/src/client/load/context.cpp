@@ -1,7 +1,6 @@
 #include <sanguis/client/load/context.hpp>
-#include <sanguis/client/load/model/collection.hpp>
 #include <sanguis/client/load/model/context.hpp>
-#include <sanguis/client/load/model/object.hpp>
+#include <sanguis/client/load/resource/context.hpp>
 #include <sge/audio/loader_ref.hpp>
 #include <sge/audio/player_ref.hpp>
 #include <sge/image2d/system_ref.hpp>

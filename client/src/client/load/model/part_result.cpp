@@ -1,4 +1,4 @@
-#include <sanguis/client/load/model/part.hpp>
+#include <sanguis/client/load/model/part.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/model/part_map.hpp>
 #include <sanguis/client/load/model/part_result.hpp>
 #include <sanguis/model/cell_size.hpp>

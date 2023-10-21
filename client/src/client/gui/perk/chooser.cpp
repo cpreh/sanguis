@@ -5,10 +5,9 @@
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/client/perk/change_callback.hpp>
 #include <sanguis/client/perk/level_callback.hpp>
-#include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/perk/state.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/perk/state_ref.hpp>
 #include <sge/font/from_fcppt_string.hpp>
-#include <sge/font/lit.hpp>
 #include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
 #include <sge/gui/gravity.hpp>
@@ -21,18 +20,18 @@
 #include <sge/input/event_base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/core.hpp>
-#include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/renderer/device/ffp_ref.hpp>
-#include <sge/renderer/target/onscreen.hpp>
+#include <sge/renderer/target/onscreen.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <sge/viewport/manager.hpp>
+#include <sge/viewport/manager.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/viewport/manager_ref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/reference_to_base.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

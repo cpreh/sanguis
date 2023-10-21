@@ -18,7 +18,6 @@
 #include <sge/font/added_unique_ptr.hpp>
 #include <sge/font/object_unique_ptr.hpp>
 #include <sge/gui/style/base_unique_ptr.hpp>
-#include <sge/renderer/device/core_ref.hpp>
 #include <sge/timer/absolute_decl.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/nonmovable.hpp>
@@ -65,8 +64,6 @@ private:
   using systems_unique_ptr = fcppt::unique_ptr<sanguis::client::systems>;
 
   systems_unique_ptr const sys_;
-
-  sge::renderer::device::core_ref const renderer_;
 
   sge::font::added_unique_ptr const added_font_;
 

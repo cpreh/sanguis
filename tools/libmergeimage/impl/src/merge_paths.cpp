@@ -6,6 +6,9 @@
 #include <sanguis/tools/libmergeimage/impl/path_vector_vector.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/join.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 // This algorithm takes a container of path_vectors so that it may
 // be called multiple times when merging a tree. Currently, this isn't done,

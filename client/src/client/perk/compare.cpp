@@ -1,7 +1,6 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/perk/compare.hpp>
 #include <sanguis/client/perk/info.hpp>
-#include <sanguis/client/perk/optional_info.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/optional/maybe.hpp>

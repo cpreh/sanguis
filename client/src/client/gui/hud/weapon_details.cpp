@@ -1,4 +1,5 @@
 #include <sanguis/optional_weapon_description.hpp>
+#include <sanguis/weapon_description.hpp>
 #include <sanguis/client/gui/hud/weapon_details.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp>
@@ -12,8 +13,6 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <sge/rucksack/dim.hpp>
-#include <sge/rucksack/vector.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/map_optional.hpp>

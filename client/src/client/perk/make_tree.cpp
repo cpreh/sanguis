@@ -5,6 +5,7 @@
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/compare.hpp>
 #include <sanguis/client/perk/info.hpp>
+#include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/make_tree.hpp>
 #include <sanguis/client/perk/max_level.hpp>
 #include <sanguis/client/perk/optional_info.hpp>
@@ -13,6 +14,7 @@
 #include <sanguis/client/perk/to_category.hpp>
 #include <sanguis/client/perk/to_string.hpp>
 #include <sanguis/client/perk/tree.hpp>
+#include <sanguis/client/perk/tree_unique_ptr.hpp>
 #include <sanguis/messages/roles/max_perk_level.hpp>
 #include <sanguis/messages/roles/perk_label.hpp>
 #include <sanguis/messages/roles/perk_level.hpp>

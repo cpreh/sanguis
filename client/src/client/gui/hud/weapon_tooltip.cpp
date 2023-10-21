@@ -1,3 +1,4 @@
+#include <sanguis/weapon_attribute.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_color.hpp>

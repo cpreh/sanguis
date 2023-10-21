@@ -7,7 +7,7 @@
 #include <sanguis/client/dispatch_default_function.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
-#include <sanguis/client/health_pair.hpp>
+#include <sanguis/client/health_pair.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
@@ -23,12 +23,12 @@
 #include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/control/actions/callback.hpp>
-#include <sanguis/client/draw/base.hpp>
+#include <sanguis/client/draw/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/create.hpp>
 #include <sanguis/client/events/action.hpp>
-#include <sanguis/client/events/connected.hpp>
+#include <sanguis/client/events/connected.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/events/input.hpp>
-#include <sanguis/client/events/menu.hpp>
+#include <sanguis/client/events/menu.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/overlay.hpp>
@@ -49,6 +49,7 @@
 #include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/roles/magazine_remaining.hpp>
+#include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/reload_time.hpp>
 #include <sanguis/messages/roles/slowdown.hpp>
 #include <sanguis/messages/roles/world_name.hpp>
@@ -57,7 +58,6 @@
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/messages/server/change_world.hpp>
 #include <sanguis/messages/server/console_print.hpp>
-#include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/experience.hpp>
 #include <sanguis/messages/server/give_weapon.hpp>
 #include <sanguis/messages/server/level_up.hpp>
@@ -77,6 +77,7 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/not.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>

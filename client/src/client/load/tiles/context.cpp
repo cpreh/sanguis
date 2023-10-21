@@ -1,22 +1,21 @@
 #include <sanguis/client/load/resource/texture_from_view.hpp>
-#include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sanguis/client/load/tiles/context.hpp>
 #include <sanguis/client/load/tiles/set.hpp>
 #include <sanguis/client/load/tiles/texture_container.hpp>
-#include <sanguis/creator/tile_size.hpp>
 #include <sanguis/tiles/area_container_ref_fwd.hpp>
 #include <sanguis/tiles/collection.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/error_image.hpp>
 #include <sge/image2d/store/object.hpp>
 #include <sge/image2d/store/view.hpp>
-#include <sge/image2d/view/const_object.hpp>
+#include <sge/image2d/view/const_object.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/texture/part.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/container/get_or_insert.hpp>
-#include <fcppt/enum/array_impl.hpp>
+#include <fcppt/enum/array_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>

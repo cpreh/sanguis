@@ -2,8 +2,9 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/make_texture.hpp>
-#include <sanguis/client/load/tiles/context.hpp>
+#include <sanguis/client/load/tiles/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/tiles/context_ref.hpp>
+#include <sanguis/client/load/tiles/texture_container.hpp>
 #include <sanguis/tiles/area_container_ref.hpp>
 #include <sanguis/tiles/content.hpp>
 #include <sanguis/tiles/error.hpp>

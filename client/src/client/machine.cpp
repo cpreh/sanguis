@@ -1,10 +1,11 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/io_service.hpp>
+#include <sanguis/io_service.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/io_service_ref.hpp>
 #include <sanguis/client/cursor_fwd.hpp>
 #include <sanguis/client/cursor_ref.hpp>
 #include <sanguis/client/log_location.hpp>
 #include <sanguis/client/machine.hpp>
+#include <sanguis/client/server_callback.hpp>
 #include <sanguis/client/args/result_fwd.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/config/settings/object_ref.hpp>
@@ -15,10 +16,11 @@
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/load/context_cref.hpp>
+#include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/net/deserialize.hpp>
 #include <sanguis/client/net/serialize_to_circular_buffer.hpp>
 #include <sanguis/messages/client/base.hpp>
-#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/net/receive_buffer_size.hpp>
 #include <sanguis/net/send_buffer_size.hpp>
@@ -29,9 +31,11 @@
 #include <alda/net/client/connect_callback.hpp>
 #include <alda/net/client/data_callback.hpp>
 #include <alda/net/client/error_callback.hpp>
+#include <sge/console/gfx/object_fwd.hpp>
 #include <sge/console/gfx/object_ref.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/object_ref.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/input/event_base.hpp>
 #include <sge/renderer/context/scoped_ffp.hpp>
@@ -39,11 +43,11 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/renderer/event/render.hpp>
 #include <sge/renderer/target/base.hpp>
-#include <sge/renderer/target/onscreen.hpp>
-#include <sge/systems/instance.hpp>
+#include <sge/renderer/target/onscreen.hpp> // NOLINT(misc-include-cleaner)
+#include <sge/systems/instance.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/viewport/manager_ref.hpp>
-#include <sge/window/system.hpp>
+#include <sge/window/system.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/window/system_ref.hpp>
 #include <awl/event/base.hpp>
 #include <awl/event/base_unique_ptr.hpp>
@@ -72,7 +76,6 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>

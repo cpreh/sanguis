@@ -5,9 +5,9 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/filesystem/extension.hpp>
+#include <fcppt/iterator/make_range.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/range/iterator_range.hpp>
 #include <filesystem>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -16,7 +16,7 @@ sanguis::client::load::resource::texture_name_map
 sanguis::client::load::resource::search_texture_names(fcppt::log::object &_log)
 {
   return fcppt::algorithm::fold(
-      boost::make_iterator_range(
+      fcppt::iterator::make_range(
           std::filesystem::directory_iterator(sanguis::media_path()),
           std::filesystem::directory_iterator()),
       sanguis::client::load::resource::texture_name_map(),

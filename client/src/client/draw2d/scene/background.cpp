@@ -1,29 +1,29 @@
 #include <sanguis/client/draw2d/translation.hpp>
+#include <sanguis/client/draw2d/unit.hpp>
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/background_texture_coordinates.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
-#include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/client/category.hpp>
 #include <sanguis/client/draw2d/sprite/client/object.hpp>
-#include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/client/system_decl.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/sprite/client/system_ref.hpp>
-#include <sanguis/client/load/context.hpp>
+#include <sanguis/client/load/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/context_cref.hpp>
 #include <sanguis/client/load/resource/context.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/target/viewport.hpp>
-#include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/intrusive/connection.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/sprite/roles/connection.hpp>
 #include <sge/sprite/roles/pos.hpp>
 #include <sge/sprite/roles/size.hpp>
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/sprite/roles/texture_coordinates0.hpp>
 #include <sge/viewport/manage_callback.hpp>
-#include <sge/viewport/manager.hpp>
+#include <sge/viewport/manager.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/viewport/manager_ref.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
@@ -35,7 +35,6 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/signal/auto_connection.hpp>
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)

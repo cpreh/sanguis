@@ -1,13 +1,13 @@
 #include <sanguis/client/cursor.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
-#include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/cursor/hotspot.hpp>
 #include <sge/input/const_processor_ref.hpp>
-#include <sge/renderer/dim2.hpp>
 #include <sge/renderer/size_type.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
-#include <sge/texture/part.hpp>
+#include <sge/texture/part.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size_fun.hpp>

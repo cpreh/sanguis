@@ -6,6 +6,7 @@
 #include <sge/renderer/display_mode/optional_dimensions.hpp>
 #include <sge/renderer/display_mode/optional_object.hpp>
 #include <sge/renderer/display_mode/optional_refresh_rate.hpp>
+#include <sge/renderer/display_mode/pixel_size.hpp>
 #include <fcppt/optional/map.hpp>
 
 sge::renderer::display_mode::optional_object

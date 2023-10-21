@@ -13,14 +13,14 @@
 #include <sge/console/gfx/output_line_limit.hpp>
 #include <sge/renderer/screen_unit.hpp>
 #include <sge/renderer/pixel_format/multi_samples.hpp>
-#include <fcppt/strong_typedef_input.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_input.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
-#include <fcppt/enum/names_array.hpp>
+#include <fcppt/enum/names_array.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/log/level.hpp>
-#include <fcppt/log/level_input.hpp>
-#include <fcppt/log/level_output.hpp>
-#include <fcppt/log/level_to_string_impl.hpp>
+#include <fcppt/log/level_input.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/log/level_output.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/log/level_to_string_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/make.hpp>
 #include <fcppt/options/apply.hpp>
 #include <fcppt/options/flag.hpp>
@@ -35,7 +35,7 @@
 #include <fcppt/options/option.hpp>
 #include <fcppt/options/optional_help_text.hpp>
 #include <fcppt/options/optional_short_name.hpp>
-#include <fcppt/options/pretty_type_enum.hpp>
+#include <fcppt/options/pretty_type_enum.hpp> // NOLINT(misc-include-cleaner)
 
 sanguis::client::args::parser_unique_ptr sanguis::client::args::create_parser()
 {

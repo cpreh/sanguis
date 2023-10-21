@@ -3,8 +3,7 @@
 #include <sanguis/tools/libmergeimage/impl/cell_size.hpp>
 #include <sanguis/tools/libmergeimage/impl/path_vector_vector.hpp>
 #include <sge/image/exception.hpp>
-#include <sge/image2d/dim.hpp>
-#include <sge/image2d/file.hpp>
+#include <sge/image2d/file.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/image2d/load_exn.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/make_ref.hpp>

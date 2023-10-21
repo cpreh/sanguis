@@ -5,7 +5,7 @@
 #include <sanguis/client/perk/find_info_const.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/level_callback.hpp>
-#include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/perk/state.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/perk/state_ref.hpp>
 #include <sanguis/client/perk/to_string.hpp>
 #include <sanguis/client/perk/tree.hpp>
@@ -30,7 +30,6 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/signal/auto_connection.hpp>
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)

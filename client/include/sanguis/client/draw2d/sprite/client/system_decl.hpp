@@ -4,7 +4,7 @@
 #include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/client/category.hpp>
 #include <sanguis/client/draw2d/sprite/client/choices.hpp>
-#include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/client/system_fwd.hpp> // IWYU pragma: export
 
 extern template class sanguis::client::draw2d::sprite::system<
     sanguis::client::draw2d::sprite::client::choices,

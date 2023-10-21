@@ -8,14 +8,14 @@
 #include <sge/image/size_type.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
 #include <sge/image2d/system_ref.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/device/core_ref.hpp>
 #include <sge/renderer/texture/create_planar_from_path.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
-#include <sge/renderer/texture/planar.hpp>
+#include <sge/renderer/texture/planar.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>

@@ -22,10 +22,8 @@
 #include <sge/systems/audio_player_default.hpp>
 #include <sge/systems/config.hpp>
 #include <sge/systems/cursor_option_field.hpp>
-#include <sge/systems/font.hpp>
 #include <sge/systems/image2d.hpp>
 #include <sge/systems/input.hpp>
-#include <sge/systems/list.hpp>
 #include <sge/systems/log_settings.hpp>
 #include <sge/systems/make_list.hpp>
 #include <sge/systems/original_window.hpp>

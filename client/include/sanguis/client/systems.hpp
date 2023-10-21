@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_SYSTEMS_HPP_INCLUDED
 #define SANGUIS_CLIENT_SYSTEMS_HPP_INCLUDED
 
-#include <sanguis/client/systems_fwd.hpp>
+#include <sanguis/client/systems_fwd.hpp> // IWYU pragma: export
 #include <sge/systems/instance.hpp>
 #include <sge/systems/with_audio_loader.hpp>
 #include <sge/systems/with_audio_player.hpp>

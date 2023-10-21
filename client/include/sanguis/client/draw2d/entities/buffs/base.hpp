@@ -19,12 +19,10 @@ public:
   virtual ~base() = 0;
 
   virtual void
-  apply(sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
-  ); // NOLINT(google-runtime-references)
+  apply(sanguis::client::draw2d::entities::model::object &); // NOLINT(google-runtime-references)
 
   virtual void
-  remove(sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
-  ); // NOLINT(google-runtime-references)
+  remove(sanguis::client::draw2d::entities::model::object &); // NOLINT(google-runtime-references)
 
   virtual void update(sanguis::client::draw2d::entities::model::object const &);
 
@@ -35,7 +33,7 @@ public:
 private:
   using counter = unsigned;
 
-  counter counter_;
+  counter counter_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 };
 
 }

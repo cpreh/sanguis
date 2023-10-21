@@ -13,19 +13,19 @@
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
 #include <sanguis/client/draw2d/sprite/normal/no_rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/rect.hpp>
 #include <sge/font/string.hpp>
-#include <sge/font/text.hpp>
+#include <sge/font/text.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/font/text_parameters.hpp>
 #include <sge/font/text_unique_ptr.hpp>
 #include <sge/font/align_h/left.hpp>
 #include <sge/font/align_h/variant.hpp>
 #include <sge/font/draw/create_texture.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
-#include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/intrusive/connection.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/sprite/roles/center.hpp>
 #include <sge/sprite/roles/color.hpp>
 #include <sge/sprite/roles/connection.hpp>
@@ -34,7 +34,7 @@
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/sprite/types/texture_size.hpp>
 #include <sge/texture/const_part_ref.hpp>
-#include <sge/texture/part.hpp>
+#include <sge/texture/part.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/timer/elapsed_fractional.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
@@ -69,7 +69,7 @@ sanguis::client::draw2d::entities::text::~text() = default;
 sanguis::client::draw2d::entities::text::text(
     sanguis::diff_clock_cref const _diff_clock,
     sanguis::client::draw2d::sprite::normal::system_ref const _sprite_system,
-    sge::font::text_unique_ptr &&_text,
+    sge::font::text_unique_ptr &&_text, // NOLINT(cppcoreguidelines-rvalue-reference-param-not-moved)
     sanguis::client::draw2d::z_ordering const _z_ordering,
     sanguis::client::draw2d::sprite::center const &_center,
     sanguis::client::draw2d::sprite::normal::color const _color)

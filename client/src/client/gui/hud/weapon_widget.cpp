@@ -7,7 +7,7 @@
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/gui/style/text_color.hpp>
-#include <sanguis/client/load/hud/context.hpp>
+#include <sanguis/client/load/hud/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/hud/context_ref.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_ref.hpp>
@@ -16,14 +16,12 @@
 #include <sge/gui/fill_color.hpp>
 #include <sge/gui/fill_level.hpp>
 #include <sge/gui/optional_needed_width.hpp>
-#include <sge/gui/text_color.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/image.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
-#include <sge/image/color/predef.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
@@ -31,7 +29,7 @@
 #include <sge/timer/elapsed_fractional.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/output_to_string.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>

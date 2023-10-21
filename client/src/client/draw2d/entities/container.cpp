@@ -1,11 +1,11 @@
 #include <sanguis/diff_clock_cref.hpp>
+#include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/radius.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
-#include <sanguis/client/draw2d/vector2.hpp>
-#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
 #include <sanguis/client/draw2d/entities/level.hpp>
@@ -16,15 +16,13 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
-#include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/size_or_texture_size.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
-#include <sge/image/color/any/object.hpp>
-#include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/intrusive/connection.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/sprite/roles/center.hpp>
 #include <sge/sprite/roles/color.hpp>
 #include <sge/sprite/roles/connection.hpp>

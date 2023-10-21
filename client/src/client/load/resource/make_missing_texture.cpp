@@ -14,7 +14,7 @@
 #include <sge/image2d/view/sub.hpp>
 #include <sge/renderer/device/core_ref.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
-#include <sge/texture/part.hpp>
+#include <sge/texture/part.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/literal.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>

@@ -182,7 +182,7 @@ private:
 
   optional_weapon_details_unique_ptr weapon_details_;
 
-  bool paused_;
+  bool paused_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 };
 
 }

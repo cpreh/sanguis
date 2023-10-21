@@ -2,7 +2,8 @@
 #include <sanguis/client/gui/perk/tab.hpp>
 #include <sanguis/client/gui/perk/tab_unique_ptr_vector.hpp>
 #include <sanguis/client/perk/category_equal_range.hpp>
-#include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/perk/const_tree_range.hpp>
+#include <sanguis/client/perk/state.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/perk/state_ref.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sge/font/object_ref.hpp>

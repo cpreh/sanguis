@@ -5,7 +5,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
-#include <sanguis/client/draw2d/entities/with_auras_decl.hpp>
+#include <sanguis/client/draw2d/entities/with_auras_decl.hpp> // IWYU pragma: export
 #include <sanguis/client/draw2d/entities/with_auras_parameters_decl.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>

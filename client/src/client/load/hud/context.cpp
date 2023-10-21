@@ -2,8 +2,7 @@
 #include <sanguis/client/load/log_location.hpp>
 #include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/client/load/hud/make_weapon_icons.hpp>
-#include <sanguis/client/load/hud/weapon_icon_map.hpp>
-#include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/make_cref.hpp>

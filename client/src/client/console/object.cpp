@@ -13,7 +13,7 @@
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
 #include <sge/console/gfx/input_active.hpp>
-#include <sge/console/gfx/object.hpp>
+#include <sge/console/gfx/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/console/gfx/object_ref.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/input/event_base.hpp>

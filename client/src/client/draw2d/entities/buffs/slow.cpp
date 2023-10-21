@@ -8,7 +8,7 @@
 #include <sge/image/color/predef.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/maybe_void.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 
 sanguis::client::draw2d::entities::buffs::slow::slow()
     : sanguis::client::draw2d::entities::buffs::base(), previous_color_()

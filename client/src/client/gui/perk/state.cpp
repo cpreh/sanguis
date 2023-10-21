@@ -1,6 +1,7 @@
 #include <sanguis/client/gui/perk/make_tabs.hpp>
 #include <sanguis/client/gui/perk/state.hpp>
-#include <sanguis/client/gui/perk/tab.hpp>
+#include <sanguis/client/gui/perk/tab.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/gui/perk/tab_unique_ptr.hpp>
 #include <sanguis/client/perk/state_ref.hpp>
 #include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
@@ -9,6 +10,7 @@
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_name_pair.hpp>
 #include <sge/gui/widget/reference_name_vector.hpp>
+#include <sge/gui/widget/tab_fwd.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/algorithm/map.hpp>
 

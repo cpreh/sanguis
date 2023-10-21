@@ -3,19 +3,18 @@
 #include <sanguis/client/draw2d/scene/light_texture_coordinates.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
-#include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/client/category.hpp>
 #include <sanguis/client/draw2d/sprite/client/object.hpp>
-#include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/client/system_decl.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/sprite/client/system_ref.hpp>
-#include <sanguis/client/load/context.hpp>
+#include <sanguis/client/load/context.hpp> // NOLINT(misc-include-cleaner)
+#include <sanguis/client/load/context_cref.hpp>
 #include <sanguis/client/load/resource/context.hpp>
-#include <sanguis/client/load/resource/context_cref.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core.hpp>
-#include <sge/renderer/state/core/sampler/object.hpp>
+#include <sge/renderer/state/core/sampler/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/renderer/state/core/sampler/parameters.hpp>
 #include <sge/renderer/state/core/sampler/scoped_single.hpp>
 #include <sge/renderer/state/core/sampler/address/mode.hpp>
@@ -23,14 +22,14 @@
 #include <sge/renderer/state/core/sampler/filter/point.hpp>
 #include <sge/renderer/target/viewport.hpp>
 #include <sge/renderer/texture/stage.hpp>
-#include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/intrusive/connection.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/sprite/roles/connection.hpp>
 #include <sge/sprite/roles/pos.hpp>
 #include <sge/sprite/roles/size.hpp>
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/sprite/roles/texture_coordinates0.hpp>
 #include <sge/viewport/manage_callback.hpp>
-#include <sge/viewport/manager.hpp>
+#include <sge/viewport/manager.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/viewport/manager_ref.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
@@ -38,15 +37,10 @@
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_signed.hpp>
-#include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)

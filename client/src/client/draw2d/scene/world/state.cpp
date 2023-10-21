@@ -4,12 +4,12 @@
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
+#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/translation_fwd.hpp>
-#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
-#include <sanguis/client/draw2d/scene/world/base.hpp>
+#include <sanguis/client/draw2d/scene/world/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
@@ -20,13 +20,13 @@
 #include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
-#include <sanguis/client/draw2d/sprite/unit.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/state.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/unit.hpp>
 #include <sanguis/client/load/tiles/context_ref.hpp>
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/result.hpp>
 #include <sanguis/collision/test_move.hpp>
-#include <sanguis/collision/unit.hpp>
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/name_fwd.hpp>
@@ -38,19 +38,13 @@
 #include <sge/renderer/device/core_ref.hpp>
 #include <sge/renderer/vertex/scoped_declaration.hpp>
 #include <sge/sprite/buffers/option.hpp>
-#include <sge/sprite/process/geometry_options.hpp>
-#include <sge/sprite/process/one_with_options.hpp>
-#include <sge/sprite/process/options.hpp>
-#include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/object_impl.hpp>
-#include <sge/sprite/state/parameters.hpp>
+#include <sge/sprite/state/parameters.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/boost_units_value.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
@@ -62,10 +56,8 @@
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/parameters_no_function.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
-#include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>

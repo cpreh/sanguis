@@ -5,7 +5,9 @@
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/optional_animation_sound.hpp>
 #include <sanguis/model/optional_image_name.hpp>
+#include <sanguis/model/part.hpp>
 #include <sanguis/model/part_name.hpp>
+#include <sanguis/model/weapon_category.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
 #include <sanguis/tools/animations/get_or_default_animation.hpp>
 #include <fcppt/reference_impl.hpp>

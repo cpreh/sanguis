@@ -3,7 +3,7 @@
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/load/auras/context.hpp>
 #include <sanguis/client/load/auras/lookup_name.hpp>
-#include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/make_cref.hpp>

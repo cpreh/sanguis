@@ -2,13 +2,13 @@
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/dispatch_default_function.hpp>
 #include <sanguis/client/machine.hpp>
-#include <sanguis/client/events/action.hpp>
+#include <sanguis/client/events/action.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/events/connected.hpp>
 #include <sanguis/client/events/input.hpp>
-#include <sanguis/client/events/menu.hpp>
+#include <sanguis/client/events/menu.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
-#include <sanguis/client/events/overlay.hpp>
+#include <sanguis/client/events/overlay.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/gui/menu/callbacks/cancel_connect.hpp>
@@ -44,7 +44,6 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
-#include <ostream>
 #include <fcppt/config/external_end.hpp>
 
 FCPPT_PP_PUSH_WARNING

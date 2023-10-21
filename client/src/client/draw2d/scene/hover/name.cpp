@@ -4,7 +4,7 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/metrics.hpp>
-#include <sge/font/object.hpp>
+#include <sge/font/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/font/object_ref.hpp>
 #include <sge/font/rect.hpp>
 #include <sge/font/text_parameters.hpp>
@@ -19,7 +19,6 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_ref.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
 

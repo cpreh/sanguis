@@ -7,7 +7,7 @@
 #include <sge/font/draw/create_ffp_sampler.hpp>
 #include <sge/renderer/context/ffp_ref.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
-#include <sge/renderer/state/ffp/sampler/object.hpp>
+#include <sge/renderer/state/ffp/sampler/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/renderer/state/ffp/sampler/object_unique_ptr.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>

@@ -6,7 +6,6 @@
 #include <sanguis/client/draw2d/entities/particle_name.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
-#include <sanguis/client/draw2d/sprite/float_unit.hpp>
 #include <sanguis/client/draw2d/sprite/optional_dim.hpp>
 #include <sanguis/client/draw2d/sprite/size_or_texture_size.hpp>
 #include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
@@ -20,10 +19,9 @@
 #include <sanguis/client/load/model/object.hpp>
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
-#include <sanguis/client/load/resource/animation/series_fwd.hpp>
+#include <sanguis/client/load/resource/animation/series_cref.hpp>
 #include <sanguis/load/model/path.hpp>
-#include <sge/image/color/predef.hpp>
-#include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/intrusive/connection.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/sprite/roles/center.hpp>
 #include <sge/sprite/roles/color.hpp>
 #include <sge/sprite/roles/connection.hpp>
@@ -31,12 +29,10 @@
 #include <sge/sprite/roles/size_or_texture_size.hpp>
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/sprite/types/texture_size.hpp>
-#include <sge/texture/part.hpp>
+#include <sge/texture/part.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/const.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>

@@ -5,7 +5,6 @@
 #include <sge/image/color/init/blue.hpp>
 #include <sge/image/color/init/green.hpp>
 #include <sge/image/color/init/red.hpp>
-#include <fcppt/literal.hpp>
 
 sge::image::color::any::object sanguis::client::gui::style::background_color()
 {

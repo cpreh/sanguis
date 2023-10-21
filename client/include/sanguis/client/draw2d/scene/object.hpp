@@ -245,7 +245,7 @@ private:
 
   fcppt::unique_ptr<sanguis::client::draw2d::scene::world::object> const world_;
 
-  bool paused_;
+  bool paused_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 
   sanguis::optional_entity_id player_id_;
 

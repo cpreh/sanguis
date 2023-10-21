@@ -11,13 +11,14 @@
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/order_function_from_vector.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
-#include <sanguis/client/draw2d/sprite/normal/object.hpp>
+#include <sanguis/client/draw2d/sprite/normal/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
 #include <fcppt/const.hpp>
@@ -35,6 +36,7 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <algorithm>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 

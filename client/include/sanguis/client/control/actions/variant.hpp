@@ -5,7 +5,7 @@
 #include <sanguis/client/control/actions/cursor.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/scale.hpp>
-#include <sanguis/client/control/actions/variant_fwd.hpp>
+#include <sanguis/client/control/actions/variant_fwd.hpp> // IWYU pragma: export
 #include <fcppt/variant/object_impl.hpp>
 
 #endif

@@ -9,7 +9,9 @@
 #include <sanguis/client/draw2d/entities/friend.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/order_function.hpp>
+#include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
+#include <sanguis/client/draw2d/entities/with_buffs_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/hover/info.hpp>
 #include <sanguis/client/draw2d/entities/hover/name_and_health.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info.hpp>

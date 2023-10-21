@@ -1,10 +1,10 @@
-#include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sanguis/client/load/tiles/make_textures.hpp>
 #include <sanguis/client/load/tiles/set.hpp>
 #include <sanguis/client/load/tiles/texture_container.hpp>
 #include <sanguis/tiles/area_container_ref.hpp>
-#include <sge/texture/part.hpp>
+#include <sge/texture/part.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>

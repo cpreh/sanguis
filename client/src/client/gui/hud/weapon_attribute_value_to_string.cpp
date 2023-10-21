@@ -1,5 +1,6 @@
 #include <sanguis/weapon_attribute_value.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_value_to_string.hpp>
+#include <sge/font/char_type.hpp>
 #include <sge/font/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <sstream>

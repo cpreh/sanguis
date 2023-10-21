@@ -4,7 +4,7 @@
 #include <sanguis/client/draw2d/sprite/buffers_impl.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
-#include <sanguis/client/draw2d/sprite/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/system_decl.hpp> // IWYU pragma: export
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_ref.hpp>
 #include <sge/sprite/buffers/option.hpp>

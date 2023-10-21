@@ -13,6 +13,7 @@
 #include <sanguis/tools/animations/delay_to_int.hpp>
 #include <sanguis/tools/animations/exception.hpp>
 #include <sanguis/tools/animations/find_image_file.hpp>
+#include <sanguis/tools/animations/frame_container.hpp>
 #include <sanguis/tools/animations/int_to_delay.hpp>
 #include <sanguis/tools/animations/load_image_files.hpp>
 #include <sanguis/tools/animations/main_window.hpp>
@@ -40,11 +41,12 @@
 #include <fcppt/cast/truncation_check.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/optional/apply.hpp>
+#include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/maybe_void_multi.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <ui_main_window.h>

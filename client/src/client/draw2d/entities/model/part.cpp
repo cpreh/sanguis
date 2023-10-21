@@ -3,6 +3,7 @@
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/client/sound_manager_ref.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/entities/model/animation.hpp>
 #include <sanguis/client/draw2d/entities/model/desired_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/loop_method.hpp>
 #include <sanguis/client/draw2d/entities/model/make_sound.hpp>
@@ -14,11 +15,11 @@
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/animation.hpp>
-#include <sanguis/client/load/model/part.hpp>
+#include <sanguis/client/load/model/part.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/model/part_cref.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
 #include <sge/audio/buffer_fwd.hpp>
-#include <sge/audio/sound/base.hpp>
+#include <sge/audio/sound/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/audio/sound/base_unique_ptr.hpp>
 #include <sge/audio/sound/do_pause.hpp>
 #include <sge/audio/sound/pause_or_resume.hpp>
@@ -27,9 +28,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/diff.hpp>
-#include <fcppt/math/vector/dim.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -37,7 +36,6 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
-#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 FCPPT_PP_PUSH_WARNING

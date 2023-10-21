@@ -2,7 +2,7 @@
 #include <sanguis/client/draw2d/entities/model/optional_sound.hpp>
 #include <sanguis/client/draw2d/sprite/animation/texture.hpp>
 #include <sanguis/client/load/animation_type.hpp>
-#include <sge/audio/sound/base.hpp>
+#include <sge/audio/sound/base.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/texture/const_part_ref.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>

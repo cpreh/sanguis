@@ -3,7 +3,7 @@
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/model/part_map.hpp>
 #include <sanguis/client/load/model/part_result.hpp>
-#include <sanguis/client/load/resource/context.hpp>
+#include <sanguis/client/load/resource/context.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/resource/context_cref.hpp>
 #include <sanguis/load/model/path_to_json_file.hpp>
 #include <sanguis/model/deserialize.hpp>

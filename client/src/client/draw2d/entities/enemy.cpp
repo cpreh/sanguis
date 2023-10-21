@@ -14,7 +14,7 @@
 #include <sanguis/client/draw2d/entities/enemy_spawn_particle.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/name.hpp>
-#include <sanguis/client/draw2d/entities/own.hpp>
+#include <sanguis/client/draw2d/entities/own.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>

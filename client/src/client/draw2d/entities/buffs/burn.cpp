@@ -4,24 +4,23 @@
 #include <sanguis/client/draw2d/entities/buffs/base.hpp>
 #include <sanguis/client/draw2d/entities/buffs/burn.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
-#include <sanguis/client/draw2d/sprite/float_unit.hpp>
 #include <sanguis/client/draw2d/sprite/size_or_texture_size.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
 #include <sanguis/client/draw2d/sprite/normal/no_rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/animation.hpp>
-#include <sanguis/client/load/model/collection.hpp>
+#include <sanguis/client/load/model/collection.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/load/model/collection_cref.hpp>
 #include <sanguis/client/load/model/object.hpp>
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
 #include <sanguis/load/model/path.hpp>
-#include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/intrusive/connection.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/sprite/roles/center.hpp>
 #include <sge/sprite/roles/color.hpp>
 #include <sge/sprite/roles/connection.hpp>

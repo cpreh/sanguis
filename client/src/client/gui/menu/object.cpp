@@ -1,9 +1,10 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/exception.hpp>
-#include <sanguis/client/config/settings/object.hpp>
+#include <sanguis/client/config/settings/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/config/settings/object_ref.hpp>
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
+#include <sanguis/client/gui/menu/callbacks/object.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
@@ -34,12 +35,13 @@
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/core.hpp>
-#include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp.hpp> // NOLINT(misc-include-cleaner)
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/viewport/manager_ref.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/exception.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/make_ref.hpp>
@@ -56,7 +58,6 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>
 #include <string>

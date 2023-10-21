@@ -1,4 +1,4 @@
-#include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp>
+#include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/client/draw2d/entities/with_auras_parameters_impl.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 
