@@ -4,6 +4,7 @@
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/spawn.hpp>
+#include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/impl/place_boss.hpp>
 #include <fcppt/text.hpp>

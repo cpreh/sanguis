@@ -5,7 +5,7 @@
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate.hpp>
-#include <sanguis/server/world/object.hpp>
+#include <sanguis/server/world/object.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/world/object_unique_ptr.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/random.hpp>
@@ -13,7 +13,7 @@
 #include <sanguis/server/world/random_seed.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 
 sanguis::server::world::object_unique_ptr sanguis::server::world::random(
