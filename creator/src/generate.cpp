@@ -2,7 +2,6 @@
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/generate.hpp>
-#include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/top_parameters.hpp>
@@ -15,7 +14,7 @@
 #include <fcppt/copy.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/not.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/contains_if.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>

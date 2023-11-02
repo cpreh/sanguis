@@ -1,5 +1,5 @@
 #include <sanguis/server/damage/armor_array.hpp>
-#include <sanguis/server/damage/armor_meta.hpp>
+#include <sanguis/server/damage/armor_meta.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/server/damage/armor_meta_list.hpp>
 #include <sanguis/server/damage/basic_make_array.hpp>
 #include <sanguis/server/damage/make_armor_array.hpp>
