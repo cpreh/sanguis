@@ -30,7 +30,6 @@
 #include <sanguis/creator/impl/place_boss.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
-#include <sanguis/creator/impl/rect.hpp>
 #include <sanguis/creator/impl/region_grid.hpp>
 #include <sanguis/creator/impl/region_id.hpp>
 #include <sanguis/creator/impl/result.hpp>
@@ -58,7 +57,6 @@
 #include <fcppt/enum/array.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/log/debug.hpp>
-#include <fcppt/log/level.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/math/to_array.hpp>
 #include <fcppt/math/box/center.hpp>

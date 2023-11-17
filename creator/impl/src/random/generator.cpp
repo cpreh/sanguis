@@ -1,7 +1,7 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/value.hpp>
-#include <fcppt/random/generator/minstd_rand_impl.hpp>
+#include <fcppt/random/generator/mt19937_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
 #include <fcppt/config/external_end.hpp>
