@@ -4,14 +4,12 @@
 #include <sanguis/collision/impl/world/body_ghost_group_pair.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/map.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 namespace sanguis::collision::impl::world
 {
 
-using body_ghost_group_relation = boost::mpl::map<
+using body_ghost_group_relation = fcppt::mpl::list::object<
     sanguis::collision::impl::world::body_ghost_group_pair<
         sanguis::collision::world::body_group::destructible,
         sanguis::collision::world::ghost_group::player_sight>,

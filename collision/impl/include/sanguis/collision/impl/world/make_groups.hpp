@@ -5,9 +5,10 @@
 #include <fcppt/array/object_impl.hpp>
 #include <fcppt/enum/array.hpp>
 #include <fcppt/enum/array_init.hpp>
+#include <fcppt/mpl/size_type.hpp>
+#include <fcppt/mpl/list/at.hpp>
+#include <fcppt/mpl/list/size.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/at.hpp>
-#include <boost/mpl/size.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -20,7 +21,7 @@ struct make_groups
 private:
   template <IndexedGroup Group>
   using groups_array =
-      fcppt::array::object<ResultGroup, boost::mpl::size<GroupsStatic<Group>>::value>;
+      fcppt::array::object<ResultGroup, fcppt::mpl::list::size<GroupsStatic<Group>>::value>;
 
   template <IndexedGroup Group>
   struct make_group
@@ -28,7 +29,7 @@ private:
     template <typename Index>
     ResultGroup operator()(Index) const
     {
-      return boost::mpl::at_c<GroupsStatic<Group>, Index::value>::type::value;
+      return fcppt::mpl::list::at<GroupsStatic<Group>, fcppt::mpl::size_type<Index::value>>::type::value;
     }
   };
 

@@ -33,6 +33,8 @@ set(
 	impl/include/sanguis/collision/impl/time.hpp
 	impl/include/sanguis/collision/impl/time_fwd.hpp
 	impl/include/sanguis/collision/impl/world/body_ghost_group_pair.hpp
+	impl/include/sanguis/collision/impl/world/body_ghost_group_pair_body.hpp
+	impl/include/sanguis/collision/impl/world/body_ghost_group_pair_ghost.hpp
 	impl/include/sanguis/collision/impl/world/body_ghost_group_relation.hpp
 	impl/include/sanguis/collision/impl/world/body_group_container.hpp
 	impl/include/sanguis/collision/impl/world/body_group_pair.hpp
