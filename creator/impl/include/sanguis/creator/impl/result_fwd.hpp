@@ -4,7 +4,7 @@
 namespace sanguis::creator::impl
 {
 
-class result;
+class result; // IWYU pragma: export
 
 }
 

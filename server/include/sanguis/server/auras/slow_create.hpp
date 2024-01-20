@@ -4,6 +4,7 @@
 #include <sanguis/aura_type.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/buff.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_PERK_TYPE_HPP_INCLUDED
 #define SANGUIS_PERK_TYPE_HPP_INCLUDED
 
-#include <sanguis/perk_type_fwd.hpp>
+#include <sanguis/perk_type_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis
 {

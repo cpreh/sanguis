@@ -4,7 +4,7 @@
 namespace sanguis::creator::impl::random
 {
 
-class uniform_pos;
+class uniform_pos; // IWYU pragma: export
 
 }
 

@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons
 {
 
-enum class attack_result;
+enum class attack_result; // IWYU pragma: export
 
 }
 

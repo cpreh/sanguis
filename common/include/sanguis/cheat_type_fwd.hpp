@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class cheat_type;
+enum class cheat_type; // IWYU pragma: export
 
 }
 

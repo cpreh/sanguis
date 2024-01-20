@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class enemy_kind;
+enum class enemy_kind; // IWYU pragma: export
 
 }
 

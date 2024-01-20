@@ -4,7 +4,7 @@
 namespace sanguis::collision::world
 {
 
-class ghost_base;
+class ghost_base; // IWYU pragma: export
 
 }
 

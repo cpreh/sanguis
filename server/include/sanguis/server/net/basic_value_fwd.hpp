@@ -5,7 +5,7 @@ namespace sanguis::server::net
 {
 
 template <typename Type, typename Policy, typename Clock>
-class basic_value;
+class basic_value; // IWYU pragma: export
 
 }
 

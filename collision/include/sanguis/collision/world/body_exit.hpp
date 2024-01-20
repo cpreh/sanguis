@@ -4,7 +4,7 @@
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_base_ref.hpp>
-#include <sanguis/collision/world/body_exit_fwd.hpp>
+#include <sanguis/collision/world/body_exit_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_base_ref.hpp>
 

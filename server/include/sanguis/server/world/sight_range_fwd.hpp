@@ -4,7 +4,7 @@
 namespace sanguis::server::world
 {
 
-class sight_range;
+class sight_range; // IWYU pragma: export
 
 }
 

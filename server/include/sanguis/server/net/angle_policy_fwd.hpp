@@ -4,7 +4,7 @@
 namespace sanguis::server::net
 {
 
-struct angle_policy;
+struct angle_policy; // IWYU pragma: export
 
 }
 

@@ -4,7 +4,7 @@
 namespace sanguis::collision::world
 {
 
-enum class body_group;
+enum class body_group; // IWYU pragma: export
 
 }
 

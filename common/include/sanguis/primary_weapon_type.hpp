@@ -1,7 +1,7 @@
 #ifndef SANGUIS_PRIMARY_WEAPON_TYPE_HPP_INCLUDED
 #define SANGUIS_PRIMARY_WEAPON_TYPE_HPP_INCLUDED
 
-#include <sanguis/primary_weapon_type_fwd.hpp>
+#include <sanguis/primary_weapon_type_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis
 {

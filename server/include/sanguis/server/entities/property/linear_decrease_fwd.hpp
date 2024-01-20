@@ -4,7 +4,7 @@
 namespace sanguis::server::entities::property
 {
 
-class linear_decrease;
+class linear_decrease; // IWYU pragma: export
 
 }
 

@@ -4,7 +4,7 @@
 namespace sanguis::server
 {
 
-enum class team;
+enum class team; // IWYU pragma: export
 
 }
 

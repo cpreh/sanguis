@@ -4,7 +4,7 @@
 namespace sanguis::server::ai
 {
 
-enum class status;
+enum class status; // IWYU pragma: export
 
 }
 

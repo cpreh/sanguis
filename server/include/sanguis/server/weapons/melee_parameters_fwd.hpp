@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons
 {
 
-class melee_parameters;
+class melee_parameters; // IWYU pragma: export
 
 }
 

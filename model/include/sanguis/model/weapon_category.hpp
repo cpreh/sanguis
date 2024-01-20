@@ -6,7 +6,7 @@
 #include <sanguis/model/animation_name_fwd.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/symbol.hpp>
-#include <sanguis/model/weapon_category_fwd.hpp>
+#include <sanguis/model/weapon_category_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis::model

@@ -24,7 +24,7 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/target_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <sanguis/server/weapons/weapon_fwd.hpp>
+#include <sanguis/server/weapons/weapon_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/weapons/attributes/magazine_size_fwd.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>

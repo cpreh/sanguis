@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-class io_service;
+class io_service; // IWYU pragma: export
 
 }
 

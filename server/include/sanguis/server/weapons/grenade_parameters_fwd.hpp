@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons
 {
 
-class grenade_parameters;
+class grenade_parameters; // IWYU pragma: export
 
 }
 

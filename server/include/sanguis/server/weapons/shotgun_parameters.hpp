@@ -4,11 +4,12 @@
 #include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/shells.hpp>
-#include <sanguis/server/weapons/shotgun_parameters_fwd.hpp>
+#include <sanguis/server/weapons/shotgun_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/weapons/spread_radius.hpp>
 #include <sanguis/server/weapons/attributes/accuracy.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>

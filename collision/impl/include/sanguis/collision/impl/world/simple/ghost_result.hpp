@@ -1,7 +1,7 @@
 #ifndef SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_GHOST_RESULT_HPP_INCLUDED
 #define SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_GHOST_RESULT_HPP_INCLUDED
 
-#include <sanguis/collision/impl/world/simple/ghost_result_fwd.hpp>
+#include <sanguis/collision/impl/world/simple/ghost_result_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
 

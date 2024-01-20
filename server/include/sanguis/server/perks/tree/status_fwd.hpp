@@ -4,7 +4,7 @@
 namespace sanguis::server::perks::tree
 {
 
-class status;
+class status; // IWYU pragma: export
 
 }
 

@@ -3,9 +3,10 @@
 
 #include <sanguis/creator/opening_count_array.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
-#include <sanguis/creator/impl/parameters_fwd.hpp>
+#include <sanguis/creator/impl/parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/object_reference.hpp>
 
 namespace sanguis::creator::impl

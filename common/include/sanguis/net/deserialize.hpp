@@ -2,7 +2,7 @@
 #define SANGUIS_NET_DESERIALIZE_HPP_INCLUDED
 
 #include <sanguis/net/message_header.hpp>
-#include <alda/message/base_decl.hpp>
+#include <alda/message/base_decl.hpp> // IWYU pragma: keep
 #include <alda/message/base_unique_ptr.hpp>
 #include <alda/net/buffer/circular_receive/extract_message.hpp>
 #include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>

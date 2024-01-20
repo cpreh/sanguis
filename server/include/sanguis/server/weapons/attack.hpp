@@ -4,9 +4,8 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/environment/object_ref.hpp>
-#include <sanguis/server/weapons/attack_fwd.hpp>
+#include <sanguis/server/weapons/attack_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/weapons/target.hpp>
-#include <fcppt/reference_impl.hpp>
 
 namespace sanguis::server::weapons
 {

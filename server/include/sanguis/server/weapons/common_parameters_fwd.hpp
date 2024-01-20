@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons
 {
 
-class common_parameters;
+class common_parameters; // IWYU pragma: export
 
 }
 

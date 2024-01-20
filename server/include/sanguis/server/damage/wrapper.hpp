@@ -6,7 +6,7 @@
 #include <sanguis/server/damage/meta_fwd.hpp>
 #include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/unit_fwd.hpp>
-#include <sanguis/server/damage/wrapper_fwd.hpp>
+#include <sanguis/server/damage/wrapper_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::damage
 {

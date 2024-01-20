@@ -4,7 +4,7 @@
 namespace sanguis::server
 {
 
-class object_base;
+class object_base; // IWYU pragma: export
 
 }
 

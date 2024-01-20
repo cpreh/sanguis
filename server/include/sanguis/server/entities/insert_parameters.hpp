@@ -4,7 +4,7 @@
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/insert_parameters_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::entities
 {

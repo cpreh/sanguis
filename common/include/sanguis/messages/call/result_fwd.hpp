@@ -4,7 +4,7 @@
 namespace sanguis::messages::call
 {
 
-class result;
+class result; // IWYU pragma: export
 
 }
 

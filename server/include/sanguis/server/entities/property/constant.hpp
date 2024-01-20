@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_CONSTANT_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_CONSTANT_HPP_INCLUDED
 
-#include <sanguis/server/entities/property/constant_fwd.hpp>
+#include <sanguis/server/entities/property/constant_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/entities/property/value.hpp>
 
 namespace sanguis::server::entities::property

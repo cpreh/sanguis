@@ -4,7 +4,7 @@
 namespace sanguis::server::perks
 {
 
-class perk;
+class perk; // IWYU pragma: export
 
 }
 

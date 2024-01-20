@@ -4,7 +4,7 @@
 namespace sanguis::server::net
 {
 
-struct speed_policy;
+struct speed_policy; // IWYU pragma: export
 
 }
 

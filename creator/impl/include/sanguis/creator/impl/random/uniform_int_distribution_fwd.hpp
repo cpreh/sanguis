@@ -5,7 +5,7 @@ namespace sanguis::creator::impl::random
 {
 
 template <typename Type>
-class uniform_int_distribution;
+class uniform_int_distribution; // IWYU pragma: export
 
 }
 

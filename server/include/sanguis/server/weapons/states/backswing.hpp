@@ -3,7 +3,6 @@
 
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/state_override.hpp>
-#include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll_fwd.hpp>
 #include <sanguis/server/weapons/events/reload_fwd.hpp>

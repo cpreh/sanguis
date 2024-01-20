@@ -4,12 +4,12 @@
 #include <sanguis/server/entities/property/base.hpp>
 #include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/change_signal.hpp>
-#include <sanguis/server/entities/property/changeable_fwd.hpp>
+#include <sanguis/server/entities/property/changeable_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/entities/property/initial_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
-#include <fcppt/signal/object_decl.hpp>
+#include <fcppt/signal/object_decl.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::entities::property
 {

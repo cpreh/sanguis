@@ -4,7 +4,7 @@
 namespace sanguis::server::entities::property
 {
 
-class change_event;
+class change_event; // IWYU pragma: export
 
 }
 

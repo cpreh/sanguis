@@ -6,7 +6,6 @@
 #include <sanguis/server/optional_mass_fwd.hpp>
 #include <sanguis/server/radius_fwd.hpp>
 #include <sanguis/server/speed_fwd.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed_fwd.hpp>
 #include <sanguis/server/entities/movement_speed_initial_fwd.hpp>
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>

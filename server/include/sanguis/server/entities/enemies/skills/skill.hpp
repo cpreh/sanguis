@@ -3,7 +3,7 @@
 
 #include <sanguis/server/entities/enemies/attribute_fwd.hpp>
 #include <sanguis/server/entities/enemies/enemy_fwd.hpp>
-#include <sanguis/server/entities/enemies/skills/skill_fwd.hpp>
+#include <sanguis/server/entities/enemies/skills/skill_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/nonmovable.hpp>
 
 namespace sanguis::server::entities::enemies::skills

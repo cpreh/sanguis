@@ -4,7 +4,7 @@
 namespace sanguis::collision
 {
 
-class log;
+class log; // IWYU pragma: export
 
 }
 

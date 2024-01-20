@@ -17,6 +17,7 @@
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 

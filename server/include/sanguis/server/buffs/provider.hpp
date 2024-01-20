@@ -1,13 +1,15 @@
 #ifndef SANGUIS_SERVER_BUFFS_PROVIDER_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_PROVIDER_HPP_INCLUDED
 
-#include <sanguis/server/buffs/provider_fwd.hpp>
+#include <sanguis/server/buffs/buff_fwd.hpp>
+#include <sanguis/server/buffs/provider_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_buffs_fwd.hpp>
 #include <sanguis/server/entities/with_buffs_ref.hpp>
 #include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/reference_decl.hpp>
-#include <fcppt/reference_std_hash.hpp>
+#include <fcppt/reference_std_hash.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>

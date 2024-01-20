@@ -4,7 +4,7 @@
 namespace sanguis::server::ai::behavior
 {
 
-class base;
+class base; // IWYU pragma: export
 
 }
 

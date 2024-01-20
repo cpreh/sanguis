@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class weapon_status;
+enum class weapon_status; // IWYU pragma: export
 
 }
 

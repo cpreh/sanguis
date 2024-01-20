@@ -6,6 +6,7 @@
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/cast/int_to_float.hpp>
 
 sanguis::server::entities::enemies::parameters &

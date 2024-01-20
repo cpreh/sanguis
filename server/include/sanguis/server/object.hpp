@@ -4,7 +4,7 @@
 #include <sanguis/io_service.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/object_base.hpp>
-#include <sanguis/server/object_fwd.hpp>
+#include <sanguis/server/object_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/symbol.hpp>
 #include <alda/net/port.hpp>
 #include <fcppt/nonmovable.hpp>

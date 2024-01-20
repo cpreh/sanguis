@@ -5,7 +5,7 @@
 namespace sanguis::collision::world
 {
 
-class body_exit;
+class body_exit; // IWYU pragma: export
 
 }
 

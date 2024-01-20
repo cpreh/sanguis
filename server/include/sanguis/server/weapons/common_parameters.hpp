@@ -3,7 +3,7 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/random_generator_ref.hpp>
-#include <sanguis/server/weapons/common_parameters_fwd.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/weapons/log_cref.hpp>
 #include <sanguis/server/weapons/log_fwd.hpp>
 

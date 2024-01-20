@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_IMPL_LINE_SEGMENT_HPP_INCLUDED
 
 #include <sanguis/collision/impl/dir.hpp>
-#include <sanguis/collision/impl/line_segment_fwd.hpp>
+#include <sanguis/collision/impl/line_segment_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/collision/impl/pos.hpp>
 
 namespace sanguis::collision::impl

@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 #define SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 
-#include <sanguis/duration.hpp>
 #include <sanguis/io_service_ref.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/messages/client/unique_ptr.hpp>
@@ -9,7 +8,7 @@
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/net/data_buffer.hpp>
 #include <sanguis/server/load.hpp>
-#include <sanguis/server/machine_fwd.hpp>
+#include <sanguis/server/machine_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/timer.hpp>
 #include <sanguis/server/timer_duration.hpp>
@@ -20,6 +19,8 @@
 #include <alda/net/server/object.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
+#include <fcppt/strong_typedef_std_hash.hpp> // IWYU pragma: keep
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/signal/auto_connection.hpp>

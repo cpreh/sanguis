@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_RANDOM_DISTRIBUTOR_DECL_HPP_INCLUDED
 
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/server/random/distributor_fwd.hpp>
+#include <sanguis/server/random/distributor_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/random/distribution/basic_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int_decl.hpp>

@@ -4,7 +4,7 @@
 #include <sanguis/creator/dim_fwd.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
-#include <sanguis/creator/impl/random/uniform_pos_fwd.hpp>
+#include <sanguis/creator/impl/random/uniform_pos_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/creator/impl/random/uniform_size_variate.hpp>
 #include <fcppt/reference_fwd.hpp>
 

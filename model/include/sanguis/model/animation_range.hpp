@@ -2,7 +2,7 @@
 #define SANGUIS_MODEL_ANIMATION_RANGE_HPP_INCLUDED
 
 #include <sanguis/model/animation_index.hpp>
-#include <sanguis/model/animation_range_fwd.hpp>
+#include <sanguis/model/animation_range_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/model/symbol.hpp>
 
 namespace sanguis::model

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_IO_SERVICE_IMPL_HPP_INCLUDED
 #define SANGUIS_IO_SERVICE_IMPL_HPP_INCLUDED
 
-#include <sanguis/io_service_impl_fwd.hpp>
+#include <sanguis/io_service_impl_fwd.hpp> // IWYU pragma: keep
 #include <alda/net/io_service_wrapper.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>

@@ -4,7 +4,7 @@
 namespace sanguis::server::net
 {
 
-struct health_policy;
+struct health_policy; // IWYU pragma: export
 
 }
 

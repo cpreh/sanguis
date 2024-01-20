@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_WEAPONS_ATTACK_RESULT_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_ATTACK_RESULT_HPP_INCLUDED
 
-#include <sanguis/server/weapons/attack_result_fwd.hpp>
+#include <sanguis/server/weapons/attack_result_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::weapons
 {

@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class aura_type;
+enum class aura_type; // IWYU pragma: export
 
 }
 

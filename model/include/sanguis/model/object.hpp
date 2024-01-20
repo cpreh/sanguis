@@ -2,7 +2,7 @@
 #define SANGUIS_MODEL_OBJECT_HPP_INCLUDED
 
 #include <sanguis/model/cell_size.hpp>
-#include <sanguis/model/object_fwd.hpp>
+#include <sanguis/model/object_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/part_fwd.hpp>

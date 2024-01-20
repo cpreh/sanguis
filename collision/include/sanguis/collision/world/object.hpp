@@ -11,7 +11,7 @@
 #include <sanguis/collision/world/ghost_fwd.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
-#include <sanguis/collision/world/object_fwd.hpp>
+#include <sanguis/collision/world/object_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/collision/world/update_result_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_fwd.hpp>

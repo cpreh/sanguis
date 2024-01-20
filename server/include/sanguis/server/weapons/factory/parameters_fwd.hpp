@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons::factory
 {
 
-class parameters;
+class parameters; // IWYU pragma: export
 
 }
 

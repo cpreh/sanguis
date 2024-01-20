@@ -4,7 +4,7 @@
 namespace sanguis::server::entities
 {
 
-class transfer_result;
+class transfer_result; // IWYU pragma: export
 
 }
 

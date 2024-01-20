@@ -2,6 +2,8 @@
 #define SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_BODY_BASE_HOOK_HPP_INCLUDED
 
 #include <fcppt/config/external_begin.hpp>
+#include <boost/intrusive/intrusive_fwd.hpp>
+#include <boost/intrusive/link_mode.hpp>
 #include <boost/intrusive/list_hook.hpp>
 #include <fcppt/config/external_end.hpp>
 

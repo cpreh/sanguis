@@ -1,7 +1,7 @@
 #ifndef SANGUIS_COLLISION_WORLD_BODY_GROUP_HPP_INCLUDED
 #define SANGUIS_COLLISION_WORLD_BODY_GROUP_HPP_INCLUDED
 
-#include <sanguis/collision/world/body_group_fwd.hpp>
+#include <sanguis/collision/world/body_group_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::collision::world
 {

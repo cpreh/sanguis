@@ -7,6 +7,7 @@
 #include <sanguis/server/weapons/modifiers/random_increase.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::weapons::modifiers
 {

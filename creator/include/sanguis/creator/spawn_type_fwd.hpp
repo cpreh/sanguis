@@ -4,7 +4,7 @@
 namespace sanguis::creator
 {
 
-enum class spawn_type;
+enum class spawn_type; // IWYU pragma: export
 
 }
 

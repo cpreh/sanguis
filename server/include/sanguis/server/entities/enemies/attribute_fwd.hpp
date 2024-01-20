@@ -4,7 +4,7 @@
 namespace sanguis::server::entities::enemies
 {
 
-class attribute;
+class attribute; // IWYU pragma: export
 
 }
 

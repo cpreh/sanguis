@@ -2,6 +2,6 @@
 #define SANGUIS_TIMER_HPP_INCLUDED
 
 #include <sanguis/timer_fwd.hpp> // IWYU pragma: export
-#include <sge/timer/basic.hpp>
+#include <sge/timer/basic.hpp> // IWYU pragma: keep
 
 #endif

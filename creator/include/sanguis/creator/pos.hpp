@@ -2,6 +2,6 @@
 #define SANGUIS_CREATOR_POS_HPP_INCLUDED
 
 #include <sanguis/creator/pos_fwd.hpp> // IWYU pragma: export
-#include <fcppt/container/grid/pos.hpp>
+#include <fcppt/container/grid/pos.hpp> // IWYU pragma: keep
 
 #endif

@@ -4,7 +4,7 @@
 namespace sanguis::server::entities::enemies::skills
 {
 
-class skill;
+class skill; // IWYU pragma: export
 
 }
 

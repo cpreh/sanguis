@@ -4,10 +4,11 @@
 #include <sanguis/io_service_ref.hpp>
 #include <sanguis/server/timer_callback.hpp>
 #include <sanguis/server/timer_duration.hpp>
-#include <sanguis/server/timer_impl_fwd.hpp>
+#include <sanguis/server/timer_impl_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/asio/basic_waitable_timer.hpp>
+#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 namespace sanguis::server

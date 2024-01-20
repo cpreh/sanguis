@@ -4,7 +4,7 @@
 namespace sanguis::collision::impl::world::simple
 {
 
-class ghost_result;
+class ghost_result; // IWYU pragma: export
 
 }
 

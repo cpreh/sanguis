@@ -3,7 +3,7 @@
 
 #include <sanguis/collision/impl/time_fwd.hpp> // IWYU pragma: export
 #include <fcppt/config/external_begin.hpp>
-#include <boost/units/quantity.hpp>
+#include <boost/units/quantity.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_end.hpp>
 
 #endif

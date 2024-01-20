@@ -2,7 +2,7 @@
 #define SANGUIS_IO_SERVICE_HPP_INCLUDED
 
 #include <sanguis/io_service_callback.hpp>
-#include <sanguis/io_service_fwd.hpp>
+#include <sanguis/io_service_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/io_service_impl_fwd.hpp>
 #include <sanguis/common/symbol.hpp>
 #include <alda/net/io_service_wrapper_fwd.hpp>

@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_DAMAGE_BASIC_MAKE_ARRAY_HPP_INCLUDED
 
 #include <sanguis/server/damage/basic_array.hpp>
-#include <sanguis/server/damage/basic_meta_decl.hpp>
+#include <sanguis/server/damage/basic_meta_decl.hpp> // IWYU pragma: keep
 #include <sanguis/server/damage/basic_meta_list.hpp>
 #include <fcppt/enum/array_init.hpp>
 

@@ -2,10 +2,9 @@
 #define SANGUIS_CREATOR_CENTER_TO_GRID_POS_HPP_INCLUDED
 
 #include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/cast/static_cast_fun.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/math/vector/static.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 

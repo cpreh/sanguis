@@ -4,7 +4,7 @@
 namespace sanguis::server::auras
 {
 
-class aura;
+class aura; // IWYU pragma: export
 
 }
 

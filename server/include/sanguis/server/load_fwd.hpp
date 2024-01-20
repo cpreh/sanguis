@@ -4,7 +4,7 @@
 namespace sanguis::server
 {
 
-class load;
+class load; // IWYU pragma: export
 
 }
 

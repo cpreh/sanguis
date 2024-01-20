@@ -1,7 +1,7 @@
 #ifndef SANGUIS_MODEL_ANIMATION_HPP_INCLUDED
 #define SANGUIS_MODEL_ANIMATION_HPP_INCLUDED
 
-#include <sanguis/model/animation_fwd.hpp>
+#include <sanguis/model/animation_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/model/animation_range.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/optional_animation_sound.hpp>

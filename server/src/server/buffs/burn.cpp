@@ -10,6 +10,7 @@
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/cast/static_downcast.hpp>
 
 sanguis::server::buffs::burn::burn(

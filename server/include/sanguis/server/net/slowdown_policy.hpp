@@ -3,7 +3,7 @@
 
 #include <sanguis/clock.hpp>
 #include <sanguis/slowdown_fwd.hpp>
-#include <sanguis/server/net/slowdown_policy_fwd.hpp>
+#include <sanguis/server/net/slowdown_policy_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::net
 {

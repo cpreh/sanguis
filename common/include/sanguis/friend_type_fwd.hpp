@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class friend_type;
+enum class friend_type; // IWYU pragma: export
 
 }
 

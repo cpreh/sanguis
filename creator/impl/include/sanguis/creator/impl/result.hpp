@@ -6,7 +6,7 @@
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/spawn_container.hpp>
-#include <sanguis/creator/impl/result_fwd.hpp>
+#include <sanguis/creator/impl/result_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::creator::impl
 {

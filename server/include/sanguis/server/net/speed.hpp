@@ -3,7 +3,7 @@
 
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/net/declare_value.hpp>
-#include <sanguis/server/net/speed_fwd.hpp>
+#include <sanguis/server/net/speed_fwd.hpp> // IWYU pragma: export
 #include <sanguis/server/net/speed_policy.hpp>
 
 SANGUIS_SERVER_NET_DECLARE_VALUE(sanguis::server::speed, sanguis::server::net::speed_policy);

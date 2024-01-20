@@ -13,6 +13,7 @@
 #include <sanguis/server/damage/fire.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/make_array.hpp>
+#include <sanguis/server/damage/unit.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 

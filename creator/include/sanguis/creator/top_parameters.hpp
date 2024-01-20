@@ -6,7 +6,7 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/symbol.hpp>
-#include <sanguis/creator/top_parameters_fwd.hpp>
+#include <sanguis/creator/top_parameters_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/log/context_reference.hpp>
 
 namespace sanguis::creator

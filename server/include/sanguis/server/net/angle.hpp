@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_NET_ANGLE_HPP_INCLUDED
 
 #include <sanguis/server/angle.hpp>
-#include <sanguis/server/net/angle_fwd.hpp>
+#include <sanguis/server/net/angle_fwd.hpp> // IWYU pragma: export
 #include <sanguis/server/net/angle_policy.hpp>
 #include <sanguis/server/net/declare_value.hpp>
 

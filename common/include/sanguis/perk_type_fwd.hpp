@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class perk_type;
+enum class perk_type; // IWYU pragma: export
 
 }
 

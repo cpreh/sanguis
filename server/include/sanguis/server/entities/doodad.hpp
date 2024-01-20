@@ -8,7 +8,6 @@
 #include <sanguis/server/player_id_fwd.hpp>
 #include <sanguis/server/entities/doodad_fwd.hpp>
 #include <sanguis/server/entities/with_body.hpp>
-#include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>

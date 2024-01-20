@@ -4,7 +4,7 @@
 namespace sanguis::server::entities::property
 {
 
-class always_max;
+class always_max; // IWYU pragma: export
 
 }
 

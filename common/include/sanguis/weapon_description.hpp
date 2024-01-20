@@ -6,7 +6,7 @@
 #include <sanguis/magazine_size.hpp>
 #include <sanguis/reload_time.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
-#include <sanguis/weapon_description_fwd.hpp>
+#include <sanguis/weapon_description_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/common/symbol.hpp>
 

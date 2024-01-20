@@ -138,8 +138,6 @@ set(
 	include/sanguis/messages/adapted_types/world_id.hpp
 	include/sanguis/messages/adapted_types/world_id_fwd.hpp
 	include/sanguis/messages/call/dispatch.hpp
-	include/sanguis/messages/call/event_result.hpp
-	include/sanguis/messages/call/event_result_fwd.hpp
 	include/sanguis/messages/call/forward_to_default.hpp
 	include/sanguis/messages/call/forward_to_default_fwd.hpp
 	include/sanguis/messages/call/result.hpp
@@ -396,7 +394,6 @@ set(
 	include/sanguis/messages/types/length.hpp
 	include/sanguis/messages/types/level.hpp
 	include/sanguis/messages/types/magazine_size.hpp
-	include/sanguis/messages/types/message_type.hpp
 	include/sanguis/messages/types/opening_count_array.hpp
 	include/sanguis/messages/types/opening_count_array_fwd.hpp
 	include/sanguis/messages/types/size.hpp

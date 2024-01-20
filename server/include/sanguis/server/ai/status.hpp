@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_AI_STATUS_HPP_INCLUDED
 #define SANGUIS_SERVER_AI_STATUS_HPP_INCLUDED
 
-#include <sanguis/server/ai/status_fwd.hpp>
+#include <sanguis/server/ai/status_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::ai
 {

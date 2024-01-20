@@ -4,7 +4,7 @@
 #include <sanguis/collision/impl/is_null.hpp>
 #include <fcppt/not.hpp>
 #include <fcppt/math/size_type.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/math/vector/length.hpp>
 #include <fcppt/math/vector/object.hpp>
 #include <fcppt/math/vector/static.hpp>

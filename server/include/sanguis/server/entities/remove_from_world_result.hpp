@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_REMOVE_FROM_WORLD_RESULT_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_exit_container.hpp>
-#include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
+#include <sanguis/server/entities/remove_from_world_result_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::entities
 {

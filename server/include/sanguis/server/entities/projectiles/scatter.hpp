@@ -14,7 +14,7 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/random/distribution/basic_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
-#include <fcppt/type_iso/strong_typedef.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::entities::projectiles
 {

@@ -20,7 +20,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
-#include <sanguis/server/entities/enemies/enemy_fwd.hpp>
+#include <sanguis/server/entities/enemies/enemy_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 

@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_INSERT_WITH_RESULT_HPP_INCLUDED
 
 #include <sanguis/exception.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>

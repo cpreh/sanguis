@@ -6,6 +6,7 @@
 #include <sanguis/server/entities/with_velocity_ref.hpp>
 #include <sanguis/server/entities/property/apply.hpp>
 #include <sanguis/server/entities/property/linear_decrease_op.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/cast/static_downcast.hpp>
 
 sanguis::server::buffs::slow::slow(

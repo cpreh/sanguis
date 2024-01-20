@@ -4,7 +4,7 @@
 #include <sanguis/clock.hpp>
 #include <sanguis/slowdown.hpp>
 #include <sanguis/server/net/basic_value_decl.hpp>
-#include <sanguis/server/net/slowdown_fwd.hpp>
+#include <sanguis/server/net/slowdown_fwd.hpp> // IWYU pragma: export
 #include <sanguis/server/net/slowdown_policy.hpp>
 
 extern template class sanguis::server::net::

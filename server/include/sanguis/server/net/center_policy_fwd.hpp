@@ -4,7 +4,7 @@
 namespace sanguis::server::net
 {
 
-struct center_policy;
+struct center_policy; // IWYU pragma: export
 
 }
 

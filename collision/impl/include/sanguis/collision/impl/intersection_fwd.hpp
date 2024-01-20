@@ -4,7 +4,7 @@
 namespace sanguis::collision::impl
 {
 
-class intersection;
+class intersection; // IWYU pragma: export
 
 }
 

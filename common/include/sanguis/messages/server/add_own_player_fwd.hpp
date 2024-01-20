@@ -9,7 +9,6 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/mpl/list/append.hpp>
 #include <fcppt/mpl/list/object.hpp>
-#include <fcppt/record/element_fwd.hpp>
 
 namespace sanguis::messages::server
 {

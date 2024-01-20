@@ -7,7 +7,6 @@
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/bindings/record_variadic_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
-#include <fcppt/record/element_fwd.hpp>
 
 namespace sanguis::messages::server
 {

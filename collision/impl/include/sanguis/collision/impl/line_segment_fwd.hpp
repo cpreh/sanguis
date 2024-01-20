@@ -4,7 +4,7 @@
 namespace sanguis::collision::impl
 {
 
-class line_segment;
+class line_segment; // IWYU pragma: export
 
 }
 

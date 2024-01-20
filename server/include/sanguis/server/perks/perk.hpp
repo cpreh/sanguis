@@ -6,6 +6,7 @@
 #include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
+#include <sanguis/server/perks/perk_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/nonmovable.hpp>
 
 namespace sanguis::server::perks

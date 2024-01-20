@@ -1,7 +1,7 @@
 #ifndef SANGUIS_WEAPON_STATUS_HPP_INCLUDED
 #define SANGUIS_WEAPON_STATUS_HPP_INCLUDED
 
-#include <sanguis/weapon_status_fwd.hpp>
+#include <sanguis/weapon_status_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis
 {

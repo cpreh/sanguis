@@ -5,7 +5,7 @@
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/spider_parameters_fwd.hpp>
+#include <sanguis/server/weapons/spider_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/weapons/attributes/health.hpp>
 
 namespace sanguis::server::weapons

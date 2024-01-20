@@ -16,6 +16,7 @@
 #include <sanguis/world_name.hpp>
 #include <sanguis/collision/log.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
+#include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
@@ -47,7 +48,7 @@
 #include <sanguis/server/world/insert_simple_pair_fwd.hpp>
 #include <sanguis/server/world/insert_with_id_pair_container.hpp>
 #include <sanguis/server/world/insert_with_id_pair_fwd.hpp>
-#include <sanguis/server/world/object_fwd.hpp>
+#include <sanguis/server/world/object_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/world/parameters_fwd.hpp>
 #include <sanguis/server/world/pickup_spawner.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>

@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class buff_type;
+enum class buff_type; // IWYU pragma: export
 
 }
 

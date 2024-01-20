@@ -4,7 +4,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/impl/world/simple/body_fwd.hpp>
-#include <sanguis/collision/impl/world/simple/ghost_fwd.hpp>
+#include <sanguis/collision/impl/world/simple/ghost_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/collision/impl/world/simple/ghost_remove_callback.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
@@ -15,8 +15,9 @@
 #include <sanguis/collision/world/optional_body_enter_fwd.hpp>
 #include <sanguis/collision/world/optional_body_exit_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/reference_std_hash.hpp>
+#include <fcppt/reference_std_hash.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>

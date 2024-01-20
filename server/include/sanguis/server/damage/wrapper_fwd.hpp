@@ -4,7 +4,7 @@
 namespace sanguis::server::damage
 {
 
-class wrapper;
+class wrapper; // IWYU pragma: export
 
 }
 

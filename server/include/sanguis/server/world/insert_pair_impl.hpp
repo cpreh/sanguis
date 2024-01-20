@@ -3,7 +3,7 @@
 
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/world/insert_pair_decl.hpp> // IWYU pragma: export
-#include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/unique_ptr_impl.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

@@ -4,7 +4,7 @@
 namespace sanguis::server::world
 {
 
-class context;
+class context; // IWYU pragma: export
 
 }
 

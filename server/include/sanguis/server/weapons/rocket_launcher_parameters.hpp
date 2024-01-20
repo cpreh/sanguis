@@ -9,7 +9,7 @@
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
-#include <sanguis/server/weapons/rocket_launcher_parameters_fwd.hpp>
+#include <sanguis/server/weapons/rocket_launcher_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/weapons/attributes/aoe.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
 

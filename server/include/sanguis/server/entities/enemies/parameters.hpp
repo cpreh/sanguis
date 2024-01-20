@@ -16,7 +16,7 @@
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
-#include <sanguis/server/entities/enemies/parameters_fwd.hpp>
+#include <sanguis/server/entities/enemies/parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>

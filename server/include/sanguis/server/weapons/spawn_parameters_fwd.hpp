@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons
 {
 
-class spawn_parameters;
+class spawn_parameters; // IWYU pragma: export
 
 }
 

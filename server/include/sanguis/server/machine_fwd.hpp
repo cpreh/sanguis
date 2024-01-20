@@ -4,7 +4,7 @@
 namespace sanguis::server
 {
 
-struct machine;
+struct machine; // IWYU pragma: export
 
 }
 

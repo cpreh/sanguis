@@ -8,7 +8,7 @@
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
-#include <sanguis/server/entities/enemies/factory/parameters_fwd.hpp>
+#include <sanguis/server/entities/enemies/factory/parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/common_parameters.hpp>
 #include <fcppt/reference_impl.hpp>

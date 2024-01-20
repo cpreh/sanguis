@@ -4,7 +4,7 @@
 namespace sanguis::server::damage
 {
 
-enum class type;
+enum class type; // IWYU pragma: export
 
 }
 

@@ -4,7 +4,7 @@
 namespace sanguis::server::entities
 {
 
-class remove_from_world_result;
+class remove_from_world_result; // IWYU pragma: export
 
 }
 

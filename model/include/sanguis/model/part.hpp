@@ -2,7 +2,7 @@
 #define SANGUIS_MODEL_PART_HPP_INCLUDED
 
 #include <sanguis/model/optional_image_name.hpp>
-#include <sanguis/model/part_fwd.hpp>
+#include <sanguis/model/part_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/model/symbol.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
 #include <sanguis/model/weapon_category_map.hpp>

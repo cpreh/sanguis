@@ -5,6 +5,7 @@
 #include <sanguis/net/data_streambuf.hpp>
 #include <sanguis/net/message_header.hpp>
 #include <alda/message/base_fwd.hpp>
+#include <alda/serialization/ostream.hpp>
 #include <alda/serialization/length/serialize.hpp>
 #include <fcppt/make_ref.hpp>
 

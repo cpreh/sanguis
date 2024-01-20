@@ -3,7 +3,7 @@
 
 #include <sanguis/server/global/dest_world_pair.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
-#include <fcppt/math/vector/comparison.hpp>
+#include <fcppt/math/vector/comparison.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>

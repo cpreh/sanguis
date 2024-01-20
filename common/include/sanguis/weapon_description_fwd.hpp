@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-class weapon_description;
+class weapon_description; // IWYU pragma: export
 
 }
 

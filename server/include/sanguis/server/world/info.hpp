@@ -7,7 +7,7 @@
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
-#include <sanguis/server/world/info_fwd.hpp>
+#include <sanguis/server/world/info_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::world
 {

@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_WORLD_GHOST_BASE_HPP_INCLUDED
 
 #include <sanguis/collision/symbol.hpp>
-#include <sanguis/collision/world/ghost_base_fwd.hpp>
+#include <sanguis/collision/world/ghost_base_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/symbol/class.hpp>
 

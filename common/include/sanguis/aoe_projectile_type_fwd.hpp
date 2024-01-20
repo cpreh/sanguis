@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class aoe_projectile_type;
+enum class aoe_projectile_type; // IWYU pragma: export
 
 }
 

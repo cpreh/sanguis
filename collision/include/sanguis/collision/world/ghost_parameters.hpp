@@ -7,7 +7,7 @@
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_base_ref.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
-#include <sanguis/collision/world/ghost_parameters_fwd.hpp>
+#include <sanguis/collision/world/ghost_parameters_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::collision::world
 {

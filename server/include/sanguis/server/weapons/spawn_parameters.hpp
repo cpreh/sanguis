@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_SPAWN_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/server/weapons/parameters.hpp>
-#include <sanguis/server/weapons/spawn_parameters_fwd.hpp>
+#include <sanguis/server/weapons/spawn_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/weapons/spawn_weapon.hpp>
 
 namespace sanguis::server::weapons

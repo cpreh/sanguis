@@ -1,8 +1,8 @@
 #ifndef SANGUIS_MESSAGES_CLIENT_SERIALIZATION_INSTANTIATE_MESSAGE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_CLIENT_SERIALIZATION_INSTANTIATE_MESSAGE_HPP_INCLUDED
 
-#include <sanguis/messages/client/serialization/global_context.hpp>
-#include <sanguis/messages/client/types/alda_type.hpp>
+#include <sanguis/messages/client/serialization/global_context.hpp> // IWYU pragma: keep
+#include <sanguis/messages/client/types/alda_type.hpp> // IWYU pragma: keep
 #include <alda/serialization/instantiate_message.hpp>
 #include <alda/serialization/register_message.hpp>
 

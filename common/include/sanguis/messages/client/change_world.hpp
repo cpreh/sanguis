@@ -3,8 +3,8 @@
 
 #include <sanguis/messages/client/change_world_fwd.hpp> // IWYU pragma: export
 #include <sanguis/messages/client/declare_message.hpp>
-#include <alda/bindings/unit.hpp>
-#include <alda/message/object.hpp>
+#include <alda/bindings/unit.hpp> // IWYU pragma: keep
+#include <alda/message/object.hpp> // IWYU pragma: keep
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>

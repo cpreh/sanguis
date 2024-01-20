@@ -4,7 +4,7 @@
 namespace sanguis::creator
 {
 
-enum class background_tile;
+enum class background_tile; // IWYU pragma: export
 
 }
 

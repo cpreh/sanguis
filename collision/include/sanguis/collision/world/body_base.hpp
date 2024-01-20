@@ -4,7 +4,7 @@
 #include <sanguis/collision/center_fwd.hpp>
 #include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/collision/symbol.hpp>
-#include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_base_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/symbol/class.hpp>
 #include <fcppt/config/external_begin.hpp>

@@ -238,7 +238,6 @@ set(
 	include/sanguis/server/entities/enemies/factory/zombie00.hpp
 	include/sanguis/server/entities/enemies/factory/zombie01.hpp
 	include/sanguis/server/entities/enemies/finalize_special_parameters.hpp
-	include/sanguis/server/entities/enemies/fwd.hpp
 	include/sanguis/server/entities/enemies/is_unique.hpp
 	include/sanguis/server/entities/enemies/make_name.hpp
 	include/sanguis/server/entities/enemies/modifiers/agile.hpp
@@ -278,7 +277,6 @@ set(
 	include/sanguis/server/entities/enemies/skills/unique_ptr.hpp
 	include/sanguis/server/entities/enemies/special.hpp
 	include/sanguis/server/entities/enemies/special_chance.hpp
-	include/sanguis/server/entities/enemies/unique_ptr.hpp
 	include/sanguis/server/entities/exp_area.hpp
 	include/sanguis/server/entities/friend.hpp
 	include/sanguis/server/entities/ifaces/with_angle.hpp
@@ -308,8 +306,6 @@ set(
 	include/sanguis/server/entities/optional_player_ref_fwd.hpp
 	include/sanguis/server/entities/optional_transfer_result.hpp
 	include/sanguis/server/entities/optional_transfer_result_fwd.hpp
-	include/sanguis/server/entities/optional_with_ai_ref.hpp
-	include/sanguis/server/entities/optional_with_ai_ref_fwd.hpp
 	include/sanguis/server/entities/optional_with_body_ref.hpp
 	include/sanguis/server/entities/optional_with_body_ref_fwd.hpp
 	include/sanguis/server/entities/optional_with_weapon_ref.hpp
@@ -385,7 +381,6 @@ set(
 	include/sanguis/server/entities/transfer_parameters_fwd.hpp
 	include/sanguis/server/entities/transfer_result.hpp
 	include/sanguis/server/entities/transfer_result_fwd.hpp
-	include/sanguis/server/entities/unique_ptr.hpp
 	include/sanguis/server/entities/with_ai.hpp
 	include/sanguis/server/entities/with_ai_fwd.hpp
 	include/sanguis/server/entities/with_ai_ref.hpp
@@ -758,7 +753,6 @@ set(
 	include/sanguis/server/world/pickup_spawner.hpp
 	include/sanguis/server/world/place_callback.hpp
 	include/sanguis/server/world/place_multiple.hpp
-	include/sanguis/server/world/place_simple_callback.hpp
 	include/sanguis/server/world/place_with_id_callback.hpp
 	include/sanguis/server/world/random.hpp
 	include/sanguis/server/world/random_generator_name.hpp
@@ -767,7 +761,6 @@ set(
 	include/sanguis/server/world/sight_range_entry_set.hpp
 	include/sanguis/server/world/sight_range_fwd.hpp
 	include/sanguis/server/world/sight_range_map.hpp
-	include/sanguis/server/world/spawn_entity.hpp
 	include/sanguis/server/world/spawn_parameters.hpp
 	include/sanguis/server/world/update_entity.hpp
 	src/server/ai/angle_to_target.cpp

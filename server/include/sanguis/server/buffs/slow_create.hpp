@@ -5,8 +5,7 @@
 #include <sanguis/server/buffs/create_callback.hpp>
 #include <sanguis/server/buffs/slow.hpp>
 #include <sanguis/server/buffs/slow_factor.hpp>
-#include <sanguis/server/buffs/unique_ptr.hpp>
-#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/base.hpp> // IWYU pragma: keep
 #include <sanguis/server/entities/base_ref.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <fcppt/make_unique_ptr.hpp>

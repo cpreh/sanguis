@@ -21,6 +21,7 @@
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/reference_fwd.hpp>

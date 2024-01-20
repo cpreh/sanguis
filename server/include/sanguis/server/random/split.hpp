@@ -8,12 +8,12 @@
 #include <sanguis/server/random/max.hpp>
 #include <sanguis/server/random/min.hpp>
 #include <sanguis/server/random/split_array.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // IWYU pragma: keep
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/array/init.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
-#include <fcppt/type_iso/strong_typedef.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <cstddef>
 #include <fcppt/config/external_end.hpp>

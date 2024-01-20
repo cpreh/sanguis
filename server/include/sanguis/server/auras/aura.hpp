@@ -7,6 +7,7 @@
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/ghost_group_fwd.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/auras/aura_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>

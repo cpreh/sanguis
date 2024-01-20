@@ -10,7 +10,7 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/body_group.hpp>
-#include <sanguis/collision/world/body_parameters_fwd.hpp>
+#include <sanguis/collision/world/body_parameters_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/log/object_fwd.hpp>
 

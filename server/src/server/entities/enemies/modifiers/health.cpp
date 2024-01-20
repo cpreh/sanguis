@@ -4,6 +4,7 @@
 #include <sanguis/server/entities/enemies/modifiers/health.hpp>
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::enemies::attribute sanguis::server::entities::enemies::modifiers::health(

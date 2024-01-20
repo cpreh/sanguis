@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class weapon_attribute_type;
+enum class weapon_attribute_type; // IWYU pragma: export
 
 }
 

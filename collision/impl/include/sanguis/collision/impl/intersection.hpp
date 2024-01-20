@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_IMPL_INTERSECTION_HPP_INCLUDED
 
 #include <sanguis/collision/impl/dir.hpp>
-#include <sanguis/collision/impl/intersection_fwd.hpp>
+#include <sanguis/collision/impl/intersection_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::collision::impl
 {

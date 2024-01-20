@@ -3,7 +3,7 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/server/angle_fwd.hpp>
-#include <sanguis/server/net/angle_policy_fwd.hpp>
+#include <sanguis/server/net/angle_policy_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::net
 {

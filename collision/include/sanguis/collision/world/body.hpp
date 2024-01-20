@@ -5,7 +5,7 @@
 #include <sanguis/collision/optional_mass_fwd.hpp>
 #include <sanguis/collision/radius_fwd.hpp>
 #include <sanguis/collision/speed_fwd.hpp>
-#include <sanguis/collision/world/body_fwd.hpp>
+#include <sanguis/collision/world/body_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/nonmovable.hpp>
 
 namespace sanguis::collision::world

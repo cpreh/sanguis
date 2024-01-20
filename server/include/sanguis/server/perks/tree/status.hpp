@@ -6,7 +6,7 @@
 #include <sanguis/server/perks/tree/max_level.hpp>
 #include <sanguis/server/perks/tree/required_parent_level.hpp>
 #include <sanguis/server/perks/tree/required_player_level.hpp>
-#include <sanguis/server/perks/tree/status_fwd.hpp>
+#include <sanguis/server/perks/tree/status_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::perks::tree
 {

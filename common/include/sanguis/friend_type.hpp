@@ -1,7 +1,7 @@
 #ifndef SANGUIS_FRIEND_TYPE_HPP_INCLUDED
 #define SANGUIS_FRIEND_TYPE_HPP_INCLUDED
 
-#include <sanguis/friend_type_fwd.hpp>
+#include <sanguis/friend_type_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis
 {

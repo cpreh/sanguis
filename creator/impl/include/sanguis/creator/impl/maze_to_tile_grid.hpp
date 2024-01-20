@@ -2,7 +2,6 @@
 #define SANGUIS_CREATOR_IMPL_MAZE_TO_TILE_GRID_HPP_INCLUDED
 
 #include <sanguis/creator/exception.hpp>
-#include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/creator/impl/maze_to_tile_grid.hpp>
@@ -14,8 +13,8 @@
 #include <fcppt/container/grid/make_pos_ref_crange.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
-#include <fcppt/math/vector/dim.hpp>
-#include <fcppt/math/vector/output.hpp>
+#include <fcppt/math/vector/dim.hpp> // IWYU pragma: keep
+#include <fcppt/math/vector/output.hpp> // IWYU pragma: keep
 #include <fcppt/optional/to_exception.hpp>
 
 namespace sanguis::creator::impl

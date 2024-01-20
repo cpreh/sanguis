@@ -6,6 +6,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/modifiers/random_increase.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::weapons::modifiers
 {

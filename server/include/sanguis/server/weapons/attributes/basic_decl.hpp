@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_WEAPONS_ATTRIBUTES_BASIC_DECL_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_ATTRIBUTES_BASIC_DECL_HPP_INCLUDED
 
-#include <sanguis/server/weapons/attributes/basic_fwd.hpp>
+#include <sanguis/server/weapons/attributes/basic_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/optional/object_impl.hpp>
 
 namespace sanguis::server::weapons::attributes

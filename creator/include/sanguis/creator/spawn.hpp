@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
-#include <sanguis/creator/spawn_fwd.hpp>
+#include <sanguis/creator/spawn_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/symbol.hpp>

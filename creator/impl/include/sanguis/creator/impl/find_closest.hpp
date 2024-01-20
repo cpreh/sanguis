@@ -1,13 +1,10 @@
 #ifndef SANGUIS_CREATOR_IMPL_FIND_CLOSEST_HPP_INCLUDED
 #define SANGUIS_CREATOR_IMPL_FIND_CLOSEST_HPP_INCLUDED
 
-#include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/optional_pos.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/container/grid/in_range.hpp>
-#include <fcppt/container/grid/object_fwd.hpp>
+#include <fcppt/container/grid/object.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/object.hpp>
 #include <fcppt/config/external_begin.hpp>

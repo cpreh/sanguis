@@ -3,7 +3,7 @@
 
 #include <sanguis/server/random/amount.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
-#include <fcppt/strong_typedef.hpp>
+#include <fcppt/strong_typedef_impl.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::random
 {

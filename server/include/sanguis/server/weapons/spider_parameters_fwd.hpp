@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons
 {
 
-class spider_parameters;
+class spider_parameters; // IWYU pragma: export
 
 }
 

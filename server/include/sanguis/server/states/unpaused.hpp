@@ -17,6 +17,7 @@
 #include <sanguis/server/events/tick_fwd.hpp>
 #include <sanguis/server/net/slowdown.hpp>
 #include <sanguis/server/states/running.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

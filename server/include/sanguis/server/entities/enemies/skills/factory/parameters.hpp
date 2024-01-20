@@ -6,7 +6,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
-#include <sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::entities::enemies::skills::factory
 {

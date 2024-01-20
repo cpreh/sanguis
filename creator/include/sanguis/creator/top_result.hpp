@@ -10,7 +10,7 @@
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/symbol.hpp>
-#include <sanguis/creator/top_result_fwd.hpp>
+#include <sanguis/creator/top_result_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::creator
 {

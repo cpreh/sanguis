@@ -1,7 +1,7 @@
 #ifndef SANGUIS_MESSAGES_CLIENT_TYPES_MESSAGE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_CLIENT_TYPES_MESSAGE_HPP_INCLUDED
 
-#include <sanguis/messages/client/types/message_fwd.hpp>
+#include <sanguis/messages/client/types/message_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::messages::client::types
 {

@@ -4,7 +4,7 @@
 namespace sanguis::server::buffs
 {
 
-class provider;
+class provider; // IWYU pragma: export
 
 }
 

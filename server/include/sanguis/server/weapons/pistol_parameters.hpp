@@ -6,7 +6,7 @@
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
-#include <sanguis/server/weapons/pistol_parameters_fwd.hpp>
+#include <sanguis/server/weapons/pistol_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/attributes/accuracy.hpp>

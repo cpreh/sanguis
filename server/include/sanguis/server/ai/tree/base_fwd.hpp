@@ -4,7 +4,7 @@
 namespace sanguis::server::ai::tree
 {
 
-class base;
+class base; // IWYU pragma: export
 
 }
 

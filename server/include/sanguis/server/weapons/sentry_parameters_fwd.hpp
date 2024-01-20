@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons
 {
 
-class sentry_parameters;
+class sentry_parameters; // IWYU pragma: export
 
 }
 

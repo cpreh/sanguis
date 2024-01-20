@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_SERVER_BASE_HPP_INCLUDED
 
 #include <sanguis/messages/server/base_fwd.hpp> // IWYU pragma: export
-#include <sanguis/messages/server/types/alda_type.hpp>
+#include <sanguis/messages/server/types/alda_type.hpp> // IWYU pragma: keep
 #include <alda/message/declare_base.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

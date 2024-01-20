@@ -4,7 +4,7 @@
 namespace sanguis::creator::impl::random
 {
 
-struct uniform_int_wrapper;
+struct uniform_int_wrapper; // IWYU pragma: export
 
 }
 

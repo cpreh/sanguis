@@ -4,7 +4,7 @@
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/damage.hpp>
-#include <sanguis/server/weapons/melee_parameters_fwd.hpp>
+#include <sanguis/server/weapons/melee_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
 

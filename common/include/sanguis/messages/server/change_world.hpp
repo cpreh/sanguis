@@ -1,19 +1,19 @@
 #ifndef SANGUIS_MESSAGES_SERVER_CHANGE_WORLD_HPP_INCLUDED
 #define SANGUIS_MESSAGES_SERVER_CHANGE_WORLD_HPP_INCLUDED
 
-#include <sanguis/messages/adapted_types/bool.hpp>
-#include <sanguis/messages/adapted_types/opening_count_array.hpp>
-#include <sanguis/messages/adapted_types/seed.hpp>
-#include <sanguis/messages/adapted_types/string.hpp>
-#include <sanguis/messages/adapted_types/world_id.hpp>
+#include <sanguis/messages/adapted_types/bool.hpp> // IWYU pragma: keep
+#include <sanguis/messages/adapted_types/opening_count_array.hpp> // IWYU pragma: keep
+#include <sanguis/messages/adapted_types/seed.hpp> // IWYU pragma: keep
+#include <sanguis/messages/adapted_types/string.hpp> // IWYU pragma: keep
+#include <sanguis/messages/adapted_types/world_id.hpp> // IWYU pragma: keep
 #include <sanguis/messages/server/change_world_fwd.hpp> // IWYU pragma: export
 #include <sanguis/messages/server/declare_message.hpp>
-#include <alda/bindings/record_variadic.hpp>
-#include <alda/message/object.hpp>
+#include <alda/bindings/record_variadic.hpp> // IWYU pragma: keep
+#include <alda/message/object.hpp> // IWYU pragma: keep
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/record/element.hpp>
+#include <fcppt/record/element.hpp> // IWYU pragma: keep
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wweak-template-vtables)

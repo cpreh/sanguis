@@ -4,7 +4,7 @@
 namespace sanguis::collision::world
 {
 
-class object;
+class object; // IWYU pragma: export
 
 }
 

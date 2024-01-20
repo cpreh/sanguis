@@ -5,11 +5,10 @@
 #include <sanguis/server/buffs/burn.hpp>
 #include <sanguis/server/buffs/burn_interval.hpp>
 #include <sanguis/server/buffs/create_callback.hpp>
-#include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/damage/array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/damage/unmodified.hpp>
-#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/base.hpp> // IWYU pragma: keep
 #include <sanguis/server/entities/base_ref.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>

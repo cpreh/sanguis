@@ -1,7 +1,7 @@
 #ifndef SANGUIS_COLLISION_LOG_HPP_INCLUDED
 #define SANGUIS_COLLISION_LOG_HPP_INCLUDED
 
-#include <sanguis/collision/log_fwd.hpp>
+#include <sanguis/collision/log_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/collision/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>

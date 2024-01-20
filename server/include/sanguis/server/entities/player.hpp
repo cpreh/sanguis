@@ -35,8 +35,7 @@
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
-#include <fcppt/reference_comparison.hpp>
-#include <fcppt/reference_std_hash.hpp>
+#include <fcppt/reference_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <set>
 #include <fcppt/config/external_end.hpp>

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CREATOR_DESTRUCTIBLE_HPP_INCLUDED
 #define SANGUIS_CREATOR_DESTRUCTIBLE_HPP_INCLUDED
 
-#include <sanguis/creator/destructible_fwd.hpp>
+#include <sanguis/creator/destructible_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/creator/destructible_pos.hpp>
 #include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/creator/symbol.hpp>

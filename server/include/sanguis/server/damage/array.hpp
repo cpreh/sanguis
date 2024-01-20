@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_DAMAGE_ARRAY_HPP_INCLUDED
 
 #include <sanguis/server/damage/array_fwd.hpp> // IWYU pragma: export
-#include <sanguis/server/damage/basic_array.hpp>
-#include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/damage/basic_array.hpp> // IWYU pragma: keep
+#include <sanguis/server/damage/unit.hpp> // IWYU pragma: keep
 
 #endif

@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons
 {
 
-class attack;
+class attack; // IWYU pragma: export
 
 }
 

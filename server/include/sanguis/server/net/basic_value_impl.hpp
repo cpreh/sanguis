@@ -2,10 +2,10 @@
 #define SANGUIS_SERVER_NET_BASIC_VALUE_IMPL_HPP_INCLUDED
 
 #include <sanguis/server/net/basic_value_decl.hpp> // IWYU pragma: export
-#include <sge/timer/basic_impl.hpp>
+#include <sge/timer/basic_impl.hpp> // IWYU pragma: keep
 #include <sge/timer/clocks/parameter.hpp>
 #include <fcppt/optional/maybe.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/object_impl.hpp> // IWYU pragma: keep
 
 template <typename Type, typename Policy, typename Clock>
 sanguis::server::net::basic_value<Type, Policy, Clock>::basic_value(

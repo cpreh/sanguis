@@ -26,8 +26,11 @@
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/log.hpp>
 #include <sanguis/server/world/context.hpp>
+#include <sanguis/server/world/object_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_decl.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
+#include <fcppt/strong_typedef_std_hash.hpp> // IWYU pragma: keep
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>

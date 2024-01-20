@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WORLD_INSERT_PAIR_DECL_HPP_INCLUDED
 
 #include <sanguis/server/entities/insert_parameters.hpp>
-#include <sanguis/server/world/insert_pair_fwd.hpp>
+#include <sanguis/server/world/insert_pair_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_decl.hpp>
 

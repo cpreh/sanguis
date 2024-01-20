@@ -6,6 +6,7 @@
 #include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/modifiers/random_increase.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <cmath>

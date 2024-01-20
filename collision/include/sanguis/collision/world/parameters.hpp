@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_WORLD_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/collision/symbol.hpp>
-#include <sanguis/collision/world/parameters_fwd.hpp>
+#include <sanguis/collision/world/parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/creator/grid_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 

@@ -4,7 +4,7 @@
 namespace sanguis::collision::world
 {
 
-class body_enter;
+class body_enter; // IWYU pragma: export
 
 }
 

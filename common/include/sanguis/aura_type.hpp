@@ -1,7 +1,7 @@
 #ifndef SANGUIS_AURA_TYPE_HPP_INCLUDED
 #define SANGUIS_AURA_TYPE_HPP_INCLUDED
 
-#include <sanguis/aura_type_fwd.hpp>
+#include <sanguis/aura_type_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis
 {

@@ -2,9 +2,10 @@
 #define SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 
 #include <sanguis/buff_type_fwd.hpp>
+#include <sanguis/server/buffs/buff_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/nonmovable.hpp>
-#include <fcppt/strong_typedef.hpp>
+#include <fcppt/strong_typedef_impl.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::buffs
 {

@@ -4,7 +4,7 @@
 namespace sanguis::server::auras
 {
 
-enum class influence;
+enum class influence; // IWYU pragma: export
 
 }
 

@@ -4,7 +4,7 @@
 namespace sanguis::server::entities
 {
 
-class insert_parameters;
+class insert_parameters; // IWYU pragma: export
 
 }
 

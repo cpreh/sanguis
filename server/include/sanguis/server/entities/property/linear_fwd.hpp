@@ -4,7 +4,7 @@
 namespace sanguis::server::entities::property
 {
 
-class linear;
+class linear; // IWYU pragma: export
 
 }
 

@@ -4,7 +4,7 @@
 namespace sanguis::creator
 {
 
-enum class opening_type;
+enum class opening_type; // IWYU pragma: export
 
 }
 

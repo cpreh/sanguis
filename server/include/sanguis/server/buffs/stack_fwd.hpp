@@ -4,7 +4,7 @@
 namespace sanguis::server::buffs
 {
 
-class stack;
+class stack; // IWYU pragma: export
 
 }
 

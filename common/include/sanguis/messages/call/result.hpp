@@ -3,7 +3,7 @@
 
 #include <sanguis/common/symbol.hpp>
 #include <sanguis/messages/call/forward_to_default_fwd.hpp>
-#include <sanguis/messages/call/result_fwd.hpp>
+#include <sanguis/messages/call/result_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/messages/call/result_variant.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>

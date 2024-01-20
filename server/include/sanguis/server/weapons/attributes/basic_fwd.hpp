@@ -5,7 +5,7 @@ namespace sanguis::server::weapons::attributes
 {
 
 template <typename Wrapped>
-class basic;
+class basic; // IWYU pragma: export
 
 }
 

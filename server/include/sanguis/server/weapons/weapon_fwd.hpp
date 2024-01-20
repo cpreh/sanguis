@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons
 {
 
-class weapon;
+class weapon; // IWYU pragma: export
 
 }
 

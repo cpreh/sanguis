@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_CONSOLE_HPP_INCLUDED
 
 #include <sanguis/server/console_command_vector.hpp>
-#include <sanguis/server/console_fwd.hpp>
+#include <sanguis/server/console_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_callback.hpp>
 #include <sanguis/server/unicast_callback.hpp>

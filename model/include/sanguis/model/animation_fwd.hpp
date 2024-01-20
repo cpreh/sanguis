@@ -4,7 +4,7 @@
 namespace sanguis::model
 {
 
-class animation;
+class animation; // IWYU pragma: export
 
 }
 

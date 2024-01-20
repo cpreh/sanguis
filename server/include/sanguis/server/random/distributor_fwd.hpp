@@ -5,7 +5,7 @@ namespace sanguis::server::random
 {
 
 template <typename Value, typename State>
-class distributor;
+class distributor; // IWYU pragma: export
 
 }
 

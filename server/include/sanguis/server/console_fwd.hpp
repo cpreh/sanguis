@@ -4,7 +4,7 @@
 namespace sanguis::server
 {
 
-class console;
+class console; // IWYU pragma: export
 
 }
 

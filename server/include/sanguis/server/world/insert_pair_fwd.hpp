@@ -5,7 +5,7 @@ namespace sanguis::server::world
 {
 
 template <typename Type>
-class insert_pair;
+class insert_pair; // IWYU pragma: export
 
 }
 

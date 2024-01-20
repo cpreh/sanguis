@@ -3,7 +3,7 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/server/ai/status_fwd.hpp>
-#include <sanguis/server/ai/tree/base_fwd.hpp>
+#include <sanguis/server/ai/tree/base_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 

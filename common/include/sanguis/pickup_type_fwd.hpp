@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class pickup_type;
+enum class pickup_type; // IWYU pragma: export
 
 }
 

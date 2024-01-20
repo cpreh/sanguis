@@ -4,7 +4,7 @@
 namespace sanguis::server::entities::property
 {
 
-class changeable;
+class changeable; // IWYU pragma: export
 
 }
 

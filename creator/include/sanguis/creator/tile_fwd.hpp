@@ -4,7 +4,7 @@
 namespace sanguis::creator
 {
 
-enum class tile;
+enum class tile; // IWYU pragma: export
 
 }
 

@@ -4,7 +4,7 @@
 namespace sanguis::messages::call
 {
 
-class forward_to_default;
+class forward_to_default; // IWYU pragma: export
 
 }
 

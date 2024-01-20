@@ -3,11 +3,12 @@
 
 #include <sanguis/creator/dim.hpp>
 #include <sanguis/creator/min.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/sup.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/container/grid/make_pos_ref_range_start_end.hpp>
 #include <fcppt/container/grid/pos_ref_range_impl.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/fill.hpp>

@@ -4,7 +4,7 @@
 namespace sanguis::server
 {
 
-class timer_impl;
+class timer_impl; // IWYU pragma: export
 
 }
 

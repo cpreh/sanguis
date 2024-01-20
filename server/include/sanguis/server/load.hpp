@@ -2,9 +2,10 @@
 #define SANGUIS_SERVER_LOAD_HPP_INCLUDED
 
 #include <sanguis/load/model/path.hpp>
-#include <sanguis/server/load_fwd.hpp>
+#include <sanguis/server/load_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/radius.hpp>
 #include <fcppt/nonmovable.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>

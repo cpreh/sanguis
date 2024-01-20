@@ -4,7 +4,7 @@
 namespace sanguis::server::auras
 {
 
-enum class target_kind;
+enum class target_kind; // IWYU pragma: export
 
 }
 

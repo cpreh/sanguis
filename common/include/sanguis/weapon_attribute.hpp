@@ -3,7 +3,7 @@
 
 #include <sanguis/weapon_attribute_base.hpp>
 #include <sanguis/weapon_attribute_extra.hpp>
-#include <sanguis/weapon_attribute_fwd.hpp>
+#include <sanguis/weapon_attribute_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/common/symbol.hpp>
 

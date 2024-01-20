@@ -5,7 +5,7 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/common_parameters.hpp>
-#include <sanguis/server/weapons/factory/parameters_fwd.hpp>
+#include <sanguis/server/weapons/factory/parameters_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::weapons::factory
 {

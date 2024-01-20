@@ -9,7 +9,7 @@
 #include <sanguis/collision/result_fwd.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/impl/world/simple/body_base_hook.hpp>
-#include <sanguis/collision/impl/world/simple/body_fwd.hpp>
+#include <sanguis/collision/impl/world/simple/body_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/collision/impl/world/simple/body_move_callback.hpp>
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/world/body.hpp>

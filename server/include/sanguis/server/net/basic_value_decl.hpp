@@ -1,11 +1,10 @@
 #ifndef SANGUIS_SERVER_NET_BASIC_VALUE_DECL_HPP_INCLUDED
 #define SANGUIS_SERVER_NET_BASIC_VALUE_DECL_HPP_INCLUDED
 
-#include <sanguis/server/net/basic_value_fwd.hpp>
+#include <sanguis/server/net/basic_value_fwd.hpp> // IWYU pragma: keep
 #include <sge/timer/basic_decl.hpp>
 #include <sge/timer/clocks/parameter_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
-#include <fcppt/reference_fwd.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
 namespace sanguis::server::net

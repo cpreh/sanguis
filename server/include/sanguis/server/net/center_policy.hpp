@@ -3,7 +3,7 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/net/center_policy_fwd.hpp>
+#include <sanguis/server/net/center_policy_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::net
 {

@@ -4,7 +4,7 @@
 namespace sanguis::server::entities::property
 {
 
-class constant;
+class constant; // IWYU pragma: export
 
 }
 

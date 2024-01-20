@@ -2,6 +2,6 @@
 #define SANGUIS_MODEL_WEAPON_CATEGORY_NAME_HPP_INCLUDED
 
 #include <sanguis/model/weapon_category_name_fwd.hpp> // IWYU pragma: export
-#include <fcppt/strong_typedef.hpp>
+#include <fcppt/strong_typedef_impl.hpp> // IWYU pragma: keep
 
 #endif

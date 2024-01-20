@@ -12,9 +12,9 @@
 #include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/nonmovable.hpp>
-#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/reference_std_hash.hpp>
+#include <fcppt/reference_std_hash.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 #include <unordered_map>

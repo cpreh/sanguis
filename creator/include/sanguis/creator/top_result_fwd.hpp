@@ -4,7 +4,7 @@
 namespace sanguis::creator
 {
 
-class top_result;
+class top_result; // IWYU pragma: export
 
 }
 

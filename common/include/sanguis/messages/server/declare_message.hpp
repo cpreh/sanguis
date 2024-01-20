@@ -1,9 +1,9 @@
 #ifndef SANGUIS_MESSAGES_SERVER_DECLARE_MESSAGE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_SERVER_DECLARE_MESSAGE_HPP_INCLUDED
 
-#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/base.hpp> // IWYU pragma: keep
 #include <sanguis/messages/server/serialization/declare_message.hpp>
-#include <sanguis/messages/server/types/alda_type.hpp>
+#include <sanguis/messages/server/types/alda_type.hpp> // IWYU pragma: keep
 #include <alda/message/declare_concrete.hpp>
 
 #define SANGUIS_MESSAGES_SERVER_DECLARE_MESSAGE(msg) \

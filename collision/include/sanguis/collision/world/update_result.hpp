@@ -5,7 +5,7 @@
 #include <sanguis/collision/world/body_collision_container.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
-#include <sanguis/collision/world/update_result_fwd.hpp>
+#include <sanguis/collision/world/update_result_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::collision::world
 {

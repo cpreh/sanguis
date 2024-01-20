@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CREATOR_SPAWN_TYPE_HPP_INCLUDED
 #define SANGUIS_CREATOR_SPAWN_TYPE_HPP_INCLUDED
 
-#include <sanguis/creator/spawn_type_fwd.hpp>
+#include <sanguis/creator/spawn_type_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::creator
 {

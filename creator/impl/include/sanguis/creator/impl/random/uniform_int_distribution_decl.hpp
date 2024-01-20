@@ -2,7 +2,7 @@
 #define SANGUIS_CREATOR_IMPL_RANDOM_UNIFORM_INT_DISTRIBUTION_DECL_HPP_INCLUDED
 
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
-#include <sanguis/creator/impl/random/uniform_int_distribution_fwd.hpp>
+#include <sanguis/creator/impl/random/uniform_int_distribution_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::creator::impl::random
 {

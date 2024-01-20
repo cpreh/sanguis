@@ -4,7 +4,7 @@
 namespace sanguis::server::weapons
 {
 
-class rocket_launcher_parameters;
+class rocket_launcher_parameters; // IWYU pragma: export
 
 }
 

@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_AURAS_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_enter_container.hpp>
-#include <sanguis/server/auras/aura_fwd.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>

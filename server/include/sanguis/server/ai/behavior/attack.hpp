@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_AI_BEHAVIOR_ATTACK_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
-#include <sanguis/server/ai/context_fwd.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/entity_set.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/speed_factor_fwd.hpp>

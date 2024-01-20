@@ -4,7 +4,7 @@
 namespace sanguis::creator
 {
 
-class destructible;
+class destructible; // IWYU pragma: export
 
 }
 

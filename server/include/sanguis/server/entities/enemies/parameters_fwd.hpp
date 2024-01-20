@@ -4,7 +4,7 @@
 namespace sanguis::server::entities::enemies
 {
 
-class parameters;
+class parameters; // IWYU pragma: export
 
 }
 

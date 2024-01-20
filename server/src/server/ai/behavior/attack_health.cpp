@@ -7,6 +7,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/div.hpp>

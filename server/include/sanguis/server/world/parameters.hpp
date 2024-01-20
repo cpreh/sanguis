@@ -6,8 +6,9 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/load_context_ref.hpp>
 #include <sanguis/server/weapons/common_parameters.hpp>
+#include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/context_ref.hpp>
-#include <sanguis/server/world/parameters_fwd.hpp>
+#include <sanguis/server/world/parameters_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/context_reference.hpp>
 

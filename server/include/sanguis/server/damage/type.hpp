@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_DAMAGE_TYPE_HPP_INCLUDED
 #define SANGUIS_SERVER_DAMAGE_TYPE_HPP_INCLUDED
 
-#include <sanguis/server/damage/type_fwd.hpp>
+#include <sanguis/server/damage/type_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>

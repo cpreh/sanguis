@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CREATOR_ENEMY_KIND_HPP_INCLUDED
 #define SANGUIS_CREATOR_ENEMY_KIND_HPP_INCLUDED
 
-#include <sanguis/creator/enemy_kind_fwd.hpp>
+#include <sanguis/creator/enemy_kind_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::creator
 {

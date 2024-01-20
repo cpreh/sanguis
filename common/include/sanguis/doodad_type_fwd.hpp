@@ -4,7 +4,7 @@
 namespace sanguis
 {
 
-enum class doodad_type;
+enum class doodad_type; // IWYU pragma: export
 
 }
 

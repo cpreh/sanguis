@@ -8,7 +8,7 @@
 #include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/log_fwd.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
-#include <sanguis/server/weapons/parameters_fwd.hpp>
+#include <sanguis/server/weapons/parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>

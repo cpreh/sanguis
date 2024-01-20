@@ -3,7 +3,7 @@
 
 #include <sanguis/entity_id.hpp>
 #include <sanguis/server/world/sight_range_entry_set.hpp>
-#include <sanguis/server/world/sight_range_fwd.hpp>
+#include <sanguis/server/world/sight_range_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::world
 {

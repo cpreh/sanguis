@@ -4,7 +4,7 @@
 namespace sanguis::messages::client::types
 {
 
-enum class message;
+enum class message; // IWYU pragma: export
 
 }
 

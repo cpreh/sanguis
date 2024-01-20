@@ -5,11 +5,11 @@
 #include <sanguis/server/collision/distance_entity_entity.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/config/compiler.hpp>
+#include <fcppt/config/compiler.hpp> // IWYU pragma: keep
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/reference.hpp>
-#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp> // IWYU pragma: keep
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 

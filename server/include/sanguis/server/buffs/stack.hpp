@@ -3,7 +3,7 @@
 
 #include <sanguis/server/buffs/buff_fwd.hpp>
 #include <sanguis/server/buffs/comparator.hpp>
-#include <sanguis/server/buffs/stack_fwd.hpp>
+#include <sanguis/server/buffs/stack_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>

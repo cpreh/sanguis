@@ -4,9 +4,6 @@
 #include <sanguis/server/random/less_function_tag.hpp>
 #include <fcppt/function_impl.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 namespace sanguis::server::random
 {

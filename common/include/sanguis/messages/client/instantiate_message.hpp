@@ -1,10 +1,10 @@
 #ifndef SANGUIS_MESSAGES_CLIENT_INSTANTIATE_MESSAGE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_CLIENT_INSTANTIATE_MESSAGE_HPP_INCLUDED
 
-#include <sanguis/messages/client/base.hpp>
-#include <sanguis/messages/client/serialization/details.hpp>
+#include <sanguis/messages/client/base.hpp> // IWYU pragma: keep
+#include <sanguis/messages/client/serialization/details.hpp> // IWYU pragma: keep
 #include <sanguis/messages/client/serialization/instantiate_message.hpp>
-#include <sanguis/messages/client/types/alda_type.hpp>
+#include <sanguis/messages/client/types/alda_type.hpp> // IWYU pragma: keep
 #include <alda/message/instantiate_concrete.hpp>
 
 #define SANGUIS_MESSAGES_CLIENT_INSTANTIATE_MESSAGE(msg) \

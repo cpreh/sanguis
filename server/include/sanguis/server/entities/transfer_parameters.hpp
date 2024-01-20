@@ -10,7 +10,7 @@
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/entities/transfer_parameters_fwd.hpp>
+#include <sanguis/server/entities/transfer_parameters_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::server::entities
 {

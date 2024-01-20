@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_OBJECT_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_OBJECT_BASE_HPP_INCLUDED
 
-#include <sanguis/server/object_base_fwd.hpp>
+#include <sanguis/server/object_base_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
