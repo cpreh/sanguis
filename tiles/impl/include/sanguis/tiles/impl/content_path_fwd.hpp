@@ -4,7 +4,7 @@
 namespace sanguis::tiles::impl
 {
 
-class content_path;
+class content_path; // IWYU pragma: export
 
 }
 

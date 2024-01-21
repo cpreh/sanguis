@@ -5,7 +5,7 @@
 #include <sanguis/creator/is_tile.hpp>
 #include <sanguis/tiles/orientation_map.hpp>
 #include <sanguis/tiles/pair_fwd.hpp>
-#include <sanguis/tiles/set_fwd.hpp>
+#include <sanguis/tiles/set_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/tiles/symbol.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>

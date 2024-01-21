@@ -62,7 +62,8 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
-#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
+#include <fcppt/strong_typedef_output.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/unit.hpp>

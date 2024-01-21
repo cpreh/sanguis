@@ -4,7 +4,7 @@
 namespace sanguis::client::events
 {
 
-class input;
+class input; // IWYU pragma: export
 
 }
 

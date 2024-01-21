@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_RESOURCE_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/client/load/context_fwd.hpp>
+#include <sanguis/client/load/resource/context_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/resource/sounds_fwd.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sge/audio/loader_ref.hpp>

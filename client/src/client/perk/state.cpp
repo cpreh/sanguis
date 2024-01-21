@@ -17,6 +17,9 @@
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
+#include <fcppt/strong_typedef_assignment.hpp> // IWYU pragma: keep
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/to_exception.hpp>

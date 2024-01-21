@@ -3,6 +3,7 @@
 
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
+#include <sanguis/client/load/model/context_fwd.hpp>
 #include <sanguis/client/load/resource/context_cref.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>

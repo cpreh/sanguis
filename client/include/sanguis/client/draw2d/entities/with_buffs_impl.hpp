@@ -4,8 +4,8 @@
 #include <sanguis/buff_type.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_decl.hpp> // IWYU pragma: export
-#include <sanguis/client/draw2d/entities/with_buffs_parameters_decl.hpp>
-#include <sanguis/client/draw2d/entities/buffs/base.hpp>
+#include <sanguis/client/draw2d/entities/with_buffs_parameters_decl.hpp> // IWYU pragma: keep
+#include <sanguis/client/draw2d/entities/buffs/base.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/entities/buffs/create.hpp>
 #include <fcppt/not.hpp>
 #include <fcppt/text.hpp>

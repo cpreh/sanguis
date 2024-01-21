@@ -4,7 +4,7 @@
 namespace sanguis::client::gui::perk
 {
 
-class line;
+class line; // IWYU pragma: export
 
 }
 

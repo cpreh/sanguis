@@ -4,7 +4,7 @@
 namespace sanguis::client::load::resource
 {
 
-class sounds;
+class sounds; // IWYU pragma: export
 
 }
 

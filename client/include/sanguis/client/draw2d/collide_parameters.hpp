@@ -3,7 +3,7 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/client/draw2d/center.hpp>
-#include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/collide_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/fradius.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 

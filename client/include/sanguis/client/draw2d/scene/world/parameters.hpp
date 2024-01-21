@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_PARAMETERS_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/scene/world/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/scene/world/parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_ref.hpp>
 #include <sanguis/client/load/context_cref.hpp>

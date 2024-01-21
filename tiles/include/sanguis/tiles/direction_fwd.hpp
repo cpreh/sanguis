@@ -4,7 +4,7 @@
 namespace sanguis::tiles
 {
 
-enum class direction;
+enum class direction; // IWYU pragma: export
 
 }
 

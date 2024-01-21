@@ -15,6 +15,7 @@
 #include <sanguis/creator/impl/random/uniform_size_variate.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/container/join.hpp>

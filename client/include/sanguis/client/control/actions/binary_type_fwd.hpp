@@ -4,7 +4,7 @@
 namespace sanguis::client::control::actions
 {
 
-enum class binary_type;
+enum class binary_type; // IWYU pragma: export
 
 }
 

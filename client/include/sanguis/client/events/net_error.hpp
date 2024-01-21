@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_EVENTS_NET_ERROR_HPP_INCLUDED
 #define SANGUIS_CLIENT_EVENTS_NET_ERROR_HPP_INCLUDED
 
-#include <sanguis/client/events/net_error_fwd.hpp>
+#include <sanguis/client/events/net_error_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>

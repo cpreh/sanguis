@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_RESOURCE_ANIMATION_ENTITY_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
-#include <sanguis/client/load/resource/animation/entity_fwd.hpp>
+#include <sanguis/client/load/resource/animation/entity_fwd.hpp> // IWYU pragma: keep
 #include <sge/renderer/dim2_fwd.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part_fwd.hpp>

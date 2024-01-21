@@ -4,7 +4,7 @@
 namespace sanguis::client::load::auras
 {
 
-class context;
+class context; // IWYU pragma: export
 
 }
 

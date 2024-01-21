@@ -4,7 +4,7 @@
 namespace sanguis::client::config::settings
 {
 
-class object;
+class object; // IWYU pragma: export
 
 }
 

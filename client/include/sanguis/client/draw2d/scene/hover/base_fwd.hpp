@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::scene::hover
 {
 
-class base;
+class base; // IWYU pragma: export
 
 }
 

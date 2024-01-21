@@ -7,6 +7,7 @@
 #include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/client/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/speed_fwd.hpp>
+#include <sanguis/client/draw2d/entities/container.hpp>
 #include <sanguis/client/draw2d/entities/friend.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>

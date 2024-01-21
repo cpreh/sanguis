@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::scene::world
 {
 
-class render_parameters;
+class render_parameters; // IWYU pragma: export
 
 }
 

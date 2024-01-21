@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_GUI_PERK_TAB_HPP_INCLUDED
 
 #include <sanguis/client/gui/perk/line_unique_ptr_tree_vector.hpp>
-#include <sanguis/client/gui/perk/tab_fwd.hpp>
+#include <sanguis/client/gui/perk/tab_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/perk/const_tree_range_fwd.hpp>
 #include <sanguis/client/perk/state_ref.hpp>
 #include <sge/font/object_ref.hpp>

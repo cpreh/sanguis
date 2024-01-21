@@ -4,7 +4,7 @@
 namespace sanguis::client::load::model
 {
 
-class weapon_category;
+class weapon_category; // IWYU pragma: export
 
 }
 

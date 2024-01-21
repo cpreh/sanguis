@@ -31,6 +31,7 @@
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/timer/elapsed.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/strong_typedef_assignment.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>

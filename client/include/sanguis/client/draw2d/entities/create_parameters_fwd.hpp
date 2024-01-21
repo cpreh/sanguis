@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::entities
 {
 
-class create_parameters;
+class create_parameters; // IWYU pragma: export
 
 }
 

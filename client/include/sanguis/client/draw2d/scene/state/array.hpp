@@ -2,6 +2,6 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_STATE_ARRAY_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/scene/state/array_fwd.hpp> // IWYU pragma: export
-#include <fcppt/enum/array_impl.hpp>
+#include <fcppt/enum/array_impl.hpp> // IWYU pragma: keep
 
 #endif

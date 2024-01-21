@@ -5,7 +5,7 @@ namespace sanguis::tiles
 {
 
 template <typename Tile>
-class pair;
+class pair; // IWYU pragma: export
 
 }
 

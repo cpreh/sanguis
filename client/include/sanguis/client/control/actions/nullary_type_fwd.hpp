@@ -4,7 +4,7 @@
 namespace sanguis::client::control::actions
 {
 
-enum class nullary_type;
+enum class nullary_type; // IWYU pragma: export
 
 }
 

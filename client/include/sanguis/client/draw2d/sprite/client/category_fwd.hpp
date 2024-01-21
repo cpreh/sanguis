@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::sprite::client
 {
 
-enum class category;
+enum class category; // IWYU pragma: export
 
 }
 

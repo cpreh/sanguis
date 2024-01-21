@@ -4,7 +4,7 @@
 namespace sanguis::client::events
 {
 
-class render;
+class render; // IWYU pragma: export
 
 }
 

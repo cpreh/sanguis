@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_RESOURCE_SOUNDS_HPP_INCLUDED
 
 #include <sanguis/client/load/resource/optional_sound_fwd.hpp>
-#include <sanguis/client/load/resource/sounds_fwd.hpp>
+#include <sanguis/client/load/resource/sounds_fwd.hpp> // IWYU pragma: keep
 #include <sge/audio/buffer_unique_ptr.hpp>
 #include <sge/audio/loader_ref.hpp>
 #include <sge/audio/player_ref.hpp>

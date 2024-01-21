@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_WORLD_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/world_id.hpp>
-#include <sanguis/client/world_parameters_fwd.hpp>
+#include <sanguis/client/world_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/creator/top_parameters.hpp>
 
 namespace sanguis::client

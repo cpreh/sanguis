@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::scene::hover
 {
 
-class weapon_attribute;
+class weapon_attribute; // IWYU pragma: export
 
 }
 

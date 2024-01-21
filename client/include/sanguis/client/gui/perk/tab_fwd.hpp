@@ -4,7 +4,7 @@
 namespace sanguis::client::gui::perk
 {
 
-class tab;
+class tab; // IWYU pragma: export
 
 }
 

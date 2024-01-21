@@ -3,7 +3,7 @@
 
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/client/load/model/global_parameters_fwd.hpp>
-#include <sanguis/client/load/model/part_fwd.hpp>
+#include <sanguis/client/load/model/part_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/model/weapon_category_fwd.hpp>
 #include <sanguis/client/load/model/weapon_category_map.hpp>
 #include <sanguis/model/part_fwd.hpp>

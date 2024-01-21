@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_EVENTS_MESSAGE_HPP_INCLUDED
 #define SANGUIS_CLIENT_EVENTS_MESSAGE_HPP_INCLUDED
 
-#include <sanguis/client/events/message_fwd.hpp>
+#include <sanguis/client/events/message_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/messages/server/shared_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>

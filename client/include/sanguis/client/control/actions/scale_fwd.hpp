@@ -4,7 +4,7 @@
 namespace sanguis::client::control::actions
 {
 
-class scale;
+class scale; // IWYU pragma: export
 
 }
 

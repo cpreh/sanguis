@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_EVENTS_TICK_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
-#include <sanguis/client/events/tick_fwd.hpp>
+#include <sanguis/client/events/tick_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>

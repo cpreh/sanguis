@@ -5,7 +5,7 @@
 #include <sanguis/io_service_ref.hpp>
 #include <sanguis/client/cursor_fwd.hpp>
 #include <sanguis/client/cursor_ref.hpp>
-#include <sanguis/client/machine_fwd.hpp>
+#include <sanguis/client/machine_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/server_callback.hpp>
 #include <sanguis/client/args/result_fwd.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
@@ -22,6 +22,7 @@
 #include <sge/console/gfx/object_ref.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/object_ref.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>

@@ -4,7 +4,7 @@
 namespace sanguis::client::perk
 {
 
-enum class choosable_state;
+enum class choosable_state; // IWYU pragma: export
 
 }
 

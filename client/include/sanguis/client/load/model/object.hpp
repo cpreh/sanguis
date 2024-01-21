@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_MODEL_OBJECT_HPP_INCLUDED
 
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/client/load/model/object_fwd.hpp>
+#include <sanguis/client/load/model/object_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/model/part_fwd.hpp>
 #include <sanguis/client/load/model/part_map.hpp>
 #include <sanguis/client/load/model/part_result.hpp>

@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_CONSOLE_OBJECT_HPP_INCLUDED
 
 #include <sanguis/client/send_callback.hpp>
-#include <sanguis/client/console/object_fwd.hpp>
+#include <sanguis/client/console/object_fwd.hpp> // IWYU pragma: keep
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/gfx/object_ref.hpp>

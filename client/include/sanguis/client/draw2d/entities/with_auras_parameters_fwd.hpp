@@ -5,7 +5,7 @@ namespace sanguis::client::draw2d::entities
 {
 
 template <typename Base>
-class with_auras_parameters;
+class with_auras_parameters; // IWYU pragma: export
 
 }
 

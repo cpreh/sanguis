@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d
 {
 
-class collide_parameters;
+class collide_parameters; // IWYU pragma: export
 
 }
 

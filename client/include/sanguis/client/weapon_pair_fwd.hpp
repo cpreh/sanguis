@@ -4,7 +4,7 @@
 namespace sanguis::client
 {
 
-class weapon_pair;
+class weapon_pair; // IWYU pragma: export
 
 }
 

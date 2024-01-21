@@ -4,7 +4,7 @@
 #include <sanguis/weapon_type.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/reference.hpp>
-#include <fcppt/variant/comparison.hpp>
+#include <fcppt/variant/comparison.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>

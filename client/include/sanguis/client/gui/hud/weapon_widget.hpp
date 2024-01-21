@@ -6,7 +6,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/weapon_description.hpp>
-#include <sanguis/client/gui/hud/weapon_widget_fwd.hpp>
+#include <sanguis/client/gui/hud/weapon_widget_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/hud/context_ref.hpp>
 #include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>

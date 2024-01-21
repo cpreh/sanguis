@@ -4,7 +4,7 @@
 namespace sanguis::client::gui::perk
 {
 
-class chooser;
+class chooser; // IWYU pragma: export
 
 }
 

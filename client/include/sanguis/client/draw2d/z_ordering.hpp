@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_Z_ORDERING_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_Z_ORDERING_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/z_ordering_fwd.hpp>
+#include <sanguis/client/draw2d/z_ordering_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::client::draw2d
 {

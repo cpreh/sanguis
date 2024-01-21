@@ -1,11 +1,12 @@
 #ifndef SANGUIS_CLIENT_LOAD_MODEL_COLLECTION_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_MODEL_COLLECTION_HPP_INCLUDED
 
-#include <sanguis/client/load/model/collection_fwd.hpp>
+#include <sanguis/client/load/model/collection_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/model/object_fwd.hpp>
 #include <sanguis/client/load/resource/context_cref.hpp>
 #include <sanguis/load/model/path.hpp>
 #include <fcppt/nonmovable.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>

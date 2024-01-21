@@ -4,7 +4,7 @@
 namespace sanguis::client::load::resource
 {
 
-class context;
+class context; // IWYU pragma: export
 
 }
 

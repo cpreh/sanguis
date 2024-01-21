@@ -6,6 +6,7 @@
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
 #include <fcppt/not.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/container/pop_back.hpp>
 #include <fcppt/container/grid/at_optional.hpp>

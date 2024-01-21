@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_BASE_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/radius_fwd.hpp>
-#include <sanguis/client/draw2d/entities/base_fwd.hpp>
+#include <sanguis/client/draw2d/entities/base_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/entities/create_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>

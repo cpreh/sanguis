@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_GUI_PERK_CHOOSER_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
-#include <sanguis/client/gui/perk/chooser_fwd.hpp>
+#include <sanguis/client/gui/perk/chooser_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/gui/perk/state_fwd.hpp>
 #include <sanguis/client/perk/state_ref.hpp>
 #include <sge/font/object_ref.hpp>

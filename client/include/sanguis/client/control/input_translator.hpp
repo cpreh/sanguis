@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_CONTROL_INPUT_TRANSLATOR_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONTROL_INPUT_TRANSLATOR_HPP_INCLUDED
 
-#include <sanguis/client/control/input_translator_fwd.hpp>
+#include <sanguis/client/control/input_translator_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/control/actions/binary_type_fwd.hpp>
 #include <sanguis/client/control/actions/callback.hpp>
 #include <sanguis/client/control/actions/nullary_type_fwd.hpp>

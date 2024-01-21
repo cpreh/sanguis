@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_ANIMATION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_ANIMATION_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/entities/model/animation_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/animation_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/entities/model/optional_sound.hpp>
 #include <sanguis/client/draw2d/sprite/animation/texture.hpp>
 #include <sanguis/client/load/animation_type.hpp>

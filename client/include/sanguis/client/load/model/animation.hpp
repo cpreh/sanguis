@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 
-#include <sanguis/client/load/model/animation_fwd.hpp>
+#include <sanguis/client/load/model/animation_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/model/global_parameters_fwd.hpp>
 #include <sanguis/client/load/resource/optional_sound.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>

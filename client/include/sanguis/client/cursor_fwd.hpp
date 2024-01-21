@@ -4,7 +4,7 @@
 namespace sanguis::client
 {
 
-class cursor;
+class cursor; // IWYU pragma: export
 
 }
 

@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::entities
 {
 
-class level;
+class level; // IWYU pragma: export
 
 }
 

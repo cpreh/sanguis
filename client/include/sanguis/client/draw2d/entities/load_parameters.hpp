@@ -7,9 +7,11 @@
 #include <sanguis/random_generator_ref.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/sound_manager_ref.hpp>
-#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp> // IWYU pragma: keep
+#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
 #include <sanguis/client/load/model/collection_cref.hpp>
+#include <sanguis/client/load/model/collection_fwd.hpp>
 
 namespace sanguis::client::draw2d::entities
 {

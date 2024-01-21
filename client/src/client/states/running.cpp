@@ -78,6 +78,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/not.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>

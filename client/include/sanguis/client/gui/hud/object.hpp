@@ -13,7 +13,7 @@
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <sanguis/client/slowed_duration_fwd.hpp>
-#include <sanguis/client/gui/hud/object_fwd.hpp>
+#include <sanguis/client/gui/hud/object_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/gui/hud/weapon_details_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/hud/context_ref.hpp>
@@ -31,7 +31,6 @@
 #include <sge/gui/widget/text.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
-#include <sge/rucksack/rect_fwd.hpp>
 #include <sge/timer/frames_counter.hpp>
 #include <sge/viewport/manager_ref.hpp>
 #include <fcppt/nonmovable.hpp>

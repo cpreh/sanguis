@@ -4,7 +4,7 @@
 #include <sanguis/client/slowed_duration_fwd.hpp>
 #include <sanguis/client/control/environment.hpp>
 #include <sanguis/client/control/optional_cursor_position_fwd.hpp>
-#include <sanguis/client/draw/base_fwd.hpp>
+#include <sanguis/client/draw/base_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/nonmovable.hpp>

@@ -3,8 +3,9 @@
 
 #include <sanguis/client/draw2d/sprite/buffers_decl.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
-#include <sanguis/client/draw2d/sprite/system_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/system_fwd.hpp> // IWYU pragma: keep
 #include <sge/renderer/context/core_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/device/core_ref.hpp>
 #include <sge/sprite/intrusive/ordered/collection_decl.hpp>
 #include <fcppt/nonmovable.hpp>

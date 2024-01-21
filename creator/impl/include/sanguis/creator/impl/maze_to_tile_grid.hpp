@@ -8,6 +8,7 @@
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange.hpp>

@@ -4,6 +4,7 @@
 #include <sanguis/server/perks/tree/required_parent_level.hpp>
 #include <sanguis/server/perks/tree/required_player_level.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 
 sanguis::server::perks::tree::status::status(
     sanguis::perk_type const _type,

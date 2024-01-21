@@ -4,7 +4,7 @@
 namespace sanguis::tiles
 {
 
-class log;
+class log; // IWYU pragma: export
 
 }
 

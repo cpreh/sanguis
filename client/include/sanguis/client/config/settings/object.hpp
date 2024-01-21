@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_CONFIG_SETTINGS_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONFIG_SETTINGS_OBJECT_HPP_INCLUDED
 
-#include <sanguis/client/config/settings/object_fwd.hpp>
+#include <sanguis/client/config/settings/object_fwd.hpp> // IWYU pragma: keep
 #include <sge/parse/ini/start.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>

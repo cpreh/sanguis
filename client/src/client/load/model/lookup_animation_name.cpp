@@ -3,6 +3,7 @@
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/lookup_animation_name.hpp>
 #include <sanguis/model/animation_name.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/enum/array.hpp>
 #include <fcppt/enum/array_init.hpp>

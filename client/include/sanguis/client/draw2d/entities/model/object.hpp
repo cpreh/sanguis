@@ -20,7 +20,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/load/animation_type_fwd.hpp>
 #include <sanguis/client/load/model/object_cref.hpp>
-#include <sanguis/client/load/model/object_fwd.hpp>
+#include <sanguis/client/load/model/object_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>

@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_PERK_INFO_HPP_INCLUDED
 
 #include <sanguis/perk_type.hpp>
-#include <sanguis/client/perk/info_fwd.hpp>
+#include <sanguis/client/perk/info_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/max_level.hpp>
 #include <sanguis/client/perk/required_parent_level.hpp>

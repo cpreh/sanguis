@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_CREATE_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
-#include <sanguis/client/draw2d/entities/create_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/create_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/creator/optional_background_tile.hpp>
 

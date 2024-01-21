@@ -6,6 +6,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/not.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>

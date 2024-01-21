@@ -1,21 +1,22 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_SYSTEM_IMPL_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_SYSTEM_IMPL_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/sprite/buffers_impl.hpp>
-#include <sanguis/client/draw2d/sprite/state.hpp>
+#include <sanguis/client/draw2d/sprite/buffers_impl.hpp> // IWYU pragma: keep
+#include <sanguis/client/draw2d/sprite/state.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sprite/system_decl.hpp> // IWYU pragma: export
 #include <sge/renderer/context/core_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/device/core_ref.hpp>
 #include <sge/sprite/buffers/option.hpp>
 #include <sge/sprite/compare/default.hpp>
-#include <sge/sprite/intrusive/ordered/collection_impl.hpp>
+#include <sge/sprite/intrusive/ordered/collection_impl.hpp> // IWYU pragma: keep
 #include <sge/sprite/process/geometry_options.hpp>
 #include <sge/sprite/process/options.hpp>
 #include <sge/sprite/process/with_options.hpp>
 #include <sge/sprite/state/default_options.hpp>
-#include <sge/sprite/state/object_impl.hpp>
-#include <sge/sprite/state/parameters.hpp>
+#include <sge/sprite/state/object_impl.hpp> // IWYU pragma: keep
+#include <sge/sprite/state/parameters.hpp> // IWYU pragma: keep
 
 template <typename Choices, typename Category>
 sanguis::client::draw2d::sprite::system<Choices, Category>::system(

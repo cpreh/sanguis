@@ -5,7 +5,7 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/client/send_callback.hpp>
-#include <sanguis/client/control/action_handler_fwd.hpp>
+#include <sanguis/client/control/action_handler_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/control/direction_vector.hpp>
 #include <sanguis/client/control/environment_cref.hpp>
 #include <sanguis/client/control/key_scale.hpp>

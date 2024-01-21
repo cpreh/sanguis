@@ -4,7 +4,7 @@
 namespace sanguis::client::events
 {
 
-class connected;
+class connected; // IWYU pragma: export
 
 }
 

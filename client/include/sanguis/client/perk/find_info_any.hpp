@@ -4,7 +4,6 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/perk/compare.hpp>
-#include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/to_string.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>

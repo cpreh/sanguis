@@ -9,6 +9,7 @@
 #include <sanguis/client/perk/tree.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>

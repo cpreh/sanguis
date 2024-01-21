@@ -4,7 +4,7 @@
 namespace sanguis::client::load::resource::animation
 {
 
-class entity;
+class entity; // IWYU pragma: export
 
 }
 

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_PERK_CONST_TREE_RANGE_HPP_INCLUDED
 #define SANGUIS_CLIENT_PERK_CONST_TREE_RANGE_HPP_INCLUDED
 
-#include <sanguis/client/perk/const_tree_range_fwd.hpp>
+#include <sanguis/client/perk/const_tree_range_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/perk/tree.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>

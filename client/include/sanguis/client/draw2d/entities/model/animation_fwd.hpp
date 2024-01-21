@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::entities::model
 {
 
-class animation;
+class animation; // IWYU pragma: export
 
 }
 

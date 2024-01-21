@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_HEALTH_PAIR_HPP_INCLUDED
 
 #include <sanguis/client/health.hpp>
-#include <sanguis/client/health_pair_fwd.hpp>
+#include <sanguis/client/health_pair_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/max_health.hpp>
 
 namespace sanguis::client

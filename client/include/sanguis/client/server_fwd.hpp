@@ -4,7 +4,7 @@
 namespace sanguis::client
 {
 
-class server;
+class server; // IWYU pragma: export
 
 }
 

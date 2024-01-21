@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_GUI_HUD_WEAPON_DETAILS_HPP_INCLUDED
 
 #include <sanguis/optional_weapon_description_fwd.hpp>
-#include <sanguis/client/gui/hud/weapon_details_fwd.hpp>
+#include <sanguis/client/gui/hud/weapon_details_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp>
 #include <sge/font/object_ref.hpp>
 #include <sge/gui/context_ref.hpp>

@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::scene::world::sprite
 {
 
-struct is_background;
+struct is_background; // IWYU pragma: export
 
 }
 

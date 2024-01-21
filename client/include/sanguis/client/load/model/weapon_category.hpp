@@ -5,7 +5,7 @@
 #include <sanguis/client/load/model/animation_fwd.hpp>
 #include <sanguis/client/load/model/animation_map.hpp>
 #include <sanguis/client/load/model/global_parameters_fwd.hpp>
-#include <sanguis/client/load/model/weapon_category_fwd.hpp>
+#include <sanguis/client/load/model/weapon_category_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/model/weapon_category_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/log/object_fwd.hpp>

@@ -4,7 +4,7 @@
 namespace sanguis::tools::libmergeimage
 {
 
-class saved_image;
+class saved_image; // IWYU pragma: export
 
 }
 

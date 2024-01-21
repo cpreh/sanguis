@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_HOVER_NAME_AND_HEALTH_HPP_INCLUDED
 
 #include <sanguis/client/optional_health_pair.hpp>
-#include <sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp>
+#include <sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/entities/hover/optional_name.hpp>
 
 namespace sanguis::client::draw2d::entities::hover

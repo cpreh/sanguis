@@ -4,7 +4,7 @@
 namespace sanguis::client::control::actions
 {
 
-class nullary;
+class nullary; // IWYU pragma: export
 
 }
 

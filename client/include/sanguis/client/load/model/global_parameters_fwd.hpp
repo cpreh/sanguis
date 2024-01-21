@@ -4,7 +4,7 @@
 namespace sanguis::client::load::model
 {
 
-class global_parameters;
+class global_parameters; // IWYU pragma: export
 
 }
 

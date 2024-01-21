@@ -4,7 +4,7 @@
 namespace sanguis::client::events
 {
 
-class message;
+class message; // IWYU pragma: export
 
 }
 

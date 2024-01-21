@@ -52,6 +52,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/output_to_string.hpp>
 #include <fcppt/reference_to_base.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>

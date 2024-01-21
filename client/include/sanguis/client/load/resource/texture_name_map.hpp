@@ -2,6 +2,8 @@
 #define SANGUIS_CLIENT_LOAD_RESOURCE_TEXTURE_NAME_MAP_HPP_INCLUDED
 
 #include <sanguis/client/load/resource/texture_identifier.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
+#include <fcppt/strong_typedef_std_hash.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
 #include <unordered_map>

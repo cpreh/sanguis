@@ -4,7 +4,7 @@
 namespace sanguis::client::console
 {
 
-class object;
+class object; // IWYU pragma: export
 
 }
 

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_EVENTS_RENDER_HPP_INCLUDED
 #define SANGUIS_CLIENT_EVENTS_RENDER_HPP_INCLUDED
 
-#include <sanguis/client/events/render_fwd.hpp>
+#include <sanguis/client/events/render_fwd.hpp> // IWYU pragma: keep
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/context/ffp_ref.hpp>
 #include <fcppt/config/external_begin.hpp>

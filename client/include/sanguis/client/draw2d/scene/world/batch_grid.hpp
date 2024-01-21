@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_BATCH_GRID_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_BATCH_GRID_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/scene/world/batch.hpp>
+#include <sanguis/client/draw2d/scene/world/batch.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp> // IWYU pragma: export
-#include <fcppt/container/grid/object_impl.hpp>
+#include <fcppt/container/grid/object_impl.hpp> // IWYU pragma: keep
 
 #endif

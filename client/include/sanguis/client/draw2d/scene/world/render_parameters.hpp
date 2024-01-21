@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_RENDER_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/translation.hpp>
-#include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/context/core_ref.hpp>
 

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_CLIENT_CATEGORY_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_CLIENT_CATEGORY_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/sprite/client/category_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/client/category_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::client::draw2d::sprite::client
 {

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_SERVER_HPP_INCLUDED
 #define SANGUIS_CLIENT_SERVER_HPP_INCLUDED
 
-#include <sanguis/client/server_fwd.hpp>
+#include <sanguis/client/server_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/server/object.hpp>
 #include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>

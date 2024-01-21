@@ -1,7 +1,7 @@
 #ifndef SANGUIS_TILES_CELL_HPP_INCLUDED
 #define SANGUIS_TILES_CELL_HPP_INCLUDED
 
-#include <sanguis/tiles/cell_fwd.hpp>
+#include <sanguis/tiles/cell_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/tiles/content.hpp>
 #include <sanguis/tiles/is_background.hpp>
 #include <sanguis/tiles/path_reference.hpp>

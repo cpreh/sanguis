@@ -4,7 +4,7 @@
 namespace sanguis::client::control
 {
 
-class input_translator;
+class input_translator; // IWYU pragma: export
 
 }
 

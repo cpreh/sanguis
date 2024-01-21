@@ -29,6 +29,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>

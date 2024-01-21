@@ -4,7 +4,7 @@
 namespace sanguis::client
 {
 
-class world_parameters;
+class world_parameters; // IWYU pragma: export
 
 }
 

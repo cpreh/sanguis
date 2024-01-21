@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_LOAD_MODEL_GLOBAL_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_MODEL_GLOBAL_PARAMETERS_HPP_INCLUDED
 
-#include <sanguis/client/load/model/global_parameters_fwd.hpp>
+#include <sanguis/client/load/model/global_parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/resource/sounds_cref.hpp>
 #include <sanguis/client/load/resource/sounds_fwd.hpp>
 #include <sanguis/client/load/resource/textures_cref.hpp>

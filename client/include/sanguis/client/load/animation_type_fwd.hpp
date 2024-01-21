@@ -4,7 +4,7 @@
 namespace sanguis::client::load
 {
 
-enum class animation_type;
+enum class animation_type; // IWYU pragma: export
 
 }
 

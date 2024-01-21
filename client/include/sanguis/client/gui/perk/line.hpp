@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_GUI_PERK_LINE_HPP_INCLUDED
 
 #include <sanguis/perk_type.hpp>
-#include <sanguis/client/gui/perk/line_fwd.hpp>
+#include <sanguis/client/gui/perk/line_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/perk/info_fwd.hpp>
 #include <sanguis/client/perk/state_ref.hpp>
 #include <sge/font/object_ref.hpp>

@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_AURAS_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/aura_type.hpp>
-#include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/client/load/auras/context_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/nonmovable.hpp>

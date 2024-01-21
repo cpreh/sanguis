@@ -2,18 +2,16 @@
 #define SANGUIS_CLIENT_PERK_STATE_HPP_INCLUDED
 
 #include <sanguis/perk_type.hpp>
-#include <sanguis/client/level.hpp>
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/change_callback.hpp>
 #include <sanguis/client/perk/change_function.hpp>
 #include <sanguis/client/perk/choosable_state_fwd.hpp>
-#include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/level_callback.hpp>
 #include <sanguis/client/perk/level_function.hpp>
 #include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/send_callback.hpp>
-#include <sanguis/client/perk/state_fwd.hpp>
+#include <sanguis/client/perk/state_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/perk/tree_fwd.hpp>
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
 #include <fcppt/nonmovable.hpp>

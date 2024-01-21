@@ -4,7 +4,7 @@
 namespace sanguis::client::perk
 {
 
-class const_tree_range;
+class const_tree_range; // IWYU pragma: export
 
 }
 

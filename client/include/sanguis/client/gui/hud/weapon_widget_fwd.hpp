@@ -4,7 +4,7 @@
 namespace sanguis::client::gui::hud
 {
 
-class weapon_widget;
+class weapon_widget; // IWYU pragma: export
 
 }
 

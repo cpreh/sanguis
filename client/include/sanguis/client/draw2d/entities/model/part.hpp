@@ -7,7 +7,7 @@
 #include <sanguis/client/sound_manager_ref.hpp>
 #include <sanguis/client/draw2d/entities/model/animation.hpp>
 #include <sanguis/client/draw2d/entities/model/desired_orientation.hpp>
-#include <sanguis/client/draw2d/entities/model/part_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/part_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_fwd.hpp>
 #include <sanguis/client/load/animation_type_fwd.hpp>

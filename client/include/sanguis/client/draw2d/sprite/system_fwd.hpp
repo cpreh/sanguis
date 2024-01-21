@@ -5,7 +5,7 @@ namespace sanguis::client::draw2d::sprite
 {
 
 template <typename Choices, typename Category>
-class system;
+class system; // IWYU pragma: export
 
 }
 

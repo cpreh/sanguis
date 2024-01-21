@@ -23,6 +23,7 @@
 #include <sanguis/creator/impl/random/generator.hpp> // NOLINT(misc-include-cleaner)
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/grid/at_optional.hpp>

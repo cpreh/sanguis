@@ -37,8 +37,6 @@ set(
 	include/sanguis/client/config/settings/object.hpp
 	include/sanguis/client/config/settings/object_fwd.hpp
 	include/sanguis/client/config/settings/object_ref.hpp
-	include/sanguis/client/config/settings/optional_section.hpp
-	include/sanguis/client/config/settings/optional_section_fwd.hpp
 	include/sanguis/client/config/settings/saver.hpp
 	include/sanguis/client/console/gfx.hpp
 	include/sanguis/client/console/object.hpp
@@ -465,7 +463,6 @@ set(
 	include/sanguis/client/gui/menu/callbacks/object_fwd.hpp
 	include/sanguis/client/gui/menu/callbacks/quickstart.hpp
 	include/sanguis/client/gui/menu/callbacks/quit.hpp
-	include/sanguis/client/gui/menu/callbacks/retry_connect.hpp
 	include/sanguis/client/gui/menu/object.hpp
 	include/sanguis/client/gui/menu/resolution_chooser.hpp
 	include/sanguis/client/gui/perk/chooser.hpp

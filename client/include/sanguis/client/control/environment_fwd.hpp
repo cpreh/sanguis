@@ -4,7 +4,7 @@
 namespace sanguis::client::control
 {
 
-class environment;
+class environment; // IWYU pragma: export
 
 }
 

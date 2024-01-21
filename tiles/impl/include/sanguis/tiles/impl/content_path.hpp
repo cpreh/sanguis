@@ -3,7 +3,7 @@
 
 #include <sanguis/tiles/content.hpp>
 #include <sanguis/tiles/path_reference.hpp>
-#include <sanguis/tiles/impl/content_path_fwd.hpp>
+#include <sanguis/tiles/impl/content_path_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::tiles::impl
 {

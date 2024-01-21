@@ -6,6 +6,7 @@
 #include <sanguis/client/perk/max_level.hpp>
 #include <sanguis/client/perk/required_parent_level.hpp>
 #include <sanguis/client/perk/required_player_level.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 
 sanguis::client::perk::info::info(sanguis::perk_type const _type)
     : type_(_type),

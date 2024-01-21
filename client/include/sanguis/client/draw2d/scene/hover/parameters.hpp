@@ -3,7 +3,7 @@
 
 #include <sanguis/client/weapon_pair.hpp>
 #include <sanguis/client/draw2d/radius.hpp>
-#include <sanguis/client/draw2d/scene/hover/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/scene/hover/parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/client/load/hud/context_ref.hpp>

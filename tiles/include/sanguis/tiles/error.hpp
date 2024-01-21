@@ -1,7 +1,7 @@
 #ifndef SANGUIS_TILES_ERROR_HPP_INCLUDED
 #define SANGUIS_TILES_ERROR_HPP_INCLUDED
 
-#include <sanguis/tiles/error_fwd.hpp>
+#include <sanguis/tiles/error_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::tiles
 {

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_LOAD_CONTEXT_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_CONTEXT_HPP_INCLUDED
 
+#include <sanguis/client/load/context_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/model/context.hpp>
 #include <sanguis/client/load/resource/context.hpp>
 #include <sge/audio/loader_ref.hpp>

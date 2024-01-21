@@ -2,7 +2,7 @@
 #define SANGUIS_TOOLS_ANIMATIONS_SGE_SYSTEMS_HPP_INCLUDED
 
 #include <sanguis/tools/animations/sge_systems_fwd.hpp> // IWYU pragma: export
-#include <sge/systems/instance.hpp>
-#include <sge/systems/with_image2d.hpp>
+#include <sge/systems/instance.hpp> // IWYU pragma: keep
+#include <sge/systems/with_image2d.hpp> // IWYU pragma: keep
 
 #endif

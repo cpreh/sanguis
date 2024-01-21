@@ -3,8 +3,7 @@
 
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/client/load/model/weapon_category_unique_ptr.hpp>
-#include <fcppt/string.hpp>
-#include <fcppt/optional/comparison.hpp>
+#include <fcppt/optional/comparison.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>

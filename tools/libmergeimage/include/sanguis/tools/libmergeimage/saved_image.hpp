@@ -3,7 +3,7 @@
 
 #include <sanguis/model/image_name.hpp>
 #include <sanguis/tools/libmergeimage/path_count_pair_vector.hpp>
-#include <sanguis/tools/libmergeimage/saved_image_fwd.hpp>
+#include <sanguis/tools/libmergeimage/saved_image_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/tools/libmergeimage/symbol.hpp>
 
 namespace sanguis::tools::libmergeimage

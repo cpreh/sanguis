@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::entities::model
 {
 
-enum class decay_option;
+enum class decay_option; // IWYU pragma: export
 
 }
 

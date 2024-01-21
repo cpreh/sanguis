@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::entities
 {
 
-class load_parameters;
+class load_parameters; // IWYU pragma: export
 
 }
 

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_SOUND_MANAGER_HPP_INCLUDED
 #define SANGUIS_CLIENT_SOUND_MANAGER_HPP_INCLUDED
 
-#include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/sound_manager_fwd.hpp> // IWYU pragma: keep
 #include <sge/audio/sound/base_unique_ptr.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>

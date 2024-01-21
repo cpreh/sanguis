@@ -90,6 +90,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/not.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
+#include <fcppt/strong_typedef_assignment.hpp> // IWYU pragma: keep
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/container/make.hpp>

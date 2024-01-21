@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_EVENTS_INPUT_HPP_INCLUDED
 #define SANGUIS_CLIENT_EVENTS_INPUT_HPP_INCLUDED
 
-#include <sanguis/client/events/input_fwd.hpp>
+#include <sanguis/client/events/input_fwd.hpp> // IWYU pragma: keep
 #include <sge/input/event_base_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/config/external_begin.hpp>

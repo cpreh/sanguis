@@ -4,7 +4,7 @@
 namespace sanguis::client::perk
 {
 
-enum class category;
+enum class category; // IWYU pragma: export
 
 }
 

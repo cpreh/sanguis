@@ -4,7 +4,7 @@
 namespace sanguis::tiles
 {
 
-class cell;
+class cell; // IWYU pragma: export
 
 }
 

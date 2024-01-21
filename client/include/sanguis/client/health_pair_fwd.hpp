@@ -4,7 +4,7 @@
 namespace sanguis::client
 {
 
-class health_pair;
+class health_pair; // IWYU pragma: export
 
 }
 

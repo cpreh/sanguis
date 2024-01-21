@@ -4,7 +4,7 @@
 namespace sanguis::client::load::resource
 {
 
-class textures;
+class textures; // IWYU pragma: export
 
 }
 

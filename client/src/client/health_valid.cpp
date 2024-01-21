@@ -2,6 +2,7 @@
 #include <sanguis/client/health_valid.hpp>
 #include <sanguis/client/health_value.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 
 bool sanguis::client::health_valid(sanguis::client::health const _health)
 {

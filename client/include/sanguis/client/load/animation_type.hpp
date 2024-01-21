@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_LOAD_ANIMATION_TYPE_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_ANIMATION_TYPE_HPP_INCLUDED
 
-#include <sanguis/client/load/animation_type_fwd.hpp>
+#include <sanguis/client/load/animation_type_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::client::load
 {

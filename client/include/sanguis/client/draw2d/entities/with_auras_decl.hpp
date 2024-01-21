@@ -3,7 +3,7 @@
 
 #include <sanguis/aura_type.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/client/draw2d/entities/with_auras_fwd.hpp>
+#include <sanguis/client/draw2d/entities/with_auras_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/entities/with_auras_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>

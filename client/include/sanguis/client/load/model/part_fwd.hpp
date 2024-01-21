@@ -4,7 +4,7 @@
 namespace sanguis::client::load::model
 {
 
-class part;
+class part; // IWYU pragma: export
 
 }
 

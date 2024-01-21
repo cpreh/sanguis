@@ -4,7 +4,7 @@
 namespace sanguis::tiles
 {
 
-enum class error;
+enum class error; // IWYU pragma: export
 
 }
 

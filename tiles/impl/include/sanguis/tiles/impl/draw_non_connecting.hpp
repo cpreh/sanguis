@@ -4,6 +4,7 @@
 #include <sanguis/creator/min.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/sup.hpp>
+#include <sanguis/creator/tile_grid_fwd.hpp>
 #include <sanguis/tiles/cell_container.hpp>
 #include <sanguis/tiles/collection_ref.hpp>
 #include <sanguis/tiles/error.hpp>

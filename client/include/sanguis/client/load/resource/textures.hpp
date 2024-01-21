@@ -3,8 +3,7 @@
 
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/texture_name_map.hpp>
-#include <sge/image/size_type.hpp>
-#include <sge/image/color/any/object_fwd.hpp>
+#include <sanguis/client/load/resource/textures_fwd.hpp> // IWYU pragma: keep
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/image2d/system_ref.hpp>
 #include <sge/renderer/device/core_fwd.hpp>

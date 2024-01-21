@@ -19,7 +19,7 @@
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
-#include <fcppt/math/vector/output.hpp>
+#include <fcppt/math/vector/output.hpp> // IWYU pragma: keep
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

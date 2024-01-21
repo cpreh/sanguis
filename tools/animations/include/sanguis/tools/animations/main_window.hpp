@@ -5,7 +5,6 @@
 #include <sanguis/model/optional_animation_delay_fwd.hpp>
 #include <sanguis/model/part_name_fwd.hpp>
 #include <sanguis/model/weapon_category_name_fwd.hpp>
-#include <sanguis/tools/animations/frame.hpp>
 #include <sanguis/tools/animations/frame_container.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
 #include <sanguis/tools/animations/optional_animation_ref_fwd.hpp>
@@ -15,7 +14,7 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/clang_version_at_least.hpp>
-#include <fcppt/config/compiler.hpp>
+#include <fcppt/config/compiler.hpp> // IWYU pragma: keep
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

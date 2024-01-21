@@ -1,7 +1,7 @@
 #ifndef SANGUIS_TILES_LOG_HPP_INCLUDED
 #define SANGUIS_TILES_LOG_HPP_INCLUDED
 
-#include <sanguis/tiles/log_fwd.hpp>
+#include <sanguis/tiles/log_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/tiles/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>

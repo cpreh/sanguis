@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_PERK_CATEGORY_HPP_INCLUDED
 #define SANGUIS_CLIENT_PERK_CATEGORY_HPP_INCLUDED
 
-#include <sanguis/client/perk/category_fwd.hpp>
+#include <sanguis/client/perk/category_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::client::perk
 {

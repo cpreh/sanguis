@@ -23,6 +23,7 @@
 #include <sanguis/load/model/path_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float.hpp>

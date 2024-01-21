@@ -4,7 +4,7 @@
 namespace sanguis::tools::libmergeimage
 {
 
-class path_count_pair;
+class path_count_pair; // IWYU pragma: export
 
 }
 

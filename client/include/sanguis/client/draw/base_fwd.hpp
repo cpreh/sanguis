@@ -4,7 +4,7 @@
 namespace sanguis::client::draw
 {
 
-class base;
+class base; // IWYU pragma: export
 
 }
 

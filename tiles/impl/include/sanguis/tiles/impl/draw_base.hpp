@@ -2,12 +2,13 @@
 #define SANGUIS_TILES_IMPL_DRAW_BASE_HPP_INCLUDED
 
 #include <sanguis/creator/min.hpp>
-#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/sup.hpp>
 #include <sanguis/creator/tile_grid.hpp>
+#include <sanguis/creator/tile_size.hpp>
 #include <sanguis/tiles/cell.hpp>
 #include <sanguis/tiles/cell_container.hpp>
 #include <sanguis/tiles/pos.hpp>
+#include <sanguis/tiles/unit.hpp>
 #include <sanguis/tiles/impl/content_path.hpp>
 #include <sanguis/tiles/impl/get_content_function.hpp>
 #include <sanguis/tiles/impl/is_background.hpp>
@@ -19,7 +20,7 @@
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange_start_end.hpp>
 #include <fcppt/container/grid/pos_reference_impl.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_signed.hpp>
@@ -38,9 +39,9 @@ sanguis::tiles::cell_container draw_base(
     sanguis::tiles::impl::shift const &_shift,
     sanguis::tiles::impl::get_content_function const &_get_content)
 {
-  auto const tile_dim(
+  sanguis::tiles::pos const tile_dim{
       fcppt::math::vector::fill<sanguis::tiles::pos>(fcppt::cast::size<sanguis::tiles::unit>(
-          fcppt::cast::to_signed(sanguis::creator::tile_size::value))));
+          fcppt::cast::to_signed(sanguis::creator::tile_size::value)))};
 
   return fcppt::algorithm::map_optional<sanguis::tiles::cell_container>(
       fcppt::container::grid::make_pos_ref_crange_start_end(_grid, _min, _sup),

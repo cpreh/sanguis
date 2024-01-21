@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_HUD_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/client/load/hud/context_fwd.hpp>
+#include <sanguis/client/load/hud/context_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/hud/weapon_icon_map.hpp>
 #include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/texture/part_fwd.hpp>

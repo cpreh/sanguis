@@ -4,7 +4,7 @@
 namespace sanguis::client::events
 {
 
-class net_error;
+class net_error; // IWYU pragma: export
 
 }
 

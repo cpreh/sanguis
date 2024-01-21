@@ -4,7 +4,7 @@
 namespace sanguis::client::gui::hud
 {
 
-class weapon_tooltip;
+class weapon_tooltip; // IWYU pragma: export
 
 }
 

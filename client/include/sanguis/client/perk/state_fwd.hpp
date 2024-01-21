@@ -4,7 +4,7 @@
 namespace sanguis::client::perk
 {
 
-class state;
+class state; // IWYU pragma: export
 
 }
 

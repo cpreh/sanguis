@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_CONTROL_ENVIRONMENT_HPP_INCLUDED
 
 #include <sanguis/client/control/cursor_position_fwd.hpp>
-#include <sanguis/client/control/environment_fwd.hpp>
+#include <sanguis/client/control/environment_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/control/optional_attack_dest_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 

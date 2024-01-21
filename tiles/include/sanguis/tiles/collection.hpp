@@ -5,18 +5,17 @@
 #include <sanguis/creator/enable_if_tile.hpp>
 #include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/creator/tile.hpp>
-#include <sanguis/tiles/collection_fwd.hpp>
+#include <sanguis/tiles/collection_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/tiles/pair.hpp>
-#include <sanguis/tiles/pair_comparison.hpp>
-#include <sanguis/tiles/pair_std_hash.hpp>
+#include <sanguis/tiles/pair_comparison.hpp> // IWYU pragma: keep
+#include <sanguis/tiles/pair_std_hash.hpp> // IWYU pragma: keep
 #include <sanguis/tiles/set.hpp>
 #include <sanguis/tiles/symbol.hpp>
 #include <sge/image2d/system_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/fusion/container/set.hpp>
+#include <boost/fusion/container/set/set.hpp>
 #include <unordered_map>
-#include <tuple>
 #include <fcppt/config/external_end.hpp>
 
 namespace sanguis::tiles

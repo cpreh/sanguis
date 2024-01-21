@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d
 {
 
-enum class z_ordering;
+enum class z_ordering; // IWYU pragma: export
 
 }
 

@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::entities::model
 {
 
-class decay_time;
+class decay_time; // IWYU pragma: export
 
 }
 

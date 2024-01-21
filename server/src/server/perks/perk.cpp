@@ -4,6 +4,7 @@
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
 #include <sanguis/server/perks/perk.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 
 void sanguis::server::perks::perk::update(
     sanguis::server::entities::with_perks &, sanguis::server::environment::object &)

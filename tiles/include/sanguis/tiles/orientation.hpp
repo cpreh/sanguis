@@ -2,6 +2,6 @@
 #define SANGUIS_TILES_ORIENTATION_HPP_INCLUDED
 
 #include <sanguis/tiles/orientation_fwd.hpp> // IWYU pragma: export
-#include <fcppt/container/bitfield/object.hpp>
+#include <fcppt/container/bitfield/object_impl.hpp> // IWYU pragma: keep
 
 #endif

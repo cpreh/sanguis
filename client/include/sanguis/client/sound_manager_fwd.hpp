@@ -4,7 +4,7 @@
 namespace sanguis::client
 {
 
-class sound_manager;
+class sound_manager; // IWYU pragma: export
 
 }
 

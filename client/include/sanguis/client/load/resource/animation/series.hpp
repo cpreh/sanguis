@@ -1,10 +1,9 @@
 #ifndef SANGUIS_CLIENT_LOAD_RESOURCE_ANIMATION_SERIES_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_RESOURCE_ANIMATION_SERIES_HPP_INCLUDED
 
-#include <sanguis/client/load/resource/animation/entity.hpp>
+#include <sanguis/client/load/resource/animation/entity.hpp> // IWYU pragma: keep
 #include <sanguis/client/load/resource/animation/entity_vector.hpp>
-#include <sanguis/client/load/resource/animation/series_fwd.hpp>
-#include <sge/renderer/dim2.hpp>
+#include <sanguis/client/load/resource/animation/series_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis::client::load::resource::animation

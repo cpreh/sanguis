@@ -4,6 +4,7 @@
 #include <sanguis/client/load/primary_weapon_name.hpp>
 #include <sanguis/client/load/model/lookup_weapon_name.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/enum/array.hpp>
 #include <fcppt/enum/array_init.hpp>

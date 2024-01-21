@@ -7,7 +7,7 @@
 #include <sanguis/tiles/area_container_ref.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/reference_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>

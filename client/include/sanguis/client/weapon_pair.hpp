@@ -4,7 +4,7 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_weapon_description.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
-#include <sanguis/client/weapon_pair_fwd.hpp>
+#include <sanguis/client/weapon_pair_fwd.hpp> // IWYU pragma: keep
 
 namespace sanguis::client
 {

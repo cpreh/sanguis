@@ -4,7 +4,7 @@
 namespace sanguis::client::gui::hud
 {
 
-class object;
+class object; // IWYU pragma: export
 
 }
 

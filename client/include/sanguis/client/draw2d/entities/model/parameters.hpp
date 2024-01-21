@@ -8,7 +8,7 @@
 #include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/order_function.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>

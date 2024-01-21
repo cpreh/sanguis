@@ -6,16 +6,16 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_decl.hpp> // IWYU pragma: export
-#include <sanguis/client/draw2d/entities/with_auras_parameters_decl.hpp>
+#include <sanguis/client/draw2d/entities/with_auras_parameters_decl.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/size_or_texture_size.hpp>
 #include <sanguis/client/draw2d/sprite/normal/no_rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp> // IWYU pragma: keep
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
-#include <sanguis/client/load/auras/context.hpp>
-#include <sge/sprite/intrusive/connection.hpp>
+#include <sanguis/client/load/auras/context.hpp> // IWYU pragma: keep
+#include <sge/sprite/intrusive/connection.hpp> // IWYU pragma: keep
 #include <sge/sprite/roles/center.hpp>
 #include <sge/sprite/roles/color.hpp>
 #include <sge/sprite/roles/connection.hpp>
@@ -27,7 +27,7 @@
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp> // IWYU pragma: keep
 #include <fcppt/make_ref.hpp>
 #include <fcppt/use.hpp>
 #include <fcppt/config/external_begin.hpp>

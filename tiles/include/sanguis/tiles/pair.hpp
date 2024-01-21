@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/creator/is_tile.hpp>
-#include <sanguis/tiles/pair_fwd.hpp>
+#include <sanguis/tiles/pair_fwd.hpp> // IWYU pragma: keep
 #include <sanguis/tiles/symbol.hpp>
 #include <fcppt/tuple/object_impl.hpp>
 

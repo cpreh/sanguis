@@ -3,7 +3,7 @@
 
 #include <sanguis/weapon_attribute_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_diff_fwd.hpp>
-#include <sanguis/client/draw2d/scene/hover/weapon_attribute_fwd.hpp>
+#include <sanguis/client/draw2d/scene/hover/weapon_attribute_fwd.hpp> // IWYU pragma: keep
 #include <sge/font/object_ref.hpp>
 #include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>

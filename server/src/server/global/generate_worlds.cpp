@@ -36,6 +36,7 @@
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/not.hpp>
+#include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/enum/array_init.hpp>

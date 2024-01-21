@@ -4,7 +4,7 @@
 namespace sanguis::client::events
 {
 
-class tick;
+class tick; // IWYU pragma: export
 
 }
 

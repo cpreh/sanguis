@@ -4,7 +4,7 @@
 namespace sanguis::client::events
 {
 
-class menu;
+class menu; // IWYU pragma: export
 
 }
 

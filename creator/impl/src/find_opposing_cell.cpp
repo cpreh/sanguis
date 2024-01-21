@@ -3,6 +3,7 @@
 #include <sanguis/creator/impl/find_opposing_cell.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>

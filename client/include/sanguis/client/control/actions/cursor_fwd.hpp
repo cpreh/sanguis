@@ -4,7 +4,7 @@
 namespace sanguis::client::control::actions
 {
 
-class cursor;
+class cursor; // IWYU pragma: export
 
 }
 

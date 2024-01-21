@@ -4,7 +4,7 @@
 namespace sanguis::client::events
 {
 
-class overlay;
+class overlay; // IWYU pragma: export
 
 }
 

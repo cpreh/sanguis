@@ -4,7 +4,7 @@
 namespace sanguis::client::draw2d::sprite::animation
 {
 
-enum class loop_method;
+enum class loop_method; // IWYU pragma: export
 
 }
 

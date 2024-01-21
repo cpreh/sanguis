@@ -4,7 +4,7 @@
 namespace sanguis::client::gui::menu::callbacks
 {
 
-class object;
+class object; // IWYU pragma: export
 
 }
 
