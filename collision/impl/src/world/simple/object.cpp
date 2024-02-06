@@ -1,6 +1,6 @@
 #include <sanguis/collision/center.hpp> // NOLINT(misc-include-cleaner)
-#include <sanguis/collision/exception.hpp>
 #include <sanguis/collision/duration.hpp>
+#include <sanguis/collision/exception.hpp>
 #include <sanguis/collision/result_pair.hpp>
 #include <sanguis/collision/test_move.hpp>
 #include <sanguis/collision/impl/collides.hpp>

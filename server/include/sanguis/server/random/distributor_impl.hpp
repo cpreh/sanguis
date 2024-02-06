@@ -6,10 +6,10 @@
 #include <sanguis/server/random/distributor_decl.hpp> // IWYU pragma: export
 #include <sanguis/server/random/make_upper_bound.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/strong_typedef_assignment.hpp> // IWYU pragma: keep
 #include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp> // IWYU pragma: keep
 #include <fcppt/random/distribution/parameters/uniform_int_impl.hpp> // IWYU pragma: keep

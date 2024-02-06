@@ -7,8 +7,8 @@
 #include <sanguis/creator/impl/set_opening_tiles.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/text.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/math/vector/output.hpp> // NOLINT(misc-include-cleaner)

@@ -3,9 +3,9 @@
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/reference_comparison.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/optional/comparison.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>

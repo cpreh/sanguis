@@ -4,8 +4,8 @@
 #include <sanguis/client/config/settings/object_ref.hpp>
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
-#include <sanguis/client/gui/menu/callbacks/object.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
+#include <sanguis/client/gui/menu/callbacks/object.hpp>
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
 #include <sge/font/from_fcppt_string.hpp>
