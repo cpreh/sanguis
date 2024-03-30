@@ -138,7 +138,6 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/enum/array_init.hpp>
@@ -152,6 +151,7 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/reference.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/disable_gnu_gcc_warning.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
