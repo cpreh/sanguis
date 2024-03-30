@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/client/control/axis_direction_max.hpp>
 #include <sanguis/client/control/axis_direction_min.hpp>
 #include <sanguis/client/control/cursor_position.hpp>
@@ -21,7 +22,7 @@
 #include <sge/input/focus/event/key.hpp>
 #include <sge/input/key/code.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/cast/dynamic_fun.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -196,7 +197,6 @@ sanguis::client::control::actions::scale_type key_scale_type(sge::input::key::co
 {
   FCPPT_PP_PUSH_WARNING
   FCPPT_PP_DISABLE_CLANG_WARNING(-Wswitch-enum)
-
   switch (_code)
   {
   case sge::input::key::code::a:
@@ -208,10 +208,9 @@ sanguis::client::control::actions::scale_type key_scale_type(sge::input::key::co
   default:
     break;
   }
-
   FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw sanguis::exception{FCPPT_TEXT("Invalid key scale type!")};
 }
 
 sanguis::client::control::key_scale
@@ -223,7 +222,6 @@ key_scale_value(sge::input::key::code const _code, bool const _pressed)
 
   FCPPT_PP_PUSH_WARNING
   FCPPT_PP_DISABLE_CLANG_WARNING(-Wswitch-enum)
-
   switch (_code)
   {
   case sge::input::key::code::w:
@@ -235,10 +233,9 @@ key_scale_value(sge::input::key::code const _code, bool const _pressed)
   default:
     break;
   }
-
   FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw sanguis::exception{FCPPT_TEXT("Invalid key scale value!")};
 }
 
 }

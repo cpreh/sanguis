@@ -1,11 +1,12 @@
 #include <sanguis/tools/libmergeimage/count_type.hpp>
+#include <sanguis/tools/libmergeimage/exception.hpp>
 #include <sanguis/tools/libmergeimage/impl/best_size.hpp>
 #include <sanguis/tools/libmergeimage/impl/cell_size.hpp>
 #include <sanguis/tools/libmergeimage/impl/cells_in_dim.hpp>
 #include <sanguis/tools/libmergeimage/impl/max_exponent.hpp>
 #include <sanguis/tools/libmergeimage/impl/pow2.hpp>
 #include <sge/image/size_type.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/text.hpp>
 
 sge::image::size_type sanguis::tools::libmergeimage::impl::best_size(
     sanguis::tools::libmergeimage::count_type const _count,
@@ -23,5 +24,5 @@ sge::image::size_type sanguis::tools::libmergeimage::impl::best_size(
     }
   }
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw sanguis::tools::libmergeimage::exception{FCPPT_TEXT("best_size failed!")};
 }
