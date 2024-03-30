@@ -7,12 +7,17 @@
 #include <sanguis/server/weapons/factory/primary.hpp>
 #include <sanguis/server/weapons/factory/rocket_launcher.hpp>
 #include <sanguis/server/weapons/factory/shotgun.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sanguis::server::weapons::unique_ptr sanguis::server::weapons::factory::primary(
     sanguis::primary_weapon_type const _type,
     sanguis::server::weapons::factory::parameters const &_parameters)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_type)
   {
   case sanguis::primary_weapon_type::melee:
@@ -26,6 +31,7 @@ sanguis::server::weapons::unique_ptr sanguis::server::weapons::factory::primary(
   case sanguis::primary_weapon_type::rocket_launcher:
     return sanguis::server::weapons::factory::rocket_launcher(_parameters);
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_type);
 }

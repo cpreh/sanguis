@@ -4,7 +4,6 @@
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_grid.hpp>
-#include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>

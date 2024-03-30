@@ -3,11 +3,16 @@
 #include <sanguis/tiles/impl/error_image_colors.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sanguis::tiles::impl::error_image_color_pair
 sanguis::tiles::impl::error_image_colors(sanguis::tiles::error const _error)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_error)
   {
   case sanguis::tiles::error::missing_foreground:
@@ -23,6 +28,7 @@ sanguis::tiles::impl::error_image_colors(sanguis::tiles::error const _error)
         sge::image::color::any::object{sge::image::color::predef::white()},
         sge::image::color::any::object{sge::image::color::predef::blue()}};
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_error);
 }

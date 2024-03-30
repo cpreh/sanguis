@@ -3,7 +3,8 @@
 #include <sanguis/server/ai/tree/basic_sequence.hpp>
 #include <sanguis/server/ai/tree/container.hpp>
 #include <sanguis/server/ai/tree/sequence.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -34,7 +35,11 @@ sanguis::server::ai::tree::sequence::run(sanguis::duration const _duration)
     return sanguis::server::ai::status::success;
   }
 
-  switch ((*current_)->run(_duration))
+  sanguis::server::ai::status const status{(*current_)->run(_duration)};
+
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
+  switch (status)
   {
   case sanguis::server::ai::status::failure:
     current_ = this->get().begin();
@@ -47,6 +52,7 @@ sanguis::server::ai::tree::sequence::run(sanguis::duration const _duration)
   case sanguis::server::ai::status::running:
     return sanguis::server::ai::status::running;
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(status);
 }

@@ -10,7 +10,10 @@
 #include <sanguis/client/load/model/collection_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sanguis::client::draw2d::entities::buffs::unique_ptr
 sanguis::client::draw2d::entities::buffs::create(
@@ -20,6 +23,8 @@ sanguis::client::draw2d::entities::buffs::create(
     sanguis::client::draw2d::entities::model::object const &_model,
     sanguis::buff_type const _type)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_type)
   {
   case sanguis::buff_type::slow:
@@ -30,6 +35,7 @@ sanguis::client::draw2d::entities::buffs::create(
         fcppt::make_unique_ptr<sanguis::client::draw2d::entities::buffs::burn>(
             _diff_clock, _normal_system, _model_collection, _model));
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_type);
 }

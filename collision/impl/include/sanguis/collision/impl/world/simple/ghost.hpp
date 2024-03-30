@@ -19,6 +19,7 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_std_hash.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
+#include <cstdint>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
@@ -70,7 +71,7 @@ private:
 
   sanguis::collision::world::ghost_base &ghost_base_;
 
-  enum class body_status
+  enum class body_status : std::uint8_t
   {
     marked_for_deletion,
     normal

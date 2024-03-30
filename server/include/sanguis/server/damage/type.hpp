@@ -12,6 +12,7 @@ namespace sanguis::server::damage
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Wshadow)
 
+// NOLINTNEXTLINE(performance-enum-size)
 enum class type
 {
   normal,

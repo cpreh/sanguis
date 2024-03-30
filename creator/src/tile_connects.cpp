@@ -1,9 +1,14 @@
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_connects.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 bool sanguis::creator::tile_connects(sanguis::creator::tile const _tile)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_tile)
   {
   case sanguis::creator::tile::nothing:
@@ -19,6 +24,7 @@ bool sanguis::creator::tile_connects(sanguis::creator::tile const _tile)
   case sanguis::creator::tile::concrete_wall:
     return true;
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_tile);
 }

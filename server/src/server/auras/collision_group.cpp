@@ -2,11 +2,16 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/collision_group.hpp>
 #include <sanguis/server/auras/influence.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sanguis::collision::world::ghost_group sanguis::server::auras::collision_group(
     sanguis::server::team const _team, sanguis::server::auras::influence const _influence)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_influence)
   {
   case sanguis::server::auras::influence::buff:
@@ -17,7 +22,7 @@ sanguis::collision::world::ghost_group sanguis::server::auras::collision_group(
     case sanguis::server::team::monsters:
       return sanguis::collision::world::ghost_group::target_enemy;
     }
-    break;
+    throw fcppt::enum_::make_invalid(_team);
   case sanguis::server::auras::influence::debuff:
     switch (_team)
     {
@@ -26,8 +31,10 @@ sanguis::collision::world::ghost_group sanguis::server::auras::collision_group(
     case sanguis::server::team::monsters:
       return sanguis::collision::world::ghost_group::target_player;
     }
-    break;
+    throw fcppt::enum_::make_invalid(_team);
   }
 
-  FCPPT_ASSERT_UNREACHABLE;
+  FCPPT_PP_POP_WARNING
+
+  throw fcppt::enum_::make_invalid(_influence);
 }

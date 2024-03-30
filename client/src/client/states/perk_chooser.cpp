@@ -17,8 +17,9 @@
 #include <sanguis/client/states/running.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -57,7 +58,11 @@ sanguis::client::states::perk_chooser::react(sanguis::client::events::action con
       [this] { return this->forward_event(); },
       [this](sanguis::client::control::actions::nullary const &_nullary)
       {
-        switch (_nullary.type())
+        sanguis::client::control::actions::nullary_type const action{_nullary.type()};
+
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
+        switch (action)
         {
         case sanguis::client::control::actions::nullary_type::perk_menu:
           return this->transit<sanguis::client::states::ingame>();
@@ -70,8 +75,9 @@ sanguis::client::states::perk_chooser::react(sanguis::client::events::action con
         case sanguis::client::control::actions::nullary_type::reload_secondary_weapon:
           return this->forward_event();
         }
+        FCPPT_PP_POP_WARNING
 
-        FCPPT_ASSERT_UNREACHABLE;
+        throw fcppt::enum_::make_invalid(action);
       });
 }
 

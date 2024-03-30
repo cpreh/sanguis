@@ -13,8 +13,11 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
 #include <fcppt/optional/bind.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sanguis::client::draw2d::entities::optional_own_unique_ptr
 sanguis::client::draw2d::entities::enemy_spawn_particle(
@@ -23,6 +26,8 @@ sanguis::client::draw2d::entities::enemy_spawn_particle(
     sanguis::client::draw2d::sprite::center const &_center,
     sanguis::creator::optional_background_tile const _background_tile)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_enemy_type)
   {
   case sanguis::creator::enemy_type::zombie00:
@@ -31,6 +36,8 @@ sanguis::client::draw2d::entities::enemy_spawn_particle(
         _background_tile,
         [&_load_parameters, _center](sanguis::creator::background_tile const _tile)
         {
+          FCPPT_PP_PUSH_WARNING
+          FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
           switch (_tile)
           {
           case sanguis::creator::background_tile::grass:
@@ -47,8 +54,9 @@ sanguis::client::draw2d::entities::enemy_spawn_particle(
           case sanguis::creator::background_tile::asphalt:
             return sanguis::client::draw2d::entities::optional_own_unique_ptr();
           }
+          FCPPT_PP_POP_WARNING
 
-          FCPPT_ASSERT_UNREACHABLE;
+          throw fcppt::enum_::make_invalid(_tile);
         });
   case sanguis::creator::enemy_type::wolf_black:
   case sanguis::creator::enemy_type::wolf_brown:
@@ -60,6 +68,7 @@ sanguis::client::draw2d::entities::enemy_spawn_particle(
   case sanguis::creator::enemy_type::reaper:
     return sanguis::client::draw2d::entities::optional_own_unique_ptr();
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_enemy_type);
 }

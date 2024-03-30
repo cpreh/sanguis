@@ -7,8 +7,11 @@
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/enum/array_init.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sanguis::client::draw2d::scene::state::array
 sanguis::client::draw2d::scene::state::create(sge::renderer::device::ffp_ref const _renderer)
@@ -16,6 +19,8 @@ sanguis::client::draw2d::scene::state::create(sge::renderer::device::ffp_ref con
   return fcppt::enum_::array_init<sanguis::client::draw2d::scene::state::array>(
       [&_renderer](sanguis::client::draw2d::z_ordering const _z_ordering)
       {
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
         switch (_z_ordering)
         {
         case sanguis::client::draw2d::z_ordering::ground:
@@ -34,7 +39,8 @@ sanguis::client::draw2d::scene::state::create(sge::renderer::device::ffp_ref con
           return fcppt::unique_ptr_to_base<sanguis::client::draw2d::scene::state::base>(
               fcppt::make_unique_ptr<sanguis::client::draw2d::scene::state::text>(_renderer));
         }
+        FCPPT_PP_POP_WARNING
 
-        FCPPT_ASSERT_UNREACHABLE;
+        throw fcppt::enum_::make_invalid(_z_ordering);
       });
 }

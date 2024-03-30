@@ -19,6 +19,7 @@
 #include <fcppt/math/vector/static.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/maybe_multi.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/tuple/make.hpp>
@@ -49,7 +50,7 @@ sanguis::collision::optional_result_pair sanguis::collision::world::body_body(
 
         sanguis::collision::unit const one(fcppt::literal<sanguis::collision::unit>(1));
 
-        auto const divisor(one / _mass1 + one / _mass2);
+        auto const divisor{one / _mass1 + one / _mass2};
 
         sanguis::collision::impl::circle const circle1(
             sanguis::collision::impl::world::make_circle(_body1));
@@ -57,64 +58,28 @@ sanguis::collision::optional_result_pair sanguis::collision::world::body_body(
         sanguis::collision::impl::circle const circle2(
             sanguis::collision::impl::world::make_circle(_body2));
 
-        return
-				sanguis::collision::impl::collides(
-					circle1,
-					circle2
-				)
-				?
-					optional_impulse(
-						fcppt::literal<
-							sanguis::collision::unit
-						>(
-							1.F
-						)
-						*
-						boost::units::si::meter_per_second
-						/
-						divisor
-					)
-				:
-					sanguis::collision::impl::collides(
-						sanguis::collision::impl::move_circle(
-							circle1,
-							_body1.speed(),
-							_duration
-						),
-						sanguis::collision::impl::move_circle(
-							circle2,
-							_body2.speed(),
-							_duration
-						)
-					)
-					?
-						optional_impulse{
-							(
-								-(
-									one
-									+
-									elasticity
-								)
-								*
-								// TODO(philipp): Make a dot function that respects boost units
-								fcppt::math::vector::dot(
-									fcppt::math::vector::map(
-										_body1.speed()
-										-
-										_body2.speed(),
-										fcppt::boost_units_value{}
-									),
-									_normal
-								)
-								*
-								boost::units::si::meter_per_second
-							)
-							/
-							divisor
-						}
-					:
-						optional_impulse{}
-				;
+        return sanguis::collision::impl::collides(circle1, circle2)
+                   ? optional_impulse(
+                         fcppt::literal<sanguis::collision::unit>(1.F) *
+                         boost::units::si::meter_per_second / divisor)
+                   : fcppt::optional::make_if(
+                         sanguis::collision::impl::collides(
+                             sanguis::collision::impl::move_circle(
+                                 circle1, _body1.speed(), _duration),
+                             sanguis::collision::impl::move_circle(
+                                 circle2, _body2.speed(), _duration)),
+                         [one, elasticity, &_body1, &_body2, &_normal, divisor]
+                         {
+                           return (-(one + elasticity) *
+                                   // TODO(philipp): Make a dot function that respects boost units
+                                   fcppt::math::vector::dot(
+                                       fcppt::math::vector::map(
+                                           _body1.speed() - _body2.speed(),
+                                           fcppt::boost_units_value{}),
+                                       _normal) *
+                                   boost::units::si::meter_per_second) /
+                                  divisor;
+                         });
       });
 
   return fcppt::optional::maybe_multi(

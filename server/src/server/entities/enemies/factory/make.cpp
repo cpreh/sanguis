@@ -23,7 +23,10 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -57,7 +60,11 @@ sanguis::server::entities::with_id_unique_ptr sanguis::server::entities::enemies
       _parameters.spawn_owner(),
       std::move(_auras));
 
-  switch (_parameters.enemy_kind())
+  sanguis::creator::enemy_kind const enemy_kind{_parameters.enemy_kind()};
+
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
+  switch (enemy_kind)
   {
   case sanguis::creator::enemy_kind::normal:
   {
@@ -85,6 +92,7 @@ sanguis::server::entities::with_id_unique_ptr sanguis::server::entities::enemies
     return sanguis::server::entities::enemies::factory::make_boss(
         fcppt::make_ref(_parameters.random_generator()), std::move(parameters));
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(enemy_kind);
 }

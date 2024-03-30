@@ -4,11 +4,16 @@
 #include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/cheat/weapon_type.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sanguis::optional_weapon_type
 sanguis::server::cheat::weapon_type(sanguis::cheat_type const _cheat_type)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_cheat_type)
   {
   case sanguis::cheat_type::auras:
@@ -34,6 +39,7 @@ sanguis::server::cheat::weapon_type(sanguis::cheat_type const _cheat_type)
     return sanguis::optional_weapon_type{
         sanguis::weapon_type(sanguis::primary_weapon_type::rocket_launcher)};
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_cheat_type);
 }

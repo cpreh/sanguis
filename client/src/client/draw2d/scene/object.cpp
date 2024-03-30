@@ -327,7 +327,7 @@ void sanguis::client::draw2d::scene::object::process_message(
       *this,
       dispatcher_type::default_callback{
           [this](sanguis::messages::server::base const &_inner_message)
-          { return this->process_default_msg(_inner_message); }});
+          { this->process_default_msg(_inner_message); }});
 }
 
 void sanguis::client::draw2d::scene::object::update(

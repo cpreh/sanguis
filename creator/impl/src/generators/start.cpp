@@ -25,11 +25,14 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/enum/array_init.hpp>
+#include <fcppt/enum/make_invalid.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -95,6 +98,8 @@ sanguis::creator::impl::generators::start(sanguis::creator::impl::parameters con
               return sanguis::creator::opening_container{};
             }
 
+            FCPPT_PP_PUSH_WARNING
+            FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
             switch (_opening_type)
             {
             case sanguis::creator::opening_type::entry:
@@ -103,7 +108,9 @@ sanguis::creator::impl::generators::start(sanguis::creator::impl::parameters con
               return sanguis::creator::opening_container{exit_portal};
             }
 
-            FCPPT_ASSERT_UNREACHABLE;
+            FCPPT_PP_POP_WARNING
+
+            throw fcppt::enum_::make_invalid(_opening_type);
           }),
       sanguis::creator::spawn_container(),
       sanguis::creator::destructible_container{sanguis::creator::destructible(

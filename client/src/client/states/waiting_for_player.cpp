@@ -18,7 +18,7 @@
 #include <sanguis/messages/server/add_own_player.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
@@ -26,6 +26,7 @@
 #include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -68,7 +69,11 @@ sanguis::client::states::waiting_for_player::react(sanguis::client::events::acti
       fcppt::variant::to_optional<sanguis::client::control::actions::nullary>(_event.value().get()),
       [this](sanguis::client::control::actions::nullary const &_nullary)
       {
-        switch (_nullary.type())
+        sanguis::client::control::actions::nullary_type const action{_nullary.type()};
+
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
+        switch (action)
         {
         case sanguis::client::control::actions::nullary_type::escape:
           this->context<sanguis::client::machine>().quit();
@@ -83,8 +88,9 @@ sanguis::client::states::waiting_for_player::react(sanguis::client::events::acti
         case sanguis::client::control::actions::nullary_type::reload_secondary_weapon:
           return;
         }
+        FCPPT_PP_POP_WARNING
 
-        FCPPT_ASSERT_UNREACHABLE;
+        throw fcppt::enum_::make_invalid(action);
       });
 
   return this->discard_event();

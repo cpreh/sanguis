@@ -142,6 +142,7 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/enum/array_init.hpp>
+#include <fcppt/enum/make_invalid.hpp>
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/out.hpp>
@@ -736,7 +737,12 @@ void sanguis::server::world::object::insert_spawns(
 {
   for (sanguis::creator::spawn const &spawn : _spawns)
   {
-    switch (spawn.spawn_type())
+    sanguis::creator::spawn_type const spawn_type{spawn.spawn_type()};
+
+    FCPPT_PP_PUSH_WARNING
+    FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
+    switch (spawn_type)
+
     {
     case sanguis::creator::spawn_type::single:
       this->insert(sanguis::server::world::generate_single_spawns(
@@ -758,8 +764,9 @@ void sanguis::server::world::object::insert_spawns(
           difficulty_));
       continue;
     }
+    FCPPT_PP_POP_WARNING
 
-    FCPPT_ASSERT_UNREACHABLE;
+    throw fcppt::enum_::make_invalid(spawn_type);
   }
 }
 

@@ -38,8 +38,11 @@
 #include <fcppt/not.hpp>
 #include <fcppt/strong_typedef_arithmetic.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/enum/array_init.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -76,14 +79,17 @@ sanguis::server::global::generate_worlds(sanguis::server::world::parameters cons
           fcppt::enum_::array_init<sanguis::creator::opening_count_array>(
               [](sanguis::creator::opening_type const _type)
               {
+                FCPPT_PP_PUSH_WARNING
+                FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
                 switch (_type)
                 {
                 case sanguis::creator::opening_type::entry:
                 case sanguis::creator::opening_type::exit:
                   return sanguis::creator::opening_count{1U};
                 }
+                FCPPT_PP_POP_WARNING
 
-                FCPPT_ASSERT_UNREACHABLE;
+                throw fcppt::enum_::make_invalid(_type);
               }),
           sanguis::creator::spawn_boss{false})));
 
@@ -97,14 +103,17 @@ sanguis::server::global::generate_worlds(sanguis::server::world::parameters cons
         fcppt::enum_::array_init<sanguis::creator::opening_count_array>(
             [](sanguis::creator::opening_type const _opening_type)
             {
+              FCPPT_PP_PUSH_WARNING
+              FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
               switch (_opening_type)
               {
               case sanguis::creator::opening_type::entry:
               case sanguis::creator::opening_type::exit:
                 return sanguis::creator::opening_count{1U};
               }
+              FCPPT_PP_POP_WARNING
 
-              FCPPT_ASSERT_UNREACHABLE;
+              throw fcppt::enum_::make_invalid(_opening_type);
             }),
         sanguis::creator::spawn_boss{world_id == sanguis::world_id{1U}},
         world_id,

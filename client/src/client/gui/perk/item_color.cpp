@@ -3,11 +3,16 @@
 #include <sge/gui/text_color.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sge::gui::text_color
 sanguis::client::gui::perk::item_color(sanguis::client::perk::choosable_state const _state)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_state)
   {
   case sanguis::client::perk::choosable_state::ok:
@@ -20,6 +25,7 @@ sanguis::client::gui::perk::item_color(sanguis::client::perk::choosable_state co
   case sanguis::client::perk::choosable_state::level_up:
     return sge::gui::text_color{sge::image::color::any::object{sge::image::color::predef::black()}};
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_state);
 }

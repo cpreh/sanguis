@@ -112,8 +112,8 @@ sanguis::collision::impl::world::simple::object::activate_body(
     fcppt::reference<sanguis::collision::world::body> const _body,
     sanguis::collision::world::created const _created)
 {
-  sanguis::collision::impl::world::simple::body &body(
-      fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::body &>(_body.get()));
+  auto &body{
+      fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::body &>(_body.get())};
 
   if (fcppt::not_(this->body_sets_[body.collision_group()].insert(fcppt::make_ref(body)).second))
   {
@@ -137,8 +137,8 @@ sanguis::collision::world::body_exit_container
 sanguis::collision::impl::world::simple::object::deactivate_body(
     fcppt::reference<sanguis::collision::world::body> const _body)
 {
-  sanguis::collision::impl::world::simple::body &body(
-      fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::body &>(_body.get()));
+  auto &body{
+      fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::body &>(_body.get())};
 
   if (this->body_sets_[body.collision_group()].erase(fcppt::make_ref(body)) != 1U)
   {
@@ -171,8 +171,8 @@ sanguis::collision::world::body_enter_container
 sanguis::collision::impl::world::simple::object::activate_ghost(
     fcppt::reference<sanguis::collision::world::ghost> const _ghost)
 {
-  sanguis::collision::impl::world::simple::ghost &ghost(
-      fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::ghost &>(_ghost.get()));
+  auto &ghost{
+      fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::ghost &>(_ghost.get())};
 
   if(fcppt::not_(this->ghost_sets_[ghost.collision_group()].insert(fcppt::make_ref(ghost)).second))
   {
@@ -194,8 +194,8 @@ sanguis::collision::world::body_exit_container
 sanguis::collision::impl::world::simple::object::deactivate_ghost(
     fcppt::reference<sanguis::collision::world::ghost> const _ghost)
 {
-  sanguis::collision::impl::world::simple::ghost &ghost(
-      fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::ghost &>(_ghost.get()));
+  auto &ghost{
+      fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::ghost &>(_ghost.get())};
 
   if (this->ghost_sets_[ghost.collision_group()].erase(fcppt::make_ref(ghost)) != 1U)
   {

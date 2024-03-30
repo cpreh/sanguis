@@ -7,6 +7,9 @@
 #include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/ai/tree/leaf.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -37,6 +40,8 @@ sanguis::server::ai::status sanguis::server::ai::tree::leaf::run(sanguis::durati
 
   sanguis::server::ai::status const result{behavior_->update(_duration)};
 
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (result)
   {
   case sanguis::server::ai::status::running:
@@ -49,6 +54,7 @@ sanguis::server::ai::status sanguis::server::ai::tree::leaf::run(sanguis::durati
 
     behavior_->context().clear_path();
   }
+  FCPPT_PP_POP_WARNING
 
   return result;
 }

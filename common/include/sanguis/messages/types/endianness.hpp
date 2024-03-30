@@ -9,7 +9,7 @@
 namespace sanguis::messages::types
 {
 
-inline constexpr std::endian endianness() { return alda::serialization::endianness(); }
+constexpr std::endian endianness() { return alda::serialization::endianness(); }
 
 }
 

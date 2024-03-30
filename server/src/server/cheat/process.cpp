@@ -32,10 +32,13 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/join.hpp>
+#include <fcppt/enum/make_invalid.hpp>
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 void sanguis::server::cheat::process(
     sanguis::server::entities::player &_player,
@@ -52,6 +55,8 @@ void sanguis::server::cheat::process(
       [&_weapon_parameters, &_player, _cheat_type, &_unicast_callback](
           fcppt::reference<sanguis::server::environment::object> const _environment)
       {
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
         switch (_cheat_type)
         {
         case sanguis::cheat_type::auras:
@@ -139,6 +144,8 @@ void sanguis::server::cheat::process(
           return;
         }
 
-        FCPPT_ASSERT_UNREACHABLE;
+        FCPPT_PP_POP_WARNING
+
+        throw fcppt::enum_::make_invalid(_cheat_type);
       });
 }

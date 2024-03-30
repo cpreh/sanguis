@@ -4,7 +4,10 @@
 #include <sanguis/client/gui/hud/weapon_name.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/variant/match.hpp>
 
 sge::font::string sanguis::client::gui::hud::weapon_name(sanguis::weapon_type const &_weapon_type)
@@ -16,6 +19,8 @@ sge::font::string sanguis::client::gui::hud::weapon_name(sanguis::weapon_type co
 #define SANGUIS_WEAPON_NAME_PRIMARY_CASE(name, value) \
   case sanguis::primary_weapon_type::name: \
     return value
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
         switch (_primary_type)
         {
           SANGUIS_WEAPON_NAME_PRIMARY_CASE(melee, SGE_FONT_LIT("Melee"));
@@ -28,16 +33,19 @@ sge::font::string sanguis::client::gui::hud::weapon_name(sanguis::weapon_type co
 
           SANGUIS_WEAPON_NAME_PRIMARY_CASE(rocket_launcher, SGE_FONT_LIT("Rocket Launcher"));
         }
+        FCPPT_PP_POP_WARNING
 
 #undef SANGUIS_WEAPON_NAME_PRIMARY_CASE
 
-        FCPPT_ASSERT_UNREACHABLE;
+        throw fcppt::enum_::make_invalid(_primary_type);
       },
       [](sanguis::secondary_weapon_type const _secondary_type)
       {
 #define SANGUIS_WEAPON_NAME_SECONDARY_CASE(name, value) \
   case sanguis::secondary_weapon_type::name: \
     return value
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
         switch (_secondary_type)
         {
           SANGUIS_WEAPON_NAME_SECONDARY_CASE(grenade, SGE_FONT_LIT("Grenade"));
@@ -46,9 +54,10 @@ sge::font::string sanguis::client::gui::hud::weapon_name(sanguis::weapon_type co
 
           SANGUIS_WEAPON_NAME_SECONDARY_CASE(spider, SGE_FONT_LIT("Spider"));
         }
+        FCPPT_PP_POP_WARNING
 
 #undef SANGUIS_WEAPON_NAME_SECONDARY_CASE
 
-        FCPPT_ASSERT_UNREACHABLE;
+        throw fcppt::enum_::make_invalid(_secondary_type);
       });
 }

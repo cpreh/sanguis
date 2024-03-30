@@ -6,6 +6,7 @@
 namespace sanguis::creator
 {
 
+// NOLINTNEXTLINE(performance-enum-size)
 enum class background_tile
 {
   asphalt,

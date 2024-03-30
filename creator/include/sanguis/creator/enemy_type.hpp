@@ -6,6 +6,7 @@
 namespace sanguis::creator
 {
 
+// NOLINTNEXTLINE(performance-enum-size)
 enum class enemy_type
 {
   wolf_black,

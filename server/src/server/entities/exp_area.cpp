@@ -82,8 +82,8 @@ boost::logic::tribool sanguis::server::entities::exp_area::can_collide_with(
 void sanguis::server::entities::exp_area::on_body_enter(
     sanguis::collision::world::body_base_ref const _base, sanguis::collision::world::created)
 {
-  sanguis::server::entities::player &entity(
-      fcppt::cast::static_downcast<sanguis::server::entities::player &>(_base.get()));
+  auto &entity{
+      fcppt::cast::static_downcast<sanguis::server::entities::player &>(_base.get())};
 
   player_links_.insert(std::make_pair(fcppt::make_ref(entity), entity.link()));
 }

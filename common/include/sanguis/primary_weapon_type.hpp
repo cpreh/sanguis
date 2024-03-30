@@ -6,6 +6,7 @@
 namespace sanguis
 {
 
+// NOLINTNEXTLINE(performance-enum-size)
 enum class primary_weapon_type
 {
   melee,

@@ -18,7 +18,10 @@
 #include <sanguis/client/load/auras/context_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -36,6 +39,8 @@ sanguis::client::draw2d::entities::unique_ptr sanguis::client::draw2d::factory::
     sanguis::buff_type_vector &&_buffs,
     sanguis::client::health_pair const _health_pair)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_friend_type)
   {
   case sanguis::friend_type::spider:
@@ -68,6 +73,7 @@ sanguis::client::draw2d::entities::unique_ptr sanguis::client::draw2d::factory::
             std::move(_buffs),
             _health_pair));
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_friend_type);
 }

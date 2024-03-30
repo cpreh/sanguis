@@ -25,6 +25,8 @@ sanguis::tiles::impl::make_pair(sanguis::tiles::impl::neighbors<Tile> _neighbors
     return result_type(pair_type(range[0], range[0]));
   case 2:
     return result_type(pair_type(range[0], range[1]));
+  default:
+    break;
   }
 
   return result_type();

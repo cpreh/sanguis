@@ -4,7 +4,10 @@
 #include <sanguis/load/weapon_pickup_name.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/variant/match.hpp>
 
 fcppt::string sanguis::load::weapon_pickup_name(sanguis::weapon_type const &_type)
@@ -13,6 +16,8 @@ fcppt::string sanguis::load::weapon_pickup_name(sanguis::weapon_type const &_typ
       _type,
       [](sanguis::primary_weapon_type const _primary_type) -> fcppt::string
       {
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
         switch (_primary_type)
         {
         case sanguis::primary_weapon_type::pistol:
@@ -26,11 +31,14 @@ fcppt::string sanguis::load::weapon_pickup_name(sanguis::weapon_type const &_typ
           // TODO(philipp): Add a placeholder texture here
           break;
         }
+        FCPPT_PP_POP_WARNING
 
-        FCPPT_ASSERT_UNREACHABLE;
+        throw fcppt::enum_::make_invalid(_primary_type);
       },
       [](sanguis::secondary_weapon_type const _secondary_type) -> fcppt::string
       {
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
         switch (_secondary_type)
         {
         case sanguis::secondary_weapon_type::grenade:
@@ -40,7 +48,8 @@ fcppt::string sanguis::load::weapon_pickup_name(sanguis::weapon_type const &_typ
         case sanguis::secondary_weapon_type::spider:
           return FCPPT_TEXT("monster");
         }
+        FCPPT_PP_POP_WARNING
 
-        FCPPT_ASSERT_UNREACHABLE;
+        throw fcppt::enum_::make_invalid(_secondary_type);
       });
 }

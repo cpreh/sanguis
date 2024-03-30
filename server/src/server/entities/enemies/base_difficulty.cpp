@@ -2,11 +2,16 @@
 #include <sanguis/server/entities/enemies/base_difficulty.hpp>
 #include <sanguis/server/entities/enemies/difficulty_value.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 sanguis::server::entities::enemies::difficulty_value
 sanguis::server::entities::enemies::base_difficulty(sanguis::creator::enemy_type const _enemy_type)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_enemy_type)
   {
   case sanguis::creator::enemy_type::wolf_black:
@@ -37,6 +42,7 @@ sanguis::server::entities::enemies::base_difficulty(sanguis::creator::enemy_type
         20 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
     );
   }
+  FCPPT_PP_POP_WARNING
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_enemy_type);
 }

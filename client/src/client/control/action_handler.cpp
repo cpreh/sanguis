@@ -53,6 +53,7 @@
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -161,6 +162,8 @@ void sanguis::client::control::action_handler::handle_action(
 void sanguis::client::control::action_handler::handle_binary_action(
     sanguis::client::control::actions::binary const &_action)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_action.type())
   {
   case sanguis::client::control::actions::binary_type::shoot_primary:
@@ -170,6 +173,7 @@ void sanguis::client::control::action_handler::handle_binary_action(
     this->handle_shooting(_action.value(), sanguis::is_primary_weapon(false));
     return;
   }
+  FCPPT_PP_POP_WARNING
 }
 
 void sanguis::client::control::action_handler::handle_cursor_action(
@@ -202,6 +206,8 @@ void sanguis::client::control::action_handler::handle_cursor_action(
 void sanguis::client::control::action_handler::handle_nullary_action(
     sanguis::client::control::actions::nullary const &_action)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_action.type())
   {
   case sanguis::client::control::actions::nullary_type::change_world:
@@ -226,6 +232,7 @@ void sanguis::client::control::action_handler::handle_nullary_action(
   case sanguis::client::control::actions::nullary_type::console:
     break;
   }
+  FCPPT_PP_POP_WARNING
 }
 
 void sanguis::client::control::action_handler::handle_scale_action(
@@ -233,6 +240,8 @@ void sanguis::client::control::action_handler::handle_scale_action(
 {
   sanguis::client::control::key_scale const scale(_action.get());
 
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_action.type())
   {
   case sanguis::client::control::actions::scale_type::horizontal_move:
@@ -244,6 +253,7 @@ void sanguis::client::control::action_handler::handle_scale_action(
 
     return;
   }
+  FCPPT_PP_POP_WARNING
 }
 
 sanguis::client::control::optional_cursor_position const &

@@ -10,7 +10,7 @@ namespace sanguis::client::draw2d::scene::world::sprite
 
 struct compare
 {
-  inline bool operator()(
+  bool operator()(
       sanguis::client::draw2d::scene::world::sprite::object const &_left,
       sanguis::client::draw2d::scene::world::sprite::object const &_right) const
   {

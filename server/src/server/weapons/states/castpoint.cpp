@@ -20,6 +20,7 @@
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -71,6 +72,8 @@ sanguis::server::weapons::states::castpoint::react(sanguis::server::weapons::eve
       },
       [&owner, this](sanguis::server::weapons::target const &_target)
       {
+        FCPPT_PP_PUSH_WARNING
+        FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
         switch (this->context<sanguis::server::weapons::weapon>().do_attack(
             sanguis::server::weapons::attack(
                 fcppt::optional::maybe(
@@ -97,6 +100,7 @@ sanguis::server::weapons::states::castpoint::react(sanguis::server::weapons::eve
         case sanguis::server::weapons::attack_result::failure:
           break;
         }
+        FCPPT_PP_POP_WARNING
 
         if (cancelled_)
         {
