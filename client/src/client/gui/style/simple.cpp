@@ -30,6 +30,9 @@
 #include <fcppt/math/dim/null.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
+#include <fcppt/preprocessor/ignore_dangling_reference.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -239,6 +242,8 @@ void sanguis::client::gui::style::simple::draw_transparent_frame(
 {
   const sge::rucksack::rect::value_type tilesize{12};
 
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_IGNORE_DANGLING_REFERENCE
   for (auto const &tile :
        {std::make_pair(sge::rucksack::vector{0, 0}, FCPPT_TEXT("hud_frame_transparent_nw")),
         std::make_pair(
@@ -256,6 +261,7 @@ void sanguis::client::gui::style::simple::draw_transparent_frame(
 
     _renderer.draw_image(_context, part, _area.pos() + tile.first);
   }
+  FCPPT_PP_POP_WARNING
 
   sge::texture::part const &part_v(textures_->load(
       sanguis::client::load::resource::texture_identifier{FCPPT_TEXT("hud_frame_transparent_v")}));
