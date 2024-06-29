@@ -1,6 +1,5 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service_callback.hpp>
-#include <sanguis/log_level_streams.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/create_systems.hpp>
 #include <sanguis/client/log_location.hpp>
@@ -43,14 +42,15 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/context_reference.hpp>
+#include <fcppt/log/default_level_streams_impl.hpp>
 #include <fcppt/log/fatal.hpp>
-#include <fcppt/log/level_stream.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
+#include <fcppt/log/standard_level_stream.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
@@ -73,7 +73,7 @@ sanguis::client::object::object(
       log_{
           _log_context,
           sanguis::client::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("object")})},
+          fcppt::log::name{FCPPT_TEXT("object")}},
       settings_(_log_context, sanguis::client::config::settings::file()),
       saver_(fcppt::make_cref(settings_)),
       io_service_(),
@@ -196,11 +196,12 @@ void sanguis::client::object::create_server(alda::net::port const _port)
   else
   {
     // The server and the client both do logging and this ensures
-    // that it's thread-safe
-    for (fcppt::log::level_stream &element : sanguis::log_level_streams())
+    // that it's thread-safe.
+    for (fcppt::unique_ptr<fcppt::log::standard_level_stream> &element :
+         fcppt::log::default_level_streams_impl())
     {
       // NOLINTNEXTLINE(readability-static-accessed-through-instance)
-      element.get().sync_with_stdio(true);
+      element->dest().sync_with_stdio(true);
     }
   }
 

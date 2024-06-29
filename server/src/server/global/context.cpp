@@ -75,7 +75,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/optional/bind.hpp>
@@ -103,7 +102,7 @@ sanguis::server::global::context::context(
       log_{
           _log_context,
           sanguis::server::log_location() / fcppt::log::name{FCPPT_TEXT("global")},
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("context")})},
+          fcppt::log::name{FCPPT_TEXT("context")}},
       weapons_log_{
           _log_context,
       },

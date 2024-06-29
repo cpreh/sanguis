@@ -55,7 +55,6 @@
 #include <fcppt/container/grid/sup_from_pos.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
 #include <fcppt/math/vector/fill.hpp>
@@ -200,11 +199,9 @@ sanguis::client::draw2d::scene::world::state::state(
 		_log_context,
 		sanguis::client::draw2d::scene::world::log_location(),
 		// TODO(philipp): Add world name?
-		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("state")
 			}
-		)
 	},
 	renderer_(
 		_renderer

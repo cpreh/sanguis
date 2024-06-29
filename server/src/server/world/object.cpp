@@ -145,7 +145,6 @@
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -175,7 +174,7 @@ sanguis::server::world::object::object(
           fcppt::make_ref(_parameters.log_context()),
           sanguis::server::log_location(),
           // TODO(philipp): Add world name?
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("world")})},
+          fcppt::log::name{FCPPT_TEXT("world")}},
       info_(
           _id,
           std::move(_name),

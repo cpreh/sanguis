@@ -84,7 +84,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -103,7 +102,7 @@ sanguis::client::states::running::running(my_context _ctx)
       log_{
           this->context<sanguis::client::machine>().log_context(),
           sanguis::client::states::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("running")})},
+          fcppt::log::name{FCPPT_TEXT("running")}},
       hud_resources_(
           this->context<sanguis::client::machine>().log_context(),
           fcppt::make_cref(

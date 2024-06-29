@@ -23,7 +23,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
@@ -44,7 +43,7 @@ sanguis::client::states::waiting_for_player::waiting_for_player(my_context _ctx)
       log_{
           this->context<sanguis::client::machine>().log_context(),
           sanguis::client::states::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("waiting_for_player")})} {
+          fcppt::log::name{FCPPT_TEXT("waiting_for_player")}} {
           FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("Entering waiting_for_player"))}
 
       FCPPT_PP_POP_WARNING

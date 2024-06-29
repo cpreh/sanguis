@@ -10,7 +10,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -24,7 +23,7 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::server::server(
     fcppt::log::context_reference const _log_context, alda::net::port const _port)
-    : log_{_log_context, sanguis::client::log_location(), fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("server")})},
+    : log_{_log_context, sanguis::client::log_location(), fcppt::log::name{FCPPT_TEXT("server")}},
       running_(true),
       impl_(
           // TODO(philipp): Add server log options here

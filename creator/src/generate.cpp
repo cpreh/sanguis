@@ -22,7 +22,6 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -33,9 +32,7 @@ sanguis::creator::top_result
 sanguis::creator::generate(sanguis::creator::top_parameters const &_parameters)
 {
   fcppt::log::object log{
-      _parameters.log_context(),
-      sanguis::log_location(),
-      fcppt::log::parameters_no_function(sanguis::creator::impl::log_name())};
+      _parameters.log_context(), sanguis::log_location(), sanguis::creator::impl::log_name()};
 
   FCPPT_LOG_DEBUG(
       log,

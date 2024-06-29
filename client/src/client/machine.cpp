@@ -69,7 +69,6 @@
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -105,7 +104,7 @@ sanguis::client::machine::machine(
       log_{
           _log_context,
           sanguis::client::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("machine")})},
+          fcppt::log::name{FCPPT_TEXT("machine")}},
       settings_(_settings),
       options_(std::move(_options)),
       resources_(_resources),

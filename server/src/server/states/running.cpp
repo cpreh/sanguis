@@ -43,7 +43,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -64,7 +63,7 @@ sanguis::server::states::running::running(my_context _ctx)
       log_{
           this->context<sanguis::server::machine>().log_context(),
           sanguis::server::states::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("running")})},
+          fcppt::log::name{FCPPT_TEXT("running")}},
       console_(
           sanguis::server::make_send_callback(
               fcppt::make_ref(this->context<sanguis::server::machine>())),

@@ -196,7 +196,6 @@
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/mpl/list/object.hpp>
@@ -234,7 +233,7 @@ sanguis::client::draw2d::scene::object::object(
       log_{
           _log_context,
           sanguis::client::draw2d::log_location(),
-          fcppt::log::parameters_no_function(sanguis::client::draw2d::scene::log_name())},
+          sanguis::client::draw2d::scene::log_name()},
       diff_clock_(),
       random_generator_(sanguis::random_seed()),
       sound_manager_(_sound_manager),

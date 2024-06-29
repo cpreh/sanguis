@@ -36,7 +36,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -56,7 +55,7 @@ sanguis::server::states::unpaused::unpaused(my_context _ctx)
       log_{
           this->context<sanguis::server::machine>().log_context(),
           sanguis::server::states::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("unpaused")})},
+          fcppt::log::name{FCPPT_TEXT("unpaused")}},
       slowdown_{sanguis::clock()} {FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("create"))}
 
       FCPPT_PP_POP_WARNING

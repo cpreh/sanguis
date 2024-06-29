@@ -23,7 +23,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -42,10 +41,8 @@ sanguis::server::states::paused::paused(my_context _ctx)
       log_{
           this->context<sanguis::server::machine>().log_context(),
           sanguis::server::states::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("paused")})} {
+          fcppt::log::name{FCPPT_TEXT("paused")}} {
           FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("create"))}
-
-      FCPPT_PP_POP_WARNING
 
       sanguis::server::states::paused::~paused(){
           FCPPT_LOG_DEBUG(log_, fcppt::log::out << FCPPT_TEXT("destroy"))}
@@ -63,6 +60,8 @@ sanguis::server::states::paused::paused(my_context _ctx)
       sanguis::messages::client::unpause>>(
       *this, _message, sanguis::server::dispatch_default_function{handle_default_msg});
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::messages::call::result sanguis::server::states::paused::operator()(
     sanguis::server::player_id, sanguis::messages::client::info const &)

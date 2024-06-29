@@ -7,6 +7,7 @@
 namespace sanguis
 {
 
+// TODO(philipp): Expose their real type here and use that in client::object
 SANGUIS_CORE_SYMBOL
 fcppt::log::level_stream_array log_level_streams();
 

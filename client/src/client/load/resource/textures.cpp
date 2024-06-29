@@ -36,7 +36,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
@@ -98,7 +97,7 @@ sanguis::client::load::resource::textures::textures(
     fcppt::log::context_reference const _log_context,
     sge::renderer::device::core_ref const _renderer,
     sge::image2d::system_ref const _image_loader)
-    : log_{_log_context, sanguis::client::load::log_location(), fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("textures")})},
+    : log_{_log_context, sanguis::client::load::log_location(), fcppt::log::name{FCPPT_TEXT("textures")}},
       renderer_(_renderer),
       image_loader_(_image_loader),
       texture_names_(sanguis::client::load::resource::search_texture_names(log_)),

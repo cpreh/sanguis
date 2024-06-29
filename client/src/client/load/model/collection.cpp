@@ -10,7 +10,6 @@
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 
 sanguis::client::load::model::object const &
 sanguis::client::load::model::collection::operator[](sanguis::load::model::path const &_path) const
@@ -28,7 +27,7 @@ sanguis::client::load::model::collection::operator[](sanguis::load::model::path 
 sanguis::client::load::model::collection::collection(
     fcppt::log::context_reference const _log_context,
     sanguis::client::load::resource::context_cref const _resources)
-    : log_{_log_context, sanguis::client::load::log_location(), fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("model")})},
+    : log_{_log_context, sanguis::client::load::log_location(), fcppt::log::name{FCPPT_TEXT("model")}},
       resources_(_resources),
       models_()
 {

@@ -49,7 +49,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
@@ -70,10 +69,7 @@ sanguis::server::machine::machine(
     alda::net::port const _port,
     sanguis::io_service_ref const _io_service)
     : log_context_{_log_context},
-      log_{
-          _log_context,
-          sanguis::server::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("machine")})},
+      log_{_log_context, sanguis::server::log_location(), fcppt::log::name{FCPPT_TEXT("machine")}},
       resources_(),
       port_(_port),
       io_service_(_io_service),

@@ -15,7 +15,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -32,7 +31,7 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::config::settings::object::object(
     fcppt::log::context_reference const _log_context, std::filesystem::path &&_path)
-    : log_{_log_context, sanguis::client::config::log_location(), fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("settings")})},
+    : log_{_log_context, sanguis::client::config::log_location(), fcppt::log::name{FCPPT_TEXT("settings")}},
       path_{std::move(_path)},
       start_{[this]
              {

@@ -4,13 +4,10 @@
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 
 sanguis::server::weapons::log::log(fcppt::log::context_reference const _log_context)
     : main_log_{
-          _log_context,
-          sanguis::server::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("weapons")})}
+          _log_context, sanguis::server::log_location(), fcppt::log::name{FCPPT_TEXT("weapons")}}
 {
 }
 

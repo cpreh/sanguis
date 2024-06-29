@@ -10,14 +10,13 @@
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/from.hpp>
 
 sanguis::client::load::hud::context::context(
     fcppt::log::context_reference const _log_context,
     sanguis::client::load::resource::textures_cref const _textures)
-    : log_{_log_context, sanguis::client::load::log_location(), fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("hud")})},
+    : log_{_log_context, sanguis::client::load::log_location(), fcppt::log::name{FCPPT_TEXT("hud")}},
       weapon_icons_(sanguis::client::load::hud::make_weapon_icons(log_, _textures)),
       missing_texture_(_textures->missing_texture())
 {

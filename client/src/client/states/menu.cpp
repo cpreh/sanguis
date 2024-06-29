@@ -37,7 +37,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -54,7 +53,7 @@ sanguis::client::states::menu::menu(my_context _ctx)
       log_{
           this->context<sanguis::client::machine>().log_context(),
           sanguis::client::states::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("menu")})},
+          fcppt::log::name{FCPPT_TEXT("menu")}},
       menu_(
           fcppt::make_ref(this->context<sanguis::client::machine>().renderer()),
           fcppt::make_ref(this->context<sanguis::client::machine>().viewport_manager()),

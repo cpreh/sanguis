@@ -41,7 +41,6 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/mpl/list/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -60,7 +59,7 @@ sanguis::client::states::has_player::has_player(my_context _ctx)
       log_{
           this->context<sanguis::client::machine>().log_context(),
           sanguis::client::states::log_location(),
-          fcppt::log::parameters_no_function(fcppt::log::name{FCPPT_TEXT("has_player")})},
+          fcppt::log::name{FCPPT_TEXT("has_player")}},
       action_handler_(fcppt::make_unique_ptr<sanguis::client::control::action_handler>(
           sanguis::client::make_send_callback(
               fcppt::make_ref(this->context<sanguis::client::machine>())),
