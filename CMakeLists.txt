@@ -33,7 +33,7 @@ option(
 # Find Boost
 
 find_package(
-	Boost REQUIRED
+    Boost 1.70.0 CONFIG REQUIRED
 	COMPONENTS
 	locale
 )
