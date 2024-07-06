@@ -1,710 +1,341 @@
-cmake_minimum_required(
-	VERSION
-	3.27.0
-)
+cmake_minimum_required(VERSION 3.27.0)
 
-project(
-	sanguis
-)
+project(sanguis)
 
-include(
-	GNUInstallDirs
-)
+include(GNUInstallDirs)
 
-set_property(
-	GLOBAL
-	PROPERTY
-	USE_FOLDERS
-	ON
-)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-option(
-	ENABLE_CLIENT
-	"Build the client in addition to the dedicated server"
-	ON
-)
+option(ENABLE_CLIENT "Build the client in addition to the dedicated server" ON)
 
-option(
-	ENABLE_TOOLS
-	"Build tools to create content for sanguis"
-	OFF
-)
+option(ENABLE_TOOLS "Build tools to create content for sanguis" OFF)
 
 # Find Boost
 
-find_package(
-    Boost 1.70.0 CONFIG REQUIRED
-	COMPONENTS
-	locale
-)
+find_package(Boost 1.70.0 CONFIG REQUIRED COMPONENTS locale)
 
 # Find FCPPT
 
-find_package(
-	fcppt REQUIRED
-)
+find_package(fcppt REQUIRED)
 
 list(
-	APPEND
-	FCPPT_UTILS_CLANG_TIDY_ADDITIONAL_CHECKS
-	"-cppcoreguidelines-avoid-const-or-ref-data-members"
-	"-fuchsia-default-arguments-calls"
-	"-fuchsia-default-arguments-declarations"
-	"-fuchsia-multiple-inheritance"
-	"-fuchsia-virtual-inheritance"
-	"-misc-misplaced-const"
-)
+  APPEND
+  FCPPT_UTILS_CLANG_TIDY_ADDITIONAL_CHECKS
+  "-cppcoreguidelines-avoid-const-or-ref-data-members"
+  "-fuchsia-default-arguments-calls"
+  "-fuchsia-default-arguments-declarations"
+  "-fuchsia-multiple-inheritance"
+  "-fuchsia-virtual-inheritance"
+  "-misc-misplaced-const")
 
-set(
-	FCPPT_UTILS_CLANG_TIDY_WHITELIST
-	"fcppt"
-	"awl"
-	"mizuiro"
-	"sge"
-	"alda"
-	"sanguis"
-)
+set(FCPPT_UTILS_CLANG_TIDY_WHITELIST "fcppt" "awl" "mizuiro" "sge" "alda"
+                                     "sanguis")
 
-include(
-	FcpptCMakeUtils
-)
+include(FcpptCMakeUtils)
 
-find_package(
-	mizuiro REQUIRED
-)
+find_package(mizuiro REQUIRED)
 
-set(
-	SGE_COMPONENTS
-	charconv
-	config
-	console
-	font
-	parse
-	parsejson
-	timer
-)
+set(SGE_COMPONENTS
+    charconv
+    config
+    console
+    font
+    parse
+    parsejson
+    timer)
 
-if(
-	ENABLE_CLIENT
-)
-	list(
-		APPEND
-		SGE_COMPONENTS
-		audio
-		consolegfx
-		cursor
-		fontdraw
-		gui
-		imagecolor
-		image2d
-		input
-		log
-		parseini
-		renderer
-		rucksack
-		rucksackviewport
-		sprite
-		systems
-		texture
-		viewport
-		window
-	)
+if(ENABLE_CLIENT)
+  list(
+    APPEND
+    SGE_COMPONENTS
+    audio
+    consolegfx
+    cursor
+    fontdraw
+    gui
+    imagecolor
+    image2d
+    input
+    log
+    parseini
+    renderer
+    rucksack
+    rucksackviewport
+    sprite
+    systems
+    texture
+    viewport
+    window)
 endif()
 
-if(
-	ENABLE_CLIENT
-	OR
-	ENABLE_TOOLS
-)
-	find_package(
-		awl REQUIRED
-	)
+if(ENABLE_CLIENT OR ENABLE_TOOLS)
+  find_package(awl REQUIRED)
 endif()
 
-if(
-	ENABLE_TOOLS
-)
-	list(
-		APPEND
-		SGE_COMPONENTS
-		image2d
-	)
+if(ENABLE_TOOLS)
+  list(APPEND SGE_COMPONENTS image2d)
 endif()
 
-find_package(
-	sge REQUIRED
-	COMPONENTS
-	"${SGE_COMPONENTS}"
-)
+find_package(sge REQUIRED COMPONENTS "${SGE_COMPONENTS}")
 
 # Find ALDA
 
-find_package(
-	alda REQUIRED
-)
+find_package(alda REQUIRED)
 
-include(
-	SGECustomPath
-)
+include(SGECustomPath)
 
-set(
-	SANGUIS_INSTALL_MEDIA_DIR
-	${FCPPT_UTILS_INSTALL_DATA_DIR}/media
-)
+set(SANGUIS_INSTALL_MEDIA_DIR ${FCPPT_UTILS_INSTALL_DATA_DIR}/media)
 
 sge_config_add_custom_path(
-	sanguis
-	media
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/media
-	${CMAKE_INSTALL_PREFIX}/${SANGUIS_INSTALL_MEDIA_DIR}
-	MEDIA_PATH_INCLUDES
-)
+  sanguis media ${FCPPT_UTILS_PROJECT_SOURCE_DIR}/media
+  ${CMAKE_INSTALL_PREFIX}/${SANGUIS_INSTALL_MEDIA_DIR} MEDIA_PATH_INCLUDES)
 
-include(
-	FcpptSymbol
-)
+include(FcpptSymbol)
 
-function(
-	sanguis_generate_symbol_header_base
-	EXPORTS_NAME
-	SYMBOL_NAME
-	RELATIVE_PATH
-)
-	fcppt_generate_symbol_header(
-		STATIC_LINK_FLAG
-			"SANGUIS_STATIC_LINK"
-		EXPORTS_NAME
-			"${EXPORTS_NAME}"
-		SYMBOL_NAME
-			"${SYMBOL_NAME}"
-		RELATIVE_PATH
-			"${RELATIVE_PATH}"
-	)
+function(sanguis_generate_symbol_header_base EXPORTS_NAME SYMBOL_NAME
+         RELATIVE_PATH)
+  fcppt_generate_symbol_header(
+    STATIC_LINK_FLAG
+    "SANGUIS_STATIC_LINK"
+    EXPORTS_NAME
+    "${EXPORTS_NAME}"
+    SYMBOL_NAME
+    "${SYMBOL_NAME}"
+    RELATIVE_PATH
+    "${RELATIVE_PATH}")
 endfunction()
 
-function(
-	sanguis_generate_symbol_header
-	LIB_NAME
-)
-	string(
-		TOUPPER
-		"${LIB_NAME}"
-		UPPER_NAME
-	)
+function(sanguis_generate_symbol_header LIB_NAME)
+  string(TOUPPER "${LIB_NAME}" UPPER_NAME)
 
-	string(
-		REPLACE
-		"_"
-		"/"
-		LIB_PATH
-		"${LIB_NAME}"
-	)
+  string(REPLACE "_" "/" LIB_PATH "${LIB_NAME}")
 
-	sanguis_generate_symbol_header_base(
-		"sanguis_${LIB_NAME}"
-		"SANGUIS_${UPPER_NAME}"
-		"sanguis/${LIB_PATH}"
-	)
+  sanguis_generate_symbol_header_base(
+    "sanguis_${LIB_NAME}" "SANGUIS_${UPPER_NAME}" "sanguis/${LIB_PATH}")
 endfunction()
 
-include_directories(
-	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include
-)
+include_directories(${FCPPT_UTILS_PROJECT_BINARY_DIR}/include)
 
-option(
-	ENABLE_SHARED
-	"Build shared libraries"
-	TRUE
-)
+option(ENABLE_SHARED "Build shared libraries" TRUE)
 
-option(
-	ENABLE_STATIC
-	"Build static libraries"
-	FALSE
-)
+option(ENABLE_STATIC "Build static libraries" FALSE)
 
-if(
-	NOT ENABLE_SHARED AND NOT ENABLE_STATIC
-)
-	message(
-		FATAL_ERROR
-		"You disabled both STATIC and SHARED"
-	)
+if(NOT ENABLE_SHARED AND NOT ENABLE_STATIC)
+  message(FATAL_ERROR "You disabled both STATIC and SHARED")
 endif()
 
-include(
-	CMakeParseArguments
-)
+include(CMakeParseArguments)
 
-if(
-	MSVC
-)
-	# inheritance via dominance warning
-	set(
-		ADDITIONAL_COMPILE_FLAGS
-		"/wd4250"
-	)
+if(MSVC)
+  # inheritance via dominance warning
+  set(ADDITIONAL_COMPILE_FLAGS "/wd4250")
 endif()
 
-function(
-	sanguis_add_library_base
-	LIBNAME
-	VARIANT
-	FILES
-)
-	set(
-		OPTION_ARGS
-		"HAS_IMPL_DIR"
-	)
+function(sanguis_add_library_base LIBNAME VARIANT FILES)
+  set(OPTION_ARGS "HAS_IMPL_DIR")
 
-	set(
-		MULTI_ARGS
-		"DEPS"
-		"TRANSITIVE_DEPS"
-		"INCLUDES"
-		"COMPILE_FLAGS"
-		"COMPILE_DEFINITIONS"
-	)
+  set(MULTI_ARGS "DEPS" "TRANSITIVE_DEPS" "INCLUDES" "COMPILE_FLAGS"
+                 "COMPILE_DEFINITIONS")
 
-	cmake_parse_arguments(
-		""
-		"${OPTION_ARGS}"
-		""
-		"${MULTI_ARGS}"
-		${ARGN}
-	)
+  cmake_parse_arguments("" "${OPTION_ARGS}" "" "${MULTI_ARGS}" ${ARGN})
 
-	if(
-		${VARIANT}
-		STREQUAL
-		INTERFACE
-	)
-		add_library(
-			${LIBNAME}
-			${VARIANT}
-		)
-	else()
-		add_library(
-			"${LIBNAME}"
-			"${VARIANT}"
-			${FILES}
-		)
+  if(${VARIANT} STREQUAL INTERFACE)
+    add_library(${LIBNAME} ${VARIANT})
+  else()
+    add_library("${LIBNAME}" "${VARIANT}" ${FILES})
 
-		target_link_libraries(
-			"${LIBNAME}"
-			PRIVATE
-			${_DEPS}
-		)
+    target_link_libraries("${LIBNAME}" PRIVATE ${_DEPS})
 
-	endif()
+  endif()
 
-	target_link_libraries(
-		"${LIBNAME}"
-		INTERFACE
-		${_TRANSITIVE_DEPS}
-	)
+  target_link_libraries("${LIBNAME}" INTERFACE ${_TRANSITIVE_DEPS})
 
-	set(
-		PUBLIC_INCLUDES
-		"${CMAKE_CURRENT_SOURCE_DIR}/include"
-		${Boost_INCLUDE_DIRS}
-	)
+  set(PUBLIC_INCLUDES "${CMAKE_CURRENT_SOURCE_DIR}/include"
+                      ${Boost_INCLUDE_DIRS})
 
-	target_include_directories(
-		"${LIBNAME}"
-		INTERFACE
-		${PUBLIC_INCLUDES}
-	)
+  target_include_directories("${LIBNAME}" INTERFACE ${PUBLIC_INCLUDES})
 
-	if(
-		NOT
-		${VARIANT}
-		STREQUAL
-		INTERFACE
-	)
-		set_target_properties(
-			"${LIBNAME}"
-			PROPERTIES
-			FOLDER
-			sanguis
-		)
+  if(NOT ${VARIANT} STREQUAL INTERFACE)
+    set_target_properties("${LIBNAME}" PROPERTIES FOLDER sanguis)
 
-		target_include_directories(
-			"${LIBNAME}"
-			PRIVATE
-			${PUBLIC_INCLUDES}
-			${_INCLUDES}
-		)
+    target_include_directories("${LIBNAME}" PRIVATE ${PUBLIC_INCLUDES}
+                                                    ${_INCLUDES})
 
-		if(
-			_HAS_IMPL_DIR
-		)
-			target_include_directories(
-				"${LIBNAME}"
-				PRIVATE
-				"${CMAKE_CURRENT_SOURCE_DIR}/impl/include"
-			)
-		endif()
+    if(_HAS_IMPL_DIR)
+      target_include_directories(
+        "${LIBNAME}" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/impl/include")
+    endif()
 
-		target_compile_definitions(
-			"${LIBNAME}"
-			PRIVATE
-			BOOST_ALL_NO_LIB
-			${_COMPILE_DEFINITIONS}
-		)
+    target_compile_definitions("${LIBNAME}" PRIVATE BOOST_ALL_NO_LIB
+                                                    ${_COMPILE_DEFINITIONS})
 
-		fcppt_utils_set_target_compiler_flags(
-			"${LIBNAME}"
-			ADDITIONAL_FLAGS
-			${_COMPILE_FLAGS}
-			${ADDITIONAL_COMPILE_FLAGS}
-		)
+    fcppt_utils_set_target_compiler_flags(
+      "${LIBNAME}" ADDITIONAL_FLAGS ${_COMPILE_FLAGS}
+      ${ADDITIONAL_COMPILE_FLAGS})
 
-		install(
-			TARGETS
-			"${LIBNAME}"
-			DESTINATION
-			"${CMAKE_INSTALL_LIBDIR}"
-		)
-	endif()
+    install(TARGETS "${LIBNAME}" DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+  endif()
 endfunction()
 
-function(
-	sanguis_add_library
-	LIBNAME
-	FILES
-)
-	set(
-		OPTION_ARGS
-		"HAS_IMPL_DIR"
-	)
+function(sanguis_add_library LIBNAME FILES)
+  set(OPTION_ARGS "HAS_IMPL_DIR")
 
-	set(
-		MULTI_ARGS
-		"DEPS"
-		"TRANSITIVE_DEPS"
-		"INCLUDES"
-		"COMPILE_FLAGS"
-		"COMPILE_DEFINITIONS"
-		"COMPILE_DEFINITIONS_SHARED_PUBLIC"
-		"COMPILE_DEFINITIONS_SHARED_PRIVATE"
-		"COMPILE_DEFINITIONS_STATIC_PUBLIC"
-	)
+  set(MULTI_ARGS
+      "DEPS"
+      "TRANSITIVE_DEPS"
+      "INCLUDES"
+      "COMPILE_FLAGS"
+      "COMPILE_DEFINITIONS"
+      "COMPILE_DEFINITIONS_SHARED_PUBLIC"
+      "COMPILE_DEFINITIONS_SHARED_PRIVATE"
+      "COMPILE_DEFINITIONS_STATIC_PUBLIC")
 
-	cmake_parse_arguments(
-		""
-		"${OPTION_ARGS}"
-		""
-		"${MULTI_ARGS}"
-		${ARGN}
-	)
+  cmake_parse_arguments("" "${OPTION_ARGS}" "" "${MULTI_ARGS}" ${ARGN})
 
-	set(
-		FULL_NAME
-		sanguis_${LIBNAME}
-	)
+  set(FULL_NAME sanguis_${LIBNAME})
 
-	sanguis_generate_symbol_header(
-		${LIBNAME}
-	)
+  sanguis_generate_symbol_header(${LIBNAME})
 
-	fcppt_utils_add_source_groups(
-		"${FILES}"
-	)
+  fcppt_utils_append_source_dir_and_make_groups("${FILES}" FILES_ABS)
 
-	sanguis_add_library_base(
-		${FULL_NAME}_interface
-		"INTERFACE"
-		"${FILES}"
-		TRANSITIVE_DEPS
-			${_TRANSITIVE_DEPS}
-	)
+  sanguis_add_library_base(${FULL_NAME}_interface "INTERFACE" "${FILES_ABS}"
+                           TRANSITIVE_DEPS ${_TRANSITIVE_DEPS})
 
-	target_compile_definitions(
-		${FULL_NAME}_interface
-		INTERFACE
-		${_COMPILE_DEFINITIONS_SHARED_PUBLIC}
-	)
+  target_compile_definitions(${FULL_NAME}_interface
+                             INTERFACE ${_COMPILE_DEFINITIONS_SHARED_PUBLIC})
 
-	if(
-		_HAS_IMPL_DIR
-	)
-		set(
-			HAS_IMPL_DIR
-			HAS_IMPL_DIR
-		)
-	endif()
+  if(_HAS_IMPL_DIR)
+    set(HAS_IMPL_DIR HAS_IMPL_DIR)
+  endif()
 
-	if(
-		ENABLE_STATIC
-	)
-		set(
-			FULL_NAME_STATIC
-			"${FULL_NAME}_static"
-		)
+  if(ENABLE_STATIC)
+    set(FULL_NAME_STATIC "${FULL_NAME}_static")
 
-		sanguis_add_library_base(
-			"${FULL_NAME_STATIC}"
-			"STATIC"
-			"${FILES}"
-			${HAS_IMPL_DIR}
-			DEPS
-				${_DEPS}
-			TRANSITIVE_DEPS
-				${_TRANSITIVE_DEPS}
-			COMPILE_DEFINITIONS
-				${_COMPILE_DEFINITIONS}
-			COMPILE_FLAGS
-				${_COMPILE_FLAGS}
-			INCLUDES
-				${_INCLUDES}
-		)
+    sanguis_add_library_base(
+      "${FULL_NAME_STATIC}"
+      "STATIC"
+      "${FILES_ABS}"
+      ${HAS_IMPL_DIR}
+      DEPS
+      ${_DEPS}
+      TRANSITIVE_DEPS
+      ${_TRANSITIVE_DEPS}
+      COMPILE_DEFINITIONS
+      ${_COMPILE_DEFINITIONS}
+      COMPILE_FLAGS
+      ${_COMPILE_FLAGS}
+      INCLUDES
+      ${_INCLUDES})
 
-		set(
-			"${FULL_NAME}_TARGET_TEMP"
-			"${FULL_NAME_STATIC}"
-		)
+    set("${FULL_NAME}_TARGET_TEMP" "${FULL_NAME_STATIC}")
 
-		target_compile_definitions(
-			"${FULL_NAME_STATIC}"
-			PUBLIC
-			"SANGUIS_STATIC_LINK"
-			${_COMPILE_DEFINITIONS_STATIC_PUBLIC}
-		)
-	endif()
+    target_compile_definitions(
+      "${FULL_NAME_STATIC}" PUBLIC "SANGUIS_STATIC_LINK"
+                                   ${_COMPILE_DEFINITIONS_STATIC_PUBLIC})
+  endif()
 
-	if(
-		ENABLE_SHARED
-	)
-		sanguis_add_library_base(
-			"${FULL_NAME}"
-			"SHARED"
-			"${FILES}"
-			${HAS_IMPL_DIR}
-			DEPS
-				${_DEPS}
-			TRANSITIVE_DEPS
-				${_TRANSITIVE_DEPS}
-			COMPILE_DEFINITIONS
-				${_COMPILE_DEFINITIONS}
-			COMPILE_FLAGS
-				${_COMPILE_FLAGS}
-			INCLUDES
-				${_INCLUDES}
-		)
+  if(ENABLE_SHARED)
+    sanguis_add_library_base(
+      "${FULL_NAME}"
+      "SHARED"
+      "${FILES_ABS}"
+      ${HAS_IMPL_DIR}
+      DEPS
+      ${_DEPS}
+      TRANSITIVE_DEPS
+      ${_TRANSITIVE_DEPS}
+      COMPILE_DEFINITIONS
+      ${_COMPILE_DEFINITIONS}
+      COMPILE_FLAGS
+      ${_COMPILE_FLAGS}
+      INCLUDES
+      ${_INCLUDES})
 
-		target_compile_definitions(
-			"${FULL_NAME}"
-			PUBLIC
-			${_COMPILE_DEFINITIONS_SHARED_PUBLIC}
-			PRIVATE
-			${_COMPILE_DEFINITIONS_SHARED_PRIVATE}
-		)
+    target_compile_definitions(
+      "${FULL_NAME}"
+      PUBLIC ${_COMPILE_DEFINITIONS_SHARED_PUBLIC}
+      PRIVATE ${_COMPILE_DEFINITIONS_SHARED_PRIVATE})
 
-		set(
-			"${FULL_NAME}_TARGET_TEMP"
-			"${FULL_NAME}"
-		)
-	endif()
+    set("${FULL_NAME}_TARGET_TEMP" "${FULL_NAME}")
+  endif()
 
-	set(
-		"${FULL_NAME}_TARGET"
-		"${${FULL_NAME}_TARGET_TEMP}"
-		CACHE
-		INTERNAL
-		""
-	)
+  set("${FULL_NAME}_TARGET"
+      "${${FULL_NAME}_TARGET_TEMP}"
+      CACHE INTERNAL "")
 endfunction()
 
-function(
-	sanguis_add_executable
-	EXENAME
-	FILES
-)
-	set(
-		SINGLE_ARGS
-		"FOLDER"
-		"MAIN_NAMESPACE"
-	)
+function(sanguis_add_executable EXENAME FILES)
+  set(SINGLE_ARGS "FOLDER" "MAIN_NAMESPACE")
 
-	set(
-		MULTI_ARGS
-		"DEPS"
-		"COMPILE_OPTIONS"
-		"INCLUDE_DIRS"
-		"SYSTEM_INCLUDE_DIRS"
-		"COMPILE_DEFINITIONS"
-	)
+  set(MULTI_ARGS "DEPS" "COMPILE_OPTIONS" "INCLUDE_DIRS" "SYSTEM_INCLUDE_DIRS"
+                 "COMPILE_DEFINITIONS")
 
-	cmake_parse_arguments(
-		""
-		""
-		"${SINGLE_ARGS}"
-		"${MULTI_ARGS}"
-		${ARGN}
-	)
+  cmake_parse_arguments("" "" "${SINGLE_ARGS}" "${MULTI_ARGS}" ${ARGN})
 
-	fcppt_utils_add_source_groups(
-		"${FILES}"
-	)
+  fcppt_utils_append_source_dir_and_make_groups("${FILES}" FILES_ABS)
 
-	if(
-		"${_MAIN_NAMESPACE}"
-		STREQUAL
-		""
-	)
-		add_executable(
-			${EXENAME}
-			${FILES}
-		)
-	else()
-		awl_utils_add_portable_executable(
-			${EXENAME}
-			${_MAIN_NAMESPACE}
-			${FILES}
-		)
-	endif()
+  if("${_MAIN_NAMESPACE}" STREQUAL "")
+    add_executable(${EXENAME} ${FILES_ABS})
+  else()
+    awl_utils_add_portable_executable(${EXENAME} ${_MAIN_NAMESPACE} ${FILES_ABS})
+  endif()
 
-	fcppt_utils_set_target_compiler_flags(
-		${EXENAME}
-		ADDITIONAL_FLAGS
-		${ADDITIONAL_COMPILE_FLAGS}
-	)
+  fcppt_utils_set_target_compiler_flags(${EXENAME} ADDITIONAL_FLAGS
+                                        ${ADDITIONAL_COMPILE_FLAGS})
 
-	if(
-		"${_FOLDER}"
-		STREQUAL
-		""
-	)
-		set(
-			FOLDER
-			sanguis
-		)
-	else()
-		set(
-			FOLDER
-			${_FOLDER}
-		)
-	endif()
+  if("${_FOLDER}" STREQUAL "")
+    set(FOLDER sanguis)
+  else()
+    set(FOLDER ${_FOLDER})
+  endif()
 
-	set_target_properties(
-		${EXENAME}
-		PROPERTIES
-		FOLDER
-		${FOLDER}
-	)
+  set_target_properties(${EXENAME} PROPERTIES FOLDER ${FOLDER})
 
-	target_include_directories(
-		${EXENAME}
-		PRIVATE
-		${_INCLUDE_DIRS}
-		${Boost_INCLUDE_DIRS}
-	)
+  target_include_directories(${EXENAME} PRIVATE ${_INCLUDE_DIRS}
+                                                ${Boost_INCLUDE_DIRS})
 
-	target_include_directories(
-		${EXENAME}
-		SYSTEM
-		PRIVATE
-		${_SYSTEM_INCLUDE_DIRS}
-	)
+  target_include_directories(${EXENAME} SYSTEM PRIVATE ${_SYSTEM_INCLUDE_DIRS})
 
-	target_compile_options(
-		${EXENAME}
-		PRIVATE
-		${_COMPILE_OPTIONS}
-	)
+  target_compile_options(${EXENAME} PRIVATE ${_COMPILE_OPTIONS})
 
-	target_compile_definitions(
-		${EXENAME}
-		PRIVATE
-		${_COMPILE_DEFINITIONS}
-		BOOST_ALL_NO_LIB
-	)
+  target_compile_definitions(${EXENAME} PRIVATE ${_COMPILE_DEFINITIONS}
+                                                BOOST_ALL_NO_LIB)
 
-	target_link_libraries(
-		${EXENAME}
-		PRIVATE
-		${_DEPS}
-	)
+  target_link_libraries(${EXENAME} PRIVATE ${_DEPS})
 
-	install(
-		TARGETS
-		${EXENAME}
-		DESTINATION
-		${CMAKE_INSTALL_BINDIR}
-	)
+  install(TARGETS ${EXENAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 endfunction()
 
-if(
-	WIN32
-)
-	set(
-		ASIO_LIBS
-		ws2_32
-	)
+if(WIN32)
+  set(ASIO_LIBS ws2_32)
 elseif(UNIX)
-	set(
-		ASIO_LIBS
-		pthread
-	)
+  set(ASIO_LIBS pthread)
 
-	set(
-		ASIO_OPTIONS
-		-pthread
-	)
+  set(ASIO_OPTIONS -pthread)
 endif()
 
-add_subdirectory(
-	core
-)
+add_subdirectory(core)
 
-add_subdirectory(
-	creator
-)
+add_subdirectory(creator)
 
-add_subdirectory(
-	collision
-)
+add_subdirectory(collision)
 
-add_subdirectory(
-	model
-)
+add_subdirectory(model)
 
-add_subdirectory(
-	common
-)
+add_subdirectory(common)
 
-add_subdirectory(
-	server
-)
+add_subdirectory(server)
 
-if(
-	ENABLE_CLIENT
-)
-	add_subdirectory(
-		tiles
-	)
+if(ENABLE_CLIENT)
+  add_subdirectory(tiles)
 
-	add_subdirectory(
-		client
-	)
+  add_subdirectory(client)
 
-	add_subdirectory(
-		main
-	)
+  add_subdirectory(main)
 endif()
 
-if(
-	ENABLE_TOOLS
-)
-	add_subdirectory(
-		tools
-	)
+if(ENABLE_TOOLS)
+  add_subdirectory(tools)
 endif()
 
-install(
-	DIRECTORY
-	media/
-	DESTINATION
-	${SANGUIS_INSTALL_MEDIA_DIR}
-)
+install(DIRECTORY media/ DESTINATION ${SANGUIS_INSTALL_MEDIA_DIR})

@@ -2,33 +2,13 @@
 
 set -e -u
 
-function toupper()
-{
-	echo $(tr 'a-z' 'A-Z' <<< "$1")
-}
-
-function update_impl()
-{
-	local sublibrary="$1"
-
-	local upperpath=$(toupper "${sublibrary}")
-
-	pushd "${sublibrary}" >> /dev/null
-
-	update_cmake \
-		CMakeLists.txt \
-		SANGUIS_"${upperpath/\//_}"_FILES \
-		"${@:2}"
-
-	popd >> /dev/null
-}
-
 function update_sublibrary()
 {
-	update_impl \
-		"$@" \
-		include \
-		src
+	update_cmake.sh \
+		"$1"/files.txt \
+		"$1"/include \
+		"$1"/src \
+		"$1/${@:2}"
 }
 
 update_sublibrary main
@@ -56,12 +36,6 @@ update_sublibrary server
 update_sublibrary \
 	tiles \
 	impl
-
-update_impl tools/animations \
-	src \
-	include \
-	-e '.*.ui' \
-	ui
 
 update_sublibrary \
 	tools/libmergeimage \

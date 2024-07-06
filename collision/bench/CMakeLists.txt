@@ -1,10 +1,9 @@
 sanguis_add_executable(
-	sanguis_collision_bench_main
-	main.cpp
-	FOLDER
-		sanguis/collision
-	DEPS
-		${sanguis_collision_TARGET}
-		${sanguis_core_TARGET}
-		${fcppt_log_TARGET}
-)
+  sanguis_collision_bench_main
+  collision/bench/main.cpp
+  FOLDER
+  sanguis/collision
+  DEPS
+  ${sanguis_collision_TARGET}
+  ${sanguis_core_TARGET}
+  ${fcppt_log_TARGET})

@@ -1,12 +1,11 @@
 sanguis_add_tool(
-	check_json
-	src/main.cpp
-	LINK_LIBS
-		${sanguis_model_TARGET}
-		${fcppt_core_TARGET}
-		${fcppt_options_TARGET}
-		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
-		${FCPPT_UTILS_MAIN_LINK_LIBS}
-	COMPILE_OPTIONS
-		${FCPPT_UTILS_MAIN_COMPILE_OPTIONS}
-)
+  check_json
+  tools/check_json/src/main.cpp
+  LINK_LIBS
+  ${sanguis_model_TARGET}
+  ${fcppt_core_TARGET}
+  ${fcppt_options_TARGET}
+  ${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
+  ${FCPPT_UTILS_MAIN_LINK_LIBS}
+  COMPILE_OPTIONS
+  ${FCPPT_UTILS_MAIN_COMPILE_OPTIONS})

@@ -1,17 +1,16 @@
 sanguis_add_tool(
-	mergeimage
-	src/main.cpp
-	"${SANGUIS_TOOLS_MERGEIMAGE_FILES}"
-	LINK_LIBS
-		${sanguis_tools_libmergeimage_TARGET}
-		${sanguis_model_TARGET}
-		${sgeimage2d_TARGET}
-		${sgesystems_TARGET}
-		${fcppt_core_TARGET}
-		${fcppt_filesystem_TARGET}
-		${fcppt_options_TARGET}
-		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
-		${FCPPT_UTILS_MAIN_LINK_LIBS}
-	COMPILE_OPTIONS
-		${FCPPT_UTILS_MAIN_COMPILE_OPTIONS}
-)
+  mergeimage
+  tools/mergeimage/src/main.cpp
+  "${SANGUIS_TOOLS_MERGEIMAGE_FILES}"
+  LINK_LIBS
+  ${sanguis_tools_libmergeimage_TARGET}
+  ${sanguis_model_TARGET}
+  ${sgeimage2d_TARGET}
+  ${sgesystems_TARGET}
+  ${fcppt_core_TARGET}
+  ${fcppt_filesystem_TARGET}
+  ${fcppt_options_TARGET}
+  ${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
+  ${FCPPT_UTILS_MAIN_LINK_LIBS}
+  COMPILE_OPTIONS
+  ${FCPPT_UTILS_MAIN_COMPILE_OPTIONS})
