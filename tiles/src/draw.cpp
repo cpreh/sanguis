@@ -31,20 +31,20 @@ sanguis::tiles::cell_container sanguis::tiles::draw(
         FCPPT_TEXT("draw: foreground and background have different sizes")};
   }
 
-  sanguis::creator::grid::dim const min_size{
-      fcppt::math::dim::fill<sanguis::creator::grid::dim>(1U)};
+  sanguis::creator::grid::size_type const min_size{1U};
 
-  if (_foreground.size() <= min_size)
+  if (_foreground.size().w() <= min_size || _foreground.size().h() <= min_size)
   {
     return sanguis::tiles::cell_container();
   }
 
-  sanguis::creator::min const &lower_bound(_min);
+  sanguis::creator::min const lower_bound{_min};
 
-  sanguis::creator::min const connecting_lower_bound(_min.get() + min_size);
+  sanguis::creator::min const connecting_lower_bound{
+      _min.get() + fcppt::math::dim::fill<sanguis::creator::grid::dim>(min_size)};
 
-  sanguis::creator::sup const upper_bound(
-      fcppt::container::grid::clamped_sup(_sup.get(), _foreground.size()));
+  sanguis::creator::sup const upper_bound{
+      fcppt::container::grid::clamped_sup(_sup.get(), _foreground.size())};
 
   return fcppt::container::join(
       sanguis::tiles::impl::draw_connecting(
