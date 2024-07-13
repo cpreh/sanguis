@@ -864,6 +864,8 @@ server/include/sanguis/server/global/load_context.hpp
 server/include/sanguis/server/global/load_context.hpp
 server/include/sanguis/server/global/next_id_callback.hpp
 server/include/sanguis/server/global/next_id_callback.hpp
+server/include/sanguis/server/global/source_world_pair_hash.hpp
+server/include/sanguis/server/global/source_world_pair_hash.hpp
 server/include/sanguis/server/global/source_world_pair.hpp
 server/include/sanguis/server/global/source_world_pair.hpp
 server/include/sanguis/server/global/world_connection_map.hpp
@@ -1959,6 +1961,8 @@ server/src/server/global/generate_worlds.cpp
 server/src/server/global/generate_worlds.cpp
 server/src/server/global/load_context.cpp
 server/src/server/global/load_context.cpp
+server/src/server/global/source_world_pair_hash.cpp
+server/src/server/global/source_world_pair_hash.cpp
 server/src/server/global/world_map.cpp
 server/src/server/global/world_map.cpp
 server/src/server/level_from_exp.cpp
