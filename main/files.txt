@@ -1,4 +1,2 @@
 main/include/sanguis/main.hpp
-main/include/sanguis/main.hpp
-main/src/main.cpp
 main/src/main.cpp
