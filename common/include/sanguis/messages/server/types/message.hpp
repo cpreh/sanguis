@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_SERVER_TYPES_MESSAGE_HPP_INCLUDED
 
 #include <sanguis/messages/server/types/message_fwd.hpp> // IWYU pragma: keep
+#include <fcppt/enum/define_max_value.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
@@ -47,10 +48,11 @@ enum class message : std::uint8_t
   slowdown,
   speed,
   unpause,
-  weapon_status,
-  fcppt_maximum = weapon_status
+  weapon_status
 };
 
 }
+
+FCPPT_ENUM_DEFINE_MAX_VALUE(sanguis::messages::server::types::message::weapon_status);
 
 #endif

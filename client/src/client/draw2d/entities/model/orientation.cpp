@@ -73,7 +73,7 @@ sanguis::client::draw2d::sprite::rotation impl(
   sanguis::client::draw2d::funit const turning_speed(twopi);
 
   sanguis::client::draw2d::sprite::rotation const new_orientation(
-      _orientation.get() + dir * _delta * turning_speed);
+      _orientation.get() + (dir * _delta * turning_speed));
 
   // This fixes the "epilepsy" bug. Imagine the current orientation being 10,
   // the desired orientation being 20 and "time" is relatively large in the

@@ -2,6 +2,7 @@
 #define SANGUIS_CREATOR_ENEMY_TYPE_HPP_INCLUDED
 
 #include <sanguis/creator/enemy_type_fwd.hpp> // IWYU pragma: keep
+#include <fcppt/enum/define_max_value.hpp>
 
 namespace sanguis::creator
 {
@@ -18,10 +19,11 @@ enum class enemy_type
   skeleton,
   ghost,
   maggot,
-  reaper,
-  fcppt_maximum = reaper
+  reaper
 };
 
 }
+
+FCPPT_ENUM_DEFINE_MAX_VALUE(sanguis::creator::enemy_type::reaper);
 
 #endif

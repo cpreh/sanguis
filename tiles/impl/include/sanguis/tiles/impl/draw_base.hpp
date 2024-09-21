@@ -56,9 +56,9 @@ sanguis::tiles::cell_container draw_base(
             [tile_dim, &_element, _shift](sanguis::tiles::impl::content_path const &_content_path)
             {
               return sanguis::tiles::cell(
-                  fcppt::math::vector::structure_cast<sanguis::tiles::pos, fcppt::cast::size_fun>(
-                      fcppt::math::vector::to_signed(_element.pos())) *
-                          tile_dim +
+                  (fcppt::math::vector::structure_cast<sanguis::tiles::pos, fcppt::cast::size_fun>(
+                       fcppt::math::vector::to_signed(_element.pos())) *
+                   tile_dim) +
                       _shift.get(),
                   _content_path.content(),
                   _content_path.path(),

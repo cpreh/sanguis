@@ -85,8 +85,5 @@ void sanguis::server::entities::property::changeable::on_recalc_max(
 
 void sanguis::server::entities::property::changeable::check_current()
 {
-  if (current_ > max_)
-  {
-    current_ = max_;
-  }
+  this->current_ = std::min(this->current_, this->max_);
 }

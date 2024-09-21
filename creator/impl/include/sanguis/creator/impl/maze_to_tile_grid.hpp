@@ -63,7 +63,7 @@ sanguis::creator::tile_grid<Tile> maze_to_tile_grid(
 
   auto const coordinate_transform(
       [_wall_thickness, _spacing](dim_type::value_type const _a)
-      { return (_a / 2) * _spacing + ((_a + 1) / 2) * _wall_thickness; });
+      { return ((_a / 2) * _spacing) + (((_a + 1) / 2) * _wall_thickness); });
 
   auto const wall_or_space([_wall_thickness, _spacing](dim_type::value_type const _a)
                            { return _a % 2 == 0 ? _wall_thickness : _spacing; });

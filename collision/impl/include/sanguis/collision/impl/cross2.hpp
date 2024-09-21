@@ -11,7 +11,7 @@ inline sanguis::collision::unit cross2(
     fcppt::math::vector::static_<sanguis::collision::unit, 2> const &_a,
     fcppt::math::vector::static_<sanguis::collision::unit, 2> const &_b)
 {
-  return _a.x() * _b.y() - _a.y() * _b.x();
+  return (_a.x() * _b.y()) - (_a.y() * _b.x());
 }
 
 }

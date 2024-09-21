@@ -202,7 +202,7 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
 
   auto rand_pos = sanguis::creator::impl::random::uniform_pos{
       fcppt::make_ref(_parameters.randgen()),
-      size - fcppt::math::dim::fill<sanguis::creator::grid::dim>(2 * max_room_size + 1)};
+      size - fcppt::math::dim::fill<sanguis::creator::grid::dim>((2 * max_room_size) + 1)};
 
   using uniform_size = fcppt::random::distribution::basic<
       sanguis::creator::impl::random::uniform_int<sanguis::creator::grid::size_type>>;
@@ -218,7 +218,7 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
   {
     auto const w = random_size();
     auto const h = random_size();
-    return sanguis::creator::dim{2 * w + 1, 2 * h + 1};
+    return sanguis::creator::dim{(2 * w) + 1, (2 * h) + 1};
   };
 
   for (::int_type i = 0; i < 100; ++i)

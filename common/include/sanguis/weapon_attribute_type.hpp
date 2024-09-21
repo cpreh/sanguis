@@ -2,6 +2,7 @@
 #define SANGUIS_WEAPON_ATTRIBUTE_TYPE_HPP_INCLUDED
 
 #include <sanguis/weapon_attribute_type_fwd.hpp> // IWYU pragma: keep
+#include <fcppt/enum/define_max_value.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
@@ -16,10 +17,11 @@ enum class weapon_attribute_type : std::uint8_t
   damage,
   health,
   shells,
-  spread_radius,
-  fcppt_maximum = spread_radius
+  spread_radius
 };
 
 }
+
+FCPPT_ENUM_DEFINE_MAX_VALUE(sanguis::weapon_attribute_type::spread_radius);
 
 #endif

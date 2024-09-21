@@ -2,6 +2,7 @@
 #define SANGUIS_COLLISION_WORLD_GHOST_GROUP_HPP_INCLUDED
 
 #include <sanguis/collision/world/ghost_group_fwd.hpp> // IWYU pragma: keep
+#include <fcppt/enum/define_max_value.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
@@ -15,10 +16,11 @@ enum class ghost_group : std::uint8_t
   player_sight,
   target_enemy,
   target_player,
-  weapon_pickup_sight,
-  fcppt_maximum = weapon_pickup_sight
+  weapon_pickup_sight
 };
 
 }
+
+FCPPT_ENUM_DEFINE_MAX_VALUE(sanguis::collision::world::ghost_group::weapon_pickup_sight);
 
 #endif

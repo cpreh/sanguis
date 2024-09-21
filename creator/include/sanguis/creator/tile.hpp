@@ -2,6 +2,7 @@
 #define SANGUIS_CREATOR_TILE_HPP_INCLUDED
 
 #include <sanguis/creator/tile_fwd.hpp> // IWYU pragma: keep
+#include <fcppt/enum/define_max_value.hpp>
 
 namespace sanguis::creator
 {
@@ -18,10 +19,11 @@ enum class tile
   grave4,
   grave5,
   hedge,
-  concrete_wall,
-  fcppt_maximum = concrete_wall
+  concrete_wall
 };
 
 }
+
+FCPPT_ENUM_DEFINE_MAX_VALUE(sanguis::creator::tile::concrete_wall);
 
 #endif

@@ -141,5 +141,5 @@ sanguis::creator::impl::maze_result sanguis::creator::impl::generate_maze(
       cur_region++;
     }
 
-  return maze_result{res_grid, cur_region};
+  return maze_result{.grid = res_grid, .next_id = cur_region};
 }

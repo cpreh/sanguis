@@ -79,7 +79,7 @@ void sanguis::server::perks::choleric::update(
           ? fcppt::literal<sanguis::server::level::value_type>(
                 3 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
                 ) +
-                this->level().get() * fcppt::literal<sanguis::server::level::value_type>(2)
+                (this->level().get() * fcppt::literal<sanguis::server::level::value_type>(2))
           : this->level().get(),
       [this, &_env, &_entity, spawn_bullets]()
       {

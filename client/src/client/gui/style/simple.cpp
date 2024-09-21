@@ -275,21 +275,21 @@ void sanguis::client::gui::style::simple::draw_transparent_frame(
       sge::rucksack::rect{
           sge::rucksack::rect::vector{
               _area.pos() + sge::rucksack::vector{_area.size().w() - tilesize, tilesize}},
-          sge::rucksack::rect::dim{tilesize, _area.size().h() - 2 * tilesize}});
+          sge::rucksack::rect::dim{tilesize, _area.size().h() - (2 * tilesize)}});
 
   _renderer.draw_image_repeat(
       _context,
       part_v,
       sge::rucksack::rect{
           sge::rucksack::rect::vector{_area.pos() + sge::rucksack::vector{0, tilesize}},
-          sge::rucksack::rect::dim{tilesize, _area.size().h() - 2 * tilesize}});
+          sge::rucksack::rect::dim{tilesize, _area.size().h() - (2 * tilesize)}});
 
   _renderer.draw_image_repeat(
       _context,
       part_h,
       sge::rucksack::rect{
           sge::rucksack::rect::vector{_area.pos() + sge::rucksack::vector{tilesize, 0}},
-          sge::rucksack::rect::dim{_area.size().w() - 2 * tilesize, tilesize}});
+          sge::rucksack::rect::dim{_area.size().w() - (2 * tilesize), tilesize}});
 
   _renderer.draw_image_repeat(
       _context,
@@ -297,5 +297,5 @@ void sanguis::client::gui::style::simple::draw_transparent_frame(
       sge::rucksack::rect{
           sge::rucksack::rect::vector{
               _area.pos() + sge::rucksack::vector{tilesize, _area.size().h() - tilesize}},
-          sge::rucksack::rect::dim{_area.size().w() - 2 * tilesize, tilesize}});
+          sge::rucksack::rect::dim{_area.size().w() - (2 * tilesize), tilesize}});
 }

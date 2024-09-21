@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_CLIENT_TYPES_MESSAGE_HPP_INCLUDED
 
 #include <sanguis/messages/client/types/message_fwd.hpp> // IWYU pragma: keep
+#include <fcppt/enum/define_max_value.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
@@ -23,10 +24,11 @@ enum class message : std::uint8_t
   reload,
   start_shooting,
   stop_shooting,
-  unpause,
-  fcppt_maximum = unpause
+  unpause
 };
 
 }
+
+FCPPT_ENUM_DEFINE_MAX_VALUE(sanguis::messages::client::types::message::unpause);
 
 #endif

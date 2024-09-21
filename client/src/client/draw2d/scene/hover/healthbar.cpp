@@ -87,7 +87,7 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
                                   fcppt::cast::int_to_float<sanguis::client::health::value_type>(
                                       (_radius.get() - border_size) * 2) *
                                   remaining_health(_health_pair)),
-                              bar_height - 2 * border_size},
+                              bar_height - (2 * border_size)},
                       sge::sprite::roles::color{} = sanguis::client::draw2d::sprite::colored::color(
                           (sge::image::color::init::red() %= std::min(
                                fcppt::literal<sanguis::client::health::value_type>(2) -

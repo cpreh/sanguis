@@ -31,7 +31,7 @@ boost::statechart::result dispatch(
       _dispatcher(
           *_message.get(), _function, typename Dispatcher::default_callback{fake_default_msg})
           .get(),
-      [](boost::statechart::result const _result) { return _result; },
+      [](boost::statechart::result const &_result) { return _result; },
       [&_handle_default_msg, &_message](sanguis::messages::call::forward_to_default)
       { return _handle_default_msg(*_message.get()); });
 }

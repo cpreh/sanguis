@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_Z_ORDERING_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/z_ordering_fwd.hpp> // IWYU pragma: keep
+#include <fcppt/enum/define_max_value.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
@@ -21,10 +22,11 @@ enum class z_ordering : std::uint8_t
   bullet,
   player_upper,
   flare,
-  text,
-  fcppt_maximum = text
+  text
 };
 
 }
+
+FCPPT_ENUM_DEFINE_MAX_VALUE(sanguis::client::draw2d::z_ordering::text);
 
 #endif
