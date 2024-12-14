@@ -5,7 +5,7 @@
 #include <alda/net/io_service_wrapper.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/asio/io_service.hpp>
+#include <boost/asio/io_context.hpp>
 #include <fcppt/config/external_end.hpp>
 
 namespace sanguis
@@ -23,7 +23,7 @@ public:
   [[nodiscard]] alda::net::io_service_wrapper const &get() const;
 
 private:
-  boost::asio::io_service io_service_;
+  boost::asio::io_context io_service_;
 
   alda::net::io_service_wrapper const wrapper_;
 };

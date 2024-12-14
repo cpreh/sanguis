@@ -7,8 +7,7 @@
 #include <sanguis/server/timer_impl_fwd.hpp> // IWYU pragma: keep
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/asio/basic_waitable_timer.hpp>
-#include <chrono>
+#include <boost/asio/steady_timer.hpp>
 #include <fcppt/config/external_end.hpp>
 
 namespace sanguis::server
@@ -35,7 +34,7 @@ private:
 
   sanguis::server::timer_duration const duration_;
 
-  using timer = boost::asio::basic_waitable_timer<std::chrono::steady_clock>;
+  using timer = boost::asio::steady_timer;
 
   timer deadline_timer_;
 };
