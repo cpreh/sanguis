@@ -24,7 +24,7 @@ void sanguis::server::world::sight_range::remove(sanguis::entity_id const _id)
 
 bool sanguis::server::world::sight_range::contains(sanguis::entity_id const _id) const
 {
-  return entries_.find(_id) != entries_.end();
+  return entries_.contains(_id);
 }
 
 bool sanguis::server::world::sight_range::empty() const { return entries_.empty(); }
