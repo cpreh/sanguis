@@ -17,6 +17,7 @@
 #include <fcppt/random/wrapper/uniform_container.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 namespace sanguis::server::random
@@ -60,7 +61,7 @@ Result draw(
         result.erase(
             std::unique(result.begin(), result.end(), _equal_function.get()), result.end());
 
-        return result;
+        return std::move(result);
       });
 }
 

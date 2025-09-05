@@ -3,7 +3,7 @@
 
 #include <fcppt/config/compiler.hpp> // IWYU pragma: keep
 
-#if defined(FCPPT_CONFIG_MSVC_COMPILER)
+#ifdef FCPPT_CONFIG_MSVC_COMPILER
 #define SANGUIS_STATE_OVERRIDE
 #else
 #define SANGUIS_STATE_OVERRIDE override

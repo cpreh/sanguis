@@ -45,7 +45,7 @@ void sanguis::client::server::quit()
 
 bool sanguis::client::server::running() const
 {
-  std::lock_guard<std::mutex> const lock(mutex_);
+  std::scoped_lock<std::mutex> const lock(mutex_);
 
   return running_;
 }
@@ -81,7 +81,7 @@ void sanguis::client::server::mainloop()
 
 void sanguis::client::server::reset_running()
 {
-  std::lock_guard<std::mutex> const lock(mutex_);
+  std::scoped_lock<std::mutex> const lock(mutex_);
 
   running_ = false;
 }

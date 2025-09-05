@@ -23,7 +23,7 @@ fcppt::optional::reference<typename Container::value_type::type> closest_entity(
     Predicate const _predicate)
 {
   FCPPT_PP_PUSH_WARNING
-#if defined(FCPPT_CONFIG_GNU_GCC_COMPILER)
+#ifdef FCPPT_CONFIG_GNU_GCC_COMPILER
   FCPPT_PP_DISABLE_GCC_WARNING(-Wmaybe-uninitialized)
 #endif
   using result_type = fcppt::optional::reference<typename Container::value_type::type>;

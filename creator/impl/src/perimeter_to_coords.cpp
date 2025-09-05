@@ -15,7 +15,7 @@ sanguis::creator::grid::pos sanguis::creator::impl::perimeter_to_coords(
   auto const w2{_dim.w() - 2U};
   auto const h2{_dim.h() - 2U};
 
-  if (fcppt::not_(_t < 2 * w2 + 2 * h2))
+  if (fcppt::not_(_t < (2 * w2) + (2 * h2)))
   {
     throw sanguis::creator::exception{FCPPT_TEXT("permieter_to_coords: _t too small!")};
   }
@@ -30,10 +30,10 @@ sanguis::creator::grid::pos sanguis::creator::impl::perimeter_to_coords(
     return sanguis::creator::grid::pos(w2 + 1U, _t - w2 + 1U);
   }
 
-  if (_t < 2U * w2 + h2)
+  if (_t < (2U * w2) + h2)
   {
     return sanguis::creator::grid::pos(w2 - (_t - w2 - h2), h2 + 1U);
   }
 
-  return sanguis::creator::grid::pos(0U, h2 - (_t - 2U * w2 - h2));
+  return sanguis::creator::grid::pos(0U, h2 - (_t - (2U * w2) - h2));
 }

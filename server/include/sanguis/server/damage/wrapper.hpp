@@ -16,13 +16,13 @@ class wrapper
 public:
   explicit wrapper(sanguis::server::damage::type);
 
-  [[nodiscard]]
   // NOLINTNEXTLINE(cppcoreguidelines-c-copy-assignment-signature,misc-unconventional-assign-operator)
+  [[nodiscard]]
   sanguis::server::damage::meta
   operator=(sanguis::server::damage::unit) const;
 
-  [[nodiscard]]
   // NOLINTNEXTLINE(cppcoreguidelines-c-copy-assignment-signature,misc-unconventional-assign-operator)
+  [[nodiscard]]
   sanguis::server::damage::armor_meta
   operator=(sanguis::server::damage::armor_unit) const;
 

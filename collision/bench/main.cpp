@@ -44,10 +44,14 @@
 #include <boost/logic/tribool.hpp>
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/si/velocity.hpp>
+#include <cstdlib>
+#include <exception>
+#include <iostream>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
 int main()
+try
 {
   sanguis::creator::grid const grid(
       fcppt::math::dim::fill<sanguis::creator::dim>(
@@ -188,4 +192,9 @@ int main()
                 0.06F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-number // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)s)
                 )));
       });
+}
+catch(std::exception const &_error)
+{
+  std::cerr << _error.what() << '\n';
+  return EXIT_FAILURE;
 }
