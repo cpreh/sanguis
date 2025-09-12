@@ -2,12 +2,12 @@
 #include <sanguis/net/data_streambuf.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/container/join.hpp>
-#include <fcppt/iterator/make_range.hpp>
 #include <fcppt/preprocessor/ignore_unsafe_buffer_usage.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <ios>
+#include <ranges>
 #include <streambuf>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -28,10 +28,10 @@ sanguis::net::data_streambuf::xsputn(char_type const *const _dest, std::streamsi
 {
   this->buffer_.get() = fcppt::container::join(
       std::move(this->buffer_.get()),
-      fcppt::iterator::make_range(
+      std::ranges::subrange{
           _dest,
           _dest + // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-              _size));
+              _size});
 
   return _size;
 }

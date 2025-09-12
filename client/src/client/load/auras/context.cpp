@@ -12,19 +12,19 @@
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/iterator/make_range.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
+#include <ranges>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
 sanguis::client::load::auras::context::context(
     sanguis::client::load::resource::textures_cref const _resources)
     : textures_(fcppt::algorithm::map<texture_map>(
-          fcppt::iterator::make_range(
+          std::ranges::subrange{
               std::filesystem::directory_iterator(sanguis::media_path() / FCPPT_TEXT("auras")),
-              std::filesystem::directory_iterator()),
+              std::filesystem::directory_iterator()},
           [&_resources](std::filesystem::path const &_path)
           {
             return std::make_pair(

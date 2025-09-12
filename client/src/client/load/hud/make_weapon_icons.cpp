@@ -9,7 +9,6 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/iterator/make_range.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/warning.hpp>
@@ -17,6 +16,7 @@
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
+#include <ranges>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -24,11 +24,11 @@ sanguis::client::load::hud::weapon_icon_map sanguis::client::load::hud::make_wea
     fcppt::log::object &_log, sanguis::client::load::resource::textures_cref const _textures)
 {
   return fcppt::algorithm::map_optional<sanguis::client::load::hud::weapon_icon_map>(
-      fcppt::iterator::make_range(
+      std::ranges::subrange{
           std::filesystem::directory_iterator(
               sanguis::media_path() / FCPPT_TEXT("hud") / FCPPT_TEXT("icons") /
               FCPPT_TEXT("weapons")),
-          std::filesystem::directory_iterator()),
+          std::filesystem::directory_iterator()},
       [&_log, &_textures](std::filesystem::path const &_path)
       {
         using result_type =
