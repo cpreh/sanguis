@@ -27,9 +27,10 @@ namespace
 
 template <
     sanguis::collision::world::body_group Group,
-    template <fcppt::mpl::map::element_concept>
+    // TODO(philipp): There seems to be a problem with clang-22 here.
+    template <typename>//fcppt::mpl::map::element_concept>
     class GetCompare,
-    template <fcppt::mpl::map::element_concept>
+    template <typename>//fcppt::mpl::map::element_concept>
     class GetValue,
     typename Other>
 using add_element_if = fcppt::mpl::bind<
