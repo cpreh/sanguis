@@ -19,9 +19,9 @@ public:
 
   ~sequence() override;
 
-private:
   [[nodiscard]] sanguis::server::ai::status run(sanguis::duration) override;
 
+private:
   sanguis::server::ai::tree::container::iterator current_;
 };
 

@@ -122,10 +122,10 @@ sanguis::server::global::generate_worlds(sanguis::server::world::parameters cons
     sanguis::world_id const previous_id(world_id.get() - 1U);
 
     sanguis::creator::opening const current_opening(
-        worlds.at(world_id)->openings()[sanguis::creator::opening_type::entry].at(0U));
+        worlds.at(world_id)->openings().get(sanguis::creator::opening_type::entry).at(0U));
 
     sanguis::creator::opening const previous_opening(
-        worlds.at(previous_id)->openings()[sanguis::creator::opening_type::exit].at(0U));
+        worlds.at(previous_id)->openings().get(sanguis::creator::opening_type::exit).at(0U));
 
     connections.insert(std::make_pair(
         sanguis::server::global::source_world_pair(
@@ -158,7 +158,7 @@ sanguis::server::global::generate_worlds(sanguis::server::world::parameters cons
                                 sanguis::server::entities::enemies::special_chance(0.F)),
                             sanguis::server::entities::insert_parameters_center(
                                 sanguis::server::world::grid_pos_to_center(
-                                    last_world.openings()[sanguis::creator::opening_type::exit]
+                                    last_world.openings().get(sanguis::creator::opening_type::exit)
                                         .at(0)
                                         .get())))
                         .has_value()))

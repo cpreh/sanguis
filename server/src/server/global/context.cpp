@@ -155,7 +155,7 @@ void sanguis::server::global::context::insert_player(
   fcppt::optional::maybe(
       fcppt::optional::bind(
           fcppt::optional::copy_value(fcppt::container::at_optional(
-              cur_world.openings()[sanguis::creator::opening_type::entry], 0U)),
+              cur_world.openings().get(sanguis::creator::opening_type::entry), 0U)),
           [&cur_world, &player_ptr](sanguis::creator::opening const &_opening)
           {
             return sanguis::server::entities::insert_with_result<

@@ -26,13 +26,13 @@ public:
 
   ~burn() override;
 
-private:
   [[nodiscard]] sanguis::buff_type type() const override;
 
   void update() override;
 
   [[nodiscard]] bool greater(sanguis::server::buffs::buff const &) const override;
 
+private:
   sanguis::server::entities::with_health_ref const entity_;
 
   sanguis::diff_timer interval_timer_;

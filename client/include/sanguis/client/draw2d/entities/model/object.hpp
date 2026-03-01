@@ -43,7 +43,6 @@ public:
 
   ~object() override;
 
-protected:
   void update() override;
 
   // with_orientation overrides
@@ -58,27 +57,28 @@ protected:
   [[nodiscard]] bool dead() const override;
 
   void pause(bool) override;
-
+private:
   [[nodiscard]] bool is_decayed() const override;
-
+protected:
   void on_die() override;
 
+public:
   // with_speed overrides
   void speed(sanguis::client::draw2d::speed const &) override;
 
   using sanguis::client::draw2d::entities::container::speed;
 
+protected:
   [[nodiscard]] sanguis::client::draw2d::entities::model::part &
   part(sanguis::client::draw2d::sprite::index const &);
-
+public:
   // with_health overrides
   void health(sanguis::client::health) override;
 
   void max_health(sanguis::client::max_health) override;
-
+protected:
   [[nodiscard]] sanguis::client::optional_health_pair health_pair() const;
 
-private:
   using part_vector = std::vector<sanguis::client::draw2d::entities::model::part>;
 
   object(
@@ -91,10 +91,11 @@ private:
       part_vector &&);
 
   // with_weapon overrides
+public:
   void weapon(sanguis::optional_primary_weapon_type) override;
 
   void weapon_status(sanguis::weapon_status) override;
-
+private:
   // own functions
   void change_animation();
 

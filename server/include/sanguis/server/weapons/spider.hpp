@@ -32,9 +32,9 @@ public:
       sanguis::server::weapons::spawn_parameters const &,
       sanguis::server::weapons::attributes::health);
 
-private:
   [[nodiscard]] sanguis::server::weapons::unique_ptr clone() const override;
 
+private:
   [[nodiscard]] sanguis::server::entities::optional_base_ref do_spawn(
       sanguis::server::weapons::attack const &,
       sanguis::server::weapons::spawn_weapon const &) override;

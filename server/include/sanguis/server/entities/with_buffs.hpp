@@ -32,9 +32,9 @@ public:
 
 protected:
   with_buffs();
-
+public:
   void update() override;
-
+protected:
   [[nodiscard]] sanguis::buff_type_vector buff_types() const;
 
 private:

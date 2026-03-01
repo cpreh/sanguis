@@ -37,11 +37,11 @@ public:
 
   ~limited() override;
 
-private:
   [[nodiscard]] bool dead() const override;
 
   void unregister(sanguis::server::entities::base &) override; // NOLINT(google-runtime-references)
 
+private:
   [[nodiscard]] sanguis::server::entities::spawns::size_type may_spawn() override;
 
   void add_count(sanguis::server::entities::spawns::size_type) override;

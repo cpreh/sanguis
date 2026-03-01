@@ -29,7 +29,7 @@ insert_pair<Type>::~insert_pair() = default;
 }
 
 template <typename Type>
-typename sanguis::server::world::insert_pair<Type>::unique_ptr &
+sanguis::server::world::insert_pair<Type>::unique_ptr &
 sanguis::server::world::insert_pair<Type>::entity()
 {
   return entity_;

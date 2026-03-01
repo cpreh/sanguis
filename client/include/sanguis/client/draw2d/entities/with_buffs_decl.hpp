@@ -22,7 +22,7 @@ class with_buffs : public sanguis::client::draw2d::entities::ifaces::with_buffs,
   FCPPT_NONMOVABLE(with_buffs);
 
 public:
-  using base_parameters = typename Base::parameters_type;
+  using base_parameters = Base::parameters_type;
 
   using parameters_type = sanguis::client::draw2d::entities::with_buffs_parameters<base_parameters>;
 
@@ -30,14 +30,13 @@ public:
 
   ~with_buffs() override;
 
-protected:
   void update() override;
 
-private:
   void add_buff(sanguis::buff_type) override;
 
   void remove_buff(sanguis::buff_type) override;
 
+private:
   sanguis::diff_clock_cref const diff_clock_;
 
   sanguis::client::draw2d::sprite::normal::system_ref const normal_system_;

@@ -34,16 +34,17 @@ public:
 
   ~grenade() override;
 
-private:
+protected:
   [[nodiscard]] sanguis::server::entities::optional_transfer_result
   on_transfer(sanguis::server::entities::transfer_parameters const &) override;
 
+private:
   void do_damage(sanguis::server::entities::with_health &) override;
-
+public:
   void update() override;
 
   void remove_from_game() override;
-
+private:
   sanguis::diff_timer slowdown_timer_;
 
   sanguis::server::damage::unit const damage_;

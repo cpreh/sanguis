@@ -20,11 +20,11 @@ public:
 
   ~leaf() override;
 
-private:
   [[nodiscard]] sanguis::server::entities::transfer_result transfer() override;
 
   [[nodiscard]] sanguis::server::ai::status run(sanguis::duration) override;
 
+private:
   sanguis::server::ai::behavior::base_unique_ptr const behavior_;
 
   bool started_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)

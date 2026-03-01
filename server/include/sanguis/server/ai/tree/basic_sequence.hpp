@@ -18,9 +18,9 @@ public:
 
   ~basic_sequence() override;
 
-protected:
   [[nodiscard]] sanguis::server::entities::transfer_result transfer() override;
 
+protected:
   [[nodiscard]] sanguis::server::ai::tree::container &get();
 
 private:

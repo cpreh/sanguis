@@ -29,11 +29,11 @@ public:
 
   ~special() override;
 
-private:
   void update() override;
 
   void remove_from_game() override;
 
+private:
   [[nodiscard]] sanguis::messages::types::string const &name() const override;
 
   [[nodiscard]] sanguis::enemy_kind enemy_kind() const override;

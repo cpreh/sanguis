@@ -58,8 +58,8 @@ sanguis::creator::generate(sanguis::creator::top_parameters const &_parameters)
 
   for (auto const opening_type : fcppt::enum_::make_range<sanguis::creator::opening_type>())
   {
-    if (result.openings()[opening_type].size() !=
-        _parameters.opening_count_array()[opening_type].get())
+    if (result.openings().get(opening_type).size() !=
+        _parameters.opening_count_array().get(opening_type).get())
     {
       throw sanguis::creator::exception{FCPPT_TEXT("Inconsistent opening counts!")};
     }

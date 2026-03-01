@@ -24,7 +24,7 @@ boost::statechart::result dispatch(
 {
   // TODO(philipp): Refactor alda's default msg so this isn't necessary
   auto const fake_default_msg(
-      [_handle_default_msg](typename Dispatcher::message_base const &_message_base)
+      [_handle_default_msg](Dispatcher::message_base const &_message_base)
       { return sanguis::messages::call::result(_handle_default_msg(_message_base)); });
 
   return fcppt::variant::match(

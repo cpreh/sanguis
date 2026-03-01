@@ -18,7 +18,6 @@ public:
 
   ~mother_spider() override;
 
-private:
   void on_die(sanguis::server::entities::enemies::enemy const &) override;
 
   [[nodiscard]] sanguis::server::entities::enemies::attribute attribute() const override;

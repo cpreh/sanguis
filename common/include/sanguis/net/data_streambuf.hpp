@@ -25,11 +25,12 @@ public:
   SANGUIS_COMMON_SYMBOL
   ~data_streambuf() override;
 
-private:
+protected:
   [[nodiscard]] std::streamsize xsputn(char_type const *, std::streamsize) override;
 
   [[nodiscard]] int_type overflow(int_type) override;
 
+private:
   fcppt::reference<sanguis::net::data_buffer> const buffer_;
 };
 

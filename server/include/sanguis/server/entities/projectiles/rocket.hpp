@@ -30,12 +30,10 @@ public:
   ~rocket() override;
 
 private:
-  void do_damage(sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
-                 ) // NOLINT(google-runtime-references)
-      override;
-
+  void do_damage(sanguis::server::entities::with_health &) override;
+public:
   void remove_from_game() override;
-
+private:
   sanguis::server::damage::unit const damage_;
 
   sanguis::server::damage::modified_array const damage_modifiers_;

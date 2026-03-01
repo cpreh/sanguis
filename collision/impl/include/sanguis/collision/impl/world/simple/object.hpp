@@ -43,7 +43,6 @@ public:
 
   ~object() override;
 
-private:
   [[nodiscard]] sanguis::collision::world::body_unique_ptr
   create_body(sanguis::collision::world::body_parameters const &) override;
 
@@ -66,6 +65,7 @@ private:
   [[nodiscard]] sanguis::collision::world::update_result
       update(sanguis::collision::duration) override;
 
+private:
   void move_bodies(sanguis::collision::duration);
 
   [[nodiscard]] sanguis::collision::world::body_collision_container body_collisions() const;
@@ -73,12 +73,10 @@ private:
   [[nodiscard]] sanguis::collision::impl::world::simple::ghost_result update_ghosts();
 
   void
-  remove_body(sanguis::collision::impl::world::simple::body & // NOLINT(google-runtime-references)
-  ); // NOLINT(google-runtime-references)
+  remove_body(sanguis::collision::impl::world::simple::body &);
 
   void
-  remove_ghost(sanguis::collision::impl::world::simple::ghost & // NOLINT(google-runtime-references)
-  ); // NOLINT(google-runtime-references)
+  remove_ghost(sanguis::collision::impl::world::simple::ghost &);
 
   void move_body(fcppt::reference<sanguis::collision::impl::world::simple::body>);
 

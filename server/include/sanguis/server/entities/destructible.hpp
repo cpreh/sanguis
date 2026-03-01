@@ -39,18 +39,18 @@ public:
 
   ~destructible() override;
 
-private:
   void update() override;
 
   void remove_from_game() override;
 
   [[nodiscard]] sanguis::server::team team() const override;
 
+private:
   [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
-
+public:
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
-
+private:
   sanguis::creator::destructible_type const type_;
 
   sanguis::server::entities::enemies::difficulty const difficulty_;

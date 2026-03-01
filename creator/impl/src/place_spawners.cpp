@@ -72,7 +72,7 @@ sanguis::creator::spawn_container sanguis::creator::impl::place_spawners(
     if (
         // TODO(philipp): Use any_of for ranges
         !fcppt::algorithm::fold(
-            _openings[sanguis::creator::opening_type::entry],
+            _openings.get(sanguis::creator::opening_type::entry),
             false,
             [&_grid, &candidate](sanguis::creator::opening const &_cur, bool const _value) {
               return _value ||

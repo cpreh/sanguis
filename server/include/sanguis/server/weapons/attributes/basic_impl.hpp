@@ -24,7 +24,7 @@ Wrapped sanguis::server::weapons::attributes::basic<Wrapped>::base() const
 }
 
 template <typename Wrapped>
-typename sanguis::server::weapons::attributes::basic<Wrapped>::optional_extra
+sanguis::server::weapons::attributes::basic<Wrapped>::optional_extra
 sanguis::server::weapons::attributes::basic<Wrapped>::extra() const
 {
   return extra_;

@@ -48,18 +48,17 @@ public:
       sanguis::server::weapons::unique_ptr &&);
 
   ~friend_() override;
-
-private:
+protected:
   [[nodiscard]] sanguis::server::entities::optional_transfer_result
   on_transfer(sanguis::server::entities::transfer_parameters const &) override;
-
+public:
   void update() override;
 
   [[nodiscard]] sanguis::server::team team() const override;
 
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
-
+private:
   [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
 
   sanguis::friend_type const friend_type_;

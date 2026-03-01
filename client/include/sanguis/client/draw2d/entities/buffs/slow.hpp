@@ -19,12 +19,12 @@ public:
 
   ~slow() override;
 
-private:
-  void apply(sanguis::client::draw2d::entities::model::object &) override; // NOLINT(google-runtime-references)
+  void apply(sanguis::client::draw2d::entities::model::object &) override;
 
   void
-  remove(sanguis::client::draw2d::entities::model::object &) override; // NOLINT(google-runtime-references)
+  remove(sanguis::client::draw2d::entities::model::object &) override;
 
+private:
   using optional_color = fcppt::optional::object<sanguis::client::draw2d::sprite::normal::color>;
 
   optional_color previous_color_;

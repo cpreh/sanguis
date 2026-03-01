@@ -36,11 +36,11 @@ private:
       sanguis::client::draw2d::sprite::center const &,
       sanguis::client::draw2d::sprite::optional_dim const &,
       sanguis::client::load::resource::animation::series_cref);
-
+public:
   void update() override;
 
   [[nodiscard]] bool may_be_removed() const override;
-
+private:
   sanguis::client::draw2d::sprite::animation::texture animation_;
 
   sanguis::client::draw2d::sprite::normal::object sprite_;

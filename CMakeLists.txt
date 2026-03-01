@@ -26,7 +26,9 @@ list(
   "-fuchsia-default-arguments-declarations"
   "-fuchsia-multiple-inheritance"
   "-fuchsia-virtual-inheritance"
-  "-misc-misplaced-const")
+  "-misc-misplaced-const"
+  "-misc-multiple-inheritance"
+  "-portability-template-virtual-member-function")
 
 set(FCPPT_UTILS_CLANG_TIDY_WHITELIST "fcppt" "awl" "mizuiro" "sge" "alda"
                                      "sanguis")

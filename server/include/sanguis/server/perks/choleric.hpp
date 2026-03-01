@@ -26,13 +26,10 @@ public:
 
   ~choleric() override;
 
-private:
-  void update(
-      sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
-      sanguis::server::environment::object & // NOLINT(google-runtime-references)
-      ) // NOLINT(google-runtime-references)
-      override;
+  void
+  update(sanguis::server::entities::with_perks &, sanguis::server::environment::object &) override;
 
+private:
   void change(
       sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
       sanguis::server::perks::level_diff) override;

@@ -21,7 +21,7 @@ class system
 
   using collection = sge::sprite::intrusive::ordered::collection<Choices, Category>;
 
-  using connection_ref = typename collection::connection_ref;
+  using connection_ref = collection::connection_ref;
 
 public:
   using state_ref = fcppt::reference<sanguis::client::draw2d::sprite::state>;

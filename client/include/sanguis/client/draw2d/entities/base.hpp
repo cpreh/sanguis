@@ -43,7 +43,7 @@ public:
 
 private:
   [[nodiscard]] virtual bool is_decayed() const = 0;
-
+protected:
   virtual void on_die() = 0;
 };
 

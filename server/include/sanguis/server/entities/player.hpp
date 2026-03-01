@@ -91,11 +91,11 @@ public:
 
   [[nodiscard]] sanguis::server::team team() const override;
 
-private:
   void transfer_to_world() override;
 
   void remove_from_game() override;
 
+private:
   void update_speed();
 
   void
@@ -105,15 +105,13 @@ private:
 
   void weapon_pickup_add_candidate(sanguis::server::entities::pickups::weapon_ref);
 
-  void weapon_pickup_remove_candidate(
-      sanguis::server::entities::pickups::weapon & // NOLINT(google-runtime-references)
-  ); // NOLINT(google-runtime-references)
-
+  void weapon_pickup_remove_candidate(sanguis::server::entities::pickups::weapon &);
+public:
   void update() override;
 
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
-
+private:
   template <typename Message>
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message_impl(sanguis::collision::world::created) const;

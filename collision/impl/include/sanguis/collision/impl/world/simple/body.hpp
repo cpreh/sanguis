@@ -27,7 +27,7 @@ namespace sanguis::collision::impl::world::simple
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Wnon-virtual-dtor)
 
-class body // NOLINT(fuchsia-multiple-inheritance)
+class body // NOLINT(fuchsia-multiple-inheritance,misc-multiple-inheritance)
     : public sanguis::collision::world::body,
       public sanguis::collision::impl::world::simple::body_base_hook
 {

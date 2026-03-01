@@ -29,10 +29,9 @@ public:
       sanguis::client::draw2d::aoe);
 
   ~aoe_bullet() override;
-
-private:
+protected:
   void on_die() override;
-
+private:
   sanguis::client::draw2d::entities::load_parameters const load_parameters_;
 
   sanguis::client::draw2d::insert_own_callback const insert_;

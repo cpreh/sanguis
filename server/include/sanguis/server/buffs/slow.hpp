@@ -19,13 +19,13 @@ public:
 
   ~slow() override;
 
-private:
   [[nodiscard]] sanguis::buff_type type() const override;
 
+private:
   void apply(sanguis::server::buffs::buff::added) override;
-
+public:
   [[nodiscard]] bool greater(sanguis::server::buffs::buff const &) const override;
-
+private:
   sanguis::server::entities::with_velocity_ref const entity_;
 
   sanguis::server::buffs::slow_factor const factor_;

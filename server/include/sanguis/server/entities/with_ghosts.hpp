@@ -34,8 +34,10 @@ protected:
   [[nodiscard]] sanguis::server::entities::optional_transfer_result
   on_transfer(sanguis::server::entities::transfer_parameters const &) override;
 
+public:
   [[nodiscard]] sanguis::server::entities::remove_from_world_result remove_from_world() override;
 
+protected:
   void update_ghost_center(sanguis::server::center const &);
 
 private:

@@ -41,18 +41,19 @@ protected:
       sanguis::creator::enemy_kind,
       sanguis::server::world::difficulty);
 
-private:
+public:
   [[nodiscard]] sanguis::server::center center() const override;
 
   [[nodiscard]] sanguis::server::angle angle() const override;
 
   void angle(sanguis::server::angle) override;
 
+protected:
   [[nodiscard]] sanguis::server::entities::optional_transfer_result
   on_transfer(sanguis::server::entities::transfer_parameters const &) override;
-
+public:
   void update() override;
-
+private:
   [[nodiscard]] virtual sanguis::server::entities::spawns::size_type may_spawn() = 0;
 
   virtual void add_count(sanguis::server::entities::spawns::size_type) = 0;

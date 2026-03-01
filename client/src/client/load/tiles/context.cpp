@@ -59,5 +59,5 @@ sanguis::tiles::collection &sanguis::client::load::tiles::context::collection()
 sge::texture::part const &
 sanguis::client::load::tiles::context::missing_texture(sanguis::tiles::error const _error) const
 {
-  return *missing_textures_[_error];
+  return *missing_textures_.get(_error);
 }

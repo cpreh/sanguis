@@ -24,14 +24,14 @@ public:
 
   explicit monster_spawner(sanguis::server::weapons::parameters const &);
 
-private:
   [[nodiscard]] sanguis::server::weapons::unique_ptr clone() const override;
-
+protected:
   [[nodiscard]] sanguis::server::weapons::attack_result
   do_attack(sanguis::server::weapons::attack const &) override;
-
+public:
   [[nodiscard]] sanguis::weapon_attribute_vector attributes() const override;
 
+private:
   sanguis::server::weapons::common_parameters const common_parameters_;
 };
 

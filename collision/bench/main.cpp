@@ -75,7 +75,6 @@ try
 
     ~body_base() override = default;
 
-  private:
     [[nodiscard]] boost::logic::tribool
     can_collide_with(sanguis::collision::world::body_base const &) const override
     {

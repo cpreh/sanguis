@@ -115,7 +115,7 @@ sanguis::collision::impl::world::simple::object::activate_body(
   auto &body{
       fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::body &>(_body.get())};
 
-  if (fcppt::not_(this->body_sets_[body.collision_group()].insert(fcppt::make_ref(body)).second))
+  if (fcppt::not_(this->body_sets_.get(body.collision_group()).insert(fcppt::make_ref(body)).second))
   {
     throw sanguis::collision::exception{FCPPT_TEXT("Body set double insert!")};
   }
@@ -127,7 +127,7 @@ sanguis::collision::impl::world::simple::object::activate_body(
       [_created, this, &body](sanguis::collision::world::ghost_group const _ghost_group)
       {
         return fcppt::algorithm::map_optional<sanguis::collision::world::body_enter_container>(
-            ghost_sets_[_ghost_group],
+            ghost_sets_.get(_ghost_group),
             [_created, &body](ghost_reference const _ghost)
             { return _ghost.get().new_body(body, _created); });
       });
@@ -140,7 +140,7 @@ sanguis::collision::impl::world::simple::object::deactivate_body(
   auto &body{
       fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::body &>(_body.get())};
 
-  if (this->body_sets_[body.collision_group()].erase(fcppt::make_ref(body)) != 1U)
+  if (this->body_sets_.get(body.collision_group()).erase(fcppt::make_ref(body)) != 1U)
   {
     throw sanguis::collision::exception{FCPPT_TEXT("Failed to erase body!")};
   }
@@ -150,7 +150,7 @@ sanguis::collision::impl::world::simple::object::deactivate_body(
       [this, &body](sanguis::collision::world::ghost_group const _ghost_group)
       {
         return fcppt::algorithm::map_optional<sanguis::collision::world::body_exit_container>(
-            ghost_sets_[_ghost_group],
+            this->ghost_sets_.get(_ghost_group),
             [&body](ghost_reference const _ghost) { return _ghost.get().remove_body(body); });
       });
 }
@@ -174,7 +174,7 @@ sanguis::collision::impl::world::simple::object::activate_ghost(
   auto &ghost{
       fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::ghost &>(_ghost.get())};
 
-  if(fcppt::not_(this->ghost_sets_[ghost.collision_group()].insert(fcppt::make_ref(ghost)).second))
+  if(fcppt::not_(this->ghost_sets_.get(ghost.collision_group()).insert(fcppt::make_ref(ghost)).second))
   {
     throw sanguis::collision::exception{FCPPT_TEXT("Ghost set double insert!")};
   }
@@ -184,7 +184,7 @@ sanguis::collision::impl::world::simple::object::activate_ghost(
       [this, &ghost](sanguis::collision::world::body_group const _body_group)
       {
         return fcppt::algorithm::map_optional<sanguis::collision::world::body_enter_container>(
-            body_sets_[_body_group],
+            this->body_sets_.get(_body_group),
             [&ghost](body_reference const _body)
             { return ghost.new_body(_body.get(), sanguis::collision::world::created{false}); });
       });
@@ -197,7 +197,7 @@ sanguis::collision::impl::world::simple::object::deactivate_ghost(
   auto &ghost{
       fcppt::cast::static_downcast<sanguis::collision::impl::world::simple::ghost &>(_ghost.get())};
 
-  if (this->ghost_sets_[ghost.collision_group()].erase(fcppt::make_ref(ghost)) != 1U)
+  if (this->ghost_sets_.get(ghost.collision_group()).erase(fcppt::make_ref(ghost)) != 1U)
   {
     throw sanguis::collision::exception{FCPPT_TEXT("Failed to erase ghost!")};
   }
@@ -207,7 +207,7 @@ sanguis::collision::impl::world::simple::object::deactivate_ghost(
       [this, &ghost](sanguis::collision::world::body_group const _body_group)
       {
         return fcppt::algorithm::map_optional<sanguis::collision::world::body_exit_container>(
-            body_sets_[_body_group],
+            this->body_sets_.get(_body_group),
             [&ghost](body_reference const _body) { return ghost.remove_body(_body.get()); });
       });
 }
@@ -241,7 +241,7 @@ void sanguis::collision::impl::world::simple::object::move_bodies(
             {
               fcppt::optional::maybe_void(
                   fcppt::container::grid::at_optional(
-                      body_list_grids_[body1.collision_group()], _pos2),
+                      this->body_list_grids_.get(body1.collision_group()), _pos2),
                   [&body1, _duration](
                       fcppt::reference<sanguis::collision::impl::world::simple::body_list> const
                           _bodies2)
@@ -286,7 +286,7 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
     sanguis::collision::impl::world::body_group_container const &paired_groups(
         sanguis::collision::impl::world::body_groups_for_body_group(body_group));
 
-    for (body_reference const &body1 : body_sets_[body_group])
+    for (body_reference const &body1 : this->body_sets_.get(body_group))
     {
       sanguis::collision::impl::world::simple::for_all_body_neighbors(
           sanguis::collision::impl::world::simple::grid_position(body1.get().center()),
@@ -296,7 +296,7 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
             for (sanguis::collision::world::body_group const group2 : paired_groups)
             {
               fcppt::optional::maybe_void(
-                  fcppt::container::grid::at_optional(body_list_grids_[group2], _grid_pos2),
+                  fcppt::container::grid::at_optional(this->body_list_grids_.get(group2), _grid_pos2),
                   [&body1, &result](
                       fcppt::reference<
                           sanguis::collision::impl::world::simple::body_list const> const _bodies2)
@@ -334,7 +334,7 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
     sanguis::collision::impl::world::body_group_container const &paired_groups(
         sanguis::collision::impl::world::body_groups_for_ghost_group(ghost_group));
 
-    for (ghost_reference const &ghost : ghost_sets_[ghost_group])
+    for (ghost_reference const &ghost : this->ghost_sets_.get(ghost_group))
     {
       ghost.get().pre_update_bodies();
 
@@ -349,7 +349,7 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
       for (sanguis::collision::world::body_group const body_group : paired_groups)
       {
         sanguis::collision::impl::world::simple::body_list_grid const &grid(
-            body_list_grids_[body_group]);
+            this->body_list_grids_.get(body_group));
 
         for (auto const grid_entry : fcppt::container::grid::make_pos_ref_range_start_end(
                  grid,
@@ -383,12 +383,12 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
 void sanguis::collision::impl::world::simple::object::remove_body(
     sanguis::collision::impl::world::simple::body &_body)
 {
-  if (body_sets_[_body.collision_group()].erase(fcppt::make_ref(_body)) > 0)
+  if (this->body_sets_.get(_body.collision_group()).erase(fcppt::make_ref(_body)) > 0)
   {
     for (sanguis::collision::world::ghost_group const ghost_group :
          sanguis::collision::impl::world::ghost_groups_for_body_group(_body.collision_group()))
     {
-      for (ghost_reference const &ghost : ghost_sets_[ghost_group])
+      for (ghost_reference const &ghost : this->ghost_sets_.get(ghost_group))
       {
         ghost.get().body_destroyed(_body);
       }
@@ -399,7 +399,7 @@ void sanguis::collision::impl::world::simple::object::remove_body(
 void sanguis::collision::impl::world::simple::object::remove_ghost(
     sanguis::collision::impl::world::simple::ghost &_ghost)
 {
-  ghost_sets_[_ghost.collision_group()].erase(fcppt::make_ref(_ghost));
+  this->ghost_sets_.get(_ghost.collision_group()).erase(fcppt::make_ref(_ghost));
 }
 
 void sanguis::collision::impl::world::simple::object::move_body(
@@ -409,7 +409,7 @@ void sanguis::collision::impl::world::simple::object::move_body(
 
   fcppt::optional::maybe_void(
       fcppt::container::grid::at_optional(
-          body_list_grids_[_body->collision_group()],
+          this->body_list_grids_.get(_body->collision_group()),
           sanguis::collision::impl::world::simple::grid_position(_body->center())),
       [&_body](fcppt::reference<sanguis::collision::impl::world::simple::body_list> const _bodies)
       { _bodies.get().push_back(_body.get()); });

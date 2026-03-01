@@ -30,9 +30,9 @@ sanguis::server::random::split_array<Size> split(
 {
   using result_type = sanguis::server::random::split_array<Size>;
 
-  using value_type = typename result_type::value_type;
+  using value_type = result_type::value_type;
 
-  using size_type = typename result_type::size_type;
+  using size_type = result_type::size_type;
 
   using distributor_type = sanguis::server::random::distributor<value_type, size_type>;
 

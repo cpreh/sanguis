@@ -106,7 +106,6 @@ public:
 
   ~object() override;
 
-private:
   void process_message(sanguis::messages::server::base const &) override;
 
   void update(
@@ -122,6 +121,7 @@ private:
   [[nodiscard]] sanguis::client::control::optional_attack_dest
   translate_attack_dest(sanguis::client::control::cursor_position const &) const override;
 
+private:
   sanguis::client::draw2d::entities::base &
   insert(sanguis::client::draw2d::entities::unique_ptr &&, sanguis::entity_id);
 

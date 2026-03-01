@@ -41,17 +41,20 @@ protected:
 
   [[nodiscard]] sanguis::server::weapons::spawn_parameters spawn_parameters() const;
 
-private:
   [[nodiscard]] sanguis::server::weapons::attack_result
   do_attack(sanguis::server::weapons::attack const &) override;
 
+private:
   [[nodiscard]] virtual sanguis::server::entities::optional_base_ref do_spawn(
       sanguis::server::weapons::attack const &, sanguis::server::weapons::spawn_weapon const &) = 0;
 
+public:
   [[nodiscard]] sanguis::weapon_attribute_vector attributes() const override;
 
+protected:
   void owner_lost() override;
 
+private:
   void kill_spawned();
 
   [[nodiscard]] virtual sanguis::weapon_attribute_vector extra_attributes() const = 0;

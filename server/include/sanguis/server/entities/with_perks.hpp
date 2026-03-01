@@ -33,7 +33,7 @@ public:
 
 protected:
   explicit with_perks(sanguis::random_generator_ref);
-
+public:
   void update() override;
 
 private:

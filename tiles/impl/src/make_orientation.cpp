@@ -22,7 +22,7 @@ sanguis::tiles::impl::make_orientation(
   for (sanguis::tiles::direction const value :
        fcppt::enum_::make_range<sanguis::tiles::direction>())
   {
-    Tile const tile{_neighbors[value]};
+    Tile const tile{_neighbors.get(value)};
 
     if (fcppt::not_(tile == _pair.first() || tile == _pair.second()))
     {

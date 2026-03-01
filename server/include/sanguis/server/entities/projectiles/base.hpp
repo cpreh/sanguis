@@ -44,13 +44,14 @@ protected:
 
   void expire();
 
+public:
   [[nodiscard]] sanguis::server::team team() const override;
 
-private:
   [[nodiscard]] bool dead() const override;
 
   void world_collision() override;
 
+private:
   [[nodiscard]] boost::logic::tribool
   can_collide_with_body(sanguis::server::entities::with_body const &) const override;
 
@@ -59,8 +60,7 @@ private:
   [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
 
   virtual void
-  do_damage(sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
-            ) = 0; // NOLINT(google-runtime-references)
+  do_damage(sanguis::server::entities::with_health &) = 0;
 
   sanguis::server::team const team_;
 

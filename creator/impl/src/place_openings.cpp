@@ -35,7 +35,7 @@ sanguis::creator::opening_container_array sanguis::creator::impl::place_openings
       [&random_pos, &_grid, &_opening_count_array](sanguis::creator::opening_type const _opening)
       {
         return fcppt::algorithm::map<sanguis::creator::opening_container>(
-            fcppt::make_int_range_count(_opening_count_array[_opening]),
+            fcppt::make_int_range_count(_opening_count_array.get(_opening)),
             [&random_pos, &_grid](sanguis::creator::opening_count)
             {
               return sanguis::creator::opening{fcppt::optional::to_exception(

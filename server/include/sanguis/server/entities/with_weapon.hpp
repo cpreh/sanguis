@@ -44,10 +44,12 @@ protected:
       sanguis::server::weapons::ias,
       sanguis::server::weapons::irs);
 
+public:
   void update() override;
 
   void tick(sanguis::duration const &) override;
 
+protected:
   [[nodiscard]] sanguis::optional_primary_weapon_type primary_weapon_type() const;
 
 public:

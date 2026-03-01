@@ -342,7 +342,7 @@ void sanguis::server::world::object::player_insertion(sanguis::server::player_id
                       [this](sanguis::creator::opening_type const _opening_type)
                       {
                         return fcppt::cast::size<sanguis::messages::types::size>(
-                            info_.openings()[_opening_type].size());
+                            info_.openings().get(_opening_type).size());
                       }),
               sanguis::messages::roles::world_name{} =
                   sge::charconv::fcppt_string_to_utf8(info_.world_name().get()),
@@ -578,7 +578,7 @@ void sanguis::server::world::object::request_transfer(sanguis::entity_id const _
       continue;
     }
 
-    for (sanguis::creator::opening const &opening : info_.openings()[opening_type])
+    for (sanguis::creator::opening const &opening : info_.openings().get(opening_type))
     {
       sanguis::server::global::source_world_pair const source_pair{
           sanguis::server::source_world_id(this->world_id()), opening};
@@ -607,7 +607,7 @@ void sanguis::server::world::object::add_portal_blocker()
 {
   if (portal_block_count_ == 0U)
   {
-    for (auto const &portal : info_.openings()[sanguis::creator::opening_type::exit])
+    for (auto const &portal : info_.openings().get(sanguis::creator::opening_type::exit))
     {
       this->insert_base(
           portal_blockers_,

@@ -64,7 +64,7 @@
 namespace sanguis::server::world
 {
 
-class object : private sanguis::server::environment::object
+class object : public sanguis::server::environment::object
 {
   FCPPT_NONMOVABLE(object);
 
@@ -102,9 +102,9 @@ public:
 
   [[nodiscard]] sanguis::world_id world_id() const;
 
-private:
   void player_insertion(sanguis::server::player_id) override;
 
+private:
   template <typename Entity>
   [[nodiscard]] fcppt::optional::reference<Entity> insert_base(
       std::vector<fcppt::unique_ptr<Entity>> &,

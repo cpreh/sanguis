@@ -186,13 +186,13 @@ sanguis::server::entities::property::always_max &
 sanguis::server::entities::with_weapon::extra_damage(
     sanguis::server::damage::type const _damage_type)
 {
-  return extra_damages_[_damage_type];
+  return extra_damages_.get(_damage_type);
 }
 
 sanguis::server::damage::unit sanguis::server::entities::with_weapon::extra_damage_value(
     sanguis::server::damage::type const _damage_type) const
 {
-  return sanguis::server::damage::unit(extra_damages_[_damage_type].current());
+  return sanguis::server::damage::unit(extra_damages_.get(_damage_type).current());
 }
 
 sanguis::server::weapons::ias sanguis::server::entities::with_weapon::ias() const

@@ -42,11 +42,8 @@ public:
 
   ~weapon() override;
 
+  void draw(sge::renderer::context::ffp &) override;
 private:
-  void draw(sge::renderer::context::ffp & // NOLINT(google-runtime-references)
-            ) // NOLINT(google-runtime-references)
-      override;
-
   sge::gui::renderer::base_ref const gui_renderer_;
 
   sge::gui::context gui_context_;

@@ -41,7 +41,7 @@ sanguis::creator::impl::random::uniform_int_distribution<IntType>::uniform_int_d
 }
 
 template <typename IntType>
-typename sanguis::creator::impl::random::uniform_int_distribution<IntType>::result_type
+sanguis::creator::impl::random::uniform_int_distribution<IntType>::result_type
 sanguis::creator::impl::random::uniform_int_distribution<IntType>::operator()(
     sanguis::creator::impl::random::generator &_randgen)
 {

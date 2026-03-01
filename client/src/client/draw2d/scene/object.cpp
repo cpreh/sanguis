@@ -422,7 +422,7 @@ void sanguis::client::draw2d::scene::object::draw(sge::renderer::context::ffp &_
           for (auto const index : fcppt::enum_::make_range<sanguis::client::draw2d::z_ordering>())
           {
             sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr const state(
-                render_states_[index]->create_scoped(fcppt::make_ref(_render_context)));
+                render_states_.get(index)->create_scoped(fcppt::make_ref(_render_context)));
 
             normal_system_.render(_render_context, index);
           }
@@ -877,7 +877,7 @@ sanguis::client::draw2d::scene::object::operator()(
               {
                 return sanguis::creator::opening_count(
                     fcppt::record::get<sanguis::messages::roles::opening_count>(
-                        _message.get())[_opening_type]);
+                        _message.get()).get(_opening_type));
               }),
           sanguis::creator::spawn_boss{
               fcppt::record::get<sanguis::messages::roles::spawn_boss>(_message.get())})));

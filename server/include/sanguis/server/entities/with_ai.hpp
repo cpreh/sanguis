@@ -44,8 +44,10 @@ protected:
       sanguis::server::weapons::ias,
       sanguis::server::weapons::irs);
 
+public:
   void update() override;
 
+protected:
   [[nodiscard]] sanguis::server::entities::transfer_result on_create() override;
 
 public:

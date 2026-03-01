@@ -25,9 +25,9 @@ public:
 
   ~weapon_pickup() override;
 
-private:
   [[nodiscard]] sanguis::client::draw2d::entities::hover::optional_info hover() const override;
 
+private:
   sanguis::weapon_description const weapon_description_;
 };
 

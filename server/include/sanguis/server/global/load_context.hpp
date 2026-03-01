@@ -21,12 +21,12 @@ public:
 
   ~load_context() override;
 
-private:
   [[nodiscard]] sanguis::server::radius
   model_size(sanguis::load::model::path const &) const override;
 
   [[nodiscard]] sanguis::entity_id next_id() override;
 
+private:
   sanguis::server::load_cref const model_context_;
 
   sanguis::server::global::next_id_callback const next_id_callback_;

@@ -18,6 +18,6 @@ sanguis::server::damage::modified_array sanguis::server::entities::modify_damage
         return sanguis::server::damage::modified_unit(
             (fcppt::literal<sanguis::server::damage::unit_value>(1) +
              _entity.extra_damage_value(_type).get()) *
-            _damages[_type].get());
+            _damages.get(_type).get());
       });
 }

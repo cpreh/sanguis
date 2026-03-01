@@ -64,39 +64,38 @@ protected:
   // entities::base::on_transfer
   [[nodiscard]] sanguis::server::entities::optional_transfer_result
   on_transfer(sanguis::server::entities::transfer_parameters const &) override;
-
+public:
   void update() override;
-
+protected:
   void body_speed(sanguis::server::speed const &);
 
   [[nodiscard]] sanguis::server::speed body_speed() const;
 
-private:
+public:
   // collision::body_base
   [[nodiscard]] boost::logic::tribool
   can_collide_with(sanguis::collision::world::body_base const &) const override;
 
-  void collision(sanguis::collision::world::body_base & // NOLINT(google-runtime-references)
-                 ) // NOLINT(google-runtime-references)
-      override;
+  void collision(sanguis::collision::world::body_base &) override;
 
+private:
   [[nodiscard]] virtual boost::logic::tribool
   can_collide_with_body(sanguis::server::entities::with_body const &) const;
 
   virtual void
-  collision_with_body(sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
-  ); // NOLINT(google-runtime-references)
+  collision_with_body(sanguis::server::entities::with_body &);
 
   [[nodiscard]] virtual sanguis::collision::world::body_group collision_group() const = 0;
 
   [[nodiscard]] virtual sanguis::server::speed initial_speed() const;
 
+public:
   void center_changed(sanguis::collision::center) override;
 
   void speed_changed(sanguis::collision::speed const &) override;
 
   void world_collision() override;
-
+private:
   sanguis::server::angle angle_;
 
   sanguis::server::collision::body collision_body_;

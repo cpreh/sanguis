@@ -34,9 +34,9 @@ protected:
       sanguis::server::optional_mass const &,
       sanguis::server::entities::movement_speed_initial,
       sanguis::server::direction);
-
+public:
   void update() override;
-
+protected:
   [[nodiscard]] sanguis::server::entities::optional_transfer_result
   on_transfer(sanguis::server::entities::transfer_parameters const &) override;
 
@@ -55,9 +55,9 @@ public:
 
 private:
   void desired_speed_change();
-
+public:
   void speed_changed(sanguis::collision::speed const &) override;
-
+private:
   [[nodiscard]] sanguis::server::speed desired_speed() const;
 
   [[nodiscard]] sanguis::server::speed initial_speed() const override;

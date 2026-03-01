@@ -40,9 +40,9 @@ public:
 
   ~other_player() override;
 
-private:
   [[nodiscard]] sanguis::client::draw2d::entities::hover::optional_info hover() const override;
 
+private:
   sanguis::client::draw2d::entities::hover::name const name_;
 };
 

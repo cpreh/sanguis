@@ -21,13 +21,11 @@ public:
 
   ~teleport() override;
 
-private:
-  void update(sanguis::server::entities::enemies::enemy & // NOLINT(google-runtime-references)
-              ) // NOLINT(google-runtime-references)
-      override;
+  void update(sanguis::server::entities::enemies::enemy &) override;
 
   [[nodiscard]] sanguis::server::entities::enemies::attribute attribute() const override;
 
+private:
   sanguis::diff_timer cooldown_timer_;
 };
 

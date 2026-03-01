@@ -38,10 +38,10 @@ public:
 
 private:
   [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
-
+public:
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
-
+private:
   sanguis::doodad_type const doodad_type_;
 
   bool dead_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)

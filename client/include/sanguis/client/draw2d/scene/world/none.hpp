@@ -18,7 +18,6 @@ public:
 
   ~none() override;
 
-private:
   void update(sanguis::client::slowed_duration) override;
 
   void draw_after(sanguis::client::draw2d::scene::world::render_parameters const &) override;

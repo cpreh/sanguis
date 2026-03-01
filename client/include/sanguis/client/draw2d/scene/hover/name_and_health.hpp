@@ -31,11 +31,8 @@ public:
 
   ~name_and_health() override;
 
+  void draw(sge::renderer::context::ffp &) override;
 private:
-  void draw(sge::renderer::context::ffp & // NOLINT(google-runtime-references)
-            ) // NOLINT(google-runtime-references)
-      override;
-
   using optional_name = fcppt::optional::object<sanguis::client::draw2d::scene::hover::name>;
 
   using healthbar_unique_ptr = fcppt::unique_ptr<sanguis::client::draw2d::scene::hover::healthbar>;

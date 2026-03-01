@@ -30,9 +30,9 @@ public:
 
   ~target() override;
 
-private:
   [[nodiscard]] sanguis::optional_aura_type type() const override;
 
+private:
   void enter(sanguis::server::entities::with_body_ref, sanguis::collision::world::created) override;
 
   void leave(sanguis::server::entities::with_body & // NOLINT(google-runtime-references)

@@ -42,9 +42,9 @@
 sanguis::creator::impl::result
 sanguis::creator::impl::generators::start(sanguis::creator::impl::parameters const &_parameters)
 {
-  if (_parameters.opening_count_array()[sanguis::creator::opening_type::entry] >
+  if (_parameters.opening_count_array().get(sanguis::creator::opening_type::entry) >
           sanguis::creator::opening_count{1U} ||
-      _parameters.opening_count_array()[sanguis::creator::opening_type::exit] >
+      _parameters.opening_count_array().get(sanguis::creator::opening_type::exit) >
           sanguis::creator::opening_count{1U})
   {
     throw sanguis::creator::exception{
@@ -92,7 +92,7 @@ sanguis::creator::impl::generators::start(sanguis::creator::impl::parameters con
           [&_parameters, start_portal, exit_portal](
               sanguis::creator::opening_type const _opening_type)
           {
-            if (_parameters.opening_count_array()[_opening_type] ==
+            if (_parameters.opening_count_array().get(_opening_type) ==
                 sanguis::creator::opening_count{0U})
             {
               return sanguis::creator::opening_container{};

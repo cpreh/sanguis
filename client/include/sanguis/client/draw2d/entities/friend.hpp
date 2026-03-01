@@ -41,7 +41,6 @@ public:
 
   ~friend_() override;
 
-private:
   [[nodiscard]] sanguis::client::draw2d::entities::hover::optional_info hover() const override;
 };
 

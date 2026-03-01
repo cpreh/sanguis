@@ -17,7 +17,7 @@ sanguis::tiles::impl::make_pair(sanguis::tiles::impl::neighbors<Tile> _neighbors
 
   using result_type = sanguis::tiles::impl::optional_pair<Tile>;
 
-  using pair_type = typename result_type::value_type;
+  using pair_type = result_type::value_type;
 
   switch (boost::size(range))
   {

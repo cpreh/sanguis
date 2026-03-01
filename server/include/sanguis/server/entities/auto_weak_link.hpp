@@ -16,9 +16,7 @@ public:
 
   auto_weak_link();
 
-  explicit auto_weak_link(
-      sanguis::server::entities::with_links &ref // NOLINT(google-runtime-references)
-  ); // NOLINT(google-runtime-references)
+  explicit auto_weak_link(sanguis::server::entities::with_links &ref);
 
   auto_weak_link(auto_weak_link const &);
 
@@ -26,7 +24,7 @@ public:
 
   auto_weak_link &operator=(auto_weak_link const &);
 
-  void unlink();
+  void unlink(); // NOLINT(bugprone-derived-method-shadowing-base-method)
 
   [[nodiscard]] optional_with_links_ref get() const;
 

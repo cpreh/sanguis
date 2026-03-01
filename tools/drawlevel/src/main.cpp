@@ -210,7 +210,7 @@ void execute_main(argument_record const &_args)
         [&store, &error_images, dest_pos](sanguis::tiles::error const _error)
         {
           sge::image2d::view::const_object const source_view(
-              sge::image2d::store::view(fcppt::make_cref(error_images[_error])));
+              sge::image2d::store::view(fcppt::make_cref(error_images.get(_error))));
 
           sge::image2d::algorithm::copy_and_convert(
               source_view,

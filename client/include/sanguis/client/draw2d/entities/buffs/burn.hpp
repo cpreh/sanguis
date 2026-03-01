@@ -26,9 +26,9 @@ public:
 
   ~burn() override;
 
-private:
   void update(sanguis::client::draw2d::entities::model::object const &) override;
 
+private:
   sanguis::client::draw2d::sprite::animation::texture animation_;
 
   sanguis::client::draw2d::sprite::normal::object sprite_;

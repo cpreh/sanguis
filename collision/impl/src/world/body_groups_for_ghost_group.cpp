@@ -63,5 +63,5 @@ sanguis::collision::impl::world::body_group_container const &
 sanguis::collision::impl::world::body_groups_for_ghost_group(
     sanguis::collision::world::ghost_group const _group)
 {
-  return groups[_group];
+  return groups.get(_group);
 }

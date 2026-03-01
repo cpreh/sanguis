@@ -38,29 +38,26 @@ protected:
       sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
       sanguis::server::team);
 
-private:
+public:
   [[nodiscard]] bool dead() const override;
 
   [[nodiscard]] sanguis::server::team team() const override;
 
+private:
   [[nodiscard]] boost::logic::tribool
   can_collide_with_body(sanguis::server::entities::with_body const &) const override;
 
   void
-  collision_with_body(sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
-                      ) // NOLINT(google-runtime-references)
-      override;
+  collision_with_body(sanguis::server::entities::with_body &) override;
 
   [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
 
   [[nodiscard]] virtual bool
-  do_pickup(sanguis::server::entities::base &receiver // NOLINT(google-runtime-references)
-            ) // NOLINT(google-runtime-references)
-      = 0;
-
+  do_pickup(sanguis::server::entities::base &receiver) = 0;
+public:
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
-
+private:
   sanguis::server::team const team_;
 
   sanguis::pickup_type const pickup_type_;

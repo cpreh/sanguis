@@ -50,12 +50,11 @@ protected:
       sanguis::server::health,
       sanguis::server::regeneration,
       sanguis::server::damage::armor_array const &);
-
+public:
   void update() override;
 
-private:
   [[nodiscard]] bool dead() const override;
-
+private:
   void health_change();
 
   void max_health_change();

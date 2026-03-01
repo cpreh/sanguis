@@ -488,13 +488,13 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
       _parameters.log(),
       fcppt::log::out << entrance_room << FCPPT_TEXT(" : ") << exit_room << FCPPT_TEXT("\n"))
 
-  if (_parameters.opening_count_array()[sanguis::creator::opening_type::entry] >
+  if (_parameters.opening_count_array().get(sanguis::creator::opening_type::entry) >
       sanguis::creator::opening_count{1U})
   {
     throw sanguis::creator::exception{FCPPT_TEXT("Too many entries in rooms generator!")};
   }
 
-  if (_parameters.opening_count_array()[sanguis::creator::opening_type::exit] >
+  if (_parameters.opening_count_array().get(sanguis::creator::opening_type::exit) >
       sanguis::creator::opening_count{1U})
   {
     throw sanguis::creator::exception{FCPPT_TEXT("Too many exits in rooms generator!")};
@@ -508,17 +508,17 @@ sanguis::creator::impl::generators::rooms(sanguis::creator::impl::parameters con
   auto openings = fcppt::enum_::array_init<sanguis::creator::opening_container_array>(
       [&rooms, &opening_counts, &rect_center_pos](sanguis::creator::opening_type const _opening)
       {
-        return opening_counts[_opening] >= sanguis::creator::opening_count{1U}
+        return opening_counts.get(_opening) >= sanguis::creator::opening_count{1U}
                    ? sanguis::creator::opening_container{sanguis::creator::opening{
-                         rect_center_pos(rooms[_opening])}}
+                         rect_center_pos(rooms.get(_opening))}}
                    : sanguis::creator::opening_container{};
       });
 
   FCPPT_LOG_DEBUG(
       _parameters.log(),
-      fcppt::log::out << openings[sanguis::creator::opening_type::entry].size()
+      fcppt::log::out << openings.get(sanguis::creator::opening_type::entry).size()
                       << FCPPT_TEXT(" entries, ")
-                      << openings[sanguis::creator::opening_type::exit].size()
+                      << openings.get(sanguis::creator::opening_type::exit).size()
                       << FCPPT_TEXT(" exits"))
 
   sanguis::creator::impl::set_opening_tiles(fcppt::make_ref(grid), openings);

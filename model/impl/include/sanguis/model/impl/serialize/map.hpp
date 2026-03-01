@@ -23,7 +23,7 @@ map(Map const &_map,
       sge::parse::json::make_value(
           sge::parse::json::object(fcppt::algorithm::map<sge::parse::json::member_map>(
               _map,
-              [_serialize_inner](typename Map::value_type const &_pair)
+              [_serialize_inner](Map::value_type const &_pair)
               {
                 return sge::parse::json::member(
                     sge::charconv::fcppt_string_to_utf8(_pair.first.get()),

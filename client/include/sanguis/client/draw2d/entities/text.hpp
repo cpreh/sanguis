@@ -42,11 +42,11 @@ private:
       sanguis::client::draw2d::z_ordering,
       sanguis::client::draw2d::sprite::center const &,
       sanguis::client::draw2d::sprite::normal::color);
-
+public:
   void update() override;
 
   [[nodiscard]] bool may_be_removed() const override;
-
+private:
   sanguis::diff_timer life_time_;
 
   sge::texture::const_part_unique_ptr const texture_;

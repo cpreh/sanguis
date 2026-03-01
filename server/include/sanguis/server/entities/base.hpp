@@ -59,12 +59,12 @@ public:
   // TODO(philipp): Move this to another class?
   [[nodiscard]] sanguis::diff_clock const &diff_clock() const;
 
-private:
+protected:
   [[nodiscard]] virtual sanguis::server::entities::transfer_result on_create();
 
   [[nodiscard]] virtual sanguis::server::entities::optional_transfer_result
   on_transfer(sanguis::server::entities::transfer_parameters const &);
-
+private:
   // TODO(philipp): Move this to another class?
   sanguis::server::environment::optional_object_ref environment_;
 

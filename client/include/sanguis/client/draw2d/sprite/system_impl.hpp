@@ -35,7 +35,7 @@ system<Choices, Category>::~system() = default;
 }
 
 template <typename Choices, typename Category>
-typename sanguis::client::draw2d::sprite::system<Choices, Category>::connection_ref
+sanguis::client::draw2d::sprite::system<Choices, Category>::connection_ref
 sanguis::client::draw2d::sprite::system<Choices, Category>::connection(Category const _category)
 {
   return collection_.connection(_category);

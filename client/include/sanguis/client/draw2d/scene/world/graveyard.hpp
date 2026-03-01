@@ -25,11 +25,11 @@ public:
 
   ~graveyard() override;
 
-private:
   void update(sanguis::client::slowed_duration) override;
 
   void draw_after(sanguis::client::draw2d::scene::world::render_parameters const &) override;
 
+private:
   sanguis::client::draw2d::scene::light light_;
 };
 

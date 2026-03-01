@@ -51,15 +51,14 @@ public:
 
   [[nodiscard]] sanguis::server::entities::enemies::difficulty difficulty() const;
 
-protected:
   void update() override;
 
   void remove_from_game() override;
 
-private:
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
 
+private:
   [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
 
   [[nodiscard]] virtual sanguis::messages::types::string const &name() const = 0;

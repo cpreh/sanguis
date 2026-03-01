@@ -33,12 +33,10 @@ public:
 
   ~scatter() override;
 
-private:
   void update() override;
 
-  void do_damage(sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
-                 ) // NOLINT(google-runtime-references)
-      override;
+private:
+  void do_damage(sanguis::server::entities::with_health &) override;
 
   sanguis::server::entities::projectiles::scatter_create const create_;
 

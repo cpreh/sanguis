@@ -34,11 +34,11 @@ protected:
       sanguis::server::direction);
 
   [[nodiscard]] sanguis::server::aoe aoe() const;
-
-private:
+public:
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
 
+private:
   sanguis::aoe_projectile_type const type_;
 
   sanguis::server::aoe const aoe_;

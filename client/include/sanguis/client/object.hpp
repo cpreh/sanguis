@@ -39,9 +39,9 @@ public:
 
   ~object() override;
 
-private:
   [[nodiscard]] awl::main::exit_code run() override;
 
+private:
   void register_handler();
 
   void loop_handler();

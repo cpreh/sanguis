@@ -45,11 +45,11 @@ public:
 
   ~enemy() override;
 
-private:
   void on_create(sanguis::client::draw2d::entities::create_parameters const &) override;
 
   [[nodiscard]] sanguis::client::draw2d::entities::hover::optional_info hover() const override;
 
+private:
   sanguis::creator::enemy_type const enemy_type_;
 
   sanguis::client::draw2d::entities::hover::name const name_;

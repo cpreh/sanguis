@@ -42,7 +42,6 @@ public:
 
   ~own_player() override;
 
-private:
   void health(sanguis::client::health) override;
 
   void max_health(sanguis::client::max_health) override;
@@ -53,8 +52,10 @@ private:
 
   void update() override;
 
+protected:
   void on_die() override;
 
+private:
   void update_health();
 
   sanguis::client::draw2d::collide_callback const collide_;

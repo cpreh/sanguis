@@ -34,7 +34,7 @@ Parameters apply(
 {
   using modifier_container = sanguis::server::weapons::modifiers::container<Parameters>;
 
-  using callback = typename modifier_container::value_type;
+  using callback = modifier_container::value_type;
 
   auto const result(sanguis::server::random::draw<modifier_container>(
       _random_generator,

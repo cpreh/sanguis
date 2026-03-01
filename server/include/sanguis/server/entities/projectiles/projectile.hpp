@@ -31,6 +31,7 @@ protected:
       sanguis::server::entities::projectiles::life_time,
       sanguis::server::direction);
 
+public:
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
 

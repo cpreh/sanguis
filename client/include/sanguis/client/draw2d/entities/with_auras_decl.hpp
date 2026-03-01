@@ -23,7 +23,7 @@ class with_auras : public sanguis::client::draw2d::entities::ifaces::with_auras,
   FCPPT_NONMOVABLE(with_auras);
 
 public:
-  using base_parameters = typename Base::parameters_type;
+  using base_parameters = Base::parameters_type;
 
   using parameters_type = sanguis::client::draw2d::entities::with_auras_parameters<base_parameters>;
 
@@ -31,14 +31,12 @@ public:
 
   ~with_auras() override;
 
-protected:
   void update() override;
-
+protected:
   void on_die() override;
-
-private:
+public:
   void add_aura(sanguis::aura_type) override;
-
+private:
   sanguis::client::load::auras::context_ref const aura_load_context_;
 
   sanguis::client::draw2d::sprite::normal::system_ref const normal_system_;

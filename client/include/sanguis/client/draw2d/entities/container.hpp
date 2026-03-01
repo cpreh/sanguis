@@ -84,7 +84,6 @@ public:
 
   [[nodiscard]] object const &master() const;
 
-protected:
   void update() override;
 
 private:

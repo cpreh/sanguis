@@ -26,9 +26,9 @@ public:
 
   ~bullet() override;
 
-private:
   void update() override;
 
+private:
   sanguis::client::draw2d::sprite::center const origin_;
 };
 

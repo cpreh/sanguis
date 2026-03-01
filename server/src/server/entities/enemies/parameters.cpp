@@ -228,7 +228,7 @@ sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::armor_element(
     sanguis::server::damage::type const _type, sanguis::server::damage::armor_unit const _unit)
 {
-  armor_[_type] = _unit;
+  armor_.get(_type) = _unit;
 
   return *this;
 }

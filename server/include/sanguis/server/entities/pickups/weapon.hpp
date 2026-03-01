@@ -40,16 +40,16 @@ public:
 
   [[nodiscard]] sanguis::weapon_type weapon_type() const;
 
-private:
   [[nodiscard]] bool dead() const override;
 
   [[nodiscard]] sanguis::server::team team() const override;
 
+private:
   [[nodiscard]] sanguis::collision::world::body_group collision_group() const override;
-
+public:
   [[nodiscard]] sanguis::messages::server::unique_ptr
       add_message(sanguis::server::player_id, sanguis::collision::world::created) const override;
-
+private:
   [[nodiscard]] sanguis::server::weapons::weapon &get() const;
 
   sanguis::server::team const team_;

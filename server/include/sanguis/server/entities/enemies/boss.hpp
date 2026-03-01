@@ -20,11 +20,11 @@ public:
 
   ~boss() override;
 
-private:
+protected:
   [[nodiscard]] sanguis::server::entities::transfer_result on_create() override;
-
+public:
   void remove_from_game() override;
-
+private:
   [[nodiscard]] sanguis::messages::types::string const &name() const override;
 
   [[nodiscard]] sanguis::enemy_kind enemy_kind() const override;

@@ -21,7 +21,7 @@ void sanguis::creator::impl::set_opening_tiles(
   for (sanguis::creator::opening_type const opening_type :
        fcppt::enum_::make_range<sanguis::creator::opening_type>())
   {
-    for (sanguis::creator::opening const &opening : _openings[opening_type])
+    for (sanguis::creator::opening const &opening : _openings.get(opening_type))
     {
       fcppt::optional::to_exception(
           fcppt::container::grid::at_optional(_grid.get(), opening.get()),

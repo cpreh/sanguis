@@ -84,8 +84,7 @@ public:
 private:
   [[nodiscard]] sanguis::entity_id next_id();
 
-  // callbacks for world
-
+public:
   void send_to_player(sanguis::server::player_id, sanguis::messages::server::base const &) override;
 
   void remove_player(sanguis::server::player_id) override;
@@ -95,7 +94,7 @@ private:
   void transfer_entity(
       sanguis::server::global::source_world_pair,
       sanguis::server::entities::with_id_unique_ptr &&) override;
-
+private:
   [[nodiscard]] sanguis::server::weapons::common_parameters weapon_parameters();
 
   [[nodiscard]] sanguis::server::world::object &world(sanguis::world_id);

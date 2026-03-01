@@ -25,13 +25,11 @@ public:
 
   ~scatter() override;
 
-private:
-  void update(sanguis::server::entities::enemies::enemy & // NOLINT(google-runtime-references)
-              ) // NOLINT(google-runtime-references)
-      override;
+  void update(sanguis::server::entities::enemies::enemy &) override;
 
   [[nodiscard]] sanguis::server::entities::enemies::attribute attribute() const override;
 
+private:
   sanguis::random_generator_ref const random_generator_;
 
   sanguis::diff_timer cooldown_timer_;

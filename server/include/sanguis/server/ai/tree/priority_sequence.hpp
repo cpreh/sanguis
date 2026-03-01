@@ -19,7 +19,6 @@ public:
 
   ~priority_sequence() override;
 
-private:
   [[nodiscard]] sanguis::server::ai::status run(sanguis::duration) override;
 };
 
