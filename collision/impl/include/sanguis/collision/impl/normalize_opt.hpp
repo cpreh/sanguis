@@ -8,9 +8,8 @@
 #include <fcppt/math/vector/length.hpp>
 #include <fcppt/math/vector/object.hpp>
 #include <fcppt/math/vector/static.hpp>
-#include <fcppt/optional/join.hpp>
-#include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/return_if.hpp>
 
 namespace sanguis::collision::impl
 {
@@ -21,9 +20,9 @@ normalize_opt(fcppt::math::vector::object<T, N, S> const _vec)
 {
   T const length{fcppt::math::vector::length(_vec)};
 
-  return fcppt::optional::join(fcppt::optional::make_if(
+  return fcppt::optional::return_if(
       fcppt::not_(sanguis::collision::impl::is_null(length)),
-      [_vec, length] { return _vec / length; }));
+      [_vec, length] { return _vec / length; });
 }
 
 }

@@ -60,12 +60,11 @@
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/div.hpp>
 #include <fcppt/optional/bind.hpp>
-#include <fcppt/optional/join.hpp>
-#include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp> // NOLINT(misc-include-cleaner)
+#include <fcppt/optional/return_if.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -239,12 +238,12 @@ void sanguis::client::gui::hud::object::health_pair(
           _opt_health_pair,
           [](sanguis::client::health_pair const &_health_pair)
           {
-            return fcppt::optional::join(fcppt::optional::make_if(
+            return fcppt::optional::return_if(
                 sanguis::client::max_health_valid(_health_pair.max_health()),
                 [&_health_pair] {
                   return fcppt::math::div(
                       _health_pair.health().get(), _health_pair.max_health().get());
-                }));
+                });
           }),
       fcppt::const_(sge::gui::fill_level(0.F)),
       [](sanguis::client::health_value const _health)
